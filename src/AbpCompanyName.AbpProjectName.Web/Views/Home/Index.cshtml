@@ -1,0 +1,23 @@
+﻿@using AbpCompanyName.AbpProjectName.Web.Startup
+@{
+    ViewBag.ActiveMenu = PageNames.Home;
+}
+
+@section scripts
+{
+    <environment names="Development">
+        <script src="~/js/views/home/index.js"></script>
+    </environment>
+
+    <environment names="Staging,Production">
+        <script src="~/js/views/home/index.min.js"></script>
+    </environment>
+}
+
+<h2>@L("HelloWorld")!</h2>
+
+<div class="row">
+    <div class="col-lg-12">
+        @L("Home_Description")
+    </div>
+</div>
