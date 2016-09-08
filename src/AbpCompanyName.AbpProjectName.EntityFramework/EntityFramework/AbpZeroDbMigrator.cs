@@ -2,11 +2,10 @@
 using Abp.Domain.Uow;
 using Abp.MultiTenancy;
 using Abp.Zero.EntityFramework;
-using AbpCompanyName.AbpProjectName.EntityFramework;
 
-namespace AbpCompanyName.AbpProjectName.Migrations
+namespace AbpCompanyName.AbpProjectName.EntityFramework
 {
-    public class AbpZeroDbMigrator : AbpZeroDbMigrator<AbpProjectNameDbContext, Configuration>
+    public class AbpZeroDbMigrator : AbpZeroDbMigrator<AbpProjectNameDbContext, Migrations.Configuration>
     {
         public AbpZeroDbMigrator(
             IUnitOfWorkManager unitOfWorkManager,

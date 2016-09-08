@@ -1,7 +1,7 @@
 ﻿using System.Reflection;
 using Abp.Configuration.Startup;
 using Abp.Localization.Dictionaries;
-using Abp.Localization.Dictionaries.Json;
+using Abp.Localization.Dictionaries.Xml;
 
 namespace AbpCompanyName.AbpProjectName.Localization
 {
@@ -9,12 +9,9 @@ namespace AbpCompanyName.AbpProjectName.Localization
     {
         public static void Configure(ILocalizationConfiguration localizationConfiguration)
         {
-            //todo@ismail -> This add lines probably will be deleted
-            //localizationConfiguration.Languages.Add(new LanguageInfo("en", "English", "famfamfam-flags england", isDefault: true));
-            //localizationConfiguration.Languages.Add(new LanguageInfo("tr", "Türkçe", "famfamfam-flags tr"));
             localizationConfiguration.Sources.Add(
                 new DictionaryBasedLocalizationSource(AbpProjectNameConsts.LocalizationSourceName,
-                    new JsonEmbeddedFileLocalizationDictionaryProvider(
+                    new XmlEmbeddedFileLocalizationDictionaryProvider(
                         Assembly.GetExecutingAssembly(),
                         "AbpCompanyName.AbpProjectName.Core.Localization.SourceFiles"
                     )

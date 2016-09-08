@@ -24,7 +24,7 @@
   "buildOptions": {
     "embed": {
       "include": [
-        "Localization/SourceFiles/*.json"
+        "Localization/SourceFiles/*.xml"
       ]
     }
   }

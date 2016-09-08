@@ -1,4 +1,6 @@
 {
+  "userSecretsId": "AbpCompanyName-AbpProjectName-56C2EF2F-ABD6-4EFC-AAF2-2E81C34E8FB1",
+
   "dependencies": {
     "AbpCompanyName.AbpProjectName.Application": "1.0.0.0-*",
     "AbpCompanyName.AbpProjectName.EntityFramework": "1.0.0.0-*",
@@ -51,7 +53,7 @@
   },
 
   "frameworks": {
-    "net461": { }
+    "net461": {}
   },
 
   "buildOptions": {

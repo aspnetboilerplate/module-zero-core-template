@@ -1,0 +1,57 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<localizationDictionary culture="tr">
+  <texts>
+    <text name="HomePage" value="Ana Sayfa" />
+    <text name="About" value="Hakkında" />
+    <text name="WellcomeMessage" value="AbpProjectName projesine hoşgeldiniz!" />
+
+    <text name="FormIsNotValidMessage" value="Form geçerli değil. Lütfen kontrol edip hataları düzeltin." />
+    <text name="TenantNameCanNotBeEmpty" value="Müşteri adı boş bırakılamaz." />
+
+    <text name="InvalidUserNameOrPassword" value="Kullanıcı adı ya da şifre hatalı." />
+    <text name="ThereIsNoTenantDefinedWithName{0}" value="{0} isminde bir müşteri tanımlı değildir." />
+    <text name="TenantIsNotActive" value="{0} isimli müşteri aktif edilmemiştir." />
+    <text name="UserIsNotActiveAndCanNotLogin" value="{0} isimli kullanıcı pasife alınmıştır ve sisteme giremez." />
+    <text name="PleaseEnterLoginInformation" value="Lütfen giriş bilgilerinizi girin" />
+    <text name="TenancyName" value="Müşteri adı" />
+    <text name="UserNameOrEmail" value="Kullanıcı adı ya da e-posta" />
+    <text name="Password" value="Şifre" />
+    <text name="RememberMe" value="Beni hatırla" />
+    <text name="LogIn" value="Giriş" />
+
+    <text name="LoginFailed" value="Giriş başarısız!" />
+
+    <text name="NameSurname" value="Ad soyad" />
+    <text name="UserName" value="Kullanıcı adı" />
+    <text name="Name" value="İsim" />
+    <text name="Surname" value="Soyisim" />
+    <text name="EmailAddress" value="E-posta adresi" />
+
+    <text name="Tenants" value="Müşteriler" />
+    <text name="SavedSuccessfully" value="Başarıyla kaydedildi" />
+    <text name="CreateNewTenant" value="Yeni müşteri oluştur" />
+    <text name="AdminEmailAddress" value="Yönetici e-posta adresi" />
+    <text name="Save" value="Kaydet" />
+    <text name="Cancel" value="İptal" />
+    <text name="TenantName_Regex_Description" value="Müşteri adı en az 2 karakter olmalı, bir harfle başlamalı ve harf, rakam, tire ya da alt çizgi ile devam etmelidir." />
+    <text name="DefaultPasswordIs" value="Varsayılan şifre {0}" />
+    <text name="CanBeEmptyToLoginAsHost" value="Host olarak giriş yapmak için boş bırakılabilir." />
+    <text name="Register" value="Kayıt ol" />
+    <text name="OrLoginWith" value="Ya da şununla giriş yap" />
+    <text name="WaitingForActivationMessage" value="Hesabınız sistem yöneticisi tarafından etkinleştirilmek için bekliyor." />
+    <text name="TenantSelection" value="Müşteri seçimi" />
+    <text name="TenantSelection_Detail" value="Lütfen aşağıdaki müşterilerden birisini seçin." />
+    <text name="Logout" value="Çıkış" />
+
+    <text name="RegisterFormUserNameInvalidMessage">Lütfen kullanıcı adı alanına e-posta adresi girmeyin.</text>
+
+    <text name="DatabaseConnectionString" value="Veritabanı bağlantı cümlesi" />
+    <text name="Users" value="Kullanıcılar" />
+    <text name="IsActive" value="Etkin mi" />
+    <text name="FullName" value="Tam adı" />
+    <text name="CreateNewUser" value="Yeni kullanıcı oluştur" />
+    <text name="Yes" value="Evet" />
+    <text name="No" value="Hayır" />
+    <text name="Optional" value="Opsiyonel" />
+  </texts>
+</localizationDictionary>

@@ -6,6 +6,7 @@ using AbpCompanyName.AbpProjectName.Configuration;
 using AbpCompanyName.AbpProjectName.EntityFramework;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.Extensions.Configuration;
+using Abp.Zero.Configuration;
 
 namespace AbpCompanyName.AbpProjectName.Web.Startup
 {
@@ -25,6 +26,9 @@ namespace AbpCompanyName.AbpProjectName.Web.Startup
         public override void PreInitialize()
         {
             Configuration.DefaultNameOrConnectionString = _appConfiguration.GetConnectionString(AbpProjectNameConsts.ConnectionStringName);
+
+            //Use database for language management
+            Configuration.Modules.Zero().LanguageManagement.EnableDbLocalization();
 
             Configuration.Navigation.Providers.Add<AbpProjectNameNavigationProvider>();
 

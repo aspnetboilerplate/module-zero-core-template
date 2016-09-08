@@ -95,7 +95,7 @@ namespace AbpCompanyName.AbpProjectName.Web.Startup
 
         private static void ConfigureOwinServices(IAppBuilder app)
         {
-            app.Properties["host.AppName"] = "AbpZeroTemplate";
+            app.Properties["host.AppName"] = "AbpProjectName";
 
             app.UseAbp();
 
