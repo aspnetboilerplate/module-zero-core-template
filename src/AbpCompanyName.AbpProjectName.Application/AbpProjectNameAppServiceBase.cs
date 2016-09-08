@@ -1,4 +1,11 @@
-﻿using Abp.Application.Services;
+﻿using System;
+using System.Threading.Tasks;
+using Abp.Application.Services;
+using AbpCompanyName.AbpProjectName.MultiTenancy;
+using AbpCompanyName.AbpProjectName.Users;
+using Microsoft.AspNet.Identity;
+using Abp.Runtime.Session;
+using Abp.IdentityFramework;
 
 namespace AbpCompanyName.AbpProjectName
 {
@@ -7,9 +14,34 @@ namespace AbpCompanyName.AbpProjectName
     /// </summary>
     public abstract class AbpProjectNameAppServiceBase : ApplicationService
     {
+        public TenantManager TenantManager { get; set; }
+
+        public UserManager UserManager { get; set; }
+
         protected AbpProjectNameAppServiceBase()
         {
             LocalizationSourceName = AbpProjectNameConsts.LocalizationSourceName;
+        }
+
+        protected virtual Task<User> GetCurrentUserAsync()
+        {
+            var user = UserManager.FindByIdAsync(AbpSession.GetUserId());
+            if (user == null)
+            {
+                throw new ApplicationException("There is no current user!");
+            }
+
+            return user;
+        }
+
+        protected virtual Task<Tenant> GetCurrentTenantAsync()
+        {
+            return TenantManager.GetByIdAsync(AbpSession.GetTenantId());
+        }
+
+        protected virtual void CheckErrors(IdentityResult identityResult)
+        {
+            identityResult.CheckErrors(LocalizationManager);
         }
     }
 }

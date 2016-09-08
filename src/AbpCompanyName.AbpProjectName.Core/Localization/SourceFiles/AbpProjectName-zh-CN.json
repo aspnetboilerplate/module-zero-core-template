@@ -1,0 +1,26 @@
+﻿{
+  "culture": "zh-CN",
+  "texts": {
+
+    "HomePage": "主页",
+    "About": "关于我们",
+    "WellcomeMessage": "欢迎使用 AbpProjectName!",
+
+    "FormIsNotValidMessage": "部分输入信息不符合要求，请检查并改正..",
+    "TenantNameCanNotBeEmpty": "租户名不能为空",
+
+    "InvalidUserNameOrPassword": "用户名或密码无效",
+    "ThereIsNoTenantDefinedWithName{0}": "租户 {0}不存在",
+    "TenantIsNotActive": "租户 {0} 未激活.",
+    "UserIsNotActiveAndCanNotLogin": "用户 {0} 未激活，不能登录.",
+    "PleaseEnterLoginInformation": "请输入登录信息",
+    "TenancyName": "租户名称",
+    "UserNameOrEmail": "用户名或邮箱地址",
+    "Password": "密码",
+    "RememberMe": "记住我",
+    "LogIn": "登录",
+
+    "LoginFailed": "登录失败!"
+
+  }
+}

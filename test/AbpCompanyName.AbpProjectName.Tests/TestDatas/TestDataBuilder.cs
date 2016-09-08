@@ -1,4 +1,4 @@
-using AbpCompanyName.AbpProjectName.EntityFrameworkCore;
+using AbpCompanyName.AbpProjectName.EntityFramework;
 
 namespace AbpCompanyName.AbpProjectName.Tests.TestDatas
 {

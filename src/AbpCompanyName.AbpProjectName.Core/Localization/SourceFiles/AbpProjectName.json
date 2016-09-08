@@ -1,11 +1,59 @@
 ﻿{
   "culture": "en",
   "texts": {
-    "HelloWorld": "Hello World!",
-    "ChangeLanguage": "Change language",
-    "HomePage": "HomePage",
+
+    "HomePage": "Home page",
     "About": "About",
-    "Home_Description": "Welcome to AbpProjectName...",
-    "About_Description": "This is a simple startup template to use ASP.NET Core with ABP framework."
+    "WellcomeMessage": "Welcome to AbpProjectName!",
+
+    "FormIsNotValidMessage": "Form is not valid. Please check and fix errors.",
+    "TenantNameCanNotBeEmpty": "Tenant name can not be empty",
+
+    "InvalidUserNameOrPassword": "Invalid user name or password",
+    "ThereIsNoTenantDefinedWithName{0}": "There is no tenant defined with name {0}",
+    "TenantIsNotActive": "Tenant {0} is not active.",
+    "UserIsNotActiveAndCanNotLogin": "User {0} is not active and can not log in.",
+    "PleaseEnterLoginInformation": "Please enter login information",
+    "TenancyName": "Tenancy name",
+    "UserNameOrEmail": "User name or email",
+    "Password": "Password",
+    "RememberMe": "Remember me",
+    "LogIn": "Log in",
+
+    "LoginFailed": "Login failed!",
+
+    "NameSurname": "Name surname",
+    "UserName": "User name",
+    "Name": "Name",
+    "Surname": "Surname",
+    "EmailAddress": "Email address",
+
+    "Tenants": "Tenants",
+    "SavedSuccessfully": "Saved successfully",
+    "CreateNewTenant": "Create new tenant",
+    "AdminEmailAddress": "Admin email address",
+    "Save": "Save",
+    "Cancel": "Cancel",
+    "TenantName_Regex_Description": "Tenant name must be at least 2 chars, starts with a letter and continue with letter, number, dash or underscore.",
+    "DefaultPasswordIs": "Default password is {0}",
+    "CanBeEmptyToLoginAsHost": "Can be empty to login as host.",
+    "Register": "Register",
+    "OrLoginWith": "Or login with",
+    "WaitingForActivationMessage": "Your account is waiting to be activated by system admin.",
+    "TenantSelection": "Tenant Selection",
+    "TenantSelection_Detail": "Please select one of the following tenants.",
+    "Logout": "Logout",
+
+    "RegisterFormUserNameInvalidMessage": "Please dont enter an email address for username.",
+
+    "DatabaseConnectionString": "Database connection string",
+    "Users": "Users",
+    "IsActive": "Is active",
+    "FullName": "Full name",
+    "CreateNewUser": "Create new user",
+    "Yes": "Yes",
+    "No": "No",
+    "Optional": "Optional"
+
   }
 }

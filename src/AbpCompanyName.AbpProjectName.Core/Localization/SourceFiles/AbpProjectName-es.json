@@ -1,0 +1,46 @@
+﻿{
+  "culture": "es",
+  "texts": {
+    "HomePage": "Página de inicio",
+    "About": "Acerca de",
+    "WellcomeMessage": "Bienvenido a WMS!",
+
+    "FormIsNotValidMessage": "Formulario no es válido. Por favor, compruebe y corrija los errores.",
+    "TenantNameCanNotBeEmpty": "Nombre de la empresa no puede estar vacío",
+
+    "InvalidUserNameOrPassword": "Usuario o contraseña invalido",
+    "ThereIsNoTenantDefinedWithName{0}": "No hay empresa definida con el nombre {0}",
+    "TenantIsNotActive": "La empresa {0} no está activa.",
+    "UserIsNotActiveAndCanNotLogin": "El usuario {0} no está activo y no puede conectarse.",
+    "PleaseEnterLoginInformation": "Por favor, introduzca la información de inicio de sesión",
+    "TenancyName": "Nombre de la empresa",
+    "UserNameOrEmail": "Nombre de usuario o correo electrónico",
+    "Password": "Contraseña",
+    "RememberMe": "Recuérdame",
+    "LogIn": "Iniciar sesión",
+
+    "LoginFailed": "¡Error de inicio de sesion!",
+
+    "NameSurname": "Nombre Apellido",
+    "UserName": "Nombre de usuario",
+    "Name": "Nombre",
+    "Surname": "Apellido",
+    "EmailAddress": "Dirección de correo electrónico",
+
+    "Tenants": "Empresas",
+    "SavedSuccessfully": "Guardado correctamente",
+    "CreateNewTenant": "Crear nueva empresa",
+    "AdminEmailAddress": "Dirección de correo electrónico del administrador",
+    "Save": "Guardar",
+    "Cancel": "Cancelar",
+    "TenantName_Regex_Description": "El nombre de la empresa debe ser de al menos 2 caracteres, empieza con una letra y continua con una letra, número, guión o un guión bajo.",
+    "DefaultPasswordIs": "La contraseña por defecto es {0}",
+    "CanBeEmptyToLoginAsHost": "Puede estar vacía para iniciar la sesión como anfitrión.",
+    "Register": "Registro",
+    "OrLoginWith": "o iniciar sesión con",
+    "WaitingForActivationMessage": "Su cuenta está en espera de ser activada por el administrador del sistema.",
+    "TenantSelection": "Selección de Empresa",
+    "TenantSelection_Detail": "Por favor seleccione una de las siguientes empresas.",
+    "Logout": "Cerrar sesión"
+  }
+}

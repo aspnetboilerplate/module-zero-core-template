@@ -3,7 +3,7 @@ using System.Net;
 using System.Net.Http;
 using System.Threading.Tasks;
 using Abp.AspNetCore.TestBase;
-using AbpCompanyName.AbpProjectName.EntityFrameworkCore;
+using AbpCompanyName.AbpProjectName.EntityFramework;
 using AbpCompanyName.AbpProjectName.Tests.TestDatas;
 using AngleSharp.Dom.Html;
 using AngleSharp.Parser.Html;
@@ -93,7 +93,7 @@ namespace AbpCompanyName.AbpProjectName.Web.Tests
             using (var context = IocManager.Resolve<AbpProjectNameDbContext>())
             {
                 await action(context);
-                await context.SaveChangesAsync(true);
+                await context.SaveChangesAsync();
             }
         }
 

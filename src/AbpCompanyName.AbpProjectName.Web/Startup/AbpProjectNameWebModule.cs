@@ -3,7 +3,7 @@ using Abp.AspNetCore;
 using Abp.AspNetCore.Configuration;
 using Abp.Modules;
 using AbpCompanyName.AbpProjectName.Configuration;
-using AbpCompanyName.AbpProjectName.EntityFrameworkCore;
+using AbpCompanyName.AbpProjectName.EntityFramework;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.Extensions.Configuration;
 
@@ -11,7 +11,7 @@ namespace AbpCompanyName.AbpProjectName.Web.Startup
 {
     [DependsOn(
         typeof(AbpProjectNameApplicationModule), 
-        typeof(AbpProjectNameEntityFrameworkCoreModule), 
+        typeof(AbpProjectNameEntityFrameworkModule), 
         typeof(AbpAspNetCoreModule))]
     public class AbpProjectNameWebModule : AbpModule
     {

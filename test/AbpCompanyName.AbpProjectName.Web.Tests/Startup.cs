@@ -2,7 +2,7 @@
 using Abp.AspNetCore;
 using Abp.AspNetCore.TestBase;
 using Abp.Dependency;
-using AbpCompanyName.AbpProjectName.EntityFrameworkCore;
+using AbpCompanyName.AbpProjectName.EntityFramework;
 using Castle.MicroKernel.Registration;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
@@ -16,7 +16,7 @@ namespace AbpCompanyName.AbpProjectName.Web.Tests
     {
         public IServiceProvider ConfigureServices(IServiceCollection services)
         {
-            services.AddEntityFrameworkInMemoryDatabase();
+            //services.AddEntityFrameworkInMemoryDatabase();
 
             services.AddMvc();
 
@@ -48,18 +48,18 @@ namespace AbpCompanyName.AbpProjectName.Web.Tests
 
         private void UseInMemoryDb(IServiceProvider serviceProvider)
         {
-            var builder = new DbContextOptionsBuilder<AbpProjectNameDbContext>();
-            builder.UseInMemoryDatabase().UseInternalServiceProvider(serviceProvider);
-            var options = builder.Options;
+            //var builder = new DbContextOptionsBuilder<AbpProjectNameDbContext>();
+            //builder.UseInMemoryDatabase().UseInternalServiceProvider(serviceProvider);
+            //var options = builder.Options;
 
-            var iocManager = serviceProvider.GetRequiredService<IIocManager>();
+            //var iocManager = serviceProvider.GetRequiredService<IIocManager>();
 
-            iocManager.IocContainer
-                .Register(
-                    Component.For<DbContextOptions<AbpProjectNameDbContext>>()
-                    .Instance(options)
-                    .LifestyleSingleton()
-                );
+            //iocManager.IocContainer
+            //    .Register(
+            //        Component.For<DbContextOptions<AbpProjectNameDbContext>>()
+            //        .Instance(options)
+            //        .LifestyleSingleton()
+            //    );
         }
     }
 }

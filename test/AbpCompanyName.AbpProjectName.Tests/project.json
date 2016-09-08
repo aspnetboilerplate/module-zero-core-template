@@ -6,15 +6,14 @@
   "dependencies": {
     "NSubstitute": "1.10.0",
     "AbpCompanyName.AbpProjectName.Application": "1.0.0.0-*",
-    "AbpCompanyName.AbpProjectName.EntityFrameworkCore": "1.0.0.0-*",
+    "AbpCompanyName.AbpProjectName.EntityFramework": "1.0.0.0-*",
     "dotnet-test-xunit": "2.2.0-preview2-build1029",
-    "Microsoft.EntityFrameworkCore.InMemory": "1.0.0",
     "xunit": "2.2.0-beta2-build3300",
     "xunit.extensibility.execution": "2.2.0-beta2-build3300",
     "xunit.runner.visualstudio": "2.2.0-beta2-build1149",
-    "Castle.Windsor.MsDependencyInjection": "1.1.0",
-    "Abp.TestBase": "0.11.0.2",
-    "Shouldly": "2.8.2"
+    "Effort.EF6": "1.1.5",
+    "Shouldly": "2.8.2",
+    "Abp.TestBase": "0.11.3"
   },
 
   "frameworks": {

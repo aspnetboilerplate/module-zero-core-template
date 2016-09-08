@@ -1,11 +1,57 @@
 ﻿{
   "culture": "tr",
   "texts": {
-    "HelloWorld": "Merhaba Dünya!",
-    "ChangeLanguage": "Dil değiştir",
-    "HomePage": "Ana sayfa",
-    "About": "Hakkında",
-    "Home_Description": "AbpProjectName projesine hoşgeldiniz...",
-    "About_Description": "Bu proje, ASP.NET Core ile ABP framework kullanmak için basit bir başlangıç şablonudur."
+    "HomePage": "\"Ana Sayfa,",
+    "About": "\"Hakkında,",
+    "WellcomeMessage": "\"AbpProjectName projesine hoşgeldiniz!,",
+
+    "FormIsNotValidMessage": "\"Form geçerli değil. Lütfen kontrol edip hataları düzeltin.,",
+    "TenantNameCanNotBeEmpty": "\"Müşteri adı boş bırakılamaz.,",
+
+    "InvalidUserNameOrPassword": "\"Kullanıcı adı ya da şifre hatalı.,",
+    "ThereIsNoTenantDefinedWithName{0}": "\"{0} isminde bir müşteri tanımlı değildir.,",
+    "TenantIsNotActive": "\"{0} isimli müşteri aktif edilmemiştir.,",
+    "UserIsNotActiveAndCanNotLogin": "\"{0} isimli kullanıcı pasife alınmıştır ve sisteme giremez.,",
+    "PleaseEnterLoginInformation": "\"Lütfen giriş bilgilerinizi girin,",
+    "TenancyName": "\"Müşteri adı,",
+    "UserNameOrEmail": "\"Kullanıcı adı ya da e-posta,",
+    "Password": "\"Şifre,",
+    "RememberMe": "\"Beni hatırla,",
+    "LogIn": "\"Giriş,",
+
+    "LoginFailed": "\"Giriş başarısız!,",
+
+    "NameSurname": "\"Ad soyad,",
+    "UserName": "\"Kullanıcı adı,",
+    "Name": "\"İsim,",
+    "Surname": "\"Soyisim,",
+    "EmailAddress": "\"E-posta adresi,",
+
+    "Tenants": "\"Müşteriler,",
+    "SavedSuccessfully": "\"Başarıyla kaydedildi,",
+    "CreateNewTenant": "\"Yeni müşteri oluştur,",
+    "AdminEmailAddress": "\"Yönetici e-posta adresi,",
+    "Save": "\"Kaydet,",
+    "Cancel": "\"İptal,",
+    "TenantName_Regex_Description": "\"Müşteri adı en az 2 karakter olmalı, bir harfle başlamalı ve harf, rakam, tire ya da alt çizgi ile devam etmelidir.,",
+    "DefaultPasswordIs": "\"Varsayılan şifre {0},",
+    "CanBeEmptyToLoginAsHost": "\"Host olarak giriş yapmak için boş bırakılabilir.,",
+    "Register": "\"Kayıt ol,",
+    "OrLoginWith": "\"Ya da şununla giriş yap,",
+    "WaitingForActivationMessage": "\"Hesabınız sistem yöneticisi tarafından etkinleştirilmek için bekliyor.,",
+    "TenantSelection": "\"Müşteri seçimi,",
+    "TenantSelection_Detail": "\"Lütfen aşağıdaki müşterilerden birisini seçin.,",
+    "Logout": "\"Çıkış,",
+
+    "RegisterFormUserNameInvalidMessage": "Lütfen kullanıcı adı alanına e-posta adresi girmeyin.",
+
+    "DatabaseConnectionString": "\"Veritabanı bağlantı cümlesi,",
+    "Users": "\"Kullanıcılar,",
+    "IsActive": "\"Etkin mi,",
+    "FullName": "\"Tam adı,",
+    "CreateNewUser": "\"Yeni kullanıcı oluştur,",
+    "Yes": "\"Evet,",
+    "No": "\"Hayır,",
+    "Optional": "\"Opsiyonel"
   }
 }
