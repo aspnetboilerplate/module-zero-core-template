@@ -1,4 +1,4 @@
-﻿@model AbpCompanyName.AbpProjectName.WebMpa.Models.Layout.LanguageSelectionViewModel
+﻿@model AbpCompanyName.AbpProjectName.Web.Views.Shared.Components.LanguageSelection.LanguageSelectionViewModel
 <li class="dropdown">
     <a href="#" class="dropdown-toggle" data-toggle="dropdown">
         <i class="@Model.CurrentLanguage.Icon"></i>
@@ -10,7 +10,7 @@
         {
             if (language.Name != Model.CurrentLanguage.Name)
             {
-                <li><a href="@(ApplicationPath)AbpLocalization/ChangeCulture?cultureName=@(language.Name)&returnUrl=@(Request.Url)"><i class="@language.Icon"></i> @language.DisplayName</a></li>
+                <li><a href="@(ApplicationPath)AbpLocalization/ChangeCulture?cultureName=@(language.Name)&returnUrl=@(Context.Request.Path)"><i class="@language.Icon"></i> @language.DisplayName</a></li>
             }
         }
     </ul>

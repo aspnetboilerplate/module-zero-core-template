@@ -15,14 +15,14 @@ namespace AbpCompanyName.AbpProjectName.Migrations.SeedData
         {
             InitialLanguages = new List<ApplicationLanguage>
             {
-                new ApplicationLanguage(null, "en", "English", "famfamfam-flag-gb"),
-                new ApplicationLanguage(null, "tr", "Türkçe", "famfamfam-flag-tr"),
-                new ApplicationLanguage(null, "zh-CN", "简体中文", "famfamfam-flag-cn"),
-                new ApplicationLanguage(null, "pt-BR", "Português-BR", "famfamfam-flag-br"),
-                new ApplicationLanguage(null, "es", "Español", "famfamfam-flag-es"),
-                new ApplicationLanguage(null, "fr", "Français", "famfamfam-flag-fr"),
-                new ApplicationLanguage(null, "it", "Italiano", "famfamfam-flag-it"),
-                new ApplicationLanguage(null, "ja", "日本語", "famfamfam-flag-jp"),
+                new ApplicationLanguage(null, "en", "English", "famfamfam-flags gb"),
+                new ApplicationLanguage(null, "tr", "Türkçe", "famfamfam-flags tr"),
+                new ApplicationLanguage(null, "zh-CN", "简体中文", "famfamfam-flags cn"),
+                new ApplicationLanguage(null, "pt-BR", "Português-BR", "famfamfam-flags br"),
+                new ApplicationLanguage(null, "es", "Español", "famfamfam-flags es"),
+                new ApplicationLanguage(null, "fr", "Français", "famfamfam-flags fr"),
+                new ApplicationLanguage(null, "it", "Italiano", "famfamfam-flags it"),
+                new ApplicationLanguage(null, "ja", "日本語", "famfamfam-flags jp"),
             };
         }
 

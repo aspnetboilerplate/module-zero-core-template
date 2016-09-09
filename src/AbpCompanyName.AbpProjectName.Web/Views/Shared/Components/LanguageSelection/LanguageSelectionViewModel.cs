@@ -1,7 +1,7 @@
 ﻿using System.Collections.Generic;
 using Abp.Localization;
 
-namespace AbpCompanyName.AbpProjectName.Web.Models.Layout
+namespace AbpCompanyName.AbpProjectName.Web.Views.Shared.Components.LanguageSelection
 {
     public class LanguageSelectionViewModel
     {

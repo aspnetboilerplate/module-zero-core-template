@@ -1,6 +1,6 @@
 using AbpCompanyName.AbpProjectName.Sessions.Dto;
 
-namespace AbpCompanyName.AbpProjectName.Web.Models.Layout
+namespace AbpCompanyName.AbpProjectName.Web.Views.Shared.Components.UserMenuOrLoginLink
 {
     public class UserMenuOrLoginLinkViewModel
     {

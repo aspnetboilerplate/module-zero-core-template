@@ -1,7 +1,6 @@
 ﻿using System.Threading.Tasks;
 using Abp.Application.Navigation;
 using Abp.Runtime.Session;
-using AbpCompanyName.AbpProjectName.Web.Models.Layout;
 using Microsoft.AspNetCore.Mvc;
 
 namespace AbpCompanyName.AbpProjectName.Web.Views.Shared.Components.TopMenu
