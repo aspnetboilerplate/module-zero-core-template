@@ -1,6 +1,7 @@
 ﻿using System.Reflection;
 using Abp.AutoMapper;
 using Abp.Modules;
+using AbpCompanyName.AbpProjectName.Authorization;
 
 namespace AbpCompanyName.AbpProjectName
 {
@@ -9,6 +10,11 @@ namespace AbpCompanyName.AbpProjectName
         typeof(AbpAutoMapperModule))]
     public class AbpProjectNameApplicationModule : AbpModule
     {
+        public override void PreInitialize()
+        {
+            Configuration.Authorization.Providers.Add<AbpProjectNameAuthorizationProvider>();
+        }
+
         public override void Initialize()
         {
             IocManager.RegisterAssemblyByConvention(Assembly.GetExecutingAssembly());

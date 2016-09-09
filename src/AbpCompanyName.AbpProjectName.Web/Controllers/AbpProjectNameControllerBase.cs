@@ -1,4 +1,6 @@
 using Abp.AspNetCore.Mvc.Controllers;
+using Microsoft.AspNet.Identity;
+using Abp.IdentityFramework;
 
 namespace AbpCompanyName.AbpProjectName.Web.Controllers
 {
@@ -7,6 +9,11 @@ namespace AbpCompanyName.AbpProjectName.Web.Controllers
         protected AbpProjectNameControllerBase()
         {
             LocalizationSourceName = AbpProjectNameConsts.LocalizationSourceName;
+        }
+
+        protected void CheckErrors(IdentityResult identityResult)
+        {
+            identityResult.CheckErrors(LocalizationManager);
         }
     }
 }

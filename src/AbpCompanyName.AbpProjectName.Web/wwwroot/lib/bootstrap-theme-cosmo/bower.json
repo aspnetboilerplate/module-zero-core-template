@@ -1,0 +1,17 @@
+{
+  "name": "bootstrap-theme-cosmo",
+  "version": "3.1.1",
+  "authors": [
+    "Tom Vincent <git@tlvince.com>"
+  ],
+  "description": "Bootswatch Cosmo Bootstrap theme",
+  "main": "cosmo.min.css",
+  "keywords": [
+    "bootstrap",
+    "cosmo",
+    "theme",
+    "bootswatch"
+  ],
+  "license": "MIT",
+  "homepage": "http://bootswatch.com/cosmo"
+}

@@ -598,6 +598,10 @@
                 continue;
             }
 
+            if (parameterInfo.value === null) {
+                parameterInfo.value = '';
+            }
+
             if (!qs.length) {
                 if (includeQuestionMark) {
                     qs = qs + '?';
@@ -606,7 +610,11 @@
                 qs = qs + '&';
             }
 
-            qs = qs + parameterInfo.name + '=' + escape(parameterInfo.value);
+            if (parameterInfo.value.toJSON && typeof parameterInfo.value.toJSON === "function") {
+                qs = qs + parameterInfo.name + '=' + encodeURIComponent(parameterInfo.value.toJSON());
+            } else {
+                qs = qs + parameterInfo.name + '=' + encodeURIComponent(parameterInfo.value);
+            }
         }
 
         return qs;

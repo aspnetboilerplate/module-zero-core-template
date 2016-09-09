@@ -1,16 +1,28 @@
 ﻿@using Abp.Collections.Extensions
-@using AbpCompanyName.AbpProjectName.Web.Views.Shared.Components.TopMenu
-@model TopMenuViewModel
+@using AbpCompanyName.AbpProjectName.Web.Views
+@model AbpCompanyName.AbpProjectName.Web.Views.Shared.Components.TopMenu.TopMenuViewModel
 @{
-    //TODO: Get current virtual path
-    var ApplicationPath = "/";
+    var calculateMenuUrl = new Func<string, string>((url) =>
+    {
+        if (string.IsNullOrEmpty(url))
+        {
+            return ApplicationPath;
+        }
+
+        if (UrlChecker.IsRooted(url))
+        {
+            return url;
+        }
+
+        return ApplicationPath + url;
+    });
 }
 @foreach (var menuItem in Model.MainMenu.Items)
 {
     <li class="@(Model.ActiveMenuItemName == menuItem.Name ? "active" : "")">
         @if (menuItem.Items.IsNullOrEmpty())
         {
-            <a href="@Model.CalculateMenuUrl(ApplicationPath, menuItem)">
+            <a href="@calculateMenuUrl(menuItem.Url)">
                 @if (!string.IsNullOrWhiteSpace(menuItem.Icon))
                 {
                     <i class="@menuItem.Icon"></i>
@@ -31,7 +43,7 @@
                 @foreach (var subMenuItem in menuItem.Items)
                 {
                     <li>
-                        <a href="@Model.CalculateMenuUrl(ApplicationPath, subMenuItem)">
+                        <a href="@calculateMenuUrl(subMenuItem.Url)">
                             @if (!string.IsNullOrWhiteSpace(subMenuItem.Icon))
                             {
                                 <i class="@subMenuItem.Icon"></i>

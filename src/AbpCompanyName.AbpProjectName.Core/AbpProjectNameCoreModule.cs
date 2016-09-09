@@ -1,13 +1,14 @@
 ﻿using System.Reflection;
 using Abp.Modules;
+using Abp.Timing;
 using Abp.Zero;
 using AbpCompanyName.AbpProjectName.Localization;
 using Abp.Zero.Configuration;
 using AbpCompanyName.AbpProjectName.MultiTenancy;
 using AbpCompanyName.AbpProjectName.Authorization.Roles;
 using AbpCompanyName.AbpProjectName.Users;
-using AbpCompanyName.AbpProjectName.Authorization;
 using AbpCompanyName.AbpProjectName.Configuration;
+using AbpCompanyName.AbpProjectName.Timing;
 
 namespace AbpCompanyName.AbpProjectName
 {
@@ -60,6 +61,11 @@ namespace AbpCompanyName.AbpProjectName
         public override void Initialize()
         {
             IocManager.RegisterAssemblyByConvention(Assembly.GetExecutingAssembly());
+        }
+
+        public override void PostInitialize()
+        {
+            IocManager.Resolve<AppTimes>().StartupTime = Clock.Now;
         }
     }
 }
