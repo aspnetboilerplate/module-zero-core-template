@@ -44,7 +44,10 @@ namespace AbpCompanyName.AbpProjectName
 
             //Configure roles
             AppRoleConfig.Configure(Configuration.Modules.Zero().RoleManagement);
-
+            
+            //Configure permissions
+            Configuration.Authorization.Providers.Add<AbpProjectNameAuthorizationProvider>();
+            
             //todo@ismail -> check this.
             //if (DebugHelper.IsDebug)
             //{
