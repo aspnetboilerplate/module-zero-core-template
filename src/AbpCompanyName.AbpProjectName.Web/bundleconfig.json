@@ -54,5 +54,17 @@
     "inputFiles": [
       "wwwroot/js/main.js"
     ]
+  },
+  {
+    "outputFileName": "wwwroot/view-resources/Views/Users/Index.min.js",
+    "inputFiles": [
+      "wwwroot/view-resources/Views/Users/Index.js"
+    ]
+  },
+  {
+    "outputFileName": "wwwroot/view-resources/Views/Tenants/Index.min.js",
+    "inputFiles": [
+      "wwwroot/view-resources/Views/Tenants/Index.js"
+    ]
   }
 ]
