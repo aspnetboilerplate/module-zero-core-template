@@ -1,14 +1,13 @@
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.Text.RegularExpressions;
-using Abp.Application.Services.Dto;
 using AbpCompanyName.AbpProjectName.MultiTenancy;
 using AbpCompanyName.AbpProjectName.Users;
 using Abp.Extensions;
 
 namespace AbpCompanyName.AbpProjectName.Web.Models.Account
 {
-    public class RegisterViewModel : IInputDto, IValidatableObject
+    public class RegisterViewModel : IValidatableObject
     {
         /// <summary>
         /// Not required for single-tenant applications.

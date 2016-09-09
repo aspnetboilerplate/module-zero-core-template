@@ -6,5 +6,9 @@
   {
     "outputFile": "wwwroot/view-resources/Views/Account/Login.es5.js",
     "inputFile": "wwwroot/view-resources/Views/Account/Login.js"
+  },
+  {
+    "outputFile": "wwwroot/view-resources/Views/Account/Login.css",
+    "inputFile": "wwwroot/view-resources/Views/Account/Login.less"
   }
 ]

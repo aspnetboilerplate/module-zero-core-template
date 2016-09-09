@@ -41,7 +41,10 @@
 
 </head>
 <body>
-    @Html.Partial("_TopBar")
+    @if (ViewBag.DisableTopBar == null || ViewBag.DisableTopBar != true)
+    {
+        Html.RenderPartial("_TopBar");
+    }
 
     <div class="container">
         @RenderBody()

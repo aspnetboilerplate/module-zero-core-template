@@ -150,18 +150,9 @@ namespace AbpCompanyName.AbpProjectName.Web.Controllers
         [UnitOfWork]
         public virtual async Task<ActionResult> Register(RegisterViewModel model)
         {
-            #region MyRegion
-
-            /*
-              try
+            try
             {
-                CheckSelfRegistrationIsEnabled();
-
-                if (!model.IsExternalLogin && UseCaptchaOnRegistration())
-                {
-                    await CheckCaptchaResponseAsync(_recaptchaValidationService);
-                }
-
+                //Get tenancy name and tenant
                 if (!_multiTenancyConfig.IsEnabled)
                 {
                     model.TenancyName = Tenant.DefaultTenantName;
@@ -176,140 +167,6 @@ namespace AbpCompanyName.AbpProjectName.Web.Controllers
                 var tenant = await GetActiveTenantAsync(model.TenancyName);
 
                 CurrentUnitOfWork.SetTenantId(tenant.Id);
-
-                if (!await SettingManager.GetSettingValueForTenantAsync<bool>(AppSettings.UserManagement.AllowSelfRegistration, tenant.Id))
-                {
-                    throw new UserFriendlyException(L("SelfUserRegistrationIsDisabledMessage_Detail"));
-                }
-
-                //Getting tenant-specific settings
-                var isNewRegisteredUserActiveByDefault = await SettingManager.GetSettingValueForTenantAsync<bool>(AppSettings.UserManagement.IsNewRegisteredUserActiveByDefault, tenant.Id);
-                var isEmailConfirmationRequiredForLogin = await SettingManager.GetSettingValueForTenantAsync<bool>(AbpZeroSettingNames.UserManagement.IsEmailConfirmationRequiredForLogin, tenant.Id);
-
-                var user = new User
-                {
-                    TenantId = tenant.Id,
-                    Name = model.Name,
-                    Surname = model.Surname,
-                    EmailAddress = model.EmailAddress,
-                    IsActive = isNewRegisteredUserActiveByDefault
-                };
-
-                ExternalLoginUserInfo externalLoginInfo = null;
-                if (model.IsExternalLogin)
-                {
-                    externalLoginInfo = await HttpContext.Authentication.GetExternalLoginUserInfo(model.ExternalLoginAuthSchema);
-                    if (externalLoginInfo == null)
-                    {
-                        throw new ApplicationException("Can not external login!");
-                    }
-
-                    user.Logins = new List<UserLogin>
-                    {
-                        new UserLogin
-                        {
-                            LoginProvider = externalLoginInfo.LoginInfo.LoginProvider,
-                            ProviderKey = externalLoginInfo.LoginInfo.ProviderKey,
-                            TenantId = tenant.Id
-                        }
-                    };
-
-                    model.UserName = model.EmailAddress;
-                    model.Password = Authorization.Users.User.CreateRandomPassword();
-
-                    if (string.Equals(externalLoginInfo.EmailAddress, model.EmailAddress, StringComparison.InvariantCultureIgnoreCase))
-                    {
-                        user.IsEmailConfirmed = true;
-                    }
-                }
-                else
-                {
-                    if (model.UserName.IsNullOrEmpty() || model.Password.IsNullOrEmpty())
-                    {
-                        throw new UserFriendlyException(L("FormIsNotValidMessage"));
-                    }
-                }
-
-                user.UserName = model.UserName;
-                user.Password = new PasswordHasher().HashPassword(model.Password);
-
-                user.Roles = new List<UserRole>();
-                foreach (var defaultRole in await _roleManager.Roles.Where(r => r.IsDefault).ToListAsync())
-                {
-                    user.Roles.Add(new UserRole(tenant.Id, user.Id, defaultRole.Id));
-                }
-
-                CheckErrors(await _userManager.CreateAsync(user));
-                await _unitOfWorkManager.Current.SaveChangesAsync();
-
-                if (!user.IsEmailConfirmed)
-                {
-                    user.SetNewEmailConfirmationCode();
-                    await _userEmailer.SendEmailActivationLinkAsync(user);
-                }
-
-                //Notifications
-                await _notificationSubscriptionManager.SubscribeToAllAvailableNotificationsAsync(user.ToUserIdentifier());
-                await _appNotifier.WelcomeToTheApplicationAsync(user);
-                await _appNotifier.NewUserRegisteredAsync(user);
-
-                //Directly login if possible
-                if (user.IsActive && (user.IsEmailConfirmed || !isEmailConfirmationRequiredForLogin))
-                {
-                    AbpUserManager<Tenant, Role, User>.AbpLoginResult loginResult;
-                    if (externalLoginInfo != null)
-                    {
-                        loginResult = await _userManager.LoginAsync(externalLoginInfo.LoginInfo, tenant.TenancyName);
-                    }
-                    else
-                    {
-                        loginResult = await GetLoginResultAsync(user.UserName, model.Password, tenant.TenancyName);
-                    }
-
-                    if (loginResult.Result == AbpLoginResultType.Success)
-                    {
-                        await SignInAsync(loginResult.User, loginResult.Identity);
-                        return Redirect(GetAppHomeUrl());
-                    }
-
-                    Logger.Warn("New registered user could not be login. This should not be normally. login result: " + loginResult.Result);
-                }
-
-                return View("RegisterResult", new RegisterResultViewModel
-                {
-                    TenancyName = tenant.TenancyName,
-                    NameAndSurname = user.Name + " " + user.Surname,
-                    UserName = user.UserName,
-                    EmailAddress = user.EmailAddress,
-                    IsActive = user.IsActive,
-                    IsEmailConfirmationRequired = isEmailConfirmationRequiredForLogin
-                });
-            }
-            catch (UserFriendlyException ex)
-            {
-                ViewBag.IsMultiTenancyEnabled = _multiTenancyConfig.IsEnabled;
-                ViewBag.UseCaptcha = !model.IsExternalLogin && UseCaptchaOnRegistration();
-                ViewBag.ErrorMessage = ex.Message;
-
-                return View("Register", model);
-            }             
-             */
-
-            #endregion
-
-            try
-            {
-                //Get tenancy name and tenant
-                if (!_multiTenancyConfig.IsEnabled)
-                {
-                    model.TenancyName = Tenant.DefaultTenantName;
-                }
-                else if (model.TenancyName.IsNullOrEmpty())
-                {
-                    throw new UserFriendlyException(L("TenantNameCanNotBeEmpty"));
-                }
-
-                var tenant = await GetActiveTenantAsync(model.TenancyName);
 
                 //Create user
                 var user = new User
@@ -341,7 +198,7 @@ namespace AbpCompanyName.AbpProjectName.Web.Controllers
                         }
                     };
 
-                    model.UserName = model.EmailAddress;
+                    model.UserName = model.UserName;
                     model.Password = Users.User.CreateRandomPassword();
 
                     if (string.Equals(externalLoginInfo.EmailAddress, model.EmailAddress, StringComparison.InvariantCultureIgnoreCase))
@@ -359,10 +216,6 @@ namespace AbpCompanyName.AbpProjectName.Web.Controllers
 
                 user.UserName = model.UserName;
                 user.Password = new PasswordHasher().HashPassword(model.Password);
-
-                //Switch to the tenant
-                _unitOfWorkManager.Current.EnableFilter(AbpDataFilters.MayHaveTenant); //TODO: Needed?
-                _unitOfWorkManager.Current.SetTenantId(tenant.Id);
 
                 //Add default roles
                 user.Roles = new List<UserRole>();

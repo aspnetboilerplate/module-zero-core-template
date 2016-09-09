@@ -1,10 +1,16 @@
-﻿@model AbpCompanyName.AbpProjectName.WebMpa.Models.Account.TenantSelectionViewModel
+﻿@model AbpCompanyName.AbpProjectName.Web.Models.Account.TenantSelectionViewModel
 @{
     ViewBag.Title = "Select Tenant";
 }
 @section Styles
 {
-    <link href="~/Views/Account/Login.css" rel="stylesheet" />
+    <environment names="Development">
+        <link rel="stylesheet" href="~/view-resources/Views/Account/Login.css" asp-append-version="true" />
+    </environment>
+
+    <environment names="Staging,Production">
+        <link rel="stylesheet" href="~/view-resources/Views/Account/Login.min.css" asp-append-version="true" />
+    </environment>
 }
 <div class="container">
     <div id="LoginArea" class="row">
@@ -26,18 +32,18 @@
                                     var tenant = Model.Tenants[i];
                                     <div class="md-radio">
                                         @{
-                                    string checkAttr = null;
-                                    if (i == 0)
-                                    {
-                                        checkAttr = "checked=\"checked\"";
-                                    }
+                                            string checkAttr = null;
+                                            if (i == 0)
+                                            {
+                                                checkAttr = "checked=\"checked\"";
+                                            }
                                         }
                                         <input type="radio" class="md-radiobtn" id="TenancyName_@(tenant.TenancyName)" name="TenancyName" value="@tenant.TenancyName" @checkAttr>
                                         <label for="TenancyName_@(tenant.TenancyName)">
                                             @tenant.Name (@tenant.TenancyName)
                                         </label>
                                     </div>
-                                }
+                                            }
                             </div>
                         </div>
 

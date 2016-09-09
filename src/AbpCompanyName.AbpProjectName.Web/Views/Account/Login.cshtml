@@ -81,9 +81,9 @@
                     {
                         provider = provider.ToLower(CultureInfo.InvariantCulture);
 
-                        if (provider == "google")
+                        if (provider == "microsoft")
                         {
-                            return "googleplus";
+                            return "windows";
                         }
 
                         return provider;
@@ -100,13 +100,11 @@
                                 <input type="hidden" name="provider" value="" />
 
                                 @foreach (var p in loginProviders)
-                {
-                                    <li>
-                                        <a class="social-login-icon social-icon-color @getSocialIconClass(p.DisplayName)"
-                                           title="@p.DisplayName"
-                                           data-provider="@p.DisplayName"
-                                           href="javascript:;"></a>
-                                    </li>
+                                {
+                                    <a class="btn btn-default btn-sm fa fa-@(getSocialIconClass(p.DisplayName)) social-login-link" title="@p.DisplayName"
+                                       data-provider="@p.DisplayName"
+                                       href="javascript:;">
+                                    </a>
                                 }
                             </form>
                         </ul>
