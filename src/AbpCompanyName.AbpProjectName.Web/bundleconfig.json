@@ -8,7 +8,8 @@
   {
     "outputFileName": "wwwroot/view-resources/Views/_Bundles/layout-libs.min.css",
     "inputFiles": [
-      "wwwroot/lib/bootstrap-paper/bootstrap.css",
+      "wwwroot/lib/jquery-ui/themes/base/all.css",
+      "wwwroot/lib/bootstrap-theme-cosmo/cosmo.min.css",
       "wwwroot/lib/toastr/toastr.css",
       "wwwroot/lib/sweetalert/dist/sweetalert.css",
       "wwwroot/lib/famfamfam-flags/dist/sprite/famfamfam-flags.css",
@@ -21,6 +22,7 @@
     "inputFiles": [
       "wwwroot/lib/json2/json2.js",
       "wwwroot/lib/jquery/dist/jquery.js",
+      "wwwroot/lib/jquery-ui/jquery-ui.js",
       "wwwroot/lib/bootstrap/dist/js/bootstrap.js",
       "wwwroot/lib/moment/min/moment-with-locales.js",
       "wwwroot/lib/jquery-validation/dist/jquery.validate.js",
@@ -34,7 +36,8 @@
       "wwwroot/lib/abp-web-resources/Abp/Framework/scripts/libs/abp.toastr.js",
       "wwwroot/lib/abp-web-resources/Abp/Framework/scripts/libs/abp.blockUI.js",
       "wwwroot/lib/abp-web-resources/Abp/Framework/scripts/libs/abp.sweet-alert.js",
-      "wwwroot/lib/abp-web-resources/Abp/Framework/scripts/libs/abp.spin.js"
+      "wwwroot/lib/abp-web-resources/Abp/Framework/scripts/libs/abp.spin.js",
+      "wwwroot/lib/signalr/jquery.signalR.js"
     ]
   },
   {

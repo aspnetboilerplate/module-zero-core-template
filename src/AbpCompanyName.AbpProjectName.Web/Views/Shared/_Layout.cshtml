@@ -20,16 +20,22 @@
 
     <title>AbpProjectName</title>
 
-    <!-- ~/Bundles/vendor/css -->
-    <link rel="stylesheet" href="~/lib/jquery-ui/themes/base/all.css" asp-append-version="true" />
-    <link rel="stylesheet" href="~/lib/bootstrap-theme-cosmo/cosmo.min.css" asp-append-version="true" />
-    <link rel="stylesheet" href="~/lib/toastr/toastr.css" asp-append-version="true" />
-    <link rel="stylesheet" href="~/lib/sweetalert/dist/sweetalert.css" asp-append-version="true" />
-    <link rel="stylesheet" href="~/lib/famfamfam-flags/dist/sprite/famfamfam-flags.css" asp-append-version="true" />
-    <link rel="stylesheet" href="~/lib/font-awesome/css/font-awesome.css" asp-append-version="true" />
+    <environment names="Development">
+        <!-- ~/Bundles/vendor/css -->
+        <link rel="stylesheet" href="~/lib/jquery-ui/themes/base/all.css" asp-append-version="true" />
+        <link rel="stylesheet" href="~/lib/bootstrap-theme-cosmo/cosmo.min.css" asp-append-version="true" />
+        <link rel="stylesheet" href="~/lib/toastr/toastr.css" asp-append-version="true" />
+        <link rel="stylesheet" href="~/lib/sweetalert/dist/sweetalert.css" asp-append-version="true" />
+        <link rel="stylesheet" href="~/lib/famfamfam-flags/dist/sprite/famfamfam-flags.css" asp-append-version="true" />
+        <link rel="stylesheet" href="~/lib/font-awesome/css/font-awesome.css" asp-append-version="true" />
 
-    <!-- ~/Bundles/css -->
-    <link rel="stylesheet" href="~/css/main.css" asp-append-version="true" />
+        <link rel="stylesheet" href="~/css/main.css" asp-append-version="true" />
+    </environment>
+
+    <environment names="Staging,Production">
+        <link rel="stylesheet" href="~/view-resources/Views/_Bundles/layout-libs.min.css" asp-append-version="true" />
+    </environment>
+    
 
     <!-- View specific styles -->
     @RenderSection("styles", required: false)
@@ -50,30 +56,35 @@
         @RenderBody()
     </div>
 
-    <!-- ~/Bundles/vendor/js/bottom -->
-    <script src="~/lib/json2/json2.js" asp-append-version="true"></script>
-    <script src="~/lib/jquery/dist/jquery.js" asp-append-version="true"></script>
-    <script src="~/lib/jquery-ui/jquery-ui.js" asp-append-version="true"></script>
-    <script src="~/lib/bootstrap/dist/js/bootstrap.js" asp-append-version="true"></script>
-    <script src="~/lib/moment/min/moment-with-locales.js" asp-append-version="true"></script>
-    <script src="~/lib/jquery-validation/dist/jquery.validate.js" asp-append-version="true"></script>
-    <script src="~/lib/blockUI/jquery.blockUI.js" asp-append-version="true"></script>
-    <script src="~/lib/toastr/toastr.js" asp-append-version="true"></script>
-    <script src="~/lib/sweetalert/dist/sweetalert-dev.js" asp-append-version="true"></script>
-    <script src="~/lib/spin.js/spin.js" asp-append-version="true"></script>
-    <script src="~/lib/spin.js/jquery.spin.js" asp-append-version="true"></script>
+    <environment names="Development">
+        <script src="~/lib/json2/json2.js" asp-append-version="true"></script>
+        <script src="~/lib/jquery/dist/jquery.js" asp-append-version="true"></script>
+        <script src="~/lib/jquery-ui/jquery-ui.js" asp-append-version="true"></script>
+        <script src="~/lib/bootstrap/dist/js/bootstrap.js" asp-append-version="true"></script>
+        <script src="~/lib/moment/min/moment-with-locales.js" asp-append-version="true"></script>
+        <script src="~/lib/jquery-validation/dist/jquery.validate.js" asp-append-version="true"></script>
+        <script src="~/lib/blockUI/jquery.blockUI.js" asp-append-version="true"></script>
+        <script src="~/lib/toastr/toastr.js" asp-append-version="true"></script>
+        <script src="~/lib/sweetalert/dist/sweetalert-dev.js" asp-append-version="true"></script>
+        <script src="~/lib/spin.js/spin.js" asp-append-version="true"></script>
+        <script src="~/lib/spin.js/jquery.spin.js" asp-append-version="true"></script>
 
-    <script src="~/lib/abp-web-resources/Abp/Framework/scripts/abp.js" asp-append-version="true"></script>
-    <script src="~/lib/abp-web-resources/Abp/Framework/scripts/libs/abp.jquery.js" asp-append-version="true"></script>
-    <script src="~/lib/abp-web-resources/Abp/Framework/scripts/libs/abp.toastr.js" asp-append-version="true"></script>
-    <script src="~/lib/abp-web-resources/Abp/Framework/scripts/libs/abp.blockUI.js" asp-append-version="true"></script>
-    <script src="~/lib/abp-web-resources/Abp/Framework/scripts/libs/abp.spin.js" asp-append-version="true"></script>
-    <script src="~/lib/abp-web-resources/Abp/Framework/scripts/libs/abp.sweet-alert.js" asp-append-version="true"></script>
+        <script src="~/lib/abp-web-resources/Abp/Framework/scripts/abp.js" asp-append-version="true"></script>
+        <script src="~/lib/abp-web-resources/Abp/Framework/scripts/libs/abp.jquery.js" asp-append-version="true"></script>
+        <script src="~/lib/abp-web-resources/Abp/Framework/scripts/libs/abp.toastr.js" asp-append-version="true"></script>
+        <script src="~/lib/abp-web-resources/Abp/Framework/scripts/libs/abp.blockUI.js" asp-append-version="true"></script>
+        <script src="~/lib/abp-web-resources/Abp/Framework/scripts/libs/abp.spin.js" asp-append-version="true"></script>
+        <script src="~/lib/abp-web-resources/Abp/Framework/scripts/libs/abp.sweet-alert.js" asp-append-version="true"></script>
 
-    <script src="~/lib/signalr/jquery.signalR.js" asp-append-version="true"></script>
+        <script src="~/lib/signalr/jquery.signalR.js" asp-append-version="true"></script>
 
-    <!-- ~/Bundles/js -->
-    <script src="~/js/main.js" asp-append-version="true"></script>
+        <script src="~/js/main.js" asp-append-version="true"></script>
+    </environment>
+
+    <environment names="Staging,Production">
+        <script src="~/view-resources/Views/_Bundles/layout-libs.min.js" asp-append-version="true"></script>
+        <script src="~/js/main.min.js" asp-append-version="true"></script>
+    </environment>
 
     <script>
         //Localizing momentjs
