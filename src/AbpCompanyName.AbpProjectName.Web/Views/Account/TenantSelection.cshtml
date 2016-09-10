@@ -1,6 +1,9 @@
-﻿@model AbpCompanyName.AbpProjectName.Web.Models.Account.TenantSelectionViewModel
+﻿@using System.Net
+@using Microsoft.EntityFrameworkCore.Metadata.Internal
+@model AbpCompanyName.AbpProjectName.Web.Models.Account.TenantSelectionViewModel
 @{
     ViewBag.Title = "Select Tenant";
+    ViewBag.DisableTopBar = true;
 }
 @section Styles
 {
@@ -17,7 +20,9 @@
         <div class="col-lg-12">
             <div class="well bs-component">
 
-                <form action="@Model.Action" method="POST">
+                <form asp-action="@(Model.Action)" method="POST">
+                    <input type="hidden" name="ReturnUrl" value="@Model.ReturnUrl"/>
+                    <input type="hidden" name="authSchema" value="@Model.AuthSchema" />
                     <fieldset>
                         <legend>@L("TenantSelection")</legend>
 
@@ -43,7 +48,7 @@
                                             @tenant.Name (@tenant.TenancyName)
                                         </label>
                                     </div>
-                                            }
+                                }
                             </div>
                         </div>
 

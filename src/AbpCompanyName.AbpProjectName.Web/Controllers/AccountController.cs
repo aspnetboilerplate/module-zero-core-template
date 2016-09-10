@@ -331,7 +331,9 @@ namespace AbpCompanyName.AbpProjectName.Web.Controllers
                         default:
                             return View("TenantSelection", new TenantSelectionViewModel
                             {
-                                Action = Url.Action("ExternalLoginCallback", "Account", new { returnUrl }),
+                                Action = "ExternalLoginCallback",
+                                ReturnUrl = returnUrl,
+                                AuthSchema = authSchema,
                                 Tenants = tenants.MapTo<List<TenantSelectionViewModel.TenantInfo>>()
                             });
                     }
