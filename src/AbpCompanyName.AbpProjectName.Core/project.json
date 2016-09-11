@@ -2,8 +2,6 @@
   "version": "1.0.0.0-*",
 
   "dependencies": {
-    "Abp": "0.11.3",
-    "Abp.Zero": "0.11.2",
     "Castle.Core": "3.3.3",
     "Castle.LoggingFacility": "3.3.0",
     "Castle.Windsor": "3.3.0",
@@ -13,7 +11,9 @@
     "System.Collections.Immutable": "1.2.0",
     "Microsoft.Extensions.Configuration.EnvironmentVariables": "1.0.0",
     "Microsoft.Extensions.Configuration.Json": "1.0.0",
-    "Microsoft.Extensions.Configuration.UserSecrets": "1.0.0"
+    "Microsoft.Extensions.Configuration.UserSecrets": "1.0.0",
+    "Abp": "0.12.0",
+    "Abp.Zero": "0.12.0"
   },
 
   "frameworks": {
