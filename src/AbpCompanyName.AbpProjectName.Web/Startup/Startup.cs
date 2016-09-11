@@ -101,7 +101,7 @@ namespace AbpCompanyName.AbpProjectName.Web.Startup
 
             app.MapSignalR();
 
-            //Enable it to use HangFire dashboard (uncomment only if it's enabled in AbpZeroTemplateWebModule)
+            //Enable it to use HangFire dashboard (uncomment only if it's enabled in AbpProjectNameWebModule)
             //app.UseHangfireDashboard("/hangfire", new DashboardOptions
             //{
             //    Authorization = new[] { new AbpHangfireAuthorizationFilter(AppPermissions.Pages_Administration_HangfireDashboard) }

@@ -10,7 +10,7 @@ using AbpCompanyName.AbpProjectName.Web;
 
 namespace AbpCompanyName.AbpProjectName.EntityFramework
 {
-    [DbConfigurationType(typeof(AbpZeroTemplateDbConfiguration))]
+    [DbConfigurationType(typeof(AbpProjectNameDbConfiguration))]
     public class AbpProjectNameDbContext : AbpZeroDbContext<Tenant, Role, User>
     {
         /* Define an IDbSet for each entity of the application */
@@ -38,8 +38,8 @@ namespace AbpCompanyName.AbpProjectName.EntityFramework
                 );
         }
 
-        /* This constructor is used by ABP to pass connection string defined in AbpZeroTemplateDataModule.PreInitialize.
-         * Notice that, actually you will not directly create an instance of AbpZeroTemplateDbContext since ABP automatically handles it.
+        /* This constructor is used by ABP to pass connection string defined in AbpProjectNameDataModule.PreInitialize.
+         * Notice that, actually you will not directly create an instance of AbpProjectNameDbContext since ABP automatically handles it.
          */
         public AbpProjectNameDbContext(string nameOrConnectionString)
             : base(nameOrConnectionString)
@@ -55,9 +55,9 @@ namespace AbpCompanyName.AbpProjectName.EntityFramework
         }
     }
 
-    public class AbpZeroTemplateDbConfiguration : DbConfiguration
+    public class AbpProjectNameDbConfiguration : DbConfiguration
     {
-        public AbpZeroTemplateDbConfiguration()
+        public AbpProjectNameDbConfiguration()
         {
             SetProviderServices(
                 "System.Data.SqlClient",
