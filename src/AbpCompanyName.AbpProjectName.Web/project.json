@@ -32,12 +32,12 @@
     "PaulMiami.AspNetCore.Mvc.Recaptcha": "1.1.0",
     "Swashbuckle": "6.0.0-beta902",
     "AspNet.Security.OpenIdConnect.Server": "1.0.0-beta6-final",
+    "Abp.AspNetCore": "0.12.0.1",
     "Abp.Castle.Log4Net": "0.12.0",
     "Abp.HangFire": "0.12.0",
     "Abp.Owin": "0.12.0",
     "Abp.RedisCache": "0.12.0",
-    "Abp.Web.SignalR": "0.12.0",
-    "Abp.AspNetCore": "0.12.0.1"
+    "Abp.Web.SignalR": "0.12.0"
   },
 
   "tools": {
