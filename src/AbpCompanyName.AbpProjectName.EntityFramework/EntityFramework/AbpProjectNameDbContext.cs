@@ -15,11 +15,6 @@ namespace AbpCompanyName.AbpProjectName.EntityFramework
     {
         /* Define an IDbSet for each entity of the application */
 
-        /* NOTE: 
-         *   Setting "Default" to base class helps us when working migration commands on Package Manager Console.
-         *   But it may cause problems when working Migrate.exe of EF. If you will apply migrations on command line, do not
-         *   pass connection string name to base classes. ABP works either way.
-         */
         /* Default constructor is needed for EF command line tool. */
         public AbpProjectNameDbContext()
             : base(GetConnectionString())
@@ -38,7 +33,7 @@ namespace AbpCompanyName.AbpProjectName.EntityFramework
                 );
         }
 
-        /* This constructor is used by ABP to pass connection string defined in AbpProjectNameDataModule.PreInitialize.
+        /* This constructor is used by ABP to pass connection string.
          * Notice that, actually you will not directly create an instance of AbpProjectNameDbContext since ABP automatically handles it.
          */
         public AbpProjectNameDbContext(string nameOrConnectionString)

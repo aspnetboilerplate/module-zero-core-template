@@ -20,6 +20,8 @@ namespace AbpCompanyName.AbpProjectName.Tests
         {
             Configuration.UnitOfWork.Timeout = TimeSpan.FromMinutes(30);
 
+            Configuration.BackgroundJobs.IsJobExecutionEnabled = false;
+
             //Use database for language management
             Configuration.Modules.Zero().LanguageManagement.EnableDbLocalization();
 

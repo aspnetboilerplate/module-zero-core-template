@@ -13,7 +13,7 @@ namespace AbpCompanyName.AbpProjectName.Migrator
 {
     public class MultiTenantMigrateExecuter : ITransientDependency
     {
-        public Log Log { get; private set; }
+        public Log Log { get; }
 
         private readonly IAbpZeroDbMigrator _migrator;
         private readonly IRepository<Tenant> _tenantRepository;
@@ -61,7 +61,7 @@ namespace AbpCompanyName.AbpProjectName.Migrator
             }
             catch (Exception ex)
             {
-                Log.Write("An error occured during migration of host database:");
+                Log.Write("An error occurred during migration of host database:");
                 Log.Write(ex.ToString());
                 Log.Write("Canceled migrations.");
                 return;
@@ -75,7 +75,7 @@ namespace AbpCompanyName.AbpProjectName.Migrator
             for (int i = 0; i < tenants.Count; i++)
             {
                 var tenant = tenants[i];
-                Log.Write(string.Format("Tenant database migration started... ({0} / {1})", (i + 1), tenants.Count));
+                Log.Write($"Tenant database migration started... ({(i + 1)} / {tenants.Count})");
                 Log.Write("Name              : " + tenant.Name);
                 Log.Write("TenancyName       : " + tenant.TenancyName);
                 Log.Write("Tenant Id         : " + tenant.Id);
@@ -89,7 +89,7 @@ namespace AbpCompanyName.AbpProjectName.Migrator
                     }
                     catch (Exception ex)
                     {
-                        Log.Write("An error occured during migration of tenant database:");
+                        Log.Write("An error occurred during migration of tenant database:");
                         Log.Write(ex.ToString());
                         Log.Write("Skipped this tenant and will continue for others...");
                     }
@@ -101,7 +101,7 @@ namespace AbpCompanyName.AbpProjectName.Migrator
                     Log.Write("This database has already migrated before (you have more than one tenant in same database). Skipping it....");
                 }
 
-                Log.Write(string.Format("Tenant database migration completed. ({0} / {1})", (i + 1), tenants.Count));
+                Log.Write($"Tenant database migration completed. ({(i + 1)} / {tenants.Count})");
                 Log.Write("--------------------------------------------------------");
             }
 

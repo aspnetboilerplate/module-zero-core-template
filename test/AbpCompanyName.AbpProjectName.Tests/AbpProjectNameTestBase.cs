@@ -117,7 +117,7 @@ namespace AbpCompanyName.AbpProjectName.Tests
             UsingDbContext(AbpSession.TenantId, action);
         }
 
-        protected Task UsingDbContextAsync(Action<AbpProjectNameDbContext> action)
+        protected Task UsingDbContextAsync(Func<AbpProjectNameDbContext, Task> action)
         {
             return UsingDbContextAsync(AbpSession.TenantId, action);
         }
@@ -145,14 +145,14 @@ namespace AbpCompanyName.AbpProjectName.Tests
             }
         }
 
-        protected async Task UsingDbContextAsync(int? tenantId, Action<AbpProjectNameDbContext> action)
+        protected async Task UsingDbContextAsync(int? tenantId, Func<AbpProjectNameDbContext, Task> action)
         {
             using (UsingTenantId(tenantId))
             {
                 using (var context = LocalIocManager.Resolve<AbpProjectNameDbContext>())
                 {
                     context.DisableAllFilters();
-                    action(context);
+                    await action(context);
                     await context.SaveChangesAsync();
                 }
             }
