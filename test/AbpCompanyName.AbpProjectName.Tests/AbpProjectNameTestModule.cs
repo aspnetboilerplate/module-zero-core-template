@@ -1,13 +1,10 @@
 using System;
-using System.Reflection;
 using Abp.Modules;
 using Abp.MultiTenancy;
 using Abp.TestBase;
 using Abp.Zero.Configuration;
 using AbpCompanyName.AbpProjectName.EntityFramework;
 using Castle.MicroKernel.Registration;
-using Microsoft.EntityFrameworkCore;
-using Microsoft.Extensions.DependencyInjection;
 using NSubstitute;
 
 
