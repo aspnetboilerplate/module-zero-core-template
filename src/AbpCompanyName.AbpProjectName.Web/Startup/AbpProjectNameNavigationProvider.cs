@@ -14,7 +14,7 @@ namespace AbpCompanyName.AbpProjectName.Web.Startup
             context.Manager.MainMenu
                 .AddItem(
                     new MenuItemDefinition(
-                        "Home",
+                        PageNames.Home,
                         L("HomePage"),
                         url: "",
                         icon: "fa fa-home",
@@ -22,7 +22,7 @@ namespace AbpCompanyName.AbpProjectName.Web.Startup
                         )
                 ).AddItem(
                     new MenuItemDefinition(
-                        "Tenants",
+                        PageNames.Tenants,
                         L("Tenants"),
                         url: "Tenants",
                         icon: "fa fa-globe",
@@ -30,7 +30,7 @@ namespace AbpCompanyName.AbpProjectName.Web.Startup
                         )
                 ).AddItem(
                     new MenuItemDefinition(
-                        "Users",
+                        PageNames.Users,
                         L("Users"),
                         url: "Users",
                         icon: "fa fa-users",
@@ -38,7 +38,7 @@ namespace AbpCompanyName.AbpProjectName.Web.Startup
                         )
                 ).AddItem(
                     new MenuItemDefinition(
-                        "About",
+                        PageNames.About,
                         L("About"),
                         url: "About",
                         icon: "fa fa-info"

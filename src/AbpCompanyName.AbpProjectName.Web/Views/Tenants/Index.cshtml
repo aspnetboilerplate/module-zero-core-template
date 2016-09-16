@@ -1,8 +1,9 @@
 ﻿@using Abp.MultiTenancy
 @using AbpCompanyName.AbpProjectName.MultiTenancy
+@using AbpCompanyName.AbpProjectName.Web.Startup
 @model Abp.Application.Services.Dto.ListResultOutput<AbpCompanyName.AbpProjectName.MultiTenancy.Dto.TenantListDto>
 @{
-    ViewBag.CurrentPageName = "Tenants"; //The menu item will be active for this page.
+    ViewBag.CurrentPageName = PageNames.Tenants; //The menu item will be active for this page.
 }
 @section scripts
 {
