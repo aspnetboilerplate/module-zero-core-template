@@ -7,7 +7,6 @@ using AbpCompanyName.AbpProjectName.EntityFramework;
 using Castle.MicroKernel.Registration;
 using NSubstitute;
 
-
 namespace AbpCompanyName.AbpProjectName.Tests
 {
     [DependsOn(

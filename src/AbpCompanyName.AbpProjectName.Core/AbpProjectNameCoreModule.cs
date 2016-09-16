@@ -7,7 +7,6 @@ using Abp.Zero.Configuration;
 using AbpCompanyName.AbpProjectName.MultiTenancy;
 using AbpCompanyName.AbpProjectName.Authorization.Roles;
 using AbpCompanyName.AbpProjectName.Users;
-using AbpCompanyName.AbpProjectName.Configuration;
 using AbpCompanyName.AbpProjectName.Timing;
 
 namespace AbpCompanyName.AbpProjectName
@@ -25,9 +24,6 @@ namespace AbpCompanyName.AbpProjectName
             Configuration.Modules.Zero().EntityTypes.User = typeof(User);
 
             AbpProjectNameLocalizationConfigurer.Configure(Configuration.Localization);
-
-            //Adding setting providers
-            Configuration.Settings.Providers.Add<AppSettingProvider>();
 
             //Enable this line to create a multi-tenant application.
             Configuration.MultiTenancy.IsEnabled = true;
