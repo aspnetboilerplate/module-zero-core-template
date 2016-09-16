@@ -52,7 +52,6 @@ namespace AbpCompanyName.AbpProjectName.Web.Startup
             }
             else
             {
-                app.UseStatusCodePagesWithRedirects("~/Error?statusCode={0}");
                 app.UseExceptionHandler("/Error");
             }
 

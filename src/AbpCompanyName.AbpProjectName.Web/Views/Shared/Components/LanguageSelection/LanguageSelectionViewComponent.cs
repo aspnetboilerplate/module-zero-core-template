@@ -1,13 +1,9 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
-using Abp.Localization;
+﻿using Abp.Localization;
 using Microsoft.AspNetCore.Mvc;
 
 namespace AbpCompanyName.AbpProjectName.Web.Views.Shared.Components.LanguageSelection
 {
-    public class LanguageSelectionViewComponent: ViewComponent
+    public class LanguageSelectionViewComponent : ViewComponent
     {
         private readonly ILocalizationManager _localizationManager;
 

@@ -66,8 +66,7 @@ namespace AbpCompanyName.AbpProjectName.Web.Controllers
 
         [HttpPost]
         [UnitOfWork]
-        public virtual async Task<JsonResult> Login(LoginViewModel loginModel, string returnUrl = "",
-            string returnUrlHash = "")
+        public virtual async Task<JsonResult> Login(LoginViewModel loginModel, string returnUrl = "", string returnUrlHash = "")
         {
             var loginResult = await GetLoginResultAsync(loginModel.UsernameOrEmailAddress, loginModel.Password, loginModel.TenancyName);
 
