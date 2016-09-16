@@ -3,9 +3,6 @@
 
   "dependencies": {
     "AbpCompanyName.AbpProjectName.Core": "1.0.0.0-*",
-    "Abp.EntityFrameworkCore": "0.11.3",
-    "Abp.AutoMapper": "0.11.3",
-    "Abp.Zero": "0.11.2",
     "AutoMapper": "5.1.1",
     "Castle.Core": "3.3.3",
     "Castle.LoggingFacility": "3.3.0",
@@ -13,7 +10,10 @@
     "Microsoft.AspNet.Identity.Core": "2.2.1",
     "Newtonsoft.Json": "9.0.1",
     "Nito.AsyncEx": "3.0.1",
-    "System.Collections.Immutable": "1.2.0"
+    "System.Collections.Immutable": "1.2.0",
+    "Abp.AutoMapper": "0.12.0",
+    "Abp.EntityFrameworkCore": "0.12.0",
+    "Abp.Zero": "0.12.0"
   },
 
   "frameworks": {

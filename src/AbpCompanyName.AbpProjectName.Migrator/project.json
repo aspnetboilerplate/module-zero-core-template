@@ -1,4 +1,4 @@
-﻿{
+{
   "version": "1.0.0-*",
 
   "buildOptions": {
@@ -10,7 +10,7 @@
   },
 
   "dependencies": {
-    "Abp.Castle.Log4Net": "0.11.3",
+    "Abp.Castle.Log4Net": "0.12.0",
     "AbpCompanyName.AbpProjectName.EntityFramework": "1.0.0.0-*"
   },
 

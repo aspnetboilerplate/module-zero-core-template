@@ -13,7 +13,7 @@
     "xunit.runner.visualstudio": "2.2.0-beta2-build1149",
     "Effort.EF6": "1.1.5",
     "Shouldly": "2.8.2",
-    "Abp.TestBase": "0.11.3"
+    "Abp.TestBase": "0.12.0"
   },
 
   "frameworks": {

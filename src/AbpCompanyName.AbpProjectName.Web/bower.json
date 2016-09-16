@@ -13,12 +13,10 @@
     "font-awesome": "^4.6.3",
     "json2": "*",
     "moment": "^2.14.1",
+    "moment-timezone": "^0.5.5",
     "jquery-validation": "^1.15.0",
     "blockUI": "jquery.blockUI#*",
     "spin.js": "^2.3.2",
     "signalr": "^2.2.1"
-  },
-  "resolutions": {
-    "abp-web-resources": "^0.11.3"
   }
 }

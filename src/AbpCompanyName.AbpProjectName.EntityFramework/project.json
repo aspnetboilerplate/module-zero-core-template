@@ -7,9 +7,8 @@
       "version": "1.0.0",
       "type": "build"
     },
-    "Abp.Zero.EntityFramework": "0.11.2",
-    "Abp.EntityFramework": "0.11.3"
-  },
+    "Abp.EntityFramework": "0.12.0",
+"Abp.Zero.EntityFramework": "0.12.0"  },
 
   "tools": {
     "Migrator.EF6.Tools": {
