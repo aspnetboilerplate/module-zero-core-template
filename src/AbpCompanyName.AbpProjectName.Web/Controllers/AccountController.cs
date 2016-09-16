@@ -17,7 +17,6 @@ using Microsoft.AspNetCore.Mvc;
 using AbpCompanyName.AbpProjectName.Authorization;
 using AbpCompanyName.AbpProjectName.Authorization.Roles;
 using AbpCompanyName.AbpProjectName.MultiTenancy;
-using AbpCompanyName.AbpProjectName.Web.MultiTenancy;
 using AbpCompanyName.AbpProjectName.Users;
 using AbpCompanyName.AbpProjectName.Web.Authentication;
 using AbpCompanyName.AbpProjectName.Web.Models.Account;
@@ -31,7 +30,6 @@ namespace AbpCompanyName.AbpProjectName.Web.Controllers
         private readonly TenantManager _tenantManager;
         private readonly IMultiTenancyConfig _multiTenancyConfig;
         private readonly IUnitOfWorkManager _unitOfWorkManager;
-        private readonly ITenancyNameFinder _tenancyNameFinder;
         private readonly AbpLoginResultTypeHelper _abpLoginResultTypeHelper;
 
         public AccountController(
@@ -40,7 +38,6 @@ namespace AbpCompanyName.AbpProjectName.Web.Controllers
             RoleManager roleManager,
             TenantManager tenantManager,
             IUnitOfWorkManager unitOfWorkManager,
-            ITenancyNameFinder tenancyNameFinder,
             AbpLoginResultTypeHelper abpLoginResultTypeHelper)
         {
             _userManager = userManager;
@@ -48,7 +45,6 @@ namespace AbpCompanyName.AbpProjectName.Web.Controllers
             _roleManager = roleManager;
             _tenantManager = tenantManager;
             _unitOfWorkManager = unitOfWorkManager;
-            _tenancyNameFinder = tenancyNameFinder;
             _abpLoginResultTypeHelper = abpLoginResultTypeHelper;
         }
 
@@ -283,7 +279,6 @@ namespace AbpCompanyName.AbpProjectName.Web.Controllers
                 new
                 {
                     ReturnUrl = returnUrl,
-                    tenancyName = _tenancyNameFinder.GetCurrentTenancyNameOrNull() ?? "",
                     authSchema = provider
                 });
 
@@ -317,7 +312,6 @@ namespace AbpCompanyName.AbpProjectName.Web.Controllers
             //Try to find tenancy name
             if (tenancyName.IsNullOrEmpty())
             {
-                tenancyName = _tenancyNameFinder.GetCurrentTenancyNameOrNull();
                 if (tenancyName.IsNullOrEmpty())
                 {
                     var tenants = await FindPossibleTenantsOfUserAsync(userInfo.LoginInfo);

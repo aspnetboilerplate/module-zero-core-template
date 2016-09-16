@@ -10,7 +10,6 @@ using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Logging;
 using AbpCompanyName.AbpProjectName.Web.Configuration;
-using AbpCompanyName.AbpProjectName.Web.MultiTenancy;
 using AbpCompanyName.AbpProjectName.Web.Startup.Owin;
 using Owin;
 
@@ -32,16 +31,6 @@ namespace AbpCompanyName.AbpProjectName.Web.Startup
             {
                 options.Filters.Add(new AutoValidateAntiforgeryTokenAttribute());
             });
-
-            //Swagger - Enable this line and the related lines in Configure method to enable swagger UI
-            //services.AddSwaggerGen();
-
-            ////Recaptcha
-            //services.AddRecaptcha(new RecaptchaOptions
-            //{
-            //    SiteKey = _appConfiguration["Recaptcha:SiteKey"],
-            //    SecretKey = _appConfiguration["Recaptcha:SecretKey"]
-            //});
 
             //Configure Abp and Dependency Injection
             return services.AddAbp<AbpProjectNameWebModule>(options =>
@@ -71,8 +60,6 @@ namespace AbpCompanyName.AbpProjectName.Web.Startup
 
             app.UseStaticFiles();
 
-            app.UseTenantIdAccessorInitialization();
-
             //Integrate to OWIN
             app.UseAppBuilder(ConfigureOwinServices);
 
@@ -86,11 +73,6 @@ namespace AbpCompanyName.AbpProjectName.Web.Startup
                     name: "default",
                     template: "{controller=Home}/{action=Index}/{id?}");
             });
-
-            // Enable middleware to serve generated Swagger as a JSON endpoint
-            //app.UseSwagger();
-            // Enable middleware to serve swagger-ui assets (HTML, JS, CSS etc.)
-            //app.UseSwaggerUi(); //URL: /swagger/ui
         }
 
         private static void ConfigureOwinServices(IAppBuilder app)
@@ -100,12 +82,6 @@ namespace AbpCompanyName.AbpProjectName.Web.Startup
             app.UseAbp();
 
             app.MapSignalR();
-
-            //Enable it to use HangFire dashboard (uncomment only if it's enabled in AbpZeroTemplateWebModule)
-            //app.UseHangfireDashboard("/hangfire", new DashboardOptions
-            //{
-            //    Authorization = new[] { new AbpHangfireAuthorizationFilter(AppPermissions.Pages_Administration_HangfireDashboard) }
-            //});
         }
     }
 }
