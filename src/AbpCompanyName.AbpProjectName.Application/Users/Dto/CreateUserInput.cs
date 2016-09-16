@@ -1,5 +1,4 @@
 using System.ComponentModel.DataAnnotations;
-using Abp.Application.Services.Dto;
 using Abp.Auditing;
 using Abp.Authorization.Users;
 using Abp.AutoMapper;
@@ -7,7 +6,7 @@ using Abp.AutoMapper;
 namespace AbpCompanyName.AbpProjectName.Users.Dto
 {
     [AutoMap(typeof(User))]
-    public class CreateUserInput : IInputDto
+    public class CreateUserInput
     {
         [Required]
         [StringLength(AbpUserBase.MaxUserNameLength)]

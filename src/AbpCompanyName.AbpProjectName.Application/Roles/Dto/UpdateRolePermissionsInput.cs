@@ -1,10 +1,9 @@
 ﻿using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
-using Abp.Application.Services.Dto;
 
 namespace AbpCompanyName.AbpProjectName.Roles.Dto
 {
-    public class UpdateRolePermissionsInput : IInputDto
+    public class UpdateRolePermissionsInput
     {
         [Range(1, int.MaxValue)]
         public int RoleId { get; set; }

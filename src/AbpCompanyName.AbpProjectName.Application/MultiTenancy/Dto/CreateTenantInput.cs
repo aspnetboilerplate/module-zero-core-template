@@ -1,5 +1,4 @@
 using System.ComponentModel.DataAnnotations;
-using Abp.Application.Services.Dto;
 using Abp.AutoMapper;
 using Abp.MultiTenancy;
 using AbpCompanyName.AbpProjectName.Users;
@@ -7,7 +6,7 @@ using AbpCompanyName.AbpProjectName.Users;
 namespace AbpCompanyName.AbpProjectName.MultiTenancy.Dto
 {
     [AutoMapTo(typeof(Tenant))]
-    public class CreateTenantInput : IInputDto
+    public class CreateTenantInput
     {
         [Required]
         [StringLength(AbpTenantBase.MaxTenancyNameLength)]
