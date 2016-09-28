@@ -1,51 +1,44 @@
 ﻿using Abp.Authorization;
 using Abp.Authorization.Users;
 using Abp.Configuration;
-using Abp.Configuration.Startup;
-using Abp.Dependency;
 using Abp.Domain.Repositories;
 using Abp.Domain.Uow;
+using Abp.IdentityFramework;
+using Abp.Localization;
 using Abp.Organizations;
 using Abp.Runtime.Caching;
-using Abp.Zero.Configuration;
 using AbpCompanyName.AbpProjectName.Authorization.Roles;
-using AbpCompanyName.AbpProjectName.MultiTenancy;
 
 namespace AbpCompanyName.AbpProjectName.Users
 {
-    public class UserManager : AbpUserManager<Tenant, Role, User>
+    public class UserManager : AbpUserManager<Role, User>
     {
         public UserManager(
-            UserStore store,
+            UserStore userStore,
             RoleManager roleManager,
-            IRepository<Tenant> tenantRepository,
-            IMultiTenancyConfig multiTenancyConfig,
             IPermissionManager permissionManager,
             IUnitOfWorkManager unitOfWorkManager,
-            ISettingManager settingManager,
-            IUserManagementConfig userManagementConfig,
-            IIocResolver iocResolver,
             ICacheManager cacheManager,
             IRepository<OrganizationUnit, long> organizationUnitRepository,
             IRepository<UserOrganizationUnit, long> userOrganizationUnitRepository,
             IOrganizationUnitSettings organizationUnitSettings,
-            IRepository<UserLoginAttempt, long> userLoginAttemptRepository
-            )
+            ILocalizationManager localizationManager,
+            ISettingManager settingManager,
+            IdentityEmailMessageService emailService,
+            IUserTokenProviderAccessor userTokenProviderAccessor)
             : base(
-                store,
-                roleManager,
-                tenantRepository,
-                multiTenancyConfig,
-                permissionManager,
-                unitOfWorkManager,
-                settingManager,
-                userManagementConfig,
-                iocResolver,
-                cacheManager,
-                organizationUnitRepository,
-                userOrganizationUnitRepository,
-                organizationUnitSettings,
-                userLoginAttemptRepository)
+                  userStore,
+                  roleManager,
+                  permissionManager,
+                  unitOfWorkManager,
+                  cacheManager,
+                  organizationUnitRepository,
+                  userOrganizationUnitRepository,
+                  organizationUnitSettings,
+                  localizationManager,
+                  emailService,
+                  settingManager,
+                  userTokenProviderAccessor)
         {
         }
     }

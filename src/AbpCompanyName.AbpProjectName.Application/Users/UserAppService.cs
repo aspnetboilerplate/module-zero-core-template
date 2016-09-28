@@ -37,11 +37,11 @@ namespace AbpCompanyName.AbpProjectName.Users
             CheckErrors(await UserManager.RemoveFromRoleAsync(userId, roleName));
         }
 
-        public async Task<ListResultOutput<UserListDto>> GetUsers()
+        public async Task<ListResultDto<UserListDto>> GetUsers()
         {
             var users = await _userRepository.GetAllListAsync();
 
-            return new ListResultOutput<UserListDto>(
+            return new ListResultDto<UserListDto>(
                 users.MapTo<List<UserListDto>>()
                 );
         }

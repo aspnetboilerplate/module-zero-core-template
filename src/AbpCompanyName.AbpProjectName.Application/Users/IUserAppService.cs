@@ -11,7 +11,7 @@ namespace AbpCompanyName.AbpProjectName.Users
 
         Task RemoveFromRole(long userId, string roleName);
 
-        Task<ListResultOutput<UserListDto>> GetUsers();
+        Task<ListResultDto<UserListDto>> GetUsers();
 
         Task CreateUser(CreateUserInput input);
     }

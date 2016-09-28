@@ -12,8 +12,8 @@
     "Microsoft.Extensions.Configuration.EnvironmentVariables": "1.0.0",
     "Microsoft.Extensions.Configuration.Json": "1.0.0",
     "Microsoft.Extensions.Configuration.UserSecrets": "1.0.0",
-    "Abp": "0.12.0.2",
-    "Abp.Zero": "0.12.0"
+    "Abp": "1.0.0",
+    "Abp.Zero": "1.0.0"
   },
 
   "frameworks": {

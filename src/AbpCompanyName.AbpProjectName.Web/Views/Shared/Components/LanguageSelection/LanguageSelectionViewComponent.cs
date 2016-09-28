@@ -5,19 +5,19 @@ namespace AbpCompanyName.AbpProjectName.Web.Views.Shared.Components.LanguageSele
 {
     public class LanguageSelectionViewComponent : ViewComponent
     {
-        private readonly ILocalizationManager _localizationManager;
+        private readonly ILanguageManager _languageManager;
 
-        public LanguageSelectionViewComponent(ILocalizationManager localizationManager)
+        public LanguageSelectionViewComponent(ILanguageManager languageManager)
         {
-            _localizationManager = localizationManager;
+            _languageManager = languageManager;
         }
 
         public IViewComponentResult Invoke()
         {
             var model = new LanguageSelectionViewModel
             {
-                CurrentLanguage = _localizationManager.CurrentLanguage,
-                Languages = _localizationManager.GetAllLanguages()
+                CurrentLanguage = _languageManager.CurrentLanguage,
+                Languages = _languageManager.GetLanguages()
             };
 
             return View(model);

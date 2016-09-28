@@ -7,7 +7,7 @@ namespace AbpCompanyName.AbpProjectName.MultiTenancy
 {
     public interface ITenantAppService : IApplicationService
     {
-        ListResultOutput<TenantListDto> GetTenants();
+        ListResultDto<TenantListDto> GetTenants();
 
         Task CreateTenant(CreateTenantInput input);
     }

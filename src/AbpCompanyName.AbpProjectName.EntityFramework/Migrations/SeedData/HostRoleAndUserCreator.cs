@@ -43,16 +43,13 @@ namespace AbpCompanyName.AbpProjectName.Migrations.SeedData
 
                 foreach (var permission in permissions)
                 {
-                    if (!permission.IsGrantedByDefault)
-                    {
-                        _context.Permissions.Add(
-                            new RolePermissionSetting
-                            {
-                                Name = permission.Name,
-                                IsGranted = true,
-                                RoleId = adminRoleForHost.Id
-                            });
-                    }
+                    _context.Permissions.Add(
+                        new RolePermissionSetting
+                        {
+                            Name = permission.Name,
+                            IsGranted = true,
+                            RoleId = adminRoleForHost.Id
+                        });
                 }
 
                 _context.SaveChanges();

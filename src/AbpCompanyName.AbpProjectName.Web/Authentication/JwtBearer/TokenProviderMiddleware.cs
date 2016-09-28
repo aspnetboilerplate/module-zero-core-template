@@ -54,7 +54,7 @@ namespace AbpCompanyName.AbpProjectName.Web.Authentication.JwtBearer
             var userNameOrEmailAddress = context.Request.Form["usernameOrEmailAddress"];
             var password = context.Request.Form["password"];
 
-            var userManager = context.RequestServices.GetRequiredService<UserManager>();
+            var userManager = context.RequestServices.GetRequiredService<LogInManager>();
             var loginResult = await userManager.LoginAsync(userNameOrEmailAddress, password, tenancyName);
 
             if (loginResult.Result != AbpLoginResultType.Success)
