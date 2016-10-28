@@ -1,0 +1,57 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<localizationDictionary culture="lt">
+  <texts>
+    <text name="HomePage" value="Pagrindinis" />
+    <text name="About" value="Apie" />
+    <text name="WellcomeMessage" value="Sveiki atvykė į AbpProjectName!" />
+
+    <text name="FormIsNotValidMessage" value="Forma blogai užpildyta. Peržiūrėkite ir pataisykite klaidas." />
+    <text name="TenantNameCanNotBeEmpty" value="Savininko pavadinimas negali būti tuščias" />
+
+    <text name="InvalidUserNameOrPassword" value="Blogas vartotojo vardas ar slaptažodis" />
+    <text name="ThereIsNoTenantDefinedWithName{0}" value="Nėra tokio savininko su pavadinimu {0}" />
+    <text name="TenantIsNotActive" value="Savininkas {0} nėra aktyvus." />
+    <text name="UserIsNotActiveAndCanNotLogin" value="Vartotojas {0} nėra aktyvus ir todėl negali prisijungti." />
+    <text name="PleaseEnterLoginInformation" value="Įveskite prisijungimo informaciją" />
+    <text name="TenancyName" value="Savininko pavadinimas" />
+    <text name="UserNameOrEmail" value="Vartotojo vardas ar slaptažodis" />
+    <text name="Password" value="Slaptažodis" />
+    <text name="RememberMe" value="Prisiminti mane" />
+    <text name="LogIn" value="Prisijungti" />
+
+    <text name="LoginFailed" value="Prisijungimas nepavyko!" />
+
+    <text name="NameSurname" value="Vardas pavardė" />
+    <text name="UserName" value="Vartotojo vardas" />
+    <text name="Name" value="Vardas" />
+    <text name="Surname" value="Pavardė" />
+    <text name="EmailAddress" value="El. pašto adresas" />
+
+    <text name="Tenants" value="Savininkai" />
+    <text name="SavedSuccessfully" value="Išsaugota sėkmingai" />
+    <text name="CreateNewTenant" value="Sukurti naują savininką" />
+    <text name="AdminEmailAddress" value="Administratoriaus el. pašto adresas" />
+    <text name="Save" value="Išsaugoti" />
+    <text name="Cancel" value="Atšaukti" />
+    <text name="TenantName_Regex_Description" value="Savininko pavadinimas privalo būti bent 2 simboliai, prasidėti su raide, skaičiumi, brūkšneliu ar pabraukimu." />
+    <text name="DefaultPasswordIs" value="Slaptažodis pagal nutylėjimą yra {0}" />
+    <text name="CanBeEmptyToLoginAsHost" value="Gali būti tuščia prisijungimui šeimininku." />
+    <text name="Register" value="Registruotis" />
+    <text name="OrLoginWith" value="Arba prisijungti su" />
+    <text name="WaitingForActivationMessage" value="Jūsų paskyra laukia, kol bus aktyvuota sistemos administratoriaus." />
+    <text name="TenantSelection" value="Savininko Pasirinkimas" />
+    <text name="TenantSelection_Detail" value="Pasirinkite vieną iš šių savininkų." />
+    <text name="Logout" value="Atsijungti" />
+
+    <text name="RegisterFormUserNameInvalidMessage">Neveskite el. pašto adreso kaip vartotojo vardo.</text>
+
+    <text name="DatabaseConnectionString" value="Duomenų bazės prisijungimo eilutė" />
+    <text name="Users" value="Vartotojai" />
+    <text name="IsActive" value="Aktyvus" />
+    <text name="FullName" value="Vardas pavardė" />
+    <text name="CreateNewUser" value="Sukurti naują vartotoją" />
+    <text name="Yes" value="Taip" />
+    <text name="No" value="Ne" />
+    <text name="Optional" value="Neprivaloma" />
+  </texts>
+</localizationDictionary>
