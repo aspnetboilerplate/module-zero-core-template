@@ -3,17 +3,13 @@
 
   "dependencies": {
     "AbpCompanyName.AbpProjectName.Core": "1.0.0.0-*",
-    "Migrator.EF6.Tools": {
-      "version": "1.0.0",
-      "type": "build"
-    },
-    "Abp.EntityFramework": "1.0.0",
-"Abp.Zero.EntityFramework": "1.0.0"
+    "Abp.EntityFramework": "1.1.3",
+    "Abp.Zero.EntityFramework": "1.1.0"
   },
 
   "tools": {
     "Migrator.EF6.Tools": {
-      "version": "1.0.0",
+      "version": "1.0.8",
       "imports": "portable-net45+win8+dnxcore50"
     }
   },
