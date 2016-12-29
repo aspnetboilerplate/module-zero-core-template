@@ -10,7 +10,7 @@
   },
 
   "dependencies": {
-    "Abp.Castle.Log4Net": "1.1.3",
+    "Abp.Castle.Log4Net": "1.2.0",
     "AbpCompanyName.AbpProjectName.EntityFramework": "1.0.0.0-*"
   },
 

@@ -3,12 +3,12 @@
 
   "dependencies": {
     "AbpCompanyName.AbpProjectName.Core": "1.0.0.0-*",
-    "Abp.EntityFramework": "1.1.3",
-    "Abp.Zero.EntityFramework": "1.1.0",
     "Migrator.EF6.Tools": {
       "type": "build",
       "version": "1.0.8"
-    }
+    },
+    "Abp.EntityFramework": "1.2.0",
+    "Abp.Zero.EntityFramework": "1.2.0"
   },
 
   "tools": {
@@ -24,7 +24,7 @@
 
   "frameworks": {
     "net461": {
-      "Microsoft.NETCore.App": "1.0.0-rc2-3002702"
+      
     }
   }
 }

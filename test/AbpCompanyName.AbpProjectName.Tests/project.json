@@ -12,8 +12,8 @@
     "xunit.extensibility.execution": "2.2.0-beta2-build3300",
     "xunit.runner.visualstudio": "2.2.0-beta2-build1149",
     "Shouldly": "2.8.2",
-    "Abp.TestBase": "1.1.3",
-    "Effort.EF6": "1.3.0"
+    "Effort.EF6": "1.3.0",
+    "Abp.TestBase": "1.2.0"
   },
 
   "frameworks": {

@@ -2,7 +2,13 @@
 Bower package for ASP.NET Boilerplate web script and style resources.
 
 ## Installation
-Via bower:
+
+npm:
+```bash
+npm install abp-web-resources --save
+```
+
+bower:
 ```bash
 bower install abp-web-resources --save
 ```
