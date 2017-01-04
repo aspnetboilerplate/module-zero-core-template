@@ -48,6 +48,12 @@ namespace AbpCompanyName.AbpProjectName.EntityFramework
         {
 
         }
+
+        public AbpProjectNameDbContext(DbConnection dbConnection, bool contextOwnsConnection)
+            : base(dbConnection, contextOwnsConnection)
+        {
+
+        }
     }
 
     public class AbpProjectNameDbConfiguration : DbConfiguration
