@@ -7,13 +7,13 @@ namespace AbpCompanyName.AbpProjectName.Migrations
     using System.Resources;
     
     [GeneratedCode("EntityFramework.Migrations", "6.1.3-40302")]
-    public sealed partial class Upgrade_To_Abp_v_1_1 : IMigrationMetadata
+    public sealed partial class AbpZero_Initial : IMigrationMetadata
     {
-        private readonly ResourceManager Resources = new ResourceManager(typeof(Upgrade_To_Abp_v_1_1));
+        private readonly ResourceManager Resources = new ResourceManager(typeof(AbpZero_Initial));
         
         string IMigrationMetadata.Id
         {
-            get { return "201612051930489_Upgrade_To_Abp_v_1_1"; }
+            get { return "201701271231271_AbpZero_Initial"; }
         }
         
         string IMigrationMetadata.Source
