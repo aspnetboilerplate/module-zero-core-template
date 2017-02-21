@@ -10,7 +10,7 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution 
 		global.json = global.json
 	EndProjectSection
 EndProject
-Project("{8BB2217D-0F2D-49D1-97BC-3654ED321F3B}") = "AbpCompanyName.AbpProjectName.Web", "src\AbpCompanyName.AbpProjectName.Web\AbpCompanyName.AbpProjectName.Web.xproj", "{A2213374-BB48-48FD-BBD4-81E6A961D866}"
+Project("{8BB2217D-0F2D-49D1-97BC-3654ED321F3B}") = "AbpCompanyName.AbpProjectName.Web.Mvc", "src\AbpCompanyName.AbpProjectName.Web\AbpCompanyName.AbpProjectName.Web.Mvc.xproj", "{A2213374-BB48-48FD-BBD4-81E6A961D866}"
 EndProject
 Project("{8BB2217D-0F2D-49D1-97BC-3654ED321F3B}") = "AbpCompanyName.AbpProjectName.Core", "src\AbpCompanyName.AbpProjectName.Core\AbpCompanyName.AbpProjectName.Core.xproj", "{0FA75A5B-AB83-4FD0-B545-279774C01E87}"
 EndProject
@@ -23,6 +23,10 @@ EndProject
 Project("{8BB2217D-0F2D-49D1-97BC-3654ED321F3B}") = "AbpCompanyName.AbpProjectName.EntityFramework", "src\AbpCompanyName.AbpProjectName.EntityFramework\AbpCompanyName.AbpProjectName.EntityFramework.xproj", "{DC780BC4-4EAC-4C63-9052-6F3169A59FA4}"
 EndProject
 Project("{8BB2217D-0F2D-49D1-97BC-3654ED321F3B}") = "AbpCompanyName.AbpProjectName.Migrator", "src\AbpCompanyName.AbpProjectName.Migrator\AbpCompanyName.AbpProjectName.Migrator.xproj", "{880B3591-E057-46FE-B525-10BD83828B93}"
+EndProject
+Project("{8BB2217D-0F2D-49D1-97BC-3654ED321F3B}") = "AbpCompanyName.AbpProjectName.Web.Host", "src\AbpCompanyName.AbpProjectName.Web.Host\AbpCompanyName.AbpProjectName.Web.Host.xproj", "{38E184BD-E874-4633-A947-AED4FDB73F40}"
+EndProject
+Project("{8BB2217D-0F2D-49D1-97BC-3654ED321F3B}") = "AbpCompanyName.AbpProjectName.Web.Core", "src\AbpCompanyName.AbpProjectName.Web.Core\AbpCompanyName.AbpProjectName.Web.Core.xproj", "{22CFE0D2-8DCA-42D7-AD7D-784C3862493F}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -54,6 +58,14 @@ Global
 		{880B3591-E057-46FE-B525-10BD83828B93}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{880B3591-E057-46FE-B525-10BD83828B93}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{880B3591-E057-46FE-B525-10BD83828B93}.Release|Any CPU.Build.0 = Release|Any CPU
+		{38E184BD-E874-4633-A947-AED4FDB73F40}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{38E184BD-E874-4633-A947-AED4FDB73F40}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{38E184BD-E874-4633-A947-AED4FDB73F40}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{38E184BD-E874-4633-A947-AED4FDB73F40}.Release|Any CPU.Build.0 = Release|Any CPU
+		{22CFE0D2-8DCA-42D7-AD7D-784C3862493F}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{22CFE0D2-8DCA-42D7-AD7D-784C3862493F}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{22CFE0D2-8DCA-42D7-AD7D-784C3862493F}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{22CFE0D2-8DCA-42D7-AD7D-784C3862493F}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -65,5 +77,7 @@ Global
 		{0D4C5D00-C144-4213-A007-4B8944113AB1} = {F10AA149-2626-486E-85BB-9CD5365F3016}
 		{DC780BC4-4EAC-4C63-9052-6F3169A59FA4} = {AFAA0841-BD93-466F-B8F4-FB4EEC86F1FC}
 		{880B3591-E057-46FE-B525-10BD83828B93} = {AFAA0841-BD93-466F-B8F4-FB4EEC86F1FC}
+		{38E184BD-E874-4633-A947-AED4FDB73F40} = {AFAA0841-BD93-466F-B8F4-FB4EEC86F1FC}
+		{22CFE0D2-8DCA-42D7-AD7D-784C3862493F} = {AFAA0841-BD93-466F-B8F4-FB4EEC86F1FC}
 	EndGlobalSection
 EndGlobal

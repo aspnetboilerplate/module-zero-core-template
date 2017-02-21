@@ -2,6 +2,7 @@
 using Abp.AspNetCore;
 using Abp.Castle.Logging.Log4Net;
 using Abp.Owin;
+using AbpCompanyName.AbpProjectName.Configuration;
 using Castle.Facilities.Logging;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
@@ -9,7 +10,6 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Logging;
-using AbpCompanyName.AbpProjectName.Web.Configuration;
 using AbpCompanyName.AbpProjectName.Web.Startup.Owin;
 using Owin;
 

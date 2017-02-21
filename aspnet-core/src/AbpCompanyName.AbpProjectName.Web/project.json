@@ -4,6 +4,7 @@
   "dependencies": {
     "AbpCompanyName.AbpProjectName.Application": "1.0.0.0-*",
     "AbpCompanyName.AbpProjectName.EntityFramework": "1.0.0.0-*",
+    "AbpCompanyName.AbpProjectName.Web.Core": "1.0.0.0-*",
     "Microsoft.AspNetCore.Razor.Tools": "1.1.0-preview4-final",
     "Microsoft.VisualStudio.Web.CodeGeneration.Tools": {
       "version": "1.1.0-preview4-final",
@@ -31,7 +32,7 @@
     "Microsoft.Extensions.Logging": "1.1.0",
     "Microsoft.Extensions.Options.ConfigurationExtensions": "1.1.0",
     "Microsoft.VisualStudio.Web.BrowserLink.Loader": "14.1.0",
-    "Abp.AspNetCore": "1.4.1",
+    
     "Abp.Castle.Log4Net": "1.4.1",
     "Abp.HangFire": "1.4.1",
     "Abp.Owin": "1.4.1",

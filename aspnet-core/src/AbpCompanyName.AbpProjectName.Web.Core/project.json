@@ -1,0 +1,19 @@
+﻿{
+  "version": "1.0.0.0-*",
+
+  "dependencies": {
+    "AbpCompanyName.AbpProjectName.EntityFramework": "1.0.0.0-*",
+    "AbpCompanyName.AbpProjectName.Application": "1.0.0.0-*",
+    
+    "Microsoft.AspNetCore.Owin": "1.1.0",
+    "Abp.AspNetCore": "1.4.1",
+    "Abp.Owin": "1.4.1",
+    "Abp.Web.SignalR": "1.4.1",
+    "Abp.Zero.AspNetCore": "1.4.0"
+  },
+
+  "frameworks": {
+    "net461": {
+    }
+  }
+}
