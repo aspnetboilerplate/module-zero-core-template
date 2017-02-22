@@ -1,6 +1,6 @@
 ﻿using System;
 using System.Text;
-using AbpCompanyName.AbpProjectName.Web.Authentication.JwtBearer;
+using Microsoft.AspNet.Identity;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Http;
 using Microsoft.Extensions.Configuration;
@@ -12,7 +12,7 @@ namespace AbpCompanyName.AbpProjectName.Web.Startup
     public static class AuthConfigurer
     {
         public const string AuthenticationScheme = "AbpProjectNameAuthSchema";
-
+        public const string ExternalAuthenticationScheme = AuthenticationScheme + "." + DefaultAuthenticationTypes.ExternalCookie;
         /// <summary>
         /// Configures the specified application.
         /// </summary>
@@ -133,14 +133,14 @@ namespace AbpCompanyName.AbpProjectName.Web.Startup
             });
 
             // Adding JWT generation endpoint
-            app.UseMiddleware<TokenProviderMiddleware>(Options.Create(new TokenProviderOptions
-            {
-                Path = "/jwt-token/authenticate",
-                Issuer = configuration["Authentication:JwtBearer:Issuer"],
-                Audience = configuration["Authentication:JwtBearer:Audience"],
-                SigningCredentials = new SigningCredentials(securityKey, SecurityAlgorithms.HmacSha256),
-                Expiration = TimeSpan.FromDays(1)
-            }));
+            //app.UseMiddleware<TokenProviderMiddleware>(Options.Create(new TokenProviderOptions
+            //{
+            //    Path = "/jwt-token/authenticate",
+            //    Issuer = configuration["Authentication:JwtBearer:Issuer"],
+            //    Audience = configuration["Authentication:JwtBearer:Audience"],
+            //    SigningCredentials = new SigningCredentials(securityKey, SecurityAlgorithms.HmacSha256),
+            //    Expiration = TimeSpan.FromDays(1)
+            //}));
         }
     }
 }

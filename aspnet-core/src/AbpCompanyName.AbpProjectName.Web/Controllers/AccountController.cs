@@ -1,54 +1,70 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Data.Entity;
+using System.Diagnostics;
 using System.Linq;
 using System.Security.Claims;
 using System.Threading.Tasks;
 using Abp.Authorization.Users;
-using Abp.AutoMapper;
+using Abp.Configuration;
 using Abp.Configuration.Startup;
 using Abp.Domain.Uow;
 using Abp.Extensions;
+using Abp.MultiTenancy;
 using Abp.Threading;
 using Abp.UI;
 using Abp.Web.Models;
-using Microsoft.AspNet.Identity;
+using Abp.Zero.AspNetCore;
+using Abp.Zero.Configuration;
 using Microsoft.AspNetCore.Mvc;
 using AbpCompanyName.AbpProjectName.Authorization;
-using AbpCompanyName.AbpProjectName.Authorization.Roles;
 using AbpCompanyName.AbpProjectName.MultiTenancy;
-using AbpCompanyName.AbpProjectName.Users;
-using AbpCompanyName.AbpProjectName.Web.Authentication;
 using AbpCompanyName.AbpProjectName.Web.Models.Account;
+using AbpCompanyName.AbpProjectName.Authorization.Users;
+using AbpCompanyName.AbpProjectName.Controllers;
+using AbpCompanyName.AbpProjectName.Sessions;
+using AbpCompanyName.AbpProjectName.Web.Identity;
+using AbpCompanyName.AbpProjectName.Web.Startup;
+using AbpCompanyName.AbpProjectName.Web.Views.Shared.Components.TenantChange;
+using Microsoft.AspNet.Identity;
 
 namespace AbpCompanyName.AbpProjectName.Web.Controllers
 {
     public class AccountController : AbpProjectNameControllerBase
     {
         private readonly UserManager _userManager;
-        private readonly RoleManager _roleManager;
         private readonly TenantManager _tenantManager;
         private readonly IMultiTenancyConfig _multiTenancyConfig;
         private readonly IUnitOfWorkManager _unitOfWorkManager;
         private readonly AbpLoginResultTypeHelper _abpLoginResultTypeHelper;
         private readonly LogInManager _logInManager;
+        private readonly SignInManager _signInManager;
+        private readonly UserRegistrationManager _userRegistrationManager;
+        private readonly ISessionAppService _sessionAppService;
+        private readonly ITenantCache _tenantCache;
+
 
         public AccountController(
             UserManager userManager,
             IMultiTenancyConfig multiTenancyConfig,
-            RoleManager roleManager,
             TenantManager tenantManager,
             IUnitOfWorkManager unitOfWorkManager,
             AbpLoginResultTypeHelper abpLoginResultTypeHelper,
-            LogInManager logInManager)
+            LogInManager logInManager, 
+            SignInManager signInManager, 
+            UserRegistrationManager userRegistrationManager, 
+            ISessionAppService sessionAppService, 
+            ITenantCache tenantCache)
         {
             _userManager = userManager;
             _multiTenancyConfig = multiTenancyConfig;
-            _roleManager = roleManager;
             _tenantManager = tenantManager;
             _unitOfWorkManager = unitOfWorkManager;
             _abpLoginResultTypeHelper = abpLoginResultTypeHelper;
             _logInManager = logInManager;
+            _signInManager = signInManager;
+            _userRegistrationManager = userRegistrationManager;
+            _sessionAppService = sessionAppService;
+            _tenantCache = tenantCache;
         }
 
         #region Login / Logout
@@ -91,7 +107,7 @@ namespace AbpCompanyName.AbpProjectName.Web.Controllers
 
         public async Task<ActionResult> Logout()
         {
-            await HttpContext.Authentication.SignOutAsync(Startup.AuthConfigurer.AuthenticationScheme);
+            await HttpContext.Authentication.SignOutAsync(AuthConfigurer.AuthenticationScheme);
             return RedirectToAction("Login");
         }
 
@@ -99,22 +115,13 @@ namespace AbpCompanyName.AbpProjectName.Web.Controllers
         {
             if (identity == null)
             {
-                identity = await _userManager.CreateIdentityAsync(user, DefaultAuthenticationTypes.ApplicationCookie);
+                identity = await _userManager.CreateIdentityAsync(user, AuthConfigurer.AuthenticationScheme);
             }
 
-            await HttpContext.Authentication.SignOutAsync(Startup.AuthConfigurer.AuthenticationScheme);
-            await HttpContext.Authentication.SignInAsync(
-                Startup.AuthConfigurer.AuthenticationScheme,
-                new ClaimsPrincipal(identity),
-                new Microsoft.AspNetCore.Http.Authentication.AuthenticationProperties
-                {
-                    IsPersistent = rememberMe
-                }
-            );
+            await _signInManager.SignOutAllAndSignInAsync(identity, rememberMe);
         }
 
-        private async Task<AbpLoginResult<Tenant, User>> GetLoginResultAsync(
-            string usernameOrEmailAddress, string password, string tenancyName)
+        private async Task<AbpLoginResult<Tenant, User>> GetLoginResultAsync(string usernameOrEmailAddress, string password, string tenancyName)
         {
             var loginResult = await _logInManager.LoginAsync(usernameOrEmailAddress, password, tenancyName);
 
@@ -123,8 +130,7 @@ namespace AbpCompanyName.AbpProjectName.Web.Controllers
                 case AbpLoginResultType.Success:
                     return loginResult;
                 default:
-                    throw _abpLoginResultTypeHelper.CreateExceptionForFailedLoginAttempt(loginResult.Result,
-                        usernameOrEmailAddress, tenancyName);
+                    throw _abpLoginResultTypeHelper.CreateExceptionForFailedLoginAttempt(loginResult.Result, usernameOrEmailAddress, tenancyName);
             }
         }
 
@@ -146,63 +152,21 @@ namespace AbpCompanyName.AbpProjectName.Web.Controllers
 
         [HttpPost]
         [UnitOfWork]
-        public virtual async Task<ActionResult> Register(RegisterViewModel model)
+        public async Task<ActionResult> Register(RegisterViewModel model)
         {
             try
             {
-                //Get tenancy name and tenant
-                if (!_multiTenancyConfig.IsEnabled)
-                {
-                    model.TenancyName = Tenant.DefaultTenantName;
-                }
-                else if (model.TenancyName.IsNullOrEmpty())
-                {
-                    throw new UserFriendlyException(L("TenantNameCanNotBeEmpty"));
-                }
-
-                CurrentUnitOfWork.SetTenantId(null);
-
-                var tenant = await GetActiveTenantAsync(model.TenancyName);
-
-                CurrentUnitOfWork.SetTenantId(tenant.Id);
-
-                //Create user
-                var user = new User
-                {
-                    TenantId = tenant.Id,
-                    Name = model.Name,
-                    Surname = model.Surname,
-                    EmailAddress = model.EmailAddress,
-                    IsActive = true
-                };
-
-                //Get external login info if possible
                 ExternalLoginUserInfo externalLoginInfo = null;
                 if (model.IsExternalLogin)
                 {
-                    externalLoginInfo = await HttpContext.Authentication.GetExternalLoginUserInfo(model.ExternalLoginAuthSchema);
+                    externalLoginInfo = await _signInManager.GetExternalLoginUserInfo(model.ExternalLoginAuthSchema);
                     if (externalLoginInfo == null)
                     {
                         throw new ApplicationException("Can not external login!");
                     }
 
-                    user.Logins = new List<UserLogin>
-                    {
-                        new UserLogin
-                        {
-                            LoginProvider = externalLoginInfo.LoginInfo.LoginProvider,
-                            ProviderKey = externalLoginInfo.LoginInfo.ProviderKey,
-                            TenantId = tenant.Id
-                        }
-                    };
-
-                    model.UserName = model.UserName;
-                    model.Password = Users.User.CreateRandomPassword();
-
-                    if (string.Equals(externalLoginInfo.EmailAddress, model.EmailAddress, StringComparison.InvariantCultureIgnoreCase))
-                    {
-                        user.IsEmailConfirmed = true;
-                    }
+                    model.UserName = model.EmailAddress;
+                    model.Password = Authorization.Users.User.CreateRandomPassword();
                 }
                 else
                 {
@@ -212,22 +176,46 @@ namespace AbpCompanyName.AbpProjectName.Web.Controllers
                     }
                 }
 
-                user.UserName = model.UserName;
-                user.Password = new PasswordHasher().HashPassword(model.Password);
+                var user = await _userRegistrationManager.RegisterAsync(
+                    model.Name,
+                    model.Surname,
+                    model.EmailAddress,
+                    model.UserName,
+                    model.Password,
+                    true
+                );
 
-                //Add default roles
-                user.Roles = new List<UserRole>();
-                foreach (var defaultRole in await _roleManager.Roles.Where(r => r.IsDefault).ToListAsync())
+                //Getting tenant-specific settings
+                var isEmailConfirmationRequiredForLogin = await SettingManager.GetSettingValueAsync<bool>(AbpZeroSettingNames.UserManagement.IsEmailConfirmationRequiredForLogin);
+
+                if (model.IsExternalLogin)
                 {
-                    user.Roles.Add(new UserRole { RoleId = defaultRole.Id });
+                    Debug.Assert(externalLoginInfo != null);
+
+                    if (string.Equals(externalLoginInfo.EmailAddress, model.EmailAddress, StringComparison.InvariantCultureIgnoreCase))
+                    {
+                        user.IsEmailConfirmed = true;
+                    }
+
+                    user.Logins = new List<UserLogin>
+                    {
+                        new UserLogin
+                        {
+                            LoginProvider = externalLoginInfo.LoginInfo.LoginProvider,
+                            ProviderKey = externalLoginInfo.LoginInfo.ProviderKey,
+                            TenantId = user.TenantId
+                        }
+                    };
                 }
 
-                //Save user
-                CheckErrors(await _userManager.CreateAsync(user));
                 await _unitOfWorkManager.Current.SaveChangesAsync();
 
+                Debug.Assert(user.TenantId != null);
+
+                var tenant = await _tenantManager.GetByIdAsync(user.TenantId.Value);
+
                 //Directly login if possible
-                if (user.IsActive)
+                if (user.IsActive && (user.IsEmailConfirmed || !isEmailConfirmationRequiredForLogin))
                 {
                     AbpLoginResult<Tenant, User> loginResult;
                     if (externalLoginInfo != null)
@@ -242,13 +230,12 @@ namespace AbpCompanyName.AbpProjectName.Web.Controllers
                     if (loginResult.Result == AbpLoginResultType.Success)
                     {
                         await SignInAsync(loginResult.User, loginResult.Identity);
-                        return Redirect(Url.Action("Index", "Home"));
+                        return Redirect(GetAppHomeUrl());
                     }
 
                     Logger.Warn("New registered user could not be login. This should not be normally. login result: " + loginResult.Result);
                 }
 
-                //If can not login, show a register result page
                 return View("RegisterResult", new RegisterResultViewModel
                 {
                     TenancyName = tenant.TenancyName,
@@ -260,7 +247,6 @@ namespace AbpCompanyName.AbpProjectName.Web.Controllers
             }
             catch (UserFriendlyException ex)
             {
-                ViewBag.IsMultiTenancyEnabled = _multiTenancyConfig.IsEnabled;
                 ViewBag.ErrorMessage = ex.Message;
 
                 return View("Register", model);
@@ -295,7 +281,7 @@ namespace AbpCompanyName.AbpProjectName.Web.Controllers
         }
 
         [UnitOfWork]
-        public virtual async Task<ActionResult> ExternalLoginCallback(string returnUrl, string authSchema, string tenancyName = "", string remoteError = null)
+        public virtual async Task<ActionResult> ExternalLoginCallback(string returnUrl, string authSchema, string remoteError = null)
         {
             if (remoteError != null)
             {
@@ -303,38 +289,17 @@ namespace AbpCompanyName.AbpProjectName.Web.Controllers
                 throw new UserFriendlyException(L("CouldNotCompleteLoginOperation"));
             }
 
-            var userInfo = await HttpContext.Authentication.GetExternalLoginUserInfo(authSchema);
+            var tenancyName = GetTenancyNameOrNull();
 
-            if (userInfo.LoginInfo.LoginProvider.IsNullOrEmpty() || userInfo.LoginInfo.ProviderKey.IsNullOrEmpty())
+            var userInfo = await _signInManager.GetExternalLoginUserInfo(authSchema);
+
+            if (userInfo.LoginInfo == null || userInfo.LoginInfo.LoginProvider.IsNullOrEmpty() || userInfo.LoginInfo.ProviderKey.IsNullOrEmpty())
             {
                 Logger.Warn("Could not get LoginProvider and ProviderKey from external login.");
                 return RedirectToAction("Login");
             }
 
-            //Try to find tenancy name
-            if (tenancyName.IsNullOrEmpty())
-            {
-                if (tenancyName.IsNullOrEmpty())
-                {
-                    var tenants = await FindPossibleTenantsOfUserAsync(userInfo.LoginInfo);
-                    switch (tenants.Count)
-                    {
-                        case 0:
-                            return await RegisterViewForExternalLogin(userInfo, tenancyName);
-                        case 1:
-                            tenancyName = tenants[0].TenancyName;
-                            break;
-                        default:
-                            return View("TenantSelection", new TenantSelectionViewModel
-                            {
-                                Action = "ExternalLoginCallback",
-                                ReturnUrl = returnUrl,
-                                AuthSchema = authSchema,
-                                Tenants = tenants.MapTo<List<TenantSelectionViewModel.TenantInfo>>()
-                            });
-                    }
-                }
-            }
+            await HttpContext.Authentication.SignOutAsync(AuthConfigurer.ExternalAuthenticationScheme);
 
             var loginResult = await _logInManager.LoginAsync(userInfo.LoginInfo, tenancyName);
 
@@ -350,7 +315,7 @@ namespace AbpCompanyName.AbpProjectName.Web.Controllers
 
                     return Redirect(returnUrl);
                 case AbpLoginResultType.UnknownExternalLogin:
-                    return await RegisterViewForExternalLogin(userInfo, tenancyName);
+                    return await RegisterForExternalLogin(userInfo);
                 default:
                     throw _abpLoginResultTypeHelper.CreateExceptionForFailedLoginAttempt(
                         loginResult.Result,
@@ -360,11 +325,10 @@ namespace AbpCompanyName.AbpProjectName.Web.Controllers
             }
         }
 
-        private async Task<ActionResult> RegisterViewForExternalLogin(ExternalLoginUserInfo userInfo, string tenancyName = null)
+        private async Task<ActionResult> RegisterForExternalLogin(ExternalLoginUserInfo userInfo)
         {
             var viewModel = new RegisterViewModel
             {
-                TenancyName = tenancyName,
                 EmailAddress = userInfo.EmailAddress,
                 Name = userInfo.Name,
                 Surname = userInfo.Surname,
@@ -372,7 +336,7 @@ namespace AbpCompanyName.AbpProjectName.Web.Controllers
                 ExternalLoginAuthSchema = userInfo.LoginInfo.LoginProvider
             };
 
-            if (!tenancyName.IsNullOrEmpty() && userInfo.HasAllNonEmpty())
+            if (userInfo.HasAllNonEmpty())
             {
                 return await Register(viewModel);
             }
@@ -397,26 +361,6 @@ namespace AbpCompanyName.AbpProjectName.Web.Controllers
 
         #endregion
 
-        #region Common private methods
-
-        private async Task<Tenant> GetActiveTenantAsync(string tenancyName)
-        {
-            var tenant = await _tenantManager.FindByTenancyNameAsync(tenancyName);
-            if (tenant == null)
-            {
-                throw new UserFriendlyException(L("ThereIsNoTenantDefinedWithName{0}", tenancyName));
-            }
-
-            if (!tenant.IsActive)
-            {
-                throw new UserFriendlyException(L("TenantIsNotActive", tenancyName));
-            }
-
-            return tenant;
-        }
-
-        #endregion
-
         #region Helpers
 
         public ActionResult RedirectToAppHome()
@@ -427,6 +371,33 @@ namespace AbpCompanyName.AbpProjectName.Web.Controllers
         public string GetAppHomeUrl()
         {
             return Url.Action("Index", "Home");
+        }
+
+        #endregion
+
+        #region Change Tenant
+
+        public async Task<ActionResult> TenantChangeModal()
+        {
+            var loginInfo = await _sessionAppService.GetCurrentLoginInformations();
+            return View("/Views/Shared/Components/TenantChange/_ChangeModal.cshtml", new ChangeModalViewModel
+            {
+                TenancyName = loginInfo.Tenant?.TenancyName
+            });
+        }
+
+        #endregion
+
+        #region Common
+
+        private string GetTenancyNameOrNull()
+        {
+            if (!AbpSession.TenantId.HasValue)
+            {
+                return null;
+            }
+
+            return _tenantCache.GetOrNull(AbpSession.TenantId.Value)?.TenancyName;
         }
 
         #endregion

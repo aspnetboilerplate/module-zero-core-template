@@ -3,7 +3,7 @@ using Abp.Authorization.Roles;
 using Abp.Domain.Uow;
 using Abp.Runtime.Caching;
 using Abp.Zero.Configuration;
-using AbpCompanyName.AbpProjectName.Users;
+using AbpCompanyName.AbpProjectName.Authorization.Users;
 
 namespace AbpCompanyName.AbpProjectName.Authorization.Roles
 {

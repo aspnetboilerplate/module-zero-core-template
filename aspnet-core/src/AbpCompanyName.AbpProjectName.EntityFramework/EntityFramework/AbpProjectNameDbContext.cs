@@ -3,9 +3,9 @@ using System.Data.Entity;
 using Abp.Zero.EntityFramework;
 using Microsoft.Extensions.Configuration;
 using AbpCompanyName.AbpProjectName.Authorization.Roles;
+using AbpCompanyName.AbpProjectName.Authorization.Users;
 using AbpCompanyName.AbpProjectName.Configuration;
 using AbpCompanyName.AbpProjectName.MultiTenancy;
-using AbpCompanyName.AbpProjectName.Users;
 using AbpCompanyName.AbpProjectName.Web;
 
 namespace AbpCompanyName.AbpProjectName.EntityFramework

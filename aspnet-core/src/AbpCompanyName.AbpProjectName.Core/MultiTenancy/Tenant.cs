@@ -1,5 +1,5 @@
 ﻿using Abp.MultiTenancy;
-using AbpCompanyName.AbpProjectName.Users;
+using AbpCompanyName.AbpProjectName.Authorization.Users;
 
 namespace AbpCompanyName.AbpProjectName.MultiTenancy
 {

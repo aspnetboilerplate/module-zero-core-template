@@ -5,8 +5,8 @@ using Abp.Authorization.Users;
 using Abp.MultiTenancy;
 using AbpCompanyName.AbpProjectName.Authorization;
 using AbpCompanyName.AbpProjectName.Authorization.Roles;
+using AbpCompanyName.AbpProjectName.Authorization.Users;
 using AbpCompanyName.AbpProjectName.EntityFramework;
-using AbpCompanyName.AbpProjectName.Users;
 using Microsoft.AspNet.Identity;
 
 namespace AbpCompanyName.AbpProjectName.Migrations.SeedData

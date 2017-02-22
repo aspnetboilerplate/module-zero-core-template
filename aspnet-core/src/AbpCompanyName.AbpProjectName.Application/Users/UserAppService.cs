@@ -5,6 +5,7 @@ using Abp.Authorization;
 using Abp.AutoMapper;
 using Abp.Domain.Repositories;
 using AbpCompanyName.AbpProjectName.Authorization;
+using AbpCompanyName.AbpProjectName.Authorization.Users;
 using AbpCompanyName.AbpProjectName.Users.Dto;
 using Microsoft.AspNet.Identity;
 

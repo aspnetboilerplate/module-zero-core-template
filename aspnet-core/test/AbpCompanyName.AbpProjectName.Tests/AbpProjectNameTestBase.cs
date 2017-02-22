@@ -9,6 +9,7 @@ using Abp.Configuration.Startup;
 using Abp.Domain.Uow;
 using Abp.Runtime.Session;
 using Abp.TestBase;
+using AbpCompanyName.AbpProjectName.Authorization.Users;
 using AbpCompanyName.AbpProjectName.EntityFramework;
 using AbpCompanyName.AbpProjectName.Migrations.SeedData;
 using AbpCompanyName.AbpProjectName.MultiTenancy;

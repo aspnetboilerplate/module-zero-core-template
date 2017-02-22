@@ -1,6 +1,7 @@
 using System.ComponentModel.DataAnnotations;
 using Abp.AutoMapper;
 using Abp.MultiTenancy;
+using AbpCompanyName.AbpProjectName.Authorization.Users;
 using AbpCompanyName.AbpProjectName.Users;
 
 namespace AbpCompanyName.AbpProjectName.MultiTenancy.Dto

@@ -1,5 +1,6 @@
 ﻿using Abp.AspNetCore.Mvc.Authorization;
 using AbpCompanyName.AbpProjectName.Authorization;
+using AbpCompanyName.AbpProjectName.Controllers;
 using AbpCompanyName.AbpProjectName.MultiTenancy;
 using Microsoft.AspNetCore.Mvc;
 

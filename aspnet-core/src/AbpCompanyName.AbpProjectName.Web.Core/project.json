@@ -4,11 +4,14 @@
   "dependencies": {
     "AbpCompanyName.AbpProjectName.EntityFramework": "1.0.0.0-*",
     "AbpCompanyName.AbpProjectName.Application": "1.0.0.0-*",
-    
+
+    "Microsoft.AspNetCore.Authentication.JwtBearer": "1.1.0",
+    "Microsoft.AspNetCore.Authentication.Facebook": "1.1.0",
+    "Microsoft.AspNetCore.Authentication.Google": "1.1.0",
+    "Microsoft.AspNetCore.Authentication.MicrosoftAccount": "1.1.0",
     "Microsoft.AspNetCore.Owin": "1.1.0",
     "Abp.AspNetCore": "1.4.1",
     "Abp.Owin": "1.4.1",
-    "Abp.Web.SignalR": "1.4.1",
     "Abp.Zero.AspNetCore": "1.4.0"
   },
 

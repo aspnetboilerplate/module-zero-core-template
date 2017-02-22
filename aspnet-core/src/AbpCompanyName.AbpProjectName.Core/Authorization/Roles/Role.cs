@@ -1,5 +1,5 @@
 ﻿using Abp.Authorization.Roles;
-using AbpCompanyName.AbpProjectName.Users;
+using AbpCompanyName.AbpProjectName.Authorization.Users;
 
 namespace AbpCompanyName.AbpProjectName.Authorization.Roles
 {

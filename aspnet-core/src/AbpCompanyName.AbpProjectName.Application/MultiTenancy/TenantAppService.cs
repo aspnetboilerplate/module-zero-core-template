@@ -9,6 +9,7 @@ using Abp.MultiTenancy;
 using Abp.Runtime.Security;
 using AbpCompanyName.AbpProjectName.Authorization;
 using AbpCompanyName.AbpProjectName.Authorization.Roles;
+using AbpCompanyName.AbpProjectName.Authorization.Users;
 using AbpCompanyName.AbpProjectName.Editions;
 using AbpCompanyName.AbpProjectName.MultiTenancy.Dto;
 using AbpCompanyName.AbpProjectName.Users;

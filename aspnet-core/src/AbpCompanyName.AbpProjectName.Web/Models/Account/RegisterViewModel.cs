@@ -4,6 +4,7 @@ using System.Text.RegularExpressions;
 using AbpCompanyName.AbpProjectName.MultiTenancy;
 using AbpCompanyName.AbpProjectName.Users;
 using Abp.Extensions;
+using AbpCompanyName.AbpProjectName.Authorization.Users;
 
 namespace AbpCompanyName.AbpProjectName.Web.Models.Account
 {

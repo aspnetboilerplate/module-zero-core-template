@@ -1,6 +1,7 @@
 ﻿using System.Threading.Tasks;
 using Abp.AspNetCore.Mvc.Authorization;
 using AbpCompanyName.AbpProjectName.Authorization;
+using AbpCompanyName.AbpProjectName.Controllers;
 using AbpCompanyName.AbpProjectName.Users;
 using Microsoft.AspNetCore.Mvc;
 

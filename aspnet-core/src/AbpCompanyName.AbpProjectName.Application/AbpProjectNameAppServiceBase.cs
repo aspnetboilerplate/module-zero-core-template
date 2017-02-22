@@ -6,6 +6,7 @@ using AbpCompanyName.AbpProjectName.Users;
 using Microsoft.AspNet.Identity;
 using Abp.Runtime.Session;
 using Abp.IdentityFramework;
+using AbpCompanyName.AbpProjectName.Authorization.Users;
 
 namespace AbpCompanyName.AbpProjectName
 {

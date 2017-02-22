@@ -1,10 +1,10 @@
-import { AbpZeroTemplatePage } from './app.po';
+import { AbpProjectNameTemplatePage } from './app.po';
 
-describe('abp-zero-template App', function() {
-  let page: AbpZeroTemplatePage;
+describe('abp-project-name-template App', function() {
+  let page: AbpProjectNameTemplatePage;
 
   beforeEach(() => {
-    page = new AbpZeroTemplatePage();
+    page = new AbpProjectNameTemplatePage();
   });
 
   it('should display message saying app works', () => {

@@ -6,7 +6,7 @@ using AbpCompanyName.AbpProjectName.Localization;
 using Abp.Zero.Configuration;
 using AbpCompanyName.AbpProjectName.MultiTenancy;
 using AbpCompanyName.AbpProjectName.Authorization.Roles;
-using AbpCompanyName.AbpProjectName.Users;
+using AbpCompanyName.AbpProjectName.Authorization.Users;
 using AbpCompanyName.AbpProjectName.Timing;
 
 namespace AbpCompanyName.AbpProjectName

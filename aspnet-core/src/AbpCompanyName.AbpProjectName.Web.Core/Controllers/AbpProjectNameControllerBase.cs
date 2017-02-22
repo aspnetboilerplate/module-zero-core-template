@@ -1,8 +1,8 @@
 using Abp.AspNetCore.Mvc.Controllers;
-using Microsoft.AspNet.Identity;
 using Abp.IdentityFramework;
+using Microsoft.AspNet.Identity;
 
-namespace AbpCompanyName.AbpProjectName.Web.Controllers
+namespace AbpCompanyName.AbpProjectName.Controllers
 {
     public abstract class AbpProjectNameControllerBase: AbpController
     {
