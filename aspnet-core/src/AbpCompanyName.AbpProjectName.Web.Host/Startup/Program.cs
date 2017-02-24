@@ -1,11 +1,7 @@
-﻿using System;
-using System.Collections.Generic;
-using System.IO;
-using System.Linq;
-using System.Threading.Tasks;
+﻿using System.IO;
 using Microsoft.AspNetCore.Hosting;
 
-namespace AbpCompanyName.AbpProjectName.Web.Host
+namespace AbpCompanyName.AbpProjectName.Web.Host.Startup
 {
     public class Program
     {

@@ -33,7 +33,7 @@ namespace AbpCompanyName.AbpProjectName.Web.Startup
             });
 
             //Configure Abp and Dependency Injection
-            return services.AddAbp<AbpProjectNameWebModule>(options =>
+            return services.AddAbp<AbpProjectNameWebMvcModule>(options =>
             {
                 //Configure Log4Net logging
                 options.IocManager.IocContainer.AddFacility<LoggingFacility>(

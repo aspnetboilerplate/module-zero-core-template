@@ -6,17 +6,21 @@
 
 # dependencies
 /node_modules
-/bower_components
 
 # IDEs and editors
 /.idea
 .project
 .classpath
+.c9/
 *.launch
 .settings/
-.vs/
-obj/
-bin/
+
+# IDE - VSCode
+.vscode/*
+!.vscode/settings.json
+!.vscode/tasks.json
+!.vscode/launch.json
+!.vscode/extensions.json
 
 # misc
 /.sass-cache
@@ -34,9 +38,3 @@ testem.log
 #System Files
 .DS_Store
 Thumbs.db
-
-# VS files
-/AbpCompanyName.AbpProjectName.AngularUI.csproj.user
-project.lock.json
-Properties/launchSettings.json
-/AbpCompanyName.AbpProjectName.AngularUI.xproj.user

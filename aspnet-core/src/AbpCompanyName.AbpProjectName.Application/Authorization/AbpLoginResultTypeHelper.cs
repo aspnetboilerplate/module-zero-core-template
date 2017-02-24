@@ -1,10 +1,12 @@
 ﻿using System;
+using Abp;
 using Abp.Authorization.Users;
+using Abp.Dependency;
 using Abp.UI;
 
 namespace AbpCompanyName.AbpProjectName.Authorization
 {
-    public class AbpLoginResultTypeHelper : AbpProjectNameAppServiceBase
+    public class AbpLoginResultTypeHelper : AbpServiceBase, ITransientDependency
     {
         public Exception CreateExceptionForFailedLoginAttempt(AbpLoginResultType result, string usernameOrEmailAddress, string tenancyName)
         {

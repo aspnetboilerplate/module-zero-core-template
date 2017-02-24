@@ -6,7 +6,6 @@ using AbpCompanyName.AbpProjectName.Sessions.Dto;
 
 namespace AbpCompanyName.AbpProjectName.Sessions
 {
-    [AbpAuthorize]
     public class SessionAppService : AbpProjectNameAppServiceBase, ISessionAppService
     {
         [DisableAuditing]
@@ -14,12 +13,21 @@ namespace AbpCompanyName.AbpProjectName.Sessions
         {
             var output = new GetCurrentLoginInformationsOutput
             {
-                User = (await GetCurrentUserAsync()).MapTo<UserLoginInfoDto>()
+                Application = new ApplicationInfoDto
+                {
+                    Version = AppVersionHelper.Version,
+                    ReleaseDate = AppVersionHelper.ReleaseDate
+                }
             };
 
             if (AbpSession.TenantId.HasValue)
             {
                 output.Tenant = (await GetCurrentTenantAsync()).MapTo<TenantLoginInfoDto>();
+            }
+
+            if (AbpSession.UserId.HasValue)
+            {
+                output.User = (await GetCurrentUserAsync()).MapTo<UserLoginInfoDto>();
             }
 
             return output;

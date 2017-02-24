@@ -29,20 +29,11 @@ namespace AbpCompanyName.AbpProjectName.Web.Startup
                 AutomaticChallenge = true
             });
 
-            if (bool.Parse(configuration["Authentication:Microsoft:IsEnabled"]))
-            {
-                app.UseMicrosoftAccountAuthentication(CreateMicrosoftAuthOptions(configuration));
-            }
-
             if (bool.Parse(configuration["Authentication:Google:IsEnabled"]))
             {
                 app.UseGoogleAuthentication(CreateGoogleAuthOptions(configuration));
             }
 
-            if (bool.Parse(configuration["Authentication:Twitter:IsEnabled"]))
-            {
-                app.UseTwitterAuthentication(CreateTwitterAuthOptions(configuration));
-            }
 
             if (bool.Parse(configuration["Authentication:Facebook:IsEnabled"]))
             {
@@ -55,16 +46,6 @@ namespace AbpCompanyName.AbpProjectName.Web.Startup
             }
         }
 
-        private static MicrosoftAccountOptions CreateMicrosoftAuthOptions(IConfiguration configuration)
-        {
-            return new MicrosoftAccountOptions
-            {
-                SignInScheme = AuthenticationScheme,
-                ClientId = configuration["Authentication:Microsoft:ClientId"],
-                ClientSecret = configuration["Authentication:Microsoft:ClientSecret"]
-            };
-        }
-
         private static GoogleOptions CreateGoogleAuthOptions(IConfiguration configuration)
         {
             return new GoogleOptions
@@ -72,17 +53,6 @@ namespace AbpCompanyName.AbpProjectName.Web.Startup
                 SignInScheme = AuthenticationScheme,
                 ClientId = configuration["Authentication:Google:ClientId"],
                 ClientSecret = configuration["Authentication:Google:ClientSecret"]
-            };
-        }
-
-        private static TwitterOptions CreateTwitterAuthOptions(IConfiguration configuration)
-        {
-            return new TwitterOptions
-            {
-                SignInScheme = AuthenticationScheme,
-                ConsumerKey = configuration["Authentication:Twitter:ConsumerKey"],
-                ConsumerSecret = configuration["Authentication:Twitter:ConsumerSecret"],
-                RetrieveUserDetails = true
             };
         }
 

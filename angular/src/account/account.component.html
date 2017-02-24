@@ -1,0 +1,18 @@
+﻿<div class="logo">
+    <a href="~/">
+        <img src="/assets/common/images/app-logo-on-dark.png" alt="" width="149" height="35" />
+    </a>
+</div>
+
+<div *ngIf="showTenantChange()" class="content tenant-change-box">
+    <tenant-change></tenant-change>
+</div>
+
+<div class="content account-forms">
+    <router-outlet></router-outlet>
+</div>
+
+
+<div class="copyright">
+    {{currentYear}} © AbpProjectName
+</div>

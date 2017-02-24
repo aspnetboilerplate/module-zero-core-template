@@ -12,7 +12,8 @@
     "Microsoft.AspNetCore.Owin": "1.1.0",
     "Abp.AspNetCore": "1.4.1",
     "Abp.Owin": "1.4.1",
-    "Abp.Zero.AspNetCore": "1.4.0"
+    "Abp.Zero.AspNetCore": "1.4.0",
+    "Swashbuckle": "6.0.0-beta902"
   },
 
   "frameworks": {

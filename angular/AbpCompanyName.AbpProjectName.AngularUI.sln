@@ -3,7 +3,7 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio 14
 VisualStudioVersion = 14.0.25420.1
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{8BB2217D-0F2D-49D1-97BC-3654ED321F3B}") = "AbpCompanyName.AbpProjectName.AngularUI", "AbpCompanyName.AbpProjectName.AngularUI.xproj", "{5F8E63A3-0297-48B8-9057-49D1604B4514}"
+Project("{8BB2217D-0F2D-49D1-97BC-3654ED321F3B}") = "AbpCompanyName.AbpProjectName.AngularUI", "AbpCompanyName.AbpProjectName.AngularUI.xproj", "{9789ABDB-9BCC-4367-9805-40DF1B5C2BFF}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -11,10 +11,10 @@ Global
 		Release|Any CPU = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(ProjectConfigurationPlatforms) = postSolution
-		{5F8E63A3-0297-48B8-9057-49D1604B4514}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{5F8E63A3-0297-48B8-9057-49D1604B4514}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{5F8E63A3-0297-48B8-9057-49D1604B4514}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{5F8E63A3-0297-48B8-9057-49D1604B4514}.Release|Any CPU.Build.0 = Release|Any CPU
+		{9789ABDB-9BCC-4367-9805-40DF1B5C2BFF}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{9789ABDB-9BCC-4367-9805-40DF1B5C2BFF}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{9789ABDB-9BCC-4367-9805-40DF1B5C2BFF}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{9789ABDB-9BCC-4367-9805-40DF1B5C2BFF}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
