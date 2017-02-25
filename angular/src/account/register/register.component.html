@@ -34,8 +34,6 @@
             <label class="control-label visible-ie8 visible-ie9">{{l("Password")}}</label>
             <input type="password" name="Password" class="form-control" [(ngModel)]="model.password" #Password="ngModel" placeholder="{{l('Password')}}" validateEqual="PasswordRepeat"
                    reverse="true" [minlength]="passwordComplexitySetting.minLength" [maxlength]="passwordComplexitySetting.maxPasswordLength"
-                   [useNumbers]="passwordComplexitySetting.useNumbers" [useUpperCaseLetters]="passwordComplexitySetting.useUpperCaseLetters"
-                   [useLowerCaseLetters]="passwordComplexitySetting.useLowerCaseLetters" [usePunctuations]="passwordComplexitySetting.usePunctuations"
                    required>
         </div>
         <div class="form-group">
@@ -53,17 +51,10 @@
                 <li [hidden]="!Password.errors.usePunctuations">{{l("PasswordComplexity_UsePunctuations_Hint")}}</li>
             </ul>
         </div>
-        <p *ngIf="useCaptcha" class="hint">
-            {{l("Captha_Hint")}}
-        </p>
-
-        <div *ngIf="useCaptcha" class="form-group margin-bottom-20">
-            <recaptcha (resolved)="captchaResolved($event)" siteKey="6LfD-wUTAAAAACULAVXvL61K0w02RIsjhI8EyiS-"></recaptcha>
-        </div>
 
         <div class="form-actions">
             <button [disabled]="saving" routerLink="/login" type="button" class="btn btn-default"><i class="fa fa-arrow-left"></i> {{l("Back")}}</button>
-            <button type="submit" class="btn btn-success uppercase" [disabled]="!registerForm.form.valid" [buttonBusy]="saving" [busyText]="l('SavingWithThreeDot')"><i class="fa fa-check"></i> {{l("Submit")}}</button>
+            <button type="submit" class="btn btn-success uppercase" [disabled]="!registerForm.form.valid"><i class="fa fa-check"></i> {{l("Submit")}}</button>
         </div>
 
     </form>

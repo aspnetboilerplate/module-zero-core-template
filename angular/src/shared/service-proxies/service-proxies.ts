@@ -197,7 +197,7 @@ export class SessionServiceProxy {
      */
     getCurrentLoginInformations(): Observable<GetCurrentLoginInformationsOutput> {
         let url_ = this.baseUrl + "/api/services/app/Session/GetCurrentLoginInformations";
-        debugger;
+        
         const content_ = "";
         
         return this.http.request(url_, {

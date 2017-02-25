@@ -8,7 +8,8 @@ import * as ApiServiceProxies from './service-proxies';
         ApiServiceProxies.SessionServiceProxy,
         ApiServiceProxies.TenantServiceProxy,
         ApiServiceProxies.UserServiceProxy,
-        ApiServiceProxies.TokenAuthServiceProxy
+        ApiServiceProxies.TokenAuthServiceProxy,
+        ApiServiceProxies.AccountServiceProxy
     ]
 })
 export class ServiceProxyModule { }

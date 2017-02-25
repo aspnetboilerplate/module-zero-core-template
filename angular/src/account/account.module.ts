@@ -29,7 +29,8 @@ import { LoginService } from './login/login.service';
         AbpModule,
         CommonModule,
         ServiceProxyModule,
-        AccountRoutingModule
+        AccountRoutingModule,
+        ModalModule.forRoot()
     ],
     declarations: [
         AccountComponent,
