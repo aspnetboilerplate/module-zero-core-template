@@ -12,6 +12,7 @@ export class AppSessionService {
     constructor(
         private _sessionService: SessionServiceProxy,
         private _abpMultiTenancyService: AbpMultiTenancyService) {
+        console.log('created AppSessionService');
     }
 
     get application(): ApplicationInfoDto {
@@ -49,6 +50,7 @@ export class AppSessionService {
                 this._application = result.application;
                 this._user = result.user;
                 this._tenant = result.tenant;
+                console.log('session init set user');
                 resolve(true);
             }, (err) => {
                 reject(err);

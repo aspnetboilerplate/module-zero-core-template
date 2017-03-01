@@ -3,7 +3,6 @@ import { NgModule, Injector, APP_INITIALIZER } from '@angular/core';
 
 import { AbpModule, ABP_HTTP_PROVIDER } from '@abp/abp.module';
 
-import { AppModule } from './app/app.module';
 import { SharedModule } from '@shared/common/shared.module';
 import { ServiceProxyModule } from '@shared/service-proxies/service-proxy.module';
 import { RootRoutingModule } from './root-routing.module';
@@ -17,11 +16,11 @@ import { AppPreBootstrap } from './AppPreBootstrap';
 
 export function appInitializerFactory(injector: Injector) {
     return () => {
+        console.log("appInitializerFactory");
         abp.ui.setBusy();
         return new Promise<boolean>((resolve, reject) => {
             AppPreBootstrap.run(() => {
                 var appSessionService: AppSessionService = injector.get(AppSessionService);
-                
                 appSessionService.init().then(
                     (result) => {
                         abp.ui.clearBusy();
@@ -46,7 +45,6 @@ export function getRemoteServiceBaseUrl(): string {
 @NgModule({
     imports: [
         BrowserModule,
-        AppModule,
         SharedModule.forRoot(),
         AbpModule,
         ServiceProxyModule,
