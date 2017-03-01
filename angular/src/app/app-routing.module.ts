@@ -8,23 +8,12 @@ import { HomeComponent } from './home/home.component';
     imports: [
         RouterModule.forChild([
             {
-                path: 'app',
+                path: '',
                 component: AppComponent,
                 canActivate: [AppRouteGuard],
                 canActivateChild: [AppRouteGuard],
                 children: [
-                    {
-                        path: '',
-                        children: [
-                            { path: '', redirectTo: '/home', pathMatch: 'full' },
-                            { path: 'home', component: HomeComponent }
-                        ]
-                    },
-                    {
-                        path: 'admin',
-                        loadChildren: 'app/app.module#AppModule', //Lazy load admin module
-                        data: { preload: true }
-                    }
+                    { path: 'home', component: HomeComponent }
                 ]
             }
         ])

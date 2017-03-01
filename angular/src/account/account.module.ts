@@ -11,7 +11,7 @@ import { AccountRoutingModule } from './account-routing.module';
 import { ServiceProxyModule } from '@shared/service-proxies/service-proxy.module';
 
 import { AppConsts } from '@shared/AppConsts';
-import { CommonModule } from '@shared/common/common.module';
+import { SharedModule } from '@shared/common/shared.module';
 
 import { AccountComponent } from './account.component';
 import { TenantChangeComponent } from './tenant/tenant-change.component';
@@ -19,6 +19,7 @@ import { TenantChangeModalComponent } from './tenant/tenant-change-modal.compone
 import { LoginComponent } from './login/login.component';
 import { RegisterComponent } from './register/register.component';
 import { LoginService } from './login/login.service';
+import { TopBarComponent } from '@shared/layout/topbar.component';
 
 @NgModule({
     imports: [
@@ -27,7 +28,7 @@ import { LoginService } from './login/login.service';
         HttpModule,
         JsonpModule,
         AbpModule,
-        CommonModule,
+        SharedModule,
         ServiceProxyModule,
         AccountRoutingModule,
         ModalModule.forRoot()
@@ -37,7 +38,8 @@ import { LoginService } from './login/login.service';
         TenantChangeComponent,
         TenantChangeModalComponent,
         LoginComponent,
-        RegisterComponent
+        RegisterComponent,
+        TopBarComponent
     ],
     providers: [
         LoginService

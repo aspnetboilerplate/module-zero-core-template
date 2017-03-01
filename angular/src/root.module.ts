@@ -4,7 +4,7 @@ import { NgModule, Injector, APP_INITIALIZER } from '@angular/core';
 import { AbpModule, ABP_HTTP_PROVIDER } from '@abp/abp.module';
 
 import { AppModule } from './app/app.module';
-import { CommonModule } from '@shared/common/common.module';
+import { SharedModule } from '@shared/common/shared.module';
 import { ServiceProxyModule } from '@shared/service-proxies/service-proxy.module';
 import { RootRoutingModule } from './root-routing.module';
 
@@ -21,17 +21,11 @@ export function appInitializerFactory(injector: Injector) {
         return new Promise<boolean>((resolve, reject) => {
             AppPreBootstrap.run(() => {
                 var appSessionService: AppSessionService = injector.get(AppSessionService);
+                
                 appSessionService.init().then(
                     (result) => {
-
-                        //Css classes based on the layout
-                        if (abp.session.userId) {
-                            $('body').attr('class', 'page-md page-header-fixed page-sidebar-closed-hide-logo');
-                        } else {
-                            $('body').attr('class', 'page-md login');
-                        }
-
                         abp.ui.clearBusy();
+                        console.log("session init");
                         resolve(result);
                     },
                     (err) => {
@@ -53,10 +47,9 @@ export function getRemoteServiceBaseUrl(): string {
     imports: [
         BrowserModule,
         AppModule,
-        CommonModule.forRoot(),
+        SharedModule.forRoot(),
         AbpModule,
         ServiceProxyModule,
-
         RootRoutingModule
     ],
     declarations: [

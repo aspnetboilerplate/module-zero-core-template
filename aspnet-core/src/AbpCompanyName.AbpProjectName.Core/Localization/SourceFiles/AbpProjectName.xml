@@ -53,5 +53,6 @@
     <text name="Yes" value="Yes" />
     <text name="No" value="No" />
     <text name="Optional" value="Optional" />
+    <text name="LeaveEmptyToSwitchToHost">Leave empty to switch to the host</text>
   </texts>
 </localizationDictionary>

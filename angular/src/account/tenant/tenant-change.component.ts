@@ -7,10 +7,10 @@ import { AppSessionService } from '@shared/common/session/app-session.service';
 @Component({
     selector: 'tenant-change',
     template: 
-    `<span *ngIf="isMultiTenancyEnabled">
+    `<div *ngIf="isMultiTenancyEnabled" class='well'>
         {{l("CurrentTenant")}}: <span *ngIf="tenancyName" title="{{name}}"><strong>{{tenancyName}}</strong></span> <span *ngIf="!tenancyName">{{l("NotSelected")}}</span> (<a (click)="showChangeModal()">{{l("Change")}}</a>)
         <tenantChangeModal #tenantChangeModal></tenantChangeModal>
-    </span>`
+    </div>`
 })
 export class TenantChangeComponent extends AppComponentBase implements OnInit {
     

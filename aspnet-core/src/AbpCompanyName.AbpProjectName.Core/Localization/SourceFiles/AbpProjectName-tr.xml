@@ -53,5 +53,6 @@
     <text name="Yes" value="Evet" />
     <text name="No" value="Hayır" />
     <text name="Optional" value="Opsiyonel" />
+    <text name="LeaveEmptyToSwitchToHost">Üst kullanıcıya geçiş için boş değer girin.</text>
   </texts>
 </localizationDictionary>

@@ -10,9 +10,7 @@ import { UtilsService } from '@abp/utils/utils.service';
 export class AppPreBootstrap {
 
     static run(callback: () => void): void {
-        console.log("here...");
         AppPreBootstrap.getApplicationConfig(() => {
-            console.log("get config...");
             AppPreBootstrap.getUserConfiguration(callback);
         });
     }
@@ -37,7 +35,7 @@ export class AppPreBootstrap {
             
             AppConsts.remoteServiceBaseUrlFormat = result.remoteServiceBaseUrl;
             AppConsts.remoteServiceBaseUrl = result.remoteServiceBaseUrl.replace(AppConsts.tenancyNamePlaceHolderInUrl, tenancyName);
-            console.log("x:" + AppConsts.remoteServiceBaseUrl);
+            
             callback();
         });
     }

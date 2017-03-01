@@ -34,6 +34,7 @@
     "abp-web-resources": "^1.3.0",
     "block-ui": "^2.70.1",
     "bootstrap": "^3.3.7",
+    "bootswatch": "^3.3.7",
     "core-js": "^2.4.1",
     "famfamfam-flags": "^1.0.0",
     "font-awesome": "^4.6.3",

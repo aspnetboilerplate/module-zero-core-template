@@ -4,6 +4,8 @@ import { AbpModule } from '@abp/abp.module';
 
 import { AppSessionService } from './session/app-session.service';
 import { AppUrlService } from './nav/app-url.service';
+import { AppAuthService } from './auth/app-auth.service';
+import { AppRouteGuard } from './auth/auth-route-guard';
 
 @NgModule({
     imports: [
@@ -11,13 +13,15 @@ import { AppUrlService } from './nav/app-url.service';
         AbpModule
     ]
 })
-export class CommonModule {
+export class SharedModule {
     static forRoot(): ModuleWithProviders {
         return {
-            ngModule: CommonModule,
+            ngModule: SharedModule,
             providers: [
                 AppSessionService,
-                AppUrlService
+                AppUrlService,
+                AppAuthService,
+                AppRouteGuard
             ]
         }
     }
