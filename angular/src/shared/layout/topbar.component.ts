@@ -4,9 +4,10 @@ import { AbpSessionService } from '@abp/session/abp-session.service';
 import { AbpMultiTenancyService } from '@abp/multi-tenancy/abp-multi-tenancy.service';
 import { UserServiceProxy } from '@shared/service-proxies/service-proxies';
 import { AppComponentBase } from '@shared/common/app-component-base';
-
 import { AppAuthService } from '@shared/common/auth/app-auth.service';
 import { AppConsts } from '@shared/AppConsts';
+
+import { MenuItem } from '@shared/layout/menu-item';
 
 @Component({
     templateUrl: './topbar.component.html',
@@ -25,7 +26,7 @@ export class TopBarComponent extends AppComponentBase implements OnInit {
 
     constructor(
         injector: Injector,
-        private sessionService: AbpSessionService,
+        private _sessionService: AbpSessionService,
         private abpMultiTenancyService: AbpMultiTenancyService,
         private userServiceProxy: UserServiceProxy,
         private _authService: AppAuthService
@@ -33,11 +34,31 @@ export class TopBarComponent extends AppComponentBase implements OnInit {
         super(injector);
     }
 
+    menuItems: MenuItem[] = [
+        new MenuItem("Home", "", "fa fa-home", "/app/home", true),
+        new MenuItem("Tenants", "Pages.Tenants", "fa fa-globe", "/app/tenants", true),
+        new MenuItem("Users", "Pages.Users", "fa fa-users", "/app/users", true),
+        new MenuItem("About", "", "fa fa-info", "/app/about", false)
+    ];
+
     ngOnInit() {
         this.languages = this.localization.languages;
         this.currentLanguage = this.localization.currentLanguage;
 
         this.getCurrentLoginInformations();
+    }
+
+    showMenuItem(menuItem): boolean {
+        
+        if (menuItem.permissionName) {
+            return this.permission.isGranted(menuItem.permissionName);
+        }
+
+        if (!menuItem.requiresAuthentication) {
+            return true;
+        }
+
+        return this._sessionService.userId > 0;
     }
 
     changeLanguage(languageName: string): void {

@@ -11,15 +11,15 @@ import { AccountRoutingModule } from './account-routing.module';
 import { ServiceProxyModule } from '@shared/service-proxies/service-proxy.module';
 
 import { AppConsts } from '@shared/AppConsts';
-import { SharedModule } from '@shared/common/shared.module';
+import { SharedModule } from '@shared/shared.module';
 
 import { AccountComponent } from './account.component';
 import { TenantChangeComponent } from './tenant/tenant-change.component';
 import { TenantChangeModalComponent } from './tenant/tenant-change-modal.component';
 import { LoginComponent } from './login/login.component';
 import { RegisterComponent } from './register/register.component';
+
 import { LoginService } from './login/login.service';
-import { TopBarComponent } from '@shared/layout/topbar.component';
 
 @NgModule({
     imports: [
@@ -38,8 +38,7 @@ import { TopBarComponent } from '@shared/layout/topbar.component';
         TenantChangeComponent,
         TenantChangeModalComponent,
         LoginComponent,
-        RegisterComponent,
-        TopBarComponent
+        RegisterComponent
     ],
     providers: [
         LoginService

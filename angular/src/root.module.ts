@@ -3,7 +3,7 @@ import { NgModule, Injector, APP_INITIALIZER } from '@angular/core';
 
 import { AbpModule, ABP_HTTP_PROVIDER } from '@abp/abp.module';
 
-import { SharedModule } from '@shared/common/shared.module';
+import { SharedModule } from '@shared/shared.module';
 import { ServiceProxyModule } from '@shared/service-proxies/service-proxy.module';
 import { RootRoutingModule } from './root-routing.module';
 
@@ -38,8 +38,7 @@ export function appInitializerFactory(injector: Injector) {
 }
 
 export function getRemoteServiceBaseUrl(): string {
-    //return AppConsts.remoteServiceBaseUrl;
-    return 'http://localhost:21021';
+    return AppConsts.remoteServiceBaseUrl;
 }
 
 @NgModule({

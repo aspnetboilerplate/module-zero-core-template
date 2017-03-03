@@ -1,9 +1,11 @@
 ﻿using System;
 using System.Text;
+using AbpCompanyName.AbpProjectName.Authentication.JwtBearer;
 using Microsoft.AspNet.Identity;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Http;
 using Microsoft.Extensions.Configuration;
+using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Options;
 using Microsoft.IdentityModel.Tokens;
 
@@ -20,7 +22,14 @@ namespace AbpCompanyName.AbpProjectName.Web.Startup
         /// <param name="configuration">The configuration.</param>
         public static void Configure(IApplicationBuilder app, IConfiguration configuration)
         {
-            app.UseCookieAuthentication(new CookieAuthenticationOptions()
+            app.UseCookieAuthentication(new CookieAuthenticationOptions
+            {
+                AutomaticAuthenticate = false,
+                AuthenticationScheme = ExternalAuthenticationScheme,
+                CookieName = ExternalAuthenticationScheme
+            });
+
+            app.UseCookieAuthentication(new CookieAuthenticationOptions
             {
                 AuthenticationScheme = AuthenticationScheme,
                 LoginPath = new PathString("/Account/Login/"),
@@ -29,11 +38,25 @@ namespace AbpCompanyName.AbpProjectName.Web.Startup
                 AutomaticChallenge = true
             });
 
+            app.UseCookieAuthentication(new CookieAuthenticationOptions
+            {
+                AutomaticAuthenticate = false,
+                AuthenticationScheme = DefaultAuthenticationTypes.TwoFactorCookie,
+                ExpireTimeSpan = TimeSpan.FromMinutes(5),
+                CookieName = DefaultAuthenticationTypes.TwoFactorCookie
+            });
+
+            app.UseCookieAuthentication(new CookieAuthenticationOptions
+            {
+                AutomaticAuthenticate = false,
+                AuthenticationScheme = DefaultAuthenticationTypes.TwoFactorRememberBrowserCookie,
+                CookieName = DefaultAuthenticationTypes.TwoFactorRememberBrowserCookie
+            });
+
             if (bool.Parse(configuration["Authentication:Google:IsEnabled"]))
             {
                 app.UseGoogleAuthentication(CreateGoogleAuthOptions(configuration));
             }
-
 
             if (bool.Parse(configuration["Authentication:Facebook:IsEnabled"]))
             {
@@ -42,7 +65,7 @@ namespace AbpCompanyName.AbpProjectName.Web.Startup
 
             if (bool.Parse(configuration["Authentication:JwtBearer:IsEnabled"]))
             {
-                ConfigureJwtBearerAuthentication(app, configuration);
+                app.UseJwtBearerAuthentication(CreateJwtBearerAuthenticationOptions(app));
             }
         }
 
@@ -71,12 +94,11 @@ namespace AbpCompanyName.AbpProjectName.Web.Startup
             return options;
         }
 
-        private static void ConfigureJwtBearerAuthentication(IApplicationBuilder app, IConfiguration configuration)
+        private static JwtBearerOptions CreateJwtBearerAuthenticationOptions(IApplicationBuilder app)
         {
-            var securityKey = new SymmetricSecurityKey(Encoding.ASCII.GetBytes(configuration["Authentication:JwtBearer:SecurityKey"]));
+            var tokenAuthConfig = app.ApplicationServices.GetRequiredService<TokenAuthConfiguration>();
 
-            //Adding bearer authentication
-            app.UseJwtBearerAuthentication(new JwtBearerOptions
+            return new JwtBearerOptions
             {
                 AutomaticAuthenticate = true,
                 AutomaticChallenge = true,
@@ -84,15 +106,15 @@ namespace AbpCompanyName.AbpProjectName.Web.Startup
                 {
                     // The signing key must match!
                     ValidateIssuerSigningKey = true,
-                    IssuerSigningKey = securityKey,
+                    IssuerSigningKey = tokenAuthConfig.SecurityKey,
 
                     // Validate the JWT Issuer (iss) claim
                     ValidateIssuer = true,
-                    ValidIssuer = configuration["Authentication:JwtBearer:Issuer"],
+                    ValidIssuer = tokenAuthConfig.Issuer,
 
                     // Validate the JWT Audience (aud) claim
                     ValidateAudience = true,
-                    ValidAudience = configuration["Authentication:JwtBearer:Audience"],
+                    ValidAudience = tokenAuthConfig.Audience,
 
                     // Validate the token expiry
                     ValidateLifetime = true,
@@ -100,17 +122,7 @@ namespace AbpCompanyName.AbpProjectName.Web.Startup
                     // If you want to allow a certain amount of clock drift, set that here
                     ClockSkew = TimeSpan.Zero
                 }
-            });
-
-            // Adding JWT generation endpoint
-            //app.UseMiddleware<TokenProviderMiddleware>(Options.Create(new TokenProviderOptions
-            //{
-            //    Path = "/jwt-token/authenticate",
-            //    Issuer = configuration["Authentication:JwtBearer:Issuer"],
-            //    Audience = configuration["Authentication:JwtBearer:Audience"],
-            //    SigningCredentials = new SigningCredentials(securityKey, SecurityAlgorithms.HmacSha256),
-            //    Expiration = TimeSpan.FromDays(1)
-            //}));
+            };
         }
     }
 }

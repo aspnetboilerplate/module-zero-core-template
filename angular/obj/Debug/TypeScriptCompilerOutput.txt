@@ -226,3 +226,7 @@ D:\Github\module-zero-core-template\angular\dist\out-tsc-e2e\app.po.js
 D:\Github\module-zero-core-template\angular\dist\out-tsc-e2e\app.po.js.map
 D:\Github\module-zero-core-template\angular\dist\out-tsc-e2e\app.e2e-spec.js
 D:\Github\module-zero-core-template\angular\dist\out-tsc-e2e\app.e2e-spec.js.map
+D:\Repositories\Github\module-zero-core-template\angular\dist\out-tsc-e2e\app.po.js
+D:\Repositories\Github\module-zero-core-template\angular\dist\out-tsc-e2e\app.po.js.map
+D:\Repositories\Github\module-zero-core-template\angular\dist\out-tsc-e2e\app.e2e-spec.js
+D:\Repositories\Github\module-zero-core-template\angular\dist\out-tsc-e2e\app.e2e-spec.js.map

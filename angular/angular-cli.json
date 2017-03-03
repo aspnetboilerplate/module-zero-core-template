@@ -28,6 +28,7 @@
 
         "../src/shared/core.less",
 
+        "../node_modules/bootstrap/dist/css/bootstrap.min.css",
         "../node_modules/bootswatch/cosmo/bootstrap.min.css"
       ],
       "scripts": [
