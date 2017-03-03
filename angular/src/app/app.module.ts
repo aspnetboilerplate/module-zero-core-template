@@ -18,12 +18,19 @@ import { AppConsts } from '@shared/AppConsts';
 
 import { HomeComponent } from '@app/home/home.component';
 import { AboutComponent } from '@app/about/about.component';
+import { UsersComponent } from '@app/users/users.component';
+import { CreateUserModalComponent } from '@app/users/create-user-modal.component';
+import { TenantsComponent } from '@app/tenants/tenants.component';
+
 
 @NgModule({
     declarations: [
         AppComponent,
         HomeComponent,
-        AboutComponent
+        AboutComponent,
+        UsersComponent,
+        CreateUserModalComponent,
+        TenantsComponent
     ],
     imports: [
         ngCommon.CommonModule,

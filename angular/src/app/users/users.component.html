@@ -1,0 +1,27 @@
+﻿<div>
+    <h1>{{l('Users')}}</h1>
+    <div class="row">
+        <div class="col-md-12">
+            <button data-toggle="modal" data-target="#createUserModal" class="btn btn-primary pull-right" (click)="createUser()"><i class="fa fa-plus"></i> {{l('CreateNewUser')}}</button>
+            <table class="table">
+                <thead>
+                <tr>
+                    <th>{{l('UserName')}}</th>
+                    <th>{{l('FullName')}}</th>
+                    <th>{{l('EmailAddress')}}</th>
+                    <th>{{l('IsActive')}}</th>
+                </tr>
+                </thead>
+                <tbody>
+                <tr *ngFor="let user of users">
+                    <td>{{user.userName}}</td>
+                    <td>{{user.fullName}}</td>
+                    <td>{{user.emailAddress}}</td>
+                    <td>{{user.isActive ? l('Yes') : l('No')}}</td>
+                </tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div>
+<createUserModal #createUserModal (modalSave)="getUsers()"></createUserModal>
