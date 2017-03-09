@@ -25,15 +25,11 @@ export class AccountComponent implements OnInit {
     }
 
     showTenantChange(): boolean {
-        return abp.multiTenancy.isEnabled && !this.supportsTenancyNameInUrl();
+        return abp.multiTenancy.isEnabled;
     }
 
     ngOnInit(): void {
         this._loginService.init();
         $('body').attr('class', 'page-md login');
-    }
-
-    private supportsTenancyNameInUrl() {
-        return (AppConsts.appBaseUrlFormat && AppConsts.appBaseUrlFormat.indexOf(AppConsts.tenancyNamePlaceHolderInUrl) >= 0);
     }
 }

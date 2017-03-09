@@ -1,0 +1,31 @@
+﻿@using Abp.MultiTenancy
+@using AbpCompanyName.AbpProjectName.Web.Models.Common.Modals
+@using AbpCompanyName.AbpProjectName.Web.Resources
+@inject IWebResourceManager WebResourceManager
+@{
+    WebResourceManager.AddScript(ApplicationPath + "view-resources/Views/Shared/Components/TenantChange/Default.js");
+}
+<div class="well tenant-change-component">
+    <span>
+        @L("CurrentTenant"):
+
+        @if (Model.Tenant != null)
+        {
+            <span title="@Model.Tenant.Name"><strong>@Model.Tenant.TenancyName</strong></span>
+        }
+        else
+        {
+            <span>@L("NotSelected")</span>
+        }
+
+        (<a href="#" data-toggle="modal" data-target="#TenantChangeModal">@L("Change")</a>)
+    </span>
+</div>
+
+<div class="modal fade" id="TenantChangeModal" tabindex="-1" role="dialog" aria-labelledby="UserCreateModalLabel" data-backdrop="static">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            
+        </div>
+    </div>
+</div>

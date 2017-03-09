@@ -3,6 +3,7 @@ using Abp.AspNetCore;
 using Abp.Castle.Logging.Log4Net;
 using Abp.Owin;
 using AbpCompanyName.AbpProjectName.Configuration;
+using AbpCompanyName.AbpProjectName.Web.Resources;
 using Castle.Facilities.Logging;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
@@ -31,6 +32,8 @@ namespace AbpCompanyName.AbpProjectName.Web.Startup
             {
                 options.Filters.Add(new AutoValidateAntiforgeryTokenAttribute());
             });
+
+            services.AddScoped<IWebResourceManager, WebResourceManager>();
 
             //Configure Abp and Dependency Injection
             return services.AddAbp<AbpProjectNameWebMvcModule>(options =>

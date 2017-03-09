@@ -116,7 +116,7 @@ export class LoginService {
         if (initialUrl.indexOf('/login') > 0) {
             initialUrl = AppConsts.appBaseUrl;
         }
-        debugger;
+        
         location.href = initialUrl;
     }
 

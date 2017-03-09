@@ -33,19 +33,6 @@
                     <input type="hidden" name="returnUrlHash" />
                     <fieldset>
                         <legend>@L("LogIn")</legend>
-                        @if (Model.IsMultiTenancyEnabled)
-                        {
-                            <div class="form-group">
-                                <div class="col-lg-12">
-                                    <input type="text" class="form-control" name="tenancyName" placeholder="@L("TenancyName")" required maxlength="@AbpCompanyName.AbpProjectName.MultiTenancy.Tenant.MaxTenancyNameLength">
-                                    <span class="text-muted">@L("CanBeEmptyToLoginAsHost")</span>
-                                </div>
-                            </div>
-                        }
-                        else
-                        {
-                            <input type="hidden" id="TenancyName" value="">
-                        }
                         <div class="form-group">
                             <div class="col-lg-12">
                                 <input type="text" class="form-control" name="usernameOrEmailAddress" placeholder="@L("UserNameOrEmail")" required maxlength="@AbpCompanyName.AbpProjectName.Authorization.Users.User.MaxEmailAddressLength">

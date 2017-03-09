@@ -1,8 +1,13 @@
 ﻿@using Abp.Web.Security.AntiForgery
 @using System.Threading
+@using Abp.Configuration.Startup
 @using Abp.Timing
+@using AbpCompanyName.AbpProjectName.Web.Resources
 @inject AbpCompanyName.AbpProjectName.Timing.AppTimes AppTimes
 @inject IAbpAntiForgeryManager AbpAntiForgeryManager
+@inject IMultiTenancyConfig MultiTenancyConfig
+@inject IWebResourceManager WebResourceManager
+
 @{
     Layout = null;
     AbpAntiForgeryManager.SetCookie(Context);
@@ -51,7 +56,7 @@
     {
         Html.RenderPartial("_TopBar");
     }
-
+    
     <div class="container">
         @RenderBody()
     </div>
@@ -99,7 +104,9 @@
     <script src="~/signalr/hubs"></script>
     @*@Html.IncludeScript("~/Abp/Framework/scripts/libs/abp.signalr.js")*@
 
-    <!-- View specific scripts -->
+    @WebResourceManager.RenderScripts();
+
+<!-- View specific scripts -->
     @RenderSection("scripts", required: false)
 </body>
 </html>

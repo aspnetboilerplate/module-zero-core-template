@@ -1,0 +1,119 @@
+﻿@using Abp.Web.Security.AntiForgery
+@using System.Threading
+@using Abp.Configuration.Startup
+@using Abp.Timing
+@using AbpCompanyName.AbpProjectName.Web.Resources
+@inject AbpCompanyName.AbpProjectName.Timing.AppTimes AppTimes
+@inject IAbpAntiForgeryManager AbpAntiForgeryManager
+@inject IMultiTenancyConfig MultiTenancyConfig
+@inject IWebResourceManager WebResourceManager
+
+@{
+    Layout = null;
+    AbpAntiForgeryManager.SetCookie(Context);
+}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="description" content="">
+    <meta name="author" content="">
+
+    <link rel="shortcut icon" href="~/favicon.ico">
+
+    <title>AbpProjectName</title>
+
+    <environment names="Development">
+        <!-- ~/Bundles/vendor/css -->
+        <link rel="stylesheet" href="~/lib/jquery-ui/themes/base/all.css" asp-append-version="true" />
+        <link rel="stylesheet" href="~/lib/bootstrap-theme-cosmo/cosmo.min.css" asp-append-version="true" />
+        <link rel="stylesheet" href="~/lib/toastr/toastr.css" asp-append-version="true" />
+        <link rel="stylesheet" href="~/lib/sweetalert/dist/sweetalert.css" asp-append-version="true" />
+        <link rel="stylesheet" href="~/lib/famfamfam-flags/dist/sprite/famfamfam-flags.css" asp-append-version="true" />
+        <link rel="stylesheet" href="~/lib/font-awesome/css/font-awesome.css" asp-append-version="true" />
+
+        <link rel="stylesheet" href="~/css/main.css" asp-append-version="true" />
+    </environment>
+
+    <environment names="Staging,Production">
+        <link rel="stylesheet" href="~/view-resources/Views/_Bundles/layout-libs.min.css" asp-append-version="true" />
+    </environment>
+
+
+    <!-- View specific styles -->
+    @RenderSection("styles", required: false)
+
+    <script type="text/javascript">
+        //This is used to get the application's root path from javascript. It's useful if you're running application in a virtual directory under IIS.
+        var abp = abp || {}; abp.appPath = '@ApplicationPath';
+    </script>
+
+</head>
+<body>
+    @if (ViewBag.DisableTopBar == null || ViewBag.DisableTopBar != true)
+    {
+        Html.RenderPartial("_TopBar");
+    }
+
+    @if (MultiTenancyConfig.IsEnabled)
+    {
+        <div class="content tenant-change-box">
+            <vc:tenant-change></vc:tenant-change>
+        </div>
+    }
+
+    <div class="container">
+        @RenderBody()
+    </div>
+
+    <environment names="Development">
+        <script src="~/lib/json2/json2.js" asp-append-version="true"></script>
+        <script src="~/lib/jquery/dist/jquery.js" asp-append-version="true"></script>
+        <script src="~/lib/jquery-ui/jquery-ui.js" asp-append-version="true"></script>
+        <script src="~/lib/bootstrap/dist/js/bootstrap.js" asp-append-version="true"></script>
+        <script src="~/lib/moment/min/moment-with-locales.js" asp-append-version="true"></script>
+        <script src="~/lib/jquery-validation/dist/jquery.validate.js" asp-append-version="true"></script>
+        <script src="~/lib/blockUI/jquery.blockUI.js" asp-append-version="true"></script>
+        <script src="~/lib/toastr/toastr.js" asp-append-version="true"></script>
+        <script src="~/lib/sweetalert/dist/sweetalert-dev.js" asp-append-version="true"></script>
+        <script src="~/lib/spin.js/spin.js" asp-append-version="true"></script>
+        <script src="~/lib/spin.js/jquery.spin.js" asp-append-version="true"></script>
+
+        <script src="~/lib/abp-web-resources/Abp/Framework/scripts/abp.js" asp-append-version="true"></script>
+        <script src="~/lib/abp-web-resources/Abp/Framework/scripts/libs/abp.jquery.js" asp-append-version="true"></script>
+        <script src="~/lib/abp-web-resources/Abp/Framework/scripts/libs/abp.toastr.js" asp-append-version="true"></script>
+        <script src="~/lib/abp-web-resources/Abp/Framework/scripts/libs/abp.blockUI.js" asp-append-version="true"></script>
+        <script src="~/lib/abp-web-resources/Abp/Framework/scripts/libs/abp.spin.js" asp-append-version="true"></script>
+        <script src="~/lib/abp-web-resources/Abp/Framework/scripts/libs/abp.sweet-alert.js" asp-append-version="true"></script>
+
+        <script src="~/lib/signalr/jquery.signalR.js" asp-append-version="true"></script>
+
+        <script src="~/js/main.js" asp-append-version="true"></script>
+    </environment>
+
+    <environment names="Staging,Production">
+        <script src="~/view-resources/Views/_Bundles/layout-libs.min.js" asp-append-version="true"></script>
+        <script src="~/js/main.min.js" asp-append-version="true"></script>
+    </environment>
+
+    <script>
+        //Localizing momentjs
+        moment.locale('@Thread.CurrentThread.CurrentUICulture.Name');
+    </script>
+
+    <!-- Dynamic scripts of ABP system (They are created on runtime and can not be bundled) -->
+    <script src="~/AbpServiceProxies/GetAll?v=@(AppTimes.StartupTime.Ticks)" type="text/javascript"></script>
+    <script src="~/AbpScripts/GetScripts?v=@(AppTimes.StartupTime.Ticks)" type="text/javascript"></script>
+
+    <!-- SignalR scripts -->
+    <script src="~/signalr/hubs"></script>
+    @*@Html.IncludeScript("~/Abp/Framework/scripts/libs/abp.signalr.js")*@
+
+    @WebResourceManager.RenderScripts();
+
+    <!-- View specific scripts -->
+    @RenderSection("scripts", required: false)
+</body>
+</html>
