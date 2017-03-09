@@ -21,7 +21,7 @@ import { AboutComponent } from '@app/about/about.component';
 import { UsersComponent } from '@app/users/users.component';
 import { CreateUserModalComponent } from '@app/users/create-user-modal.component';
 import { TenantsComponent } from '@app/tenants/tenants.component';
-
+import { CreateTenantModalComponent } from '@app/tenants/create-tenant-modal.component';
 
 @NgModule({
     declarations: [
@@ -30,7 +30,8 @@ import { TenantsComponent } from '@app/tenants/tenants.component';
         AboutComponent,
         UsersComponent,
         CreateUserModalComponent,
-        TenantsComponent
+        TenantsComponent,
+        CreateTenantModalComponent
     ],
     imports: [
         ngCommon.CommonModule,

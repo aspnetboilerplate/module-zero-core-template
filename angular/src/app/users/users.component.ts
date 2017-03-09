@@ -33,7 +33,6 @@ export class UsersComponent extends AppComponentBase implements OnInit {
     }
 
     createUser(): void {
-        console.log("creat it...");
         this.createUserModal.show();
     }
 }
