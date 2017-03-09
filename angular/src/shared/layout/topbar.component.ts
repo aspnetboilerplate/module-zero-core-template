@@ -1,4 +1,5 @@
 ﻿import { Component, OnInit, Injector, ViewEncapsulation, ViewChild } from '@angular/core';
+import { Router } from '@angular/router';
 import { LocalizationService } from '@abp/localization/localization.service';
 import { AbpSessionService } from '@abp/session/abp-session.service';
 import { AbpMultiTenancyService } from '@abp/multi-tenancy/abp-multi-tenancy.service';
@@ -29,7 +30,8 @@ export class TopBarComponent extends AppComponentBase implements OnInit {
         private _sessionService: AbpSessionService,
         private abpMultiTenancyService: AbpMultiTenancyService,
         private userServiceProxy: UserServiceProxy,
-        private _authService: AppAuthService
+        private _authService: AppAuthService,
+        private _router: Router
     ) {
         super(injector);
     }
@@ -42,14 +44,13 @@ export class TopBarComponent extends AppComponentBase implements OnInit {
     ];
 
     ngOnInit() {
+        this.getCurrentLoginInformations();
         this.languages = this.localization.languages;
         this.currentLanguage = this.localization.currentLanguage;
-
-        this.getCurrentLoginInformations();
     }
 
     showMenuItem(menuItem): boolean {
-        
+
         if (menuItem.permissionName) {
             return this.permission.isGranted(menuItem.permissionName);
         }
@@ -62,23 +63,18 @@ export class TopBarComponent extends AppComponentBase implements OnInit {
     }
 
     changeLanguage(languageName: string): void {
-        //let input = new ChangeUserLanguageDto();
-        //input.languageName = languageName;
-
-        //this.userServiceProxy.changeLanguage(input).subscribe(() => {
-        //    abp.utils.setCookieValue(
-        //        "Abp.Localization.CultureName",
-        //        languageName,
-        //        new Date(new Date().getTime() + 5 * 365 * 86400000), //5 year
-        //        abp.appPath
-        //    );
-
-        //    window.location.reload();
-        //});
+        abp.utils.setCookieValue("Abp.Localization.CultureName", languageName);
+        location.reload();
     }
 
     getCurrentLoginInformations(): void {
-        //this.shownLoginName = this.appSession.getShownLoginName();
+        if (this.appSession.userId > 0) {
+            this.shownLoginName = this.appSession.getShownLoginName();
+        }
+    }
+
+    userIsLoggedIn(): boolean {
+        return this.appSession.userId > 0;
     }
 
     logout(): void {

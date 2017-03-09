@@ -1,61 +1,52 @@
 ﻿<div [@routerTransition]>
-    <h3 class="form-title">{{l("SignUp")}}</h3>
+    <div class="container">
+        <div id="LoginArea" class="row">
+            <div class="col-lg-12">
+                <div class="well bs-component">
+                    <h3 class="form-title">{{l("SignUp")}}</h3>
 
-    <form #registerForm="ngForm" class="login-form" method="post" novalidate (ngSubmit)="save()">
+                    <form #registerForm="ngForm" class="login-form" method="post" novalidate (ngSubmit)="save()">
 
-        <p class="hint">
-            {{l("PersonalInformations")}}
-        </p>
+                        <p class="hint">
+                            {{l("PersonalInformations")}}
+                        </p>
 
-        <div class="form-group">
-            <label class="control-label visible-ie8 visible-ie9">{{l("Name")}}</label>
-            <input class="form-control placeholder-no-fix" autoFocus type="text" placeholder="{{l('Name')}}" [(ngModel)]="model.name" name="Name" required maxlength="32" />
+                        <div class="form-group">
+                            <label class="control-label visible-ie8 visible-ie9">{{l("Name")}}</label>
+                            <input class="form-control placeholder-no-fix" autoFocus type="text" placeholder="{{l('Name')}}" [(ngModel)]="model.name" name="Name" required maxlength="32" />
+                        </div>
+
+                        <div class="form-group">
+                            <label class="control-label visible-ie8 visible-ie9">{{l("Surname")}}</label>
+                            <input class="form-control placeholder-no-fix" type="text" placeholder="{{l('Surname')}}" [(ngModel)]="model.surname" name="Surname" required maxlength="32" />
+                        </div>
+
+                        <div class="form-group">
+                            <label class="control-label visible-ie8 visible-ie9">{{l("EmailAddress")}}</label>
+                            <input class="form-control placeholder-no-fix" type="email" placeholder="{{l('EmailAddress')}}" [(ngModel)]="model.emailAddress" name="EmailAddress" required maxlength="256" pattern="^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{1,})+$" />
+                        </div>
+
+                        <p class="hint">
+                            {{l("AccountSettings")}}
+                        </p>
+
+                        <div class="form-group">
+                            <label class="control-label visible-ie8 visible-ie9">{{l("UserName")}}</label>
+                            <input class="form-control placeholder-no-fix input-ltr" type="text" autocomplete="off" placeholder="{{l('UserName')}}" name="UserName" [(ngModel)]="model.userName" required maxlength="32" />
+                        </div>
+                        <div class="form-group">
+                            <label class="control-label visible-ie8 visible-ie9">{{l("Password")}}</label>
+                            <input type="password" name="Password" class="form-control" [(ngModel)]="model.password" placeholder="{{l('Password')}}" required>
+                        </div>
+
+                        <div class="form-actions">
+                            <button [disabled]="saving" [routerLink]="['../login']" type="button" class="btn btn-default"><i class="fa fa-arrow-left"></i> {{l("Back")}}</button>
+                            <button type="submit" class="btn btn-success uppercase" [disabled]="!registerForm.form.valid"><i class="fa fa-check"></i> {{l("Submit")}}</button>
+                        </div>
+
+                    </form>
+                </div>
+            </div>
         </div>
-
-        <div class="form-group">
-            <label class="control-label visible-ie8 visible-ie9">{{l("Surname")}}</label>
-            <input class="form-control placeholder-no-fix" type="text" placeholder="{{l('Surname')}}" [(ngModel)]="model.surname" name="Surname" required maxlength="32" />
-        </div>
-
-        <div class="form-group">
-            <label class="control-label visible-ie8 visible-ie9">{{l("EmailAddress")}}</label>
-            <input class="form-control placeholder-no-fix" type="email" placeholder="{{l('EmailAddress')}}" [(ngModel)]="model.emailAddress" name="EmailAddress" required maxlength="256" pattern="^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{1,})+$" />
-        </div>
-
-        <p class="hint">
-            {{l("AccountSettings")}}
-        </p>
-
-        <div class="form-group">
-            <label class="control-label visible-ie8 visible-ie9">{{l("UserName")}}</label>
-            <input class="form-control placeholder-no-fix input-ltr" type="text" autocomplete="off" placeholder="{{l('UserName')}}" name="UserName" [(ngModel)]="model.userName" required maxlength="32" />
-        </div>
-        <div class="form-group">
-            <label class="control-label visible-ie8 visible-ie9">{{l("Password")}}</label>
-            <input type="password" name="Password" class="form-control" [(ngModel)]="model.password" #Password="ngModel" placeholder="{{l('Password')}}" validateEqual="PasswordRepeat"
-                   reverse="true" [minlength]="passwordComplexitySetting.minLength" [maxlength]="passwordComplexitySetting.maxPasswordLength"
-                   required>
-        </div>
-        <div class="form-group">
-            <label class="control-label visible-ie8 visible-ie9">{{l("PasswordRepeat")}}</label>
-            <input type="password" name="PasswordRepeat" class="form-control" [ngModel]="model.passwordRepeat" placeholder="{{l('PasswordRepeat')}}" validateEqual="Password"
-                   reverse="false" required>
-        </div>
-        <div [hidden]="registerForm.form.valid || registerForm.form.pristine" class="form-group">
-            <ul class="help-block text-danger" *ngIf="Password.errors">
-                <li [hidden]="!Password.errors.minlength">{{l("PasswordComplexity_MinLength_Hint",passwordComplexitySetting.minLength)}}</li>
-                <li [hidden]="!Password.errors.maxLenght">{{l("PasswordComplexity_MaxLength_Hint",passwordComplexitySetting.maxLength)}}</li>
-                <li [hidden]="!Password.errors.useUpperCaseLetters">{{l("PasswordComplexity_UseUpperCaseLetters_Hint")}}</li>
-                <li [hidden]="!Password.errors.useLowerCaseLetters">{{l("PasswordComplexity_UseLowerCaseLetters_Hint")}}</li>
-                <li [hidden]="!Password.errors.useNumbers">{{l("PasswordComplexity_UseNumbers_Hint")}}</li>
-                <li [hidden]="!Password.errors.usePunctuations">{{l("PasswordComplexity_UsePunctuations_Hint")}}</li>
-            </ul>
-        </div>
-
-        <div class="form-actions">
-            <button [disabled]="saving" routerLink="/login" type="button" class="btn btn-default"><i class="fa fa-arrow-left"></i> {{l("Back")}}</button>
-            <button type="submit" class="btn btn-success uppercase" [disabled]="!registerForm.form.valid"><i class="fa fa-check"></i> {{l("Submit")}}</button>
-        </div>
-
-    </form>
+    </div>
 </div>

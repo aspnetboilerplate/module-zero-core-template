@@ -10,7 +10,7 @@
                         <span aria-hidden="true">&times;</span>
                     </button>
                     <h4 class="modal-title">
-                        <span>{{l("ChangeTenant")}}</span>
+                        <span>{{l("CreateNewTenant")}}</span>
                     </h4>
                 </div>
 
@@ -29,7 +29,7 @@
                     </div>
                     <div class="form-group">
                         <label>{{l("AdminEmailAddress")}}</label>
-                        <input type="email" name="AdminEmailAddress" class="form-control" [(ngModel)]="tenant.adminEmailAddress" required maxlength="256">
+                        <input type="email" name="AdminEmailAddress" class="form-control" [(ngModel)]="tenant.adminEmailAddress" required maxlength="256" pattern="^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{1,})+$">
                     </div>
                     <p>{{l("DefaultPasswordIs","123qwe")}}</p>
                 </div>

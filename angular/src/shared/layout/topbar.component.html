@@ -21,8 +21,28 @@
                 </template>
             </ul>
             <ul class="nav navbar-nav navbar-right">
-                <!-- UserMenuOrLoginLinkViewComponent -->
-                <!-- UserMenuOrLoginLinkViewComponent -->
+                <li class="dropdown">
+                    <a href="#" class="dropdown-toggle" data-toggle="dropdown">
+                        <i class="{{currentLanguage.icon}}"></i>
+                        <span>{{currentLanguage.displayName}}</span>
+                        <b class="caret"></b>
+                    </a>
+                    <ul class="dropdown-menu">
+                        <li *ngFor="let language of languages">
+                            <a *ngIf="language.name != currentLanguage.name" href="#" (click)="changeLanguage(language.name)"><i class="{{language.icon}}"></i> {{language.displayName}}</a>
+                        </li>
+                    </ul>
+                </li>
+
+                <li class="dropdown" *ngIf="userIsLoggedIn()">
+                    <a href="" data-toggle="dropdown"><i class="fa fa-user"></i> <span>{{shownLoginName}}</span> <b class="caret"></b></a>
+                    <ul class="dropdown-menu">
+                        <li><a href="#" (click)="logout()"><i class="fa fa-sign-out"></i> {{l('Logout')}}</a></li>
+                    </ul>
+                </li>
+                <li *ngIf="!userIsLoggedIn()">
+                    <a href="#" [routerLink]="['../account/login']"><i class="fa fa-sign-in"></i> {{l('LogIn')}}</a>
+                </li>
             </ul>
         </div>
     </div>

@@ -37,7 +37,7 @@ export class LoginComponent extends AppComponentBase {
             return false;
         }
 
-        return this.setting.getBoolean('App.UserManagement.AllowSelfRegistration');
+        return true;
     }
 
     login(): void {

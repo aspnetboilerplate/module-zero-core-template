@@ -29,7 +29,7 @@
                                 <div class="col-lg-12">
                                     <button id="LoginButton" type="submit" class="btn btn-primary" [disabled]="!loginForm.form.valid"><i class="fa fa-sign-in"></i> {{l("LogIn")}}</button>
                                     <span *ngIf="isSelfRegistrationAllowed">
-                                        <a class="btn btn-success" routerLink="/register"><i class="fa fa-sign-in"></i> {{l("Register")}}</a>
+                                        <a class="btn btn-success" [routerLink]="['../register']"><i class="fa fa-sign-in"></i> {{l("Register")}}</a>
                                     </span>
                                 </div>
                             </div>

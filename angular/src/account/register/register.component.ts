@@ -24,20 +24,12 @@ export class RegisterComponent extends AppComponentBase {
         super(injector);
     }
 
-    get useCaptcha(): boolean {
-        return this.setting.getBoolean('App.UserManagement.UseCaptchaOnRegistration');
-    }
 
     back(): void {
         this._router.navigate(['/login']);
     }
 
     save(): void {
-        if (this.useCaptcha && !this.model.captchaResponse) {
-            this.message.warn(this.l('CaptchaCanNotBeEmpty'));
-            return;
-        }
-
         this.saving = true;
         this._accountService.register(this.model)
             .finally(() => { this.saving = false; })
@@ -54,9 +46,5 @@ export class RegisterComponent extends AppComponentBase {
                 this._loginService.authenticateModel.password = this.model.password;
                 this._loginService.authenticate(() => { this.saving = false; });
             });
-    }
-
-    captchaResolved(captchaResponse: string): void {
-        this.model.captchaResponse = captchaResponse;
     }
 }

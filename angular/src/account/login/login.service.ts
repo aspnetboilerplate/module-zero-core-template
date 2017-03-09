@@ -100,7 +100,6 @@ export class LoginService {
 
             this._logService.warn('Unexpected authenticateResult!');
             this._router.navigate(['account/login']);
-
         }
     }
 
@@ -117,7 +116,7 @@ export class LoginService {
         if (initialUrl.indexOf('/login') > 0) {
             initialUrl = AppConsts.appBaseUrl;
         }
-
+        debugger;
         location.href = initialUrl;
     }
 
@@ -165,7 +164,9 @@ export class LoginService {
                             clientId: loginProvider.clientId,
                             scope: 'openid profile email'
                         }).then(() => {
-                            gapi.auth2.getAuthInstance().isSignedIn.listen(this.googleLoginStatusChangeCallback);
+                            gapi.auth2.getAuthInstance().isSignedIn.listen((isSignedIn) => {
+                                this.googleLoginStatusChangeCallback(isSignedIn);
+                            });
                             this.googleLoginStatusChangeCallback(gapi.auth2.getAuthInstance().isSignedIn.get());
                         });
 
