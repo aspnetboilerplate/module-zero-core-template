@@ -58,8 +58,8 @@
         "../node_modules/abp-web-resources/Abp/Framework/scripts/libs/abp.sweet-alert.js",
         "../node_modules/abp-web-resources/Abp/Framework/scripts/libs/abp.moment.js"
       ],
+      "environmentSource": "environments/environment.ts",
       "environments": {
-        "source": "environments/environment.ts",
         "dev": "environments/environment.ts",
         "prod": "environments/environment.prod.ts"
       }

@@ -1,5 +1,3 @@
-import './polyfills.ts';
-
 import { platformBrowserDynamic } from '@angular/platform-browser-dynamic';
 import { enableProdMode, ChangeDetectorRef } from '@angular/core';
 import { environment } from './environments/environment';
