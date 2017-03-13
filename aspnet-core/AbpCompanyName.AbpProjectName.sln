@@ -1,32 +1,29 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
-# Visual Studio 14
-VisualStudioVersion = 14.0.25420.1
+# Visual Studio 15
+VisualStudioVersion = 15.0.26228.4
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "src", "src", "{AFAA0841-BD93-466F-B8F4-FB4EEC86F1FC}"
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution Items", "{8326CDCE-1AB4-4188-96E1-640A068AE3AE}"
-	ProjectSection(SolutionItems) = preProject
-		global.json = global.json
-	EndProjectSection
-EndProject
-Project("{8BB2217D-0F2D-49D1-97BC-3654ED321F3B}") = "AbpCompanyName.AbpProjectName.Core", "src\AbpCompanyName.AbpProjectName.Core\AbpCompanyName.AbpProjectName.Core.xproj", "{0FA75A5B-AB83-4FD0-B545-279774C01E87}"
-EndProject
-Project("{8BB2217D-0F2D-49D1-97BC-3654ED321F3B}") = "AbpCompanyName.AbpProjectName.Application", "src\AbpCompanyName.AbpProjectName.Application\AbpCompanyName.AbpProjectName.Application.xproj", "{3870C648-4AEA-4B85-BA3F-F2F63B96136A}"
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "test", "test", "{F10AA149-2626-486E-85BB-9CD5365F3016}"
 EndProject
-Project("{8BB2217D-0F2D-49D1-97BC-3654ED321F3B}") = "AbpCompanyName.AbpProjectName.Tests", "test\AbpCompanyName.AbpProjectName.Tests\AbpCompanyName.AbpProjectName.Tests.xproj", "{0D4C5D00-C144-4213-A007-4B8944113AB1}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "AbpCompanyName.AbpProjectName.Core", "src\AbpCompanyName.AbpProjectName.Core\AbpCompanyName.AbpProjectName.Core.csproj", "{0FA75A5B-AB83-4FD0-B545-279774C01E87}"
 EndProject
-Project("{8BB2217D-0F2D-49D1-97BC-3654ED321F3B}") = "AbpCompanyName.AbpProjectName.EntityFramework", "src\AbpCompanyName.AbpProjectName.EntityFramework\AbpCompanyName.AbpProjectName.EntityFramework.xproj", "{DC780BC4-4EAC-4C63-9052-6F3169A59FA4}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "AbpCompanyName.AbpProjectName.Application", "src\AbpCompanyName.AbpProjectName.Application\AbpCompanyName.AbpProjectName.Application.csproj", "{3870C648-4AEA-4B85-BA3F-F2F63B96136A}"
 EndProject
-Project("{8BB2217D-0F2D-49D1-97BC-3654ED321F3B}") = "AbpCompanyName.AbpProjectName.Migrator", "src\AbpCompanyName.AbpProjectName.Migrator\AbpCompanyName.AbpProjectName.Migrator.xproj", "{880B3591-E057-46FE-B525-10BD83828B93}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "AbpCompanyName.AbpProjectName.Tests", "test\AbpCompanyName.AbpProjectName.Tests\AbpCompanyName.AbpProjectName.Tests.csproj", "{0D4C5D00-C144-4213-A007-4B8944113AB1}"
 EndProject
-Project("{8BB2217D-0F2D-49D1-97BC-3654ED321F3B}") = "AbpCompanyName.AbpProjectName.Web.Host", "src\AbpCompanyName.AbpProjectName.Web.Host\AbpCompanyName.AbpProjectName.Web.Host.xproj", "{38E184BD-E874-4633-A947-AED4FDB73F40}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "AbpCompanyName.AbpProjectName.EntityFramework", "src\AbpCompanyName.AbpProjectName.EntityFramework\AbpCompanyName.AbpProjectName.EntityFramework.csproj", "{DC780BC4-4EAC-4C63-9052-6F3169A59FA4}"
 EndProject
-Project("{8BB2217D-0F2D-49D1-97BC-3654ED321F3B}") = "AbpCompanyName.AbpProjectName.Web.Core", "src\AbpCompanyName.AbpProjectName.Web.Core\AbpCompanyName.AbpProjectName.Web.Core.xproj", "{22CFE0D2-8DCA-42D7-AD7D-784C3862493F}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "AbpCompanyName.AbpProjectName.Migrator", "src\AbpCompanyName.AbpProjectName.Migrator\AbpCompanyName.AbpProjectName.Migrator.csproj", "{880B3591-E057-46FE-B525-10BD83828B93}"
 EndProject
-Project("{8BB2217D-0F2D-49D1-97BC-3654ED321F3B}") = "AbpCompanyName.AbpProjectName.Web.Mvc", "src\AbpCompanyName.AbpProjectName.Web.Mvc\AbpCompanyName.AbpProjectName.Web.Mvc.xproj", "{A2213374-BB48-48FD-BBD4-81E6A961D866}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "AbpCompanyName.AbpProjectName.Web.Host", "src\AbpCompanyName.AbpProjectName.Web.Host\AbpCompanyName.AbpProjectName.Web.Host.csproj", "{38E184BD-E874-4633-A947-AED4FDB73F40}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "AbpCompanyName.AbpProjectName.Web.Core", "src\AbpCompanyName.AbpProjectName.Web.Core\AbpCompanyName.AbpProjectName.Web.Core.csproj", "{22CFE0D2-8DCA-42D7-AD7D-784C3862493F}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "AbpCompanyName.AbpProjectName.Web.Mvc", "src\AbpCompanyName.AbpProjectName.Web.Mvc\AbpCompanyName.AbpProjectName.Web.Mvc.csproj", "{A2213374-BB48-48FD-BBD4-81E6A961D866}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

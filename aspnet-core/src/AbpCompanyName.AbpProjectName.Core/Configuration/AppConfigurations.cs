@@ -1,4 +1,5 @@
 ﻿using System.Collections.Concurrent;
+using System.Reflection;
 using Abp.Extensions;
 using Microsoft.Extensions.Configuration;
 
@@ -37,7 +38,7 @@ namespace AbpCompanyName.AbpProjectName.Configuration
 
             if (addUserSecrets)
             {
-                builder.AddUserSecrets();
+                builder.AddUserSecrets(Assembly.GetExecutingAssembly());
             }
 
             return builder.Build();
