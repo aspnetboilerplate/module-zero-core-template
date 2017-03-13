@@ -7,8 +7,8 @@
       "type": "build",
       "version": "1.0.8"
     },
-    "Abp.EntityFramework": "1.4.1",
-"Abp.Zero.EntityFramework": "1.4.0"
+    "Abp.EntityFramework": "1.5.0",
+"Abp.Zero.EntityFramework": "1.5.0"
   },
 
   "tools": {

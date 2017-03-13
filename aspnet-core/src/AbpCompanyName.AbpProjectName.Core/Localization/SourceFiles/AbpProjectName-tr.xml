@@ -54,5 +54,10 @@
     <text name="No" value="Hayır" />
     <text name="Optional" value="Opsiyonel" />
     <text name="LeaveEmptyToSwitchToHost">Üst kullanıcıya geçiş için boş değer girin.</text>
+
+    <text name="CurrentTenant">Geçerli müşteri</text>
+    <text name="NotSelected">Seçilmemiş</text>
+    <text name="Change">Değiştir</text>
+    <text name="ChangeTenant">Müşteri değiştir</text>
   </texts>
 </localizationDictionary>

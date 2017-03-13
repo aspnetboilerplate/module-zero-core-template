@@ -2,7 +2,6 @@
 import { AppConsts } from '@shared/AppConsts';
 import { UrlHelper } from './shared/helpers/UrlHelper';
 import * as _ from 'lodash';
-import { SubdomainTenancyNameFinder } from '@shared/helpers/SubdomainTenancyNameFinder';
 import { platformBrowserDynamic } from '@angular/platform-browser-dynamic';
 import { Type, CompilerOptions, NgModuleRef } from '@angular/core';
 import { UtilsService } from '@abp/utils/utils.service';
@@ -27,14 +26,8 @@ export class AppPreBootstrap {
                 'Abp.TenantId': abp.multiTenancy.getTenantIdCookie()
             }
         }).done(result => {
-            let subdomainTenancyNameFinder = new SubdomainTenancyNameFinder();
-            var tenancyName = subdomainTenancyNameFinder.getCurrentTenancyNameOrNull(result.appBaseUrl);
-
-            AppConsts.appBaseUrlFormat = result.appBaseUrl;
-            AppConsts.appBaseUrl = result.appBaseUrl.replace(AppConsts.tenancyNamePlaceHolderInUrl, tenancyName);
-            
-            AppConsts.remoteServiceBaseUrlFormat = result.remoteServiceBaseUrl;
-            AppConsts.remoteServiceBaseUrl = result.remoteServiceBaseUrl.replace(AppConsts.tenancyNamePlaceHolderInUrl, tenancyName);
+            AppConsts.appBaseUrl = result.appBaseUrl;
+            AppConsts.remoteServiceBaseUrl = result.remoteServiceBaseUrl;
             
             callback();
         });

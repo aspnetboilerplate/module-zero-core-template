@@ -54,5 +54,10 @@
     <text name="No" value="No" />
     <text name="Optional" value="Optional" />
     <text name="LeaveEmptyToSwitchToHost">Leave empty to switch to the host</text>
+    
+    <text name="CurrentTenant">Current tenant</text>
+    <text name="NotSelected">Not selected</text>
+    <text name="Change">Change</text>
+    <text name="ChangeTenant">Change tenant</text>
   </texts>
 </localizationDictionary>

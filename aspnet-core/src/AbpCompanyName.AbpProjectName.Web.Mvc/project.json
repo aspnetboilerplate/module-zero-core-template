@@ -32,13 +32,12 @@
     "Microsoft.Extensions.Logging": "1.1.0",
     "Microsoft.Extensions.Options.ConfigurationExtensions": "1.1.0",
     "Microsoft.VisualStudio.Web.BrowserLink.Loader": "14.1.0",
-    
-    "Abp.Castle.Log4Net": "1.4.1",
-    "Abp.HangFire": "1.4.1",
-    "Abp.Owin": "1.4.1",
-    "Abp.RedisCache": "1.4.1",
-    "Abp.Web.SignalR": "1.4.1",
-    "Microsoft.AspNetCore.Mvc": "1.1.1"
+    "Microsoft.AspNetCore.Mvc": "1.1.1",
+    "Abp.HangFire": "1.5.0",
+    "Abp.Owin": "1.5.0",
+    "Abp.RedisCache": "1.5.0",
+    "Abp.Web.SignalR": "1.5.0",
+    "Abp.Castle.Log4Net": "1.5.0"
   },
 
   "tools": {

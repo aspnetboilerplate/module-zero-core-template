@@ -13,7 +13,7 @@
     "xunit": "2.2.0-beta4-build3444",
     "xunit.extensibility.execution": "2.2.0-beta4-build3444",
     "xunit.runner.visualstudio": "2.2.0-beta4-build1194",
-    "Abp.TestBase": "1.4.1"
+    "Abp.TestBase": "1.5.0"
   },
 
   "frameworks": {
