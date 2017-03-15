@@ -16,7 +16,7 @@
   </ItemGroup>
 
   <ItemGroup>
-    <PackageReference Include="Migrator.EF6.Tools" Version="1.0.8">
+    <PackageReference Include="Migrator.EF6.Tools" Version="1.1.0">
       <PrivateAssets>All</PrivateAssets>
     </PackageReference>
     <PackageReference Include="Abp.EntityFramework" Version="1.5.0" />
@@ -29,7 +29,7 @@
   </ItemGroup>
 
   <ItemGroup>
-    <DotNetCliToolReference Include="Migrator.EF6.Tools" Version="1.0.8" />
+    <DotNetCliToolReference Include="Migrator.EF6.Tools" Version="1.1.0" />
   </ItemGroup>
 
 </Project>

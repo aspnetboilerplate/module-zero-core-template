@@ -29,7 +29,19 @@ namespace AbpCompanyName.AbpProjectName.Web
                 directoryInfo = directoryInfo.Parent;
             }
 
-            return Path.Combine(directoryInfo.FullName, @"src\AbpCompanyName.AbpProjectName.Web");
+            var webMvcFolder = Path.Combine(directoryInfo.FullName, @"src\AbpCompanyName.AbpProjectName.Web.Mvc");
+            if (Directory.Exists(webMvcFolder))
+            {
+                return webMvcFolder;
+            }
+
+            var webHostFolder = Path.Combine(directoryInfo.FullName, @"src\AbpCompanyName.AbpProjectName.Web.Host");
+            if (Directory.Exists(webHostFolder))
+            {
+                return webHostFolder;
+            }
+
+            throw new ApplicationException("Could not find root folder of the web project!");
         }
 
         private static bool DirectoryContains(string directory, string fileName)
