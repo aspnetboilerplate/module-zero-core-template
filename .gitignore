@@ -2,3 +2,5 @@
 
 # IDEs and editors
 .vs/
+obj/
+bin/

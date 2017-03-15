@@ -1,4 +1,4 @@
-{
+﻿{
   "compilerOptions": {
     "declaration": false,
     "emitDecoratorMetadata": true,
@@ -20,5 +20,8 @@
       "@shared/*": [ "./shared/*" ],
       "@node_modules/*": [ "../node_modules/*" ]
     }
-  }
+  },
+  "exclude": [
+    "node_modules"
+  ]
 }

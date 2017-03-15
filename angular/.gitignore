@@ -1,4 +1,4 @@
-# See http://help.github.com/ignore-files/ for more about ignoring files.
+﻿# See http://help.github.com/ignore-files/ for more about ignoring files.
 
 # compiled output
 /dist
@@ -14,6 +14,9 @@
 .c9/
 *.launch
 .settings/
+.vs/
+obj/
+bin/
 
 # IDE - VSCode
 .vscode/*

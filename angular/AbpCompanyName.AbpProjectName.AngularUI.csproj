@@ -7,7 +7,13 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <Compile Remove="node_modules\**\*;dist" />
+    <Compile Remove="node_modules\**" />
+    <EmbeddedResource Remove="node_modules\**" />
+    <None Remove="node_modules\**" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Compile Remove="dist" />
     <None Include="App.config" />
     <None Update="wwwroot\**\*;web.config">
       <CopyToPublishDirectory>PreserveNewest</CopyToPublishDirectory>
