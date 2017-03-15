@@ -49,10 +49,10 @@ namespace AbpCompanyName.AbpProjectName.Web.Controllers
             TenantManager tenantManager,
             IUnitOfWorkManager unitOfWorkManager,
             AbpLoginResultTypeHelper abpLoginResultTypeHelper,
-            LogInManager logInManager, 
-            SignInManager signInManager, 
-            UserRegistrationManager userRegistrationManager, 
-            ISessionAppService sessionAppService, 
+            LogInManager logInManager,
+            SignInManager signInManager,
+            UserRegistrationManager userRegistrationManager,
+            ISessionAppService sessionAppService,
             ITenantCache tenantCache)
         {
             _userManager = userManager;
@@ -79,7 +79,8 @@ namespace AbpCompanyName.AbpProjectName.Web.Controllers
             return View(new LoginFormViewModel
             {
                 ReturnUrl = returnUrl,
-                IsMultiTenancyEnabled = _multiTenancyConfig.IsEnabled
+                IsMultiTenancyEnabled = _multiTenancyConfig.IsEnabled,
+                IsSelfRegistrationAllowed = IsSelfRegistrationEnabled()
             });
         }
 
@@ -148,6 +149,16 @@ namespace AbpCompanyName.AbpProjectName.Web.Controllers
             ViewBag.IsMultiTenancyEnabled = _multiTenancyConfig.IsEnabled;
 
             return View("Register", model);
+        }
+
+        private bool IsSelfRegistrationEnabled()
+        {
+            if (!AbpSession.TenantId.HasValue)
+            {
+                return false; //No registration enabled for host users!
+            }
+
+            return true;
         }
 
         [HttpPost]
