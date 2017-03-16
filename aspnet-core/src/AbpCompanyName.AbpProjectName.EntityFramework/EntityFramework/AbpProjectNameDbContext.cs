@@ -1,5 +1,6 @@
 ﻿using System.Data.Common;
 using System.Data.Entity;
+using Abp.Notifications;
 using Abp.Zero.EntityFramework;
 using Microsoft.Extensions.Configuration;
 using AbpCompanyName.AbpProjectName.Authorization.Roles;

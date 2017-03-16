@@ -197,7 +197,7 @@ export class SessionServiceProxy {
      */
     getCurrentLoginInformations(): Observable<GetCurrentLoginInformationsOutput> {
         let url_ = this.baseUrl + "/api/services/app/Session/GetCurrentLoginInformations";
-        
+
         const content_ = "";
         
         return this.http.request(url_, {
@@ -1147,11 +1147,13 @@ export class AuthenticateModel {
 
 export class AuthenticateResultModel { 
     accessToken: string; 
+    encryptedAccessToken: string; 
     expireInSeconds: number; 
     userId: number;
     constructor(data?: any) {
         if (data !== undefined) {
             this.accessToken = data["accessToken"] !== undefined ? data["accessToken"] : null;
+            this.encryptedAccessToken = data["encryptedAccessToken"] !== undefined ? data["encryptedAccessToken"] : null;
             this.expireInSeconds = data["expireInSeconds"] !== undefined ? data["expireInSeconds"] : null;
             this.userId = data["userId"] !== undefined ? data["userId"] : null;
         }
@@ -1164,6 +1166,7 @@ export class AuthenticateResultModel {
     toJS(data?: any) {
         data = data === undefined ? {} : data;
         data["accessToken"] = this.accessToken !== undefined ? this.accessToken : null;
+        data["encryptedAccessToken"] = this.encryptedAccessToken !== undefined ? this.encryptedAccessToken : null;
         data["expireInSeconds"] = this.expireInSeconds !== undefined ? this.expireInSeconds : null;
         data["userId"] = this.userId !== undefined ? this.userId : null;
         return data; 
@@ -1246,11 +1249,13 @@ export class ExternalAuthenticateModel {
 
 export class ExternalAuthenticateResultModel { 
     accessToken: string; 
+    encryptedAccessToken: string; 
     expireInSeconds: number; 
     waitingForActivation: boolean;
     constructor(data?: any) {
         if (data !== undefined) {
             this.accessToken = data["accessToken"] !== undefined ? data["accessToken"] : null;
+            this.encryptedAccessToken = data["encryptedAccessToken"] !== undefined ? data["encryptedAccessToken"] : null;
             this.expireInSeconds = data["expireInSeconds"] !== undefined ? data["expireInSeconds"] : null;
             this.waitingForActivation = data["waitingForActivation"] !== undefined ? data["waitingForActivation"] : null;
         }
@@ -1263,6 +1268,7 @@ export class ExternalAuthenticateResultModel {
     toJS(data?: any) {
         data = data === undefined ? {} : data;
         data["accessToken"] = this.accessToken !== undefined ? this.accessToken : null;
+        data["encryptedAccessToken"] = this.encryptedAccessToken !== undefined ? this.encryptedAccessToken : null;
         data["expireInSeconds"] = this.expireInSeconds !== undefined ? this.expireInSeconds : null;
         data["waitingForActivation"] = this.waitingForActivation !== undefined ? this.waitingForActivation : null;
         return data; 

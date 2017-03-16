@@ -799,9 +799,9 @@
       "dev": true
     },
     "caniuse-db": {
-      "version": "1.0.30000635",
+      "version": "1.0.30000636",
       "from": "caniuse-db@>=1.0.30000634 <2.0.0",
-      "resolved": "https://registry.npmjs.org/caniuse-db/-/caniuse-db-1.0.30000635.tgz",
+      "resolved": "https://registry.npmjs.org/caniuse-db/-/caniuse-db-1.0.30000636.tgz",
       "dev": true
     },
     "capture-stack-trace": {
@@ -1970,9 +1970,9 @@
       "dev": true
     },
     "fs-extra": {
-      "version": "2.0.0",
+      "version": "2.1.1",
       "from": "fs-extra@>=2.0.0 <3.0.0",
-      "resolved": "https://registry.npmjs.org/fs-extra/-/fs-extra-2.0.0.tgz",
+      "resolved": "https://registry.npmjs.org/fs-extra/-/fs-extra-2.1.1.tgz",
       "dev": true
     },
     "fs.realpath": {
@@ -3537,9 +3537,9 @@
       "dev": true
     },
     "node-gyp": {
-      "version": "3.5.0",
+      "version": "3.6.0",
       "from": "node-gyp@>=3.3.1 <4.0.0",
-      "resolved": "https://registry.npmjs.org/node-gyp/-/node-gyp-3.5.0.tgz",
+      "resolved": "https://registry.npmjs.org/node-gyp/-/node-gyp-3.6.0.tgz",
       "dev": true,
       "dependencies": {
         "nopt": {
@@ -6029,6 +6029,11 @@
       "from": "punycode@>=1.4.1 <2.0.0",
       "resolved": "https://registry.npmjs.org/punycode/-/punycode-1.4.1.tgz",
       "dev": true
+    },
+    "push.js": {
+      "version": "0.0.12",
+      "from": "push.js@0.0.12",
+      "resolved": "https://registry.npmjs.org/push.js/-/push.js-0.0.12.tgz"
     },
     "q": {
       "version": "1.4.1",

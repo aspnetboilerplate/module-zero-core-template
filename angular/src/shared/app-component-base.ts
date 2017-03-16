@@ -7,7 +7,7 @@ import { NotifyService } from '@abp/notify/notify.service';
 import { SettingService } from '@abp/settings/setting.service';
 import { MessageService } from '@abp/message/message.service';
 import { AbpMultiTenancyService } from '@abp/multi-tenancy/abp-multi-tenancy.service';
-import { AppSessionService } from '@shared/common/session/app-session.service';
+import { AppSessionService } from '@shared/session/app-session.service';
 
 export abstract class AppComponentBase {
 

@@ -1,6 +1,6 @@
 ﻿import { Injectable } from '@angular/core';
 import { PermissionCheckerService } from "@abp/auth/permission-checker.service";
-import { AppSessionService } from '@shared/common/session/app-session.service';
+import { AppSessionService } from '../session/app-session.service';
 
 import {
     CanActivate, Router,
@@ -44,7 +44,7 @@ export class AppRouteGuard implements CanActivate, CanActivateChild {
         if (!this._sessionService.user) {
             return '/account/login';
         }
-
+        
         if (this._permissionChecker.isGranted('Pages.Administration.Users')) {
             return '/app/admin/users';
         }

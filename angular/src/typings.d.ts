@@ -15,3 +15,5 @@ declare var System: any;
 
 declare var App: any; //Related to Metronic
 declare var Layout: any; //Related to Metronic
+
+declare var Push: any;

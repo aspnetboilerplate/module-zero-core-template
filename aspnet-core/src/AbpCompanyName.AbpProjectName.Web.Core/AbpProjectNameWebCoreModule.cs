@@ -4,6 +4,7 @@ using System.Text;
 using Abp.AspNetCore;
 using Abp.AspNetCore.Configuration;
 using Abp.Modules;
+using Abp.Web.SignalR;
 using Abp.Zero.AspNetCore;
 using Abp.Zero.Configuration;
 using AbpCompanyName.AbpProjectName.Authentication.JwtBearer;
@@ -19,7 +20,8 @@ namespace AbpCompanyName.AbpProjectName
          typeof(AbpProjectNameApplicationModule),
          typeof(AbpProjectNameEntityFrameworkModule),
          typeof(AbpAspNetCoreModule),
-         typeof(AbpZeroAspNetCoreModule)
+         typeof(AbpZeroAspNetCoreModule),
+         typeof(AbpWebSignalRModule)
      )]
     public class AbpProjectNameWebCoreModule : AbpModule
     {

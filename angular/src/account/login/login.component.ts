@@ -2,7 +2,7 @@
 import { Router } from '@angular/router';
 import { Http, Headers } from '@angular/http';
 import { TokenAuthServiceProxy, AuthenticateModel, AuthenticateResultModel } from '@shared/service-proxies/service-proxies';
-import { AppComponentBase } from '@shared/common/app-component-base';
+import { AppComponentBase } from '@shared/app-component-base';
 import { AppConsts } from '@shared/AppConsts';
 import { LoginService, ExternalLoginProvider } from './login.service';
 import { accountModuleAnimation } from '@shared/animations/routerTransition';

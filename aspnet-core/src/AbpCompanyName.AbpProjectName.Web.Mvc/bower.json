@@ -17,6 +17,7 @@
     "blockUI": "jquery.blockUI#*",
     "spin.js": "^2.3.2",
     "signalr": "^2.2.1",
-    "abp-web-resources": "^1.2.1"
+    "abp-web-resources": "^1.2.1",
+    "push.js": "v0.0.12"
   }
 }

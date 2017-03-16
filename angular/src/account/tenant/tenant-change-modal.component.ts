@@ -1,5 +1,5 @@
 ﻿import { Component, OnInit, ViewChild, Injector, ElementRef } from '@angular/core';
-import { AppComponentBase } from '@shared/common/app-component-base';
+import { AppComponentBase } from '@shared/app-component-base';
 import { AccountServiceProxy } from '@shared/service-proxies/service-proxies';
 import { IsTenantAvailableInput } from '@shared/service-proxies/service-proxies';
 import { AppTenantAvailabilityState } from '@shared/AppEnums';

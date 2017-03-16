@@ -4,13 +4,16 @@ using System.Diagnostics;
 using System.Linq;
 using System.Security.Claims;
 using System.Threading.Tasks;
+using Abp;
 using Abp.Authorization.Users;
 using Abp.Configuration;
 using Abp.Configuration.Startup;
 using Abp.Domain.Uow;
 using Abp.Extensions;
 using Abp.MultiTenancy;
+using Abp.Notifications;
 using Abp.Threading;
+using Abp.Timing;
 using Abp.UI;
 using Abp.Web.Models;
 using Abp.Zero.AspNetCore;
@@ -41,7 +44,7 @@ namespace AbpCompanyName.AbpProjectName.Web.Controllers
         private readonly UserRegistrationManager _userRegistrationManager;
         private readonly ISessionAppService _sessionAppService;
         private readonly ITenantCache _tenantCache;
-
+        private readonly INotificationPublisher _notificationPublisher;
 
         public AccountController(
             UserManager userManager,
@@ -53,7 +56,8 @@ namespace AbpCompanyName.AbpProjectName.Web.Controllers
             SignInManager signInManager,
             UserRegistrationManager userRegistrationManager,
             ISessionAppService sessionAppService,
-            ITenantCache tenantCache)
+            ITenantCache tenantCache,
+            INotificationPublisher notificationPublisher)
         {
             _userManager = userManager;
             _multiTenancyConfig = multiTenancyConfig;
@@ -65,6 +69,7 @@ namespace AbpCompanyName.AbpProjectName.Web.Controllers
             _userRegistrationManager = userRegistrationManager;
             _sessionAppService = sessionAppService;
             _tenantCache = tenantCache;
+            _notificationPublisher = notificationPublisher;
         }
 
         #region Login / Logout
@@ -412,5 +417,36 @@ namespace AbpCompanyName.AbpProjectName.Web.Controllers
         }
 
         #endregion
+
+        #region Etc
+
+        /// <summary>
+        /// This is a demo code to demonstrate sending notification to default tenant admin and host admin uers.
+        /// Don't use this code in production !!!
+        /// </summary>
+        /// <param name="message"></param>
+        /// <returns></returns>
+        public async Task<ActionResult> TestNotification(string message = "")
+        {
+            if (message.IsNullOrEmpty())
+            {
+                message = "This is a test notification, created at " + Clock.Now;
+            }
+
+            var defaultTenantAdmin = new UserIdentifier(1, 2);
+            var hostAdmin = new UserIdentifier(null, 1);
+
+            await _notificationPublisher.PublishAsync(
+                    "App.SimpleMessage",
+                    new MessageNotificationData(message),
+                    severity: NotificationSeverity.Info,
+                    userIds: new[] { defaultTenantAdmin, hostAdmin }
+                 );
+
+            return Content("Sent notification: " + message);
+        }
+
+        #endregion
+
     }
 }

@@ -1,5 +1,5 @@
 ﻿import { Component, Injector, AfterViewInit } from '@angular/core';
-import { AppComponentBase } from '@shared/common/app-component-base';
+import { AppComponentBase } from '@shared/app-component-base';
 import { appModuleAnimation } from '@shared/animations/routerTransition';
 
 @Component({

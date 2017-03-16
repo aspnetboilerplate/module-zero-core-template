@@ -1,5 +1,5 @@
-import { NgModule } from '@angular/core';
-import * as ngCommon from '@angular/common';
+﻿import { NgModule } from '@angular/core';
+import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
 import { HttpModule, JsonpModule } from '@angular/http';
 
@@ -34,7 +34,7 @@ import { CreateTenantModalComponent } from '@app/tenants/create-tenant-modal.com
         CreateTenantModalComponent
     ],
     imports: [
-        ngCommon.CommonModule,
+        CommonModule,
         FormsModule,
         HttpModule,
         JsonpModule,
@@ -45,7 +45,7 @@ import { CreateTenantModalComponent } from '@app/tenants/create-tenant-modal.com
         SharedModule
     ],
     providers: [
-        
+
     ]
 })
 export class AppModule { }

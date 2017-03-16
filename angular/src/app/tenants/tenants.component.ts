@@ -1,5 +1,5 @@
 ﻿import { Component, Injector, AfterViewInit, ViewChild } from '@angular/core';
-import { AppComponentBase } from '@shared/common/app-component-base';
+import { AppComponentBase } from '@shared/app-component-base';
 import { appModuleAnimation } from '@shared/animations/routerTransition';
 import { TenantServiceProxy, TenantListDto } from '@shared/service-proxies/service-proxies';
 import { CreateTenantModalComponent } from '@app/tenants/create-tenant-modal.component';

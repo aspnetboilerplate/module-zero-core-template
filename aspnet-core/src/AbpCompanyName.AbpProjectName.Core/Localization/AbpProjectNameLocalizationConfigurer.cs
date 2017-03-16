@@ -13,7 +13,7 @@ namespace AbpCompanyName.AbpProjectName.Localization
                 new DictionaryBasedLocalizationSource(AbpProjectNameConsts.LocalizationSourceName,
                     new XmlEmbeddedFileLocalizationDictionaryProvider(
                         Assembly.GetExecutingAssembly(),
-                        "AbpCompanyName.AbpProjectName.Core.Localization.SourceFiles"
+                        "AbpCompanyName.AbpProjectName.Localization.SourceFiles"
                     )
                 )
             );

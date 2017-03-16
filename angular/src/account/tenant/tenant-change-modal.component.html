@@ -16,8 +16,8 @@
 
                 <div class="modal-body">
                     <div class="form-group form-md-line-input form-md-floating-label no-hint">
-                        <input #tenancyNameInput type="text" name="TenancyName" class="form-control" [ngClass]="{'edited':tenancyName}" [(ngModel)]="tenancyName" maxlength="64">
-                        <label>{{l("TenancyName")}}</label>
+                      <label>{{l("TenancyName")}}</label>  
+                      <input #tenancyNameInput type="text" name="TenancyName" class="form-control" [ngClass]="{'edited':tenancyName}" [(ngModel)]="tenancyName" maxlength="64">
                         <span class="help-block">{{l("LeaveEmptyToSwitchToHost")}}</span>
                     </div>
                 </div>

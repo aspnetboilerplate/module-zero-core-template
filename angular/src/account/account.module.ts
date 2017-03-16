@@ -1,4 +1,4 @@
-﻿import * as ngCommon from '@angular/common';
+﻿import { CommonModule } from '@angular/common';
 import { NgModule, APP_INITIALIZER } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import { HttpModule, JsonpModule } from '@angular/http';
@@ -23,7 +23,7 @@ import { LoginService } from './login/login.service';
 
 @NgModule({
     imports: [
-        ngCommon.CommonModule,
+        CommonModule,
         FormsModule,
         HttpModule,
         JsonpModule,

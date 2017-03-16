@@ -10,4 +10,8 @@
     static readonly localization = {
         defaultLocalizationSourceName: 'AbpProjectName'
     };
+
+    static readonly authorization = {
+        encrptedAuthTokenName: 'enc_auth_token'
+    };
 }

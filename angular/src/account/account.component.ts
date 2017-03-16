@@ -18,10 +18,8 @@ export class AccountComponent implements OnInit {
     currentYear: number = moment().year();
 
     public constructor(
-        private _loginService: LoginService,
-        viewContainerRef: ViewContainerRef
+        private _loginService: LoginService
     ) {
-        this.viewContainerRef = viewContainerRef; // We need this small hack in order to catch application root view container ref for modals
     }
 
     showTenantChange(): boolean {

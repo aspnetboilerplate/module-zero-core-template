@@ -1,8 +1,8 @@
-{
+﻿{
   "$schema": "./node_modules/@angular/cli/lib/config/schema.json",
   "project": {
     "version": "1.0.0-beta.31",
-    "name": "abp-project-name-template"
+    "name": "abp-project-name-template"    
   },
   "apps": [
     {
@@ -10,7 +10,12 @@
       "outDir": "dist",
       "assets": [
         "assets",
-        "favicon.ico"
+        "favicon.ico",
+        {
+          "glob": "abp.signalr.js",
+          "input": "../node_modules/abp-web-resources/Abp/Framework/scripts/libs/",
+          "output": "./assets/abp/"
+        }
       ],
       "index": "index.html",
       "main": "main.ts",
@@ -43,12 +48,12 @@
 
         "../node_modules/signalr/jquery.signalR.js",
 
-
         "../node_modules/toastr/toastr.js",
         "../node_modules/sweetalert/dist/sweetalert-dev.js",
         "../node_modules/block-ui/jquery.blockUI.js",
         "../node_modules/spin.js/spin.min.js",
         "../node_modules/spin.js/jquery.spin.js",
+        "../node_modules/push.js/push.min.js",
 
         "../node_modules/abp-web-resources/Abp/Framework/scripts/abp.js",
         "../node_modules/abp-web-resources/Abp/Framework/scripts/libs/abp.jquery.js",

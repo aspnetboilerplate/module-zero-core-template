@@ -93,7 +93,7 @@ export class LoginService {
 
         if (authenticateResult.accessToken) {
             //Successfully logged in
-            this.login(authenticateResult.accessToken, authenticateResult.expireInSeconds, this.rememberMe);
+            this.login(authenticateResult.accessToken, authenticateResult.encryptedAccessToken, authenticateResult.expireInSeconds, this.rememberMe);
 
         } else {
             //Unexpected result!
@@ -103,7 +103,7 @@ export class LoginService {
         }
     }
 
-    private login(accessToken: string, expireInSeconds: number, rememberMe?: boolean): void {
+    private login(accessToken: string, encryptedAccessToken: string, expireInSeconds: number, rememberMe?: boolean): void {
 
         var tokenExpireDate = rememberMe ? (new Date(new Date().getTime() + 1000 * expireInSeconds)) : undefined;
 
@@ -112,11 +112,18 @@ export class LoginService {
             tokenExpireDate
         );
 
+        this._utilsService.setCookieValue(
+            AppConsts.authorization.encrptedAuthTokenName,
+            encryptedAccessToken,
+            tokenExpireDate,
+            abp.appPath
+        );
+
         var initialUrl = UrlHelper.initialUrl;
         if (initialUrl.indexOf('/login') > 0) {
             initialUrl = AppConsts.appBaseUrl;
         }
-        
+
         location.href = initialUrl;
     }
 
@@ -189,7 +196,7 @@ export class LoginService {
                         return;
                     }
 
-                    this.login(result.accessToken, result.expireInSeconds);
+                    this.login(result.accessToken, result.encryptedAccessToken, result.expireInSeconds);
                 });
         }
     }
@@ -207,7 +214,7 @@ export class LoginService {
                         return;
                     }
 
-                    this.login(result.accessToken, result.expireInSeconds);
+                    this.login(result.accessToken, result.encryptedAccessToken, result.expireInSeconds);
                 });
         }
     }

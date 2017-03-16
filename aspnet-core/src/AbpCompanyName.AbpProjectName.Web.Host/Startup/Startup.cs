@@ -7,10 +7,12 @@ using AbpCompanyName.AbpProjectName.Owin;
 using Castle.Facilities.Logging;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
+using Microsoft.AspNet.SignalR;
 using Microsoft.AspNetCore.Mvc.Cors.Internal;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Logging;
+using Microsoft.Owin.Cors;
 using Owin;
 
 
@@ -40,13 +42,14 @@ namespace AbpCompanyName.AbpProjectName.Web.Host.Startup
             {
                 options.AddPolicy(DefaultCorsPolicyName, p =>
                 {
+                    //todo: Get from confiuration
                     p.WithOrigins("http://localhost:4200").AllowAnyHeader().AllowAnyMethod();
                 });
             });
 
             //Swagger - Enable this line and the related lines in Configure method to enable swagger UI
             services.AddSwaggerGen();
-            
+
             //Configure Abp and Dependency Injection
             return services.AddAbp<AbpProjectNameWebHostModule>(options =>
             {
@@ -92,16 +95,16 @@ namespace AbpCompanyName.AbpProjectName.Web.Host.Startup
             app.Properties["host.AppName"] = "AbpZeroTemplate";
 
             app.UseAbp();
-
-            //app.Map("/signalr", map =>
-            //{
-            //    map.UseCors(CorsOptions.AllowAll);
-            //    var hubConfiguration = new HubConfiguration
-            //    {
-            //        EnableJSONP = true
-            //    };
-            //    map.RunSignalR(hubConfiguration);
-            //});
+            
+            app.Map("/signalr", map =>
+            {
+                map.UseCors(CorsOptions.AllowAll);
+                var hubConfiguration = new HubConfiguration
+                {
+                    EnableJSONP = true
+                };
+                map.RunSignalR(hubConfiguration);
+            });
         }
     }
 }

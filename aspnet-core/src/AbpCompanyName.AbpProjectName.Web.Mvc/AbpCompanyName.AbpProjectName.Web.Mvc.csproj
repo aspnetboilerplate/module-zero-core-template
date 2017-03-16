@@ -7,7 +7,12 @@
     <OutputType>Exe</OutputType>
     <PackageId>AbpCompanyName.AbpProjectName.Web.Mvc</PackageId>
     <UserSecretsId>AbpCompanyName-AbpProjectName-56C2EF2F-ABD6-4EFC-AAF2-2E81C34E8FB1</UserSecretsId>
+    <RootNamespace>AbpCompanyName.AbpProjectName.Web</RootNamespace>
   </PropertyGroup>
+
+  <ItemGroup>
+    <Content Include="wwwroot\images\app-logo-small.png" />
+  </ItemGroup>
 
   <ItemGroup>
     <None Include="App.config" />
@@ -27,6 +32,7 @@
   </ItemGroup>
 
   <ItemGroup>
+    <PackageReference Include="Abp.Web.Resources" Version="1.5.2" />
     <PackageReference Include="Microsoft.VisualStudio.Web.CodeGeneration.Design" Version="1.1.0">
       <PrivateAssets>All</PrivateAssets>
     </PackageReference>

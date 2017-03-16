@@ -1,7 +1,7 @@
 ﻿import { Component, Injector, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { AccountServiceProxy, RegisterInput } from '@shared/service-proxies/service-proxies'
-import { AppComponentBase } from '@shared/common/app-component-base';
+import { AppComponentBase } from '@shared/app-component-base';
 import { LoginService } from '../login/login.service';
 import { accountModuleAnimation } from '@shared/animations/routerTransition';
 

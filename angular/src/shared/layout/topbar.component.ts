@@ -2,10 +2,8 @@
 import { Router } from '@angular/router';
 import { LocalizationService } from '@abp/localization/localization.service';
 import { AbpSessionService } from '@abp/session/abp-session.service';
-import { AbpMultiTenancyService } from '@abp/multi-tenancy/abp-multi-tenancy.service';
-import { UserServiceProxy } from '@shared/service-proxies/service-proxies';
-import { AppComponentBase } from '@shared/common/app-component-base';
-import { AppAuthService } from '@shared/common/auth/app-auth.service';
+import { AppComponentBase } from '../app-component-base';
+import { AppAuthService } from '../auth/app-auth.service';
 import { AppConsts } from '@shared/AppConsts';
 
 import { MenuItem } from '@shared/layout/menu-item';
@@ -24,12 +22,9 @@ export class TopBarComponent extends AppComponentBase implements OnInit {
     shownLoginName: string = "";
     remoteServiceBaseUrl: string = AppConsts.remoteServiceBaseUrl;
 
-
     constructor(
         injector: Injector,
         private _sessionService: AbpSessionService,
-        private abpMultiTenancyService: AbpMultiTenancyService,
-        private userServiceProxy: UserServiceProxy,
         private _authService: AppAuthService,
         private _router: Router
     ) {
@@ -63,7 +58,13 @@ export class TopBarComponent extends AppComponentBase implements OnInit {
     }
 
     changeLanguage(languageName: string): void {
-        abp.utils.setCookieValue("Abp.Localization.CultureName", languageName);
+        abp.utils.setCookieValue(
+            "Abp.Localization.CultureName",
+            languageName,
+            new Date(new Date().getTime() + 5 * 365 * 86400000), //5 year
+            abp.appPath
+        );
+
         location.reload();
     }
 

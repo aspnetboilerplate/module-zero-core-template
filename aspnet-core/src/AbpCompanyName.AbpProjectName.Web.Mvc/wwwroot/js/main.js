@@ -1,8 +1,18 @@
 ﻿(function ($) {
-
     //Notification handler
     abp.event.on('abp.notifications.received', function (userNotification) {
         abp.notifications.showUiNotifyForUserNotification(userNotification);
+
+        //Desktop notification
+        Push.create("AbpZeroTemplate", {
+            body: userNotification.notification.data.message,
+            icon: abp.appPath + 'images/app-logo-small.png',
+            timeout: 6000,
+            onClick: function () {
+                window.focus();
+                this.close();
+            }
+        });
     });
 
     //serializeFormToObject plugin for jQuery
