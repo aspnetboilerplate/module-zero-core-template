@@ -26,9 +26,6 @@
     <script src='lib/marked.js' type='text/javascript'></script>
     <script src='lib/swagger-oauth.js' type='text/javascript'></script>
 
-    <!-- Added for Anti Forgery Token Header -->
-    <script src='/lib/abp-web-resources/Abp/Framework/scripts/abp.js' type='text/javascript'></script>
-
     <!-- Some basic translations -->
     <!--<script src='lang/translator.js' type='text/javascript'></script>
     <script src='lang/ru.js' type='text/javascript'></script>
@@ -62,9 +59,6 @@
                     if (window.SwaggerTranslator) {
                         window.SwaggerTranslator.translate();
                     }
-                    var csrfToken = abp.security.antiForgery.getToken();
-                    var csrfCookieAuth = new SwaggerClient.ApiKeyAuthorization(abp.security.antiForgery.tokenHeaderName, csrfToken, "header");
-                    swaggerUi.api.clientAuthorizations.add(abp.security.antiForgery.tokenHeaderName, csrfCookieAuth);
                 },
                 onFailure: function (data) {
                     log("Unable to Load SwaggerUI");
