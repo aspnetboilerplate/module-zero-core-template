@@ -14,7 +14,7 @@ namespace AbpCompanyName.AbpProjectName.Tests.Sessions
             _sessionAppService = Resolve<ISessionAppService>();
         }
 
-        [Fact]
+        [MultiTenantFact]
         public async Task Should_Get_Current_User_When_Logged_In_As_Host()
         {
             //Arrange

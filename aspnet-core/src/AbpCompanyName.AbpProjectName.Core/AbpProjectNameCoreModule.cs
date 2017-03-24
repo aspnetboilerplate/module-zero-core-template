@@ -26,7 +26,7 @@ namespace AbpCompanyName.AbpProjectName
             AbpProjectNameLocalizationConfigurer.Configure(Configuration.Localization);
 
             //Enable this line to create a multi-tenant application.
-            Configuration.MultiTenancy.IsEnabled = true;
+            Configuration.MultiTenancy.IsEnabled = AbpProjectNameConsts.MultiTenancyEnabled;
 
             //Configure roles
             AppRoleConfig.Configure(Configuration.Modules.Zero().RoleManagement);

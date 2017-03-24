@@ -208,8 +208,6 @@ namespace AbpCompanyName.AbpProjectName.Tests
 
         protected void LoginAsHost(string userName)
         {
-            Resolve<IMultiTenancyConfig>().IsEnabled = true;
-
             AbpSession.TenantId = null;
 
             var user =

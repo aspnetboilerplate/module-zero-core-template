@@ -5,5 +5,7 @@
         public const string LocalizationSourceName = "AbpProjectName";
 
         public const string ConnectionStringName = "Default";
+
+        public const bool MultiTenancyEnabled = true;
     }
 }
