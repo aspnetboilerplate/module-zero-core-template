@@ -12,6 +12,8 @@
     <text name="ThereIsNoTenantDefinedWithName{0}" value="Il dominio {0} non esiste" />
     <text name="TenantIsNotActive" value="Il dominio {0} non è attivo." />
     <text name="UserIsNotActiveAndCanNotLogin" value="L'utente {0} non è attivo e non può fare login." />
+    <text name="UserEmailIsNotConfirmedAndCanNotLogin">Indirizzo email non registrato. Login non ammesso.</text>
+    <text name="UserLockedOutMessage">L'account è momentaneamente bloccato. Riprovare più tardi.</text>
     <text name="PleaseEnterLoginInformation" value="Inserisci le informazioni di login" />
     <text name="TenancyName" value="Dominio" />
     <text name="UserNameOrEmail" value="Use name o email" />
