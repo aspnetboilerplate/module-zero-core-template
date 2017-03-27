@@ -29,7 +29,7 @@
         <div class="col-lg-12">
             <div class="well bs-component">
                 <form asp-action="Login" id="LoginForm" class="form-horizontal" method="POST">
-                    <input type="hidden" name="returnUrl" value="@ViewBag.ReturnUrl" />
+                    <input type="hidden" name="returnUrl" value="@Model.ReturnUrl" />
                     <input type="hidden" name="returnUrlHash" />
                     <fieldset>
                         <legend>@L("LogIn")</legend>
