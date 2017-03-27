@@ -8,6 +8,11 @@ namespace AbpCompanyName.AbpProjectName.Authorization
 {
     public class AbpLoginResultTypeHelper : AbpServiceBase, ITransientDependency
     {
+        public AbpLoginResultTypeHelper()
+        {
+            LocalizationSourceName = AbpProjectNameConsts.LocalizationSourceName;
+        }
+
         public Exception CreateExceptionForFailedLoginAttempt(AbpLoginResultType result, string usernameOrEmailAddress, string tenancyName)
         {
             switch (result)
@@ -25,6 +30,8 @@ namespace AbpCompanyName.AbpProjectName.Authorization
                     return new UserFriendlyException(L("LoginFailed"), L("UserIsNotActiveAndCanNotLogin", usernameOrEmailAddress));
                 case AbpLoginResultType.UserEmailIsNotConfirmed:
                     return new UserFriendlyException(L("LoginFailed"), L("UserEmailIsNotConfirmedAndCanNotLogin"));
+                case AbpLoginResultType.LockedOut:
+                    return new UserFriendlyException(L("LoginFailed"), L("UserLockedOutMessage"));
                 default: //Can not fall to default actually. But other result types can be added in the future and we may forget to handle it
                     Logger.Warn("Unhandled login fail reason: " + result);
                     return new UserFriendlyException(L("LoginFailed"));

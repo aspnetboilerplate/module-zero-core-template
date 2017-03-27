@@ -12,6 +12,8 @@
     <text name="ThereIsNoTenantDefinedWithName{0}" value="{0} isminde bir müşteri tanımlı değildir." />
     <text name="TenantIsNotActive" value="{0} isimli müşteri aktif edilmemiştir." />
     <text name="UserIsNotActiveAndCanNotLogin" value="{0} isimli kullanıcı pasife alınmıştır ve sisteme giremez." />
+    <text name="UserEmailIsNotConfirmedAndCanNotLogin">E-posta adresiniz doğrulanmadı, giriş yapamazsınız.</text>
+    <text name="UserLockedOutMessage">Kullanıcı hesabı kilitlenmiş. Lütfen bir süre sonra tekrar deneyin.</text>
     <text name="PleaseEnterLoginInformation" value="Lütfen giriş bilgilerinizi girin" />
     <text name="TenancyName" value="Müşteri adı" />
     <text name="UserNameOrEmail" value="Kullanıcı adı ya da e-posta" />
