@@ -1,9 +1,7 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using Abp.Dependency;
-using Abp.Zero.AspNetCore;
 
 namespace AbpCompanyName.AbpProjectName.Authentication.External
 {
@@ -26,7 +24,7 @@ namespace AbpCompanyName.AbpProjectName.Authentication.External
             }
         }
 
-        public Task<ExternalLoginUserInfo> GetUserInfo(string provider, string accessCode)
+        public Task<ExternalAuthUserInfo> GetUserInfo(string provider, string accessCode)
         {
             using (var providerApi = CreateProviderApi(provider))
             {
@@ -39,7 +37,7 @@ namespace AbpCompanyName.AbpProjectName.Authentication.External
             var providerInfo = _externalAuthConfiguration.Providers.FirstOrDefault(p => p.Name == provider);
             if (providerInfo == null)
             {
-                throw new ApplicationException("Unknown external auth provider: " + provider);
+                throw new Exception("Unknown external auth provider: " + provider);
             }
 
             var providerApi = _iocResolver.ResolveAsDisposable<IExternalAuthProviderApi>(providerInfo.ProviderApiType);

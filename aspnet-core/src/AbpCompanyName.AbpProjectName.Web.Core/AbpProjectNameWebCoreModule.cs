@@ -4,24 +4,28 @@ using System.Text;
 using Abp.AspNetCore;
 using Abp.AspNetCore.Configuration;
 using Abp.Modules;
-using Abp.Web.SignalR;
-using Abp.Zero.AspNetCore;
+using Abp.Reflection.Extensions;
 using Abp.Zero.Configuration;
 using AbpCompanyName.AbpProjectName.Authentication.JwtBearer;
 using AbpCompanyName.AbpProjectName.Configuration;
-using AbpCompanyName.AbpProjectName.EntityFramework;
+using AbpCompanyName.AbpProjectName.EntityFrameworkCore;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.Extensions.Configuration;
 using Microsoft.IdentityModel.Tokens;
+
+#if FEATURE_SIGNALR
+using Abp.Web.SignalR;
+#endif
 
 namespace AbpCompanyName.AbpProjectName
 {
     [DependsOn(
          typeof(AbpProjectNameApplicationModule),
          typeof(AbpProjectNameEntityFrameworkModule),
-         typeof(AbpAspNetCoreModule),
-         typeof(AbpZeroAspNetCoreModule),
-         typeof(AbpWebSignalRModule)
+         typeof(AbpAspNetCoreModule)
+#if FEATURE_SIGNALR 
+        ,typeof(AbpWebSignalRModule)
+#endif
      )]
     public class AbpProjectNameWebCoreModule : AbpModule
     {
@@ -45,7 +49,7 @@ namespace AbpCompanyName.AbpProjectName
 
             Configuration.Modules.AbpAspNetCore()
                  .CreateControllersForAppServices(
-                     typeof(AbpProjectNameApplicationModule).Assembly
+                     typeof(AbpProjectNameApplicationModule).GetAssembly()
                  );
 
             ConfigureTokenAuth();
@@ -65,7 +69,7 @@ namespace AbpCompanyName.AbpProjectName
 
         public override void Initialize()
         {
-            IocManager.RegisterAssemblyByConvention(Assembly.GetExecutingAssembly());
+            IocManager.RegisterAssemblyByConvention(typeof(AbpProjectNameWebCoreModule).GetAssembly());
         }
     }
 }

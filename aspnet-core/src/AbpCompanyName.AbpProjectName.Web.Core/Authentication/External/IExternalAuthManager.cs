@@ -1,5 +1,4 @@
 ﻿using System.Threading.Tasks;
-using Abp.Zero.AspNetCore;
 
 namespace AbpCompanyName.AbpProjectName.Authentication.External
 {
@@ -7,6 +6,6 @@ namespace AbpCompanyName.AbpProjectName.Authentication.External
     {
         Task<bool> IsValidUser(string provider, string providerKey, string providerAccessCode);
 
-        Task<ExternalLoginUserInfo> GetUserInfo(string provider, string accessCode);
+        Task<ExternalAuthUserInfo> GetUserInfo(string provider, string accessCode);
     }
 }

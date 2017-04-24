@@ -1,4 +1,5 @@
-﻿using System;
+﻿#if FEATURE_SIGNALR 
+using System;
 using System.Collections.Generic;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Builder;
@@ -34,3 +35,4 @@ namespace AbpCompanyName.AbpProjectName.Owin
         }
     }
 }
+#endif

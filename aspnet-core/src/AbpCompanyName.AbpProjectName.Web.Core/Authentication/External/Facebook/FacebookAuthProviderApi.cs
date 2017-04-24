@@ -4,12 +4,11 @@ using System.Net.Http;
 using System.Security.Cryptography;
 using System.Text;
 using System.Threading.Tasks;
-using Abp.Zero.AspNetCore;
-using Microsoft.AspNet.Identity;
 using Microsoft.AspNetCore.Authentication.Facebook;
 using Microsoft.AspNetCore.WebUtilities;
 using Newtonsoft.Json.Linq;
 using Abp.Extensions;
+using Microsoft.AspNetCore.Identity;
 
 namespace AbpCompanyName.AbpProjectName.Authentication.External.Facebook
 {
@@ -17,7 +16,7 @@ namespace AbpCompanyName.AbpProjectName.Authentication.External.Facebook
     {
         public const string Name = "Facebook";
 
-        public override async Task<ExternalLoginUserInfo> GetUserInfo(string accessCode)
+        public override async Task<ExternalAuthUserInfo> GetUserInfo(string accessCode)
         {
             var endpoint = QueryHelpers.AddQueryString("https://graph.facebook.com/v2.8/me", "access_token", accessCode);
             endpoint = QueryHelpers.AddQueryString(endpoint, "appsecret_proof", GenerateAppSecretProof(accessCode));
@@ -43,12 +42,13 @@ namespace AbpCompanyName.AbpProjectName.Authentication.External.Facebook
                     name += middleName;
                 }
 
-                return new ExternalLoginUserInfo
+                return new ExternalAuthUserInfo
                 {
                     Name = name,
                     EmailAddress = FacebookHelper.GetEmail(payload),
                     Surname = FacebookHelper.GetLastName(payload),
-                    LoginInfo = new UserLoginInfo(Name, FacebookHelper.GetId(payload))
+                    Provider = Name,
+                    ProviderKey = FacebookHelper.GetId(payload)
                 };
             }
         }

@@ -1,9 +1,5 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
+﻿using System.Threading.Tasks;
 using Abp.Dependency;
-using Abp.Zero.AspNetCore;
 
 namespace AbpCompanyName.AbpProjectName.Authentication.External
 {
@@ -19,9 +15,9 @@ namespace AbpCompanyName.AbpProjectName.Authentication.External
         public async Task<bool> IsValidUser(string userId, string accessCode)
         {
             var userInfo = await GetUserInfo(accessCode);
-            return userInfo.LoginInfo.ProviderKey == userId;
+            return userInfo.ProviderKey == userId;
         }
 
-        public abstract Task<ExternalLoginUserInfo> GetUserInfo(string accessCode);
+        public abstract Task<ExternalAuthUserInfo> GetUserInfo(string accessCode);
     }
 }

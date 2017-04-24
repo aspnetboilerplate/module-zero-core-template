@@ -1,6 +1,6 @@
 using Abp.AspNetCore.Mvc.Controllers;
 using Abp.IdentityFramework;
-using Microsoft.AspNet.Identity;
+using Microsoft.AspNetCore.Identity;
 
 namespace AbpCompanyName.AbpProjectName.Controllers
 {

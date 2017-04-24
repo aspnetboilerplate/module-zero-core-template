@@ -2,8 +2,6 @@
 using System.Net.Http;
 using System.Net.Http.Headers;
 using System.Threading.Tasks;
-using Abp.Zero.AspNetCore;
-using Microsoft.AspNet.Identity;
 using Microsoft.AspNetCore.Authentication.Google;
 using Newtonsoft.Json.Linq;
 
@@ -13,7 +11,7 @@ namespace AbpCompanyName.AbpProjectName.Authentication.External.Google
     {
         public const string Name = "Google";
 
-        public override async Task<ExternalLoginUserInfo> GetUserInfo(string accessCode)
+        public override async Task<ExternalAuthUserInfo> GetUserInfo(string accessCode)
         {
             using (var client = new HttpClient())
             {
@@ -31,12 +29,13 @@ namespace AbpCompanyName.AbpProjectName.Authentication.External.Google
 
                 var payload = JObject.Parse(await response.Content.ReadAsStringAsync());
 
-                return new ExternalLoginUserInfo
+                return new ExternalAuthUserInfo
                 {
                     Name = GoogleHelper.GetName(payload),
                     EmailAddress = GoogleHelper.GetEmail(payload),
                     Surname = GoogleHelper.GetFamilyName(payload),
-                    LoginInfo = new UserLoginInfo(Name, GoogleHelper.GetId(payload))
+                    ProviderKey = GoogleHelper.GetId(payload),
+                    Provider = Name
                 };
             }
         }

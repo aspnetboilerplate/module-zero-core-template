@@ -10,14 +10,13 @@ using Abp.AutoMapper;
 using Abp.MultiTenancy;
 using Abp.Runtime.Security;
 using Abp.UI;
-using Abp.Zero.AspNetCore;
 using AbpCompanyName.AbpProjectName.Authentication.External;
 using AbpCompanyName.AbpProjectName.Authentication.JwtBearer;
 using AbpCompanyName.AbpProjectName.Authorization;
 using AbpCompanyName.AbpProjectName.Authorization.Users;
 using AbpCompanyName.AbpProjectName.Models.TokenAuth;
 using AbpCompanyName.AbpProjectName.MultiTenancy;
-using Microsoft.AspNet.Identity;
+using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 
 namespace AbpCompanyName.AbpProjectName.Controllers
@@ -81,7 +80,7 @@ namespace AbpCompanyName.AbpProjectName.Controllers
         {
             var externalUser = await GetExternalUserInfo(model);
 
-            var loginResult = await _logInManager.LoginAsync(new UserLoginInfo(model.AuthProvider, model.ProviderKey), GetTenancyNameOrNull());
+            var loginResult = await _logInManager.LoginAsync(new UserLoginInfo(model.AuthProvider, model.ProviderKey, model.AuthProvider), GetTenancyNameOrNull());
 
             switch (loginResult.Result)
             {
@@ -107,7 +106,7 @@ namespace AbpCompanyName.AbpProjectName.Controllers
                         }
 
                         //Try to login again with newly registered user!
-                        loginResult = await _logInManager.LoginAsync(new UserLoginInfo(model.AuthProvider, model.ProviderKey), GetTenancyNameOrNull());
+                        loginResult = await _logInManager.LoginAsync(new UserLoginInfo(model.AuthProvider, model.ProviderKey, model.AuthProvider), GetTenancyNameOrNull());
                         if (loginResult.Result != AbpLoginResultType.Success)
                         {
                             throw _abpLoginResultTypeHelper.CreateExceptionForFailedLoginAttempt(
@@ -134,7 +133,7 @@ namespace AbpCompanyName.AbpProjectName.Controllers
             }
         }
 
-        private async Task<User> RegisterExternalUserAsync(ExternalLoginUserInfo externalUser)
+        private async Task<User> RegisterExternalUserAsync(ExternalAuthUserInfo externalUser)
         {
             var user = await _userRegistrationManager.RegisterAsync(
                 externalUser.Name,
@@ -149,8 +148,8 @@ namespace AbpCompanyName.AbpProjectName.Controllers
             {
                 new UserLogin
                 {
-                    LoginProvider = externalUser.LoginInfo.LoginProvider,
-                    ProviderKey = externalUser.LoginInfo.ProviderKey,
+                    LoginProvider = externalUser.Provider,
+                    ProviderKey = externalUser.ProviderKey,
                     TenantId = user.TenantId
                 }
             };
@@ -160,10 +159,10 @@ namespace AbpCompanyName.AbpProjectName.Controllers
             return user;
         }
 
-        private async Task<ExternalLoginUserInfo> GetExternalUserInfo(ExternalAuthenticateModel model)
+        private async Task<ExternalAuthUserInfo> GetExternalUserInfo(ExternalAuthenticateModel model)
         {
             var userInfo = await _externalAuthManager.GetUserInfo(model.AuthProvider, model.ProviderAccessCode);
-            if (userInfo.LoginInfo.ProviderKey != model.ProviderKey)
+            if (userInfo.ProviderKey != model.ProviderKey)
             {
                 throw new UserFriendlyException(L("CouldNotValidateExternalUser"));
             }
