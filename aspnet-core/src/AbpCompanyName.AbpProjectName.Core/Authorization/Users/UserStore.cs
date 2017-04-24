@@ -1,6 +1,7 @@
 using Abp.Authorization.Users;
 using Abp.Domain.Repositories;
 using Abp.Domain.Uow;
+using Abp.Linq;
 using AbpCompanyName.AbpProjectName.Authorization.Roles;
 
 namespace AbpCompanyName.AbpProjectName.Authorization.Users
@@ -8,21 +9,23 @@ namespace AbpCompanyName.AbpProjectName.Authorization.Users
     public class UserStore : AbpUserStore<Role, User>
     {
         public UserStore(
-            IRepository<User, long> userRepository,
-            IRepository<UserLogin, long> userLoginRepository,
-            IRepository<UserRole, long> userRoleRepository,
-            IRepository<Role> roleRepository,
-            IRepository<UserPermissionSetting, long> userPermissionSettingRepository,
-            IUnitOfWorkManager unitOfWorkManager,
-            IRepository<UserClaim, long> userClaimRepository)
+            IUnitOfWorkManager unitOfWorkManager, 
+            IRepository<User, long> userRepository, 
+            IRepository<Role> roleRepository, 
+            IAsyncQueryableExecuter asyncQueryableExecuter, 
+            IRepository<UserRole, long> userRoleRepository, 
+            IRepository<UserLogin, long> userLoginRepository, 
+            IRepository<UserClaim, long> userClaimRepository, 
+            IRepository<UserPermissionSetting, long> userPermissionSettingRepository) 
             : base(
-                userRepository,
-                userLoginRepository,
-                userRoleRepository,
-                roleRepository,
-                userPermissionSettingRepository,
-                unitOfWorkManager,
-                userClaimRepository)
+                  unitOfWorkManager, 
+                  userRepository, 
+                  roleRepository, 
+                  asyncQueryableExecuter, 
+                  userRoleRepository, 
+                  userLoginRepository, 
+                  userClaimRepository,
+                  userPermissionSettingRepository)
         {
         }
     }

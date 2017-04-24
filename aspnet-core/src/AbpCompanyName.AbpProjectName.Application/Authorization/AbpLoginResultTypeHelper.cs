@@ -1,7 +1,6 @@
 ﻿using System;
 using Abp;
 using Abp.Authorization;
-using Abp.Authorization.Users;
 using Abp.Dependency;
 using Abp.UI;
 
@@ -19,7 +18,7 @@ namespace AbpCompanyName.AbpProjectName.Authorization
             switch (result)
             {
                 case AbpLoginResultType.Success:
-                    return new ApplicationException("Don't call this method with a success result!");
+                    return new Exception("Don't call this method with a success result!");
                 case AbpLoginResultType.InvalidUserNameOrEmailAddress:
                 case AbpLoginResultType.InvalidPassword:
                     return new UserFriendlyException(L("LoginFailed"), L("InvalidUserNameOrPassword"));
@@ -44,7 +43,7 @@ namespace AbpCompanyName.AbpProjectName.Authorization
             switch (result)
             {
                 case AbpLoginResultType.Success:
-                    throw new ApplicationException("Don't call this method with a success result!");
+                    throw new Exception("Don't call this method with a success result!");
                 case AbpLoginResultType.InvalidUserNameOrEmailAddress:
                 case AbpLoginResultType.InvalidPassword:
                     return L("InvalidUserNameOrPassword");

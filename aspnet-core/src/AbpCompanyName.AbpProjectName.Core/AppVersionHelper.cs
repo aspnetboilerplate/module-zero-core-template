@@ -1,5 +1,6 @@
 ﻿using System;
 using System.IO;
+using Abp.Reflection.Extensions;
 
 namespace AbpCompanyName.AbpProjectName
 {
@@ -20,7 +21,7 @@ namespace AbpCompanyName.AbpProjectName
         /// </summary>
         public static DateTime ReleaseDate
         {
-            get { return new FileInfo(typeof(AppVersionHelper).Assembly.Location).LastWriteTime; }
+            get { return new FileInfo(typeof(AppVersionHelper).GetAssembly().Location).LastWriteTime; }
         }
     }
 }

@@ -1,7 +1,6 @@
 ﻿using System;
 using Abp.Authorization.Users;
 using Abp.Extensions;
-using Microsoft.AspNet.Identity;
 
 namespace AbpCompanyName.AbpProjectName.Authorization.Users
 {
@@ -23,7 +22,7 @@ namespace AbpCompanyName.AbpProjectName.Authorization.Users
                 Name = AdminUserName,
                 Surname = AdminUserName,
                 EmailAddress = emailAddress,
-                Password = new PasswordHasher().HashPassword(password)
+                //Password = new PasswordHasher<>().HashPassword(password) //TODO: Set Password from out of this class!
             };
         }
     }

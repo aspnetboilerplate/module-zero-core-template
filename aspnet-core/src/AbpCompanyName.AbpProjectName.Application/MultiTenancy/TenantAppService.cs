@@ -12,7 +12,6 @@ using AbpCompanyName.AbpProjectName.Authorization.Roles;
 using AbpCompanyName.AbpProjectName.Authorization.Users;
 using AbpCompanyName.AbpProjectName.Editions;
 using AbpCompanyName.AbpProjectName.MultiTenancy.Dto;
-using AbpCompanyName.AbpProjectName.Users;
 
 namespace AbpCompanyName.AbpProjectName.MultiTenancy
 {
@@ -70,7 +69,7 @@ namespace AbpCompanyName.AbpProjectName.MultiTenancy
             using (CurrentUnitOfWork.SetTenantId(tenant.Id))
             {
                 //Create static roles for new tenant
-                CheckErrors(await _roleManager.CreateStaticRoles(tenant.Id));
+                await _roleManager.CreateStaticRoles(tenant.Id);
 
                 await CurrentUnitOfWork.SaveChangesAsync(); //To get static role ids
 
@@ -80,11 +79,11 @@ namespace AbpCompanyName.AbpProjectName.MultiTenancy
 
                 //Create admin user for the tenant
                 var adminUser = User.CreateTenantAdminUser(tenant.Id, input.AdminEmailAddress, User.DefaultPassword);
-                CheckErrors(await UserManager.CreateAsync(adminUser));
+                await UserManager.CreateAsync(adminUser);
                 await CurrentUnitOfWork.SaveChangesAsync(); //To get admin user's id
 
                 //Assign admin user to role!
-                CheckErrors(await UserManager.AddToRoleAsync(adminUser.Id, adminRole.Name));
+                await UserManager.AddToRoleAsync(adminUser, adminRole.Name);
                 await CurrentUnitOfWork.SaveChangesAsync();
             }
         }

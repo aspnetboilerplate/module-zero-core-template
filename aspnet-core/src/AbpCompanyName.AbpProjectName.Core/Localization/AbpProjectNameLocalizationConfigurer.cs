@@ -2,6 +2,7 @@
 using Abp.Configuration.Startup;
 using Abp.Localization.Dictionaries;
 using Abp.Localization.Dictionaries.Xml;
+using Abp.Reflection.Extensions;
 
 namespace AbpCompanyName.AbpProjectName.Localization
 {
@@ -12,7 +13,7 @@ namespace AbpCompanyName.AbpProjectName.Localization
             localizationConfiguration.Sources.Add(
                 new DictionaryBasedLocalizationSource(AbpProjectNameConsts.LocalizationSourceName,
                     new XmlEmbeddedFileLocalizationDictionaryProvider(
-                        Assembly.GetExecutingAssembly(),
+                        typeof(AbpProjectNameLocalizationConfigurer).GetAssembly(),
                         "AbpCompanyName.AbpProjectName.Localization.SourceFiles"
                     )
                 )

@@ -1,6 +1,7 @@
 ﻿using System;
 using System.IO;
 using System.Linq;
+using Abp.Reflection.Extensions;
 
 namespace AbpCompanyName.AbpProjectName.Web
 {
@@ -12,10 +13,10 @@ namespace AbpCompanyName.AbpProjectName.Web
     {
         public static string CalculateContentRootFolder()
         {
-            var coreAssemblyDirectoryPath = Path.GetDirectoryName(typeof(AbpProjectNameCoreModule).Assembly.Location);
+            var coreAssemblyDirectoryPath = Path.GetDirectoryName(typeof(AbpProjectNameCoreModule).GetAssembly().Location);
             if (coreAssemblyDirectoryPath == null)
             {
-                throw new ApplicationException("Could not find location of AbpCompanyName.AbpProjectName.Core assembly!");
+                throw new Exception("Could not find location of AbpCompanyName.AbpProjectName.Core assembly!");
             }
 
             var directoryInfo = new DirectoryInfo(coreAssemblyDirectoryPath);
@@ -23,7 +24,7 @@ namespace AbpCompanyName.AbpProjectName.Web
             {
                 if (directoryInfo.Parent == null)
                 {
-                    throw new ApplicationException("Could not find content root folder!");
+                    throw new Exception("Could not find content root folder!");
                 }
 
                 directoryInfo = directoryInfo.Parent;
@@ -41,7 +42,7 @@ namespace AbpCompanyName.AbpProjectName.Web
                 return webHostFolder;
             }
 
-            throw new ApplicationException("Could not find root folder of the web project!");
+            throw new Exception("Could not find root folder of the web project!");
         }
 
         private static bool DirectoryContains(string directory, string fileName)

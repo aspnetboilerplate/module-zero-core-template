@@ -2,7 +2,7 @@
 
   <PropertyGroup>
     <VersionPrefix>1.0.0.0</VersionPrefix>
-    <TargetFramework>net461</TargetFramework>
+    <TargetFrameworks>net461;netcoreapp1.1</TargetFrameworks>
     <AssemblyName>AbpCompanyName.AbpProjectName.Core</AssemblyName>
     <PackageId>AbpCompanyName.AbpProjectName.Core</PackageId>
     <GenerateAssemblyConfigurationAttribute>false</GenerateAssemblyConfigurationAttribute>
@@ -19,8 +19,8 @@
   <ItemGroup>
     <PackageReference Include="Abp" Version="2.0.1" />
     <PackageReference Include="Abp.AutoMapper" Version="2.0.1" />
-    <PackageReference Include="Abp.EntityFramework" Version="2.0.1" />
-    <PackageReference Include="Abp.Zero" Version="2.0.1" />
+    <PackageReference Include="Abp.ZeroCore" Version="2.0.1" />
+    <PackageReference Include="Abp.ZeroCore.EntityFrameworkCore" Version="2.0.1" />
     <PackageReference Include="Microsoft.Extensions.Configuration.EnvironmentVariables" Version="1.1.1" />
     <PackageReference Include="Microsoft.Extensions.Configuration.Json" Version="1.1.1" />
     <PackageReference Include="Microsoft.Extensions.Configuration.UserSecrets" Version="1.1.1" />

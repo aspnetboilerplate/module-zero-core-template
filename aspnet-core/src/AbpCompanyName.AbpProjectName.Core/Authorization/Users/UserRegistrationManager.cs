@@ -1,6 +1,5 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Data.Entity;
 using System.Linq;
 using System.Threading.Tasks;
 using Abp.Authorization.Users;
@@ -10,7 +9,8 @@ using Abp.Runtime.Session;
 using Abp.UI;
 using AbpCompanyName.AbpProjectName.Authorization.Roles;
 using AbpCompanyName.AbpProjectName.MultiTenancy;
-using Microsoft.AspNet.Identity;
+using Microsoft.AspNetCore.Identity;
+using Microsoft.EntityFrameworkCore;
 
 namespace AbpCompanyName.AbpProjectName.Authorization.Users
 {
@@ -21,15 +21,18 @@ namespace AbpCompanyName.AbpProjectName.Authorization.Users
         private readonly TenantManager _tenantManager;
         private readonly UserManager _userManager;
         private readonly RoleManager _roleManager;
+        private readonly IPasswordHasher<User> _passwordHasher;
 
         public UserRegistrationManager(
             TenantManager tenantManager,
             UserManager userManager,
-            RoleManager roleManager)
+            RoleManager roleManager,
+            IPasswordHasher<User> passwordHasher)
         {
             _tenantManager = tenantManager;
             _userManager = userManager;
             _roleManager = roleManager;
+            _passwordHasher = passwordHasher;
 
             AbpSession = NullAbpSession.Instance;
         }
@@ -48,10 +51,11 @@ namespace AbpCompanyName.AbpProjectName.Authorization.Users
                 EmailAddress = emailAddress,
                 IsActive = true,
                 UserName = userName,
-                Password = _userManager.PasswordHasher.HashPassword(plainPassword),
                 IsEmailConfirmed = true,
                 Roles = new List<UserRole>()
             };
+
+            user.Password = _passwordHasher.HashPassword(user, plainPassword);
 
             foreach (var defaultRole in await _roleManager.Roles.Where(r => r.IsDefault).ToListAsync())
             {

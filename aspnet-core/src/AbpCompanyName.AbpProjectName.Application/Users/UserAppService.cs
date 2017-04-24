@@ -7,7 +7,7 @@ using Abp.Domain.Repositories;
 using AbpCompanyName.AbpProjectName.Authorization;
 using AbpCompanyName.AbpProjectName.Authorization.Users;
 using AbpCompanyName.AbpProjectName.Users.Dto;
-using Microsoft.AspNet.Identity;
+using Microsoft.AspNetCore.Identity;
 
 namespace AbpCompanyName.AbpProjectName.Users
 {
@@ -17,11 +17,16 @@ namespace AbpCompanyName.AbpProjectName.Users
     {
         private readonly IRepository<User, long> _userRepository;
         private readonly IPermissionManager _permissionManager;
+        private readonly IPasswordHasher<User> _passwordHasher;
 
-        public UserAppService(IRepository<User, long> userRepository, IPermissionManager permissionManager)
+        public UserAppService(
+            IRepository<User, long> userRepository, 
+            IPermissionManager permissionManager,
+            IPasswordHasher<User> passwordHasher)
         {
             _userRepository = userRepository;
             _permissionManager = permissionManager;
+            _passwordHasher = passwordHasher;
         }
 
         public async Task ProhibitPermission(ProhibitPermissionInput input)
@@ -35,7 +40,8 @@ namespace AbpCompanyName.AbpProjectName.Users
         //Example for primitive method parameters.
         public async Task RemoveFromRole(long userId, string roleName)
         {
-            CheckErrors(await UserManager.RemoveFromRoleAsync(userId, roleName));
+            var user = await UserManager.FindByIdAsync(userId.ToString());
+            await UserManager.RemoveFromRoleAsync(user, roleName);
         }
 
         public async Task<ListResultDto<UserListDto>> GetUsers()
@@ -52,10 +58,10 @@ namespace AbpCompanyName.AbpProjectName.Users
             var user = input.MapTo<User>();
 
             user.TenantId = AbpSession.TenantId;
-            user.Password = new PasswordHasher().HashPassword(input.Password);
+            user.Password = _passwordHasher.HashPassword(user, input.Password);
             user.IsEmailConfirmed = true;
 
-            CheckErrors(await UserManager.CreateAsync(user));
+            await UserManager.CreateAsync(user);
         }
     }
 }

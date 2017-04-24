@@ -2,10 +2,10 @@
 using System.Threading.Tasks;
 using Abp.Application.Services;
 using AbpCompanyName.AbpProjectName.MultiTenancy;
-using Microsoft.AspNet.Identity;
 using Abp.Runtime.Session;
 using Abp.IdentityFramework;
 using AbpCompanyName.AbpProjectName.Authorization.Users;
+using Microsoft.AspNetCore.Identity;
 
 namespace AbpCompanyName.AbpProjectName
 {
@@ -25,10 +25,10 @@ namespace AbpCompanyName.AbpProjectName
 
         protected virtual Task<User> GetCurrentUserAsync()
         {
-            var user = UserManager.FindByIdAsync(AbpSession.GetUserId());
+            var user = UserManager.FindByIdAsync(AbpSession.GetUserId().ToString());
             if (user == null)
             {
-                throw new ApplicationException("There is no current user!");
+                throw new Exception("There is no current user!");
             }
 
             return user;
