@@ -1,19 +1,23 @@
 ﻿using System;
 using Abp.AspNetCore;
 using Abp.Castle.Logging.Log4Net;
-using Abp.Owin;
 using AbpCompanyName.AbpProjectName.Configuration;
-using AbpCompanyName.AbpProjectName.Owin;
 using Castle.Facilities.Logging;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
-using Microsoft.AspNet.SignalR;
 using Microsoft.AspNetCore.Mvc.Cors.Internal;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Logging;
-using Microsoft.Owin.Cors;
+using Swashbuckle.AspNetCore.Swagger;
+
+#if FEATURE_SIGNALR
 using Owin;
+using Microsoft.Owin.Cors;
+using Microsoft.AspNet.SignalR;
+using AbpCompanyName.AbpProjectName.Owin;
+using Abp.Owin;
+#endif
 
 
 namespace AbpCompanyName.AbpProjectName.Web.Host.Startup
@@ -48,7 +52,11 @@ namespace AbpCompanyName.AbpProjectName.Web.Host.Startup
             });
 
             //Swagger - Enable this line and the related lines in Configure method to enable swagger UI
-            services.AddSwaggerGen();
+            services.AddSwaggerGen(options =>
+            {
+                options.SwaggerDoc("v1", new Info { Title = "AbpProjectName API", Version = "v1" });
+                options.DocInclusionPredicate((docName, description) => true);
+            });
 
             //Configure Abp and Dependency Injection
             return services.AddAbp<AbpProjectNameWebHostModule>(options =>
@@ -70,8 +78,10 @@ namespace AbpCompanyName.AbpProjectName.Web.Host.Startup
 
             app.UseStaticFiles();
 
+#if FEATURE_SIGNALR
             //Integrate to OWIN
             app.UseAppBuilder(ConfigureOwinServices);
+#endif
 
             app.UseMvc(routes =>
             {
@@ -87,9 +97,13 @@ namespace AbpCompanyName.AbpProjectName.Web.Host.Startup
             // Enable middleware to serve generated Swagger as a JSON endpoint
             app.UseSwagger();
             // Enable middleware to serve swagger-ui assets (HTML, JS, CSS etc.)
-            app.UseSwaggerUi(); //URL: /swagger/ui
+            app.UseSwaggerUI(options =>
+            {
+                options.SwaggerEndpoint("/swagger/v1/swagger.json", "AbpProjectName API V1");
+            }); //URL: /swagger
         }
 
+#if FEATURE_SIGNALR
         private static void ConfigureOwinServices(IAppBuilder app)
         {
             app.Properties["host.AppName"] = "AbpZeroTemplate";
@@ -106,5 +120,6 @@ namespace AbpCompanyName.AbpProjectName.Web.Host.Startup
                 map.RunSignalR(hubConfiguration);
             });
         }
+#endif
     }
 }

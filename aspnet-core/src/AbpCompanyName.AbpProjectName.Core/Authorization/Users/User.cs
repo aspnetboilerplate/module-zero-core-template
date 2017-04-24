@@ -15,15 +15,18 @@ namespace AbpCompanyName.AbpProjectName.Authorization.Users
 
         public static User CreateTenantAdminUser(int tenantId, string emailAddress)
         {
-            return new User
+            var user = new User
             {
                 TenantId = tenantId,
                 UserName = AdminUserName,
                 Name = AdminUserName,
                 Surname = AdminUserName,
-                EmailAddress = emailAddress,
-                //Password = new PasswordHasher<>().HashPassword(password) //TODO: Set Password from out of this class!
+                EmailAddress = emailAddress
             };
+
+            user.SetNormalizedNames();
+
+            return user;
         }
     }
 }

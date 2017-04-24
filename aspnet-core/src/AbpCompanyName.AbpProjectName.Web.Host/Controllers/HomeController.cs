@@ -19,7 +19,7 @@ namespace AbpCompanyName.AbpProjectName.Web.Host.Controllers
 
         public IActionResult Index()
         {
-            return Redirect("/swagger/ui");
+            return Redirect("/swagger");
         }
 
         /// <summary>

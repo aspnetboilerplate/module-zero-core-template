@@ -55,6 +55,8 @@ namespace AbpCompanyName.AbpProjectName.Authorization.Users
                 Roles = new List<UserRole>()
             };
 
+            user.SetNormalizedNames();
+
             user.Password = _passwordHasher.HashPassword(user, plainPassword);
 
             foreach (var defaultRole in await _roleManager.Roles.Where(r => r.IsDefault).ToListAsync())
