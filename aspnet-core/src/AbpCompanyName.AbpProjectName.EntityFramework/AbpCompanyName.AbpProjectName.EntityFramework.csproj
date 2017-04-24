@@ -20,8 +20,8 @@
     <PackageReference Include="Migrator.EF6.Tools" Version="1.1.1">
       <PrivateAssets>All</PrivateAssets>
     </PackageReference>
-    <PackageReference Include="Abp.EntityFramework" Version="1.5.1" />
-    <PackageReference Include="Abp.Zero.EntityFramework" Version="1.5.1" />
+    <PackageReference Include="Abp.EntityFramework" Version="2.0.1" />
+    <PackageReference Include="Abp.Zero.EntityFramework" Version="2.0.1" />
   </ItemGroup>
 
   <ItemGroup Condition=" '$(TargetFramework)' == 'net461' ">

@@ -22,16 +22,16 @@
   </ItemGroup>
 
   <ItemGroup>
-    <PackageReference Include="Abp.Web.SignalR" Version="1.5.1" />
+    <PackageReference Include="Abp.Web.SignalR" Version="2.0.1" />
     <PackageReference Include="Microsoft.AspNetCore.Authentication.JwtBearer" Version="1.1.1" />
     <PackageReference Include="Microsoft.AspNetCore.Authentication.Facebook" Version="1.1.1" />
     <PackageReference Include="Microsoft.AspNetCore.Authentication.Google" Version="1.1.1" />
     <PackageReference Include="Microsoft.AspNetCore.Authentication.MicrosoftAccount" Version="1.1.1" />
     <PackageReference Include="Microsoft.AspNetCore.Owin" Version="1.1.1" />
     <PackageReference Include="Swashbuckle" Version="6.0.0-beta902" />
-    <PackageReference Include="Abp.AspNetCore" Version="1.5.1" />
-    <PackageReference Include="Abp.Owin" Version="1.5.1" />
-    <PackageReference Include="Abp.Zero.AspNetCore" Version="1.5.1" />
+    <PackageReference Include="Abp.AspNetCore" Version="2.0.1" />
+    <PackageReference Include="Abp.Owin" Version="2.0.1" />
+    <PackageReference Include="Abp.Zero.AspNetCore" Version="2.0.1" />
   </ItemGroup>
 
   <ItemGroup Condition=" '$(TargetFramework)' == 'net461' ">

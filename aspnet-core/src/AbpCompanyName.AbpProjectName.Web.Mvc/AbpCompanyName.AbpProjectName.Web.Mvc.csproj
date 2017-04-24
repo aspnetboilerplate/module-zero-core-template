@@ -37,8 +37,8 @@
     </PackageReference>
     <PackageReference Include="Swashbuckle" Version="6.0.0-beta902" />
     <PackageReference Include="AspNet.Security.OpenIdConnect.Server" Version="1.0.0-beta6-final" />
-    <PackageReference Include="PaulMiami.AspNetCore.Mvc.Recaptcha" Version="1.1.1" />
-    <PackageReference Include="Castle.LoggingFacility.MsLogging" Version="1.1.0" />
+    <PackageReference Include="PaulMiami.AspNetCore.Mvc.Recaptcha" Version="1.2.0" />
+    <PackageReference Include="Castle.LoggingFacility.MsLogging" Version="2.0.0" />
     <PackageReference Include="Microsoft.AspNetCore.Authentication.Cookies" Version="1.1.1" />
     <PackageReference Include="Microsoft.AspNetCore.Authentication.Facebook" Version="1.1.1" />
     <PackageReference Include="Microsoft.AspNetCore.Authentication.Google" Version="1.1.1" />
@@ -54,11 +54,11 @@
     <PackageReference Include="Microsoft.Extensions.Options.ConfigurationExtensions" Version="1.1.1" />
     <PackageReference Include="Microsoft.VisualStudio.Web.BrowserLink" Version="1.1.0" />
     <PackageReference Include="Microsoft.AspNetCore.Mvc" Version="1.1.2" />
-    <PackageReference Include="Abp.HangFire" Version="1.5.1" />
-    <PackageReference Include="Abp.Owin" Version="1.5.1" />
-    <PackageReference Include="Abp.RedisCache" Version="1.5.1" />
-    <PackageReference Include="Abp.Web.SignalR" Version="1.5.1" />
-    <PackageReference Include="Abp.Castle.Log4Net" Version="1.5.1" />
+    <PackageReference Include="Abp.HangFire" Version="2.0.1" />
+    <PackageReference Include="Abp.Owin" Version="2.0.1" />
+    <PackageReference Include="Abp.RedisCache" Version="2.0.1" />
+    <PackageReference Include="Abp.Web.SignalR" Version="2.0.1" />
+    <PackageReference Include="Abp.Castle.Log4Net" Version="2.0.1" />
   </ItemGroup>
 
   <ItemGroup Condition=" '$(TargetFramework)' == 'net461' ">

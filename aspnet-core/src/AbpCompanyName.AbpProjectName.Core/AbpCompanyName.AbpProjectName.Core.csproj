@@ -17,10 +17,10 @@
   </ItemGroup>
 
   <ItemGroup>
-    <PackageReference Include="Abp" Version="1.5.1" />
-    <PackageReference Include="Abp.AutoMapper" Version="1.5.1" />
-    <PackageReference Include="Abp.EntityFramework" Version="1.5.1" />
-    <PackageReference Include="Abp.Zero" Version="1.5.1" />
+    <PackageReference Include="Abp" Version="2.0.1" />
+    <PackageReference Include="Abp.AutoMapper" Version="2.0.1" />
+    <PackageReference Include="Abp.EntityFramework" Version="2.0.1" />
+    <PackageReference Include="Abp.Zero" Version="2.0.1" />
     <PackageReference Include="Microsoft.Extensions.Configuration.EnvironmentVariables" Version="1.1.1" />
     <PackageReference Include="Microsoft.Extensions.Configuration.Json" Version="1.1.1" />
     <PackageReference Include="Microsoft.Extensions.Configuration.UserSecrets" Version="1.1.1" />

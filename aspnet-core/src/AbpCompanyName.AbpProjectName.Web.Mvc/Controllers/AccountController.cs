@@ -5,6 +5,7 @@ using System.Linq;
 using System.Security.Claims;
 using System.Threading.Tasks;
 using Abp;
+using Abp.Authorization;
 using Abp.Authorization.Users;
 using Abp.Configuration;
 using Abp.Configuration.Startup;

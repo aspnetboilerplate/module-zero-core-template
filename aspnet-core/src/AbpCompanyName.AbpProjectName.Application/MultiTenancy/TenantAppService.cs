@@ -60,7 +60,7 @@ namespace AbpCompanyName.AbpProjectName.MultiTenancy
                 tenant.EditionId = defaultEdition.Id;
             }
 
-            CheckErrors(await TenantManager.CreateAsync(tenant));
+            await TenantManager.CreateAsync(tenant);
             await CurrentUnitOfWork.SaveChangesAsync(); //To get new tenant's id.
 
             //Create tenant database
