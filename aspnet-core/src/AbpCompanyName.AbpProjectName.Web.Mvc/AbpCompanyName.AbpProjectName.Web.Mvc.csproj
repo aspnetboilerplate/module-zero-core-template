@@ -27,7 +27,6 @@
 
   <ItemGroup>
     <ProjectReference Include="..\AbpCompanyName.AbpProjectName.Application\AbpCompanyName.AbpProjectName.Application.csproj" />
-    <ProjectReference Include="..\AbpCompanyName.AbpProjectName.EntityFramework\AbpCompanyName.AbpProjectName.EntityFramework.csproj" />
     <ProjectReference Include="..\AbpCompanyName.AbpProjectName.Web.Core\AbpCompanyName.AbpProjectName.Web.Core.csproj" />
   </ItemGroup>
 

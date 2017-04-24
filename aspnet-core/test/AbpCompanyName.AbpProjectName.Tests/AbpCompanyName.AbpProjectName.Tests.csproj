@@ -13,7 +13,6 @@
 
   <ItemGroup>
     <ProjectReference Include="..\..\src\AbpCompanyName.AbpProjectName.Application\AbpCompanyName.AbpProjectName.Application.csproj" />
-    <ProjectReference Include="..\..\src\AbpCompanyName.AbpProjectName.EntityFramework\AbpCompanyName.AbpProjectName.EntityFramework.csproj" />
   </ItemGroup>
 
   <ItemGroup>

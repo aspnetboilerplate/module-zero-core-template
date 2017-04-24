@@ -12,6 +12,7 @@ using AbpCompanyName.AbpProjectName.Authorization.Roles;
 using AbpCompanyName.AbpProjectName.Authorization.Users;
 using AbpCompanyName.AbpProjectName.Editions;
 using AbpCompanyName.AbpProjectName.MultiTenancy.Dto;
+using Microsoft.AspNetCore.Identity;
 
 namespace AbpCompanyName.AbpProjectName.MultiTenancy
 {
@@ -22,17 +23,20 @@ namespace AbpCompanyName.AbpProjectName.MultiTenancy
         private readonly RoleManager _roleManager;
         private readonly EditionManager _editionManager;
         private readonly IAbpZeroDbMigrator _abpZeroDbMigrator;
+        private readonly IPasswordHasher<User> _passwordHasher;
 
         public TenantAppService(
             TenantManager tenantManager, 
             RoleManager roleManager, 
             EditionManager editionManager, 
-            IAbpZeroDbMigrator abpZeroDbMigrator)
+            IAbpZeroDbMigrator abpZeroDbMigrator, 
+            IPasswordHasher<User> passwordHasher)
         {
             _tenantManager = tenantManager;
             _roleManager = roleManager;
             _editionManager = editionManager;
             _abpZeroDbMigrator = abpZeroDbMigrator;
+            _passwordHasher = passwordHasher;
         }
 
         public ListResultDto<TenantListDto> GetTenants()
@@ -78,7 +82,8 @@ namespace AbpCompanyName.AbpProjectName.MultiTenancy
                 await _roleManager.GrantAllPermissionsAsync(adminRole);
 
                 //Create admin user for the tenant
-                var adminUser = User.CreateTenantAdminUser(tenant.Id, input.AdminEmailAddress, User.DefaultPassword);
+                var adminUser = User.CreateTenantAdminUser(tenant.Id, input.AdminEmailAddress);
+                adminUser.Password = _passwordHasher.HashPassword(adminUser, User.DefaultPassword);
                 await UserManager.CreateAsync(adminUser);
                 await CurrentUnitOfWork.SaveChangesAsync(); //To get admin user's id
 

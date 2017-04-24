@@ -1,4 +1,3 @@
-using System.Data.Entity;
 using System.Reflection;
 using Abp.Events.Bus;
 using Abp.Modules;
@@ -6,7 +5,8 @@ using Abp.Reflection.Extensions;
 using Castle.MicroKernel.Registration;
 using Microsoft.Extensions.Configuration;
 using AbpCompanyName.AbpProjectName.Configuration;
-using AbpCompanyName.AbpProjectName.EntityFramework;
+using AbpCompanyName.AbpProjectName.EntityFrameworkCore;
+using AbpCompanyName.AbpProjectName.Migrator.DependencyInjection;
 
 namespace AbpCompanyName.AbpProjectName.Migrator
 {
@@ -15,8 +15,10 @@ namespace AbpCompanyName.AbpProjectName.Migrator
     {
         private readonly IConfigurationRoot _appConfiguration;
 
-        public AbpProjectNameMigratorModule()
+        public AbpProjectNameMigratorModule(AbpProjectNameEntityFrameworkModule abpProjectNameEntityFrameworkModule)
         {
+            abpProjectNameEntityFrameworkModule.SkipDbSeed = true;
+
             _appConfiguration = AppConfigurations.Get(
                 typeof(AbpProjectNameMigratorModule).Assembly.GetDirectoryPathOrNull()
             );
@@ -24,8 +26,6 @@ namespace AbpCompanyName.AbpProjectName.Migrator
 
         public override void PreInitialize()
         {
-            Database.SetInitializer<AbpProjectNameDbContext>(null);
-
             Configuration.DefaultNameOrConnectionString = _appConfiguration.GetConnectionString(
                 AbpProjectNameConsts.ConnectionStringName
                 );
@@ -42,6 +42,7 @@ namespace AbpCompanyName.AbpProjectName.Migrator
         public override void Initialize()
         {
             IocManager.RegisterAssemblyByConvention(Assembly.GetExecutingAssembly());
+            ServiceCollectionRegistrar.Register(IocManager);
         }
     }
 }
