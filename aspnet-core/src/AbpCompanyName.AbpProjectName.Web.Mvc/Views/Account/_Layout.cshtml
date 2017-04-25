@@ -1,7 +1,6 @@
-﻿@using Abp.Web.Security.AntiForgery
-@using System.Threading
+﻿@using System.Globalization
+@using Abp.Web.Security.AntiForgery
 @using Abp.Configuration.Startup
-@using Abp.Timing
 @using AbpCompanyName.AbpProjectName.Web.Resources
 @inject AbpCompanyName.AbpProjectName.Timing.AppTimes AppTimes
 @inject IAbpAntiForgeryManager AbpAntiForgeryManager
@@ -100,7 +99,7 @@
 
     <script>
         //Localizing momentjs
-        moment.locale('@Thread.CurrentThread.CurrentUICulture.Name');
+        moment.locale('@CultureInfo.CurrentUICulture.Name');
     </script>
 
     <!-- Dynamic scripts of ABP system (They are created on runtime and can not be bundled) -->

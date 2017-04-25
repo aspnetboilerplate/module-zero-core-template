@@ -164,7 +164,7 @@ namespace AbpCompanyName.AbpProjectName.Web.Controllers
                     externalLoginInfo = await _signInManager.GetExternalLoginInfoAsync();
                     if (externalLoginInfo == null)
                     {
-                        throw new ApplicationException("Can not external login!");
+                        throw new Exception("Can not external login!");
                     }
 
                     model.UserName = model.EmailAddress;

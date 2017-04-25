@@ -1,7 +1,6 @@
 ﻿using System;
 using Abp.AspNetCore;
 using Abp.Castle.Logging.Log4Net;
-using Abp.Owin;
 using AbpCompanyName.AbpProjectName.Authorization.Roles;
 using AbpCompanyName.AbpProjectName.Authorization.Users;
 using AbpCompanyName.AbpProjectName.Configuration;
@@ -15,8 +14,12 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Logging;
-using AbpCompanyName.AbpProjectName.Web.Startup.Owin;
+
+#if FEATURE_SIGNALR
 using Owin;
+using Abp.Owin;
+using AbpCompanyName.AbpProjectName.Owin;
+#endif
 
 namespace AbpCompanyName.AbpProjectName.Web.Startup
 {
@@ -78,8 +81,10 @@ namespace AbpCompanyName.AbpProjectName.Web.Startup
 
             app.UseStaticFiles();
 
+#if FEATURE_SIGNALR
             //Integrate to OWIN
             app.UseAppBuilder(ConfigureOwinServices);
+#endif
 
             app.UseMvc(routes =>
             {
@@ -93,6 +98,7 @@ namespace AbpCompanyName.AbpProjectName.Web.Startup
             });
         }
 
+#if FEATURE_SIGNALR
         private static void ConfigureOwinServices(IAppBuilder app)
         {
             app.Properties["host.AppName"] = "AbpProjectName";
@@ -101,5 +107,6 @@ namespace AbpCompanyName.AbpProjectName.Web.Startup
 
             app.MapSignalR();
         }
+#endif
     }
 }

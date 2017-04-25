@@ -69,7 +69,7 @@
 
                     Func<string, string> getSocialIconClass = (provider) =>
                     {
-                        provider = provider.ToLower(CultureInfo.InvariantCulture);
+                        provider = provider.ToLowerInvariant();
 
                         if (provider == "microsoft")
                         {
