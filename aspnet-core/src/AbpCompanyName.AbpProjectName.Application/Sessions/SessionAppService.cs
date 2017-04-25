@@ -1,6 +1,5 @@
 ﻿using System.Threading.Tasks;
 using Abp.Auditing;
-using Abp.Authorization;
 using Abp.AutoMapper;
 using AbpCompanyName.AbpProjectName.Sessions.Dto;
 
@@ -22,12 +21,12 @@ namespace AbpCompanyName.AbpProjectName.Sessions
 
             if (AbpSession.TenantId.HasValue)
             {
-                output.Tenant = (await GetCurrentTenantAsync()).MapTo<TenantLoginInfoDto>();
+                output.Tenant = ObjectMapper.Map<TenantLoginInfoDto>(await GetCurrentTenantAsync());
             }
 
             if (AbpSession.UserId.HasValue)
             {
-                output.User = (await GetCurrentUserAsync()).MapTo<UserLoginInfoDto>();
+                output.User = ObjectMapper.Map<UserLoginInfoDto>(await GetCurrentUserAsync());
             }
 
             return output;

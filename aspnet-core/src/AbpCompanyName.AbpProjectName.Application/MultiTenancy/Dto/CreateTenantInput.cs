@@ -1,8 +1,7 @@
 using System.ComponentModel.DataAnnotations;
+using Abp.Authorization.Users;
 using Abp.AutoMapper;
 using Abp.MultiTenancy;
-using AbpCompanyName.AbpProjectName.Authorization.Users;
-using AbpCompanyName.AbpProjectName.Users;
 
 namespace AbpCompanyName.AbpProjectName.MultiTenancy.Dto
 {
@@ -19,7 +18,7 @@ namespace AbpCompanyName.AbpProjectName.MultiTenancy.Dto
         public string Name { get; set; }
 
         [Required]
-        [StringLength(User.MaxEmailAddressLength)]
+        [StringLength(AbpUserBase.MaxEmailAddressLength)]
         public string AdminEmailAddress { get; set; }
 
         [MaxLength(AbpTenantBase.MaxConnectionStringLength)]

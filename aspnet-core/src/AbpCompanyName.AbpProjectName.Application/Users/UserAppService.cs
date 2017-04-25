@@ -49,13 +49,13 @@ namespace AbpCompanyName.AbpProjectName.Users
             var users = await _userRepository.GetAllListAsync();
 
             return new ListResultDto<UserListDto>(
-                users.MapTo<List<UserListDto>>()
+                ObjectMapper.Map<List<UserListDto>>(users)
                 );
         }
 
         public async Task CreateUser(CreateUserInput input)
         {
-            var user = input.MapTo<User>();
+            var user = ObjectMapper.Map<User>(input);
 
             user.TenantId = AbpSession.TenantId;
             user.Password = _passwordHasher.HashPassword(user, input.Password);

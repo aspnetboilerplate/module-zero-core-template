@@ -72,7 +72,7 @@ namespace AbpCompanyName.AbpProjectName.Controllers
         [HttpGet]
         public List<ExternalLoginProviderInfoModel> GetExternalAuthenticationProviders()
         {
-            return _externalAuthConfiguration.Providers.MapTo<List<ExternalLoginProviderInfoModel>>();
+            return ObjectMapper.Map<List<ExternalLoginProviderInfoModel>>(_externalAuthConfiguration.Providers);
         }
 
         [HttpPost]

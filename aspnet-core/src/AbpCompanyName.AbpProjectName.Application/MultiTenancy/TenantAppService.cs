@@ -42,17 +42,16 @@ namespace AbpCompanyName.AbpProjectName.MultiTenancy
         public ListResultDto<TenantListDto> GetTenants()
         {
             return new ListResultDto<TenantListDto>(
-                _tenantManager.Tenants
-                    .OrderBy(t => t.TenancyName)
-                    .ToList()
-                    .MapTo<List<TenantListDto>>()
-                );
+                ObjectMapper.Map<List<TenantListDto>>(
+                    _tenantManager.Tenants.OrderBy(t => t.TenancyName).ToList()
+                )
+            );
         }
 
         public async Task CreateTenant(CreateTenantInput input)
         {
             //Create tenant
-            var tenant = input.MapTo<Tenant>();
+            var tenant = ObjectMapper.Map<Tenant>(input);
             tenant.ConnectionString = input.ConnectionString.IsNullOrEmpty()
                 ? null
                 : SimpleStringCipher.Instance.Encrypt(input.ConnectionString);

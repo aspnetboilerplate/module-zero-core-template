@@ -1,7 +1,7 @@
-﻿using System.Data.Entity;
-using System.Threading.Tasks;
+﻿using System.Threading.Tasks;
 using AbpCompanyName.AbpProjectName.Users;
 using AbpCompanyName.AbpProjectName.Users.Dto;
+using Microsoft.EntityFrameworkCore;
 using Shouldly;
 using Xunit;
 
