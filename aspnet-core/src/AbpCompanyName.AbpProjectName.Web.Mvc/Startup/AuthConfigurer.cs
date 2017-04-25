@@ -1,20 +1,14 @@
 ﻿using System;
-using System.Text;
 using AbpCompanyName.AbpProjectName.Authentication.JwtBearer;
-using Microsoft.AspNet.Identity;
 using Microsoft.AspNetCore.Builder;
-using Microsoft.AspNetCore.Http;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
-using Microsoft.Extensions.Options;
 using Microsoft.IdentityModel.Tokens;
 
 namespace AbpCompanyName.AbpProjectName.Web.Startup
 {
     public static class AuthConfigurer
     {
-        public const string AuthenticationScheme = "AbpProjectNameAuthSchema";
-        public const string ExternalAuthenticationScheme = AuthenticationScheme + "." + DefaultAuthenticationTypes.ExternalCookie;
         /// <summary>
         /// Configures the specified application.
         /// </summary>
@@ -22,37 +16,8 @@ namespace AbpCompanyName.AbpProjectName.Web.Startup
         /// <param name="configuration">The configuration.</param>
         public static void Configure(IApplicationBuilder app, IConfiguration configuration)
         {
-            app.UseCookieAuthentication(new CookieAuthenticationOptions
-            {
-                AutomaticAuthenticate = false,
-                AuthenticationScheme = ExternalAuthenticationScheme,
-                CookieName = ExternalAuthenticationScheme
-            });
-
-            app.UseCookieAuthentication(new CookieAuthenticationOptions
-            {
-                AuthenticationScheme = AuthenticationScheme,
-                LoginPath = new PathString("/Account/Login/"),
-                AccessDeniedPath = new PathString("/Error/E403"),
-                AutomaticAuthenticate = true,
-                AutomaticChallenge = true
-            });
-
-            app.UseCookieAuthentication(new CookieAuthenticationOptions
-            {
-                AutomaticAuthenticate = false,
-                AuthenticationScheme = DefaultAuthenticationTypes.TwoFactorCookie,
-                ExpireTimeSpan = TimeSpan.FromMinutes(5),
-                CookieName = DefaultAuthenticationTypes.TwoFactorCookie
-            });
-
-            app.UseCookieAuthentication(new CookieAuthenticationOptions
-            {
-                AutomaticAuthenticate = false,
-                AuthenticationScheme = DefaultAuthenticationTypes.TwoFactorRememberBrowserCookie,
-                CookieName = DefaultAuthenticationTypes.TwoFactorRememberBrowserCookie
-            });
-
+            app.UseIdentity();
+            
             if (bool.Parse(configuration["Authentication:Google:IsEnabled"]))
             {
                 app.UseGoogleAuthentication(CreateGoogleAuthOptions(configuration));
@@ -73,7 +38,6 @@ namespace AbpCompanyName.AbpProjectName.Web.Startup
         {
             return new GoogleOptions
             {
-                SignInScheme = AuthenticationScheme,
                 ClientId = configuration["Authentication:Google:ClientId"],
                 ClientSecret = configuration["Authentication:Google:ClientSecret"]
             };
@@ -84,8 +48,7 @@ namespace AbpCompanyName.AbpProjectName.Web.Startup
             var options = new FacebookOptions
             {
                 AppId = configuration["Authentication:Facebook:AppId"],
-                AppSecret = configuration["Authentication:Facebook:AppSecret"],
-                SignInScheme = AuthenticationScheme
+                AppSecret = configuration["Authentication:Facebook:AppSecret"]
             };
 
             options.Scope.Add("email");

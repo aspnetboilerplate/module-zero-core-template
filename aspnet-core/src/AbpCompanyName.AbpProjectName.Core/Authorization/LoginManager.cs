@@ -1,5 +1,4 @@
 ﻿using Abp.Authorization;
-using Abp.Authorization.Roles;
 using Abp.Authorization.Users;
 using Abp.Configuration;
 using Abp.Configuration.Startup;
@@ -16,7 +15,8 @@ namespace AbpCompanyName.AbpProjectName.Authorization
 {
     public class LogInManager : AbpLogInManager<Tenant, Role, User>
     {
-        public LogInManager(AbpUserManager<Role, User> userManager, 
+        public LogInManager(
+            UserManager userManager, 
             IMultiTenancyConfig multiTenancyConfig,
             IRepository<Tenant> tenantRepository,
             IUnitOfWorkManager unitOfWorkManager,

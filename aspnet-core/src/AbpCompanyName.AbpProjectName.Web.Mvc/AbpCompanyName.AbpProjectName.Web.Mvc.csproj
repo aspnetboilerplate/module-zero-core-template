@@ -26,7 +26,6 @@
   </ItemGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\AbpCompanyName.AbpProjectName.Application\AbpCompanyName.AbpProjectName.Application.csproj" />
     <ProjectReference Include="..\AbpCompanyName.AbpProjectName.Web.Core\AbpCompanyName.AbpProjectName.Web.Core.csproj" />
   </ItemGroup>
 
@@ -34,7 +33,6 @@
     <PackageReference Include="Microsoft.VisualStudio.Web.CodeGeneration.Design" Version="1.1.0">
       <PrivateAssets>All</PrivateAssets>
     </PackageReference>
-    <PackageReference Include="Swashbuckle" Version="6.0.0-beta902" />
     <PackageReference Include="AspNet.Security.OpenIdConnect.Server" Version="1.0.0-beta6-final" />
     <PackageReference Include="PaulMiami.AspNetCore.Mvc.Recaptcha" Version="1.2.0" />
     <PackageReference Include="Castle.LoggingFacility.MsLogging" Version="2.0.0" />

@@ -17,7 +17,6 @@ using Abp.Threading;
 using Abp.Timing;
 using Abp.UI;
 using Abp.Web.Models;
-using Abp.Zero.AspNetCore;
 using Abp.Zero.Configuration;
 using Microsoft.AspNetCore.Mvc;
 using AbpCompanyName.AbpProjectName.Authorization;
@@ -25,11 +24,11 @@ using AbpCompanyName.AbpProjectName.MultiTenancy;
 using AbpCompanyName.AbpProjectName.Web.Models.Account;
 using AbpCompanyName.AbpProjectName.Authorization.Users;
 using AbpCompanyName.AbpProjectName.Controllers;
+using AbpCompanyName.AbpProjectName.Identity;
 using AbpCompanyName.AbpProjectName.Sessions;
-using AbpCompanyName.AbpProjectName.Web.Identity;
 using AbpCompanyName.AbpProjectName.Web.Startup;
 using AbpCompanyName.AbpProjectName.Web.Views.Shared.Components.TenantChange;
-using Microsoft.AspNet.Identity;
+using Microsoft.AspNetCore.Identity;
 
 namespace AbpCompanyName.AbpProjectName.Web.Controllers
 {
@@ -94,39 +93,26 @@ namespace AbpCompanyName.AbpProjectName.Web.Controllers
         [UnitOfWork]
         public virtual async Task<JsonResult> Login(LoginViewModel loginModel, string returnUrl = "", string returnUrlHash = "")
         {
-            var loginResult = await GetLoginResultAsync(loginModel.UsernameOrEmailAddress, loginModel.Password, GetTenancyNameOrNull());
-
-            await SignInAsync(loginResult.User, loginResult.Identity, loginModel.RememberMe);
-            await UnitOfWorkManager.Current.SaveChangesAsync();
-
-            if (string.IsNullOrWhiteSpace(returnUrl))
-            {
-                returnUrl = GetAppHomeUrl();
-            }
-
+            returnUrl = NormalizeReturnUrl(returnUrl);
             if (!string.IsNullOrWhiteSpace(returnUrlHash))
             {
                 returnUrl = returnUrl + returnUrlHash;
             }
+
+            var loginResult = await GetLoginResultAsync(loginModel.UsernameOrEmailAddress, loginModel.Password, GetTenancyNameOrNull());
+
+            await _signInManager.SignInAsync(loginResult.Identity, loginModel.RememberMe);
+            await UnitOfWorkManager.Current.SaveChangesAsync();
 
             return Json(new AjaxResponse { TargetUrl = returnUrl });
         }
 
         public async Task<ActionResult> Logout()
         {
-            await HttpContext.Authentication.SignOutAsync(AuthConfigurer.AuthenticationScheme);
+            await _signInManager.SignOutAsync();
             return RedirectToAction("Login");
         }
 
-        private async Task SignInAsync(User user, ClaimsIdentity identity = null, bool rememberMe = false)
-        {
-            if (identity == null)
-            {
-                identity = await _userManager.CreateIdentityAsync(user, AuthConfigurer.AuthenticationScheme);
-            }
-
-            await _signInManager.SignOutAllAndSignInAsync(identity, rememberMe);
-        }
 
         private async Task<AbpLoginResult<Tenant, User>> GetLoginResultAsync(string usernameOrEmailAddress, string password, string tenancyName)
         {
@@ -173,10 +159,10 @@ namespace AbpCompanyName.AbpProjectName.Web.Controllers
         {
             try
             {
-                ExternalLoginUserInfo externalLoginInfo = null;
+                ExternalLoginInfo externalLoginInfo = null;
                 if (model.IsExternalLogin)
                 {
-                    externalLoginInfo = await _signInManager.GetExternalLoginUserInfo(model.ExternalLoginAuthSchema);
+                    externalLoginInfo = await _signInManager.GetExternalLoginInfoAsync();
                     if (externalLoginInfo == null)
                     {
                         throw new ApplicationException("Can not external login!");
@@ -208,8 +194,8 @@ namespace AbpCompanyName.AbpProjectName.Web.Controllers
                 if (model.IsExternalLogin)
                 {
                     Debug.Assert(externalLoginInfo != null);
-
-                    if (string.Equals(externalLoginInfo.EmailAddress, model.EmailAddress, StringComparison.InvariantCultureIgnoreCase))
+                    
+                    if (string.Equals(externalLoginInfo.Principal.FindFirstValue(ClaimTypes.Email), model.EmailAddress, StringComparison.OrdinalIgnoreCase))
                     {
                         user.IsEmailConfirmed = true;
                     }
@@ -218,8 +204,8 @@ namespace AbpCompanyName.AbpProjectName.Web.Controllers
                     {
                         new UserLogin
                         {
-                            LoginProvider = externalLoginInfo.LoginInfo.LoginProvider,
-                            ProviderKey = externalLoginInfo.LoginInfo.ProviderKey,
+                            LoginProvider = externalLoginInfo.LoginProvider,
+                            ProviderKey = externalLoginInfo.ProviderKey,
                             TenantId = user.TenantId
                         }
                     };
@@ -237,7 +223,7 @@ namespace AbpCompanyName.AbpProjectName.Web.Controllers
                     AbpLoginResult<Tenant, User> loginResult;
                     if (externalLoginInfo != null)
                     {
-                        loginResult = await _logInManager.LoginAsync(externalLoginInfo.LoginInfo, tenant.TenancyName);
+                        loginResult = await _logInManager.LoginAsync(externalLoginInfo, tenant.TenancyName);
                     }
                     else
                     {
@@ -246,7 +232,7 @@ namespace AbpCompanyName.AbpProjectName.Web.Controllers
 
                     if (loginResult.Result == AbpLoginResultType.Success)
                     {
-                        await SignInAsync(loginResult.User, loginResult.Identity);
+                        await _signInManager.SignInAsync(loginResult.Identity, false);
                         return Redirect(GetAppHomeUrl());
                     }
 
@@ -300,60 +286,60 @@ namespace AbpCompanyName.AbpProjectName.Web.Controllers
         [UnitOfWork]
         public virtual async Task<ActionResult> ExternalLoginCallback(string returnUrl, string authSchema, string remoteError = null)
         {
+            returnUrl = NormalizeReturnUrl(returnUrl);
+            
             if (remoteError != null)
             {
                 Logger.Error("Remote Error in ExternalLoginCallback: " + remoteError);
                 throw new UserFriendlyException(L("CouldNotCompleteLoginOperation"));
             }
 
-            var tenancyName = GetTenancyNameOrNull();
-
-            var userInfo = await _signInManager.GetExternalLoginUserInfo(authSchema);
-
-            if (userInfo.LoginInfo == null || userInfo.LoginInfo.LoginProvider.IsNullOrEmpty() || userInfo.LoginInfo.ProviderKey.IsNullOrEmpty())
+            var externalLoginInfo = await _signInManager.GetExternalLoginInfoAsync(authSchema);
+            if (externalLoginInfo == null)
             {
-                Logger.Warn("Could not get LoginProvider and ProviderKey from external login.");
-                return RedirectToAction("Login");
+                Logger.Warn("Could not get information from external login.");
+                return RedirectToAction(nameof(Login));
             }
 
-            await HttpContext.Authentication.SignOutAsync(AuthConfigurer.ExternalAuthenticationScheme);
+            await _signInManager.SignOutAsync();
 
-            var loginResult = await _logInManager.LoginAsync(userInfo.LoginInfo, tenancyName);
+            var tenancyName = GetTenancyNameOrNull();
+
+            var loginResult = await _logInManager.LoginAsync(externalLoginInfo, tenancyName);
 
             switch (loginResult.Result)
             {
                 case AbpLoginResultType.Success:
-                    await SignInAsync(loginResult.User, loginResult.Identity, true);
-
-                    if (string.IsNullOrWhiteSpace(returnUrl))
-                    {
-                        returnUrl = GetAppHomeUrl();
-                    }
-
+                    await _signInManager.SignInAsync(loginResult.Identity, false);
                     return Redirect(returnUrl);
                 case AbpLoginResultType.UnknownExternalLogin:
-                    return await RegisterForExternalLogin(userInfo);
+                    return await RegisterForExternalLogin(externalLoginInfo);
                 default:
                     throw _abpLoginResultTypeHelper.CreateExceptionForFailedLoginAttempt(
                         loginResult.Result,
-                        userInfo.EmailAddress ?? userInfo.LoginInfo.ProviderKey,
+                        externalLoginInfo.Principal.FindFirstValue(ClaimTypes.Email) ?? externalLoginInfo.ProviderKey,
                         tenancyName
                     );
             }
         }
 
-        private async Task<ActionResult> RegisterForExternalLogin(ExternalLoginUserInfo userInfo)
+        private async Task<ActionResult> RegisterForExternalLogin(ExternalLoginInfo externalLoginInfo)
         {
+            var email = externalLoginInfo.Principal.FindFirstValue(ClaimTypes.Email);
+            var nameinfo = ExternalLoginInfoHelper.GetNameAndSurnameFromClaims(externalLoginInfo.Principal.Claims.ToList());
+
             var viewModel = new RegisterViewModel
             {
-                EmailAddress = userInfo.EmailAddress,
-                Name = userInfo.Name,
-                Surname = userInfo.Surname,
+                EmailAddress = email,
+                Name = nameinfo.name,
+                Surname = nameinfo.surname,
                 IsExternalLogin = true,
-                ExternalLoginAuthSchema = userInfo.LoginInfo.LoginProvider
+                ExternalLoginAuthSchema = externalLoginInfo.LoginProvider
             };
 
-            if (userInfo.HasAllNonEmpty())
+            if (nameinfo.name != null &&
+                nameinfo.surname != null &&
+                email != null)
             {
                 return await Register(viewModel);
             }
@@ -417,6 +403,26 @@ namespace AbpCompanyName.AbpProjectName.Web.Controllers
             return _tenantCache.GetOrNull(AbpSession.TenantId.Value)?.TenancyName;
         }
 
+        private string NormalizeReturnUrl(string returnUrl, Func<string> defaultValueBuilder = null)
+        {
+            if (defaultValueBuilder == null)
+            {
+                defaultValueBuilder = GetAppHomeUrl;
+            }
+
+            if (returnUrl.IsNullOrEmpty())
+            {
+                return defaultValueBuilder();
+            }
+
+            if (Url.IsLocalUrl(returnUrl))
+            {
+                return returnUrl;
+            }
+
+            return defaultValueBuilder();
+        }
+
         #endregion
 
         #region Etc
@@ -448,6 +454,5 @@ namespace AbpCompanyName.AbpProjectName.Web.Controllers
         }
 
         #endregion
-
     }
 }

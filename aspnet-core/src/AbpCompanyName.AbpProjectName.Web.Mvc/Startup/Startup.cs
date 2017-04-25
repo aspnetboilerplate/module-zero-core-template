@@ -2,7 +2,11 @@
 using Abp.AspNetCore;
 using Abp.Castle.Logging.Log4Net;
 using Abp.Owin;
+using AbpCompanyName.AbpProjectName.Authorization.Roles;
+using AbpCompanyName.AbpProjectName.Authorization.Users;
 using AbpCompanyName.AbpProjectName.Configuration;
+using AbpCompanyName.AbpProjectName.Identity;
+using AbpCompanyName.AbpProjectName.MultiTenancy;
 using AbpCompanyName.AbpProjectName.Web.Resources;
 using Castle.Facilities.Logging;
 using Microsoft.AspNetCore.Builder;
@@ -32,6 +36,18 @@ namespace AbpCompanyName.AbpProjectName.Web.Startup
             {
                 options.Filters.Add(new AutoValidateAntiforgeryTokenAttribute());
             });
+
+            services.AddAbpIdentity<Tenant, User, Role, SecurityStampValidator>(options =>
+                {
+                    options.Cookies.ApplicationCookie.AuthenticationScheme = "AbpProjectNameAuthSchema";
+                    options.Cookies.ApplicationCookie.CookieName = "AbpProjectNameAuth";
+                })
+                .AddUserManager<UserManager>()
+                .AddRoleManager<RoleManager>()
+                .AddSignInManager<SignInManager>()
+                .AddClaimsPrincipalFactory<UserClaimsPrincipalFactory>()
+                .AddDefaultTokenProviders();
+
 
             services.AddScoped<IWebResourceManager, WebResourceManager>();
 

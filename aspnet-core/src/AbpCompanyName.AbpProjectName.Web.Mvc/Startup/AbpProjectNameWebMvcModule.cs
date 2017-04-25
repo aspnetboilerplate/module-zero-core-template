@@ -1,6 +1,5 @@
 ﻿using System.Reflection;
 using Abp.Modules;
-using Abp.Zero.AspNetCore;
 using AbpCompanyName.AbpProjectName.Configuration;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.Extensions.Configuration;
@@ -21,8 +20,6 @@ namespace AbpCompanyName.AbpProjectName.Web.Startup
 
         public override void PreInitialize()
         {
-            Configuration.Get<IAbpZeroAspNetCoreConfiguration>().AuthenticationScheme = AuthConfigurer.AuthenticationScheme;
-
             Configuration.Navigation.Providers.Add<AbpProjectNameNavigationProvider>();
         }
 
