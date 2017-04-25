@@ -26,7 +26,6 @@ using AbpCompanyName.AbpProjectName.Authorization.Users;
 using AbpCompanyName.AbpProjectName.Controllers;
 using AbpCompanyName.AbpProjectName.Identity;
 using AbpCompanyName.AbpProjectName.Sessions;
-using AbpCompanyName.AbpProjectName.Web.Startup;
 using AbpCompanyName.AbpProjectName.Web.Views.Shared.Components.TenantChange;
 using Microsoft.AspNetCore.Identity;
 

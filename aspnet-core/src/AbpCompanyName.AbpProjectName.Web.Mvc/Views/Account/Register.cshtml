@@ -36,15 +36,6 @@
                             </div>
                         }
 
-                        @if (ViewBag.IsMultiTenancyEnabled)
-                        {
-                            <div class="form-group">
-                                <div class="col-lg-12">
-                                    <input type="text" class="form-control" name="TenancyName" placeholder="@L("TenancyName")" value="@Model.TenancyName" required maxlength="@AbpCompanyName.AbpProjectName.MultiTenancy.Tenant.MaxTenancyNameLength">
-                                </div>
-                            </div>
-                        }
-
                         <input type="hidden" name="IsExternalLogin" value="@Model.IsExternalLogin.ToString()" />
                         <input type="hidden" name="ExternalLoginAuthSchema" value="@Model.ExternalLoginAuthSchema"/>
 
