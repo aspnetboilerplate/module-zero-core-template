@@ -2,6 +2,7 @@
 
   <PropertyGroup>
     <TargetFrameworks>net461;netcoreapp1.1</TargetFrameworks>
+    <PackageTargetFallback>$(PackageTargetFallback);dotnet5.6;portable-net45+win8</PackageTargetFallback>
     <RootNamespace>AbpCompanyName.AbpProjectName</RootNamespace>
     <AutoGenerateBindingRedirects>true</AutoGenerateBindingRedirects>
   </PropertyGroup>
