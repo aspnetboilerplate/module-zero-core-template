@@ -1,4 +1,3 @@
-using System.Reflection;
 using Abp.Events.Bus;
 using Abp.Modules;
 using Abp.Reflection.Extensions;
@@ -20,7 +19,7 @@ namespace AbpCompanyName.AbpProjectName.Migrator
             abpProjectNameEntityFrameworkModule.SkipDbSeed = true;
 
             _appConfiguration = AppConfigurations.Get(
-                typeof(AbpProjectNameMigratorModule).Assembly.GetDirectoryPathOrNull()
+                typeof(AbpProjectNameMigratorModule).GetAssembly().GetDirectoryPathOrNull()
             );
         }
 
@@ -41,7 +40,7 @@ namespace AbpCompanyName.AbpProjectName.Migrator
 
         public override void Initialize()
         {
-            IocManager.RegisterAssemblyByConvention(Assembly.GetExecutingAssembly());
+            IocManager.RegisterAssemblyByConvention(typeof(AbpProjectNameMigratorModule).GetAssembly());
             ServiceCollectionRegistrar.Register(IocManager);
         }
     }
