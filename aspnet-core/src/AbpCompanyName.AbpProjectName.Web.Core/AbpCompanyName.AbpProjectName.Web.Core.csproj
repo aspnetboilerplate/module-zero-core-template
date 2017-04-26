@@ -34,7 +34,7 @@
     <PackageReference Include="Microsoft.AspNetCore.Authentication.MicrosoftAccount" Version="1.1.1" />
     <PackageReference Include="Microsoft.AspNetCore.Owin" Version="1.1.1" />
     <PackageReference Include="Swashbuckle.AspNetCore" Version="1.0.0" />
-    <PackageReference Include="Abp.AspNetCore" Version="2.0.1" />
+    <PackageReference Include="Abp.AspNetCore" Version="2.0.2" />
     <PackageReference Include="Abp.ZeroCore" Version="2.0.1" />
   </ItemGroup>
 
@@ -42,8 +42,8 @@
     <Reference Include="System" />
     <Reference Include="Microsoft.CSharp" />
 
-    <PackageReference Include="Abp.Web.SignalR" Version="2.0.1" />
-    <PackageReference Include="Abp.Owin" Version="2.0.1" />
+    <PackageReference Include="Abp.Web.SignalR" Version="2.0.2" />
+    <PackageReference Include="Abp.Owin" Version="2.0.2" />
   </ItemGroup>
 
 </Project>

@@ -18,8 +18,8 @@
   </ItemGroup>
 
   <ItemGroup>
-    <PackageReference Include="Abp" Version="2.0.1" />
-    <PackageReference Include="Abp.AutoMapper" Version="2.0.1" />
+    <PackageReference Include="Abp" Version="2.0.2" />
+    <PackageReference Include="Abp.AutoMapper" Version="2.0.2" />
     <PackageReference Include="Abp.ZeroCore" Version="2.0.1" />
     <PackageReference Include="Abp.ZeroCore.EntityFrameworkCore" Version="2.0.1" />
     <PackageReference Include="Microsoft.Extensions.Configuration.EnvironmentVariables" Version="1.1.1" />
