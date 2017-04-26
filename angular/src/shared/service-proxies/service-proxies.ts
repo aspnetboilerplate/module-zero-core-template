@@ -901,11 +901,19 @@ export class GetCurrentLoginInformationsOutput {
 
 export class ApplicationInfoDto { 
     version: string; 
-    releaseDate: moment.Moment;
+    releaseDate: moment.Moment; 
+    features: { [key: string] : boolean; };
     constructor(data?: any) {
         if (data !== undefined) {
             this.version = data["version"] !== undefined ? data["version"] : null;
             this.releaseDate = data["releaseDate"] ? moment(data["releaseDate"].toString()) : null;
+            if (data["features"]) {
+                this.features = {};
+                for (let key in data["features"]) {
+                    if (data["features"].hasOwnProperty(key))
+                        this.features[key] = data["features"][key] !== undefined ? data["features"][key] : null;
+                }
+            }
         }
     }
 
@@ -917,6 +925,13 @@ export class ApplicationInfoDto {
         data = data === undefined ? {} : data;
         data["version"] = this.version !== undefined ? this.version : null;
         data["releaseDate"] = this.releaseDate ? this.releaseDate.toISOString() : null;
+        if (this.features) {
+            data["features"] = {};
+            for (let key in this.features) {
+                if (this.features.hasOwnProperty(key))
+                    data["features"][key] = this.features[key] !== undefined ? this.features[key] : null;
+            }
+        }
         return data; 
     }
 

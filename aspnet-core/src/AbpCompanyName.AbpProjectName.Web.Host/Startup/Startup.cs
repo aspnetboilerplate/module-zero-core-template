@@ -1,7 +1,11 @@
 ﻿using System;
 using Abp.AspNetCore;
 using Abp.Castle.Logging.Log4Net;
+using AbpCompanyName.AbpProjectName.Authorization.Roles;
+using AbpCompanyName.AbpProjectName.Authorization.Users;
 using AbpCompanyName.AbpProjectName.Configuration;
+using AbpCompanyName.AbpProjectName.Identity;
+using AbpCompanyName.AbpProjectName.MultiTenancy;
 using Castle.Facilities.Logging;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
@@ -40,6 +44,17 @@ namespace AbpCompanyName.AbpProjectName.Web.Host.Startup
             {
                 options.Filters.Add(new CorsAuthorizationFilterFactory(DefaultCorsPolicyName));
             });
+
+            services.AddAbpIdentity<Tenant, User, Role, SecurityStampValidator>(options =>
+                {
+                    options.Cookies.ApplicationCookie.AuthenticationScheme = "AbpProjectNameAuthSchema";
+                    options.Cookies.ApplicationCookie.CookieName = "AbpProjectNameAuth";
+                })
+                .AddUserManager<UserManager>()
+                .AddRoleManager<RoleManager>()
+                .AddSignInManager<SignInManager>()
+                .AddClaimsPrincipalFactory<UserClaimsPrincipalFactory>()
+                .AddDefaultTokenProviders();
 
             //Configure CORS for angular2 UI
             services.AddCors(options =>

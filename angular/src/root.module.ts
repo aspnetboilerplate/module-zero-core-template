@@ -1,4 +1,5 @@
 ﻿import { BrowserModule } from '@angular/platform-browser';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { NgModule, Injector, APP_INITIALIZER } from '@angular/core';
 
 import { AbpModule, ABP_HTTP_PROVIDER } from '@abp/abp.module';
@@ -13,58 +14,59 @@ import { API_BASE_URL } from '@shared/service-proxies/service-proxies';
 
 import { RootComponent } from './root.component';
 import { AppPreBootstrap } from './AppPreBootstrap';
-import { ModalModule } from 'ng2-bootstrap';
+import { ModalModule } from 'ngx-bootstrap';
 
 
 export function appInitializerFactory(injector: Injector) {
-    return () => {
-        
-        abp.ui.setBusy();
-        return new Promise<boolean>((resolve, reject) => {
-            AppPreBootstrap.run(() => {
-                var appSessionService: AppSessionService = injector.get(AppSessionService);
-                appSessionService.init().then(
-                    (result) => {
-                        abp.ui.clearBusy();
-                        resolve(result);
-                    },
-                    (err) => {
-                        abp.ui.clearBusy();
-                        reject(err);
-                    }
-                );
-            });
-        });
-    }
+  return () => {
+
+    abp.ui.setBusy();
+    return new Promise<boolean>((resolve, reject) => {
+      AppPreBootstrap.run(() => {
+        var appSessionService: AppSessionService = injector.get(AppSessionService);
+        appSessionService.init().then(
+          (result) => {
+            abp.ui.clearBusy();
+            resolve(result);
+          },
+          (err) => {
+            abp.ui.clearBusy();
+            reject(err);
+          }
+        );
+      });
+    });
+  }
 }
 
 export function getRemoteServiceBaseUrl(): string {
-    return AppConsts.remoteServiceBaseUrl;
+  return AppConsts.remoteServiceBaseUrl;
 }
 
 @NgModule({
-    imports: [
-        BrowserModule,
-        SharedModule.forRoot(),
-        ModalModule.forRoot(),
-        AbpModule,
-        ServiceProxyModule,
-        RootRoutingModule
-    ],
-    declarations: [
-        RootComponent
-    ],
-    providers: [
-        ABP_HTTP_PROVIDER,
-        { provide: API_BASE_URL, useFactory: getRemoteServiceBaseUrl },
-        {
-            provide: APP_INITIALIZER,
-            useFactory: appInitializerFactory,
-            deps: [Injector],
-            multi: true
-        }
-    ],
-    bootstrap: [RootComponent]
+  imports: [
+    BrowserModule,
+    BrowserAnimationsModule,
+    SharedModule.forRoot(),
+    ModalModule.forRoot(),
+    AbpModule,
+    ServiceProxyModule,
+    RootRoutingModule
+  ],
+  declarations: [
+    RootComponent
+  ],
+  providers: [
+    ABP_HTTP_PROVIDER,
+    { provide: API_BASE_URL, useFactory: getRemoteServiceBaseUrl },
+    {
+      provide: APP_INITIALIZER,
+      useFactory: appInitializerFactory,
+      deps: [Injector],
+      multi: true
+    }
+  ],
+  bootstrap: [RootComponent]
 })
 export class RootModule {
 

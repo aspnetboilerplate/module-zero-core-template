@@ -11,14 +11,14 @@
         </div>
         <div class="collapse navbar-collapse">
             <ul class="nav navbar-nav">
-                <template ngFor let-menuItem [ngForOf]="menuItems" let-mainMenuItemIndex="index">
+                <ng-template ngFor let-menuItem [ngForOf]="menuItems" let-mainMenuItemIndex="index">
                     <li *ngIf="showMenuItem(menuItem)" routerLinkActive="active">
                         <a [routerLink]="[menuItem.route]">
                             <i class="{{menuItem.icon}}"></i>
                             <span class="title">{{l(menuItem.name)}}</span>
                         </a>
                     </li>
-                </template>
+                </ng-template>
             </ul>
             <ul class="nav navbar-nav navbar-right">
                 <li class="dropdown">

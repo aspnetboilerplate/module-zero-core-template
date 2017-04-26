@@ -1,7 +1,8 @@
-﻿using System.Threading.Tasks;
+﻿using System.Collections.Generic;
+using System.Threading.Tasks;
 using Abp.Auditing;
-using Abp.AutoMapper;
 using AbpCompanyName.AbpProjectName.Sessions.Dto;
+using AbpCompanyName.AbpProjectName.SignalR;
 
 namespace AbpCompanyName.AbpProjectName.Sessions
 {
@@ -15,7 +16,11 @@ namespace AbpCompanyName.AbpProjectName.Sessions
                 Application = new ApplicationInfoDto
                 {
                     Version = AppVersionHelper.Version,
-                    ReleaseDate = AppVersionHelper.ReleaseDate
+                    ReleaseDate = AppVersionHelper.ReleaseDate,
+                    Features = new Dictionary<string, bool>
+                    {
+                        { "SignalR", SignalRFeature.IsAvailable }
+                    }
                 }
             };
 
