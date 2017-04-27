@@ -14,11 +14,7 @@
   <PropertyGroup Condition=" '$(TargetFramework)' == 'net461' ">
     <DefineConstants>FEATURE_SIGNALR</DefineConstants>
   </PropertyGroup>
-
-  <ItemGroup>
-    <Content Include="wwwroot\images\app-logo-small.png" />
-  </ItemGroup>
-
+  
   <ItemGroup>
     <None Include="app.config" />
     <None Update="log4net.config">
