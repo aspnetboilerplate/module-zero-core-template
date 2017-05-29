@@ -2,7 +2,6 @@ using System.Collections.Generic;
 using System.Threading.Tasks;
 using Abp.Application.Services.Dto;
 using Abp.Authorization;
-using Abp.AutoMapper;
 using Abp.Domain.Repositories;
 using AbpCompanyName.AbpProjectName.Authorization;
 using AbpCompanyName.AbpProjectName.Authorization.Users;
@@ -41,7 +40,7 @@ namespace AbpCompanyName.AbpProjectName.Users
         public async Task RemoveFromRole(long userId, string roleName)
         {
             var user = await UserManager.FindByIdAsync(userId.ToString());
-            await UserManager.RemoveFromRoleAsync(user, roleName);
+            CheckErrors(await UserManager.RemoveFromRoleAsync(user, roleName));
         }
 
         public async Task<ListResultDto<UserListDto>> GetUsers()
@@ -61,7 +60,7 @@ namespace AbpCompanyName.AbpProjectName.Users
             user.Password = _passwordHasher.HashPassword(user, input.Password);
             user.IsEmailConfirmed = true;
 
-            await UserManager.CreateAsync(user);
+            CheckErrors(await UserManager.CreateAsync(user));
         }
     }
 }
