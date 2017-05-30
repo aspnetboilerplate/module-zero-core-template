@@ -34,7 +34,9 @@
         "../src/shared/core.less",
 
         "../node_modules/bootstrap/dist/css/bootstrap.min.css",
-        "../node_modules/bootswatch/cosmo/bootstrap.min.css"
+        "../node_modules/bootswatch/cosmo/bootstrap.min.css",
+        
+        "../src/styles.css"
       ],
       "scripts": [
         "../node_modules/jquery/dist/jquery.min.js",
