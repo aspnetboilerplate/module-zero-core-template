@@ -1,0 +1,17 @@
+version: '2'
+
+services:
+
+    zero_host:
+        image: zero/host
+        environment:
+            - ASPNETCORE_ENVIRONMENT=Staging
+        ports:
+            - "9901:80"
+        volumes:
+            - "./Host-Logs:/app/App_Data/Logs"
+
+    zero_ng:
+        image: zero/ng
+        ports:
+            - "9902:80"
