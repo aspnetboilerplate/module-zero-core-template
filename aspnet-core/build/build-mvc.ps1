@@ -7,7 +7,7 @@ $webMvcFolder = Join-Path $slnFolder "src/AbpCompanyName.AbpProjectName.Web.Mvc"
 
 ## CLEAR ######################################################################
 
-Remove-Item $outputFolder -Force -Recurse
+Remove-Item $outputFolder -Force -Recurse -ErrorAction Ignore
 New-Item -Path $outputFolder -ItemType Directory
 
 ## RESTORE NUGET PACKAGES #####################################################
