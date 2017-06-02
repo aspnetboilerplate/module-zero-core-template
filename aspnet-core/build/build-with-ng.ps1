@@ -8,7 +8,7 @@ $ngFolder = Join-Path $buildFolder "../../angular"
 
 ## CLEAR ######################################################################
 
-Remove-Item $outputFolder -Force -Recurse
+Remove-Item $outputFolder -Force -Recurse -ErrorAction Ignore
 New-Item -Path $outputFolder -ItemType Directory
 
 ## RESTORE NUGET PACKAGES #####################################################
@@ -24,6 +24,7 @@ dotnet publish --output (Join-Path $outputFolder "Host")
 ## PUBLISH ANGULAR UI PROJECT #################################################
 
 Set-Location $ngFolder
+& yarn
 & ng build -prod
 Copy-Item (Join-Path $ngFolder "dist") (Join-Path $outputFolder "ng") -Recurse
 Copy-Item (Join-Path $ngFolder "Dockerfile") (Join-Path $outputFolder "ng")
