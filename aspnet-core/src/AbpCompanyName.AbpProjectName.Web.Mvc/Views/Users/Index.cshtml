@@ -15,31 +15,57 @@
     </environment>
 }
 <div>
-    <h1>@L("Users")</h1>
-    <div class="row">
-        <div class="col-md-12">
-            <button data-toggle="modal" data-target="#UserCreateModal" class="btn btn-primary pull-right"><i class="fa fa-plus"></i> @L("CreateNewUser")</button>
-            <table class="table">
-                <thead>
-                    <tr>
-                        <th>@L("UserName")</th>
-                        <th>@L("FullName")</th>
-                        <th>@L("EmailAddress")</th>
-                        <th>@L("IsActive")</th>
-                    </tr>
-                </thead>
-                <tbody>
-                    @foreach (var user in Model.Items)
-                    {
+    <div class="block-header">
+        
+    </div>
+    
+    <div class="row clearfix">
+        <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+            <div class="card">
+                <div class="header">
+                    <h2>
+                        @L("Users")
+                    </h2>
+                    <ul class="header-dropdown m-r--5">
+                        <li class="dropdown">
+                            <a href="javascript:void(0);" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">
+                                <i class="material-icons">more_vert</i>
+                            </a>
+                            <ul class="dropdown-menu pull-right">
+                                <li><a href="javascript:void(0);" class=" waves-effect waves-block">Action</a></li>
+                                <li><a href="javascript:void(0);" class=" waves-effect waves-block">Another action</a></li>
+                                <li><a href="javascript:void(0);" class=" waves-effect waves-block">Something else here</a></li>
+                            </ul>
+                        </li>
+                    </ul>
+                </div>
+                <div class="body table-responsive">
+                    <table class="table">
+                        <thead>
                         <tr>
-                            <td>@user.UserName</td>
-                            <td>@user.FullName</td>
-                            <td>@user.EmailAddress</td>
-                            <td>@L(user.IsActive ? "Yes" : "No")</td>
+                            <th>@L("UserName")</th>
+                            <th>@L("FullName")</th>
+                            <th>@L("EmailAddress")</th>
+                            <th>@L("IsActive")</th>
                         </tr>
-                    }
-                </tbody>
-            </table>
+                        </thead>
+                        <tbody>
+                        @foreach (var user in Model.Items)
+                        {
+                            <tr>
+                                <td>@user.UserName</td>
+                                <td>@user.FullName</td>
+                                <td>@user.EmailAddress</td>
+                                <td>@L(user.IsActive ? "Yes" : "No")</td>
+                            </tr>
+                        }
+                        </tbody>
+                    </table>
+                    <button type="button" class="btn btn-primary btn-circle waves-effect waves-circle waves-float pull-right" data-toggle="modal" data-target="#UserCreateModal">
+                        <i class="material-icons">add</i>
+                    </button>
+                </div>
+            </div>
         </div>
     </div>
 </div>
