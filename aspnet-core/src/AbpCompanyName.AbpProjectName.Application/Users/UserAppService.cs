@@ -15,23 +15,20 @@ namespace AbpCompanyName.AbpProjectName.Users
     public class UserAppService : AbpProjectNameAppServiceBase, IUserAppService
     {
         private readonly IRepository<User, long> _userRepository;
-        private readonly IPermissionManager _permissionManager;
         private readonly IPasswordHasher<User> _passwordHasher;
 
         public UserAppService(
             IRepository<User, long> userRepository, 
-            IPermissionManager permissionManager,
             IPasswordHasher<User> passwordHasher)
         {
             _userRepository = userRepository;
-            _permissionManager = permissionManager;
             _passwordHasher = passwordHasher;
         }
 
         public async Task ProhibitPermission(ProhibitPermissionInput input)
         {
             var user = await UserManager.GetUserByIdAsync(input.UserId);
-            var permission = _permissionManager.GetPermission(input.PermissionName);
+            var permission = PermissionManager.GetPermission(input.PermissionName);
 
             await UserManager.ProhibitPermissionAsync(user, permission);
         }
