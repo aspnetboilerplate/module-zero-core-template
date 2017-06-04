@@ -61,5 +61,8 @@
     <text name="NotSelected">Seçilmemiş</text>
     <text name="Change">Değiştir</text>
     <text name="ChangeTenant">Müşteri değiştir</text>
+
+    <text name="MultiLevelMenu" value="Çok Seviyeli Menü" />
+    
   </texts>
 </localizationDictionary>

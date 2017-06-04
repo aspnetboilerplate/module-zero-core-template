@@ -61,5 +61,8 @@
     <text name="NotSelected">Not selected</text>
     <text name="Change">Change</text>
     <text name="ChangeTenant">Change tenant</text>
+
+    <text name="MultiLevelMenu" value="Multi Level Menu" />
+
   </texts>
 </localizationDictionary>

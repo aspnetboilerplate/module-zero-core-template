@@ -19,7 +19,7 @@ namespace AbpCompanyName.AbpProjectName.Web.Startup
                         url: "",
                         icon: "home",
                         requiresAuthentication: true
-                        )
+                    )
                 ).AddItem(
                     new MenuItemDefinition(
                         PageNames.Tenants,
@@ -27,7 +27,7 @@ namespace AbpCompanyName.AbpProjectName.Web.Startup
                         url: "Tenants",
                         icon: "business",
                         requiredPermissionName: PermissionNames.Pages_Tenants
-                        )
+                    )
                 ).AddItem(
                     new MenuItemDefinition(
                         PageNames.Users,
@@ -35,14 +35,102 @@ namespace AbpCompanyName.AbpProjectName.Web.Startup
                         url: "Users",
                         icon: "people",
                         requiredPermissionName: PermissionNames.Pages_Users
-                        )
+                    )
                 ).AddItem(
                     new MenuItemDefinition(
                         PageNames.About,
                         L("About"),
                         url: "About",
                         icon: "info"
+                    )
+                ).AddItem( //Menu items below is just for demonstration!
+                    new MenuItemDefinition(
+                        PageNames.About,
+                        L("MultiLevelMenu"),
+                        icon: "menu"
+                    ).AddItem(
+                        new MenuItemDefinition(
+                            "AspNetBoilerplate",
+                            new FixedLocalizableString("ASP.NET Boilerplate")
+                        ).AddItem(
+                            new MenuItemDefinition(
+                                "AspNetBoilerplateHome",
+                                new FixedLocalizableString("Home"),
+                                url: "https://aspnetboilerplate.com"
+                            )
+                        ).AddItem(
+                            new MenuItemDefinition(
+                                "AspNetBoilerplateTemplates",
+                                new FixedLocalizableString("Templates"),
+                                url: "https://aspnetboilerplate.com/Templates"
+                            )
+                        ).AddItem(
+                            new MenuItemDefinition(
+                                "AspNetBoilerplateSamples",
+                                new FixedLocalizableString("Samples"),
+                                url: "https://aspnetboilerplate.com/Samples"
+                            )
+                        ).AddItem(
+                            new MenuItemDefinition(
+                                "AspNetBoilerplateDocuments",
+                                new FixedLocalizableString("Documents"),
+                                url: "https://aspnetboilerplate.com/Documents"
+                            )
+                        ).AddItem(
+                            new MenuItemDefinition(
+                                "AspNetBoilerplateForum",
+                                new FixedLocalizableString("Forum"),
+                                url: "https://forum.aspnetboilerplate.com/"
+                            )
+                        ).AddItem(
+                            new MenuItemDefinition(
+                                "AspNetBoilerplateAbout",
+                                new FixedLocalizableString("About"),
+                                url: "https://aspnetboilerplate.com/About"
+                            )
                         )
+                    ).AddItem(
+                        new MenuItemDefinition(
+                            "AspNetZero",
+                            new FixedLocalizableString("ASP.NET Zero")
+                        ).AddItem(
+                            new MenuItemDefinition(
+                                "AspNetZeroHome",
+                                new FixedLocalizableString("Home"),
+                                url: "https://aspnetzero.com?ref=abptmpl"
+                            )
+                        ).AddItem(
+                            new MenuItemDefinition(
+                                "AspNetZeroDescription",
+                                new FixedLocalizableString("Description"),
+                                url: "https://aspnetzero.com/#description"
+                            )
+                        ).AddItem(
+                            new MenuItemDefinition(
+                                "AspNetZeroFeatures",
+                                new FixedLocalizableString("Features"),
+                                url: "https://aspnetzero.com/#features"
+                            )
+                        ).AddItem(
+                            new MenuItemDefinition(
+                                "AspNetZeroPricing",
+                                new FixedLocalizableString("Pricing"),
+                                url: "https://aspnetzero.com/#pricing"
+                            )
+                        ).AddItem(
+                            new MenuItemDefinition(
+                                "AspNetZeroFaq",
+                                new FixedLocalizableString("Faq"),
+                                url: "https://aspnetzero.com/Faq"
+                            )
+                        ).AddItem(
+                            new MenuItemDefinition(
+                                "AspNetZeroDocuments",
+                                new FixedLocalizableString("Documents"),
+                                url: "https://aspnetzero.com/Documents"
+                            )
+                        )
+                    )
                 );
         }
 

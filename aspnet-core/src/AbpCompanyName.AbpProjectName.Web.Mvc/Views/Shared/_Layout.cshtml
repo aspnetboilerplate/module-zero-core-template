@@ -1,6 +1,7 @@
 ﻿@using System.Globalization
 @using Abp.Web.Security.AntiForgery
 @using Abp.Configuration.Startup
+@using AbpCompanyName.AbpProjectName
 @using AbpCompanyName.AbpProjectName.Web.Resources
 @using AbpCompanyName.AbpProjectName.Web.Views.Shared.Components.SideBarNav
 @inject AbpCompanyName.AbpProjectName.Timing.AppTimes AppTimes
@@ -98,7 +99,7 @@
             <div class="navbar-header">
                 <a href="javascript:void(0);" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar-collapse" aria-expanded="false"></a>
                 <a href="javascript:void(0);" class="bars"></a>
-                <a class="navbar-brand" href="../../index.html">ADMINBSB - MATERIAL DESIGN</a>
+                <a class="navbar-brand" asp-controller="Home" asp-action="Index"><i class="fa fa-cubes"></i> AbpProjectName</a>
             </div>
             <div class="collapse navbar-collapse" id="navbar-collapse">
                 <ul class="nav navbar-nav navbar-right">
@@ -252,10 +253,10 @@
             <!-- Footer -->
             <div class="legal">
                 <div class="copyright">
-                    &copy; 2016 <a href="javascript:void(0);">AdminBSB - Material Design</a>.
+                    &copy; @DateTime.Now.Year <a href="javascript:void(0);">AbpProjectName</a>.
                 </div>
                 <div class="version">
-                    <b>Version: </b> 1.0.4
+                    <b>Version: </b> @AppVersionHelper.Version [@AppVersionHelper.ReleaseDate.ToString("yyyyMMdd")]
                 </div>
             </div>
             <!-- #Footer -->
