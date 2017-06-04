@@ -2,8 +2,8 @@ version: '2'
 
 services:
 
-    zero_mvc:
-        image: zero/mvc
+    abp_mvc:
+        image: abp/mvc
         environment:
             - ASPNETCORE_ENVIRONMENT=Staging
         ports:
