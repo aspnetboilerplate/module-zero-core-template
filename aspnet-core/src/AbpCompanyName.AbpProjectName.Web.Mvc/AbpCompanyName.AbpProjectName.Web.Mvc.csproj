@@ -14,6 +14,11 @@
   <PropertyGroup Condition=" '$(TargetFramework)' == 'net461' ">
     <DefineConstants>FEATURE_SIGNALR</DefineConstants>
   </PropertyGroup>
+
+  <ItemGroup>
+    <Content Include="wwwroot\images\user-img-background.jpg" />
+    <Content Include="wwwroot\images\user.png" />
+  </ItemGroup>
   
   <ItemGroup>
     <None Include="app.config" />

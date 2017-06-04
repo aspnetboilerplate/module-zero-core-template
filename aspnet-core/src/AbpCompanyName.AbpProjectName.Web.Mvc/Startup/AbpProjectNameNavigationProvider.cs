@@ -17,7 +17,7 @@ namespace AbpCompanyName.AbpProjectName.Web.Startup
                         PageNames.Home,
                         L("HomePage"),
                         url: "",
-                        icon: "fa fa-home",
+                        icon: "home",
                         requiresAuthentication: true
                         )
                 ).AddItem(
@@ -25,7 +25,7 @@ namespace AbpCompanyName.AbpProjectName.Web.Startup
                         PageNames.Tenants,
                         L("Tenants"),
                         url: "Tenants",
-                        icon: "fa fa-globe",
+                        icon: "business",
                         requiredPermissionName: PermissionNames.Pages_Tenants
                         )
                 ).AddItem(
@@ -33,7 +33,7 @@ namespace AbpCompanyName.AbpProjectName.Web.Startup
                         PageNames.Users,
                         L("Users"),
                         url: "Users",
-                        icon: "fa fa-users",
+                        icon: "people",
                         requiredPermissionName: PermissionNames.Pages_Users
                         )
                 ).AddItem(
@@ -41,7 +41,7 @@ namespace AbpCompanyName.AbpProjectName.Web.Startup
                         PageNames.About,
                         L("About"),
                         url: "About",
-                        icon: "fa fa-info"
+                        icon: "info"
                         )
                 );
         }
