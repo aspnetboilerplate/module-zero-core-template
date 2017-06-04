@@ -49,4 +49,6 @@
             switchToSelectedTenant();
         }
     });
+
+    $.AdminBSB.input.activate(_$form);
 })(jQuery);
