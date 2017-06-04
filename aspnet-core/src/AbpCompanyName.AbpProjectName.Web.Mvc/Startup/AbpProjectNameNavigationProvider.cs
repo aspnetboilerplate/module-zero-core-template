@@ -45,7 +45,7 @@ namespace AbpCompanyName.AbpProjectName.Web.Startup
                     )
                 ).AddItem( //Menu items below is just for demonstration!
                     new MenuItemDefinition(
-                        PageNames.About,
+                        "MultiLevelMenu",
                         L("MultiLevelMenu"),
                         icon: "menu"
                     ).AddItem(
