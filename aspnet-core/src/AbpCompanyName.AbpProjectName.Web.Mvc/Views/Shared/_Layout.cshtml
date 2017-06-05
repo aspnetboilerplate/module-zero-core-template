@@ -31,7 +31,6 @@
     <title>AbpProjectName</title>
 
     <environment names="Development">
-        <!-- ~/Bundles/vendor/css TODO: Update bundle! -->
         <link href="~/fonts/roboto/roboto.css" rel="stylesheet" asp-append-version="true" />
         <link href="~/fonts/material-icons/materialicons.css" rel="stylesheet" asp-append-version="true" />
         <link href="~/lib/bootstrap/dist/css/bootstrap.css" rel="stylesheet" asp-append-version="true" />
@@ -48,7 +47,7 @@
     </environment>
 
     <environment names="Staging,Production">
-        <link href="~/view-resources/Views/_Bundles/layout-libs.min.css" rel="stylesheet" asp-append-version="true" />
+        <link href="~/view-resources/Views/_Bundles/shared-layout.min.css" rel="stylesheet" asp-append-version="true" />
     </environment>
 
     <!-- View specific styles -->
@@ -279,18 +278,16 @@
         </aside>
         <!-- #END# Right Sidebar -->
     </section>
+
     <section class="content">
         <div class="container-fluid">
             @RenderBody()
         </div>
     </section>
 
-
     <environment names="Development">
-        <!-- TODO: Update bundles -->
         <script src="~/lib/json2/json2.js" asp-append-version="true"></script>
         <script src="~/lib/jquery/dist/jquery.js" asp-append-version="true"></script>
-        <script src="~/lib/jquery-ui/jquery-ui.js" asp-append-version="true"></script>
         <script src="~/lib/bootstrap/dist/js/bootstrap.js" asp-append-version="true"></script>
         <script src="~/lib/moment/min/moment-with-locales.js" asp-append-version="true"></script>
         <script src="~/lib/jquery-validation/dist/jquery.validate.js" asp-append-version="true"></script>
@@ -299,31 +296,28 @@
         <script src="~/lib/sweetalert/dist/sweetalert-dev.js" asp-append-version="true"></script>
         <script src="~/lib/spin.js/spin.js" asp-append-version="true"></script>
         <script src="~/lib/spin.js/jquery.spin.js" asp-append-version="true"></script>
-        <script src="~/lib/bootstrap-select/dist/js/bootstrap-select.js"></script>
-        <script src="~/lib/jquery-slimscroll/jquery.slimscroll.js"></script>
-        <script src="~/lib/Waves/dist/waves.js"></script>
+        <script src="~/lib/bootstrap-select/dist/js/bootstrap-select.js" asp-append-version="true"></script>
+        <script src="~/lib/jquery-slimscroll/jquery.slimscroll.js" asp-append-version="true"></script>
+        <script src="~/lib/Waves/dist/waves.js" asp-append-version="true"></script>
         <script src="~/lib/push.js/push.js" asp-append-version="true"></script>
-
         <script src="~/lib/abp-web-resources/Abp/Framework/scripts/abp.js" asp-append-version="true"></script>
         <script src="~/lib/abp-web-resources/Abp/Framework/scripts/libs/abp.jquery.js" asp-append-version="true"></script>
         <script src="~/lib/abp-web-resources/Abp/Framework/scripts/libs/abp.toastr.js" asp-append-version="true"></script>
         <script src="~/lib/abp-web-resources/Abp/Framework/scripts/libs/abp.blockUI.js" asp-append-version="true"></script>
         <script src="~/lib/abp-web-resources/Abp/Framework/scripts/libs/abp.spin.js" asp-append-version="true"></script>
         <script src="~/lib/abp-web-resources/Abp/Framework/scripts/libs/abp.sweet-alert.js" asp-append-version="true"></script>
-
+        <script src="~/js/admin.js"></script>
+        <script src="~/js/demo.js"></script>
+        <script src="~/js/main.js" asp-append-version="true"></script>
+        
         @if (SignalRFeature.IsAvailable)
         {
             <script src="~/lib/signalr/jquery.signalR.js" asp-append-version="true"></script>
         }
-
-        <script src="~/js/admin.js"></script>
-        <script src="~/js/demo.js"></script>
-
-        <script src="~/js/main.js" asp-append-version="true"></script>
     </environment>
 
     <environment names="Staging,Production">
-        <script src="~/view-resources/Views/_Bundles/layout-libs.min.js" asp-append-version="true"></script>
+        <script src="~/view-resources/Views/_Bundles/shared-layout.min.js" asp-append-version="true"></script>
         <script src="~/js/main.min.js" asp-append-version="true"></script>
     </environment>
 
@@ -338,7 +332,7 @@
 
     @if (SignalRFeature.IsAvailable)
     {
-    <!-- SignalR scripts -->
+        <!-- SignalR scripts -->
         <script src="~/signalr/hubs"></script>
         <script src="~/lib/abp-web-resources/Abp/Framework/scripts/libs/abp.signalr.js" type="text/javascript"></script>
     }
