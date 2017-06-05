@@ -6,5 +6,9 @@
   {
     "outputFile": "wwwroot/view-resources/Views/Account/Login.css",
     "inputFile": "wwwroot/view-resources/Views/Account/Login.less"
+  },
+  {
+    "outputFile": "wwwroot/view-resources/Views/Account/_Layout.css",
+    "inputFile": "wwwroot/view-resources/Views/Account/_Layout.less"
   }
 ]
