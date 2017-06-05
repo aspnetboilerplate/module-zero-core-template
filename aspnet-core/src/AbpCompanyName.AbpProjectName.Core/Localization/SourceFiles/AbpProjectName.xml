@@ -61,5 +61,11 @@
     <text name="NotSelected">Not selected</text>
     <text name="Change">Change</text>
     <text name="ChangeTenant">Change tenant</text>
+
+    <text name="MultiLevelMenu" value="Multi Level Menu" />
+    <text name="Back" value="Back" />
+    <text name="SuccessfullyRegistered" value="Successfully registered" />
+    <text name="WaitingForEmailActivation" value="Your email address should be activated" />
+
   </texts>
 </localizationDictionary>

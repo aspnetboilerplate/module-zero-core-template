@@ -184,7 +184,7 @@ namespace AbpCompanyName.AbpProjectName.Web.Controllers
                     model.EmailAddress,
                     model.UserName,
                     model.Password,
-                    true
+                    true //Assumed email address is always confirmed. Change this if you want to implement email confirmation.
                 );
 
                 //Getting tenant-specific settings
@@ -244,7 +244,9 @@ namespace AbpCompanyName.AbpProjectName.Web.Controllers
                     NameAndSurname = user.Name + " " + user.Surname,
                     UserName = user.UserName,
                     EmailAddress = user.EmailAddress,
-                    IsActive = user.IsActive
+                    IsEmailConfirmed = user.IsEmailConfirmed,
+                    IsActive = user.IsActive,
+                    IsEmailConfirmationRequiredForLogin = isEmailConfirmationRequiredForLogin
                 });
             }
             catch (UserFriendlyException ex)

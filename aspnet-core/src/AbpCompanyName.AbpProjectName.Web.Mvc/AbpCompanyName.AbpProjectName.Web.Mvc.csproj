@@ -14,7 +14,11 @@
   <PropertyGroup Condition=" '$(TargetFramework)' == 'net461' ">
     <DefineConstants>FEATURE_SIGNALR</DefineConstants>
   </PropertyGroup>
-  
+
+  <ItemGroup>
+    <Content Include="wwwroot\view-resources\Views\Shared\_Layout.js" />
+  </ItemGroup>
+
   <ItemGroup>
     <None Include="app.config" />
     <None Update="Dockerfile">
@@ -69,6 +73,11 @@
     <DotNetCliToolReference Include="Microsoft.Extensions.SecretManager.Tools" Version="1.0.0" />
     <DotNetCliToolReference Include="Microsoft.EntityFrameworkCore.Tools.DotNet" Version="1.0.0" />
     <DotNetCliToolReference Include="Microsoft.VisualStudio.Web.CodeGeneration.Tools" Version="1.0.0" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Folder Include="wwwroot\view-resources\Views\_Bundles\" />
+    <Folder Include="wwwroot\view-resources\Views\_Bundles\" />
   </ItemGroup>
 
 </Project>

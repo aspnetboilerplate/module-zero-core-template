@@ -61,5 +61,11 @@
     <text name="NotSelected">Seçilmemiş</text>
     <text name="Change">Değiştir</text>
     <text name="ChangeTenant">Müşteri değiştir</text>
+
+    <text name="MultiLevelMenu" value="Çok Seviyeli Menü" />
+    <text name="Back" value="Geri" />
+    <text name="SuccessfullyRegistered" value="Başarıyla kayıt olundu" />
+    <text name="WaitingForEmailActivation" value="E-posta adresiniz etkinleştirilmeli." />
+
   </texts>
 </localizationDictionary>
