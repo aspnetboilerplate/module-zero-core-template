@@ -31,28 +31,25 @@
     <title>AbpProjectName</title>
 
     <environment names="Development">
-
-        <!-- Fonts -->
+        <!-- ~/Bundles/vendor/css TODO: Update bundle! -->
         <link href="~/fonts/roboto/roboto.css" rel="stylesheet" asp-append-version="true" />
         <link href="~/fonts/material-icons/materialicons.css" rel="stylesheet" asp-append-version="true" />
-
-        <!-- ~/Bundles/vendor/css TODO: Update bundle! -->
-        <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.css" asp-append-version="true" />
+        <link href="~/lib/bootstrap/dist/css/bootstrap.css" rel="stylesheet" asp-append-version="true" />
+        <link href="~/lib/bootstrap-select/dist/css/bootstrap-select.css" rel="stylesheet" asp-append-version="true" />
+        <link href="~/lib/toastr/toastr.css" rel="stylesheet" asp-append-version="true" />
+        <link href="~/lib/sweetalert/dist/sweetalert.css" rel="stylesheet" asp-append-version="true" />
+        <link href="~/lib/famfamfam-flags/dist/sprite/famfamfam-flags.css" rel="stylesheet" asp-append-version="true" />
+        <link href="~/lib/font-awesome/css/font-awesome.css" rel="stylesheet" asp-append-version="true" />
+        <link href="~/lib/Waves/dist/waves.css" rel="stylesheet" asp-append-version="true" />
+        <link href="~/lib/animate.css/animate.css" rel="stylesheet" asp-append-version="true" />
         <link href="~/css/style.css" rel="stylesheet" asp-append-version="true">
         <link href="~/css/themes/all-themes.css" rel="stylesheet" asp-append-version="true" />
-        <link rel="stylesheet" href="~/lib/toastr/toastr.css" asp-append-version="true" />
-        <link rel="stylesheet" href="~/lib/sweetalert/dist/sweetalert.css" asp-append-version="true" />
-        <link rel="stylesheet" href="~/lib/famfamfam-flags/dist/sprite/famfamfam-flags.css" asp-append-version="true" />
-        <link rel="stylesheet" href="~/lib/font-awesome/css/font-awesome.css" asp-append-version="true" />
-        <link href="~/plugins/node-waves/waves.css" rel="stylesheet" asp-append-version="true" />
-        <link href="~/plugins/animate-css/animate.css" rel="stylesheet" asp-append-version="true" />
         <link href="~/view-resources/Views/Shared/_Layout.css" rel="stylesheet" asp-append-version="true" />
     </environment>
 
     <environment names="Staging,Production">
-        <link rel="stylesheet" href="~/view-resources/Views/_Bundles/layout-libs.min.css" asp-append-version="true" />
+        <link href="~/view-resources/Views/_Bundles/layout-libs.min.css" rel="stylesheet" asp-append-version="true" />
     </environment>
-
 
     <!-- View specific styles -->
     @RenderSection("styles", required: false)
@@ -302,11 +299,10 @@
         <script src="~/lib/sweetalert/dist/sweetalert-dev.js" asp-append-version="true"></script>
         <script src="~/lib/spin.js/spin.js" asp-append-version="true"></script>
         <script src="~/lib/spin.js/jquery.spin.js" asp-append-version="true"></script>
-        <script src="~/plugins/bootstrap-select/js/bootstrap-select.js"></script>
-        <script src="~/plugins/jquery-slimscroll/jquery.slimscroll.js"></script>
-        <script src="~/plugins/node-waves/waves.js"></script>
-        <script src="~/js/admin.js"></script>
-        <script src="~/js/demo.js"></script>
+        <script src="~/lib/bootstrap-select/dist/js/bootstrap-select.js"></script>
+        <script src="~/lib/jquery-slimscroll/jquery.slimscroll.js"></script>
+        <script src="~/lib/Waves/dist/waves.js"></script>
+        <script src="~/lib/push.js/push.js" asp-append-version="true"></script>
 
         <script src="~/lib/abp-web-resources/Abp/Framework/scripts/abp.js" asp-append-version="true"></script>
         <script src="~/lib/abp-web-resources/Abp/Framework/scripts/libs/abp.jquery.js" asp-append-version="true"></script>
@@ -320,7 +316,9 @@
             <script src="~/lib/signalr/jquery.signalR.js" asp-append-version="true"></script>
         }
 
-        <script src="~/lib/push.js/push.js" asp-append-version="true"></script>
+        <script src="~/js/admin.js"></script>
+        <script src="~/js/demo.js"></script>
+
         <script src="~/js/main.js" asp-append-version="true"></script>
     </environment>
 
