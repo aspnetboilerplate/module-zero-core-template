@@ -5,49 +5,22 @@
 @section scripts
 {
     <environment names="Development">
-        <!-- countTo -->
-        <script src="~/plugins/jquery-countto/jquery.countTo.js"></script>
-
-        <!-- Morris Plugin Js -->
-        <script src="~/plugins/raphael/raphael.min.js"></script>
-        <script src="~/plugins/morrisjs/morris.js"></script>
-        <!-- ChartJs -->
-        <script src="~/plugins/chartjs/Chart.bundle.js"></script>
-        <!-- Flot Charts Plugin Js -->
-        <script src="~/plugins/flot-charts/jquery.flot.js"></script>
-        <script src="~/plugins/flot-charts/jquery.flot.resize.js"></script>
-        <script src="~/plugins/flot-charts/jquery.flot.pie.js"></script>
-        <script src="~/plugins/flot-charts/jquery.flot.categories.js"></script>
-        <script src="~/plugins/flot-charts/jquery.flot.time.js"></script>
-        <!-- Sparkline Chart Plugin Js -->
-        <script src="~/plugins/jquery-sparkline/jquery.sparkline.js"></script>
+        <script src="~/lib/jquery-countTo/jquery.countTo.js" asp-append-version="true"></script>
+        <script src="~/lib/raphael/raphael.js" asp-append-version="true"></script>
+        <script src="~/lib/morris.js/morris.js" asp-append-version="true"></script>
+        <script src="~/lib/chart.js/dist/Chart.bundle.js" asp-append-version="true"></script>
+        <script src="~/lib/Flot/jquery.flot.js" asp-append-version="true"></script>
+        <script src="~/lib/Flot/jquery.flot.resize.js" asp-append-version="true"></script>
+        <script src="~/lib/Flot/jquery.flot.pie.js" asp-append-version="true"></script>
+        <script src="~/lib/Flot/jquery.flot.categories.js" asp-append-version="true"></script>
+        <script src="~/lib/Flot/jquery.flot.time.js" asp-append-version="true"></script>
+        <script src="~/lib/jquery-sparkline/dist/jquery.sparkline.js" asp-append-version="true"></script>
 
         <script src="~/view-resources/Views/Home/Index.js" asp-append-version="true"></script>
     </environment>
 
     <environment names="Staging,Production">
         <!-- TODO: Bundle! -->
-
-        <!-- countTo -->
-        <script src="~/plugins/jquery-countto/jquery.countTo.js"></script>
-
-        <!-- Morris Plugin Js -->
-        <script src="~/plugins/raphael/raphael.min.js"></script>
-        <script src="~/plugins/morrisjs/morris.js"></script>
-
-        <!-- ChartJs -->
-        <script src="~/plugins/chartjs/Chart.bundle.js"></script>
-
-        <!-- Flot Charts Plugin Js -->
-        <script src="~/plugins/flot-charts/jquery.flot.js"></script>
-        <script src="~/plugins/flot-charts/jquery.flot.resize.js"></script>
-        <script src="~/plugins/flot-charts/jquery.flot.pie.js"></script>
-        <script src="~/plugins/flot-charts/jquery.flot.categories.js"></script>
-        <script src="~/plugins/flot-charts/jquery.flot.time.js"></script>
-
-        <!-- Sparkline Chart Plugin Js -->
-        <script src="~/plugins/jquery-sparkline/jquery.sparkline.js"></script>
-
         <script src="~/view-resources/Views/Home/Index.min.js" asp-append-version="true"></script>
     </environment>
 }
