@@ -2,6 +2,7 @@
 @using Abp.Web.Security.AntiForgery
 @using Abp.Configuration.Startup
 @using AbpCompanyName.AbpProjectName
+@using AbpCompanyName.AbpProjectName.SignalR
 @using AbpCompanyName.AbpProjectName.Web.Resources
 @using AbpCompanyName.AbpProjectName.Web.Views.Shared.Components.SideBarNav
 @using AbpCompanyName.AbpProjectName.Web.Views.Shared.Components.SideBarUserArea
@@ -109,9 +110,9 @@
                     <!-- Call Search -->
                     <li><a href="javascript:void(0);" class="js-search" data-close="true"><i class="material-icons">search</i></a></li>
                     <!-- #END# Call Search -->
-                    
+
                     @await Component.InvokeAsync(typeof(TopBarLanguageSwitchViewComponent))
-                    
+
                     <li class="pull-right"><a href="javascript:void(0);" class="js-right-sidebar" data-close="true"><i class="material-icons">more_vert</i></a></li>
                 </ul>
             </div>
@@ -121,7 +122,7 @@
     <section>
         <!-- Left Sidebar -->
         <aside id="leftsidebar" class="sidebar">
-            
+
             @await Component.InvokeAsync(typeof(SideBarUserAreaViewComponent))
             @await Component.InvokeAsync(typeof(SideBarNavViewComponent), new { activeMenu = ViewBag.CurrentPageName })
 
@@ -314,7 +315,10 @@
         <script src="~/lib/abp-web-resources/Abp/Framework/scripts/libs/abp.spin.js" asp-append-version="true"></script>
         <script src="~/lib/abp-web-resources/Abp/Framework/scripts/libs/abp.sweet-alert.js" asp-append-version="true"></script>
 
-        <script src="~/lib/signalr/jquery.signalR.js" asp-append-version="true"></script>
+        @if (SignalRFeature.IsAvailable)
+        {
+            <script src="~/lib/signalr/jquery.signalR.js" asp-append-version="true"></script>
+        }
 
         <script src="~/lib/push.js/push.js" asp-append-version="true"></script>
         <script src="~/js/main.js" asp-append-version="true"></script>
@@ -334,9 +338,12 @@
     <script src="~/AbpServiceProxies/GetAll?v=@(AppTimes.StartupTime.Ticks)" type="text/javascript"></script>
     <script src="~/AbpScripts/GetScripts?v=@(AppTimes.StartupTime.Ticks)" type="text/javascript"></script>
 
+    @if (SignalRFeature.IsAvailable)
+    {
     <!-- SignalR scripts -->
-    <script src="~/signalr/hubs"></script>
-    <script src="~/lib/abp-web-resources/Abp/Framework/scripts/libs/abp.signalr.js" type="text/javascript"></script>
+        <script src="~/signalr/hubs"></script>
+        <script src="~/lib/abp-web-resources/Abp/Framework/scripts/libs/abp.signalr.js" type="text/javascript"></script>
+    }
 
     @WebResourceManager.RenderScripts();
 
