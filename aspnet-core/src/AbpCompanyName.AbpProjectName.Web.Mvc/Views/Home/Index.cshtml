@@ -15,13 +15,12 @@
         <script src="~/lib/Flot/jquery.flot.categories.js" asp-append-version="true"></script>
         <script src="~/lib/Flot/jquery.flot.time.js" asp-append-version="true"></script>
         <script src="~/lib/jquery-sparkline/dist/jquery.sparkline.js" asp-append-version="true"></script>
-
         <script src="~/view-resources/Views/Home/Index.js" asp-append-version="true"></script>
     </environment>
 
     <environment names="Staging,Production">
         <!-- TODO: Bundle! -->
-        <script src="~/view-resources/Views/Home/Index.min.js" asp-append-version="true"></script>
+        <script src="~/view-resources/Views/_Bundles/home-index.min.js" asp-append-version="true"></script>
     </environment>
 }
 <div class="block-header">
