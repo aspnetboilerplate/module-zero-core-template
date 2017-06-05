@@ -40,6 +40,7 @@
     <Content Include="wwwroot\images\user.png" />
     <Content Include="wwwroot\view-resources\Views\Account\_Layout.less" />
     <Content Include="wwwroot\view-resources\Views\Home\Index.js" />
+    <Content Include="wwwroot\view-resources\Views\Shared\_Layout.less" />
   </ItemGroup>
   
   <ItemGroup>
