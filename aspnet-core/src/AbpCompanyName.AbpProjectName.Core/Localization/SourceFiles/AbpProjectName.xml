@@ -63,6 +63,7 @@
     <text name="ChangeTenant">Change tenant</text>
 
     <text name="MultiLevelMenu" value="Multi Level Menu" />
+    <text name="Back" value="Back" />
 
   </texts>
 </localizationDictionary>

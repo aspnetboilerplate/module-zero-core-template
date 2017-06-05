@@ -63,6 +63,7 @@
     <text name="ChangeTenant">Müşteri değiştir</text>
 
     <text name="MultiLevelMenu" value="Çok Seviyeli Menü" />
-    
+    <text name="Back" value="Geri" />
+
   </texts>
 </localizationDictionary>
