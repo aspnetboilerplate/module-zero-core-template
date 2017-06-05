@@ -64,6 +64,8 @@
 
     <text name="MultiLevelMenu" value="Çok Seviyeli Menü" />
     <text name="Back" value="Geri" />
+    <text name="SuccessfullyRegistered" value="Başarıyla kayıt olundu" />
+    <text name="WaitingForEmailActivation" value="E-posta adresiniz etkinleştirilmeli." />
 
   </texts>
 </localizationDictionary>

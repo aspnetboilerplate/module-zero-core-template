@@ -52,17 +52,14 @@
                     <button id="LoginButton" class="btn btn-block bg-pink waves-effect" type="submit">@L("LogIn")</button>
                 </div>
             </div>
-            <div class="row m-t-15 m-b--20">
-                <div class="col-xs-6">
-                    @if (Model.IsSelfRegistrationAllowed)
-                    {
+            @if (Model.IsSelfRegistrationAllowed)
+            {
+                <div class="row m-t-15 m-b--20">
+                    <div class="col-xs-12">
                         <a asp-action="Register">@L("Register")</a>
-                    }
+                    </div>
                 </div>
-                <div class="col-xs-6 align-right">
-                    <a href="javascript:void(0);">Forgot Password?</a>
-                </div>
-            </div>
+            }
         </form>
     </div>
 </div>
