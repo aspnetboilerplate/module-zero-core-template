@@ -43,6 +43,8 @@
   {
     "outputFileName": "wwwroot/view-resources/Views/_Bundles/shared-layout.min.css",
     "inputFiles": [
+      "wwwroot/fonts/roboto/roboto.css",
+      "wwwroot/fonts/material-icons/materialicons.css",
       "wwwroot/lib/bootstrap/dist/css/bootstrap.css",
       "wwwroot/lib/bootstrap-select/dist/css/bootstrap-select.css",
       "wwwroot/lib/toastr/toastr.css",
@@ -98,7 +100,7 @@
       "wwwroot/lib/Flot/jquery.flot.categories.js",
       "wwwroot/lib/Flot/jquery.flot.time.js",
       "wwwroot/lib/jquery-sparkline/dist/jquery.sparkline.js",
-      "wwwroot/view-resources/Views/Home/Index.js",
+      "wwwroot/view-resources/Views/Home/Index.js"
     ]
   },
   {
@@ -123,6 +125,18 @@
     "outputFileName": "wwwroot/view-resources/Views/Tenants/Index.min.js",
     "inputFiles": [
       "wwwroot/view-resources/Views/Tenants/Index.js"
+    ]
+  },
+  {
+    "outputFileName": "wwwroot/view-resources/Views/Shared/Components/TenantChange/_ChangeModal.min.js",
+    "inputFiles": [
+      "wwwroot/view-resources/Views/Shared/Components/TenantChange/_ChangeModal.js"
+    ]
+  },
+  {
+    "outputFileName": "wwwroot/view-resources/Views/Shared/Components/TenantChange/Default.min.js",
+    "inputFiles": [
+      "wwwroot/view-resources/Views/Shared/Components/TenantChange/Default.js"
     ]
   }
 ]
