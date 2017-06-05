@@ -16,6 +16,10 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <Content Include="wwwroot\view-resources\Views\Shared\_Layout.js" />
+  </ItemGroup>
+
+  <ItemGroup>
     <None Include="app.config" />
     <None Update="Dockerfile">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
