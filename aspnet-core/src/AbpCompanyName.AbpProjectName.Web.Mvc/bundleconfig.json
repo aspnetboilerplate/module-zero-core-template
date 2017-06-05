@@ -2,6 +2,8 @@
   {
     "outputFileName": "wwwroot/view-resources/Views/_Bundles/account-layout.min.css",
     "inputFiles": [
+      "wwwroot/fonts/roboto/roboto.css",
+      "wwwroot/fonts/material-icons/materialicons.css",
       "wwwroot/lib/bootstrap/dist/css/bootstrap.css",
       "wwwroot/lib/toastr/toastr.css",
       "wwwroot/lib/sweetalert/dist/sweetalert.css",
@@ -9,6 +11,7 @@
       "wwwroot/lib/font-awesome/css/font-awesome.css",
       "wwwroot/lib/Waves/dist/waves.css",
       "wwwroot/lib/animate.css/animate.css",
+      "wwwroot/css/materialize.css",
       "wwwroot/css/style.css",
       "wwwroot/view-resources/Views/Account/_Layout.css"
     ]
@@ -48,6 +51,7 @@
       "wwwroot/lib/font-awesome/css/font-awesome.css",
       "wwwroot/lib/Waves/dist/waves.css",
       "wwwroot/lib/animate.css/animate.css",
+      "wwwroot/css/materialize.css",
       "wwwroot/css/style.css",
       "wwwroot/css/themes/all-themes.css",
       "wwwroot/view-resources/Views/Shared/_Layout.css"
