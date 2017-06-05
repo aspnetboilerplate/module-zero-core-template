@@ -83,7 +83,6 @@
       "wwwroot/lib/abp-web-resources/Abp/Framework/scripts/libs/abp.spin.js",
       "wwwroot/lib/abp-web-resources/Abp/Framework/scripts/libs/abp.sweet-alert.js",
       "wwwroot/js/admin.js",
-      "wwwroot/js/demo.js",
       "wwwroot/js/main.js"
     ]
   },
