@@ -1,6 +1,5 @@
 ﻿import { Component, OnInit, Injector, ViewEncapsulation, ViewChild } from '@angular/core';
 import { Router } from '@angular/router';
-import { LocalizationService } from '@abp/localization/localization.service';
 import { AbpSessionService } from '@abp/session/abp-session.service';
 import { AppComponentBase } from '../app-component-base';
 import { AppAuthService } from '../auth/app-auth.service';
