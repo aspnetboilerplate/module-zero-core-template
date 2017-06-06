@@ -19,6 +19,7 @@ import { UsersComponent } from '@app/users/users.component';
 import { CreateUserModalComponent } from '@app/users/create-user-modal.component';
 import { TenantsComponent } from '@app/tenants/tenants.component';
 import { CreateTenantModalComponent } from '@app/tenants/create-tenant-modal.component';
+import { TopBarComponent } from '@app/layout/topbar.component';
 import { TopBarLanguageSwitchComponent } from '@app/layout/topbar-languageswitch.component';
 import { SideBarUserAreaComponent } from '@app/layout/sidebar-user-area.component';
 import { SideBarNavComponent } from '@app/layout/sidebar-nav.component';
@@ -34,6 +35,7 @@ import { RightSideBarComponent } from '@app/layout/right-sidebar.component';
         CreateUserModalComponent,
         TenantsComponent,
         CreateTenantModalComponent,
+        TopBarComponent,
         TopBarLanguageSwitchComponent,
         SideBarUserAreaComponent,
         SideBarNavComponent,
