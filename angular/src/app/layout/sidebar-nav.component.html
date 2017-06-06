@@ -1,0 +1,12 @@
+﻿<div class="menu">
+    <ul class="list">
+        <ng-template ngFor let-menuItem [ngForOf]="menuItems" let-mainMenuItemIndex="index">
+            <li *ngIf="showMenuItem(menuItem)" routerLinkActive="active">
+                <a [routerLink]="[menuItem.route]">
+                    <i class="material-icons">{{menuItem.icon}}</i>
+                    <span>{{l(menuItem.name)}}</span>
+                </a>
+            </li>
+        </ng-template>
+    </ul>
+</div>

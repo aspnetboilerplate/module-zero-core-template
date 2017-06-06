@@ -22,10 +22,6 @@ export class SideBarUserAreaComponent extends AppComponentBase implements OnInit
         this.shownLoginName = this.appSession.getShownLoginName();
     }
 
-    getCurrentLoginInformations(): void {
-        
-    }
-    
     logout(): void {
         this._authService.logout();
     }
