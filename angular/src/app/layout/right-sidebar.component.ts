@@ -1,21 +1,13 @@
-﻿import { Component, Injector, ViewEncapsulation } from '@angular/core';
+﻿import { Component, Injector, ViewEncapsulation, OnInit } from '@angular/core';
 import { AppComponentBase } from '@shared/app-component-base';
-
-class UiThemeInfo {
-    constructor(
-        public name: string,
-        public cssClass: string
-    ) {
-        
-    }
-}
+import { ConfigurationServiceProxy, ChangeUiThemeInput } from '@shared/service-proxies/service-proxies';
 
 @Component({
     templateUrl: './right-sidebar.component.html',
     selector: 'right-sidebar',
     encapsulation: ViewEncapsulation.None
 })
-export class RightSideBarComponent extends AppComponentBase {
+export class RightSideBarComponent extends AppComponentBase implements OnInit {
 
     themes: UiThemeInfo[] = [
         new UiThemeInfo("Red", "red"),
@@ -43,19 +35,36 @@ export class RightSideBarComponent extends AppComponentBase {
     selectedThemeCssClass: string = "red";
 
     constructor(
-        injector: Injector
+        injector: Injector,
+        private _configurationService: ConfigurationServiceProxy
     ) {
         super(injector);
     }
 
-    setTheme(theme: UiThemeInfo): void {
-        const $body = $('body');
-
-        $('.right-sidebar .demo-choose-skin li').removeClass('active');
-        $body.removeClass('theme-' + this.selectedThemeCssClass);
-        $('.right-sidebar .demo-choose-skin li div.' + theme.cssClass).closest('li').addClass('active');
-        $body.addClass('theme-' + theme.cssClass);
-
-        this.selectedThemeCssClass = theme.cssClass;
+    ngOnInit(): void {
+        this.selectedThemeCssClass = this.setting.get('App.UiTheme');
+        $('body').addClass('theme-' + this.selectedThemeCssClass);
     }
+
+    setTheme(theme: UiThemeInfo): void {
+        const input = new ChangeUiThemeInput();
+        input.theme = theme.cssClass;
+        this._configurationService.changeUiTheme(input).subscribe(() => {
+            const $body = $('body');
+
+            $('.right-sidebar .demo-choose-skin li').removeClass('active');
+            $body.removeClass('theme-' + this.selectedThemeCssClass);
+            $('.right-sidebar .demo-choose-skin li div.' + theme.cssClass).closest('li').addClass('active');
+            $body.addClass('theme-' + theme.cssClass);
+
+            this.selectedThemeCssClass = theme.cssClass;
+        });
+    }
+}
+
+class UiThemeInfo {
+    constructor(
+        public name: string,
+        public cssClass: string
+    ) { }
 }
