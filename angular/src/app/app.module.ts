@@ -22,6 +22,7 @@ import { CreateTenantModalComponent } from '@app/tenants/create-tenant-modal.com
 import { TopBarLanguageSwitchComponent } from '@app/layout/topbar-languageswitch.component';
 import { SideBarUserAreaComponent } from '@app/layout/sidebar-user-area.component';
 import { SideBarNavComponent } from '@app/layout/sidebar-nav.component';
+import { SideBarFooterComponent } from '@app/layout/sidebar-footer.component';
 
 @NgModule({
     declarations: [
@@ -34,7 +35,8 @@ import { SideBarNavComponent } from '@app/layout/sidebar-nav.component';
         CreateTenantModalComponent,
         TopBarLanguageSwitchComponent,
         SideBarUserAreaComponent,
-        SideBarNavComponent
+        SideBarNavComponent,
+        SideBarFooterComponent
     ],
     imports: [
         CommonModule,

@@ -9,8 +9,6 @@ import { MenuItem } from '@shared/layout/menu-item';
 })
 export class SideBarNavComponent extends AppComponentBase {
 
-    shownLoginName: string = "";
-
     menuItems: MenuItem[] = [
         new MenuItem("HomePage", "", "home", "/app/home", true),
         new MenuItem("Tenants", "Pages.Tenants", "business", "/app/tenants", true),
