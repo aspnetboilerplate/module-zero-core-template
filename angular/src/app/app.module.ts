@@ -23,6 +23,7 @@ import { TopBarLanguageSwitchComponent } from '@app/layout/topbar-languageswitch
 import { SideBarUserAreaComponent } from '@app/layout/sidebar-user-area.component';
 import { SideBarNavComponent } from '@app/layout/sidebar-nav.component';
 import { SideBarFooterComponent } from '@app/layout/sidebar-footer.component';
+import { RightSideBarComponent } from '@app/layout/right-sidebar.component';
 
 @NgModule({
     declarations: [
@@ -36,7 +37,8 @@ import { SideBarFooterComponent } from '@app/layout/sidebar-footer.component';
         TopBarLanguageSwitchComponent,
         SideBarUserAreaComponent,
         SideBarNavComponent,
-        SideBarFooterComponent
+        SideBarFooterComponent,
+        RightSideBarComponent
     ],
     imports: [
         CommonModule,
