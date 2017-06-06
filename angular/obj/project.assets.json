@@ -8,15 +8,15 @@
     ".NETFramework,Version=v4.5.2": []
   },
   "packageFolders": {
-    "C:\\Users\\aliriza\\.nuget\\packages\\": {}
+    "C:\\Users\\hikalkan\\.nuget\\packages\\": {}
   },
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "D:\\GitHub\\module-zero-core-template\\angular\\AbpCompanyName.AbpProjectName.AngularUI.csproj",
+      "projectUniqueName": "D:\\Github\\module-zero-core-template\\angular\\AbpCompanyName.AbpProjectName.AngularUI.csproj",
       "projectName": "AbpCompanyName.AbpProjectName.AngularUI",
-      "projectPath": "D:\\GitHub\\module-zero-core-template\\angular\\AbpCompanyName.AbpProjectName.AngularUI.csproj",
-      "outputPath": "D:\\GitHub\\module-zero-core-template\\angular\\obj\\",
+      "projectPath": "D:\\Github\\module-zero-core-template\\angular\\AbpCompanyName.AbpProjectName.AngularUI.csproj",
+      "outputPath": "D:\\Github\\module-zero-core-template\\angular\\obj\\",
       "projectStyle": "PackageReference",
       "originalTargetFrameworks": [
         "net452"
