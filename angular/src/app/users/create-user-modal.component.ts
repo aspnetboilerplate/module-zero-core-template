@@ -2,7 +2,6 @@
 import { ModalDirective } from 'ngx-bootstrap';
 import { UserServiceProxy, CreateUserInput } from '@shared/service-proxies/service-proxies';
 import { AppComponentBase } from '@shared/app-component-base';
-import { NgForm } from '@angular/forms';
 
 import * as _ from "lodash";
 
