@@ -22,30 +22,32 @@ import { UsersComponent } from '@app/users/users.component';
 import { CreateUserModalComponent } from '@app/users/create-user-modal.component';
 import { TenantsComponent } from '@app/tenants/tenants.component';
 import { CreateTenantModalComponent } from '@app/tenants/create-tenant-modal.component';
+import { TopBarLanguageSwitchComponent } from 'app/layout/topbar-languageswitch.component';
 
 @NgModule({
-    declarations: [
-        AppComponent,
-        HomeComponent,
-        AboutComponent,
-        UsersComponent,
-        CreateUserModalComponent,
-        TenantsComponent,
-        CreateTenantModalComponent
-    ],
-    imports: [
-        CommonModule,
-        FormsModule,
-        HttpModule,
-        JsonpModule,
-        ModalModule.forRoot(),
-        AbpModule,
-        AppRoutingModule,
-        ServiceProxyModule,
-        SharedModule
-    ],
-    providers: [
+  declarations: [
+    AppComponent,
+    HomeComponent,
+    AboutComponent,
+    UsersComponent,
+    CreateUserModalComponent,
+    TenantsComponent,
+    CreateTenantModalComponent,
+    TopBarLanguageSwitchComponent
+  ],
+  imports: [
+    CommonModule,
+    FormsModule,
+    HttpModule,
+    JsonpModule,
+    ModalModule.forRoot(),
+    AbpModule,
+    AppRoutingModule,
+    ServiceProxyModule,
+    SharedModule
+  ],
+  providers: [
 
-    ]
+  ]
 })
 export class AppModule { }

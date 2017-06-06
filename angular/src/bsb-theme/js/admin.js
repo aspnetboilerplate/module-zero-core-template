@@ -1,4 +1,4 @@
-if (typeof jQuery === "undefined") {
+﻿if (typeof jQuery === "undefined") {
     throw new Error("jQuery plugins need to be before this file");
 }
 
@@ -124,8 +124,11 @@ $.AdminBSB.leftSideBar = {
 
             //Scroll active menu item when page load, if option set = true
             if ($.AdminBSB.options.leftSideBar.scrollActiveItemWhenPageLoad) {
-                var activeItemOffsetTop = $('.menu .list li.active')[0].offsetTop
-                if (activeItemOffsetTop > 150) $el.slimscroll({ scrollTo: activeItemOffsetTop + 'px' });
+                var $activeItem = $('.menu .list li.active');
+                if ($activeItem.length) {
+                    var activeItemOffsetTop = $activeItem[0].offsetTop;
+                    if (activeItemOffsetTop > 150) $el.slimscroll({ scrollTo: activeItemOffsetTop + 'px' });
+                }
             }
         }
     },
@@ -446,15 +449,13 @@ $.AdminBSB.browser = {
 }
 //==========================================================================================================================
 
-$(function () {
+$.AdminBSB.activateAll = function () {
     $.AdminBSB.browser.activate();
     $.AdminBSB.leftSideBar.activate();
     $.AdminBSB.rightSideBar.activate();
     $.AdminBSB.navbar.activate();
-    $.AdminBSB.dropdownMenu.activate();
+    //$.AdminBSB.dropdownMenu.activate(); //Breaks drop downs, so disabled it!
     $.AdminBSB.input.activate();
     $.AdminBSB.select.activate();
     $.AdminBSB.search.activate();
-
-    setTimeout(function () { $('.page-loader-wrapper').fadeOut(); }, 50);
-});
+}
