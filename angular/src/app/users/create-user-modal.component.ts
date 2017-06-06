@@ -2,7 +2,7 @@
 import { ModalDirective } from 'ngx-bootstrap';
 import { UserServiceProxy, CreateUserInput } from '@shared/service-proxies/service-proxies';
 import { AppComponentBase } from '@shared/app-component-base';
-import { AppConsts } from '@shared/AppConsts';
+import { NgForm } from '@angular/forms';
 
 import * as _ from "lodash";
 
@@ -13,6 +13,7 @@ import * as _ from "lodash";
 export class CreateUserModalComponent extends AppComponentBase {
 
     @ViewChild('createUserModal') modal: ModalDirective;
+    @ViewChild('modalContent') modalContent: ElementRef;
 
     @Output() modalSave: EventEmitter<any> = new EventEmitter<any>();
 
@@ -30,7 +31,11 @@ export class CreateUserModalComponent extends AppComponentBase {
     show(): void {
         this.active = true;
         this.modal.show();
-        this.user = new CreateUserInput({ isActive: false });
+        this.user = new CreateUserInput({ isActive: true });
+    }
+
+    onShown(): void {
+        ($ as any).AdminBSB.input.activate($(this.modalContent.nativeElement));
     }
 
     save(): void {
