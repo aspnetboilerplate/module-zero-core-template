@@ -84,7 +84,8 @@ namespace AbpCompanyName.AbpProjectName.Web.Controllers
             {
                 ReturnUrl = returnUrl,
                 IsMultiTenancyEnabled = _multiTenancyConfig.IsEnabled,
-                IsSelfRegistrationAllowed = IsSelfRegistrationEnabled()
+                IsSelfRegistrationAllowed = IsSelfRegistrationEnabled(),
+                MultiTenancySide = AbpSession.MultiTenancySide
             });
         }
 
