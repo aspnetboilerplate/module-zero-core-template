@@ -195,10 +195,10 @@
     *  You can manage the search bar
     *  
     */
-    var $searchBar = $('.search-bar');
     $.AdminBSB.search = {
         activate: function () {
             var _this = this;
+            var $searchBar = $('.search-bar');
 
             //Search button click event
             $('.js-search').on('click', function () {
@@ -218,10 +218,13 @@
             });
         },
         showSearchBar: function () {
+            var $searchBar = $('.search-bar');
             $searchBar.addClass('open');
             $searchBar.find('input[type="text"]').focus();
+            console.log($searchBar);
         },
         hideSearchBar: function () {
+            var $searchBar = $('.search-bar');
             $searchBar.removeClass('open');
             $searchBar.find('input[type="text"]').val('');
         }
