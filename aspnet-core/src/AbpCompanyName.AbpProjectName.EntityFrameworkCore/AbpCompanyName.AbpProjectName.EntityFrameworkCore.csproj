@@ -25,4 +25,8 @@
     <ProjectReference Include="..\AbpCompanyName.AbpProjectName.Core\AbpCompanyName.AbpProjectName.Core.csproj" />
   </ItemGroup>
 
+  <ItemGroup>
+    <DotNetCliToolReference Include="Microsoft.EntityFrameworkCore.Tools.DotNet" Version="1.0.0" />
+  </ItemGroup>
+
 </Project>
