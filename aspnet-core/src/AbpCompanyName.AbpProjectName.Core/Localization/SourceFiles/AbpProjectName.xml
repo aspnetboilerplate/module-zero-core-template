@@ -62,10 +62,10 @@
     <text name="Change">Change</text>
     <text name="ChangeTenant">Change tenant</text>
 
-    <text name="MultiLevelMenu" value="Multi Level Menu" />
-    <text name="Back" value="Back" />
-    <text name="SuccessfullyRegistered" value="Successfully registered" />
-    <text name="WaitingForEmailActivation" value="Your email address should be activated" />
+    <text name="MultiLevelMenu">Multi Level Menu</text>
+    <text name="Back">Back</text>
+    <text name="SuccessfullyRegistered">Successfully registered</text>
+    <text name="WaitingForEmailActivation">Your email address should be activated</text>
 
   </texts>
 </localizationDictionary>

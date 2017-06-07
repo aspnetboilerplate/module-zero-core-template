@@ -44,7 +44,7 @@
 
                 <div class="modal-footer">
                     <button [disabled]="saving" type="button" class="btn btn-default" (click)="close()">{{l("Cancel")}}</button>
-                    <button type="submit" class="btn btn-primary blue" [disabled]="!createTenantForm.form.valid">{{l("Save")}}</button>
+                    <button type="submit" class="btn btn-primary blue" [disabled]="!createTenantForm.form.valid || saving">{{l("Save")}}</button>
                 </div>
 
             </form>
