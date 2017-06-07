@@ -1,8 +1,5 @@
 ﻿import { Component, OnInit, Injector, ViewEncapsulation } from '@angular/core';
-import { Router } from '@angular/router';
-import { AbpSessionService } from '@abp/session/abp-session.service';
 import { AppComponentBase } from '@shared/app-component-base';
-import { AppAuthService } from '@shared/auth/app-auth.service';
 
 @Component({
   templateUrl: './topbar-languageswitch.component.html',
@@ -15,10 +12,7 @@ export class TopBarLanguageSwitchComponent extends AppComponentBase implements O
   currentLanguage: abp.localization.ILanguageInfo;
   
   constructor(
-    injector: Injector,
-    private _sessionService: AbpSessionService,
-    private _authService: AppAuthService,
-    private _router: Router
+    injector: Injector
   ) {
     super(injector);
   }
