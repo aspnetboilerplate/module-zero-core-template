@@ -31,10 +31,7 @@ export class TopBarComponent extends AppComponentBase implements OnInit {
     }
 
     menuItems: MenuItem[] = [
-        new MenuItem("Home", "", "fa fa-home", "/app/home", true),
-        new MenuItem("Tenants", "Pages.Tenants", "fa fa-globe", "/app/tenants", true),
-        new MenuItem("Users", "Pages.Users", "fa fa-users", "/app/users", true),
-        new MenuItem("About", "", "fa fa-info", "/app/about", false)
+
     ];
 
     ngOnInit() {

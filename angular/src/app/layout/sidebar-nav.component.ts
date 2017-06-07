@@ -10,10 +10,28 @@ import { MenuItem } from '@shared/layout/menu-item';
 export class SideBarNavComponent extends AppComponentBase {
 
     menuItems: MenuItem[] = [
-        new MenuItem("HomePage", "", "home", "/app/home", true),
-        new MenuItem("Tenants", "Pages.Tenants", "business", "/app/tenants", true),
-        new MenuItem("Users", "Pages.Users", "people", "/app/users", true),
-        new MenuItem("About", "", "info", "/app/about", true)
+        new MenuItem(this.l("HomePage"), "", "home", "/app/home"),
+        new MenuItem(this.l("Tenants"), "Pages.Tenants", "business", "/app/tenants"),
+        new MenuItem(this.l("Users"), "Pages.Users", "people", "/app/users"),
+        new MenuItem(this.l("About"), "", "info", "/app/about"),
+        new MenuItem(this.l("MultiLevelMenu"), "", "menu", "", [
+            new MenuItem("ASP.NET Boilerplate", "", "", "", [
+                new MenuItem("Home", "", "", "https://aspnetboilerplate.com"),
+                new MenuItem("Templates", "", "", "https://aspnetboilerplate.com/Templates"),
+                new MenuItem("Samples", "", "", "https://aspnetboilerplate.com/Samples"),
+                new MenuItem("Documents", "", "", "https://aspnetboilerplate.com/Pages/Documents"),
+                new MenuItem("Forum", "", "", "https://forum.aspnetboilerplate.com/"),
+                new MenuItem("About", "", "", "https://aspnetboilerplate.com/About")
+            ]),
+            new MenuItem("ASP.NET Zero", "", "", "", [
+                new MenuItem("Home", "", "", "https://aspnetzero.com?ref=abptmpl"),
+                new MenuItem("Description", "", "", "https://aspnetzero.com/?ref=abptmpl#description"),
+                new MenuItem("Features", "", "", "https://aspnetzero.com/?ref=abptmpl#features"),
+                new MenuItem("Pricing", "", "", "https://aspnetzero.com/?ref=abptmpl#pricing"),
+                new MenuItem("Faq", "", "", "https://aspnetzero.com/Faq?ref=abptmpl"),
+                new MenuItem("Documents", "", "", "https://aspnetzero.com/Documents?ref=abptmpl")
+            ])
+        ])
     ];
 
     constructor(
@@ -23,15 +41,10 @@ export class SideBarNavComponent extends AppComponentBase {
     }
 
     showMenuItem(menuItem): boolean {
-
         if (menuItem.permissionName) {
             return this.permission.isGranted(menuItem.permissionName);
         }
 
-        if (!menuItem.requiresAuthentication) {
-            return true;
-        }
-
-        return this.appSession.userId > 0;
+        return true;
     }
 }
