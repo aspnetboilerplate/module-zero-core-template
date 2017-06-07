@@ -28,6 +28,6 @@ export class AccountComponent implements OnInit {
 
     ngOnInit(): void {
         this._loginService.init();
-        $('body').attr('class', 'page-md login');
+        $('body').attr('class', 'login-page');
     }
 }

@@ -1,4 +1,4 @@
-﻿import { Component, Injector, OnInit } from '@angular/core';
+﻿import { Component, Injector, ElementRef, AfterViewInit, ViewChild } from '@angular/core';
 import { Router } from '@angular/router';
 import { AccountServiceProxy, RegisterInput } from '@shared/service-proxies/service-proxies'
 import { AppComponentBase } from '@shared/app-component-base';
@@ -9,7 +9,9 @@ import { accountModuleAnimation } from '@shared/animations/routerTransition';
     templateUrl: './register.component.html',
     animations: [accountModuleAnimation()]
 })
-export class RegisterComponent extends AppComponentBase {
+export class RegisterComponent extends AppComponentBase implements AfterViewInit {
+
+    @ViewChild('cardBody') cardBody: ElementRef;
 
     model: RegisterInput = new RegisterInput();
 
@@ -24,6 +26,10 @@ export class RegisterComponent extends AppComponentBase {
         super(injector);
     }
 
+    ngAfterViewInit(): void {
+        ($ as any).AdminBSB.input.activate($(this.cardBody.nativeElement));
+        $(this.cardBody.nativeElement).find('input:first').focus();
+    }
 
     back(): void {
         this._router.navigate(['/login']);
