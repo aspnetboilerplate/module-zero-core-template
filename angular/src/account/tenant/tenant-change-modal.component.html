@@ -1,7 +1,7 @@
 ﻿<div bsModal #tenantChangeModal="bs-modal" (onShown)="onShown()" class="modal fade" tabindex="-1" role="dialog" aria-labelledby="tenantChangeModal" aria-hidden="true" [config]="{backdrop: 'static'}">
     <div class="modal-dialog">
 
-        <div class="modal-content">
+        <div #modalContent class="modal-content">
 
             <form *ngIf="active" #changeTenantForm="ngForm" novalidate (ngSubmit)="save()">
 
@@ -15,16 +15,18 @@
                 </div>
 
                 <div class="modal-body">
-                    <div class="form-group form-md-line-input form-md-floating-label no-hint">
-                      <label>{{l("TenancyName")}}</label>  
-                      <input #tenancyNameInput type="text" name="TenancyName" class="form-control" [ngClass]="{'edited':tenancyName}" [(ngModel)]="tenancyName" maxlength="64">
-                        <span class="help-block">{{l("LeaveEmptyToSwitchToHost")}}</span>
+                    <div class="form-group form-float">
+                        <div class="form-line">
+                            <input #tenancyNameInput type="text" name="TenancyName" class="form-control" [ngClass]="{'edited':tenancyName}" [(ngModel)]="tenancyName" maxlength="64">
+                            <label class="form-label">{{l("TenancyName")}}</label>
+                        </div>
                     </div>
+                    <span class="help-block">{{l("LeaveEmptyToSwitchToHost")}}</span>
                 </div>
 
                 <div class="modal-footer">
-                    <button [disabled]="saving" type="button" class="btn btn-default" (click)="close()">{{l("Cancel")}}</button>
-                    <button type="submit" class="btn btn-primary blue" [disabled]="!changeTenantForm.form.valid"><i class="fa fa-save"></i> <span>{{l("Save")}}</span></button>
+                    <button [disabled]="saving" type="button" class="btn btn-default waves-effect" (click)="close()">{{l("Cancel")}}</button>
+                    <button type="submit" class="btn btn-primary waves-effect" [disabled]="!changeTenantForm.form.valid">{{l("Save")}}</button>
                 </div>
 
             </form>

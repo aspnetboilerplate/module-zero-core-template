@@ -1,9 +1,6 @@
-﻿import { Component, Injector, OnInit } from '@angular/core';
+﻿import { Component, Injector, ElementRef, AfterViewInit, ViewChild } from '@angular/core';
 import { Router } from '@angular/router';
-import { Http, Headers } from '@angular/http';
-import { TokenAuthServiceProxy, AuthenticateModel, AuthenticateResultModel } from '@shared/service-proxies/service-proxies';
 import { AppComponentBase } from '@shared/app-component-base';
-import { AppConsts } from '@shared/AppConsts';
 import { LoginService, ExternalLoginProvider } from './login.service';
 import { accountModuleAnimation } from '@shared/animations/routerTransition';
 import { AbpSessionService } from '@abp/session/abp-session.service';
@@ -17,6 +14,8 @@ import { AbpSessionService } from '@abp/session/abp-session.service';
 })
 export class LoginComponent extends AppComponentBase {
 
+    @ViewChild('cardBody') cardBody: ElementRef;
+
     submitting: boolean = false;
 
     constructor(
@@ -26,6 +25,11 @@ export class LoginComponent extends AppComponentBase {
         private _sessionService: AbpSessionService
     ) {
         super(injector);
+    }
+
+    ngAfterViewInit(): void {
+        ($ as any).AdminBSB.input.activate($(this.cardBody.nativeElement));
+        $(this.cardBody.nativeElement).find('input:first').focus();
     }
 
     get multiTenancySideIsTeanant(): boolean {

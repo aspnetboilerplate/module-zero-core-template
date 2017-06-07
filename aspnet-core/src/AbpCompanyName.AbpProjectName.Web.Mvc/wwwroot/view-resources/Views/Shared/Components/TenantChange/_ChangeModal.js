@@ -51,4 +51,8 @@
     });
 
     $.AdminBSB.input.activate(_$form);
+
+    $('#TenantChangeModal').on('shown.bs.modal', function () {
+        _$form.find('input[type=text]:first').focus();
+    });
 })(jQuery);

@@ -1,54 +1,51 @@
-﻿<div [@routerTransition]>
-    <div class="container">
-        <div id="LoginArea" class="row">
-            <div class="col-lg-12">
-                <div class="well bs-component">
-                    <form #loginForm="ngForm" id="LoginForm" class="form-horizontal" method="post" novalidate (ngSubmit)="login()">
-                        <fieldset>
-                            <legend>{{l("LogIn")}}</legend>
-                            <div class="form-group">
-                                <div class="col-lg-12">
-                                    <input [(ngModel)]="loginService.authenticateModel.userNameOrEmailAddress" autoFocus class="form-control form-control-solid placeholder-no-fix input-ltr" type="text" autocomplete="off" placeholder="{{l('UserNameOrEmail')}}" name="userNameOrEmailAddress" required />
-                                </div>
-                            </div>
+﻿<div class="card" [@routerTransition]>
+    <div #cardBody class="body">
+        <form #loginForm="ngForm" id="LoginForm" method="post" novalidate (ngSubmit)="login()">
+            <h4 class="text-center">{{l("LogIn")}}</h4>
 
-                            <div class="form-group">
-                                <div class="col-lg-12">
-                                    <input [(ngModel)]="loginService.authenticateModel.password" class="form-control form-control-solid placeholder-no-fix input-ltr" type="password" autocomplete="off" placeholder="{{l('Password')}}" name="password" required maxlength="32" />
-                                    <div class="checkbox">
-                                        <label>
-                                            <input [(ngModel)]="loginService.rememberMe" type="checkbox" name="rememberMe" value="true" />
-                                            <span class="ripple"></span>
-                                            <span class="check"></span> {{l("RememberMe")}}
-                                        </label>
-                                    </div>
-                                </div>
-                            </div>
-
-                            <div class="form-group">
-                                <div class="col-lg-12">
-                                    <button id="LoginButton" type="submit" class="btn btn-primary" [disabled]="!loginForm.form.valid"><i class="fa fa-sign-in"></i> {{l("LogIn")}}</button>
-                                    <span *ngIf="isSelfRegistrationAllowed">
-                                        <a class="btn btn-success" [routerLink]="['../register']"><i class="fa fa-sign-in"></i> {{l("Register")}}</a>
-                                    </span>
-                                </div>
-                            </div>
-
-                        </fieldset>
-                    </form>
-
-                    <div class="login-options" *ngIf="multiTenancySideIsTeanant && loginService.externalLoginProviders.length > 0">
-                        <h4>{{l("LoginWith")}}</h4>
-                        <ul class="social-icons">
-                            <li *ngFor="let provider of loginService.externalLoginProviders">
-                                <a class="btn btn-default btn-sm fa fa-{{provider.icon == 'googleplus' ? 'google-plus' : provider.icon}}"
-                                   (click)="externalLogin(provider)"
-                                   title="{{provider.name}}"></a>
-                            </li>
-                        </ul>
-                    </div>
+            <div class="input-group">
+                <span class="input-group-addon">
+                    <i class="material-icons">person</i>
+                </span>
+                <div class="form-line">
+                    <input [(ngModel)]="loginService.authenticateModel.userNameOrEmailAddress" autoFocus class="form-control" type="text" autocomplete="off" placeholder="{{l('UserNameOrEmail')}}" name="userNameOrEmailAddress" required maxlength="255" />
                 </div>
             </div>
+            
+            <div class="input-group">
+                <span class="input-group-addon">
+                    <i class="material-icons">lock</i>
+                </span>
+                <div class="form-line">
+                    <input type="password" [(ngModel)]="loginService.authenticateModel.password" class="form-control" name="password" placeholder="{{l('Password')}}" required maxlength="32">
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-xs-8 p-t-5">
+                    <input type="checkbox"  [(ngModel)]="loginService.rememberMe" name="rememberMe" id="rememberme" class="filled-in chk-col-pink" value="true">
+                    <label for="rememberme">{{l("RememberMe")}}</label>
+                </div>
+                <div class="col-xs-4">
+                    <button id="LoginButton" class="btn btn-block bg-pink waves-effect" type="submit">{{l("LogIn")}}</button>
+                </div>
+            </div>
+            
+            <div class="row m-t-15 m-b--20" *ngIf="isSelfRegistrationAllowed">
+                <div class="col-xs-12">
+                    <a [routerLink]="['../register']">{{l("Register")}}</a>
+                </div>
+            </div>
+        </form>
+        
+        <div class="login-options" *ngIf="multiTenancySideIsTeanant && loginService.externalLoginProviders.length > 0">
+            <h4>{{l("OrLoginWith")}}</h4>
+            <ul class="social-icons">
+                <li *ngFor="let provider of loginService.externalLoginProviders">
+                    <a class="btn btn-default btn-sm fa fa-{{provider.icon == 'googleplus' ? 'google-plus' : provider.icon}}"
+                       (click)="externalLogin(provider)"
+                       title="{{provider.name}}"></a>
+                </li>
+            </ul>
         </div>
     </div>
 </div>

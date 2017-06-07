@@ -74,7 +74,7 @@ namespace AbpCompanyName.AbpProjectName.Web.Startup
                             new MenuItemDefinition(
                                 "AspNetBoilerplateDocuments",
                                 new FixedLocalizableString("Documents"),
-                                url: "https://aspnetboilerplate.com/Documents"
+                                url: "https://aspnetboilerplate.com/Pages/Documents"
                             )
                         ).AddItem(
                             new MenuItemDefinition(
@@ -103,31 +103,31 @@ namespace AbpCompanyName.AbpProjectName.Web.Startup
                             new MenuItemDefinition(
                                 "AspNetZeroDescription",
                                 new FixedLocalizableString("Description"),
-                                url: "https://aspnetzero.com/#description"
+                                url: "https://aspnetzero.com/?ref=abptmpl#description"
                             )
                         ).AddItem(
                             new MenuItemDefinition(
                                 "AspNetZeroFeatures",
                                 new FixedLocalizableString("Features"),
-                                url: "https://aspnetzero.com/#features"
+                                url: "https://aspnetzero.com/?ref=abptmpl#features"
                             )
                         ).AddItem(
                             new MenuItemDefinition(
                                 "AspNetZeroPricing",
                                 new FixedLocalizableString("Pricing"),
-                                url: "https://aspnetzero.com/#pricing"
+                                url: "https://aspnetzero.com/?ref=abptmpl#pricing"
                             )
                         ).AddItem(
                             new MenuItemDefinition(
                                 "AspNetZeroFaq",
                                 new FixedLocalizableString("Faq"),
-                                url: "https://aspnetzero.com/Faq"
+                                url: "https://aspnetzero.com/Faq?ref=abptmpl"
                             )
                         ).AddItem(
                             new MenuItemDefinition(
                                 "AspNetZeroDocuments",
                                 new FixedLocalizableString("Documents"),
-                                url: "https://aspnetzero.com/Documents"
+                                url: "https://aspnetzero.com/Documents?ref=abptmpl"
                             )
                         )
                     )

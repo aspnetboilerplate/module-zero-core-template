@@ -40,5 +40,5 @@
         $form.submit();
     });
 
-    $loginForm.find('input:first-child').focus();
+    $loginForm.find('input[type=text]:first-child').focus();
 });

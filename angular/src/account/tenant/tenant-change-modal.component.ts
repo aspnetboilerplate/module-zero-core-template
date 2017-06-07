@@ -13,6 +13,7 @@ export class TenantChangeModalComponent extends AppComponentBase {
 
     @ViewChild('tenantChangeModal') modal: ModalDirective;
     @ViewChild('tenancyNameInput') tenancyNameInput: ElementRef;
+    @ViewChild('modalContent') modalContent: ElementRef;
 
     tenancyName: string = '';
     active: boolean = false;
@@ -32,6 +33,7 @@ export class TenantChangeModalComponent extends AppComponentBase {
     }
 
     onShown(): void {
+        ($ as any).AdminBSB.input.activate($(this.modalContent.nativeElement));
         $(this.tenancyNameInput.nativeElement).focus().select();
     }
 

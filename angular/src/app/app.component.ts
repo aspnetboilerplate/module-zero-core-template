@@ -39,6 +39,7 @@ export class AppComponent extends AppComponentBase implements OnInit, AfterViewI
   }
 
   ngAfterViewInit(): void {
-
+    ($ as any).AdminBSB.activateAll();
+    ($ as any).AdminBSB.activateDemo();
   }
 }
