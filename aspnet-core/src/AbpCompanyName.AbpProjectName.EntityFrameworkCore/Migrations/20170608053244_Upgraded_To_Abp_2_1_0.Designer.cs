@@ -11,9 +11,10 @@ using Abp.Notifications;
 namespace AbpCompanyName.AbpProjectName.Migrations
 {
     [DbContext(typeof(AbpProjectNameDbContext))]
-    partial class AbpProjectNameDbContextModelSnapshot : ModelSnapshot
+    [Migration("20170608053244_Upgraded_To_Abp_2_1_0")]
+    partial class Upgraded_To_Abp_2_1_0
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
             modelBuilder
                 .HasAnnotation("ProductVersion", "1.1.2")
