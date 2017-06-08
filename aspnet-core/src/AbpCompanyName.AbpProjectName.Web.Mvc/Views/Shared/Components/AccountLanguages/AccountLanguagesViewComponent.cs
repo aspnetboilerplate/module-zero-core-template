@@ -20,7 +20,7 @@ namespace AbpCompanyName.AbpProjectName.Web.Views.Shared.Components.AccountLangu
             {
                 CurrentLanguage = _languageManager.CurrentLanguage,
                 Languages = _languageManager.GetLanguages()
-                //.Where(l => !l.IsDisabled) //TODO: Will be supported after Abp.ZeroCore 2.1.
+                .Where(l => !l.IsDisabled)
                 .ToList(),
                 CurrentUrl = Request.Path
             };
