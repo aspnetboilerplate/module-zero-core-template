@@ -1,12 +1,11 @@
 ﻿using System.Threading.Tasks;
-using Abp.AspNetCore.Mvc.ViewComponents;
 using Abp.Configuration.Startup;
 using AbpCompanyName.AbpProjectName.Sessions;
 using Microsoft.AspNetCore.Mvc;
 
 namespace AbpCompanyName.AbpProjectName.Web.Views.Shared.Components.SideBarUserArea
 {
-    public class SideBarUserAreaViewComponent : AbpViewComponent
+    public class SideBarUserAreaViewComponent : AbpProjectNameViewComponent
     {
         private readonly ISessionAppService _sessionAppService;
         private readonly IMultiTenancyConfig _multiTenancyConfig;

@@ -1,10 +1,9 @@
-﻿using Abp.AspNetCore.Mvc.ViewComponents;
-using Abp.Localization;
+﻿using Abp.Localization;
 using Microsoft.AspNetCore.Mvc;
 
 namespace AbpCompanyName.AbpProjectName.Web.Views.Shared.Components.TopBarLanguageSwitch
 {
-    public class TopBarLanguageSwitchViewComponent : AbpViewComponent
+    public class TopBarLanguageSwitchViewComponent : AbpProjectNameViewComponent
     {
         private readonly ILanguageManager _languageManager;
 
