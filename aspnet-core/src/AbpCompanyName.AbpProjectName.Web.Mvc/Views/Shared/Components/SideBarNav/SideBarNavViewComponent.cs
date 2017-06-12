@@ -1,11 +1,12 @@
 ﻿using System.Threading.Tasks;
 using Abp.Application.Navigation;
+using Abp.AspNetCore.Mvc.ViewComponents;
 using Abp.Runtime.Session;
 using Microsoft.AspNetCore.Mvc;
 
 namespace AbpCompanyName.AbpProjectName.Web.Views.Shared.Components.SideBarNav
 {
-    public class SideBarNavViewComponent : ViewComponent
+    public class SideBarNavViewComponent : AbpViewComponent
     {
         private readonly IUserNavigationManager _userNavigationManager;
         private readonly IAbpSession _abpSession;

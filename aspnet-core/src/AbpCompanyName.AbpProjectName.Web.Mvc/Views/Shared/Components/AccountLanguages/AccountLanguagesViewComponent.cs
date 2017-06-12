@@ -1,11 +1,12 @@
 ﻿using System.Linq;
 using System.Threading.Tasks;
+using Abp.AspNetCore.Mvc.ViewComponents;
 using Abp.Localization;
 using Microsoft.AspNetCore.Mvc;
 
 namespace AbpCompanyName.AbpProjectName.Web.Views.Shared.Components.AccountLanguages
 {
-    public class AccountLanguagesViewComponent : ViewComponent
+    public class AccountLanguagesViewComponent : AbpViewComponent
     {
         private readonly ILanguageManager _languageManager;
 

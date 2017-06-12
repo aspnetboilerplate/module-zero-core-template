@@ -1,5 +1,6 @@
 ﻿using System.Linq;
 using System.Threading.Tasks;
+using Abp.AspNetCore.Mvc.ViewComponents;
 using Abp.Configuration;
 using AbpCompanyName.AbpProjectName.Configuration;
 using AbpCompanyName.AbpProjectName.Configuration.Ui;
@@ -7,7 +8,7 @@ using Microsoft.AspNetCore.Mvc;
 
 namespace AbpCompanyName.AbpProjectName.Web.Views.Shared.Components.RightSideBar
 {
-    public class RightSideBarViewComponent : ViewComponent
+    public class RightSideBarViewComponent : AbpViewComponent
     {
         private readonly ISettingManager _settingManager;
 
