@@ -35,7 +35,7 @@ export abstract class AppComponentBase {
         this.domNode = injector.get(ElementRef).nativeElement;
     }
     
-    ngAfterViewInit(): void {
+    ngAfterViewChecked(): void {
         ($ as any).AdminBSB.input.activate($(this.domNode));
     }
 
