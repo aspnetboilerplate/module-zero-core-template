@@ -14,32 +14,52 @@
         <script src="~/view-resources/Views/Users/Index.min.js" asp-append-version="true"></script>
     </environment>
 }
-<div>
-    <h1>@L("Users")</h1>
-    <div class="row">
-        <div class="col-md-12">
-            <button data-toggle="modal" data-target="#UserCreateModal" class="btn btn-primary pull-right"><i class="fa fa-plus"></i> @L("CreateNewUser")</button>
-            <table class="table">
-                <thead>
-                    <tr>
-                        <th>@L("UserName")</th>
-                        <th>@L("FullName")</th>
-                        <th>@L("EmailAddress")</th>
-                        <th>@L("IsActive")</th>
-                    </tr>
-                </thead>
-                <tbody>
-                    @foreach (var user in Model.Items)
-                    {
+<div class="row clearfix">
+    <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+        <div class="card">
+            <div class="header">
+                <h2>
+                    @L("Users")
+                </h2>
+                <ul class="header-dropdown m-r--5">
+                    <li class="dropdown">
+                        <a href="javascript:void(0);" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">
+                            <i class="material-icons">more_vert</i>
+                        </a>
+                        <ul class="dropdown-menu pull-right">
+                            <li><a href="javascript:void(0);" class=" waves-effect waves-block">Action</a></li>
+                            <li><a href="javascript:void(0);" class=" waves-effect waves-block">Another action</a></li>
+                            <li><a href="javascript:void(0);" class=" waves-effect waves-block">Something else here</a></li>
+                        </ul>
+                    </li>
+                </ul>
+            </div>
+            <div class="body table-responsive">
+                <table class="table">
+                    <thead>
                         <tr>
-                            <td>@user.UserName</td>
-                            <td>@user.FullName</td>
-                            <td>@user.EmailAddress</td>
-                            <td>@L(user.IsActive ? "Yes" : "No")</td>
+                            <th>@L("UserName")</th>
+                            <th>@L("FullName")</th>
+                            <th>@L("EmailAddress")</th>
+                            <th>@L("IsActive")</th>
                         </tr>
-                    }
-                </tbody>
-            </table>
+                    </thead>
+                    <tbody>
+                        @foreach (var user in Model.Items)
+                            {
+                            <tr>
+                                <td>@user.UserName</td>
+                                <td>@user.FullName</td>
+                                <td>@user.EmailAddress</td>
+                                <td>@L(user.IsActive ? "Yes" : "No")</td>
+                            </tr>
+                            }
+                    </tbody>
+                </table>
+                <button type="button" class="btn btn-primary btn-circle waves-effect waves-circle waves-float pull-right" data-toggle="modal" data-target="#UserCreateModal">
+                    <i class="material-icons">add</i>
+                </button>
+            </div>
         </div>
     </div>
 </div>
@@ -53,35 +73,44 @@
                     </h4>
                 </div>
                 <div class="modal-body">
-                    <div class="form-group">
-                        <label>@L("UserName")</label>
-                        <input class="form-control" type="text" name="UserName" required maxlength="@AbpUserBase.MaxUserNameLength" minlength="2">
+                    <div class="form-group form-float">
+                        <div class="form-line">
+                            <input class="form-control" type="text" name="UserName" required maxlength="@AbpUserBase.MaxUserNameLength" minlength="2">
+                            <label class="form-label">@L("UserName")</label>
+                        </div>
                     </div>
-                    <div class="form-group">
-                        <label>@L("Name")</label>
-                        <input type="text" name="Name" class="form-control" required maxlength="@AbpUserBase.MaxNameLength">
+                    <div class="form-group form-float">
+                        <div class="form-line">
+                            <input type="text" name="Name" class="form-control" required maxlength="@AbpUserBase.MaxNameLength">
+                            <label class="form-label">@L("Name")</label>
+                        </div>
                     </div>
-                    <div class="form-group">
-                        <label>@L("Surname")</label>
-                        <input type="text" name="Surname" class="form-control" required maxlength="@AbpUserBase.MaxSurnameLength">
+                    <div class="form-group form-float">
+                        <div class="form-line">
+                            <input type="text" name="Surname" class="form-control" required maxlength="@AbpUserBase.MaxSurnameLength">
+                            <label class="form-label">@L("Surname")</label>
+                        </div>
                     </div>
-                    <div class="form-group">
-                        <label>@L("EmailAddress")</label>
-                        <input type="email" name="EmailAddress" class="form-control" maxlength="@AbpUserBase.MaxEmailAddressLength">
+                    <div class="form-group form-float">
+                        <div class="form-line">
+                            <input type="email" name="EmailAddress" class="form-control" required maxlength="@AbpUserBase.MaxEmailAddressLength">
+                            <label class="form-label">@L("EmailAddress")</label>
+                        </div>
                     </div>
-                    <div class="form-group">
-                        <label>@L("Password")</label>
-                        <input type="password" name="Password" class="form-control" required maxlength="@AbpUserBase.MaxPlainPasswordLength">
+                    <div class="form-group form-float">
+                        <div class="form-line">
+                            <input type="password" name="Password" class="form-control" required maxlength="@AbpUserBase.MaxPlainPasswordLength">
+                            <label class="form-label">@L("Password")</label>
+                        </div>
                     </div>
                     <div class="checkbox">
-                        <label>
-                            <input type="checkbox" name="IsActive" value="true" value="true" checked="checked"> @L("IsActive")
-                        </label>
+                        <input type="checkbox" name="IsActive" value="true" id="CreateUserIsActive" class="filled-in" checked />
+                        <label for="CreateUserIsActive">@L("IsActive")</label>
                     </div>
                 </div>
                 <div class="modal-footer">
-                    <button type="button" class="btn btn-default" data-dismiss="modal">@L("Cancel")</button>
-                    <button type="submit" class="btn btn-primary blue"><i class="fa fa-save"></i> <span>@L("Save")</span></button>
+                    <button type="button" class="btn btn-default waves-effect" data-dismiss="modal">@L("Cancel")</button>
+                    <button type="submit" class="btn btn-primary waves-effect">@L("Save")</button>
                 </div>
             </form>
         </div>

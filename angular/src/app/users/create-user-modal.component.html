@@ -1,7 +1,7 @@
-﻿<div bsModal #createUserModal="bs-modal" class="modal fade" tabindex="-1" role="dialog" aria-labelledby="createUserModal" aria-hidden="true" [config]="{backdrop: 'static'}">
+﻿<div bsModal #createUserModal="bs-modal" class="modal fade" (onShown)="onShown()" tabindex="-1" role="dialog" aria-labelledby="createUserModal" aria-hidden="true" [config]="{backdrop: 'static'}">
     <div class="modal-dialog">
 
-        <div class="modal-content">
+        <div #modalContent class="modal-content">
 
             <form *ngIf="active" #createUserForm="ngForm" novalidate (ngSubmit)="save()">
 
@@ -15,36 +15,45 @@
                 </div>
 
                 <div class="modal-body">
-                    <div class="form-group">
-                        <label>{{l("UserName")}}</label>
-                        <input class="form-control" type="text" name="UserName" [(ngModel)]="user.userName" required maxlength="32" minlength="2">
+                    <div class="form-group form-float">
+                        <div class="form-line">
+                            <input class="form-control" type="text" name="UserName" [(ngModel)]="user.userName" required maxlength="32" minlength="2">
+                            <label class="form-label">{{l("UserName")}}</label>
+                        </div>
                     </div>
-                    <div class="form-group">
-                        <label>{{l("Name")}}</label>
-                        <input type="text" name="Name" class="form-control" [(ngModel)]="user.name" required maxlength="32">
+                    <div class="form-group form-float">
+                        <div class="form-line">
+                            <input type="text" name="Name" class="form-control" [(ngModel)]="user.name" required maxlength="32">
+                            <label class="form-label">{{l("Name")}}</label>
+                        </div>
                     </div>
-                    <div class="form-group">
-                        <label>{{l("Surname")}}</label>
-                        <input type="text" name="Surname" class="form-control" [(ngModel)]="user.surname" required maxlength="32">
+                    <div class="form-group form-float">
+                        <div class="form-line">
+                            <input type="text" name="Surname" class="form-control" [(ngModel)]="user.surname" required maxlength="32">
+                            <label class="form-label">{{l("Surname")}}</label>
+                        </div>
                     </div>
-                    <div class="form-group">
-                        <label>{{l("EmailAddress")}}</label>
-                        <input type="email" name="EmailAddress" class="form-control" [(ngModel)]="user.emailAddress" maxlength="256" pattern="^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{1,})+$">
+                    <div class="form-group form-float">
+                        <div class="form-line">
+                            <input type="email" name="EmailAddress" class="form-control" [(ngModel)]="user.emailAddress" maxlength="256" pattern="^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{1,})+$">
+                            <label class="form-label">{{l("EmailAddress")}}</label>
+                        </div>
                     </div>
-                    <div class="form-group">
-                        <label>{{l("Password")}}</label>
-                        <input type="password" name="Password" class="form-control" [(ngModel)]="user.password" required maxlength="32">
+                    <div class="form-group form-float">
+                        <div class="form-line">
+                            <input type="password" name="Password" class="form-control" [(ngModel)]="user.password" required maxlength="32">
+                            <label class="form-label">{{l("Password")}}</label>
+                        </div>
                     </div>
                     <div class="checkbox">
-                        <label>
-                            <input type="checkbox" name="IsActive" value="true" value="true" [(ngModel)]="user.isActive" checked="checked"> {{l("IsActive")}}
-                        </label>
+                        <input type="checkbox" name="IsActive" value="true" id="CreateUserIsActive" [(ngModel)]="user.isActive" class="filled-in" checked />
+                        <label for="CreateUserIsActive">{{l("IsActive")}}</label>
                     </div>
                 </div>
 
                 <div class="modal-footer">
                     <button [disabled]="saving" type="button" class="btn btn-default" (click)="close()">{{l("Cancel")}}</button>
-                    <button type="submit" class="btn btn-primary blue" [disabled]="!createUserForm.form.valid"><i class="fa fa-save"></i> <span>{{l("Save")}}</span></button>
+                    <button type="submit" class="btn btn-primary blue" [disabled]="!createUserForm.form.valid">{{l("Save")}}</button>
                 </div>
 
             </form>

@@ -1,8 +1,20 @@
-﻿<topbar></topbar>
+﻿<div class="login-box">
+    <div class="logo">
+        <a href="javascript:void(0);">AbpProjectName</a>
+    </div>
 
-<div class="content account-forms">
-    <div *ngIf="showTenantChange()" class="content tenant-change-box">
+    <div *ngIf="showTenantChange()" class="tenant-change-box">
         <tenant-change></tenant-change>
     </div>
+
     <router-outlet></router-outlet>
+
+    <account-languages></account-languages>
+
+    <div class="row">
+        <div class="col-xs-12 text-center" style="color: #e9e9e9">
+            <small>&copy; {{currentYear}} AbpProjectName. <b>Version </b> {{versionText}}</small>
+        </div>
+    </div>
+    
 </div>

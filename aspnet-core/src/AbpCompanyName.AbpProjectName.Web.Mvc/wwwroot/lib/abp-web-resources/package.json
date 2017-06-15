@@ -1,6 +1,6 @@
 {
   "name": "abp-web-resources",
-  "version": "1.2.1",
+  "version": "2.1.2",
   "description": "ASP.NET Boilerplate web resources",
   "main": "Abp/Framework/scripts/abp.js",
   "dependencies": {},

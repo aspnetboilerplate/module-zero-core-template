@@ -1,4 +1,5 @@
-﻿@using Abp.MultiTenancy
+﻿@using Abp.Authorization.Users
+@using Abp.MultiTenancy
 @using AbpCompanyName.AbpProjectName.MultiTenancy
 @using AbpCompanyName.AbpProjectName.Web.Startup
 @model Abp.Application.Services.Dto.ListResultDto<AbpCompanyName.AbpProjectName.MultiTenancy.Dto.TenantListDto>
@@ -15,31 +16,52 @@
         <script src="~/view-resources/Views/Tenants/Index.min.js" asp-append-version="true"></script>
     </environment>
 }
-<div>
-    <h1>@L("Tenants")</h1>
-    <div class="row">
-        <div class="col-md-12">
-            <button data-toggle="modal" data-target="#TenantCreateModal" class="btn btn-primary pull-right"><i class="fa fa-plus"></i> @L("CreateNewTenant")</button>
-            <table class="table">
-                <thead>
-                    <tr>
-                        <th>@L("TenancyName")</th>
-                        <th>@L("Name")</th>
-                    </tr>
-                </thead>
-                <tbody>
-                    @foreach (var tenant in Model.Items)
-                    {
+<div class="row clearfix">
+    <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+        <div class="card">
+            <div class="header">
+                <h2>
+                    @L("Tenants")
+                </h2>
+                <ul class="header-dropdown m-r--5">
+                    <li class="dropdown">
+                        <a href="javascript:void(0);" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">
+                            <i class="material-icons">more_vert</i>
+                        </a>
+                        <ul class="dropdown-menu pull-right">
+                            <li><a href="javascript:void(0);" class=" waves-effect waves-block">Action</a></li>
+                            <li><a href="javascript:void(0);" class=" waves-effect waves-block">Another action</a></li>
+                            <li><a href="javascript:void(0);" class=" waves-effect waves-block">Something else here</a></li>
+                        </ul>
+                    </li>
+                </ul>
+            </div>
+            <div class="body table-responsive">
+                <table class="table">
+                    <thead>
                         <tr>
-                            <td>@tenant.TenancyName</td>
-                            <td>@tenant.Name</td>
+                            <th>@L("TenancyName")</th>
+                            <th>@L("Name")</th>
                         </tr>
-                    }
-                </tbody>
-            </table>
+                    </thead>
+                    <tbody>
+                        @foreach (var tenant in Model.Items)
+                        {
+                            <tr>
+                                <td>@tenant.TenancyName</td>
+                                <td>@tenant.Name</td>
+                            </tr>
+                        }
+                    </tbody>
+                </table>
+                <button type="button" class="btn btn-primary btn-circle waves-effect waves-circle waves-float pull-right" data-toggle="modal" data-target="#TenantCreateModal">
+                    <i class="material-icons">add</i>
+                </button>
+            </div>
         </div>
     </div>
 </div>
+
 <div class="modal fade" id="TenantCreateModal" tabindex="-1" role="dialog" aria-labelledby="TenantCreateModalLabel" data-backdrop="static">
     <div class="modal-dialog" role="document">
         <div class="modal-content">
@@ -50,27 +72,35 @@
                     </h4>
                 </div>
                 <div class="modal-body">
-                    <div class="form-group">
-                        <label>@L("TenancyName")</label>
-                        <input class="form-control" type="text" name="TenancyName" required maxlength="@Tenant.MaxTenancyNameLength" minlength="2">
+                    <div class="form-group form-float">
+                        <div class="form-line">
+                            <input class="form-control" type="text" name="TenancyName" required maxlength="@AbpTenantBase.MaxTenancyNameLength" minlength="2">
+                            <label class="form-label">@L("TenancyName")</label>
+                        </div>
                     </div>
-                    <div class="form-group">
-                        <label>@L("Name")</label>
-                        <input type="text" name="Name" class="form-control" required maxlength="@Tenant.MaxNameLength">
+                    <div class="form-group form-float">
+                        <div class="form-line">
+                            <input type="text" name="Name" class="form-control" required maxlength="@Tenant.MaxNameLength">
+                            <label class="form-label">@L("Name")</label>
+                        </div>
                     </div>
-                    <div class="form-group">
-                        <label>@L("DatabaseConnectionString") (@L("Optional"))</label>
-                        <input type="text" name="ConnectionString" class="form-control" maxlength="@AbpTenantBase.MaxConnectionStringLength">
+                    <div class="form-group form-float">
+                        <div class="form-line">
+                            <input type="text" name="ConnectionString" class="form-control" maxlength="@AbpTenantBase.MaxConnectionStringLength">
+                            <label class="form-label">@L("DatabaseConnectionString") (@L("Optional"))</label>
+                        </div>
                     </div>
-                    <div class="form-group">
-                        <label>@L("AdminEmailAddress")</label>
-                        <input type="email" name="AdminEmailAddress" class="form-control" required maxlength="@AbpCompanyName.AbpProjectName.Authorization.Users.User.MaxEmailAddressLength">
+                    <div class="form-group form-float">
+                        <div class="form-line">
+                            <input type="email" name="AdminEmailAddress" class="form-control" required maxlength="@AbpUserBase.MaxEmailAddressLength">
+                            <label class="form-label">@L("AdminEmailAddress")</label>
+                        </div>
                     </div>
                     <p>@L("DefaultPasswordIs", AbpCompanyName.AbpProjectName.Authorization.Users.User.DefaultPassword)</p>
                 </div>
                 <div class="modal-footer">
-                    <button type="button" class="btn btn-default" data-dismiss="modal">@L("Cancel")</button>
-                    <button type="submit" class="btn btn-primary blue"><i class="fa fa-save"></i> <span>@L("Save")</span></button>
+                    <button type="button" class="btn btn-default waves-effect" data-dismiss="modal">@L("Cancel")</button>
+                    <button type="submit" class="btn btn-primary waves-effect">@L("Save")</button>
                 </div>
             </form>
         </div>

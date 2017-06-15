@@ -1,8 +1,6 @@
-﻿import { Component, ViewContainerRef, OnInit, ViewEncapsulation } from '@angular/core';
+﻿import { Component, ViewContainerRef, OnInit, ViewEncapsulation, Injector } from '@angular/core';
 import { LoginService } from './login/login.service';
-import { AppConsts } from '@shared/AppConsts';
-
-import * as moment from 'moment';
+import { AppComponentBase } from '@shared/app-component-base';
 
 @Component({
     templateUrl: './account.component.html',
@@ -11,15 +9,21 @@ import * as moment from 'moment';
     ],
     encapsulation: ViewEncapsulation.None
 })
-export class AccountComponent implements OnInit {
+export class AccountComponent extends AppComponentBase implements OnInit {
 
     private viewContainerRef: ViewContainerRef;
 
-    currentYear: number = moment().year();
+    versionText: string;
+    currentYear: number;
 
     public constructor(
+        injector: Injector,
         private _loginService: LoginService
     ) {
+        super(injector);
+
+        this.currentYear = new Date().getFullYear();
+        this.versionText = this.appSession.application.version + ' [' + this.appSession.application.releaseDate.format('YYYYDDMM') + ']';
     }
 
     showTenantChange(): boolean {
@@ -28,6 +32,6 @@ export class AccountComponent implements OnInit {
 
     ngOnInit(): void {
         this._loginService.init();
-        $('body').attr('class', 'page-md login');
+        $('body').attr('class', 'login-page');
     }
 }

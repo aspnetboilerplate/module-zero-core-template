@@ -1,0 +1,60 @@
+﻿<div class="menu">
+    <ul class="list">
+        <ng-template ngFor let-menuItem [ngForOf]="menuItems" let-mainMenuItemIndex="index">
+            <li *ngIf="showMenuItem(menuItem)" routerLinkActive="active">
+                <!-- route name -->
+                <a [routerLink]="[menuItem.route]" *ngIf="!menuItem.items && menuItem.route.indexOf('http') != 0">
+                    <i *ngIf="menuItem.icon" class="material-icons">{{menuItem.icon}}</i>
+                    <span>{{menuItem.name}}</span>
+                </a>
+                <!-- Static link (starts with 'http') -->
+                <a href="{{menuItem.route}}" target="_blank" *ngIf="!menuItem.items  && menuItem.route.indexOf('http') == 0">
+                    <i *ngIf="menuItem.icon" class="material-icons">{{menuItem.icon}}</i>
+                    <span>{{menuItem.name}}</span>
+                </a>
+                <!-- Has child menu items (so, this is a parent menu) -->
+                <a href="javascript:void(0);" class="menu-toggle" *ngIf="menuItem.items">
+                    <i *ngIf="menuItem.icon" class="material-icons">{{menuItem.icon}}</i>
+                    <span>{{menuItem.name}}</span>
+                </a>
+                <ul class="ml-menu" *ngIf="menuItem.items">
+                    <ng-template ngFor let-subMenuItem [ngForOf]="menuItem.items" let-mainMenuItemIndex="index">
+                        <li *ngIf="showMenuItem(subMenuItem)" routerLinkActive="active">
+                            <!-- route name -->
+                            <a [routerLink]="[subMenuItem.route]" *ngIf="!subMenuItem.items && subSubMenuItem.route.indexOf('http') != 0">
+                                <i *ngIf="subMenuItem.icon" class="material-icons">{{subMenuItem.icon}}</i>
+                                <span>{{subMenuItem.name}}</span>
+                            </a>
+                            <!-- Static link (starts with 'http') -->
+                            <a href="{{subMenuItem.route}}" target="_blank" *ngIf="!subMenuItem.items && subSubMenuItem.route.indexOf('http') == 0">
+                                <i *ngIf="subMenuItem.icon" class="material-icons">{{subMenuItem.icon}}</i>
+                                <span>{{subMenuItem.name}}</span>
+                            </a>
+                            <!-- Has child menu items (so, this is a parent menu) -->
+                            <a href="javascript:void(0);" class="menu-toggle" *ngIf="subMenuItem.items">
+                                <i *ngIf="subMenuItem.icon" class="material-icons">{{subMenuItem.icon}}</i>
+                                <span>{{subMenuItem.name}}</span>
+                            </a>
+                            <ul class="ml-menu" *ngIf="subMenuItem.items">
+                                <ng-template ngFor let-subSubMenuItem [ngForOf]="subMenuItem.items" let-mainMenuItemIndex="index">
+                                    <li *ngIf="showMenuItem(subSubMenuItem)" routerLinkActive="active">
+                                        <!-- route name -->
+                                        <a [routerLink]="[subSubMenuItem.route]" *ngIf="subSubMenuItem.route.indexOf('http') != 0">
+                                            <i *ngIf="subSubMenuItem.icon" class="material-icons">{{subSubMenuItem.icon}}</i>
+                                            <span>{{subSubMenuItem.name}}</span>
+                                        </a>
+                                        <!-- Static link (starts with 'http') -->
+                                        <a href="{{subSubMenuItem.route}}" target="_blank" *ngIf="subSubMenuItem.route.indexOf('http') == 0">
+                                            <i *ngIf="subSubMenuItem.icon" class="material-icons">{{subSubMenuItem.icon}}</i>
+                                            <span>{{subSubMenuItem.name}}</span>
+                                        </a>
+                                    </li>
+                                </ng-template>
+                            </ul>
+                        </li>
+                    </ng-template>
+                </ul>
+            </li>
+        </ng-template>
+    </ul>
+</div>

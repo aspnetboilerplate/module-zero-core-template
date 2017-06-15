@@ -11,5 +11,9 @@ namespace AbpCompanyName.AbpProjectName.Web.Models.Account
         public string NameAndSurname { get; set; }
 
         public bool IsActive { get; set; }
+
+        public bool IsEmailConfirmationRequiredForLogin { get; set; }
+
+        public bool IsEmailConfirmed { get; set; }
     }
 }

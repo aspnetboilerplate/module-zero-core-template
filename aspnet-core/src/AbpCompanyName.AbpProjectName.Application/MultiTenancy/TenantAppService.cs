@@ -72,7 +72,7 @@ namespace AbpCompanyName.AbpProjectName.MultiTenancy
             using (CurrentUnitOfWork.SetTenantId(tenant.Id))
             {
                 //Create static roles for new tenant
-                await _roleManager.CreateStaticRoles(tenant.Id);
+                CheckErrors(await _roleManager.CreateStaticRoles(tenant.Id));
 
                 await CurrentUnitOfWork.SaveChangesAsync(); //To get static role ids
 
@@ -83,11 +83,11 @@ namespace AbpCompanyName.AbpProjectName.MultiTenancy
                 //Create admin user for the tenant
                 var adminUser = User.CreateTenantAdminUser(tenant.Id, input.AdminEmailAddress);
                 adminUser.Password = _passwordHasher.HashPassword(adminUser, User.DefaultPassword);
-                await UserManager.CreateAsync(adminUser);
+                CheckErrors(await UserManager.CreateAsync(adminUser));
                 await CurrentUnitOfWork.SaveChangesAsync(); //To get admin user's id
 
                 //Assign admin user to role!
-                await UserManager.AddToRoleAsync(adminUser, adminRole.Name);
+                CheckErrors(await UserManager.AddToRoleAsync(adminUser, adminRole.Name));
                 await CurrentUnitOfWork.SaveChangesAsync();
             }
         }

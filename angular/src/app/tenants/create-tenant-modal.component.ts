@@ -13,6 +13,7 @@ import * as _ from "lodash";
 export class CreateTenantModalComponent extends AppComponentBase {
 
     @ViewChild('createTenantModal') modal: ModalDirective;
+    @ViewChild('modalContent') modalContent: ElementRef;
 
     @Output() modalSave: EventEmitter<any> = new EventEmitter<any>();
 
@@ -31,6 +32,10 @@ export class CreateTenantModalComponent extends AppComponentBase {
         this.active = true;
         this.modal.show();
         this.tenant = new CreateTenantInput();
+    }
+
+    onShown(): void {
+        ($ as any).AdminBSB.input.activate($(this.modalContent.nativeElement));
     }
 
     save(): void {

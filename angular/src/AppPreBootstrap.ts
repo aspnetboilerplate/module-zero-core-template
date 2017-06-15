@@ -1,10 +1,7 @@
 ﻿import * as moment from 'moment';
 import { AppConsts } from '@shared/AppConsts';
-import { UrlHelper } from './shared/helpers/UrlHelper';
-import * as _ from 'lodash';
 import { platformBrowserDynamic } from '@angular/platform-browser-dynamic';
 import { Type, CompilerOptions, NgModuleRef } from '@angular/core';
-import { UtilsService } from '@abp/utils/utils.service';
 
 export class AppPreBootstrap {
 
@@ -51,7 +48,7 @@ export class AppPreBootstrap {
             method: 'GET',
             headers: {
                 Authorization: 'Bearer ' + abp.auth.getToken(),
-                'Accept-Language': abp.utils.getCookieValue("Abp.Localization.CultureName"),
+                '.AspNetCore.Culture': abp.utils.getCookieValue("Abp.Localization.CultureName"),
                 'Abp.TenantId': abp.multiTenancy.getTenantIdCookie()
             }
         }).done(result => {

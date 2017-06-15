@@ -1,5 +1,5 @@
 ﻿import { CommonModule } from '@angular/common';
-import { NgModule, APP_INITIALIZER } from '@angular/core';
+import { NgModule } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import { HttpModule, JsonpModule } from '@angular/http';
 import { ModalModule } from 'ngx-bootstrap';
@@ -10,7 +10,6 @@ import { AccountRoutingModule } from './account-routing.module';
 
 import { ServiceProxyModule } from '@shared/service-proxies/service-proxy.module';
 
-import { AppConsts } from '@shared/AppConsts';
 import { SharedModule } from '@shared/shared.module';
 
 import { AccountComponent } from './account.component';
@@ -18,6 +17,7 @@ import { TenantChangeComponent } from './tenant/tenant-change.component';
 import { TenantChangeModalComponent } from './tenant/tenant-change-modal.component';
 import { LoginComponent } from './login/login.component';
 import { RegisterComponent } from './register/register.component';
+import { AccountLanguagesComponent } from './layout/account-languages.component';
 
 import { LoginService } from './login/login.service';
 
@@ -38,7 +38,8 @@ import { LoginService } from './login/login.service';
         TenantChangeComponent,
         TenantChangeModalComponent,
         LoginComponent,
-        RegisterComponent
+        RegisterComponent,
+        AccountLanguagesComponent
     ],
     providers: [
         LoginService

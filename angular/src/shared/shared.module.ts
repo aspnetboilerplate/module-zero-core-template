@@ -8,19 +8,11 @@ import { AppUrlService } from './nav/app-url.service';
 import { AppAuthService } from './auth/app-auth.service';
 import { AppRouteGuard } from './auth/auth-route-guard';
 
-import { TopBarComponent } from './layout/topbar.component';
-
 @NgModule({
     imports: [
         CommonModule,
         AbpModule,
         RouterModule
-    ],
-    declarations: [
-        TopBarComponent
-    ],
-    exports: [
-        TopBarComponent
     ]
 })
 export class SharedModule {

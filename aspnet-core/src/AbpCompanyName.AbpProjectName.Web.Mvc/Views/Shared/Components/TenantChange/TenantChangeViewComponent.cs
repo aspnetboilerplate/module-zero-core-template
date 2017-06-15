@@ -1,14 +1,11 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
+﻿using System.Threading.Tasks;
 using Abp.AutoMapper;
 using AbpCompanyName.AbpProjectName.Sessions;
 using Microsoft.AspNetCore.Mvc;
 
 namespace AbpCompanyName.AbpProjectName.Web.Views.Shared.Components.TenantChange
 {
-    public class TenantChangeViewComponent : ViewComponent
+    public class TenantChangeViewComponent : AbpProjectNameViewComponent
     {
         private readonly ISessionAppService _sessionAppService;
 

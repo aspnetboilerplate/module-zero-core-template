@@ -1,38 +1,48 @@
-﻿<div [@routerTransition]>
-  <div class="container">
-    <div id="LoginArea" class="row">
-      <div class="col-lg-12">
-        <div class="well bs-component">
-          <h3 class="form-title">{{l("Register")}}</h3>
-            <hr />
-          <form #registerForm="ngForm" class="login-form" method="post" novalidate (ngSubmit)="save()">
-            <div class="form-group">
-              <input class="form-control placeholder-no-fix" autoFocus type="text" placeholder="{{l('Name')}}" [(ngModel)]="model.name" name="Name" required maxlength="32" />
+﻿<div class="card" [@routerTransition]>
+    <div #cardBody class="body">
+        <form #registerForm="ngForm" method="post" novalidate (ngSubmit)="save()">
+            <h4 class="text-center">{{l("Register")}}</h4>
+
+            <div class="form-group form-float">
+                <div class="form-line">
+                    <input class="form-control" autoFocus type="text" [(ngModel)]="model.name" name="Name" required maxlength="32" />
+                    <label class="form-label">{{l('Name')}}</label>
+                </div>
+            </div>
+            
+            <div class="form-group form-float">
+                <div class="form-line">
+                    <input class="form-control" type="text" [(ngModel)]="model.surname" name="Surname" required maxlength="32" />
+                    <label class="form-label">{{l('Surname')}}</label>
+                </div>
             </div>
 
-            <div class="form-group">
-              <input class="form-control placeholder-no-fix" type="text" placeholder="{{l('Surname')}}" [(ngModel)]="model.surname" name="Surname" required maxlength="32" />
+            <div class="form-group form-float">
+                <div class="form-line">
+                    <input class="form-control" type="email" [(ngModel)]="model.emailAddress" name="EmailAddress" required maxlength="255" pattern="^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{1,})+$" />
+                    <label class="form-label">{{l('EmailAddress')}}</label>
+                </div>
             </div>
 
-            <div class="form-group">
-              <input class="form-control placeholder-no-fix" type="email" placeholder="{{l('EmailAddress')}}" [(ngModel)]="model.emailAddress" name="EmailAddress" required maxlength="256" pattern="^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{1,})+$" />
+            <div class="form-group form-float">
+                <div class="form-line">
+                    <input class="form-control" type="text" autocomplete="off" [(ngModel)]="model.userName" name="UserName" required maxlength="32" />
+                    <label class="form-label">{{l('UserName')}}</label>
+                </div>
             </div>
-
-            <div class="form-group">
-              <input class="form-control placeholder-no-fix input-ltr" type="text" autocomplete="off" placeholder="{{l('UserName')}}" name="UserName" [(ngModel)]="model.userName" required maxlength="32" />
-            </div>
-            <div class="form-group">
-              <input type="password" name="Password" class="form-control" [(ngModel)]="model.password" placeholder="{{l('Password')}}" required>
+            
+            <div class="form-group form-float">
+                <div class="form-line">
+                    <input class="form-control" type="password" [(ngModel)]="model.password" name="Password" required maxlength="32" />
+                    <label class="form-label">{{l('Password')}}</label>
+                </div>
             </div>
 
             <div class="form-actions">
-              <button [disabled]="saving" [routerLink]="['../login']" type="button" class="btn btn-default"><i class="fa fa-arrow-left"></i> {{l("Back")}}</button>
-              <button type="submit" class="btn btn-success uppercase" [disabled]="!registerForm.form.valid"><i class="fa fa-check"></i> {{l("Submit")}}</button>
+                <button [disabled]="saving" [routerLink]="['../login']" type="button" class="btn btn-default">{{l("Back")}}</button>
+                <button type="submit" class="btn btn-success" [disabled]="!registerForm.form.valid">{{l("Submit")}}</button>
             </div>
 
-          </form>
-        </div>
-      </div>
+        </form>
     </div>
-  </div>
 </div>

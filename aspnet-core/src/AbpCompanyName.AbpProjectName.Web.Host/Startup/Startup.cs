@@ -1,11 +1,9 @@
 ﻿using System;
+using System.Linq;
 using Abp.AspNetCore;
 using Abp.Castle.Logging.Log4Net;
-using AbpCompanyName.AbpProjectName.Authorization.Roles;
-using AbpCompanyName.AbpProjectName.Authorization.Users;
 using AbpCompanyName.AbpProjectName.Configuration;
 using AbpCompanyName.AbpProjectName.Identity;
-using AbpCompanyName.AbpProjectName.MultiTenancy;
 using Castle.Facilities.Logging;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
@@ -14,6 +12,7 @@ using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Logging;
 using Swashbuckle.AspNetCore.Swagger;
+using Abp.Extensions;
 
 #if FEATURE_SIGNALR
 using Owin;
@@ -45,24 +44,18 @@ namespace AbpCompanyName.AbpProjectName.Web.Host.Startup
                 options.Filters.Add(new CorsAuthorizationFilterFactory(DefaultCorsPolicyName));
             });
 
-            services.AddAbpIdentity<Tenant, User, Role, SecurityStampValidator>(options =>
-                {
-                    options.Cookies.ApplicationCookie.AuthenticationScheme = "AbpProjectNameAuthSchema";
-                    options.Cookies.ApplicationCookie.CookieName = "AbpProjectNameAuth";
-                })
-                .AddUserManager<UserManager>()
-                .AddRoleManager<RoleManager>()
-                .AddSignInManager<SignInManager>()
-                .AddClaimsPrincipalFactory<UserClaimsPrincipalFactory>()
-                .AddDefaultTokenProviders();
+            IdentityRegistrar.Register(services);
 
             //Configure CORS for angular2 UI
             services.AddCors(options =>
             {
-                options.AddPolicy(DefaultCorsPolicyName, p =>
+                options.AddPolicy(DefaultCorsPolicyName, builder =>
                 {
-                    //todo: Get from confiuration
-                    p.WithOrigins("http://localhost:4200").AllowAnyHeader().AllowAnyMethod();
+                    //App:CorsOrigins in appsettings.json can contain more than one address with splitted by comma.
+                    builder
+                        .WithOrigins(_appConfiguration["App:CorsOrigins"].Split(",", StringSplitOptions.RemoveEmptyEntries).Select(o => o.RemovePostFix("/")).ToArray())
+                        .AllowAnyHeader()
+                        .AllowAnyMethod();
                 });
             });
 

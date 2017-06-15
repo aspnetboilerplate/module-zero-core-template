@@ -15,7 +15,7 @@
 *.launch
 .settings/
 .vs/
-obj/
+[Oo]bj/
 bin/
 
 # IDE - VSCode

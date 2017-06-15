@@ -24,44 +24,55 @@
       "tsconfig": "tsconfig.json",
       "prefix": "app",
       "styles": [
+        "assets/fonts/roboto/roboto.css",
+        "assets/fonts/material-icons/materialicons.css",
+        "../node_modules/bootstrap/dist/css/bootstrap.min.css",
         "../node_modules/simple-line-icons/css/simple-line-icons.css",
         "../node_modules/font-awesome/css/font-awesome.css",
         "../node_modules/famfamfam-flags/dist/sprite/famfamfam-flags.css",
-
         "../node_modules/toastr/build/toastr.css",
         "../node_modules/sweetalert/dist/sweetalert.css",
-
-        "../src/shared/core.less",
-
-        "../node_modules/bootstrap/dist/css/bootstrap.min.css",
-        "../node_modules/bootswatch/cosmo/bootstrap.min.css"
+        "../node_modules/node-waves/dist/waves.css",
+        "../src/bsb-theme/css/materialize.css",
+        "../src/bsb-theme/css/style.css",
+        "../src/bsb-theme/css/themes/all-themes.css",
+        "../src/shared/core.less"
       ],
       "scripts": [
         "../node_modules/jquery/dist/jquery.min.js",
         "../node_modules/jquery-migrate/dist/jquery-migrate.min.js",
         "../node_modules/js-cookie/src/js.cookie.js",
-
         "../node_modules/bootstrap/dist/js/bootstrap.js",
-
         "../node_modules/lodash/lodash.min.js",
         "../node_modules/moment/min/moment.min.js",
-
         "../node_modules/signalr/jquery.signalR.js",
-
         "../node_modules/toastr/toastr.js",
         "../node_modules/sweetalert/dist/sweetalert-dev.js",
         "../node_modules/block-ui/jquery.blockUI.js",
         "../node_modules/spin.js/spin.min.js",
         "../node_modules/spin.js/jquery.spin.js",
         "../node_modules/push.js/push.min.js",
-
+        "../node_modules/jquery-slimscroll/jquery.slimscroll.min.js",
+        "../node_modules/node-waves/dist/waves.min.js",
+        "../node_modules/jquery-countto/jquery.countTo.js",
+        "../node_modules/raphael/raphael.min.js",
+        "../node_modules/morris.js/morris.min.js",
+        "../node_modules/chart.js/dist/Chart.bundle.min.js",
+        "../node_modules/flot/jquery.flot.js",
+        "../node_modules/flot/jquery.flot.resize.js",
+        "../node_modules/flot/jquery.flot.pie.js",
+        "../node_modules/flot/jquery.flot.categories.js",
+        "../node_modules/flot/jquery.flot.time.js",
+        "../node_modules/jquery-sparkline/jquery.sparkline.min.js",
         "../node_modules/abp-web-resources/Abp/Framework/scripts/abp.js",
         "../node_modules/abp-web-resources/Abp/Framework/scripts/libs/abp.jquery.js",
         "../node_modules/abp-web-resources/Abp/Framework/scripts/libs/abp.toastr.js",
         "../node_modules/abp-web-resources/Abp/Framework/scripts/libs/abp.blockUI.js",
         "../node_modules/abp-web-resources/Abp/Framework/scripts/libs/abp.spin.js",
         "../node_modules/abp-web-resources/Abp/Framework/scripts/libs/abp.sweet-alert.js",
-        "../node_modules/abp-web-resources/Abp/Framework/scripts/libs/abp.moment.js"
+        "../node_modules/abp-web-resources/Abp/Framework/scripts/libs/abp.moment.js",
+        "../src/bsb-theme/js/admin.js",
+        "../src/bsb-theme/js/demo.js"
       ],
       "environmentSource": "environments/environment.ts",
       "environments": {

@@ -1,5 +1,4 @@
 ﻿(function () {
-
     $('.tenant-change-component a')
         .click(function (e) {
             e.preventDefault();
@@ -13,5 +12,4 @@
                 error: function (e) { }
             });
         });
-
 })();

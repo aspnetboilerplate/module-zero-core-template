@@ -16,7 +16,7 @@ namespace AbpCompanyName.AbpProjectName.Migrations
         protected override void BuildModel(ModelBuilder modelBuilder)
         {
             modelBuilder
-                .HasAnnotation("ProductVersion", "1.1.1")
+                .HasAnnotation("ProductVersion", "1.1.2")
                 .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
             modelBuilder.Entity("Abp.Application.Editions.Edition", b =>
@@ -176,13 +176,9 @@ namespace AbpCompanyName.AbpProjectName.Migrations
 
                     b.Property<int?>("TenantId");
 
-                    b.Property<int?>("UserId");
-
                     b.HasKey("Id");
 
                     b.HasIndex("RoleId");
-
-                    b.HasIndex("UserId");
 
                     b.HasIndex("TenantId", "ClaimType");
 
@@ -488,6 +484,8 @@ namespace AbpCompanyName.AbpProjectName.Migrations
                         .HasMaxLength(128);
 
                     b.Property<bool>("IsDeleted");
+
+                    b.Property<bool>("IsDisabled");
 
                     b.Property<DateTime?>("LastModificationTime");
 
@@ -977,7 +975,8 @@ namespace AbpCompanyName.AbpProjectName.Migrations
                 {
                     b.HasOne("AbpCompanyName.AbpProjectName.Authorization.Roles.Role")
                         .WithMany("Claims")
-                        .HasForeignKey("UserId");
+                        .HasForeignKey("RoleId")
+                        .OnDelete(DeleteBehavior.Cascade);
                 });
 
             modelBuilder.Entity("Abp.Authorization.Users.UserClaim", b =>

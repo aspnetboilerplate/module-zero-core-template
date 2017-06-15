@@ -7,6 +7,7 @@ using Abp.Zero.Configuration;
 using AbpCompanyName.AbpProjectName.MultiTenancy;
 using AbpCompanyName.AbpProjectName.Authorization.Roles;
 using AbpCompanyName.AbpProjectName.Authorization.Users;
+using AbpCompanyName.AbpProjectName.Configuration;
 using AbpCompanyName.AbpProjectName.Timing;
 
 namespace AbpCompanyName.AbpProjectName
@@ -30,6 +31,8 @@ namespace AbpCompanyName.AbpProjectName
 
             //Configure roles
             AppRoleConfig.Configure(Configuration.Modules.Zero().RoleManagement);
+
+            Configuration.Settings.Providers.Add<AppSettingProvider>();
         }
 
         public override void Initialize()

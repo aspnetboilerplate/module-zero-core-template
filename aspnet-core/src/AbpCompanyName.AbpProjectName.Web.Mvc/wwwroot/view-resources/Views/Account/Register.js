@@ -4,20 +4,20 @@
         return;
     }
 
-    $.validator.addMethod("customUsername", function (value, element) {
-        if (value === $('input[name="EmailAddress"]').val()) {
-            return true;
-        }
+    $(function () {
 
-        return !$.validator.methods.email.apply(this, arguments);
-    }, abp.localization.localize("RegisterFormUserNameInvalidMessage", "AbpProjectName"));
+        var $registerForm = $('#RegisterForm');
 
-    $(document).ready(function () {
-        $('.register-form').validate({
-            errorElement: 'span', //default input error message container
-            errorClass: 'text-danger', // default input error message class
-            focusInvalid: false, // do not focus the last invalid input
-            ignore: "",
+        $.validator.addMethod("customUsername", function (value, element) {
+            if (value === $registerForm.find('input[name="EmailAddress"]').val()) {
+                return true;
+            }
+
+            //Username can not be an email address (except the email address entered)
+            return !$.validator.methods.email.apply(this, arguments);
+        }, abp.localization.localize("RegisterFormUserNameInvalidMessage", "AbpProjectName"));
+        
+        $registerForm.validate({
             rules: {
                 UserName: {
                     required: true,
@@ -25,17 +25,16 @@
                 }
             },
 
-            highlight: function (element) {
-                $(element).closest('.form-group').addClass('has-error');
+            highlight: function (input) {
+                $(input).parents('.form-line').addClass('error');
             },
 
-            success: function (label) {
-                label.closest('.form-group').removeClass('has-error');
-                label.remove();
+            unhighlight: function (input) {
+                $(input).parents('.form-line').removeClass('error');
             },
 
-            submitHandler: function (form) {
-                form.submit();
+            errorPlacement: function (error, element) {
+                $(element).parents('.form-group').append(error);
             }
         });
     });

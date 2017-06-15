@@ -122,6 +122,66 @@ export class AccountServiceProxy {
 }
 
 @Injectable()
+export class ConfigurationServiceProxy {
+    private http: Http = null; 
+    private baseUrl: string = undefined; 
+    protected jsonParseReviver: (key: string, value: any) => any = undefined;
+
+    constructor(@Inject(Http) http: Http, @Optional() @Inject(API_BASE_URL) baseUrl?: string) {
+        this.http = http; 
+        this.baseUrl = baseUrl ? baseUrl : ""; 
+    }
+
+    /**
+     * @return Success
+     */
+    changeUiTheme(input: ChangeUiThemeInput): Observable<void> {
+        let url_ = this.baseUrl + "/api/services/app/Configuration/ChangeUiTheme";
+
+        const content_ = JSON.stringify(input ? input.toJS() : null);
+        
+        return this.http.request(url_, {
+            body: content_,
+            method: "post",
+            headers: new Headers({
+                "Content-Type": "application/json; charset=UTF-8", 
+				"Accept": "application/json; charset=UTF-8"
+            })
+        }).map((response) => {
+            return this.processChangeUiTheme(response);
+        }).catch((response: any, caught: any) => {
+            if (response instanceof Response) {
+                try {
+                    return Observable.of(this.processChangeUiTheme(response));
+                } catch (e) {
+                    return <Observable<void>><any>Observable.throw(e);
+                }
+            } else
+                return <Observable<void>><any>Observable.throw(response);
+        });
+    }
+
+    protected processChangeUiTheme(response: Response): void {
+        const responseText = response.text();
+        const status = response.status; 
+
+        if (status === 200) {
+            return null;
+        } else if (status !== 200 && status !== 204) {
+            this.throwException("An unexpected server error occurred.", status, responseText);
+        }
+        return null;
+    }
+
+    protected throwException(message: string, status: number, response: string, result?: any): any {
+        if(result !== null && result !== undefined)
+            throw result;
+        else
+            throw new SwaggerException(message, status, response);
+    }
+}
+
+@Injectable()
 export class RoleServiceProxy {
     private http: Http = null; 
     private baseUrl: string = undefined; 
@@ -823,6 +883,34 @@ export class RegisterOutput {
     clone() {
         const json = this.toJSON();
         return new RegisterOutput(JSON.parse(json));
+    }
+}
+
+export class ChangeUiThemeInput { 
+    theme: string;
+    constructor(data?: any) {
+        if (data !== undefined) {
+            this.theme = data["theme"] !== undefined ? data["theme"] : null;
+        }
+    }
+
+    static fromJS(data: any): ChangeUiThemeInput {
+        return new ChangeUiThemeInput(data);
+    }
+
+    toJS(data?: any) {
+        data = data === undefined ? {} : data;
+        data["theme"] = this.theme !== undefined ? this.theme : null;
+        return data; 
+    }
+
+    toJSON() {
+        return JSON.stringify(this.toJS());
+    }
+
+    clone() {
+        const json = this.toJSON();
+        return new ChangeUiThemeInput(JSON.parse(json));
     }
 }
 
