@@ -25,12 +25,12 @@
             case 2: //InActive
                 abp.message.warn(abp.utils.formatString(abp.localization
                     .localize("TenantIsNotActive", "AbpProjectName"),
-                    this.tenancyName));
+                    tenancyName));
                 break;
             case 3: //NotFound
                 abp.message.warn(abp.utils.formatString(abp.localization
                     .localize("ThereIsNoTenantDefinedWithName{0}", "AbpProjectName"),
-                    this.tenancyName));
+                    tenancyName));
                 break;
             }
         });
