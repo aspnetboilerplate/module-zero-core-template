@@ -6,6 +6,7 @@ import { HomeComponent } from './home/home.component';
 import { AboutComponent } from './about/about.component';
 import { UsersComponent } from './users/users.component';
 import { TenantsComponent } from './tenants/tenants.component';
+import { TestComponent } from './test/test.component';
 
 @NgModule({
     imports: [
@@ -17,7 +18,10 @@ import { TenantsComponent } from './tenants/tenants.component';
                     { path: 'home', component: HomeComponent,  canActivate: [AppRouteGuard] },
                     { path: 'users', component: UsersComponent, data: { permission: 'Pages.Users' }, canActivate: [AppRouteGuard] },
                     { path: 'tenants', component: TenantsComponent, data: { permission: 'Pages.Tenants' }, canActivate: [AppRouteGuard] },
-                    { path: 'about', component: AboutComponent }
+                    { path: 'about', component: AboutComponent },
+                    // Testing
+                    { path: 'test/:id',  component: TestComponent},
+                    { path: 'test/:id/:subid', component: TestComponent}
                 ]
             }
         ])

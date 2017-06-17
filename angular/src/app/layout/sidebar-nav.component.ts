@@ -12,8 +12,26 @@ export class SideBarNavComponent extends AppComponentBase {
     menuItems: MenuItem[] = [
         new MenuItem(this.l("HomePage"), "", "home", "/app/home"),
         new MenuItem(this.l("Administration"), "", "people", "", [
+        	new MenuItem(this.l("Users"), "Pages.Users", "person", "/app/users"),
 			new MenuItem(this.l("Tenants"), "Pages.Tenants", "business", "/app/tenants"),
-			new MenuItem(this.l("Users"), "Pages.Users", "person", "/app/users")
+            new MenuItem(this.l("Test1 - With Route"), "Pages.Users", "person", "/app/test/1", [
+                new MenuItem(this.l("Test1.1"), "Pages.Users", "person", '/app/test/1.1'),
+                new MenuItem(this.l("Test1.2"), "Pages.Users", "person", "/app/test/1.2"),
+                new MenuItem(this.l("Test1.3"), "Pages.Users", "person", "/app/test/1.3")
+            ]),
+            new MenuItem(this.l("Test2 - Empty Route"), "Pages.Users", "person", "", [
+                new MenuItem(this.l("Test2.1"), "Pages.Users", "person", "/app/test/2.1"),
+                new MenuItem(this.l("Test2.2"), "Pages.Users", "person", "/app/test/2.2"),
+                new MenuItem(this.l("Test2.3"), "Pages.Users", "person", "/app/test/2.3" /*,[
+                    // Nesting is too deep here
+                    new MenuItem(this.l("Test2.1"), "Pages.Users", "person", "/app/test/2.3/1"),
+                    new MenuItem(this.l("Test2.2"), "Pages.Users", "person", "/app/test/2.3/2"),
+                    new MenuItem(this.l("Test2.3"), "Pages.Users", "person", "/app/test/2.3/3")
+                ]*/ )
+            ]),
+            new MenuItem(this.l("Test3"), "Pages.Users", "person", "/app/test/3"),
+            new MenuItem(this.l("Test4"), "Pages.Users", "person", "/app/test/4"),
+            new MenuItem(this.l("Test5"), "Pages.Users", "person", "/app/test/5")
 		]),
         new MenuItem(this.l("About"), "", "info", "/app/about"),
         new MenuItem(this.l("MultiLevelMenu"), "", "menu", "", [
