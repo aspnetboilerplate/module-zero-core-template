@@ -34,10 +34,6 @@ export class CreateTenantModalComponent extends AppComponentBase {
         this.tenant = new CreateTenantInput();
     }
 
-    onShown(): void {
-        ($ as any).AdminBSB.input.activate($(this.modalContent.nativeElement));
-    }
-
     save(): void {
 
         this.saving = true;

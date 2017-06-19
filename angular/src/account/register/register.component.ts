@@ -27,7 +27,6 @@ export class RegisterComponent extends AppComponentBase implements AfterViewInit
     }
 
     ngAfterViewInit(): void {
-        ($ as any).AdminBSB.input.activate($(this.cardBody.nativeElement));
         $(this.cardBody.nativeElement).find('input:first').focus();
     }
 

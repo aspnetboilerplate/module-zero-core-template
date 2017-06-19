@@ -33,10 +33,6 @@ export class CreateUserModalComponent extends AppComponentBase {
         this.user = new CreateUserInput({ isActive: true });
     }
 
-    onShown(): void {
-        ($ as any).AdminBSB.input.activate($(this.modalContent.nativeElement));
-    }
-
     save(): void {
 
         this.saving = true;

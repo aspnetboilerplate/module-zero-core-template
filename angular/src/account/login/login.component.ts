@@ -10,7 +10,7 @@ import { AbpSessionService } from '@abp/session/abp-session.service';
     styleUrls: [
         './login.component.less'
     ],
-    animations: [accountModuleAnimation()] 
+    animations: [accountModuleAnimation()]
 })
 export class LoginComponent extends AppComponentBase {
 
@@ -28,7 +28,6 @@ export class LoginComponent extends AppComponentBase {
     }
 
     ngAfterViewInit(): void {
-        ($ as any).AdminBSB.input.activate($(this.cardBody.nativeElement));
         $(this.cardBody.nativeElement).find('input:first').focus();
     }
 

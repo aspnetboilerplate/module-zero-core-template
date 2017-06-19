@@ -20,6 +20,7 @@ import { RegisterComponent } from './register/register.component';
 import { AccountLanguagesComponent } from './layout/account-languages.component';
 
 import { LoginService } from './login/login.service';
+import { MaterialInput } from '@shared/directives/material-input.directive';
 
 @NgModule({
     imports: [
@@ -39,7 +40,8 @@ import { LoginService } from './login/login.service';
         TenantChangeModalComponent,
         LoginComponent,
         RegisterComponent,
-        AccountLanguagesComponent
+        AccountLanguagesComponent,
+        MaterialInput
     ],
     providers: [
         LoginService
