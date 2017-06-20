@@ -40,8 +40,7 @@ import { MaterialInput } from '@shared/directives/material-input.directive';
         TenantChangeModalComponent,
         LoginComponent,
         RegisterComponent,
-        AccountLanguagesComponent,
-        MaterialInput
+        AccountLanguagesComponent
     ],
     providers: [
         LoginService

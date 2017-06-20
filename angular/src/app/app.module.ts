@@ -41,8 +41,7 @@ import { MaterialInput } from '@shared/directives/material-input.directive';
         SideBarUserAreaComponent,
         SideBarNavComponent,
         SideBarFooterComponent,
-        RightSideBarComponent,
-        MaterialInput
+        RightSideBarComponent
     ],
     imports: [
         CommonModule,
