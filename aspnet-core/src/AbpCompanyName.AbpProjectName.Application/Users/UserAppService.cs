@@ -1,63 +1,135 @@
 using System.Collections.Generic;
 using System.Threading.Tasks;
+
+using Abp.Domain.Uow;
+using Abp.Application.Services;
 using Abp.Application.Services.Dto;
 using Abp.Authorization;
 using Abp.Domain.Repositories;
+
 using AbpCompanyName.AbpProjectName.Authorization;
+using AbpCompanyName.AbpProjectName.Authorization.Roles;
 using AbpCompanyName.AbpProjectName.Authorization.Users;
 using AbpCompanyName.AbpProjectName.Users.Dto;
+
 using Microsoft.AspNetCore.Identity;
+
+using System.Linq;
+using System.Linq.Dynamic;
+using System.Linq.Expressions;
+
+using Microsoft.EntityFrameworkCore;
+using Abp.Linq.Extensions;
+using Abp.IdentityFramework;
 
 namespace AbpCompanyName.AbpProjectName.Users
 {
-    /* THIS IS JUST A SAMPLE. */
-    [AbpAuthorize(PermissionNames.Pages_Users)]
-    public class UserAppService : AbpProjectNameAppServiceBase, IUserAppService
+    public class UserAppService  : AsyncCrudAppService<User, UserDto, long, PagedResultRequestDto, CreateUserDto, UserDto>, IUserAppService, IAsyncCrudAppService<UserDto, long, PagedResultRequestDto, CreateUserDto, UserDto>
     {
-        private readonly IRepository<User, long> _userRepository;
-        private readonly IPasswordHasher<User> _passwordHasher;
+        private UserManager userManager;
 
-        public UserAppService(
-            IRepository<User, long> userRepository, 
-            IPasswordHasher<User> passwordHasher)
+        public UserAppService(IRepository<User, long> _service, UserManager userManager): base(_service)
         {
-            _userRepository = userRepository;
-            _passwordHasher = passwordHasher;
+            this.userManager = userManager;
+
+            CreatePermissionName 
+            = GetAllPermissionName 
+            = GetPermissionName 
+            = UpdatePermissionName
+            = DeletePermissionName
+            = PermissionNames.Pages_Users;
         }
 
-        public async Task ProhibitPermission(ProhibitPermissionInput input)
+        protected override IQueryable<User> CreateFilteredQuery(PagedResultRequestDto input)
         {
-            var user = await UserManager.GetUserByIdAsync(input.UserId);
-            var permission = PermissionManager.GetPermission(input.PermissionName);
-
-            await UserManager.ProhibitPermissionAsync(user, permission);
+             return Repository.GetAllIncluding(x=>x.Roles).OrderByDescending(x=>x.Id);
         }
 
-        //Example for primitive method parameters.
-        public async Task RemoveFromRole(long userId, string roleName)
+        protected override async Task<User> GetEntityByIdAsync(long id)
         {
-            var user = await UserManager.FindByIdAsync(userId.ToString());
-            CheckErrors(await UserManager.RemoveFromRoleAsync(user, roleName));
+            return await CreateFilteredQuery(null)
+                            .Where(x=>x.Id == id)
+                            .FirstOrDefaultAsync();
+        }
+        protected override User MapToEntity(CreateUserDto createInput)
+        {
+            User user = ObjectMapper.Map<User>(createInput);
+            user.SetNormalizedNames();
+            
+            return user;
         }
 
-        public async Task<ListResultDto<UserListDto>> GetUsers()
+        protected override void MapToEntity(UserDto input, User user)
         {
-            var users = await _userRepository.GetAllListAsync();
-
-            return new ListResultDto<UserListDto>(
-                ObjectMapper.Map<List<UserListDto>>(users)
-                );
+            ObjectMapper.Map(input, user);
+            user.SetNormalizedNames();
         }
 
-        public async Task CreateUser(CreateUserInput input)
+        protected override IQueryable<User> ApplyPaging(IQueryable<User> query, PagedResultRequestDto input)
         {
-            var user = ObjectMapper.Map<User>(input);
+            //Try to use paging if available
+            var pagedInput = input as IPagedResultRequest;
+            if (pagedInput != null)
+            {
+                // Sort again after paging // .take resets the orderby
+                query = query.PageBy(pagedInput);
+                query = ApplySorting(query, input);
+                return query;
+            }
 
-            user.TenantId = AbpSession.TenantId;
-            user.Password = _passwordHasher.HashPassword(user, input.Password);
-            user.IsEmailConfirmed = true;
+            //Try to limit query result if available
+            var limitedInput = input as ILimitedResultRequest;
+            if (limitedInput != null)
+            {
+                query = query.Take(limitedInput.MaxResultCount);
+                query = ApplySorting(query, input);
+                return query;
+            }
 
-            CheckErrors(await UserManager.CreateAsync(user));
+            //No paging
+            return query;
+        }
+
+		[UnitOfWork]
+        public async override Task<UserDto> Create(CreateUserDto input)
+        {
+            CheckCreatePermission();
+
+            User user = ObjectMapper.Map<User>(input); 
+            CheckErrors(await userManager.CreateAsync(user));
+            CheckErrors(await userManager.SetRoles(user, input.Roles));
+
+            CurrentUnitOfWork.SaveChanges();
+
+            return MapToEntityDto(user);
+        }
+
+        [UnitOfWork]
+        public async override Task<UserDto> Update(UserDto input)
+        {
+            CheckUpdatePermission();
+
+            User user = await userManager.GetUserByIdAsync(input.Id);
+
+            MapToEntity(input, user);
+
+            CheckErrors(await this.userManager.UpdateAsync(user));
+            CheckErrors(await userManager.SetRoles(user, input.Roles));
+            
+            // get the user again after updating the roles
+            return await Get(input);
+        }
+
+        [UnitOfWork]
+        public async override Task Delete(EntityDto<long> input)
+        {
+            User user = await userManager.GetUserByIdAsync(input.Id);
+            await userManager.DeleteAsync(user);
+		}
+        
+        protected virtual void CheckErrors(IdentityResult identityResult)
+        {
+            identityResult.CheckErrors(LocalizationManager);
         }
     }
 }

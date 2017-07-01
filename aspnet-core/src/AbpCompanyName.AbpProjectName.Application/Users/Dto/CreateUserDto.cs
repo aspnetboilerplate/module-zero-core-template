@@ -2,12 +2,13 @@ using System.ComponentModel.DataAnnotations;
 using Abp.Auditing;
 using Abp.Authorization.Users;
 using Abp.AutoMapper;
+
 using AbpCompanyName.AbpProjectName.Authorization.Users;
 
 namespace AbpCompanyName.AbpProjectName.Users.Dto
 {
-    [AutoMap(typeof(User))]
-    public class CreateUserInput
+    [AutoMapTo(typeof(User))]
+    public class CreateUserDto
     {
         [Required]
         [StringLength(AbpUserBase.MaxUserNameLength)]
@@ -26,11 +27,18 @@ namespace AbpCompanyName.AbpProjectName.Users.Dto
         [StringLength(AbpUserBase.MaxEmailAddressLength)]
         public string EmailAddress { get; set; }
 
+        public bool IsActive { get; set; }
+
+        public string[] Roles { get; set; }
+
         [Required]
         [StringLength(User.MaxPlainPasswordLength)]
         [DisableAuditing]
         public string Password { get; set; }
 
-        public bool IsActive { get; set; }
+        [Required]
+        [StringLength(User.MaxPlainPasswordLength)]
+        [DisableAuditing]
+        public string ConfirmPassword { get; set; }
     }
 }

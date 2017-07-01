@@ -1,4 +1,7 @@
 ﻿using System.Threading.Tasks;
+
+using Abp.Application.Services.Dto;
+
 using AbpCompanyName.AbpProjectName.Users;
 using AbpCompanyName.AbpProjectName.Users.Dto;
 using Microsoft.EntityFrameworkCore;
@@ -20,7 +23,7 @@ namespace AbpCompanyName.AbpProjectName.Tests.Users
         public async Task GetUsers_Test()
         {
             //Act
-            var output = await _userAppService.GetUsers();
+            var output = await _userAppService.GetAll(new PagedResultRequestDto{MaxResultCount=20, SkipCount=0} );
 
             //Assert
             output.Items.Count.ShouldBeGreaterThan(0);
@@ -30,8 +33,8 @@ namespace AbpCompanyName.AbpProjectName.Tests.Users
         public async Task CreateUser_Test()
         {
             //Act
-            await _userAppService.CreateUser(
-                new CreateUserInput
+            await _userAppService.Create(
+                new CreateUserDto
                 {
                     EmailAddress = "john@volosoft.com",
                     IsActive = true,

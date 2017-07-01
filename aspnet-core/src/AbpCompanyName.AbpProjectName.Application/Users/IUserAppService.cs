@@ -5,14 +5,8 @@ using AbpCompanyName.AbpProjectName.Users.Dto;
 
 namespace AbpCompanyName.AbpProjectName.Users
 {
-    public interface IUserAppService : IApplicationService
+    public interface IUserAppService : IAsyncCrudAppService<UserDto, long, PagedResultRequestDto, CreateUserDto, UserDto>, IApplicationService
     {
-        Task ProhibitPermission(ProhibitPermissionInput input);
 
-        Task RemoveFromRole(long userId, string roleName);
-
-        Task<ListResultDto<UserListDto>> GetUsers();
-
-        Task CreateUser(CreateUserInput input);
     }
 }

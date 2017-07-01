@@ -1,0 +1,102 @@
+<div bsModal #editRoleModal="bs-modal" class="modal fade" (onShown)="onShown()" tabindex="-1" role="dialog" aria-labelledby="edidtRoleModal" aria-hidden="true" [config]="{backdrop: 'static'}">
+    <div class="modal-dialog">
+
+        <div #modalContent class="modal-content">
+
+            <form *ngIf="active" #editRoleForm="ngForm" id="frm_edit_role" novalidate (ngSubmit)="save()">
+
+                <div class="modal-header">
+                    <button type="button" class="close" (click)="close()" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                    <h4 class="modal-title">
+                        <span>{{l("EditRole")}}</span>
+                    </h4>
+                </div>
+                <div class="modal-body">
+
+                    <ul class="nav nav-tabs tab-nav-right" role="tablist">
+                        <li role="presentation" class="active"><a href="#role-details" data-toggle="tab">Role Details</a></li>
+                        <li role="presentation"><a href="#role-description" data-toggle="tab">Role Description</a></li>
+                    </ul>
+                    <div class="tab-content">
+                        
+                        <div role="tabpanel" class="tab-pane animated fadeIn active" id="role-details">
+                            <div *ngIf="role.isStatic">
+                                <h5 style="color:red">Static Role</h5>
+                            </div>
+                            <div class="row clearfix" style="margin-top:20px;">
+                                <div class="col-sm-6">
+                                    <div class="form-group form-float">
+                                        <div class="form-line">
+                                            <input id="rolename" [disabled]="role.isStatic"  type="text" name="RoleName" [(ngModel)]="role.name" required maxlength="32" minlength="2" class="validate form-control">
+                                            <label for="username" class="form-label">{{l("RoleName")}}</label>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-sm-6">
+                                    <div class="form-group form-float">
+                                        <div class="">
+                                            <input id="isactive" [disabled]="role.isStatic" type="checkbox" name="IsActive" [(ngModel)]="role.isActive" checked class="form-control"/>
+                                            <label for="isactive" class="form-label">{{l("IsActive")}}</label>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="row clearfix" style="margin-top:20px;">
+                                <div class="col-sm-12">
+                                    <div class="form-group form-float">
+                                        <div class="form-line">
+                                            <input id="displayname"  type="text" name="DisplayName" [(ngModel)]="role.displayName" required maxlength="32" minlength="2" class="validate form-control">
+                                            <label for="displayname" class="form-label">{{l("DisplayName")}}</label>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="row clearfix">
+                              <div class="col-sm-12">
+                                <fieldset class="show-fieldset col s12">
+									<legend class="show-legend">Permissions</legend>
+
+									<ng-template ngFor let-permission [ngForOf]="permissions.items" let-permissionIndex="index">
+									<div class="col-sm-6">
+										<input [disabled]="role.isStatic" type="checkbox" name="permission" value="{{permission.name}}" class="filled-in" id="permission-{{permissionIndex}}" checked="{{checkPermission(permission.name)}}" />
+										<label for="permission-{{permissionIndex}}">{{permission.displayName}}</label>
+									</div>
+									</ng-template>
+
+                                </fieldset>
+                              </div>
+                            </div>
+                        </div>
+                        <div role="tabpanel" class="tab-pane animated fadeIn" id="role-description">
+
+                            <div class="row" style="margin-top:20px;">
+                                <div class="col-sm-12">
+									<div class="form-group form-float">
+                                        <div class="form-line">
+											<textarea id="role-description" name="Description" [(ngModel)]="role.description" required class="validate form-control"></textarea>
+											<label for="role-description" class="form-label">Role Description</label>
+										</div>
+									</div>
+                                </div>
+                            </div>
+
+                        </div>
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button [disabled]="saving" type="button" class="btn btn-default waves-effect" (click)="close()">
+                        <i class="material-icons">clear</i>{{l("Cancel")}}
+                    </button>
+                    <button [disabled]="!editRoleForm.form.valid || saving" type="submit" class="btn btn-primary waves-effect">
+                        <i class="material-icons">check</i>{{l("Save")}}
+                    </button>
+                </div>
+
+            </form>
+        </div>
+    </div>
+</div>

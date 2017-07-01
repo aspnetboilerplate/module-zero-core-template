@@ -5,10 +5,7 @@ using AbpCompanyName.AbpProjectName.MultiTenancy.Dto;
 
 namespace AbpCompanyName.AbpProjectName.MultiTenancy
 {
-    public interface ITenantAppService : IApplicationService
+    public interface ITenantAppService : IApplicationService, IAsyncCrudAppService<TenantDto, int, PagedResultRequestDto, CreateTenantDto, TenantDto>
     {
-        ListResultDto<TenantListDto> GetTenants();
-
-        Task CreateTenant(CreateTenantInput input);
     }
 }

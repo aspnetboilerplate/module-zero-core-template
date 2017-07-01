@@ -16,6 +16,7 @@ namespace AbpCompanyName.AbpProjectName.Authorization
             }
 
             var users = pages.CreateChildPermission(PermissionNames.Pages_Users, L("Users"));
+            var roles = pages.CreateChildPermission(PermissionNames.Pages_Roles, L("Roles"));
 
             //Host permissions
             var tenants = pages.CreateChildPermission(PermissionNames.Pages_Tenants, L("Tenants"), multiTenancySides: MultiTenancySides.Host);
