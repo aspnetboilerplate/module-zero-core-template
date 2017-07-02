@@ -1,4 +1,5 @@
-﻿using Abp.AspNetCore.Mvc.Authorization;
+﻿using Abp.Application.Services.Dto;
+using Abp.AspNetCore.Mvc.Authorization;
 using AbpCompanyName.AbpProjectName.Authorization;
 using AbpCompanyName.AbpProjectName.Controllers;
 using AbpCompanyName.AbpProjectName.MultiTenancy;
@@ -18,7 +19,7 @@ namespace AbpCompanyName.AbpProjectName.Web.Controllers
 
         public ActionResult Index()
         {
-            var output = _tenantAppService.GetTenants();
+            var output = _tenantAppService.GetAll(new PagedResultRequestDto());
             return View(output);
         }
     }
