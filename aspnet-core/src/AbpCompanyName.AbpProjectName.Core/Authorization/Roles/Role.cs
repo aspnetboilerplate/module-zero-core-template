@@ -1,15 +1,15 @@
-﻿using Abp.Authorization.Roles;
+﻿using System.ComponentModel.DataAnnotations;
+using Abp.Authorization.Roles;
 using AbpCompanyName.AbpProjectName.Authorization.Users;
 
 namespace AbpCompanyName.AbpProjectName.Authorization.Roles
 {
     public class Role : AbpRole<User>
     {
-        //Can add application specific role properties here
+        public const int MaxDescriptionLength = 5000;
 
         public Role()
         {
-
         }
 
         public Role(int? tenantId, string displayName)
@@ -23,5 +23,8 @@ namespace AbpCompanyName.AbpProjectName.Authorization.Roles
         {
 
         }
+
+        [MaxLength(MaxDescriptionLength)]
+        public string Description {get; set;}
     }
 }

@@ -1,63 +1,125 @@
 using System.Collections.Generic;
 using System.Threading.Tasks;
+using Abp.Application.Services;
 using Abp.Application.Services.Dto;
-using Abp.Authorization;
 using Abp.Domain.Repositories;
 using AbpCompanyName.AbpProjectName.Authorization;
 using AbpCompanyName.AbpProjectName.Authorization.Users;
 using AbpCompanyName.AbpProjectName.Users.Dto;
 using Microsoft.AspNetCore.Identity;
+using System.Linq;
+using Abp.Collections.Extensions;
+using Microsoft.EntityFrameworkCore;
+using Abp.IdentityFramework;
+using AbpCompanyName.AbpProjectName.Authorization.Roles;
+using AbpCompanyName.AbpProjectName.Roles.Dto;
 
 namespace AbpCompanyName.AbpProjectName.Users
 {
-    /* THIS IS JUST A SAMPLE. */
-    [AbpAuthorize(PermissionNames.Pages_Users)]
-    public class UserAppService : AbpProjectNameAppServiceBase, IUserAppService
+    public class UserAppService  : AsyncCrudAppService<User, UserDto, long, PagedResultRequestDto, CreateUserDto, UserDto>, IUserAppService
     {
-        private readonly IRepository<User, long> _userRepository;
+        private readonly UserManager _userManager;
         private readonly IPasswordHasher<User> _passwordHasher;
+        private readonly IRepository<Role> _roleRepository;
 
-        public UserAppService(
-            IRepository<User, long> userRepository, 
-            IPasswordHasher<User> passwordHasher)
+        public UserAppService(IRepository<User, long> repository, UserManager userManager, IPasswordHasher<User> passwordHasher, IRepository<Role> roleRepository)
+            : base(repository)
         {
-            _userRepository = userRepository;
+            _userManager = userManager;
             _passwordHasher = passwordHasher;
+            _roleRepository = roleRepository;
+
+            CreatePermissionName 
+            = GetAllPermissionName 
+            = GetPermissionName 
+            = UpdatePermissionName
+            = DeletePermissionName
+            = PermissionNames.Pages_Users;
         }
-
-        public async Task ProhibitPermission(ProhibitPermissionInput input)
+        
+        public override async Task<UserDto> Create(CreateUserDto input)
         {
-            var user = await UserManager.GetUserByIdAsync(input.UserId);
-            var permission = PermissionManager.GetPermission(input.PermissionName);
+            CheckCreatePermission();
 
-            await UserManager.ProhibitPermissionAsync(user, permission);
-        }
-
-        //Example for primitive method parameters.
-        public async Task RemoveFromRole(long userId, string roleName)
-        {
-            var user = await UserManager.FindByIdAsync(userId.ToString());
-            CheckErrors(await UserManager.RemoveFromRoleAsync(user, roleName));
-        }
-
-        public async Task<ListResultDto<UserListDto>> GetUsers()
-        {
-            var users = await _userRepository.GetAllListAsync();
-
-            return new ListResultDto<UserListDto>(
-                ObjectMapper.Map<List<UserListDto>>(users)
-                );
-        }
-
-        public async Task CreateUser(CreateUserInput input)
-        {
             var user = ObjectMapper.Map<User>(input);
 
             user.TenantId = AbpSession.TenantId;
             user.Password = _passwordHasher.HashPassword(user, input.Password);
             user.IsEmailConfirmed = true;
 
-            CheckErrors(await UserManager.CreateAsync(user));
+            CheckErrors(await _userManager.CreateAsync(user));
+
+            if (input.Roles != null)
+            {
+                CheckErrors(await _userManager.SetRoles(user, input.Roles));
+            }
+
+            CurrentUnitOfWork.SaveChanges();
+
+            return MapToEntityDto(user);
+        }
+
+        public override async Task<UserDto> Update(UserDto input)
+        {
+            CheckUpdatePermission();
+
+            var user = await _userManager.GetUserByIdAsync(input.Id);
+
+            MapToEntity(input, user);
+
+            CheckErrors(await _userManager.UpdateAsync(user));
+
+            if (input.Roles != null)
+            {
+                CheckErrors(await _userManager.SetRoles(user, input.Roles));
+            }
+
+            return await Get(input);
+        }
+
+        public override async Task Delete(EntityDto<long> input)
+        {
+            var user = await _userManager.GetUserByIdAsync(input.Id);
+            await _userManager.DeleteAsync(user);
+		}
+
+        public async Task<ListResultDto<RoleDto>> GetRoles()
+        {
+            var roles = await _roleRepository.GetAllListAsync();
+            return new ListResultDto<RoleDto>(ObjectMapper.Map<List<RoleDto>>(roles));
+        }
+
+        protected override User MapToEntity(CreateUserDto createInput)
+        {
+            var user = ObjectMapper.Map<User>(createInput);
+            user.SetNormalizedNames();
+            return user;
+        }
+
+        protected override void MapToEntity(UserDto input, User user)
+        {
+            ObjectMapper.Map(input, user);
+            user.SetNormalizedNames();
+        }
+        
+        protected override IQueryable<User> CreateFilteredQuery(PagedResultRequestDto input)
+        {
+            return Repository.GetAllIncluding(x => x.Roles);
+        }
+
+        protected override async Task<User> GetEntityByIdAsync(long id)
+        {
+            return await Repository.GetAllIncluding(x => x.Roles).FirstOrDefaultAsync(x => x.Id == id);
+        }
+        
+        protected override IQueryable<User> ApplySorting(IQueryable<User> query, PagedResultRequestDto input)
+        {
+            return query.OrderBy(r => r.UserName);
+        }
+
+        protected virtual void CheckErrors(IdentityResult identityResult)
+        {
+            identityResult.CheckErrors(LocalizationManager);
         }
     }
 }

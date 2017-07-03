@@ -1,28 +1,28 @@
 ﻿import { Component, ViewChild, Injector, Output, EventEmitter, ElementRef } from '@angular/core';
 import { ModalDirective } from 'ngx-bootstrap';
-import { UserServiceProxy, CreateUserInput } from '@shared/service-proxies/service-proxies';
+import { TenantServiceProxy, CreateTenantDto } from '@shared/service-proxies/service-proxies';
 import { AppComponentBase } from '@shared/app-component-base';
 
 import * as _ from "lodash";
 
 @Component({
-    selector: 'createUserModal',
-    templateUrl: './create-user-modal.component.html'
+  selector: 'create-tenant-modal',
+  templateUrl: './create-tenant.component.html'
 })
-export class CreateUserModalComponent extends AppComponentBase {
+export class CreateTenantComponent extends AppComponentBase {
 
-    @ViewChild('createUserModal') modal: ModalDirective;
+    @ViewChild('createTenantModal') modal: ModalDirective;
     @ViewChild('modalContent') modalContent: ElementRef;
 
     @Output() modalSave: EventEmitter<any> = new EventEmitter<any>();
 
     active: boolean = false;
     saving: boolean = false;
-    user: CreateUserInput = null;
+    tenant: CreateTenantDto = null;
 
     constructor(
         injector: Injector,
-        private _userService: UserServiceProxy
+        private _tenantService: TenantServiceProxy
     ) {
         super(injector);
     }
@@ -30,17 +30,28 @@ export class CreateUserModalComponent extends AppComponentBase {
     show(): void {
         this.active = true;
         this.modal.show();
-        this.user = new CreateUserInput({ isActive: true });
+        this.tenant = new CreateTenantDto({isActive:true});
     }
 
     onShown(): void {
         ($ as any).AdminBSB.input.activate($(this.modalContent.nativeElement));
+
+        $('#frm_create_tenant').validate({
+            highlight: input => {
+                $(input).parents('.form-line').addClass('error');
+            },
+            unhighlight: input => {
+                $(input).parents('.form-line').removeClass('error');
+            },
+            errorPlacement: (error, element) => {
+                $(element).parents('.form-group').append(error);
+            }
+        });
     }
 
     save(): void {
-
         this.saving = true;
-        this._userService.createUser(this.user)
+        this._tenantService.create(this.tenant)
             .finally(() => { this.saving = false; })
             .subscribe(() => {
                 this.notify.info(this.l('SavedSuccessfully'));
