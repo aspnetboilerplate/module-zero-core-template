@@ -1,4 +1,4 @@
-<div bsModal #createTenantModal="bs-modal" class="modal fade" (onShown)="onShown()" tabindex="-1" role="dialog" aria-labelledby="createUserModal" aria-hidden="true" [config]="{backdrop: 'static'}">
+﻿<div bsModal #createTenantModal="bs-modal" class="modal fade" (onShown)="onShown()" tabindex="-1" role="dialog" aria-labelledby="createUserModal" aria-hidden="true" [config]="{backdrop: 'static'}">
     <div class="modal-dialog">
 
         <div #modalContent class="modal-content">
@@ -37,6 +37,12 @@
                         <div class="form-line">
                             <input type="email" name="AdminEmailAddress" class="form-control" [(ngModel)]="tenant.adminEmailAddress" required maxlength="256" pattern="^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{1,})+$">
                             <label class="form-label">{{l("AdminEmailAddress")}}</label>
+                        </div>
+                    </div>
+                    <div class="form-group form-float">
+                        <div class="">
+                            <input id="isactive" type="checkbox" name="IsActive" [(ngModel)]="tenant.isActive" checked class="form-control" />
+                            <label for="isactive" class="form-label">{{l("IsActive")}}</label>
                         </div>
                     </div>
                     <p>{{l("DefaultPasswordIs","123qwe")}}</p>
