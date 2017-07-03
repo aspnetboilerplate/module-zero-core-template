@@ -1,7 +1,6 @@
 ﻿import { Component, Injector, ViewChild } from '@angular/core';
-import { PagedListingComponentBase, PagedRequestDto, EntityDto } from "shared/paged-listing-component-base";
-import { RoleServiceProxy, RoleDto } from "shared/service-proxies/service-proxies";
-
+import { PagedListingComponentBase, PagedRequestDto } from "shared/paged-listing-component-base";
+import { RoleServiceProxy, RoleDto, PagedResultDtoOfRoleDto } from "shared/service-proxies/service-proxies";
 import { appModuleAnimation } from '@shared/animations/routerTransition';
 import { CreateRoleComponent } from "app/roles/create-role/create-role.component";
 import { EditRoleComponent } from "app/roles/edit-role/edit-role.component";
@@ -29,7 +28,7 @@ export class RolesComponent extends PagedListingComponentBase<RoleDto> {
 			.finally( ()=> {
 				finishedCallback();
 			})
-			.subscribe((result)=>{
+            .subscribe((result: PagedResultDtoOfRoleDto)=>{
 				this.roles = result.items;
 				this.showPaging(result, pageNumber);
 		});

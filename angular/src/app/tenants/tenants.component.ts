@@ -1,9 +1,8 @@
-﻿import { Component, Injector, AfterViewInit, ViewChild } from '@angular/core';
-import { AppComponentBase } from '@shared/app-component-base';
+﻿import { Component, Injector, ViewChild } from '@angular/core';
 import { appModuleAnimation } from '@shared/animations/routerTransition';
-import { TenantServiceProxy, TenantDto } from '@shared/service-proxies/service-proxies';
+import { TenantServiceProxy, TenantDto, PagedResultDtoOfTenantDto } from '@shared/service-proxies/service-proxies';
 
-import { PagedListingComponentBase, PagedRequestDto, EntityDto } from "shared/paged-listing-component-base";
+import { PagedListingComponentBase, PagedRequestDto } from "shared/paged-listing-component-base";
 import { EditTenantComponent } from "app/tenants/edit-tenant/edit-tenant.component";
 import { CreateTenantComponent } from "app/tenants/create-tenant/create-tenant.component";
 
@@ -30,7 +29,7 @@ export class TenantsComponent extends PagedListingComponentBase<TenantDto> {
             .finally(()=>{
                 finishedCallback();
             })
-            .subscribe((result)=>{
+            .subscribe((result:PagedResultDtoOfTenantDto)=>{
 				this.tenants = result.items;
 				this.showPaging(result, pageNumber);
             });
