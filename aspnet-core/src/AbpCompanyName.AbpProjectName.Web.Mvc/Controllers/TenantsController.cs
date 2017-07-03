@@ -1,4 +1,5 @@
-﻿using Abp.Application.Services.Dto;
+﻿using System.Threading.Tasks;
+using Abp.Application.Services.Dto;
 using Abp.AspNetCore.Mvc.Authorization;
 using AbpCompanyName.AbpProjectName.Authorization;
 using AbpCompanyName.AbpProjectName.Controllers;
@@ -17,9 +18,9 @@ namespace AbpCompanyName.AbpProjectName.Web.Controllers
             _tenantAppService = tenantAppService;
         }
 
-        public ActionResult Index()
+        public async Task<ActionResult> Index()
         {
-            var output = _tenantAppService.GetAll(new PagedResultRequestDto());
+            var output = await _tenantAppService.GetAll(new PagedResultRequestDto { MaxResultCount = int.MaxValue }); //Paging not implemented yet
             return View(output);
         }
     }

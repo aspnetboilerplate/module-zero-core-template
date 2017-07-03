@@ -2,7 +2,6 @@ using System.ComponentModel.DataAnnotations;
 using Abp.Auditing;
 using Abp.Authorization.Users;
 using Abp.AutoMapper;
-
 using AbpCompanyName.AbpProjectName.Authorization.Users;
 
 namespace AbpCompanyName.AbpProjectName.Users.Dto
@@ -35,10 +34,5 @@ namespace AbpCompanyName.AbpProjectName.Users.Dto
         [StringLength(AbpUserBase.MaxPlainPasswordLength)]
         [DisableAuditing]
         public string Password { get; set; }
-
-        [Required]
-        [StringLength(AbpUserBase.MaxPlainPasswordLength)]
-        [DisableAuditing]
-        public string ConfirmPassword { get; set; }
     }
 }

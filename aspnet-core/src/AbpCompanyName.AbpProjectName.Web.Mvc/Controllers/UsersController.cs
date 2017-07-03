@@ -20,7 +20,7 @@ namespace AbpCompanyName.AbpProjectName.Web.Controllers
 
         public async Task<ActionResult> Index()
         {
-            var output = await _userAppService.GetAll(new PagedResultRequestDto());
+            var output = await _userAppService.GetAll(new PagedResultRequestDto { MaxResultCount = int.MaxValue }); //Paging not implemented yet
             return View(output);
         }
     }

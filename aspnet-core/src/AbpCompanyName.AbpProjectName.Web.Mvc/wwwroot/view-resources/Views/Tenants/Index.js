@@ -17,7 +17,7 @@
             var tenant = _$form.serializeFormToObject(); //serializeFormToObject is defined in main.js
 
             abp.ui.setBusy(_$modal);
-            _tenantService.createTenant(tenant).done(function () {
+            _tenantService.create(tenant).done(function () {
                 _$modal.modal('hide');
                 location.reload(true); //reload page to see new tenant!
             }).always(function() {

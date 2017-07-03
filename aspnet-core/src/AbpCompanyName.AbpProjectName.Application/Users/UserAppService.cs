@@ -8,6 +8,7 @@ using AbpCompanyName.AbpProjectName.Authorization.Users;
 using AbpCompanyName.AbpProjectName.Users.Dto;
 using Microsoft.AspNetCore.Identity;
 using System.Linq;
+using Abp.Collections.Extensions;
 using Microsoft.EntityFrameworkCore;
 using Abp.IdentityFramework;
 using AbpCompanyName.AbpProjectName.Authorization.Roles;
@@ -47,7 +48,11 @@ namespace AbpCompanyName.AbpProjectName.Users
             user.IsEmailConfirmed = true;
 
             CheckErrors(await _userManager.CreateAsync(user));
-            CheckErrors(await _userManager.SetRoles(user, input.Roles));
+
+            if (input.Roles != null)
+            {
+                CheckErrors(await _userManager.SetRoles(user, input.Roles));
+            }
 
             CurrentUnitOfWork.SaveChanges();
 
@@ -63,8 +68,12 @@ namespace AbpCompanyName.AbpProjectName.Users
             MapToEntity(input, user);
 
             CheckErrors(await _userManager.UpdateAsync(user));
-            CheckErrors(await _userManager.SetRoles(user, input.Roles));
-            
+
+            if (input.Roles != null)
+            {
+                CheckErrors(await _userManager.SetRoles(user, input.Roles));
+            }
+
             return await Get(input);
         }
 
