@@ -19,7 +19,7 @@ namespace AbpCompanyName.AbpProjectName.Web.Views.Shared.Components.AccountLangu
             var model = new LanguageSelectionViewModel
             {
                 CurrentLanguage = _languageManager.CurrentLanguage,
-                Languages = _languageManager.GetLanguages()
+                Languages = _languageManager.GetLanguages().Where(l => !l.IsDisabled).ToList()
                 .Where(l => !l.IsDisabled)
                 .ToList(),
                 CurrentUrl = Request.Path

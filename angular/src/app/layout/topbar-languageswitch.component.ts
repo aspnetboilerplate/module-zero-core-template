@@ -1,6 +1,8 @@
 ﻿import { Component, OnInit, Injector, ViewEncapsulation } from '@angular/core';
 import { AppComponentBase } from '@shared/app-component-base';
 
+import * as _ from 'lodash';
+
 @Component({
   templateUrl: './topbar-languageswitch.component.html',
   selector: 'topbar-languageswitch',
@@ -18,7 +20,7 @@ export class TopBarLanguageSwitchComponent extends AppComponentBase implements O
   }
 
   ngOnInit() {
-    this.languages = this.localization.languages;
+    this.languages = _.filter(this.localization.languages, l => !l.isDisabled);
     this.currentLanguage = this.localization.currentLanguage;
   }
 
