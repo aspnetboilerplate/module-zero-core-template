@@ -18,7 +18,7 @@ export class PagedRequestDto {
 
 export abstract class PagedListingComponentBase<EntityDto> extends AppComponentBase implements OnInit {
 
-    public pageSize: number = 2;
+    public pageSize: number = 10;
     public pageNumber: number = 1;
     public totalPages: number = 1;
     public totalItems: number;

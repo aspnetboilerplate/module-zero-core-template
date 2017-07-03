@@ -20,7 +20,6 @@ namespace AbpCompanyName.AbpProjectName.Roles.Dto
 
         public string NormalizedName { get; set; }
         
-        [Required]
         [StringLength(Role.MaxDescriptionLength)]
         public string Description { get; set; }
 
