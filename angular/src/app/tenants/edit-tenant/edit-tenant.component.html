@@ -1,4 +1,4 @@
-<div bsModal #editTenantModal="bs-modal" class="modal fade" (onShown)="onShown()" tabindex="-1" role="dialog" aria-labelledby="editUserModal" aria-hidden="true" [config]="{backdrop: 'static'}">
+﻿<div bsModal #editTenantModal="bs-modal" class="modal fade" (onShown)="onShown()" tabindex="-1" role="dialog" aria-labelledby="editUserModal" aria-hidden="true" [config]="{backdrop: 'static'}">
     <div class="modal-dialog">
 
         <div #modalContent class="modal-content">
@@ -27,19 +27,16 @@
                             <label class="form-label">{{l("Name")}}</label>
                         </div>
                     </div>
-                    <div class="form-group form-float">
-                        <div class="form-line">
-                            <input type="text" disabled="true" name="ConnectionString" class="form-control" [(ngModel)]="tenant.connectionString" maxlength="1024">
-                            <label class="form-label">{{l("DatabaseConnectionString")}} ({{l("UpdateDisabled")}})</label>
+                    <div class="row clearfix">
+                        <div class="col-sm-12">
+                            <div class="form-group form-float">
+                                <div class="">
+                                    <input id="isactive" type="checkbox" name="IsActive" [(ngModel)]="tenant.isActive" checked class="form-control" />
+                                    <label for="isactive" class="form-label">{{l("IsActive")}}</label>
+                                </div>
+                            </div>
                         </div>
                     </div>
-                    <div class="form-group form-float">
-                        <div class="form-line">
-                            <input type="email" name="AdminEmailAddress" class="form-control" [(ngModel)]="tenant.adminEmailAddress" required maxlength="256" pattern="^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{1,})+$">
-                            <label class="form-label">{{l("AdminEmailAddress")}}</label>
-                        </div>
-                    </div>
-                    <p>{{l("DefaultPasswordIs","123qwe")}}</p>
                 </div>
 
                 <div class="modal-footer">

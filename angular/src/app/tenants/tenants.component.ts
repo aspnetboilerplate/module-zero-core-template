@@ -25,36 +25,6 @@ export class TenantsComponent extends PagedListingComponentBase<TenantDto> {
         super(injector);
     }
 
-    protected getUIPanelSelector(): string {
-        return "div.main-content>>table";
-    }
-
-	toggleActive(tenant:TenantDto): void {
-        let newStatus = (!tenant.isActive?'active':'in-active');
-		abp.message.confirm(
-			"Change tenant '" + tenant.tenancyName + "' to " + newStatus,
-			(result:boolean) => {
-				if(result) {
-					this._tenantService.get(tenant.id)
-						.finally(()=>{})
-						.subscribe((result)=>{
-							result.isActive = !result.isActive
-							
-							// update
-							this._tenantService.update(result)
-									.finally(()=>{
-										this.refresh();
-									})
-									.subscribe((result)=>{
-                                        var statusFromServer =  (result.isActive ? 'active' : 'in-active')
-                                        abp.message.success("Tenant '"+result.tenancyName+"' is now '" + statusFromServer + "'", "Tenant status updated" );
-                                    });
-						});
-				}
-			}
-		);
-	}
-
     list(request:PagedRequestDto, pageNumber:number, finishedCallback: Function): void {
         this._tenantService.getAll(request.skipCount, request.maxResultCount)
             .finally(()=>{
@@ -73,11 +43,10 @@ export class TenantsComponent extends PagedListingComponentBase<TenantDto> {
 				if(result) {
 					this._tenantService.delete(tenant.id)
 						.finally(() => {
-							abp.message.success("Deleted tenant: " + tenant.name );
+					        abp.notify.info("Deleted tenant: " + tenant.name );
 							this.refresh();
 						})
-						.subscribe(() => {
-						});
+						.subscribe(() => { });
 				}
 			}
 		);

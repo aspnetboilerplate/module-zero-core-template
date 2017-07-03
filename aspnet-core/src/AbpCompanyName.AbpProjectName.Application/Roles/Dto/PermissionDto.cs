@@ -1,14 +1,6 @@
-using System;
-using System.Collections.Generic;
-using System.ComponentModel.DataAnnotations;
-
 using Abp.Application.Services.Dto;
 using Abp.AutoMapper;
-using AbpCompanyName.AbpProjectName.Authorization.Roles;
-
-using Abp.Authorization.Roles;
 using Abp.Authorization;
-using Abp.MultiTenancy;
 
 namespace AbpCompanyName.AbpProjectName.Roles.Dto
 {

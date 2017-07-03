@@ -1,4 +1,4 @@
-import { Component, ViewChild, Injector, Output, EventEmitter, ElementRef, OnInit } from '@angular/core';
+﻿import { Component, ViewChild, Injector, Output, EventEmitter, ElementRef, OnInit } from '@angular/core';
 import { ModalDirective } from 'ngx-bootstrap';
 import { UserServiceProxy, RoleServiceProxy, CreateUserDto, RoleDto } from '@shared/service-proxies/service-proxies';
 import { AppComponentBase } from '@shared/app-component-base';
@@ -47,13 +47,13 @@ export class CreateUserComponent extends AppComponentBase implements OnInit {
         ($ as any).AdminBSB.input.activate($(this.modalContent.nativeElement));
 
         $('#frm_create_user').validate({
-            highlight: function (input) {
+            highlight: input => {
                 $(input).parents('.form-line').addClass('error');
             },
-            unhighlight: function (input) {
+            unhighlight: input => {
                 $(input).parents('.form-line').removeClass('error');
             },
-            errorPlacement: function (error, element) {
+            errorPlacement: (error, element) => {
                 $(element).parents('.form-group').append(error);
             }
         });
@@ -61,7 +61,7 @@ export class CreateUserComponent extends AppComponentBase implements OnInit {
 
     save(): void {
         var roles = [];
-        $(this.modalContent.nativeElement).find("[name=role]").each(function(ind:number, elem:Element){
+        $(this.modalContent.nativeElement).find("[name=role]").each((ind:number, elem:Element) => {
             if($(elem).is(":checked") == true){
                 roles.push(elem.getAttribute("value").valueOf());
             }

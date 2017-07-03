@@ -1,6 +1,6 @@
-import { Component, ViewChild, Injector, Output, EventEmitter, ElementRef } from '@angular/core';
+﻿import { Component, ViewChild, Injector, Output, EventEmitter, ElementRef } from '@angular/core';
 import { ModalDirective } from 'ngx-bootstrap';
-import { UserServiceProxy, RoleServiceProxy, CreateUserDto, UserDto, RoleDto } from '@shared/service-proxies/service-proxies';
+import { UserServiceProxy, RoleServiceProxy, UserDto, RoleDto } from '@shared/service-proxies/service-proxies';
 import { AppComponentBase } from '@shared/app-component-base';
 
 import * as _ from "lodash";
@@ -30,9 +30,7 @@ export class EditUserComponent extends AppComponentBase {
         super(injector);
     }
 
-	userInRole(role:RoleDto,user:UserDto): string {
-		console.log("UserInRole user:" + user.fullName + " role:" + role.displayName);
-
+	userInRole(role:RoleDto, user:UserDto): string {
 		if(user.roles.indexOf(role.displayName)!= -1) {
 			return "checked";
 		}
@@ -59,15 +57,14 @@ export class EditUserComponent extends AppComponentBase {
 
     onShown(): void {
         ($ as any).AdminBSB.input.activate($(this.modalContent.nativeElement));
-
         $('#frm_edit_user').validate({
-            highlight: function (input) {
+            highlight: input => {
                 $(input).parents('.form-line').addClass('error');
             },
-            unhighlight: function (input) {
+            unhighlight: input => {
                 $(input).parents('.form-line').removeClass('error');
             },
-            errorPlacement: function (error, element) {
+            errorPlacement: (error, element) => {
                 $(element).parents('.form-group').append(error);
             }
         });

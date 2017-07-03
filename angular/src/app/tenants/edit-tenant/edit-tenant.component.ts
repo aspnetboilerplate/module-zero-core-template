@@ -1,8 +1,7 @@
-import { Component, ViewChild, Injector, Output, EventEmitter, ElementRef} from '@angular/core';
+﻿import { Component, ViewChild, Injector, Output, EventEmitter, ElementRef} from '@angular/core';
 import { ModalDirective } from 'ngx-bootstrap';
 import { TenantServiceProxy, TenantDto } from '@shared/service-proxies/service-proxies';
 import { AppComponentBase } from '@shared/app-component-base';
-import { AppConsts } from '@shared/AppConsts';
 
 import * as _ from "lodash";
 
@@ -43,13 +42,13 @@ export class EditTenantComponent extends AppComponentBase{
         ($ as any).AdminBSB.input.activate($(this.modalContent.nativeElement));
 
         $('#frm_edit_tenant').validate({
-            highlight: function (input) {
+            highlight(input) {
                 $(input).parents('.form-line').addClass('error');
             },
-            unhighlight: function (input) {
+            unhighlight(input) {
                 $(input).parents('.form-line').removeClass('error');
             },
-            errorPlacement: function (error, element) {
+            errorPlacement(error, element) {
                 $(element).parents('.form-group').append(error);
             }
         });

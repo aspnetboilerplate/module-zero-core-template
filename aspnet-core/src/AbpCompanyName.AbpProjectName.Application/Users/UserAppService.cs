@@ -1,36 +1,25 @@
-using System.Collections.Generic;
 using System.Threading.Tasks;
-
-using Abp.Domain.Uow;
 using Abp.Application.Services;
 using Abp.Application.Services.Dto;
-using Abp.Authorization;
 using Abp.Domain.Repositories;
-
 using AbpCompanyName.AbpProjectName.Authorization;
-using AbpCompanyName.AbpProjectName.Authorization.Roles;
 using AbpCompanyName.AbpProjectName.Authorization.Users;
 using AbpCompanyName.AbpProjectName.Users.Dto;
-
 using Microsoft.AspNetCore.Identity;
-
 using System.Linq;
-using System.Linq.Dynamic;
-using System.Linq.Expressions;
-
 using Microsoft.EntityFrameworkCore;
-using Abp.Linq.Extensions;
 using Abp.IdentityFramework;
 
 namespace AbpCompanyName.AbpProjectName.Users
 {
-    public class UserAppService  : AsyncCrudAppService<User, UserDto, long, PagedResultRequestDto, CreateUserDto, UserDto>, IUserAppService, IAsyncCrudAppService<UserDto, long, PagedResultRequestDto, CreateUserDto, UserDto>
+    public class UserAppService  : AsyncCrudAppService<User, UserDto, long, PagedResultRequestDto, CreateUserDto, UserDto>, IUserAppService
     {
-        private UserManager userManager;
+        private readonly UserManager _userManager;
 
-        public UserAppService(IRepository<User, long> _service, UserManager userManager): base(_service)
+        public UserAppService(IRepository<User, long> repository, UserManager userManager)
+            : base(repository)
         {
-            this.userManager = userManager;
+            _userManager = userManager;
 
             CreatePermissionName 
             = GetAllPermissionName 
@@ -40,22 +29,49 @@ namespace AbpCompanyName.AbpProjectName.Users
             = PermissionNames.Pages_Users;
         }
 
-        protected override IQueryable<User> CreateFilteredQuery(PagedResultRequestDto input)
+        protected override IQueryable<User> ApplySorting(IQueryable<User> query, PagedResultRequestDto input)
         {
-             return Repository.GetAllIncluding(x=>x.Roles).OrderByDescending(x=>x.Id);
+            return query.OrderBy(r => r.UserName);
         }
 
-        protected override async Task<User> GetEntityByIdAsync(long id)
+        public override async Task<UserDto> Create(CreateUserDto input)
         {
-            return await CreateFilteredQuery(null)
-                            .Where(x=>x.Id == id)
-                            .FirstOrDefaultAsync();
+            CheckCreatePermission();
+
+            var user = ObjectMapper.Map<User>(input);
+
+            CheckErrors(await _userManager.CreateAsync(user));
+            CheckErrors(await _userManager.SetRoles(user, input.Roles));
+
+            CurrentUnitOfWork.SaveChanges();
+
+            return MapToEntityDto(user);
         }
+
+        public override async Task<UserDto> Update(UserDto input)
+        {
+            CheckUpdatePermission();
+
+            var user = await _userManager.GetUserByIdAsync(input.Id);
+
+            MapToEntity(input, user);
+
+            CheckErrors(await _userManager.UpdateAsync(user));
+            CheckErrors(await _userManager.SetRoles(user, input.Roles));
+            
+            return await Get(input);
+        }
+
+        public override async Task Delete(EntityDto<long> input)
+        {
+            var user = await _userManager.GetUserByIdAsync(input.Id);
+            await _userManager.DeleteAsync(user);
+		}
+
         protected override User MapToEntity(CreateUserDto createInput)
         {
-            User user = ObjectMapper.Map<User>(createInput);
+            var user = ObjectMapper.Map<User>(createInput);
             user.SetNormalizedNames();
-            
             return user;
         }
 
@@ -64,69 +80,17 @@ namespace AbpCompanyName.AbpProjectName.Users
             ObjectMapper.Map(input, user);
             user.SetNormalizedNames();
         }
-
-        protected override IQueryable<User> ApplyPaging(IQueryable<User> query, PagedResultRequestDto input)
-        {
-            //Try to use paging if available
-            var pagedInput = input as IPagedResultRequest;
-            if (pagedInput != null)
-            {
-                // Sort again after paging // .take resets the orderby
-                query = query.PageBy(pagedInput);
-                query = ApplySorting(query, input);
-                return query;
-            }
-
-            //Try to limit query result if available
-            var limitedInput = input as ILimitedResultRequest;
-            if (limitedInput != null)
-            {
-                query = query.Take(limitedInput.MaxResultCount);
-                query = ApplySorting(query, input);
-                return query;
-            }
-
-            //No paging
-            return query;
-        }
-
-		[UnitOfWork]
-        public async override Task<UserDto> Create(CreateUserDto input)
-        {
-            CheckCreatePermission();
-
-            User user = ObjectMapper.Map<User>(input); 
-            CheckErrors(await userManager.CreateAsync(user));
-            CheckErrors(await userManager.SetRoles(user, input.Roles));
-
-            CurrentUnitOfWork.SaveChanges();
-
-            return MapToEntityDto(user);
-        }
-
-        [UnitOfWork]
-        public async override Task<UserDto> Update(UserDto input)
-        {
-            CheckUpdatePermission();
-
-            User user = await userManager.GetUserByIdAsync(input.Id);
-
-            MapToEntity(input, user);
-
-            CheckErrors(await this.userManager.UpdateAsync(user));
-            CheckErrors(await userManager.SetRoles(user, input.Roles));
-            
-            // get the user again after updating the roles
-            return await Get(input);
-        }
-
-        [UnitOfWork]
-        public async override Task Delete(EntityDto<long> input)
-        {
-            User user = await userManager.GetUserByIdAsync(input.Id);
-            await userManager.DeleteAsync(user);
-		}
         
+        protected override IQueryable<User> CreateFilteredQuery(PagedResultRequestDto input)
+        {
+            return Repository.GetAllIncluding(x => x.Roles);
+        }
+
+        protected override async Task<User> GetEntityByIdAsync(long id)
+        {
+            return await Repository.GetAllIncluding(x => x.Roles).FirstOrDefaultAsync(x => x.Id == id);
+        }
+
         protected virtual void CheckErrors(IdentityResult identityResult)
         {
             identityResult.CheckErrors(LocalizationManager);
