@@ -1,6 +1,6 @@
 ﻿import { Component, ViewChild, Injector, Output, EventEmitter, ElementRef, OnInit } from '@angular/core';
 import { ModalDirective } from 'ngx-bootstrap';
-import { UserServiceProxy, RoleServiceProxy, CreateUserDto, RoleDto } from '@shared/service-proxies/service-proxies';
+import { UserServiceProxy, CreateUserDto, RoleDto } from '@shared/service-proxies/service-proxies';
 import { AppComponentBase } from '@shared/app-component-base';
 
 import * as _ from "lodash";
@@ -24,14 +24,12 @@ export class CreateUserComponent extends AppComponentBase implements OnInit {
     constructor(
         injector: Injector,
         private _userService: UserServiceProxy,
-        private _roleService: RoleServiceProxy
     ) {
         super(injector);
     }
 
     ngOnInit(): void {
-        //max of 1000 roles, todo: change to -1 for all
-        this._roleService.getAll(0,1000)
+        this._userService.getRoles()
         .subscribe((result) => {
             this.roles = result.items;
         });
@@ -60,6 +58,7 @@ export class CreateUserComponent extends AppComponentBase implements OnInit {
     }
 
     save(): void {
+        //TODO: Refactor this, don't use jQuery style code
         var roles = [];
         $(this.modalContent.nativeElement).find("[name=role]").each((ind:number, elem:Element) => {
             if($(elem).is(":checked") == true){

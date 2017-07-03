@@ -1,6 +1,6 @@
 ﻿import { Component, ViewChild, Injector, Output, EventEmitter, ElementRef } from '@angular/core';
 import { ModalDirective } from 'ngx-bootstrap';
-import { UserServiceProxy, RoleServiceProxy, UserDto, RoleDto } from '@shared/service-proxies/service-proxies';
+import { UserServiceProxy, UserDto, RoleDto } from '@shared/service-proxies/service-proxies';
 import { AppComponentBase } from '@shared/app-component-base';
 
 import * as _ from "lodash";
@@ -24,8 +24,7 @@ export class EditUserComponent extends AppComponentBase {
 
     constructor(
         injector: Injector,
-        private _userService: UserServiceProxy,
-        private _roleService: RoleServiceProxy
+        private _userService: UserServiceProxy
     ) {
         super(injector);
     }
@@ -40,7 +39,7 @@ export class EditUserComponent extends AppComponentBase {
 	}
 
     show(id:number): void {
-        this._roleService.getAll(0,1000)
+        this._userService.getRoles()
             .subscribe((result) => {
                 this.roles = result.items;
             });

@@ -48,17 +48,6 @@
                         </div>
                     </div>
 
-                    <div class="row">
-                        <div class="col-sm-12">
-                            <div class="form-group form-float">
-                                <div class="">
-                                    <input id="isactive" [disabled]="role.isStatic" type="checkbox" name="IsActive" [(ngModel)]="role.isActive" checked class="form-control" />
-                                    <label for="isactive" class="form-label">{{l("IsActive")}}</label>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-
                     <div class="row" *ngIf="role.isStatic">
                         <div class="col-sm-12">
                             <p style="color:red">Static Role</p>

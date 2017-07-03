@@ -1,6 +1,5 @@
-﻿
-import { AppComponentBase } from "shared/app-component-base";
-import { Injector, Component, ViewEncapsulation, OnInit } from '@angular/core';
+﻿import { AppComponentBase } from "shared/app-component-base";
+import { Injector, OnInit } from '@angular/core';
 
 export class PagedResultDto {
     items: any[];

@@ -6,7 +6,6 @@ namespace AbpCompanyName.AbpProjectName.Authorization.Roles
 {
     public class Role : AbpRole<User>
     {
-        //Can add application specific role properties here
         public const int MaxDescriptionLength = 5000;
 
         public Role()
@@ -25,9 +24,7 @@ namespace AbpCompanyName.AbpProjectName.Authorization.Roles
 
         }
 
-        [MaxLength(Role.MaxDescriptionLength)]
+        [MaxLength(MaxDescriptionLength)]
         public string Description {get; set;}
-
-        public bool IsActive {get; set;}
     }
 }

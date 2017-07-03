@@ -15,11 +15,11 @@ namespace AbpCompanyName.AbpProjectName.Users.Dto
         public string UserName { get; set; }
 
         [Required]
-        [StringLength(User.MaxNameLength)]
+        [StringLength(AbpUserBase.MaxNameLength)]
         public string Name { get; set; }
 
         [Required]
-        [StringLength(User.MaxSurnameLength)]
+        [StringLength(AbpUserBase.MaxSurnameLength)]
         public string Surname { get; set; }
 
         [Required]
@@ -32,12 +32,12 @@ namespace AbpCompanyName.AbpProjectName.Users.Dto
         public string[] Roles { get; set; }
 
         [Required]
-        [StringLength(User.MaxPlainPasswordLength)]
+        [StringLength(AbpUserBase.MaxPlainPasswordLength)]
         [DisableAuditing]
         public string Password { get; set; }
 
         [Required]
-        [StringLength(User.MaxPlainPasswordLength)]
+        [StringLength(AbpUserBase.MaxPlainPasswordLength)]
         [DisableAuditing]
         public string ConfirmPassword { get; set; }
     }
