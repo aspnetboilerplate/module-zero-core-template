@@ -76,18 +76,6 @@ namespace AbpCompanyName.AbpProjectName.Web.Startup
                                 new FixedLocalizableString("Documents"),
                                 url: "https://aspnetboilerplate.com/Pages/Documents"
                             )
-                        ).AddItem(
-                            new MenuItemDefinition(
-                                "AspNetBoilerplateForum",
-                                new FixedLocalizableString("Forum"),
-                                url: "https://forum.aspnetboilerplate.com/"
-                            )
-                        ).AddItem(
-                            new MenuItemDefinition(
-                                "AspNetBoilerplateAbout",
-                                new FixedLocalizableString("About"),
-                                url: "https://aspnetboilerplate.com/About"
-                            )
                         )
                     ).AddItem(
                         new MenuItemDefinition(
