@@ -22,9 +22,7 @@ export class SideBarNavComponent extends AppComponentBase {
                 new MenuItem("Home", "", "", "https://aspnetboilerplate.com"),
                 new MenuItem("Templates", "", "", "https://aspnetboilerplate.com/Templates"),
                 new MenuItem("Samples", "", "", "https://aspnetboilerplate.com/Samples"),
-                new MenuItem("Documents", "", "", "https://aspnetboilerplate.com/Pages/Documents"),
-                new MenuItem("Forum", "", "", "https://forum.aspnetboilerplate.com/"),
-                new MenuItem("About", "", "", "https://aspnetboilerplate.com/About")
+                new MenuItem("Documents", "", "", "https://aspnetboilerplate.com/Pages/Documents")
             ]),
             new MenuItem("ASP.NET Zero", "", "", "", [
                 new MenuItem("Home", "", "", "https://aspnetzero.com?ref=abptmpl"),

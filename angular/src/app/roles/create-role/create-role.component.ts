@@ -1,6 +1,6 @@
 ﻿import { Component, ViewChild, Injector, Output, EventEmitter, ElementRef, OnInit } from '@angular/core';
 import { ModalDirective } from 'ngx-bootstrap';
-import { RoleServiceProxy, CreateRoleDto, RoleDto, ListResultDtoOfPermissionDto } from '@shared/service-proxies/service-proxies';
+import { RoleServiceProxy, CreateRoleDto, ListResultDtoOfPermissionDto } from '@shared/service-proxies/service-proxies';
 import { AppComponentBase } from '@shared/app-component-base';
 
 @Component({
@@ -35,29 +35,22 @@ export class CreateRoleComponent extends AppComponentBase implements OnInit {
 
     show(): void {
         this.active = true;
-        this.modal.show();
-        this.role = new CreateRoleDto({isStatic:false,
-                                        description:'',
-                                        isActive:false,
-                                        name:''});
+        this.role = new CreateRoleDto({ isActive: true, isStatic: false });
 
-        // // shouldn't have to do this!
-        // this.role.description = "";
-        // this.role.isActive = false;
-        // this.role.name = "";
+        this.modal.show();
     }
 
     onShown(): void {
         ($ as any).AdminBSB.input.activate($(this.modalContent.nativeElement));
 
         $('#frm_create_role').validate({
-            highlight: function (input) {
+            highlight: input => {
                 $(input).parents('.form-line').addClass('error');
             },
-            unhighlight: function (input) {
+            unhighlight: input => {
                 $(input).parents('.form-line').removeClass('error');
             },
-            errorPlacement: function (error, element) {
+            errorPlacement: (error, element) => {
                 $(element).parents('.form-group').append(error);
             }
         });
@@ -66,12 +59,12 @@ export class CreateRoleComponent extends AppComponentBase implements OnInit {
     save(): void {
         var permissions = [];
         $(this.modalContent.nativeElement).find("[name=permission]").each(
-            function( index:number, elem: Element){
-                if($(elem).is(":checked") == true){
+            (index: number, elem: Element) => {
+                if ($(elem).is(":checked") == true) {
                     permissions.push(elem.getAttribute("value").valueOf());
                 }
             }
-        )
+        );
 
         this.role.permissions = permissions;
         this.saving = true;
