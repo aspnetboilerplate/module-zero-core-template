@@ -67,6 +67,7 @@
     <text name="SuccessfullyRegistered">Successfully registered</text>
     <text name="WaitingForEmailActivation">Your email address should be activated</text>
     <text name="Roles">Roles</text>
+    <text name="DisplayName">Display Name</text>
 
   </texts>
 </localizationDictionary>

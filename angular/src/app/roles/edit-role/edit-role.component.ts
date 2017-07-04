@@ -46,18 +46,6 @@ export class EditRoleComponent extends AppComponentBase implements OnInit {
 
     onShown(): void {
         $.AdminBSB.input.activate($(this.modalContent.nativeElement));
-
-        $('#frm_edit_role').validate({
-            highlight: function (input) {
-                $(input).parents('.form-line').addClass('error');
-            },
-            unhighlight: function (input) {
-                $(input).parents('.form-line').removeClass('error');
-            },
-            errorPlacement: function (error, element) {
-                $(element).parents('.form-group').append(error);
-            }
-        });
     }
 
     checkPermission(permissionName: string): string {

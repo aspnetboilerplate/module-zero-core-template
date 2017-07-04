@@ -1397,7 +1397,6 @@ export class CreateRoleDto {
     displayName: string; 
     normalizedName: string; 
     description: string; 
-    isActive: boolean; 
     isStatic: boolean; 
     permissions: string[];
     constructor(data?: any) {
@@ -1406,7 +1405,6 @@ export class CreateRoleDto {
             this.displayName = data["displayName"] !== undefined ? data["displayName"] : null;
             this.normalizedName = data["normalizedName"] !== undefined ? data["normalizedName"] : null;
             this.description = data["description"] !== undefined ? data["description"] : null;
-            this.isActive = data["isActive"] !== undefined ? data["isActive"] : null;
             this.isStatic = data["isStatic"] !== undefined ? data["isStatic"] : null;
             if (data["permissions"] && data["permissions"].constructor === Array) {
                 this.permissions = [];
@@ -1426,7 +1424,6 @@ export class CreateRoleDto {
         data["displayName"] = this.displayName !== undefined ? this.displayName : null;
         data["normalizedName"] = this.normalizedName !== undefined ? this.normalizedName : null;
         data["description"] = this.description !== undefined ? this.description : null;
-        data["isActive"] = this.isActive !== undefined ? this.isActive : null;
         data["isStatic"] = this.isStatic !== undefined ? this.isStatic : null;
         if (this.permissions && this.permissions.constructor === Array) {
             data["permissions"] = [];
@@ -2062,8 +2059,7 @@ export class CreateUserDto {
     emailAddress: string; 
     isActive: boolean; 
     roles: string[]; 
-    password: string; 
-    confirmPassword: string;
+    password: string;
     constructor(data?: any) {
         if (data !== undefined) {
             this.userName = data["userName"] !== undefined ? data["userName"] : null;
@@ -2077,7 +2073,6 @@ export class CreateUserDto {
                     this.roles.push(item);
             }
             this.password = data["password"] !== undefined ? data["password"] : null;
-            this.confirmPassword = data["confirmPassword"] !== undefined ? data["confirmPassword"] : null;
         }
     }
 
@@ -2098,7 +2093,6 @@ export class CreateUserDto {
                 data["roles"].push(item);
         }
         data["password"] = this.password !== undefined ? this.password : null;
-        data["confirmPassword"] = this.confirmPassword !== undefined ? this.confirmPassword : null;
         return data; 
     }
 

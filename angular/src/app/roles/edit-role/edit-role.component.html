@@ -10,7 +10,7 @@
                         <span aria-hidden="true">&times;</span>
                     </button>
                     <h4 class="modal-title">
-                        <span>{{l("EditRole")}}</span>
+                        <span>{{l("EditRole")}} <span *ngIf="role.isStatic"> (<span style="color:red">static</span>)</span></span>
                     </h4>
                 </div>
                 <div class="modal-body">
@@ -45,12 +45,6 @@
                                     <label for="role-description" class="form-label">Role Description</label>
                                 </div>
                             </div>
-                        </div>
-                    </div>
-
-                    <div class="row" *ngIf="role.isStatic">
-                        <div class="col-sm-12">
-                            <p style="color:red">Static Role</p>
                         </div>
                     </div>
 

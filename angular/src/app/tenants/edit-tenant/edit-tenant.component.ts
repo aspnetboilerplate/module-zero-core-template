@@ -40,18 +40,6 @@ export class EditTenantComponent extends AppComponentBase{
 
     onShown(): void {
         $.AdminBSB.input.activate($(this.modalContent.nativeElement));
-
-        $('#frm_edit_tenant').validate({
-            highlight(input) {
-                $(input).parents('.form-line').addClass('error');
-            },
-            unhighlight(input) {
-                $(input).parents('.form-line').removeClass('error');
-            },
-            errorPlacement(error, element) {
-                $(element).parents('.form-group').append(error);
-            }
-        });
     }
 
     save(): void {

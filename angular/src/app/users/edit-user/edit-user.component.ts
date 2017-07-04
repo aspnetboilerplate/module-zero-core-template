@@ -56,23 +56,12 @@ export class EditUserComponent extends AppComponentBase {
 
     onShown(): void {
         $.AdminBSB.input.activate($(this.modalContent.nativeElement));
-        $('#frm_edit_user').validate({
-            highlight: input => {
-                $(input).parents('.form-line').addClass('error');
-            },
-            unhighlight: input => {
-                $(input).parents('.form-line').removeClass('error');
-            },
-            errorPlacement: (error, element) => {
-                $(element).parents('.form-group').append(error);
-            }
-        });
     }
 
     save(): void {
         var roles = [];
         $(this.modalContent.nativeElement).find("[name=role]").each(function(ind:number, elem:Element){
-            if($(elem).is(":checked") == true){
+            if($(elem).is(":checked")){
                 roles.push(elem.getAttribute("value").valueOf());
             }
         });
