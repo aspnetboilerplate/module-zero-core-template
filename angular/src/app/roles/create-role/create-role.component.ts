@@ -4,12 +4,12 @@ import { RoleServiceProxy, CreateRoleDto, ListResultDtoOfPermissionDto } from '@
 import { AppComponentBase } from '@shared/app-component-base';
 
 @Component({
-  selector: 'create-role-modal',
-  templateUrl: './create-role.component.html'
+    selector: 'create-role-modal',
+    templateUrl: './create-role.component.html'
 })
 export class CreateRoleComponent extends AppComponentBase implements OnInit {
-@ViewChild('createRoleModal') modal: ModalDirective;
-@ViewChild('modalContent') modalContent: ElementRef;
+    @ViewChild('createRoleModal') modal: ModalDirective;
+    @ViewChild('modalContent') modalContent: ElementRef;
 
     active: boolean = false;
     saving: boolean = false;
@@ -27,8 +27,7 @@ export class CreateRoleComponent extends AppComponentBase implements OnInit {
 
     ngOnInit(): void {
         this._roleService.getAllPermissions()
-            .subscribe((permissions:ListResultDtoOfPermissionDto) => 
-            {
+            .subscribe((permissions: ListResultDtoOfPermissionDto) => {
                 this.permissions = permissions;
             });
     }
@@ -41,32 +40,21 @@ export class CreateRoleComponent extends AppComponentBase implements OnInit {
     }
 
     onShown(): void {
-        ($ as any).AdminBSB.input.activate($(this.modalContent.nativeElement));
-
-        $('#frm_create_role').validate({
-            highlight: input => {
-                $(input).parents('.form-line').addClass('error');
-            },
-            unhighlight: input => {
-                $(input).parents('.form-line').removeClass('error');
-            },
-            errorPlacement: (error, element) => {
-                $(element).parents('.form-group').append(error);
-            }
-        });
+        $.AdminBSB.input.activate($(this.modalContent.nativeElement));
     }
 
     save(): void {
         var permissions = [];
         $(this.modalContent.nativeElement).find("[name=permission]").each(
             (index: number, elem: Element) => {
-                if ($(elem).is(":checked") == true) {
+                if ($(elem).is(":checked")) {
                     permissions.push(elem.getAttribute("value").valueOf());
                 }
             }
         );
 
         this.role.permissions = permissions;
+
         this.saving = true;
         this._roleService.create(this.role)
             .finally(() => { this.saving = false; })

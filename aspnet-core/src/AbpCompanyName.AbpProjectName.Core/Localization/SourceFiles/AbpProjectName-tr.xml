@@ -66,6 +66,8 @@
     <text name="Back">Geri</text>
     <text name="SuccessfullyRegistered">Başarıyla kayıt olundu</text>
     <text name="WaitingForEmailActivation">E-posta adresiniz etkinleştirilmeli.</text>
+    <text name="Roles">Roller</text>
+    <text name="DisplayName">Görünen ad</text>
 
   </texts>
 </localizationDictionary>

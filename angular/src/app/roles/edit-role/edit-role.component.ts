@@ -1,4 +1,4 @@
-import { Component, ViewChild, Injector, Output, EventEmitter, ElementRef, OnInit } from '@angular/core';
+﻿import { Component, ViewChild, Injector, Output, EventEmitter, ElementRef, OnInit } from '@angular/core';
 import { ModalDirective } from 'ngx-bootstrap';
 import { RoleServiceProxy, RoleDto, ListResultDtoOfPermissionDto } from '@shared/service-proxies/service-proxies';
 import { AppComponentBase } from '@shared/app-component-base';
@@ -28,47 +28,32 @@ export class EditRoleComponent extends AppComponentBase implements OnInit {
 
     ngOnInit(): void {
         this._roleService.getAllPermissions()
-            .subscribe((permissions:ListResultDtoOfPermissionDto) => 
-            {
+            .subscribe((permissions: ListResultDtoOfPermissionDto) => {
                 this.permissions = permissions;
                 console.log(permissions);// TODO: remove logging
             });
     }
 
-    show(id:number): void {
+    show(id: number): void {
         this._roleService.get(id)
-        .finally(() => {
-            this.active = true;
-            this.modal.show();
-        })
-        .subscribe((result)=>{
-            this.role = result;
-        });
+            .finally(() => {
+                this.active = true;
+                this.modal.show();
+            })
+            .subscribe((result: RoleDto) => {
+                this.role = result;
+            });
     }
 
     onShown(): void {
-        ($ as any).AdminBSB.input.activate($(this.modalContent.nativeElement));
-
-        $('#frm_edit_role').validate({
-            highlight: function (input) {
-                $(input).parents('.form-line').addClass('error');
-            },
-            unhighlight: function (input) {
-                $(input).parents('.form-line').removeClass('error');
-            },
-            errorPlacement: function (error, element) {
-                $(element).parents('.form-group').append(error);
+        $.AdminBSB.input.activate($(this.modalContent.nativeElement));
             }
-        });
-    }
 
-    checkPermission(permissionName:string): string {
-        if(this.role.permissions.indexOf(permissionName) != -1)
-        {
+    checkPermission(permissionName: string): string {
+        if (this.role.permissions.indexOf(permissionName) != -1) {
             return "checked";
         }
-        else
-        {
+        else {
             return "";
         }
     }

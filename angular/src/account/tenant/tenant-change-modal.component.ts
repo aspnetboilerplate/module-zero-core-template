@@ -33,7 +33,6 @@ export class TenantChangeModalComponent extends AppComponentBase {
     }
 
     onShown(): void {
-        ($ as any).AdminBSB.input.activate($(this.modalContent.nativeElement));
         $(this.tenancyNameInput.nativeElement).focus().select();
     }
 
