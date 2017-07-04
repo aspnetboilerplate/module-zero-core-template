@@ -29,14 +29,14 @@ export class EditUserComponent extends AppComponentBase {
         super(injector);
     }
 
-	userInRole(role:RoleDto, user:UserDto): string {
-		if(user.roles.indexOf(role.displayName)!= -1) {
-			return "checked";
-		}
-		else {
-			return "";
-		}
-	}
+    userInRole(role:RoleDto, user:UserDto): string {
+        if(user.roles.indexOf(role.displayName)!= -1) {
+            return "checked";
+        }
+        else {
+            return "";
+        }
+    }
 
     show(id:number): void {
         this._userService.getRoles()
@@ -44,14 +44,14 @@ export class EditUserComponent extends AppComponentBase {
                 this.roles = result.items;
             });
 
-		this._userService.get(id)
-			.subscribe(
-				(result) => {
-					this.user = result;
-					this.active = true;
-        			this.modal.show();
-				}
-			);
+        this._userService.get(id)
+            .subscribe(
+                (result) => {
+                    this.user = result;
+                    this.active = true;
+                    this.modal.show();
+                }
+            );
     }
 
     onShown(): void {

@@ -28,14 +28,14 @@ export class EditTenantComponent extends AppComponentBase{
     }
 
     show(id:number): void {
-		this._tenantService.get(id)
-			.finally(()=>{
-				this.active = true;
-				this.modal.show();
-			})
-			.subscribe((result)=>{
-				this.tenant = result;
-			});
+        this._tenantService.get(id)
+            .finally(()=>{
+                this.active = true;
+                this.modal.show();
+            })
+            .subscribe((result)=>{
+                this.tenant = result;
+            });
     }
 
     onShown(): void {

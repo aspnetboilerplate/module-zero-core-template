@@ -81,7 +81,7 @@ namespace AbpCompanyName.AbpProjectName.Users
         {
             var user = await _userManager.GetUserByIdAsync(input.Id);
             await _userManager.DeleteAsync(user);
-		}
+        }
 
         public async Task<ListResultDto<RoleDto>> GetRoles()
         {

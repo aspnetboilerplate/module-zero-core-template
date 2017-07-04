@@ -11,53 +11,53 @@ import { EditRoleComponent } from "app/roles/edit-role/edit-role.component";
 })
 export class RolesComponent extends PagedListingComponentBase<RoleDto> {
 
-	@ViewChild('createRoleModal') createRoleModal: CreateRoleComponent;
-	@ViewChild('editRoleModal') editRoleModal: EditRoleComponent;
-	
-	roles: RoleDto[] = [];
-
-	constructor(
-		private injector:Injector,
-		private rolesService: RoleServiceProxy
-	) {
-		super(injector);
-	}
+    @ViewChild('createRoleModal') createRoleModal: CreateRoleComponent;
+    @ViewChild('editRoleModal') editRoleModal: EditRoleComponent;
     
-	list(request: PagedRequestDto, pageNumber: number, finishedCallback: Function): void {
-		this.rolesService.getAll(request.skipCount, request.maxResultCount)
-			.finally( ()=> {
-				finishedCallback();
-			})
+    roles: RoleDto[] = [];
+
+    constructor(
+        private injector:Injector,
+        private rolesService: RoleServiceProxy
+    ) {
+        super(injector);
+    }
+    
+    list(request: PagedRequestDto, pageNumber: number, finishedCallback: Function): void {
+        this.rolesService.getAll(request.skipCount, request.maxResultCount)
+            .finally( ()=> {
+                finishedCallback();
+            })
             .subscribe((result: PagedResultDtoOfRoleDto)=>{
-				this.roles = result.items;
-				this.showPaging(result, pageNumber);
-		});
-	}
+                this.roles = result.items;
+                this.showPaging(result, pageNumber);
+        });
+    }
 
-	delete(role: RoleDto): void {
-		abp.message.confirm(
-			"Remove Users from Role and delete Role '"+ role.displayName +"'?",
-			"Permanently delete this Role",
-			(result:boolean) =>{
-				if(result)
-				{
-					this.rolesService.delete(role.id)
-						.finally(() => {
-							abp.notify.info("Deleted Role: " + role.displayName );
-							this.refresh();
-						})
-						.subscribe(() => { });
-				}
-			}
-		);
-	}
+    delete(role: RoleDto): void {
+        abp.message.confirm(
+            "Remove Users from Role and delete Role '"+ role.displayName +"'?",
+            "Permanently delete this Role",
+            (result:boolean) =>{
+                if(result)
+                {
+                    this.rolesService.delete(role.id)
+                        .finally(() => {
+                            abp.notify.info("Deleted Role: " + role.displayName );
+                            this.refresh();
+                        })
+                        .subscribe(() => { });
+                }
+            }
+        );
+    }
 
-	// Show Modals
-	createRole(): void {
-		this.createRoleModal.show();
-	}
+    // Show Modals
+    createRole(): void {
+        this.createRoleModal.show();
+    }
 
-	editRole(role:RoleDto): void {
-		this.editRoleModal.show(role.id);
-	}
+    editRole(role:RoleDto): void {
+        this.editRoleModal.show(role.id);
+    }
 }

@@ -25,27 +25,27 @@ export class EditRoleComponent extends AppComponentBase implements OnInit {
         super(injector);
     }
 
-	ngOnInit(): void {
+    ngOnInit(): void {
         this._roleService.getAllPermissions()
             .subscribe((permissions:ListResultDtoOfPermissionDto) => 
             {
                 this.permissions = permissions;
                 console.log(permissions);
             });
-	}
+    }
 
-	show(id:number): void {
-		this._roleService.get(id)
-		.finally(() => {
-			this.active = true;
-        	this.modal.show();
-		})
-		.subscribe((result)=>{
-			this.role = result;
-		});
-	}
+    show(id:number): void {
+        this._roleService.get(id)
+        .finally(() => {
+            this.active = true;
+            this.modal.show();
+        })
+        .subscribe((result)=>{
+            this.role = result;
+        });
+    }
 
-	onShown(): void {
+    onShown(): void {
         ($ as any).AdminBSB.input.activate($(this.modalContent.nativeElement));
 
         $('#frm_edit_role').validate({
@@ -61,16 +61,16 @@ export class EditRoleComponent extends AppComponentBase implements OnInit {
         });
     }
 
-	checkPermission(permissionName:string): string {
-		if(this.role.permissions.indexOf(permissionName) != -1)
-		{
-			return "checked";
-		}
-		else
-		{
-			return "";
-		}
-	}
+    checkPermission(permissionName:string): string {
+        if(this.role.permissions.indexOf(permissionName) != -1)
+        {
+            return "checked";
+        }
+        else
+        {
+            return "";
+        }
+    }
 
     save(): void {
         var permissions = [];
@@ -93,7 +93,7 @@ export class EditRoleComponent extends AppComponentBase implements OnInit {
             });
     }
 
-	close(): void {
+    close(): void {
         this.active = false;
         this.modal.hide();
     }
