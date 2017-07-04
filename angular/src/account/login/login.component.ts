@@ -1,4 +1,4 @@
-﻿import { Component, Injector, ElementRef, AfterViewInit, ViewChild } from '@angular/core';
+﻿import { Component, Injector, ElementRef, ViewChild } from '@angular/core';
 import { Router } from '@angular/router';
 import { AppComponentBase } from '@shared/app-component-base';
 import { LoginService, ExternalLoginProvider } from './login.service';
@@ -10,7 +10,7 @@ import { AbpSessionService } from '@abp/session/abp-session.service';
     styleUrls: [
         './login.component.less'
     ],
-    animations: [accountModuleAnimation()] 
+    animations: [accountModuleAnimation()]
 })
 export class LoginComponent extends AppComponentBase {
 
@@ -28,7 +28,6 @@ export class LoginComponent extends AppComponentBase {
     }
 
     ngAfterViewInit(): void {
-        ($ as any).AdminBSB.input.activate($(this.cardBody.nativeElement));
         $(this.cardBody.nativeElement).find('input:first').focus();
     }
 

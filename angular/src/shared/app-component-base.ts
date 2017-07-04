@@ -21,7 +21,7 @@ export abstract class AppComponentBase {
     message: MessageService;
     multiTenancy: AbpMultiTenancyService;
     appSession: AppSessionService;
-    domNode: HTMLElement = null;
+    elementRef: ElementRef;
 
     constructor(injector: Injector) {
         this.localization = injector.get(LocalizationService);
@@ -32,11 +32,7 @@ export abstract class AppComponentBase {
         this.message = injector.get(MessageService);
         this.multiTenancy = injector.get(AbpMultiTenancyService);
         this.appSession = injector.get(AppSessionService);
-        this.domNode = injector.get(ElementRef).nativeElement;
-    }
-    
-    ngAfterViewInit(): void {
-        ($ as any).AdminBSB.input.activate($(this.domNode));
+        this.elementRef = injector.get(ElementRef);
     }
 
     l(key: string, ...args: any[]): string {

@@ -55,7 +55,7 @@ export class EditUserComponent extends AppComponentBase {
     }
 
     onShown(): void {
-        ($ as any).AdminBSB.input.activate($(this.modalContent.nativeElement));
+        $.AdminBSB.input.activate($(this.modalContent.nativeElement));
         $('#frm_edit_user').validate({
             highlight: input => {
                 $(input).parents('.form-line').addClass('error');

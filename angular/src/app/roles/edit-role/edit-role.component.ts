@@ -1,16 +1,16 @@
-import { Component, ViewChild, Injector, Output, EventEmitter, ElementRef, OnInit } from '@angular/core';
+﻿import { Component, ViewChild, Injector, Output, EventEmitter, ElementRef, OnInit } from '@angular/core';
 import { ModalDirective } from 'ngx-bootstrap';
 import { RoleServiceProxy, RoleDto, ListResultDtoOfPermissionDto } from '@shared/service-proxies/service-proxies';
 import { AppComponentBase } from '@shared/app-component-base';
 
 @Component({
-  selector: 'edit-role-modal',
-  templateUrl: './edit-role.component.html'
+    selector: 'edit-role-modal',
+    templateUrl: './edit-role.component.html'
 })
 export class EditRoleComponent extends AppComponentBase implements OnInit {
-@ViewChild('editRoleModal') modal: ModalDirective;
-@ViewChild('modalContent') modalContent: ElementRef;
-    
+    @ViewChild('editRoleModal') modal: ModalDirective;
+    @ViewChild('modalContent') modalContent: ElementRef;
+
     active: boolean = false;
     saving: boolean = false;
 
@@ -25,28 +25,27 @@ export class EditRoleComponent extends AppComponentBase implements OnInit {
         super(injector);
     }
 
-	ngOnInit(): void {
+    ngOnInit(): void {
         this._roleService.getAllPermissions()
-            .subscribe((permissions:ListResultDtoOfPermissionDto) => 
-            {
+            .subscribe((permissions: ListResultDtoOfPermissionDto) => {
                 this.permissions = permissions;
                 console.log(permissions);
             });
-	}
+    }
 
-	show(id:number): void {
-		this._roleService.get(id)
-		.finally(() => {
-			this.active = true;
-        	this.modal.show();
-		})
-		.subscribe((result)=>{
-			this.role = result;
-		});
-	}
+    show(id: number): void {
+        this._roleService.get(id)
+            .finally(() => {
+                this.active = true;
+                this.modal.show();
+            })
+            .subscribe((result: RoleDto) => {
+                this.role = result;
+            });
+    }
 
-	onShown(): void {
-        ($ as any).AdminBSB.input.activate($(this.modalContent.nativeElement));
+    onShown(): void {
+        $.AdminBSB.input.activate($(this.modalContent.nativeElement));
 
         $('#frm_edit_role').validate({
             highlight: function (input) {
@@ -61,22 +60,20 @@ export class EditRoleComponent extends AppComponentBase implements OnInit {
         });
     }
 
-	checkPermission(permissionName:string): string {
-		if(this.role.permissions.indexOf(permissionName) != -1)
-		{
-			return "checked";
-		}
-		else
-		{
-			return "";
-		}
-	}
+    checkPermission(permissionName: string): string {
+        if (this.role.permissions.indexOf(permissionName) != -1) {
+            return "checked";
+        }
+        else {
+            return "";
+        }
+    }
 
     save(): void {
         var permissions = [];
         $(this.modalContent.nativeElement).find("[name=permission]").each(
-            function( index:number, elem: Element){
-                if($(elem).is(":checked") == true){
+            function (index: number, elem: Element) {
+                if ($(elem).is(":checked") == true) {
                     permissions.push(elem.getAttribute("value").valueOf());
                 }
             }
@@ -93,7 +90,7 @@ export class EditRoleComponent extends AppComponentBase implements OnInit {
             });
     }
 
-	close(): void {
+    close(): void {
         this.active = false;
         this.modal.hide();
     }

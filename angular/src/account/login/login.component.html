@@ -8,16 +8,16 @@
                     <i class="material-icons">person</i>
                 </span>
                 <div class="form-line">
-                    <input [(ngModel)]="loginService.authenticateModel.userNameOrEmailAddress" autoFocus class="form-control" type="text" autocomplete="off" placeholder="{{l('UserNameOrEmail')}}" name="userNameOrEmailAddress" required maxlength="255" />
+                    <input materialInput [(ngModel)]="loginService.authenticateModel.userNameOrEmailAddress" autoFocus class="form-control" type="text" autocomplete="off" placeholder="{{l('UserNameOrEmail')}}" name="userNameOrEmailAddress" required maxlength="255" />
                 </div>
             </div>
-            
+
             <div class="input-group">
                 <span class="input-group-addon">
                     <i class="material-icons">lock</i>
                 </span>
                 <div class="form-line">
-                    <input type="password" [(ngModel)]="loginService.authenticateModel.password" class="form-control" name="password" placeholder="{{l('Password')}}" required maxlength="32">
+                    <input materialInput type="password" [(ngModel)]="loginService.authenticateModel.password" class="form-control" name="password" placeholder="{{l('Password')}}" required maxlength="32">
                 </div>
             </div>
             <div class="row">
@@ -29,14 +29,14 @@
                     <button id="LoginButton" class="btn btn-block bg-pink waves-effect" type="submit">{{l("LogIn")}}</button>
                 </div>
             </div>
-            
+
             <div class="row m-t-15 m-b--20" *ngIf="isSelfRegistrationAllowed">
                 <div class="col-xs-12">
                     <a [routerLink]="['../register']">{{l("Register")}}</a>
                 </div>
             </div>
         </form>
-        
+
         <div class="login-options" *ngIf="multiTenancySideIsTeanant && loginService.externalLoginProviders.length > 0">
             <h4>{{l("OrLoginWith")}}</h4>
             <ul class="social-icons">
