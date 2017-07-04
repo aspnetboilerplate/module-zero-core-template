@@ -21,12 +21,12 @@
                     <ng-template ngFor let-subMenuItem [ngForOf]="menuItem.items" let-mainMenuItemIndex="index">
                         <li *ngIf="showMenuItem(subMenuItem)" routerLinkActive="active">
                             <!-- route name -->
-                            <a [routerLink]="[subMenuItem.route]" *ngIf="!subMenuItem.items && subSubMenuItem.route.indexOf('http') != 0">
+                            <a [routerLink]="[subMenuItem.route]" class="toggled" *ngIf="!subMenuItem.items && subMenuItem.route.indexOf('http') != 0">
                                 <i *ngIf="subMenuItem.icon" class="material-icons">{{subMenuItem.icon}}</i>
                                 <span>{{subMenuItem.name}}</span>
                             </a>
                             <!-- Static link (starts with 'http') -->
-                            <a href="{{subMenuItem.route}}" target="_blank" *ngIf="!subMenuItem.items && subSubMenuItem.route.indexOf('http') == 0">
+                            <a href="{{subMenuItem.route}}" class="toggled" target="_blank" *ngIf="!subMenuItem.items && subMenuItem.route.indexOf('http') == 0">
                                 <i *ngIf="subMenuItem.icon" class="material-icons">{{subMenuItem.icon}}</i>
                                 <span>{{subMenuItem.name}}</span>
                             </a>
