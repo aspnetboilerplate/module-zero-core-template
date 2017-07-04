@@ -1,14 +1,15 @@
-import { Directive, ElementRef, Injectable } from '@angular/core';
+﻿import { Directive, ElementRef, Injectable, AfterViewInit } from '@angular/core';
 
 @Directive({
-  selector: '[materialInput]'
+    selector: '[materialInput]'
 })
 
 @Injectable()
-export class MaterialInput {
+export class MaterialInput implements AfterViewInit {
+    constructor(private _element: ElementRef) {
+    }
 
-  constructor(el: ElementRef) {
-    ($ as any).AdminBSB.input.activate($(el.nativeElement).parent());
-  }
-
+    ngAfterViewInit(): void {
+        $.AdminBSB.input.activate($(this._element.nativeElement).parent());
+    }
 }

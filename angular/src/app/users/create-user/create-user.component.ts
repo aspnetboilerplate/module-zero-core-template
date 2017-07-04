@@ -42,7 +42,7 @@ export class CreateUserComponent extends AppComponentBase implements OnInit {
     }
 
     onShown(): void {
-        ($ as any).AdminBSB.input.activate($(this.modalContent.nativeElement));
+        $.AdminBSB.input.activate($(this.modalContent.nativeElement));
 
         $('#frm_create_user').validate({
             highlight: input => {

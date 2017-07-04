@@ -1,6 +1,6 @@
 ﻿import { Component, Injector, ElementRef, AfterViewInit, ViewChild } from '@angular/core';
 import { Router } from '@angular/router';
-import { AccountServiceProxy, RegisterInput } from '@shared/service-proxies/service-proxies'
+import { AccountServiceProxy, RegisterInput, RegisterOutput } from '@shared/service-proxies/service-proxies'
 import { AppComponentBase } from '@shared/app-component-base';
 import { LoginService } from '../login/login.service';
 import { accountModuleAnimation } from '@shared/animations/routerTransition';
@@ -38,7 +38,7 @@ export class RegisterComponent extends AppComponentBase implements AfterViewInit
         this.saving = true;
         this._accountService.register(this.model)
             .finally(() => { this.saving = false; })
-            .subscribe((result) => {
+            .subscribe((result:RegisterOutput) => {
                 if (!result.canLogin) {
                     this.notify.success(this.l('SuccessfullyRegistered'));
                     this._router.navigate(['/login']);

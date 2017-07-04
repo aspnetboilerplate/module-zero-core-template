@@ -1,4 +1,4 @@
-﻿import { Component, Injector, ElementRef, AfterViewInit, ViewChild } from '@angular/core';
+﻿import { Component, Injector, ElementRef, ViewChild } from '@angular/core';
 import { Router } from '@angular/router';
 import { AppComponentBase } from '@shared/app-component-base';
 import { LoginService, ExternalLoginProvider } from './login.service';

@@ -20,7 +20,6 @@ import { RegisterComponent } from './register/register.component';
 import { AccountLanguagesComponent } from './layout/account-languages.component';
 
 import { LoginService } from './login/login.service';
-import { MaterialInput } from '@shared/directives/material-input.directive';
 
 @NgModule({
     imports: [

@@ -33,13 +33,13 @@ export class EditTenantComponent extends AppComponentBase{
 				this.active = true;
 				this.modal.show();
 			})
-			.subscribe((result)=>{
+			.subscribe((result: TenantDto)=>{
 				this.tenant = result;
 			});
     }
 
     onShown(): void {
-        ($ as any).AdminBSB.input.activate($(this.modalContent.nativeElement));
+        $.AdminBSB.input.activate($(this.modalContent.nativeElement));
 
         $('#frm_edit_tenant').validate({
             highlight(input) {
