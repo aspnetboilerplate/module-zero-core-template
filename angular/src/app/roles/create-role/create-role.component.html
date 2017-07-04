@@ -52,7 +52,7 @@
                             <h4>Permissions</h4>
                             <ng-template ngFor let-permission [ngForOf]="permissions.items" let-permissionIndex="index">
                                 <div class="col-sm-6">
-                                    <input type="checkbox" name="permission" value="{{permission.name}}" class="filled-in" id="permission-{{permissionIndex}}" checked="checked" />
+                                    <input type="checkbox" name="permission" value="{{permission.name}}" class="form-control" id="permission-{{permissionIndex}}" checked="checked" />
                                     <label for="permission-{{permissionIndex}}">{{permission.displayName}}</label>
                                 </div>
                             </ng-template>

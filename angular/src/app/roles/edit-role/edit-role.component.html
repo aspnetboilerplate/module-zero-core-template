@@ -10,7 +10,7 @@
                         <span aria-hidden="true">&times;</span>
                     </button>
                     <h4 class="modal-title">
-                        <span>{{l("EditRole")}} <span *ngIf="role.isStatic"> (<span style="color:red">static</span>)</span></span>
+                        <span>{{l("EditRole")}} <span *ngIf="role.isStatic"> (<span class="red-text">static</span>)</span></span>
                     </h4>
                 </div>
                 <div class="modal-body">
@@ -54,7 +54,7 @@
 
                             <ng-template ngFor let-permission [ngForOf]="permissions.items" let-permissionIndex="index">
                                 <div class="col-sm-6">
-                                    <input [disabled]="role.isStatic" type="checkbox" name="permission" value="{{permission.name}}" class="filled-in" id="permission-{{permissionIndex}}" checked="{{checkPermission(permission.name)}}" />
+                                    <input [disabled]="role.isStatic" type="checkbox" name="permission" value="{{permission.name}}" class="form-control" id="permission-{{permissionIndex}}" checked="{{checkPermission(permission.name)}}" />
                                     <label for="permission-{{permissionIndex}}">{{permission.displayName}}</label>
                                 </div>
                             </ng-template>

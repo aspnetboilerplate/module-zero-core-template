@@ -25,7 +25,7 @@
                             <th>{{l("TenancyName")}}</th>
                             <th>{{l("Name")}}</th>
                             <th>
-                                <div style="text-align:center">{{l('IsActive')}}</div>
+                                <div class="align-center">{{l('IsActive')}}</div>
                             </th>
                             <th>{{l('Actions')}}</th>
                         </tr>
@@ -35,8 +35,8 @@
                             <td>{{tenant.tenancyName}}</td>
                             <td>{{tenant.name}}</td>
                             <td align="center">
-                                <i class="material-icons" *ngIf="tenant.isActive" style="color:green;">check_box</i>
-                                <i class="material-icons" *ngIf="!tenant.isActive" style="color:red;">indeterminate_check_box</i>
+                                <i class="material-icons text-green" *ngIf="tenant.isActive">check_box</i>
+                                <i class="material-icons text-red" *ngIf="!tenant.isActive">indeterminate_check_box</i>
                             </td>
                             <td class="dropdown">
                                 <a href="javascript:void(0);" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">

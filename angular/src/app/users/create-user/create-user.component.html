@@ -21,7 +21,7 @@
                     <div class="tab-content">
                         <div role="tabpanel" class="tab-pane animated fadeIn active" id="user-details">
 
-                            <div class="row clearfix" style="margin-top:10px;">
+                            <div class="row clearfix m-t-10">
                                 <div class="col-sm-12">
                                     <div class="form-group form-float">
                                         <div class="form-line">
@@ -101,7 +101,7 @@
                                 <div class="col-sm-12 ">
                                     <ng-template ngFor let-role [ngForOf]="roles" let-roleIndex="index">
                                         <div class="col-sm-6">
-                                            <input type="checkbox" name="role" value="{{role.normalizedName}}" title="{{role.description}}" class="filled-in" id="role-{{roleIndex}}" checked="checked" />
+                                            <input type="checkbox" name="role" value="{{role.normalizedName}}" title="{{role.description}}" class="form-control" id="role-{{roleIndex}}" checked="checked" />
                                             <label for="role-{{roleIndex}}" title="{{role.displayName}}">{{role.name}}</label>
                                         </div>
                                     </ng-template>

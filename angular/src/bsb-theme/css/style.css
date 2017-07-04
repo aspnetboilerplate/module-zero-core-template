@@ -12,6 +12,14 @@
     border: 0px transparent !important;
 }
 
+.text-red{
+    color: red;
+}
+
+.text-green{
+    color: green;
+}
+
 /* Ngx Pagination ============================== */
 a{cursor: pointer;
     text-decoration: none;
