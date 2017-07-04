@@ -1,4 +1,5 @@
-﻿using Abp.Localization;
+﻿using System.Linq;
+using Abp.Localization;
 using Microsoft.AspNetCore.Mvc;
 
 namespace AbpCompanyName.AbpProjectName.Web.Views.Shared.Components.TopBarLanguageSwitch
@@ -17,7 +18,7 @@ namespace AbpCompanyName.AbpProjectName.Web.Views.Shared.Components.TopBarLangua
             var model = new TopBarLanguageSwitchViewModel
             {
                 CurrentLanguage = _languageManager.CurrentLanguage,
-                Languages = _languageManager.GetLanguages()
+                Languages = _languageManager.GetLanguages().Where(l => !l.IsDisabled).ToList()
             };
 
             return View(model);

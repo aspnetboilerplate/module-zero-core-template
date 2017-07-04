@@ -11,17 +11,18 @@ export class SideBarNavComponent extends AppComponentBase {
 
     menuItems: MenuItem[] = [
         new MenuItem(this.l("HomePage"), "", "home", "/app/home"),
+
         new MenuItem(this.l("Tenants"), "Pages.Tenants", "business", "/app/tenants"),
         new MenuItem(this.l("Users"), "Pages.Users", "people", "/app/users"),
+        new MenuItem(this.l("Roles"), "Pages.Roles", "local_offer", "/app/roles"),
         new MenuItem(this.l("About"), "", "info", "/app/about"),
+
         new MenuItem(this.l("MultiLevelMenu"), "", "menu", "", [
             new MenuItem("ASP.NET Boilerplate", "", "", "", [
                 new MenuItem("Home", "", "", "https://aspnetboilerplate.com"),
                 new MenuItem("Templates", "", "", "https://aspnetboilerplate.com/Templates"),
                 new MenuItem("Samples", "", "", "https://aspnetboilerplate.com/Samples"),
-                new MenuItem("Documents", "", "", "https://aspnetboilerplate.com/Pages/Documents"),
-                new MenuItem("Forum", "", "", "https://forum.aspnetboilerplate.com/"),
-                new MenuItem("About", "", "", "https://aspnetboilerplate.com/About")
+                new MenuItem("Documents", "", "", "https://aspnetboilerplate.com/Pages/Documents")
             ]),
             new MenuItem("ASP.NET Zero", "", "", "", [
                 new MenuItem("Home", "", "", "https://aspnetzero.com?ref=abptmpl"),

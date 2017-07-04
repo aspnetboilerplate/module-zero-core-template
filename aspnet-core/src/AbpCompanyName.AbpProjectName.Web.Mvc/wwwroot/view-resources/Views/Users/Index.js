@@ -17,7 +17,7 @@
             var user = _$form.serializeFormToObject(); //serializeFormToObject is defined in main.js
             
             abp.ui.setBusy(_$modal);
-            _userService.createUser(user).done(function () {
+            _userService.create(user).done(function () {
                 _$modal.modal('hide');
                 location.reload(true); //reload page to see new user!
             }).always(function () {

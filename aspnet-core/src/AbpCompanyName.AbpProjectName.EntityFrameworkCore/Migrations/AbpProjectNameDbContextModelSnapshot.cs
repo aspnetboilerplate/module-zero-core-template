@@ -737,6 +737,9 @@ namespace AbpCompanyName.AbpProjectName.Migrations
 
                     b.Property<DateTime?>("DeletionTime");
 
+                    b.Property<string>("Description")
+                        .HasMaxLength(5000);
+
                     b.Property<string>("DisplayName")
                         .IsRequired()
                         .HasMaxLength(64);

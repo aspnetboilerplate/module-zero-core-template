@@ -3,7 +3,7 @@
 
         <div #modalContent class="modal-content">
 
-            <form *ngIf="active" #createTenantForm="ngForm" novalidate (ngSubmit)="save()">
+            <form *ngIf="active" #createTenantForm="ngForm" id="frm_create_tenant" novalidate (ngSubmit)="save()">
 
                 <div class="modal-header">
                     <button type="button" class="close" (click)="close()" aria-label="Close">
@@ -39,12 +39,18 @@
                             <label class="form-label">{{l("AdminEmailAddress")}}</label>
                         </div>
                     </div>
+                    <div class="form-group form-float">
+                        <div class="">
+                            <input id="isactive" type="checkbox" name="IsActive" [(ngModel)]="tenant.isActive" checked class="form-control" />
+                            <label for="isactive" class="form-label">{{l("IsActive")}}</label>
+                        </div>
+                    </div>
                     <p>{{l("DefaultPasswordIs","123qwe")}}</p>
                 </div>
 
                 <div class="modal-footer">
                     <button [disabled]="saving" type="button" class="btn btn-default" (click)="close()">{{l("Cancel")}}</button>
-                    <button type="submit" class="btn btn-primary blue" [disabled]="!createTenantForm.form.valid || saving">{{l("Save")}}</button>
+                    <button [disabled]="!createTenantForm.form.valid || saving" type="submit" class="btn btn-primary blue">{{l("Save")}}</button>
                 </div>
 
             </form>

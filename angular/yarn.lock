@@ -149,6 +149,12 @@
   dependencies:
     "@types/jquery" "*"
 
+"@types/jquery.validation@^1.16.3":
+  version "1.16.3"
+  resolved "https://registry.yarnpkg.com/@types/jquery.validation/-/jquery.validation-1.16.3.tgz#32cb17657a866c54a145988f1768d4ed31d1b986"
+  dependencies:
+    "@types/jquery" "*"
+
 "@types/jquery@*", "@types/jquery@^2.0.41":
   version "2.0.41"
   resolved "https://registry.yarnpkg.com/@types/jquery/-/jquery-2.0.41.tgz#b87ba051011f99edbe586d8f97282e7786e01a6d"
@@ -3511,6 +3517,10 @@ ngx-bootstrap@^1.6.6:
   resolved "https://registry.yarnpkg.com/ngx-bootstrap/-/ngx-bootstrap-1.6.6.tgz#0057141cfbdd7e8a50e81bda735fad8e95acb0dd"
   dependencies:
     moment "2.18.1"
+
+ngx-pagination@^3.0.0:
+  version "3.0.1"
+  resolved "https://registry.yarnpkg.com/ngx-pagination/-/ngx-pagination-3.0.1.tgz#5a8000e40c0424d9c41c9d6d592562e1547abf24"
 
 no-case@^2.2.0:
   version "2.3.1"

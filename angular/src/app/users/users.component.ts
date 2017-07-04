@@ -1,18 +1,21 @@
-﻿import { Component, Injector, OnInit, ViewChild } from '@angular/core';
-import { AppComponentBase } from '@shared/app-component-base';
+﻿import { Component, Injector, ViewChild } from '@angular/core';
 import { appModuleAnimation } from '@shared/animations/routerTransition';
-import { UserServiceProxy, UserListDto } from '@shared/service-proxies/service-proxies';
-
-import { CreateUserModalComponent } from './create-user-modal.component';
+import { UserServiceProxy, UserDto, PagedResultDtoOfUserDto } from '@shared/service-proxies/service-proxies';
+import { PagedListingComponentBase, PagedRequestDto } from "shared/paged-listing-component-base";
+import { CreateUserComponent } from "app/users/create-user/create-user.component";
+import { EditUserComponent } from "app/users/edit-user/edit-user.component";
 
 @Component({
     templateUrl: './users.component.html',
     animations: [appModuleAnimation()]
 })
-export class UsersComponent extends AppComponentBase implements OnInit {
+export class UsersComponent extends PagedListingComponentBase<UserDto> {
 
-    @ViewChild('createUserModal') createUserModal: CreateUserModalComponent;
-    users: UserListDto[] = [];
+    @ViewChild('createUserModal') createUserModal: CreateUserComponent;
+    @ViewChild('editUserModal') editUserModal: EditUserComponent;
+
+    active: boolean = false;
+    users: UserDto[] = [];
 
     constructor(
         injector: Injector,
@@ -21,18 +24,39 @@ export class UsersComponent extends AppComponentBase implements OnInit {
         super(injector);
     }
 
-    ngOnInit() {
-        this.getUsers();
-    }
-
-    getUsers(): void {
-        this._userService.getUsers()
-            .subscribe((result) => {
+    protected list(request: PagedRequestDto, pageNumber: number, finishedCallback: Function): void {
+        this._userService.getAll(request.skipCount, request.maxResultCount)
+            .finally(() => {
+                finishedCallback();
+            })
+            .subscribe((result: PagedResultDtoOfUserDto) => {
                 this.users = result.items;
+                this.showPaging(result, pageNumber);
             });
     }
 
+    protected delete(user: UserDto): void {
+        abp.message.confirm(
+            "Delete user '" + user.fullName + "'?",
+            (result: boolean) => {
+                if (result) {
+                    this._userService.delete(user.id)
+                        .finally(() => {
+                            abp.notify.info("Deleted User: " + user.fullName);
+                            this.refresh();
+                        })
+                        .subscribe(() => { });
+                }
+            }
+        );
+    }
+
+    // Show Modals
     createUser(): void {
         this.createUserModal.show();
+    }
+
+    editUser(user: UserDto): void {
+        this.editUserModal.show(user.id);
     }
 }
