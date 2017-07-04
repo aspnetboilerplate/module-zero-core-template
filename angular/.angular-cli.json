@@ -25,7 +25,6 @@
       "prefix": "app",
       "styles": [
         "assets/fonts/roboto/roboto.css",
-        "assets/fonts/material-icons/materialicons.css",
         "../node_modules/bootstrap/dist/css/bootstrap.min.css",
         "../node_modules/simple-line-icons/css/simple-line-icons.css",
         "../node_modules/font-awesome/css/font-awesome.css",
