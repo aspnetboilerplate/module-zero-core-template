@@ -8,8 +8,9 @@ import { AppComponentBase } from '@shared/app-component-base';
   templateUrl: './edit-role.component.html'
 })
 export class EditRoleComponent extends AppComponentBase implements OnInit {
-@ViewChild('editRoleModal') modal: ModalDirective;
-@ViewChild('modalContent') modalContent: ElementRef;
+
+    @ViewChild('editRoleModal') modal: ModalDirective;
+    @ViewChild('modalContent') modalContent: ElementRef;
     
     active: boolean = false;
     saving: boolean = false;
@@ -30,7 +31,7 @@ export class EditRoleComponent extends AppComponentBase implements OnInit {
             .subscribe((permissions:ListResultDtoOfPermissionDto) => 
             {
                 this.permissions = permissions;
-                console.log(permissions);
+                console.log(permissions);// TODO: remove logging
             });
     }
 

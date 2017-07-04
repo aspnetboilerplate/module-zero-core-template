@@ -51,7 +51,7 @@ namespace AbpCompanyName.AbpProjectName.Web.Startup
                     ).AddItem(
                         new MenuItemDefinition(
                             "AspNetBoilerplate",
-                            new FixedLocalizableString("ASP.NET Boilerplate")
+                            new FixedLocalizableString("ASPNETBoilerplate")
                         ).AddItem(
                             new MenuItemDefinition(
                                 "AspNetBoilerplateHome",
@@ -80,7 +80,7 @@ namespace AbpCompanyName.AbpProjectName.Web.Startup
                     ).AddItem(
                         new MenuItemDefinition(
                             "AspNetZero",
-                            new FixedLocalizableString("ASP.NET Zero")
+                            new FixedLocalizableString("ASPNETZero")
                         ).AddItem(
                             new MenuItemDefinition(
                                 "AspNetZeroHome",

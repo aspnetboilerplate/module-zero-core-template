@@ -36,14 +36,14 @@ export class RolesComponent extends PagedListingComponentBase<RoleDto> {
 
     delete(role: RoleDto): void {
         abp.message.confirm(
-            "Remove Users from Role and delete Role '"+ role.displayName +"'?",
-            "Permanently delete this Role",
+            this.l("DeleteRoleRemoveUsersFromRoleNamed{0}", role.displayName),
+            this.l("DeleteRoleTitle"),
             (result:boolean) =>{
                 if(result)
                 {
                     this.rolesService.delete(role.id)
                         .finally(() => {
-                            abp.notify.info("Deleted Role: " + role.displayName );
+                            abp.notify.info( this.l("DeletedRoleWithName{0}", role.displayName));
                             this.refresh();
                         })
                         .subscribe(() => { });

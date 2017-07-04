@@ -18,19 +18,19 @@ export class SideBarNavComponent extends AppComponentBase {
         new MenuItem(this.l("About"), "", "info", "/app/about"),
 
         new MenuItem(this.l("MultiLevelMenu"), "", "menu", "", [
-            new MenuItem("ASP.NET Boilerplate", "", "", "", [
-                new MenuItem("Home", "", "", "https://aspnetboilerplate.com"),
-                new MenuItem("Templates", "", "", "https://aspnetboilerplate.com/Templates"),
-                new MenuItem("Samples", "", "", "https://aspnetboilerplate.com/Samples"),
-                new MenuItem("Documents", "", "", "https://aspnetboilerplate.com/Pages/Documents")
+            new MenuItem(this.l("ASPNETBoilerplate"), "", "", "", [
+                new MenuItem(this.l("Home"), "", "", "https://aspnetboilerplate.com"),
+                new MenuItem(this.l("Templates"), "", "", "https://aspnetboilerplate.com/Templates"),
+                new MenuItem(this.l("Samples"), "", "", "https://aspnetboilerplate.com/Samples"),
+                new MenuItem(this.l("Documents"), "", "", "https://aspnetboilerplate.com/Pages/Documents")
             ]),
-            new MenuItem("ASP.NET Zero", "", "", "", [
-                new MenuItem("Home", "", "", "https://aspnetzero.com?ref=abptmpl"),
-                new MenuItem("Description", "", "", "https://aspnetzero.com/?ref=abptmpl#description"),
-                new MenuItem("Features", "", "", "https://aspnetzero.com/?ref=abptmpl#features"),
-                new MenuItem("Pricing", "", "", "https://aspnetzero.com/?ref=abptmpl#pricing"),
-                new MenuItem("Faq", "", "", "https://aspnetzero.com/Faq?ref=abptmpl"),
-                new MenuItem("Documents", "", "", "https://aspnetzero.com/Documents?ref=abptmpl")
+            new MenuItem(this.l("ASPNETZero"), "", "", "", [
+                new MenuItem(this.l("Home"), "", "", "https://aspnetzero.com?ref=abptmpl"),
+                new MenuItem(this.l("Description"), "", "", "https://aspnetzero.com/?ref=abptmpl#description"),
+                new MenuItem(this.l("Features"), "", "", "https://aspnetzero.com/?ref=abptmpl#features"),
+                new MenuItem(this.l("Pricing"), "", "", "https://aspnetzero.com/?ref=abptmpl#pricing"),
+                new MenuItem(this.l("Faq"), "", "", "https://aspnetzero.com/Faq?ref=abptmpl"),
+                new MenuItem(this.l("Documents"), "", "", "https://aspnetzero.com/Documents?ref=abptmpl")
             ])
         ])
     ];
