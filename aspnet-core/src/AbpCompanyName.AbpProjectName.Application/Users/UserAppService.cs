@@ -8,7 +8,7 @@ using AbpCompanyName.AbpProjectName.Authorization.Users;
 using AbpCompanyName.AbpProjectName.Users.Dto;
 using Microsoft.AspNetCore.Identity;
 using System.Linq;
-using Abp.Collections.Extensions;
+using Abp.Authorization;
 using Microsoft.EntityFrameworkCore;
 using Abp.IdentityFramework;
 using AbpCompanyName.AbpProjectName.Authorization.Roles;
@@ -16,7 +16,8 @@ using AbpCompanyName.AbpProjectName.Roles.Dto;
 
 namespace AbpCompanyName.AbpProjectName.Users
 {
-    public class UserAppService  : AsyncCrudAppService<User, UserDto, long, PagedResultRequestDto, CreateUserDto, UserDto>, IUserAppService
+    [AbpAuthorize(PermissionNames.Pages_Users)]
+    public class UserAppService : AsyncCrudAppService<User, UserDto, long, PagedResultRequestDto, CreateUserDto, UserDto>, IUserAppService
     {
         private readonly UserManager _userManager;
         private readonly IPasswordHasher<User> _passwordHasher;
@@ -28,13 +29,6 @@ namespace AbpCompanyName.AbpProjectName.Users
             _userManager = userManager;
             _passwordHasher = passwordHasher;
             _roleRepository = roleRepository;
-
-            CreatePermissionName 
-            = GetAllPermissionName 
-            = GetPermissionName 
-            = UpdatePermissionName
-            = DeletePermissionName
-            = PermissionNames.Pages_Users;
         }
         
         public override async Task<UserDto> Create(CreateUserDto input)

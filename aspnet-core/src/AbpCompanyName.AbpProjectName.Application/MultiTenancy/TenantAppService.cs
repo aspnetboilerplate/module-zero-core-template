@@ -2,6 +2,7 @@ using System.Linq;
 using System.Threading.Tasks;
 using Abp.Application.Services;
 using Abp.Application.Services.Dto;
+using Abp.Authorization;
 using Abp.Domain.Repositories;
 using Abp.Extensions;
 using Abp.MultiTenancy;
@@ -16,6 +17,7 @@ using Abp.IdentityFramework;
 
 namespace AbpCompanyName.AbpProjectName.MultiTenancy
 {
+    [AbpAuthorize(PermissionNames.Pages_Tenants)]
     public class TenantAppService : AsyncCrudAppService<Tenant, TenantDto, int, PagedResultRequestDto, CreateTenantDto, TenantDto>, ITenantAppService
     {
         private readonly TenantManager _tenantManager;
@@ -43,13 +45,6 @@ namespace AbpCompanyName.AbpProjectName.MultiTenancy
             _abpZeroDbMigrator = abpZeroDbMigrator;
             _passwordHasher = passwordHasher;
             _userManager = userManager;
-
-            CreatePermissionName 
-            = GetAllPermissionName 
-            = GetPermissionName 
-            = UpdatePermissionName
-            = DeletePermissionName
-            = PermissionNames.Pages_Tenants;
         }
         
         public override async Task<TenantDto> Create(CreateTenantDto input)

@@ -4,6 +4,7 @@ using Abp.Application.Services;
 using Abp.Application.Services.Dto;
 using Abp.Domain.Repositories;
 using System.Linq;
+using Abp.Authorization;
 using AbpCompanyName.AbpProjectName.Authorization.Roles;
 using AbpCompanyName.AbpProjectName.Roles.Dto;
 using Microsoft.AspNetCore.Identity;
@@ -15,6 +16,7 @@ using Abp.UI;
 
 namespace AbpCompanyName.AbpProjectName.Roles
 {
+    [AbpAuthorize(PermissionNames.Pages_Roles)]
     public class RoleAppService : AsyncCrudAppService<Role, RoleDto, int, PagedResultRequestDto, CreateRoleDto, RoleDto>, IRoleAppService
     {
         private readonly RoleManager _roleManager;
@@ -25,13 +27,6 @@ namespace AbpCompanyName.AbpProjectName.Roles
         {
             _roleManager = roleManager;
             _userManager = userManager;
-
-            CreatePermissionName
-            = GetAllPermissionName
-            = GetPermissionName
-            = UpdatePermissionName
-            = DeletePermissionName
-            = PermissionNames.Pages_Roles;
         }
 
         public override async Task<RoleDto> Create(CreateRoleDto input)
