@@ -26,7 +26,7 @@ namespace AbpCompanyName.AbpProjectName.Tests.Users
 {
     public class RoleAppService_Tests : AbpProjectNameAsyncServiceTestBase<Role, RoleDto, int, RoleAppService, CreateRoleDto, RoleDto>
     {
-        protected override Role create(int number)
+        protected override async Task<Role> createEntity(int number)
         {
             return new Role
             {
@@ -66,6 +66,26 @@ namespace AbpCompanyName.AbpProjectName.Tests.Users
                 savedEntity.Permissions.Any(x=>x.Name == PermissionNames.Pages_Users).ShouldBeTrue();
                 savedEntity.Permissions.Any(x=>x.Name == PermissionNames.Pages_Roles).ShouldBeTrue();
             });
+        }
+
+        [Fact]
+        public async Task GetAll_Sorting_Test()
+        {
+            //Arrange
+            await create(20);
+            
+            //Act
+            PagedResultDto<RoleDto> roles = await AppService.GetAll(
+                new PagedResultRequestDto{MaxResultCount=10, SkipCount=10}
+            );
+
+            //Assert
+            roles.Items.ShouldBeInOrder(SortDirection.Ascending, 
+                Comparer<RoleDto>.Create((x, y) => x.Id.CompareTo(y.Id) )
+            );
+
+            roles.Items[0].Id.ShouldBe(keys[10]);
+            roles.Items[9].Id.ShouldBe(keys[19]);
         }
     }
 }
