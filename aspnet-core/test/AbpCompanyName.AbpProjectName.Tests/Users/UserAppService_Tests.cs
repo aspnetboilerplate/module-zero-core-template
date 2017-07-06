@@ -24,7 +24,7 @@ namespace AbpCompanyName.AbpProjectName.Tests.Users
     {
         private readonly IUserAppService _userAppService;
 
-		private long[] _userIds = new long[0];
+        private long[] _userIds = new long[0];
 
         public UserAppService_Tests()
         {
@@ -33,7 +33,7 @@ namespace AbpCompanyName.AbpProjectName.Tests.Users
 
         private async Task createUsers(int count)
         {
-			Role adminRole = await getAdminRole();
+            Role adminRole = await getAdminRole();
 
             List<long> ids = new List<long>();
 
@@ -153,14 +153,14 @@ namespace AbpCompanyName.AbpProjectName.Tests.Users
         [Fact]
         public async Task Get_Test()
         {
-			// Arrange
-			await createUsers(1);
+            // Arrange
+            await createUsers(1);
 
-			// Act
-			UserDto userDto = await _userAppService.Get(new EntityDto<long>( _userIds[0]));
+            // Act
+            UserDto userDto = await _userAppService.Get(new EntityDto<long>( _userIds[0]));
 
-			// Assert
-			userDto.Id.ShouldBe(_userIds[0]);
+            // Assert
+            userDto.Id.ShouldBe(_userIds[0]);
         }
 
         [Fact]
@@ -169,12 +169,12 @@ namespace AbpCompanyName.AbpProjectName.Tests.Users
             //Arrange
             await createUsers(20);
 
-			//Act
+            //Act
             PagedResultDto<UserDto> users = await _userAppService.GetAll(
-				new PagedResultRequestDto{MaxResultCount=10, SkipCount=0}
-			);
+                new PagedResultRequestDto{MaxResultCount=10, SkipCount=0}
+            );
 
-			//Assert
+            //Assert
             users.Items.Count.ShouldBe(10);
         }
 
@@ -184,12 +184,12 @@ namespace AbpCompanyName.AbpProjectName.Tests.Users
             //Arrange
             await createUsers(20);
 
-			//Act
+            //Act
             PagedResultDto<UserDto> users = await _userAppService.GetAll(
-				new PagedResultRequestDto{MaxResultCount=10, SkipCount=10} 
-			);
+                new PagedResultRequestDto{MaxResultCount=10, SkipCount=10} 
+            );
 
-			//Assert
+            //Assert
             users.Items.Count.ShouldBe(10);
             users.TotalCount.ShouldBeGreaterThan(20); // Including SystemUsers
         }
@@ -200,10 +200,10 @@ namespace AbpCompanyName.AbpProjectName.Tests.Users
             //Arrange
             await createUsers(20);
 
-			//Act
+            //Act
             PagedResultDto<UserDto> users = await _userAppService.GetAll(
-				new PagedResultRequestDto{MaxResultCount=10, SkipCount=10} 
-			);
+                new PagedResultRequestDto{MaxResultCount=10, SkipCount=10} 
+            );
 
             // Assert
             users.Items.ShouldBeInOrder(SortDirection.Descending, 
@@ -214,14 +214,14 @@ namespace AbpCompanyName.AbpProjectName.Tests.Users
         [Fact]
         public async Task Update_Test()
         {
-			// Arrange
-			await createUsers(1);
+            // Arrange
+            await createUsers(1);
 
-			// Act
-			UserDto userDto = await _userAppService.Update(
-				new UserDto
+            // Act
+            UserDto userDto = await _userAppService.Update(
+                new UserDto
                 {
-					Id = _userIds[0],
+                    Id = _userIds[0],
                     EmailAddress = "john@volosoft.com",
                     IsActive = true,
                     Name = "John",
@@ -229,16 +229,16 @@ namespace AbpCompanyName.AbpProjectName.Tests.Users
                     UserName = "john.nash",
                     Roles = new List<string>{"Admin"}.ToArray()
                 }
-			);
+            );
 
-			// Assert
-			await UsingDbContextAsync(async context => 
+            // Assert
+            await UsingDbContextAsync(async context => 
             {
-				User updatedUser = await context.Users.FirstOrDefaultAsync(x => x.Id == userDto.Id);
-				updatedUser.Id.ShouldBe(_userIds[0]);
-				updatedUser.EmailAddress.ShouldBe("john@volosoft.com");
-				updatedUser.UserName.ShouldBe("john.nash");
-			});
+                User updatedUser = await context.Users.FirstOrDefaultAsync(x => x.Id == userDto.Id);
+                updatedUser.Id.ShouldBe(_userIds[0]);
+                updatedUser.EmailAddress.ShouldBe("john@volosoft.com");
+                updatedUser.UserName.ShouldBe("john.nash");
+            });
         }
 
         [Fact]
@@ -277,18 +277,18 @@ namespace AbpCompanyName.AbpProjectName.Tests.Users
         [Fact]
         public async Task Delete_Test()
         {
-			// Arrange
-			await createUsers(1);
+            // Arrange
+            await createUsers(1);
 
-			// Act
-			await _userAppService.Delete(new EntityDto<long>(_userIds[0]));
+            // Act
+            await _userAppService.Delete(new EntityDto<long>(_userIds[0]));
 
-			// Assert
-			await UsingDbContextAsync(async context => 
+            // Assert
+            await UsingDbContextAsync(async context => 
             {
-				User updatedUser = await context.Users.FirstOrDefaultAsync(x => x.Id == _userIds[0] && x.IsDeleted == false);
+                User updatedUser = await context.Users.FirstOrDefaultAsync(x => x.Id == _userIds[0] && x.IsDeleted == false);
                 updatedUser.ShouldBeNull();
-			});
+            });
         }
     }
 }
