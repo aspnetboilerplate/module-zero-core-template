@@ -69,5 +69,7 @@
     <text name="Roles">Roles</text>
     <text name="DisplayName">Display Name</text>
 
+    <text name="Edit">Edit</text>
+    <text name="Delete">Delete</text>
   </texts>
 </localizationDictionary>

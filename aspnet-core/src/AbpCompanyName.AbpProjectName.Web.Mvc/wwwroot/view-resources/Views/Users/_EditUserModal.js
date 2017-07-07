@@ -1,19 +1,27 @@
 ﻿(function ($) {
 
-    var _tenantService = abp.services.app.tenant;
-    var _$modal = $('#TenantEditModal');
-    var _$form = $('form[name=TenantEditForm]');
+    var _userService = abp.services.app.user;
+    var _$modal = $('#UserEditModal');
+    var _$form = $('form[name=UserEditForm]');
 
     function save() {
-        
+
         if (!_$form.valid()) {
             return;
         }
 
-        var tenant = _$form.serializeFormToObject(); //serializeFormToObject is defined in main.js
+        var user = _$form.serializeFormToObject(); //serializeFormToObject is defined in main.js
+        user.roles = [];
+        var _$roleCheckboxes = $("input[name='role']:checked");
+        if (_$roleCheckboxes) {
+            for (var roleIndex = 0; roleIndex < _$roleCheckboxes.length; roleIndex++) {
+                var _$roleCheckbox = $(_$roleCheckboxes[roleIndex]);
+                user.roles.push(_$roleCheckbox.val());
+            }
+        }
 
         abp.ui.setBusy(_$form);
-        _tenantService.update(tenant).done(function () {
+        _userService.update(user).done(function () {
             _$modal.modal('hide');
             location.reload(true); //reload page to see edited tenant!
         }).always(function () {

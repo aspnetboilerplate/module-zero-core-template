@@ -18,6 +18,7 @@
   <ItemGroup>
     <Content Include="wwwroot\view-resources\Views\Shared\_Layout.js" />
     <Content Include="wwwroot\view-resources\Views\Tenants\_EditTenantModal.js" />
+    <Content Include="wwwroot\view-resources\Views\Users\_EditUserModal.js" />
   </ItemGroup>
 
   <ItemGroup>

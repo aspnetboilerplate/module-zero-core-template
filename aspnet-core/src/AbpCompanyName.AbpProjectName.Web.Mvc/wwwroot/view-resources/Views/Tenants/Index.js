@@ -8,7 +8,7 @@
         _$form.validate();
 
         $('#RefreshButton').click(function () {
-            document.location.reload();
+            refreshTenantList();
         });
 
         $('.delete-tenant').click(function () {
@@ -55,7 +55,7 @@
             _$modal.find('input:not([type=hidden]):first').focus();
         });
 
-        function refreshTenantsList() {
+        function refreshTenantList() {
             location.reload(true); //reload page to see new tenant!
         }
 
@@ -67,7 +67,7 @@
                         _tenantService.delete({
                             id: tenantId
                         }).done(function () {
-                            refreshTenantsList();
+                            refreshTenantList();
                         });
                     }
                 }
