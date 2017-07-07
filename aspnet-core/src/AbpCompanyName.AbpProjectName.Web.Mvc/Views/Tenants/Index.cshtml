@@ -29,9 +29,7 @@
                             <i class="material-icons">more_vert</i>
                         </a>
                         <ul class="dropdown-menu pull-right">
-                            <li><a href="javascript:void(0);" class=" waves-effect waves-block">Action</a></li>
-                            <li><a href="javascript:void(0);" class=" waves-effect waves-block">Another action</a></li>
-                            <li><a href="javascript:void(0);" class=" waves-effect waves-block">Something else here</a></li>
+                            <li><a id="RefreshButton" href="javascript:void(0);" class="waves-effect waves-block"><i class="material-icons">refresh</i>Refresh</a></li>
                         </ul>
                     </li>
                 </ul>
@@ -42,6 +40,7 @@
                         <tr>
                             <th>@L("TenancyName")</th>
                             <th>@L("Name")</th>
+                            <th>@L("IsActive")</th>
                         </tr>
                     </thead>
                     <tbody>
@@ -50,6 +49,16 @@
                             <tr>
                                 <td>@tenant.TenancyName</td>
                                 <td>@tenant.Name</td>
+                                <td><i class="material-icons" style="color:@(tenant.IsActive ? "green":"red");">@(tenant.IsActive ? "check_box" : "indeterminate_check_box")</i></td>
+                                <td class="dropdown">
+                                    <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">
+                                        <i class="material-icons">menu</i>
+                                    </a>
+                                    <ul class="dropdown-menu pull-right">
+                                        <li><a href="#" class="waves-effect waves-block edit-tenant" data-tenant-id="@tenant.Id" data-toggle="modal" data-target="#TenantEditModal"><i class="material-icons">edit</i>@L("Edit")</a></li>
+                                        <li><a href="#" class="waves-effect waves-block delete-tenant" data-tenant-id="@tenant.Id" data-tenancy-name="@tenant.TenancyName"><i class="material-icons">delete_sweep</i>@L("Delete")</a></li>
+                                    </ul>
+                                </td>
                             </tr>
                         }
                     </tbody>
@@ -107,6 +116,14 @@
                     <button type="submit" class="btn btn-primary waves-effect">@L("Save")</button>
                 </div>
             </form>
+        </div>
+    </div>
+</div>
+
+<div class="modal fade" id="TenantEditModal" tabindex="-1" role="dialog" aria-labelledby="TenantEditModalLabel" data-backdrop="static">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+
         </div>
     </div>
 </div>
