@@ -12,6 +12,7 @@ using Shouldly;
 using Xunit;
 using Abp.UI;
 using Abp.Runtime.Validation;
+using AbpCompanyName.AbpProjectName.EntityFrameworkCore;
 
 namespace AbpCompanyName.AbpProjectName.Tests
 {
@@ -100,7 +101,13 @@ namespace AbpCompanyName.AbpProjectName.Tests
             {
                 TEntity savedEntity = await context.Set<TEntity>().FirstOrDefaultAsync(e => e.Id.CompareTo(createdEntityDto.Id) == 0);
                 savedEntity.ShouldNotBeNull();
+
+                CreateChecks(context);
             });
+        }
+
+        public async virtual Task CreateChecks(AbpProjectNameDbContext context)
+        {
         }
 
         [Fact]
@@ -168,6 +175,15 @@ namespace AbpCompanyName.AbpProjectName.Tests
 
             //Assert, should check an updated field
             entityDto.Id.ShouldBe(keys[0]);
+
+
+            await UsingDbContextAsync(async context => {
+                await UpdateChecks(context);
+            });
+        }
+
+        public async virtual Task UpdateChecks(AbpProjectNameDbContext context)
+        {
         }
 
         [Fact]

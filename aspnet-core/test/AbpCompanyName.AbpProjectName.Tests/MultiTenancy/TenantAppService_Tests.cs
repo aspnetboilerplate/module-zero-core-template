@@ -44,7 +44,7 @@ namespace AbpCompanyName.AbpProjectName.Tests.MultiTenancy
         }
 
         [Fact]
-        public async virtual Task Create_Creates_Admin_User()
+        public async virtual Task Create_Should_Create_Admin_User()
         {
             //Arrange
             CreateTenantDto createDto = getCreateDto();
@@ -66,7 +66,5 @@ namespace AbpCompanyName.AbpProjectName.Tests.MultiTenancy
                 adminUser.Roles.Any(x => x.RoleId == adminRole.Id).ShouldBeTrue();
             });
         }
-
-        // Delete - Soft Delete Users
     }
 }
