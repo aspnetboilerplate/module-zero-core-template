@@ -1,14 +1,11 @@
 ﻿using System.Collections.Generic;
+using System.Linq;
 using System.Threading.Tasks;
 
-using System.Linq;
-using System.Linq.Dynamic;
 
 using Abp;
 using Abp.Application.Services.Dto;
 using Abp.Authorization.Users;
-using Abp.Domain.Repositories;
-
 using AbpCompanyName.AbpProjectName.Authorization.Roles;
 using AbpCompanyName.AbpProjectName.Authorization.Users;
 using AbpCompanyName.AbpProjectName.Users;
@@ -43,12 +40,12 @@ namespace AbpCompanyName.AbpProjectName.Tests.Users
                 {
                     User user = new User
                     {
-                        EmailAddress = $"user.{i}@volosoft.com",
+                        EmailAddress = $"user.{i.ToString("000.#")}@volosoft.com",
                         IsActive = true,
                         Name = "User",
-                        Surname = $"{i}",
+                        Surname = $"{i.ToString("000.#")}",
                         Password = "123qwe",
-                        UserName = $"User.{i}",
+                        UserName = $"User.{i.ToString("000.#")}",
                         TenantId = this.AbpSession.TenantId
                     };
 

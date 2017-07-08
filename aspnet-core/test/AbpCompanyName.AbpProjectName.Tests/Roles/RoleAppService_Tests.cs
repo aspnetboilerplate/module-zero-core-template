@@ -1,26 +1,18 @@
 using System.Collections.Generic;
+using System.Linq;
 using System.Threading.Tasks;
 
-using System.Linq;
-using System.Linq.Dynamic;
-
-using Abp;
 using Abp.Application.Services.Dto;
-using Abp.Authorization.Users;
-using Abp.Domain.Repositories;
 
+using AbpCompanyName.AbpProjectName.Authorization;
 using AbpCompanyName.AbpProjectName.Authorization.Roles;
-using AbpCompanyName.AbpProjectName.Authorization.Users;
 using AbpCompanyName.AbpProjectName.Roles;
-using AbpCompanyName.AbpProjectName.Users;
-using AbpCompanyName.AbpProjectName.Users.Dto;
+using AbpCompanyName.AbpProjectName.Roles.Dto;
 
 using Microsoft.EntityFrameworkCore;
 
 using Shouldly;
 using Xunit;
-using AbpCompanyName.AbpProjectName.Roles.Dto;
-using AbpCompanyName.AbpProjectName.Authorization;
 
 namespace AbpCompanyName.AbpProjectName.Tests.Users
 {
@@ -30,14 +22,14 @@ namespace AbpCompanyName.AbpProjectName.Tests.Users
         {
             return new Role
             {
-                DisplayName = $"Role{number}",
-                Description= $"Role{number}",
-                Name = $"Role{number}",
-                TenantId=AbpSession.TenantId
+                DisplayName = $"Role{number.ToString("000.#")}",
+                Description= $"Role{number.ToString("000.#")}",
+                Name = $"Role{number.ToString("000.#")}",
+                TenantId = AbpSession.TenantId
             };
         }
 
-        protected override CreateRoleDto getCreateDto(int number)
+        protected override CreateRoleDto getCreateDto()
         {
             return new CreateRoleDto
             {
@@ -49,10 +41,10 @@ namespace AbpCompanyName.AbpProjectName.Tests.Users
         }
 
         [Fact]
-        public async Task Create_Sets_Correct_Permissions_Test()
+        public async virtual Task Create_Sets_Correct_Permissions_Test()
         {
             //Arrange
-            CreateRoleDto createDto = getCreateDto(1);
+            CreateRoleDto createDto = getCreateDto();
 
             //Act
             RoleDto createdEntityDto = await AppService.Create(createDto);
@@ -69,7 +61,7 @@ namespace AbpCompanyName.AbpProjectName.Tests.Users
         }
 
         [Fact]
-        public async Task GetAll_Sorting_Test()
+        public async virtual Task GetAll_Sorting_Test()
         {
             //Arrange
             await create(20);
@@ -81,11 +73,12 @@ namespace AbpCompanyName.AbpProjectName.Tests.Users
 
             //Assert
             roles.Items.ShouldBeInOrder(SortDirection.Ascending, 
-                Comparer<RoleDto>.Create((x, y) => x.Id.CompareTo(y.Id) )
+                Comparer<RoleDto>.Create((x, y) => x.Name.CompareTo(y.Name) )
             );
 
-            roles.Items[0].Id.ShouldBe(keys[10]);
-            roles.Items[9].Id.ShouldBe(keys[19]);
+            // admin is first role
+            roles.Items[0].Name.ShouldBe("Role009");
+            roles.Items[9].Name.ShouldBe("Role018");
         }
     }
 }

@@ -1,33 +1,17 @@
 using System;
 using System.Collections.Generic;
-using System.Data.Common;
-using System.Linq;
 using System.Threading.Tasks;
-using Abp;
+
 using Abp.Application.Services;
 using Abp.Application.Services.Dto;
-using Abp.Authorization.Users;
-using Abp.Dependency;
 using Abp.Domain.Entities;
-using Abp.EntityFrameworkCore;
-using Abp.Events.Bus;
-using Abp.Events.Bus.Entities;
-using Abp.Runtime.Session;
-using Abp.TestBase;
-using Abp.Zero.EntityFrameworkCore;
-using AbpCompanyName.AbpProjectName.Authorization.Roles;
-using AbpCompanyName.AbpProjectName.Authorization.Users;
-
-using AbpCompanyName.AbpProjectName.EntityFrameworkCore;
-using AbpCompanyName.AbpProjectName.EntityFrameworkCore.Seed.Host;
-using AbpCompanyName.AbpProjectName.EntityFrameworkCore.Seed.Tenants;
-
-using AbpCompanyName.AbpProjectName.MultiTenancy;
-using Castle.MicroKernel.Registration;
+using Abp.ObjectMapping;
 
 using Microsoft.EntityFrameworkCore;
 using Shouldly;
 using Xunit;
+using Abp.UI;
+using Abp.Runtime.Validation;
 
 namespace AbpCompanyName.AbpProjectName.Tests
 {
@@ -67,7 +51,6 @@ namespace AbpCompanyName.AbpProjectName.Tests
                     context.Set<TEntity>().Add(entity);
 
                     context.SaveChanges();
-                    //Create Additional Entities:: createAdditionalEntities() //
 
                     return entity.Id;
                 });
@@ -80,23 +63,38 @@ namespace AbpCompanyName.AbpProjectName.Tests
 
         protected abstract Task<TEntity> createEntity(int entityNumer);
 
-        protected abstract TCreateDto  getCreateDto(int number);
+        protected abstract TCreateDto  getCreateDto();
 
-        //Get
-        //GetAll
-        //Create
-        //Update
-        //Delete
+        protected async virtual Task<TEntityDto> checkForValidationErrors( Func<Task<TEntityDto>> function )
+        {
+            try
+            {
+                return await function();
+            }
+            catch(AbpValidationException ave)
+            {
+                string message = "";
+                foreach (var error in ave.ValidationErrors)
+                {
+                    message += error.ErrorMessage + "\n";
+                }
+
+                throw new ShouldAssertException(message);
+            }
+        }
 
         [Fact]
         public async Task Create_Test()
         {
             //Arrange
-            TCreateDto createDto = getCreateDto(1);
+            TCreateDto createDto = getCreateDto();
 
             //Act
-            TEntityDto createdEntityDto = await _appService.Create(createDto);
-            
+            TEntityDto createdEntityDto = await checkForValidationErrors(async () => {
+                    return await _appService.Create(createDto);
+                }
+            );
+
             //Assert
             await UsingDbContextAsync(async context =>
             {
@@ -119,7 +117,7 @@ namespace AbpCompanyName.AbpProjectName.Tests
         }
 
         [Fact]
-        public async Task GetAll_Test()
+        public virtual async Task GetAll_Test()
         {
             //Arrange
             await create(20);
@@ -134,7 +132,7 @@ namespace AbpCompanyName.AbpProjectName.Tests
         }
 
         [Fact]
-        public async Task GetAll_Paging_Test()
+        public virtual async Task GetAll_Paging_Test()
         {
             //Arrange
             await create(20);
@@ -148,14 +146,53 @@ namespace AbpCompanyName.AbpProjectName.Tests
             users.Items.Count.ShouldBe(10);
         }
 
-        // [Fact]
-        // public async Task Update_Test()
-        // {
-        // }
+        [Fact]
+        public async Task Update_Test()
+        {
+            //Arrange
+            await create(1);
 
-        // [Fact]
-        // public async Task Delete_Test()
-        // {
-        // }
+            IObjectMapper objectMapper = this.LocalIocManager.Resolve<IObjectMapper>();
+
+            //
+            TUpdateDto updatedDto = objectMapper.Map<TUpdateDto>(await createEntity(2));
+            updatedDto.Id = keys[0];
+
+            //Act
+            //Assuming TUpdateDto is TEntityDto, otherwise atribute mapping is required 
+            TEntityDto entityDto = await checkForValidationErrors(async () => {
+                return await _appService.Update(
+                    updatedDto
+                );
+            });
+
+            //Assert, should check an updated field
+            entityDto.Id.ShouldBe(keys[0]);
+        }
+
+        [Fact]
+        public async Task Delete_Test()
+        {
+            //Arrange
+            await create(1);
+
+            //Act
+            await _appService.Delete(new EntityDto<TPrimaryKey>(keys[0]));
+
+            //Assert
+            await UsingDbContextAsync(async context =>
+            {
+                TEntity savedEntity = await context.Set<TEntity>().FirstOrDefaultAsync(e => e.Id.CompareTo(keys[0]) == 0);
+
+                if(savedEntity is ISoftDelete)
+                {
+                    (savedEntity as ISoftDelete).IsDeleted.ShouldBeTrue();
+                }
+                else
+                {
+                    savedEntity.ShouldBeNull();
+                }
+            });
+        }
     }
 }
