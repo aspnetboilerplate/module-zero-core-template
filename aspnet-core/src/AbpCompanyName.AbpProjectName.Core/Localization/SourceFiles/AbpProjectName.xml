@@ -93,7 +93,9 @@
 
     <text name="Actions">Actions</text>
     <text name="Refresh">Refresh</text>
-
+    <text name="Edit">Edit</text>
+    <text name="Delete">Delete</text>
+    
     <text name="Back">Back</text>
     <text name="Save" value="Save" />
     <text name="Cancel" value="Cancel" />
@@ -106,5 +108,6 @@
     <text name="TenantIdIsNotActive{0}" value="TenantId is not active: {0}" />
     <text name="CouldNotValidateExternalUser{0}" value="Could not validate external user: {0}" />
     <text name="CouldNotCompleteLoginOperation" value="Could not complete login operation."/>
+
   </texts>
 </localizationDictionary>

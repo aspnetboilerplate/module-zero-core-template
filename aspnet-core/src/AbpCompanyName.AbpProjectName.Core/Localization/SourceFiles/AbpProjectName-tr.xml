@@ -69,5 +69,7 @@
     <text name="Roles">Roller</text>
     <text name="DisplayName">Görünen ad</text>
 
+    <text name="Edit">Düzenle</text>
+    <text name="Delete">Sil</text>
   </texts>
 </localizationDictionary>

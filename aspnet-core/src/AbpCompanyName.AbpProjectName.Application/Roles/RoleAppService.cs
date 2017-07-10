@@ -4,6 +4,7 @@ using Abp.Application.Services;
 using Abp.Application.Services.Dto;
 using Abp.Domain.Repositories;
 using System.Linq;
+using Abp.Authorization;
 using AbpCompanyName.AbpProjectName.Authorization.Roles;
 using AbpCompanyName.AbpProjectName.Roles.Dto;
 using Microsoft.AspNetCore.Identity;
@@ -23,15 +24,15 @@ namespace AbpCompanyName.AbpProjectName.Roles
         public RoleAppService(IRepository<Role> repository, RoleManager roleManager, UserManager userManager)
             : base(repository)
         {
+            //todo@ismail: move to AbpAuthorize attribute when this is resolved https://github.com/aspnetboilerplate/aspnetboilerplate/issues/2253
+            CreatePermissionName
+                = GetAllPermissionName
+                    = GetPermissionName
+                        = UpdatePermissionName
+                            = DeletePermissionName = PermissionNames.Pages_Roles;
+
             _roleManager = roleManager;
             _userManager = userManager;
-
-            CreatePermissionName
-            = GetAllPermissionName
-            = GetPermissionName
-            = UpdatePermissionName
-            = DeletePermissionName
-            = PermissionNames.Pages_Roles;
         }
 
         public override async Task<RoleDto> Create(CreateRoleDto input)

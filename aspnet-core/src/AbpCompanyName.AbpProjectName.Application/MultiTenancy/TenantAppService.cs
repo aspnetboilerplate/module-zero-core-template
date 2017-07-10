@@ -2,6 +2,7 @@ using System.Linq;
 using System.Threading.Tasks;
 using Abp.Application.Services;
 using Abp.Application.Services.Dto;
+using Abp.Authorization;
 using Abp.Domain.Repositories;
 using Abp.Extensions;
 using Abp.MultiTenancy;
@@ -44,12 +45,13 @@ namespace AbpCompanyName.AbpProjectName.MultiTenancy
             _passwordHasher = passwordHasher;
             _userManager = userManager;
 
-            CreatePermissionName 
-            = GetAllPermissionName 
-            = GetPermissionName 
-            = UpdatePermissionName
-            = DeletePermissionName
-            = PermissionNames.Pages_Tenants;
+            //todo@ismail: move to AbpAuthorize attribute when this is resolved https://github.com/aspnetboilerplate/aspnetboilerplate/issues/2253
+            CreatePermissionName
+                = GetAllPermissionName
+                    = GetPermissionName
+                        = UpdatePermissionName
+                            = DeletePermissionName
+                                = PermissionNames.Pages_Tenants;
         }
         
         public override async Task<TenantDto> Create(CreateTenantDto input)
