@@ -3,25 +3,25 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 
-
 using Abp;
 using Abp.Application.Services.Dto;
-using Abp.Authorization.Users;
+
 using AbpCompanyName.AbpProjectName.Authorization.Roles;
 using AbpCompanyName.AbpProjectName.Authorization.Users;
+using AbpCompanyName.AbpProjectName.EntityFrameworkCore;
 using AbpCompanyName.AbpProjectName.Users;
 using AbpCompanyName.AbpProjectName.Users.Dto;
 
 using Microsoft.EntityFrameworkCore;
 using Shouldly;
 using Xunit;
-using AbpCompanyName.AbpProjectName.EntityFrameworkCore;
+
 
 namespace AbpCompanyName.AbpProjectName.Tests.Users
 {
     public class UserAppService_Tests : AbpProjectNameAsyncServiceTestBase<User, UserDto, long, UserAppService, CreateUserDto, UserDto>
     {
-        protected override async Task<User> createEntity(int entityNumer)
+        protected override async Task<User> CreateEntity(int entityNumer)
         {
             return new User
             {
@@ -35,7 +35,7 @@ namespace AbpCompanyName.AbpProjectName.Tests.Users
             };
         }
 
-        protected override CreateUserDto getCreateDto()
+        protected override CreateUserDto GetCreateDto()
         {
             return new CreateUserDto
             {
@@ -44,46 +44,57 @@ namespace AbpCompanyName.AbpProjectName.Tests.Users
                 Name = "New",
                 Surname = "User",
                 Password = "123qwe",
-                UserName = "New.User"
+                UserName = "New.User",
+                Roles = new String[] { "Admin" }
             };
         }
 
-        public async override Task CreateChecks(AbpProjectNameDbContext context)
+        protected override UserDto GetUpdateDto(long key)
         {
-            Role adminRole = await getRole("Admin");
-
-            User adminUser = await context.Users.Include(x => x.Roles).FirstOrDefaultAsync(e => e.UserName == "Admin");
-            adminUser.ShouldNotBeNull();
-
-            adminUser.Roles.Any(x => x.RoleId == adminRole.Id).ShouldBeTrue();
+            return new UserDto
+            {
+                Id = key,
+                EmailAddress = "updated.user@volosoft.com",
+                IsActive = true,
+                Name = "Updated",
+                Surname = "User",
+                UserName = "Updated.User",
+                Roles = new String[] { "Admin" }
+            };
         }
-
-        private async Task<Role> getRole(string name)
+        
+        private async Task<Role> GetRole(string name)
         {
             return await UsingDbContextAsync(async context =>
             {
                 return await context.Roles.FirstOrDefaultAsync(r => r.Name == name && r.TenantId == this.AbpSession.TenantId && r.IsDeleted == false);
             });
         }
-        
+
+        public async override Task CreateChecks(AbpProjectNameDbContext context, CreateUserDto createEntity)
+        {
+            Role adminRole = await GetRole("Admin");
+            User user = await context.Users.Include(x => x.Roles).FirstOrDefaultAsync(e => e.EmailAddress == createEntity.EmailAddress);
+
+            adminRole.ShouldNotBeNull();
+            user.ShouldNotBeNull();
+
+            user.Roles.Any(x => x.RoleId == adminRole.Id);
+        }
+
         [Fact]
         public async Task Create_For_Non_Existing_Role_Should_Throw_Exception_Test()
         {
-            //Act
-            AppService.Create(
-                new CreateUserDto
-                {
-                    EmailAddress = "john@volosoft.com",
-                    IsActive = true,
-                    Name = "John",
-                    Surname = "Nash",
-                    Password = "123qwe",
-                    UserName = "john.nash",
-                    Roles = new List<string>{"NonExistantRole"}.ToArray()
-                }
-            ).ShouldThrow(typeof(AbpException));
+            //Arrange
+            CreateUserDto dto = GetCreateDto();
+            dto.Roles = new string[] { "NONEXISTANTROLE" };
 
-            // Failure Here.. Lack of transactions on InMemory Provider
+            //Act, Assert
+            await AppService.Create(
+                dto
+            ).ShouldThrowAsync(typeof(AbpException));
+
+            // Failure Here, should just delete this code. Lack of transactions on InMemory Provider
             //await UsingDbContextAsync(async context =>
             //{
             //    User johnNashUser = await context.Users.Include(x => x.Roles).FirstOrDefaultAsync(u => u.UserName == "john.nash" && u.IsDeleted == false);
@@ -92,35 +103,71 @@ namespace AbpCompanyName.AbpProjectName.Tests.Users
         }
 
         [Fact]
-        public async Task GetAll_Paging_Test()
+        public async Task Create_With_Invalid_EmailAddress_Should_Throw()
         {
             //Arrange
-            await create(20);
+            CreateUserDto createDto = GetCreateDto();
+            createDto.EmailAddress = null;
 
-            //Act
-            PagedResultDto<UserDto> users = await AppService.GetAll(
-                new PagedResultRequestDto{MaxResultCount=10, SkipCount=10} 
-            );
+            //Act, Assert
+            await CheckForValidationErrors(
+                async () => await AppService.Create(createDto)
+            ).ShouldThrowAsync<ShouldAssertException>();
+        }
 
-            //Assert
-            users.Items.Count.ShouldBe(10);
-            users.TotalCount.ShouldBeGreaterThan(20); // Including SystemUsers
+        [Fact]
+        public async Task Create_With_Invalid_UserName_Should_Throw()
+        {
+            //Arrange
+            CreateUserDto createDto = GetCreateDto();
+            createDto.UserName = "invalid username";
+
+            //Act, Assert
+            await base.CheckForValidationErrors(
+                async () => await AppService.Create(createDto)
+            ).ShouldThrowAsync<ShouldAssertException>();
+        }
+
+        [Fact]
+        public async Task Create_With_Null_Password_Should_Throw()
+        {
+            //Arrange
+            CreateUserDto createDto = GetCreateDto();
+            createDto.Password = null;
+
+            //Act, Assert
+            await base.CheckForValidationErrors(
+                async () => await AppService.Create(createDto)
+            ).ShouldThrowAsync<ShouldAssertException>();
+        }
+
+        [Fact]
+        public async Task Create_With_Invalid_Password_Should_Throw()
+        {
+            //Arrange
+            CreateUserDto createDto = GetCreateDto();
+            createDto.Password = "";
+
+            //Act, Assert
+            await base.CheckForValidationErrors(
+                async () => await AppService.Create(createDto)
+            ).ShouldThrowAsync<ShouldAssertException>();
         }
 
         [Fact]
         public async Task GetAll_Check_Sorting_Test()
         {
             //Arrange
-            await create(20);
+            await Create(20);
 
             //Act
             PagedResultDto<UserDto> users = await AppService.GetAll(
-                new PagedResultRequestDto{MaxResultCount=10, SkipCount=10} 
+                new PagedResultRequestDto { MaxResultCount = 10, SkipCount = 10 }
             );
 
             // Assert
-            users.Items.ShouldBeInOrder(SortDirection.Descending, 
-                Comparer<UserDto>.Create((x, y) => x.Name.CompareTo(y.Name) )
+            users.Items.ShouldBeInOrder(SortDirection.Descending,
+                Comparer<UserDto>.Create((x, y) => x.Name.CompareTo(y.Name))
             );
         }
 
@@ -128,22 +175,18 @@ namespace AbpCompanyName.AbpProjectName.Tests.Users
         public async Task Update_Sets_Roles_Correctly_Test()
         {
             // Arrange
-            Role adminRole = await getRole("admin");
+            Role adminRole = await GetRole("admin");
 
-            await create(1); //User Has Admin Permission
+            await Create(1); //User Has Admin Permission
+
+            UserDto user = GetUpdateDto(keys[0]);
+            user.Roles = new List<string> { }.ToArray(); //Remove Admin Role
 
             // Act
-            UserDto userDto = await AppService.Update(
-                new UserDto
-                {
-                    Id = keys[0],
-                    EmailAddress = "john@volosoft.com",
-                    IsActive = true,
-                    Name = "John",
-                    Surname = "Nash",
-                    UserName = "john.nash",
-                    Roles = new List<string> { }.ToArray()
-                }
+            UserDto userDto = await base.CheckForValidationErrors(
+                async () => await AppService.Update(
+                    user
+                )
             );
 
             // Assert
@@ -155,6 +198,78 @@ namespace AbpCompanyName.AbpProjectName.Tests.Users
                 // Admin role should be removed
                 updatedUser.Roles.Any(x => x.Id == adminRole.Id).ShouldBeFalse();
             });
+        }
+
+        [Fact]
+        public async Task Update_With_Invalid_EmailAddress_Should_Throw()
+        {
+            // Arrange
+            Role adminRole = await GetRole("admin");
+
+            await Create(1); //User Has Admin Permission
+
+            UserDto updateDto = GetUpdateDto(keys[0]);
+            updateDto.EmailAddress = null; // Required cause validation exception
+
+            // Act
+            await CheckForValidationErrors(
+                async () => await AppService.Update(updateDto)
+            ).ShouldThrowAsync<ShouldAssertException>();
+        }
+
+        [Fact]
+        public async Task Update_With_Invalid_UserName_Should_Throw()
+        {
+            // Arrange
+            Role adminRole = await GetRole("admin");
+
+            await Create(1); //User Has Admin Permission
+
+            UserDto updateDto = GetUpdateDto(keys[0]);
+            updateDto.UserName = "invalid user name";
+
+            // Act
+            await base.CheckForValidationErrors(
+                async () => await AppService.Update(updateDto)
+            ).ShouldThrowAsync<ShouldAssertException>();
+        }
+
+        [Fact]
+        public async Task Update_With_Invalid_Surname_Should_Throw()
+        {
+            await Create(1); //User Has Admin Permission
+
+            UserDto updateDto = GetUpdateDto(keys[0]);
+            updateDto.Surname = "";
+
+            // Act
+            await base.CheckForValidationErrors(
+                async () => await AppService.Update(updateDto)
+            ).ShouldThrowAsync<ShouldAssertException>();
+        }
+
+        [Fact]
+        public async Task Update_With_Invalid_Name_Should_Throw()
+        {
+            await Create(1); //User Has Admin Permission
+
+            UserDto updateDto = GetUpdateDto(keys[0]);
+            updateDto.Name = "";
+
+            // Act
+            await base.CheckForValidationErrors(
+                async () => await AppService.Update(updateDto)
+            ).ShouldThrowAsync<ShouldAssertException>();
+        }
+
+        public override async Task DeleteChecks(AbpProjectNameDbContext context, long key)
+        {
+            User user = await context.Users.FirstOrDefaultAsync(
+                e => e.Id == key
+            );
+
+            user.ShouldNotBeNull();
+            user.IsDeleted.ShouldBeTrue();
         }
     }
 }

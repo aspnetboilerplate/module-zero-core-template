@@ -1,3 +1,4 @@
+using System;
 using System.Threading.Tasks;
 
 using AbpCompanyName.AbpProjectName.MultiTenancy;
@@ -11,6 +12,7 @@ using Shouldly;
 using Xunit;
 using AbpCompanyName.AbpProjectName.Authorization.Roles;
 using AbpCompanyName.AbpProjectName.Authorization.Users;
+using AbpCompanyName.AbpProjectName.EntityFrameworkCore;
 
 namespace AbpCompanyName.AbpProjectName.Tests.MultiTenancy
 {
@@ -20,8 +22,8 @@ namespace AbpCompanyName.AbpProjectName.Tests.MultiTenancy
         {
             LoginAsHost("admin");
         }
-        
-        protected override async Task<Tenant> createEntity(int number)
+
+        protected override async Task<Tenant> CreateEntity(int number)
         {
             return new Tenant
             {
@@ -31,7 +33,7 @@ namespace AbpCompanyName.AbpProjectName.Tests.MultiTenancy
             };
         }
 
-        protected override CreateTenantDto getCreateDto()
+        protected override CreateTenantDto GetCreateDto()
         {
             return new CreateTenantDto
             {
@@ -43,16 +45,35 @@ namespace AbpCompanyName.AbpProjectName.Tests.MultiTenancy
             };
         }
 
+        protected override TenantDto GetUpdateDto(int key)
+        {
+            // this could be TUpdateDto
+            return new TenantDto
+            {
+                Id = key,
+                TenancyName = "updatedtenant",
+                Name = "Updated Tenant",
+                IsActive = true
+            };
+        }
+
+        public async override Task UpdateChecks(AbpProjectNameDbContext context, TenantDto updatedObject)
+        {
+            updatedObject.TenancyName.ShouldBe("updatedtenant");
+            updatedObject.Name.ShouldBe("Updated Tenant");
+            updatedObject.IsActive.ShouldBeTrue();
+        }
+
         [Fact]
         public async virtual Task Create_Should_Create_Admin_User()
         {
             //Arrange
-            CreateTenantDto createDto = getCreateDto();
+            CreateTenantDto createDto = GetCreateDto();
 
             //Act
-            TenantDto createdEntityDto = await checkForValidationErrors( async () => {
-                return await AppService.Create(createDto);
-            });
+            TenantDto createdEntityDto = await CheckForValidationErrors( async () =>
+                await AppService.Create(createDto)
+            ) as TenantDto;
 
             // Assert
             await UsingDbContextAsync(async context =>

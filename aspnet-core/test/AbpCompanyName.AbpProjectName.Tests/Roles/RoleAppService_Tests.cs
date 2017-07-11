@@ -6,6 +6,7 @@ using Abp.Application.Services.Dto;
 
 using AbpCompanyName.AbpProjectName.Authorization;
 using AbpCompanyName.AbpProjectName.Authorization.Roles;
+using AbpCompanyName.AbpProjectName.EntityFrameworkCore;
 using AbpCompanyName.AbpProjectName.Roles;
 using AbpCompanyName.AbpProjectName.Roles.Dto;
 
@@ -13,12 +14,13 @@ using Microsoft.EntityFrameworkCore;
 
 using Shouldly;
 using Xunit;
+using AbpCompanyName.AbpProjectName.Authorization.Users;
 
 namespace AbpCompanyName.AbpProjectName.Tests.Users
 {
     public class RoleAppService_Tests : AbpProjectNameAsyncServiceTestBase<Role, RoleDto, int, RoleAppService, CreateRoleDto, RoleDto>
     {
-        protected override async Task<Role> createEntity(int number)
+        protected override async Task<Role> CreateEntity(int number)
         {
             return new Role
             {
@@ -29,7 +31,7 @@ namespace AbpCompanyName.AbpProjectName.Tests.Users
             };
         }
 
-        protected override CreateRoleDto getCreateDto()
+        protected override CreateRoleDto GetCreateDto()
         {
             return new CreateRoleDto
             {
@@ -40,11 +42,33 @@ namespace AbpCompanyName.AbpProjectName.Tests.Users
             };
         }
 
+        protected override RoleDto GetUpdateDto(int key)
+        {
+            return new RoleDto
+            {
+                Id = key,
+                Name = "Updated Role",
+                DisplayName = "Updated Role",
+                Description = "Updated Role Description",
+                Permissions = new List<string> { }
+            };
+        }
+
+        public override async Task UpdateChecks(AbpProjectNameDbContext context, RoleDto updateDto)
+        {
+            updateDto.Name.ShouldBe("Updated Role");
+            updateDto.DisplayName.ShouldBe("Updated Role");
+            updateDto.Description.ShouldBe("Updated Role Description");
+
+            Role role = await context.Roles.FirstOrDefaultAsync(x => x.Id == updateDto.Id);
+            role.ShouldNotBeNull();
+        }
+
         [Fact]
         public async virtual Task Create_Sets_Correct_Permissions_Test()
         {
             //Arrange
-            CreateRoleDto createDto = getCreateDto();
+            CreateRoleDto createDto = GetCreateDto();
 
             //Act
             RoleDto createdEntityDto = await AppService.Create(createDto);
@@ -64,7 +88,7 @@ namespace AbpCompanyName.AbpProjectName.Tests.Users
         public async virtual Task GetAll_Sorting_Test()
         {
             //Arrange
-            await create(20);
+            await Create(20);
             
             //Act
             PagedResultDto<RoleDto> roles = await AppService.GetAll(

@@ -2,17 +2,20 @@ using System;
 using System.Collections.Generic;
 using System.Threading.Tasks;
 
+using Abp;
+using Abp.UI;
+using Abp.Runtime.Validation;
 using Abp.Application.Services;
 using Abp.Application.Services.Dto;
 using Abp.Domain.Entities;
 using Abp.ObjectMapping;
 
+using AbpCompanyName.AbpProjectName.EntityFrameworkCore;
+using AbpCompanyName.AbpProjectName.Users.Dto;
+
 using Microsoft.EntityFrameworkCore;
 using Shouldly;
 using Xunit;
-using Abp.UI;
-using Abp.Runtime.Validation;
-using AbpCompanyName.AbpProjectName.EntityFrameworkCore;
 
 namespace AbpCompanyName.AbpProjectName.Tests
 {
@@ -20,8 +23,8 @@ namespace AbpCompanyName.AbpProjectName.Tests
         : AbpProjectNameTestBase
         where TService : AsyncCrudAppService<TEntity, TEntityDto, TPrimaryKey, PagedResultRequestDto, TCreateDto, TUpdateDto>
         where TEntity : class, IEntity<TPrimaryKey>
-        where TEntityDto : IEntityDto<TPrimaryKey>
-        where TUpdateDto :  IEntityDto<TPrimaryKey>
+        where TEntityDto : class, IEntityDto<TPrimaryKey>
+        where TUpdateDto : class, IEntityDto<TPrimaryKey>
         where TPrimaryKey : IComparable
     {
         private readonly TService _appService;
@@ -41,14 +44,14 @@ namespace AbpCompanyName.AbpProjectName.Tests
 
         protected TPrimaryKey[] keys;
 
-        protected async Task create(int entityCount)
+        protected async Task Create(int entityCount)
         {
             List<TPrimaryKey> ids = new List<TPrimaryKey>();
             for(int i = 0; i < entityCount; i++ )
             {
                 TPrimaryKey id = await UsingDbContextAsync(async context => 
                 {
-                    TEntity entity = await createEntity(i);
+                    TEntity entity = await CreateEntity(i);
                     context.Set<TEntity>().Add(entity);
 
                     context.SaveChanges();
@@ -61,40 +64,69 @@ namespace AbpCompanyName.AbpProjectName.Tests
 
             keys = ids.ToArray();
         } 
+        
+        protected abstract Task<TEntity> CreateEntity(int entityNumer);
 
-        protected abstract Task<TEntity> createEntity(int entityNumer);
+        protected abstract TCreateDto  GetCreateDto();
 
-        protected abstract TCreateDto  getCreateDto();
+        protected abstract TUpdateDto GetUpdateDto(TPrimaryKey key);
 
-        protected async virtual Task<TEntityDto> checkForValidationErrors( Func<Task<TEntityDto>> function )
+        protected async virtual Task<TUpdateDto> CheckForValidationErrors(Func<Task<TUpdateDto>> callBack)
+        {
+            try
+            {
+                return await callBack();
+            }
+            catch(AbpException ave)
+            {
+                if(ave is AbpValidationException)
+                {
+                    throw CreateShouldAssertException(ave as AbpValidationException);
+                }
+
+                throw new ShouldAssertException(ave.Message);
+            }
+        }
+
+        protected async virtual Task<IEntityDto<TPrimaryKey>> CheckForValidationErrors( Func<Task<IEntityDto<TPrimaryKey>>> function )
         {
             try
             {
                 return await function();
             }
-            catch(AbpValidationException ave)
+            catch(AbpException ave)
             {
-                string message = "";
-                foreach (var error in ave.ValidationErrors)
+                if(ave is AbpValidationException)
                 {
-                    message += error.ErrorMessage + "\n";
+                    throw CreateShouldAssertException(ave as AbpValidationException);
                 }
 
-                throw new ShouldAssertException(message);
+                throw new ShouldAssertException(ave.Message);
             }
+        }
+
+        private ShouldAssertException CreateShouldAssertException(AbpValidationException ave)
+        {
+            string message = "";
+            foreach (var error in ave.ValidationErrors)
+            {
+                message += error.ErrorMessage + "\n";
+            }
+
+            return new ShouldAssertException(message);
         }
 
         [Fact]
         public async Task Create_Test()
         {
             //Arrange
-            TCreateDto createDto = getCreateDto();
+            TCreateDto createDto = GetCreateDto();
 
             //Act
-            TEntityDto createdEntityDto = await checkForValidationErrors(async () => {
-                    return await _appService.Create(createDto);
-                }
-            );
+            TEntityDto createdEntityDto = await CheckForValidationErrors(async () =>
+            {
+                return await _appService.Create(createDto);
+            }) as TEntityDto;
 
             //Assert
             await UsingDbContextAsync(async context =>
@@ -102,11 +134,11 @@ namespace AbpCompanyName.AbpProjectName.Tests
                 TEntity savedEntity = await context.Set<TEntity>().FirstOrDefaultAsync(e => e.Id.CompareTo(createdEntityDto.Id) == 0);
                 savedEntity.ShouldNotBeNull();
 
-                CreateChecks(context);
+                await CreateChecks(context, createDto);
             });
         }
 
-        public async virtual Task CreateChecks(AbpProjectNameDbContext context)
+        public async virtual Task CreateChecks(AbpProjectNameDbContext context, TCreateDto createDto)
         {
         }
 
@@ -114,7 +146,7 @@ namespace AbpCompanyName.AbpProjectName.Tests
         public async Task Get_Test()
         {
             //Arrange
-            await create(1);
+            await Create(1);
 
             //Act
             TEntityDto entity = await _appService.Get(new EntityDto<TPrimaryKey>(keys[0]));
@@ -127,7 +159,7 @@ namespace AbpCompanyName.AbpProjectName.Tests
         public virtual async Task GetAll_Test()
         {
             //Arrange
-            await create(20);
+            await Create(20);
 
             //Act
             PagedResultDto<TEntityDto> users = await _appService.GetAll(
@@ -142,7 +174,7 @@ namespace AbpCompanyName.AbpProjectName.Tests
         public virtual async Task GetAll_Paging_Test()
         {
             //Arrange
-            await create(20);
+            await Create(20);
 
             //Act
             PagedResultDto<TEntityDto> users = await _appService.GetAll(
@@ -157,32 +189,35 @@ namespace AbpCompanyName.AbpProjectName.Tests
         public async Task Update_Test()
         {
             //Arrange
-            await create(1);
-
-            IObjectMapper objectMapper = this.LocalIocManager.Resolve<IObjectMapper>();
-
+            await Create(1);
+                
             //
-            TUpdateDto updatedDto = objectMapper.Map<TUpdateDto>(await createEntity(2));
-            updatedDto.Id = keys[0];
+            TUpdateDto updateDto = GetUpdateDto(keys[0]);
 
             //Act
             //Assuming TUpdateDto is TEntityDto, otherwise atribute mapping is required 
-            TEntityDto entityDto = await checkForValidationErrors(async () => {
+            TEntityDto updatedEntityDto = await CheckForValidationErrors(async () => 
+            {
                 return await _appService.Update(
-                    updatedDto
+                    updateDto
                 );
-            });
+            }) as TEntityDto;
+
+            // SaveChanges here so that the 
+            // await _unitOfWorkManager.Current.SaveChangesAsync();
 
             //Assert, should check an updated field
-            entityDto.Id.ShouldBe(keys[0]);
+            updatedEntityDto.ShouldNotBeNull();
+            updatedEntityDto.Id.ShouldBe(keys[0]);
 
-
-            await UsingDbContextAsync(async context => {
-                await UpdateChecks(context);
-            });
+            await UsingDbContextAsync(async (context, updatedDto) =>
+            {
+                await UpdateChecks(context, updatedDto);
+            }, updatedEntityDto);
         }
 
-        public async virtual Task UpdateChecks(AbpProjectNameDbContext context)
+        //todo: add Async To methods
+        public async virtual Task UpdateChecks(AbpProjectNameDbContext context, TEntityDto updatedDto)
         {
         }
 
@@ -190,7 +225,7 @@ namespace AbpCompanyName.AbpProjectName.Tests
         public async Task Delete_Test()
         {
             //Arrange
-            await create(1);
+            await Create(1);
 
             //Act
             await _appService.Delete(new EntityDto<TPrimaryKey>(keys[0]));
@@ -200,7 +235,7 @@ namespace AbpCompanyName.AbpProjectName.Tests
             {
                 TEntity savedEntity = await context.Set<TEntity>().FirstOrDefaultAsync(e => e.Id.CompareTo(keys[0]) == 0);
 
-                if(savedEntity is ISoftDelete)
+                if (savedEntity is ISoftDelete)
                 {
                     (savedEntity as ISoftDelete).IsDeleted.ShouldBeTrue();
                 }
@@ -208,7 +243,30 @@ namespace AbpCompanyName.AbpProjectName.Tests
                 {
                     savedEntity.ShouldBeNull();
                 }
+
+                await DeleteChecks(context, keys[0]);
             });
+        }
+
+        public async virtual Task DeleteChecks(AbpProjectNameDbContext context, TPrimaryKey key)
+        {
+        }
+
+        protected async Task UsingDbContextAsync(Func<AbpProjectNameDbContext, TEntityDto, Task> action, TEntityDto updateDto)
+        {
+            await UsingDbContextAsync(AbpSession.TenantId, action, updateDto);
+        }
+
+        protected async Task UsingDbContextAsync(int? tenantId, Func<AbpProjectNameDbContext, TEntityDto, Task> action, TEntityDto updateDto)
+        {
+            using (UsingTenantId(tenantId))
+            {
+                using (var context = LocalIocManager.Resolve<AbpProjectNameDbContext>())
+                {
+                    await action(context, updateDto);
+                    await context.SaveChangesAsync();
+                }
+            }
         }
     }
 }
