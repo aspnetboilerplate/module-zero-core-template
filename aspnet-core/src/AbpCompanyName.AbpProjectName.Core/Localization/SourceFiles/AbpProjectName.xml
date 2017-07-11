@@ -71,5 +71,9 @@
 
     <text name="Edit">Edit</text>
     <text name="Delete">Delete</text>
+
+    <text name="CreateNewRole">Create New Role</text>
+    <text name="RoleName">Role Name</text>
+    <text name="Actions">Actions</text>
   </texts>
 </localizationDictionary>
