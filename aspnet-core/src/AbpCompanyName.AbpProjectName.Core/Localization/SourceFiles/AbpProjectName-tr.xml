@@ -71,5 +71,9 @@
 
     <text name="Edit">Düzenle</text>
     <text name="Delete">Sil</text>
+
+    <text name="CreateNewRole">Yeni rol oluştur</text>
+    <text name="RoleName">Rol adı</text>
+    <text name="Actions">İşlemler</text>
   </texts>
 </localizationDictionary>

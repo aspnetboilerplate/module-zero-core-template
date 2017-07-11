@@ -60,7 +60,7 @@
                     <div class="col-sm-12">
                         <div class="form-group form-float">
                             <div class="">
-                                <input id="IsActive" type="checkbox" name="IsActive" value="true" @(Model.User.IsActive ? "checked" :"") class="form-control" />
+                                <input id="IsActive" type="checkbox" name="IsActive" value="true" @(Model.User.IsActive ? "checked" : "") class="form-control" />
                                 <label for="IsActive" class="form-label">@L("IsActive")</label>
                             </div>
                         </div>
@@ -74,8 +74,8 @@
                         @foreach (var role in Model.Roles)
                         {
                             <div class="col-sm-6">
-                                <input type="checkbox" name="role" value="@role.NormalizedName" title="@role.Description" class="filled-in" id="role-@role.Id" @(Model.UserIsInRole(role) ? "checked" :"") />
-                                <label for="role-@role.Id" title="@role.DisplayName">@role.Name</label>
+                                <input type="checkbox" name="role" value="@role.NormalizedName" title="@role.Description" class="filled-in" id="@string.Format("role{0}",role.Id)" @(Model.UserIsInRole(role) ? "checked" : "") />
+                                <label for="@string.Format("role{0}",role.Id)" title="@role.DisplayName">@role.Name</label>
                             </div>
                         }
                     </div>

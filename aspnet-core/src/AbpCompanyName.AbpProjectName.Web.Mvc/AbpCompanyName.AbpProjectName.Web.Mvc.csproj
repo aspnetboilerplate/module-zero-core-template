@@ -16,6 +16,8 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <Content Include="wwwroot\view-resources\Views\Roles\Index.js" />
+    <Content Include="wwwroot\view-resources\Views\Roles\_EditRoleModal.js" />
     <Content Include="wwwroot\view-resources\Views\Shared\_Layout.js" />
     <Content Include="wwwroot\view-resources\Views\Tenants\_EditTenantModal.js" />
     <Content Include="wwwroot\view-resources\Views\Users\_EditUserModal.js" />
