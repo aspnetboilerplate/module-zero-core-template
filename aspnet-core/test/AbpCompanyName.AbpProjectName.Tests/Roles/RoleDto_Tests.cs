@@ -26,6 +26,8 @@ namespace AbpCompanyName.AbpProjectName.Tests.Roles
             };
         }
 
+        #region Name
+
         [Fact]
         public async virtual Task Name_With_Null_Value_Should_Cause_Validation_Failure()
         {
@@ -72,6 +74,10 @@ namespace AbpCompanyName.AbpProjectName.Tests.Roles
             //Act, Assert
             await Validate(roleDto);
         }
+
+        #endregion
+
+        #region DisplayName
 
         [Fact]
         public async virtual Task DisplayName_With_Null_Value_Should_Cause_Validation_Failure()
@@ -120,6 +126,10 @@ namespace AbpCompanyName.AbpProjectName.Tests.Roles
                 .ShouldThrowAsync<ShouldAssertException>();
         }
 
+        #endregion
+
+        #region Description
+
         [Fact]
         public async virtual Task Description_With_Null_Value_Should_Be_Valid()
         {
@@ -153,5 +163,7 @@ namespace AbpCompanyName.AbpProjectName.Tests.Roles
             await Validate(roleDto)
                 .ShouldThrowAsync<ShouldAssertException>();
         }
+
+        #endregion
     }
 }
