@@ -1,18 +1,18 @@
-using System;
+using System.Collections.Generic;
+using System.Linq;
 using System.Threading.Tasks;
 
+using Abp.Application.Services.Dto;
+using AbpCompanyName.AbpProjectName.Authorization.Roles;
+using AbpCompanyName.AbpProjectName.Authorization.Users;
+using AbpCompanyName.AbpProjectName.EntityFrameworkCore;
 using AbpCompanyName.AbpProjectName.MultiTenancy;
 using AbpCompanyName.AbpProjectName.MultiTenancy.Dto;
 
 using Microsoft.EntityFrameworkCore;
 
-using System.Linq;
-
 using Shouldly;
 using Xunit;
-using AbpCompanyName.AbpProjectName.Authorization.Roles;
-using AbpCompanyName.AbpProjectName.Authorization.Users;
-using AbpCompanyName.AbpProjectName.EntityFrameworkCore;
 
 namespace AbpCompanyName.AbpProjectName.Tests.MultiTenancy
 {
@@ -47,7 +47,6 @@ namespace AbpCompanyName.AbpProjectName.Tests.MultiTenancy
 
         protected override TenantDto GetUpdateDto(int key)
         {
-            // this could be TUpdateDto
             return new TenantDto
             {
                 Id = key,
@@ -75,7 +74,7 @@ namespace AbpCompanyName.AbpProjectName.Tests.MultiTenancy
                 await AppService.Create(createDto)
             ) as TenantDto;
 
-            // Assert
+            //Assert
             await UsingDbContextAsync(async context =>
             {
                 Role adminRole = await context.Roles.FirstOrDefaultAsync(x => x.NormalizedName == "ADMIN" && x.TenantId == createdEntityDto.Id);
@@ -86,6 +85,27 @@ namespace AbpCompanyName.AbpProjectName.Tests.MultiTenancy
 
                 adminUser.Roles.Any(x => x.RoleId == adminRole.Id).ShouldBeTrue();
             });
+        }
+
+        [Fact]
+        public async virtual Task GetAll_Sorting_Test()
+        {
+            //Arrange
+            await Create(20);
+
+            //Act
+            PagedResultDto<TenantDto> tenants = await AppService.GetAll(
+                new PagedResultRequestDto { MaxResultCount = 10, SkipCount = 10 }
+            );
+
+            //Assert
+            tenants.Items.ShouldBeInOrder(SortDirection.Ascending,
+                Comparer<TenantDto>.Create((x, y) => x.Name.CompareTo(y.Name))
+            );
+
+            // default tenant is first tenant
+            tenants.Items[0].Name.ShouldBe("Tenant009");
+            tenants.Items[9].Name.ShouldBe("Tenant018");
         }
     }
 }

@@ -18,5 +18,10 @@ namespace AbpCompanyName.AbpProjectName.MultiTenancy.Dto
         public string Name { get; set; }        
         
         public bool IsActive {get; set;}
+
+        public override string ToString()
+        {
+            return $"{Name} [{TenancyName} - {Id}]";
+        }
     }
 }
