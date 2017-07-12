@@ -62,7 +62,7 @@ namespace AbpCompanyName.AbpProjectName.Tests.Users
             };
         }
         
-        private async Task<Role> getRole(string name)
+        private async Task<Role> GetRole(string name)
         {
             return await UsingDbContextAsync(async context =>
             {
@@ -72,7 +72,7 @@ namespace AbpCompanyName.AbpProjectName.Tests.Users
 
         public async override Task CreateChecks(AbpProjectNameDbContext context, CreateUserDto createEntity)
         {
-            Role adminRole = await getRole("Admin");
+            Role adminRole = await GetRole("Admin");
             User user = await context.Users.Include(x => x.Roles).FirstOrDefaultAsync(e => e.EmailAddress == createEntity.EmailAddress);
 
             adminRole.ShouldNotBeNull();
@@ -126,7 +126,7 @@ namespace AbpCompanyName.AbpProjectName.Tests.Users
                 new PagedResultRequestDto { MaxResultCount = 10, SkipCount = 10 }
             );
 
-            // Assert
+            //Assert
             users.Items.ShouldBeInOrder(SortDirection.Descending,
                 Comparer<UserDto>.Create((x, y) => x.Name.CompareTo(y.Name))
             );
@@ -135,8 +135,8 @@ namespace AbpCompanyName.AbpProjectName.Tests.Users
         [Fact]
         public async Task Update_Sets_Roles_Correctly_Test()
         {
-            // Arrange
-            Role adminRole = await getRole("admin");
+            //Arrange
+            Role adminRole = await GetRole("admin");
 
             await Create(1); //User Has Admin Permission
 

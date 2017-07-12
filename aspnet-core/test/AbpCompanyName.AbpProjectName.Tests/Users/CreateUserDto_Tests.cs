@@ -29,18 +29,19 @@ namespace AbpCompanyName.AbpProjectName.Tests.Users
         }
 
         [Fact]
-        public async Task Create_With_Null_Name_Should_Throw()
+        public async Task Name_With_Null_Value_Should_Cause_Validation_Failure()
         {
             //Arrange
             CreateUserDto createDto = GetDto();
             createDto.Name = null;
 
+            //Act, Assert
             await Validate(createDto)
                 .ShouldThrowAsync<ShouldAssertException>();
         }
 
         [Fact]
-        public async Task Create_With_Empty_Name_Should_Throw()
+        public async Task Name_With_Empty_Value_Should_Cause_Validation_Failure()
         {
             //Arrange
             CreateUserDto createDto = GetDto();
@@ -52,7 +53,7 @@ namespace AbpCompanyName.AbpProjectName.Tests.Users
         }
 
         [Fact]
-        public async Task Create_With_Over_MaxNameLength_Name_Should_Throw()
+        public async Task Name_With_Over_MaxLength_Value_Should_Cause_Validation_Failure()
         {
             //Arrange
             CreateUserDto createDto = GetDto();
@@ -64,7 +65,7 @@ namespace AbpCompanyName.AbpProjectName.Tests.Users
         }
 
         [Fact]
-        public async Task Create_With_Null_Surname_Should_Throw()
+        public async Task Surname_With_Null_Value_Should_Cause_Validation_Failure()
         {
             //Arrange
             CreateUserDto createDto = GetDto();
@@ -76,7 +77,7 @@ namespace AbpCompanyName.AbpProjectName.Tests.Users
         }
 
         [Fact]
-        public async Task Create_With_Empty_Surname_Should_Throw()
+        public async Task Surname_With_Empty_Value_Should_Cause_Validation_Failure()
         {
             //Arrange
             CreateUserDto createDto = GetDto();
@@ -88,7 +89,7 @@ namespace AbpCompanyName.AbpProjectName.Tests.Users
         }
 
         [Fact]
-        public async Task Create_With_Over_MaxLength_Surname_Should_Throw()
+        public async Task Surname_With_Over_MaxLength_Value_Should_Cause_Validation_Failure()
         {
             //Arrange
             CreateUserDto createDto = GetDto();
@@ -100,84 +101,91 @@ namespace AbpCompanyName.AbpProjectName.Tests.Users
         }
 
         [Fact]
-        public async Task Create_With_Null_EmailAddress_Should_Throw()
+        public async Task EmailAddress_With_Null_Value_Should_Cause_Validation_Failure()
         {
             //Arrange
             CreateUserDto createDto = GetDto();
             createDto.EmailAddress = null;
 
+            //Act, Assert
             await Validate(createDto)
                 .ShouldThrowAsync<ShouldAssertException>();
         }
 
         [Fact]
-        public async Task Create_With_Empty_EmailAddress_Should_Throw()
+        public async Task EmailAddress_With_Empty_Value_Should_Cause_Validation_Failure()
         {
             //Arrange
             CreateUserDto createDto = GetDto();
             createDto.EmailAddress = String.Empty;
 
+            //Act, Assert
             await Validate(createDto)
                 .ShouldThrowAsync<ShouldAssertException>();
         }
 
         [Fact]
-        public async Task Create_With_Invalid_EmailAddress_Should_Throw()
+        public async Task EmailAddress_With_Invalid_Value_Should_Cause_Validation_Failure()
         {
             //Arrange
             CreateUserDto createDto = GetDto();
             createDto.EmailAddress = "InvalidEmailAddress";
 
+            //Act, Assert
             await Validate(createDto)
                 .ShouldThrowAsync<ShouldAssertException>();
         }
 
         [Fact]
-        public async Task Create_With_Over_MaxLength_EmailAddress_Should_Throw()
+        public async Task UserName_With_Over_MaxLength_EmailAddress_Should_Cause_Validation_Failure()
         {
             //Arrange
             CreateUserDto createDto = GetDto();
             createDto.EmailAddress = new string('a', AbpUserBase.MaxEmailAddressLength + 1);
 
+            //Act, Assert
             await Validate(createDto)
                .ShouldThrowAsync<ShouldAssertException>();
         }
 
         [Fact]
-        public async Task Create_With_Null_UserName_Should_Throw()
+        public async Task UserName_With_Null_Value_Should_Cause_Validation_Failure()
         {
             //Arrange
             CreateUserDto createDto = GetDto();
             createDto.UserName = null;
 
+            //Act, Assert
             await Validate(createDto)
                 .ShouldThrowAsync<ShouldAssertException>();
         }
 
         [Fact]
-        public async Task Create_With_Empty_UserName_Should_Throw()
+        public async Task UserName_With_Empty_Value_Should_Cause_Validation_Failure()
         {
             //Arrange
             CreateUserDto createDto = GetDto();
             createDto.UserName = String.Empty;
 
+            //Act, Assert
             await Validate(createDto)
                 .ShouldThrowAsync<ShouldAssertException>();
         }
 
         [Fact]
-        public async Task Create_With_Over_MaxLength_UserName_Should_Throw()
+        public async Task UserName_Over_MaxLength_Should_Cause_Validation_Failure()
         {
             //Arrange
             CreateUserDto createDto = GetDto();
             createDto.UserName = new string('a', AbpUserBase.MaxUserNameLength + 1);
 
+            //Act, Assert
             await Validate(createDto)
                 .ShouldThrowAsync<ShouldAssertException>();
         }
 
         [Fact]
-        public async Task Create_With_Null_Password_Should_Throw()
+        public async Task Password_With_Null_Value_Should_Cause_Validation_Failure()
         {
             //Arrange
             CreateUserDto createDto = GetDto();
@@ -189,7 +197,7 @@ namespace AbpCompanyName.AbpProjectName.Tests.Users
         }
 
         [Fact]
-        public async Task Create_With_Empty_Password_Should_Throw()
+        public async Task Password_With_Empty_Value_Should_Cause_Validation_Failure()
         {
             //Arrange
             CreateUserDto createDto = GetDto();
@@ -202,7 +210,7 @@ namespace AbpCompanyName.AbpProjectName.Tests.Users
 
 
         [Fact]
-        public async Task Create_With_Over_MaxLength_Password_Should_Throw()
+        public async Task Password_With_Over_MaxLength_EmailAddress_Should_Cause_Validation_Failure()
         {
             //Arrange
             CreateUserDto createDto = GetDto();
