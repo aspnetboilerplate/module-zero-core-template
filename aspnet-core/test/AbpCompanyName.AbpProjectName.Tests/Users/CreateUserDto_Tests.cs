@@ -28,6 +28,8 @@ namespace AbpCompanyName.AbpProjectName.Tests.Users
             };
         }
 
+        #region Name
+
         [Fact]
         public async Task Name_With_Null_Value_Should_Cause_Validation_Failure()
         {
@@ -63,6 +65,10 @@ namespace AbpCompanyName.AbpProjectName.Tests.Users
             await Validate(createDto)
                 .ShouldThrowAsync<ShouldAssertException>();
         }
+
+        #endregion
+
+        #region Surname
 
         [Fact]
         public async Task Surname_With_Null_Value_Should_Cause_Validation_Failure()
@@ -100,6 +106,10 @@ namespace AbpCompanyName.AbpProjectName.Tests.Users
                 .ShouldThrowAsync<ShouldAssertException>();
         }
 
+        #endregion
+
+        #region EmailAddress
+
         [Fact]
         public async Task EmailAddress_With_Null_Value_Should_Cause_Validation_Failure()
         {
@@ -136,17 +146,22 @@ namespace AbpCompanyName.AbpProjectName.Tests.Users
                 .ShouldThrowAsync<ShouldAssertException>();
         }
 
+
         [Fact]
-        public async Task UserName_With_Over_MaxLength_EmailAddress_Should_Cause_Validation_Failure()
+        public async Task EmailAddress_With_Over_MaxLength_Value_Should_Cause_Validation_Failure()
         {
             //Arrange
             CreateUserDto createDto = GetDto();
-            createDto.EmailAddress = new string('a', AbpUserBase.MaxEmailAddressLength + 1);
+            createDto.EmailAddress = new string('a', AbpUserBase.MaxEmailAddressLength) + "@volosoft.com";
 
             //Act, Assert
             await Validate(createDto)
                .ShouldThrowAsync<ShouldAssertException>();
         }
+
+        #endregion
+
+        #region UserName
 
         [Fact]
         public async Task UserName_With_Null_Value_Should_Cause_Validation_Failure()
@@ -184,6 +199,10 @@ namespace AbpCompanyName.AbpProjectName.Tests.Users
                 .ShouldThrowAsync<ShouldAssertException>();
         }
 
+        #endregion
+
+        #region Password
+
         [Fact]
         public async Task Password_With_Null_Value_Should_Cause_Validation_Failure()
         {
@@ -220,5 +239,7 @@ namespace AbpCompanyName.AbpProjectName.Tests.Users
             await Validate(createDto)
                 .ShouldThrowAsync<ShouldAssertException>();
         }
+
+        #endregion
     }
 }

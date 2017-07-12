@@ -101,7 +101,6 @@ namespace AbpCompanyName.AbpProjectName.Tests.Users
             //});
         }
 
-        // This is not a Data Attribute test
         [Fact]
         public async Task Create_With_Invalid_UserName_Should_Throw()
         {
