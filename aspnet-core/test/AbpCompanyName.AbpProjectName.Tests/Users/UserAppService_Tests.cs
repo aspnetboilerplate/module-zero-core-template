@@ -15,7 +15,6 @@ using AbpCompanyName.AbpProjectName.Users.Dto;
 using Microsoft.EntityFrameworkCore;
 using Shouldly;
 using Xunit;
-using Abp.Authorization.Users;
 
 namespace AbpCompanyName.AbpProjectName.Tests.Users
 {
@@ -63,7 +62,7 @@ namespace AbpCompanyName.AbpProjectName.Tests.Users
             };
         }
         
-        private async Task<Role> GetRole(string name)
+        private async Task<Role> getRole(string name)
         {
             return await UsingDbContextAsync(async context =>
             {
@@ -73,7 +72,7 @@ namespace AbpCompanyName.AbpProjectName.Tests.Users
 
         public async override Task CreateChecks(AbpProjectNameDbContext context, CreateUserDto createEntity)
         {
-            Role adminRole = await GetRole("Admin");
+            Role adminRole = await getRole("Admin");
             User user = await context.Users.Include(x => x.Roles).FirstOrDefaultAsync(e => e.EmailAddress == createEntity.EmailAddress);
 
             adminRole.ShouldNotBeNull();
@@ -82,7 +81,6 @@ namespace AbpCompanyName.AbpProjectName.Tests.Users
             user.Roles.Any(x => x.RoleId == adminRole.Id);
         }
 
-        // 
         [Fact]
         public async Task Create_For_Non_Existing_Role_Should_Throw_Exception_Test()
         {
@@ -103,153 +101,7 @@ namespace AbpCompanyName.AbpProjectName.Tests.Users
             //});
         }
 
-        #region CreateUserDto Tests, TCreateDto
-
-        private async Task<UserDto> createUser(CreateUserDto createDto)
-        {
-            //Act, Assert
-            return await CheckForValidationErrors(
-                async () => await AppService.Create(createDto)
-            );
-        }
-
-        [Fact]
-        public async Task Create_With_Null_Name_Should_Throw()
-        {
-            //Arrange
-            CreateUserDto createDto = GetCreateDto();
-            createDto.Name = null;
-
-            await createUser(createDto)
-                .ShouldThrowAsync<ShouldAssertException>();
-        }
-
-        [Fact]
-        public async Task Create_With_Empty_Name_Should_Throw()
-        {
-            //Arrange
-            CreateUserDto createDto = GetCreateDto();
-            createDto.Name = String.Empty;
-
-            //Act, Assert
-            await createUser(createDto)
-                .ShouldThrowAsync<ShouldAssertException>();
-        }
-
-        [Fact]
-        public async Task Create_With_Over_MaxNameLength_Name_Should_Throw()
-        {
-            //Arrange
-            CreateUserDto createDto = GetCreateDto();
-            createDto.Name = new string('a', AbpUserBase.MaxNameLength + 1);
-
-            //Act, Assert
-            await createUser(createDto)
-                .ShouldThrowAsync<ShouldAssertException>();
-        }
-
-        [Fact]
-        public async Task Create_With_Null_Surname_Should_Throw()
-        {
-            //Arrange
-            CreateUserDto createDto = GetCreateDto();
-            createDto.Surname = null;
-
-            //Act, Assert
-            await createUser(createDto)
-                .ShouldThrowAsync<ShouldAssertException>();
-        }
-
-        [Fact]
-        public async Task Create_With_Empty_Surname_Should_Throw()
-        {
-            //Arrange
-            CreateUserDto createDto = GetCreateDto();
-            createDto.Surname = string.Empty;
-
-            //Act, Assert
-            await createUser(createDto)
-                .ShouldThrowAsync<ShouldAssertException>();
-        }
-
-        [Fact]
-        public async Task Create_With_Over_MaxLength_Surname_Should_Throw()
-        {
-            //Arrange
-            CreateUserDto createDto = GetCreateDto();
-            createDto.Surname = new string('a', AbpUserBase.MaxSurnameLength + 1);
-
-            //Act, Assert
-            await createUser(createDto)
-                .ShouldThrowAsync<ShouldAssertException>();
-        }
-
-        [Fact]
-        public async Task Create_With_Null_EmailAddress_Should_Throw()
-        {
-            //Arrange
-            CreateUserDto createDto = GetCreateDto();
-            createDto.EmailAddress = null;
-
-            await createUser(createDto)
-                .ShouldThrowAsync<ShouldAssertException>();
-        }
-
-        [Fact]
-        public async Task Create_With_Empty_EmailAddress_Should_Throw()
-        {
-            //Arrange
-            CreateUserDto createDto = GetCreateDto();
-            createDto.EmailAddress = String.Empty;
-
-            await createUser(createDto)
-                .ShouldThrowAsync<ShouldAssertException>();
-        }
-
-        [Fact]
-        public async Task Create_With_Invalid_EmailAddress_Should_Throw()
-        {
-            //Arrange
-            CreateUserDto createDto = GetCreateDto();
-            createDto.EmailAddress = "InvalidEmailAddress";
-
-            await createUser(createDto)
-                .ShouldThrowAsync<ShouldAssertException>();
-        }
-
-        [Fact]
-        public async Task Create_With_Over_MaxLength_EmailAddress_Should_Throw()
-        {
-            //Arrange
-            CreateUserDto createDto = GetCreateDto();
-            createDto.EmailAddress = new string('a', AbpUserBase.MaxEmailAddressLength + 1);
-
-             await createUser(createDto)
-                .ShouldThrowAsync<ShouldAssertException>();
-        }
-
-        [Fact]
-        public async Task Create_With_Null_UserName_Should_Throw()
-        {
-            //Arrange
-            CreateUserDto createDto = GetCreateDto();
-            createDto.UserName = null;
-
-            await createUser(createDto)
-                .ShouldThrowAsync<ShouldAssertException>();
-        }
-
-        [Fact]
-        public async Task Create_With_Empty_UserName_Should_Throw()
-        {
-            //Arrange
-            CreateUserDto createDto = GetCreateDto();
-            createDto.UserName = String.Empty;
-
-            await createUser(createDto)
-                .ShouldThrowAsync<ShouldAssertException>();
-        }
-
+        // This is not a Data Attribute test
         [Fact]
         public async Task Create_With_Invalid_UserName_Should_Throw()
         {
@@ -257,59 +109,11 @@ namespace AbpCompanyName.AbpProjectName.Tests.Users
             CreateUserDto createDto = GetCreateDto();
             createDto.UserName = "invalid username";
 
-            await createUser(createDto)
-                .ShouldThrowAsync<ShouldAssertException>();
-        }
-
-        [Fact]
-        public async Task Create_With_Over_MaxLength_UserName_Should_Throw()
-        {
-            //Arrange
-            CreateUserDto createDto = GetCreateDto();
-            createDto.UserName = new string('a', AbpUserBase.MaxUserNameLength + 1);
-
-            await createUser(createDto)
-                .ShouldThrowAsync<ShouldAssertException>();
-        }
-
-        [Fact]
-        public async Task Create_With_Null_Password_Should_Throw()
-        {
-            //Arrange
-            CreateUserDto createDto = GetCreateDto();
-            createDto.Password = null;
-
             //Act, Assert
-            await createUser(createDto)
-                .ShouldThrowAsync<ShouldAssertException>();
+            await CheckForValidationErrors(
+                async () => await AppService.Create(createDto)
+            ).ShouldThrowAsync<ShouldAssertException>();
         }
-
-        [Fact]
-        public async Task Create_With_Empty_Password_Should_Throw()
-        {
-            //Arrange
-            CreateUserDto createDto = GetCreateDto();
-            createDto.Password = String.Empty;
-
-            //Act, Assert
-            await createUser(createDto)
-                .ShouldThrowAsync<ShouldAssertException>();
-        }
-
-
-        [Fact]
-        public async Task Create_With_Over_MaxLength_Password_Should_Throw()
-        {
-            //Arrange
-            CreateUserDto createDto = GetCreateDto();
-            createDto.Password = new string('a', AbpUserBase.MaxPlainPasswordLength + 1);
-
-            //Act, Assert
-            await createUser(createDto)
-                .ShouldThrowAsync<ShouldAssertException>();
-        }
-
-        #endregion
 
         [Fact]
         public async Task GetAll_Check_Sorting_Test()
@@ -332,7 +136,7 @@ namespace AbpCompanyName.AbpProjectName.Tests.Users
         public async Task Update_Sets_Roles_Correctly_Test()
         {
             // Arrange
-            Role adminRole = await GetRole("admin");
+            Role adminRole = await getRole("admin");
 
             await Create(1); //User Has Admin Permission
 
@@ -356,228 +160,6 @@ namespace AbpCompanyName.AbpProjectName.Tests.Users
                 updatedUser.Roles.Any(x => x.Id == adminRole.Id).ShouldBeFalse();
             });
         }
-
-        #region UserDto Validation tests, (TUpdateDto)
-
-        private async Task<UserDto> updateUser(UserDto updateDto)
-        {
-            return await CheckForValidationErrors(
-                async () => await AppService.Update(updateDto)
-            );
-        }
-
-        [Fact]
-        public async Task Update_With_Null_EmailAddress_Should_Throw()
-        {
-            //Arrange
-            await Create(1);
-
-            UserDto updateDto = GetUpdateDto(keys[0]);
-            updateDto.EmailAddress = null;
-
-            //Act, Assert
-            await updateUser(updateDto)
-                .ShouldThrowAsync<ShouldAssertException>();
-        }
-
-        [Fact]
-        public async Task Update_With_Empty_EmailAddress_Should_Throw()
-        {
-            //Arrange
-            await Create(1);
-
-            UserDto updateDto = GetUpdateDto(keys[0]);
-            updateDto.EmailAddress = String.Empty;
-
-            //Act, Assert
-            await updateUser(updateDto)
-                .ShouldThrowAsync<ShouldAssertException>();
-        }
-
-        [Fact]
-        public async Task Update_With_Invalid_EmailAddress_Should_Throw()
-        {
-            //Arrange
-            await Create(1);
-
-            UserDto updateDto = GetUpdateDto(keys[0]);
-            updateDto.EmailAddress = "InvalidEmailAddress";
-
-            //Act, Assert
-            await updateUser(updateDto)
-                .ShouldThrowAsync<ShouldAssertException>();
-        }
-
-        [Fact]
-        public async Task Update_With_Over_MaxLength_EmailAddress_Should_Throw()
-        {
-            //Arrange
-            await Create(1);
-
-            UserDto updateDto = GetUpdateDto(keys[0]);
-            updateDto.EmailAddress = String.Format("{0}@volosoft.com", new string('a', AbpUserBase.MaxEmailAddressLength));
-
-            //Act, Assert
-            await updateUser(updateDto)
-                .ShouldThrowAsync<ShouldAssertException>();
-        }
-
-        [Fact]
-        public async Task Update_With_Null_UserName_Should_Throw()
-        {
-            //Arrange
-            await Create(1);
-
-            UserDto updateDto = GetUpdateDto(keys[0]);
-            updateDto.UserName = null;
-
-            //Act, Assert
-            await updateUser(updateDto)
-                .ShouldThrowAsync<ShouldAssertException>();
-        }
-
-        [Fact]
-        public async Task Update_With_Empty_UserName_Should_Throw()
-        {
-            //Arrange
-            await Create(1);
-
-            UserDto updateDto = GetUpdateDto(keys[0]);
-            updateDto.UserName = String.Empty;
-
-            //Act, Assert
-            await updateUser(updateDto)
-                .ShouldThrowAsync<ShouldAssertException>();
-        }
-
-        [Fact]
-        public async Task Update_With_Invalid_UserName_Should_Throw()
-        {
-            //Arrange
-            await Create(1);
-
-            UserDto updateDto = GetUpdateDto(keys[0]);
-            updateDto.UserName = "invalid username";
-
-            //Act, Assert
-            await updateUser(updateDto)
-                .ShouldThrowAsync<ShouldAssertException>();
-        }
-
-        [Fact]
-        public async Task Update_With_Email_For_UserName_Should_Throw()
-        {
-            //Arrange
-            await Create(1);
-
-            UserDto updateDto = GetUpdateDto(keys[0]);
-            updateDto.UserName = "user@volosoft.com";  
-            //Check if original UserAppService worked like this, [functionality is in mvc project in jquery]
-
-            //Act, Assert
-            await updateUser(updateDto)
-                .ShouldThrowAsync<ShouldAssertException>();
-        }
-
-        [Fact]
-        public async Task Update_With_Over_MaxLength_UserName_Should_Throw()
-        {
-            //Arrange
-            await Create(1);
-
-            UserDto updateDto = GetUpdateDto(keys[0]);
-            updateDto.UserName = new string('a', AbpUserBase.MaxUserNameLength + 1);
-
-            //Act, Assert
-            await updateUser(updateDto)
-                .ShouldThrowAsync<ShouldAssertException>();
-        }
-
-        [Fact]
-        public async Task Update_With_Null_Name_Should_Throw()
-        {
-            //Arrange
-            await Create(1);
-
-            UserDto updateDto = GetUpdateDto(keys[0]);
-            updateDto.Name = null;
-
-            //Act, Assert
-            await updateUser(updateDto)
-                .ShouldThrowAsync<ShouldAssertException>();
-        }
-
-        [Fact]
-        public async Task Update_With_Empty_Name_Should_Throw()
-        {
-            //Arrange
-            await Create(1);
-
-            UserDto updateDto = GetUpdateDto(keys[0]);
-            updateDto.Name = String.Empty;
-
-            //Act, Assert
-            await updateUser(updateDto)
-                .ShouldThrowAsync<ShouldAssertException>();
-        }
-
-        [Fact]
-        public async Task Update_With_Over_MaxLength_Name_Should_Throw()
-        {
-            //Arrange
-            await Create(1);
-
-            UserDto updateDto = GetUpdateDto(keys[0]);
-            updateDto.Name = new string('a', AbpUserBase.MaxNameLength + 1);
-
-            //Act, Assert
-            await updateUser(updateDto)
-                .ShouldThrowAsync<ShouldAssertException>();
-        }
-
-        [Fact]
-        public async Task Update_With_Null_Surname_Should_Throw()
-        {
-            //Arrange
-            await Create(1);
-
-            UserDto updateDto = GetUpdateDto(keys[0]);
-            updateDto.Surname = null;
-
-            //Act, Assert
-            await updateUser(updateDto)
-                .ShouldThrowAsync<ShouldAssertException>();
-        }
-
-        [Fact]
-        public async Task Update_With_Empty_Surname_Should_Throw()
-        {
-            //Arrange
-            await Create(1);
-
-            UserDto updateDto = GetUpdateDto(keys[0]);
-            updateDto.Surname = "";
-
-            //Act, Assert
-            await updateUser(updateDto)
-                .ShouldThrowAsync<ShouldAssertException>();
-        }
-
-        [Fact]
-        public async Task Update_With_Over_MaxLength_Surname_Should_Throw()
-        {
-            //Arrange
-            await Create(1);
-
-            UserDto updateDto = GetUpdateDto(keys[0]);
-            updateDto.Surname = new string('a', AbpUserBase.MaxSurnameLength + 1);
-
-            //Act, Assert
-            await updateUser(updateDto)
-                .ShouldThrowAsync<ShouldAssertException>();
-        }
-
-        #endregion
 
         public override async Task DeleteChecks(AbpProjectNameDbContext context, long key)
         {

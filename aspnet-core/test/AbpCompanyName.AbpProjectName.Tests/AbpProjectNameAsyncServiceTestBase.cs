@@ -3,15 +3,12 @@ using System.Collections.Generic;
 using System.Threading.Tasks;
 
 using Abp;
-using Abp.UI;
 using Abp.Runtime.Validation;
 using Abp.Application.Services;
 using Abp.Application.Services.Dto;
 using Abp.Domain.Entities;
-using Abp.ObjectMapping;
 
 using AbpCompanyName.AbpProjectName.EntityFrameworkCore;
-using AbpCompanyName.AbpProjectName.Users.Dto;
 
 using Microsoft.EntityFrameworkCore;
 using Shouldly;
@@ -42,6 +39,7 @@ namespace AbpCompanyName.AbpProjectName.Tests
             _appService = Resolve<TService>();
         }
 
+        // move this to return on method
         protected TPrimaryKey[] keys;
 
         protected async Task Create(int entityCount)
@@ -88,7 +86,7 @@ namespace AbpCompanyName.AbpProjectName.Tests
             }
         }
 
-        protected async virtual Task<IEntityDto<TPrimaryKey>> CheckForValidationErrors( Func<Task<IEntityDto<TPrimaryKey>>> function )
+        protected async virtual Task<IEntityDto<TPrimaryKey>> CheckForValidationErrors(Func<Task<IEntityDto<TPrimaryKey>>> function)
         {
             try
             {
@@ -108,7 +106,7 @@ namespace AbpCompanyName.AbpProjectName.Tests
         private ShouldAssertException CreateShouldAssertException(AbpValidationException ave)
         {
             string message = "";
-            foreach (var error in ave.ValidationErrors)
+            foreach(var error in ave.ValidationErrors)
             {
                 message += error.ErrorMessage + "\n";
             }
@@ -203,9 +201,6 @@ namespace AbpCompanyName.AbpProjectName.Tests
                 );
             }) as TEntityDto;
 
-            // SaveChanges here so that the 
-            // await _unitOfWorkManager.Current.SaveChangesAsync();
-
             //Assert, should check an updated field
             updatedEntityDto.ShouldNotBeNull();
             updatedEntityDto.Id.ShouldBe(keys[0]);
@@ -216,7 +211,6 @@ namespace AbpCompanyName.AbpProjectName.Tests
             }, updatedEntityDto);
         }
 
-        //todo: add Async To methods
         public async virtual Task UpdateChecks(AbpProjectNameDbContext context, TEntityDto updatedDto)
         {
         }
@@ -252,6 +246,8 @@ namespace AbpCompanyName.AbpProjectName.Tests
         {
         }
 
+        #region UsingDbContextAsync extensions to allow adding TEntityDto to lambda method
+
         protected async Task UsingDbContextAsync(Func<AbpProjectNameDbContext, TEntityDto, Task> action, TEntityDto updateDto)
         {
             await UsingDbContextAsync(AbpSession.TenantId, action, updateDto);
@@ -268,5 +264,7 @@ namespace AbpCompanyName.AbpProjectName.Tests
                 }
             }
         }
+
+        #endregion
     }
 }
