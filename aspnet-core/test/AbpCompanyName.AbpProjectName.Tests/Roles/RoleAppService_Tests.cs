@@ -14,9 +14,8 @@ using Microsoft.EntityFrameworkCore;
 
 using Shouldly;
 using Xunit;
-using AbpCompanyName.AbpProjectName.Authorization.Users;
 
-namespace AbpCompanyName.AbpProjectName.Tests.Users
+namespace AbpCompanyName.AbpProjectName.Tests.Roles
 {
     public class RoleAppService_Tests : AbpProjectNameAsyncServiceTestBase<Role, RoleDto, int, RoleAppService, CreateRoleDto, RoleDto>
     {
@@ -89,7 +88,7 @@ namespace AbpCompanyName.AbpProjectName.Tests.Users
         {
             //Arrange
             await Create(20);
-            
+
             //Act
             PagedResultDto<RoleDto> roles = await AppService.GetAll(
                 new PagedResultRequestDto{MaxResultCount=10, SkipCount=10}
