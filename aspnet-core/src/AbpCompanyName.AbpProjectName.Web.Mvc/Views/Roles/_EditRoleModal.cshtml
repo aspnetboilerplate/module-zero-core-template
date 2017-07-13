@@ -8,6 +8,7 @@
 <div class="modal-body">
     <form name="RoleEditForm" role="form" novalidate class="form-validation">
         <input type="hidden" name="Id" value="@Model.Role.Id" />
+        <input type="hidden" name="IsStatic" value="@(Model.Role.IsStatic.ToString())" />
         <div class="row clearfix">
             <div class="col-sm-12">
                 <div class="form-group form-float">
@@ -48,7 +49,7 @@
                 @foreach (var permission in Model.Permissions)
                 {
                     <div class="col-sm-6">
-                        <input type="checkbox" name="permission" value="@permission.Name" class="filled-in" id="@string.Format("permission{0}",permission.Name)" @(Model.HasPermission(permission) ? "checked" : "") />
+                        <input type="checkbox" name="permission" value="@permission.Name" class="filled-in" id="@string.Format("permission{0}",permission.Name)" @(Model.HasPermission(permission) ? "checked" : "") @(Model.Role.IsStatic ? "disabled" : "") />
                         <label for="@string.Format("permission{0}",permission.Name)">@permission.DisplayName</label>
                     </div>
                 }
