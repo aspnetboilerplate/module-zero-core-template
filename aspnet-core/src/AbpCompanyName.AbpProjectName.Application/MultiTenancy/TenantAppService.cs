@@ -118,6 +118,11 @@ namespace AbpCompanyName.AbpProjectName.MultiTenancy
             await _tenantManager.DeleteAsync(tenant);
         }
 
+        protected override IQueryable<Tenant> ApplySorting(IQueryable<Tenant> query, PagedResultRequestDto input)
+        {
+            return query.OrderBy(x => x.Name);
+        }
+
         protected virtual void CheckErrors(IdentityResult identityResult)
         {
             identityResult.CheckErrors(LocalizationManager);
