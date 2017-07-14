@@ -1,8 +1,6 @@
 ﻿using System;
 using System.Threading.Tasks;
 
-using Abp.Authorization.Users;
-using Abp.MultiTenancy;
 using AbpCompanyName.AbpProjectName.MultiTenancy;
 using AbpCompanyName.AbpProjectName.MultiTenancy.Dto;
 

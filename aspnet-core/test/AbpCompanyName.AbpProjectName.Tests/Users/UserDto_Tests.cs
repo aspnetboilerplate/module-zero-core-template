@@ -1,16 +1,11 @@
 ﻿using System;
-using System.ComponentModel.DataAnnotations;
-using System.Collections.Generic;
-using System.Text;
-
-using Abp.TestBase;
-using AbpCompanyName.AbpProjectName.Users.Dto;
 using System.Threading.Tasks;
-using Xunit;
+
+using Abp.Authorization.Users;
+using AbpCompanyName.AbpProjectName.Users.Dto;
 
 using Shouldly;
-using Abp.Authorization.Users;
-using Xunit.Abstractions;
+using Xunit;
 
 namespace AbpCompanyName.AbpProjectName.Tests.Users
 {

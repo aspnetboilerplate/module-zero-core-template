@@ -3,7 +3,6 @@ using System.Collections.Generic;
 using System.Threading.Tasks;
 
 using Abp.Authorization.Roles;
-
 using AbpCompanyName.AbpProjectName.Authorization;
 using AbpCompanyName.AbpProjectName.Roles.Dto;
 using AbpCompanyName.AbpProjectName.Authorization.Roles;

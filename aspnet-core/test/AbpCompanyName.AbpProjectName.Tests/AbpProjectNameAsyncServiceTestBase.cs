@@ -7,7 +7,6 @@ using Abp.Runtime.Validation;
 using Abp.Application.Services;
 using Abp.Application.Services.Dto;
 using Abp.Domain.Entities;
-
 using AbpCompanyName.AbpProjectName.EntityFrameworkCore;
 
 using Microsoft.EntityFrameworkCore;
@@ -16,6 +15,16 @@ using Xunit;
 
 namespace AbpCompanyName.AbpProjectName.Tests
 {
+    public abstract class AbpProjectNameAsyncServiceTestBase<TEntity, TEntityDto, TPrimaryKey, TService, TCreateDto>
+        : AbpProjectNameAsyncServiceTestBase<TEntity, TEntityDto, TPrimaryKey, TService, TCreateDto, TEntityDto>
+        where TService : AsyncCrudAppService<TEntity, TEntityDto, TPrimaryKey, PagedResultRequestDto, TCreateDto, TEntityDto>
+        where TEntity : class, IEntity<TPrimaryKey>
+        where TEntityDto : class, IEntityDto<TPrimaryKey>
+        where TCreateDto : class
+        where TPrimaryKey : IComparable
+    {
+    }
+
     public abstract class AbpProjectNameAsyncServiceTestBase<TEntity, TEntityDto, TPrimaryKey, TService, TCreateDto, TUpdateDto> 
         : AbpProjectNameTestBase
         where TService : AsyncCrudAppService<TEntity, TEntityDto, TPrimaryKey, PagedResultRequestDto, TCreateDto, TUpdateDto>
@@ -151,6 +160,15 @@ namespace AbpCompanyName.AbpProjectName.Tests
 
             //Assert
             entity.ShouldNotBeNull();
+
+            await UsingDbContextAsync(async (context, entityDto) =>
+            {
+                await GetChecks(context, entityDto);
+            }, entity);
+        }
+
+        public async virtual Task GetChecks(AbpProjectNameDbContext context, TEntityDto entity)
+        {
         }
 
         [Fact]
@@ -160,12 +178,21 @@ namespace AbpCompanyName.AbpProjectName.Tests
             await Create(20);
 
             //Act
-            PagedResultDto<TEntityDto> users = await _appService.GetAll(
+            PagedResultDto<TEntityDto> entities = await _appService.GetAll(
                 new PagedResultRequestDto{MaxResultCount=10, SkipCount=0}
             );
 
             //Assert
-            users.Items.Count.ShouldBe(10);
+            entities.Items.Count.ShouldBe(10);
+
+            await UsingDbContextAsync(async (context, pagedResultDto) =>
+            {
+                await GetAllChecks(context, pagedResultDto);
+            }, entities);
+        }
+
+        public async virtual Task GetAllChecks(AbpProjectNameDbContext context, PagedResultDto<TEntityDto> entities)
+        {
         }
 
         [Fact]
@@ -246,7 +273,7 @@ namespace AbpCompanyName.AbpProjectName.Tests
         {
         }
 
-        #region UsingDbContextAsync extensions to allow adding TEntityDto to lambda method
+        #region UsingDbContextAsync extensions to allow adding TEntityDto or PagedResultDto<TEntityDto> to lambda method
 
         protected async Task UsingDbContextAsync(Func<AbpProjectNameDbContext, TEntityDto, Task> action, TEntityDto updateDto)
         {
@@ -260,6 +287,23 @@ namespace AbpCompanyName.AbpProjectName.Tests
                 using (var context = LocalIocManager.Resolve<AbpProjectNameDbContext>())
                 {
                     await action(context, updateDto);
+                    await context.SaveChangesAsync();
+                }
+            }
+        }
+
+        protected async Task UsingDbContextAsync(Func<AbpProjectNameDbContext, PagedResultDto<TEntityDto>, Task> action, PagedResultDto<TEntityDto> entities)
+        {
+            await UsingDbContextAsync(AbpSession.TenantId, action, entities);
+        }
+
+        protected async Task UsingDbContextAsync(int? tenantId, Func<AbpProjectNameDbContext, PagedResultDto<TEntityDto>, Task> action, PagedResultDto<TEntityDto> entities)
+        {
+            using (UsingTenantId(tenantId))
+            {
+                using (var context = LocalIocManager.Resolve<AbpProjectNameDbContext>())
+                {
+                    await action(context, entities);
                     await context.SaveChangesAsync();
                 }
             }
