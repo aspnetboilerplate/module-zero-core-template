@@ -17,6 +17,7 @@ using Abp.IdentityFramework;
 
 namespace AbpCompanyName.AbpProjectName.MultiTenancy
 {
+    [AbpAuthorize(PermissionNames.Pages_Tenants)]
     public class TenantAppService : AsyncCrudAppService<Tenant, TenantDto, int, PagedResultRequestDto, CreateTenantDto, TenantDto>, ITenantAppService
     {
         private readonly TenantManager _tenantManager;
@@ -44,14 +45,6 @@ namespace AbpCompanyName.AbpProjectName.MultiTenancy
             _abpZeroDbMigrator = abpZeroDbMigrator;
             _passwordHasher = passwordHasher;
             _userManager = userManager;
-
-            //todo@ismail: move to AbpAuthorize attribute when this is resolved https://github.com/aspnetboilerplate/aspnetboilerplate/issues/2253
-            CreatePermissionName
-                = GetAllPermissionName
-                    = GetPermissionName
-                        = UpdatePermissionName
-                            = DeletePermissionName
-                                = PermissionNames.Pages_Tenants;
         }
         
         public override async Task<TenantDto> Create(CreateTenantDto input)
@@ -118,7 +111,7 @@ namespace AbpCompanyName.AbpProjectName.MultiTenancy
             await _tenantManager.DeleteAsync(tenant);
         }
 
-        protected virtual void CheckErrors(IdentityResult identityResult)
+        private void CheckErrors(IdentityResult identityResult)
         {
             identityResult.CheckErrors(LocalizationManager);
         }

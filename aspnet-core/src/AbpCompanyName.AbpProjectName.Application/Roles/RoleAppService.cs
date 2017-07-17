@@ -16,6 +16,7 @@ using Abp.UI;
 
 namespace AbpCompanyName.AbpProjectName.Roles
 {
+    [AbpAuthorize(PermissionNames.Pages_Roles)]
     public class RoleAppService : AsyncCrudAppService<Role, RoleDto, int, PagedResultRequestDto, CreateRoleDto, RoleDto>, IRoleAppService
     {
         private readonly RoleManager _roleManager;
@@ -24,13 +25,6 @@ namespace AbpCompanyName.AbpProjectName.Roles
         public RoleAppService(IRepository<Role> repository, RoleManager roleManager, UserManager userManager)
             : base(repository)
         {
-            //todo@ismail: move to AbpAuthorize attribute when this is resolved https://github.com/aspnetboilerplate/aspnetboilerplate/issues/2253
-            CreatePermissionName
-                = GetAllPermissionName
-                    = GetPermissionName
-                        = UpdatePermissionName
-                            = DeletePermissionName = PermissionNames.Pages_Roles;
-
             _roleManager = roleManager;
             _userManager = userManager;
         }

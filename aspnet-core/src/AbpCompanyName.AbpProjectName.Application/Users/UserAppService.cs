@@ -8,6 +8,7 @@ using AbpCompanyName.AbpProjectName.Authorization.Users;
 using AbpCompanyName.AbpProjectName.Users.Dto;
 using Microsoft.AspNetCore.Identity;
 using System.Linq;
+using Abp.Authorization;
 using Microsoft.EntityFrameworkCore;
 using Abp.IdentityFramework;
 using AbpCompanyName.AbpProjectName.Authorization.Roles;
@@ -15,6 +16,7 @@ using AbpCompanyName.AbpProjectName.Roles.Dto;
 
 namespace AbpCompanyName.AbpProjectName.Users
 {
+    [AbpAuthorize(PermissionNames.Pages_Users)]
     public class UserAppService : AsyncCrudAppService<User, UserDto, long, PagedResultRequestDto, CreateUserDto, UserDto>, IUserAppService
     {
         private readonly UserManager _userManager;
@@ -24,13 +26,6 @@ namespace AbpCompanyName.AbpProjectName.Users
         public UserAppService(IRepository<User, long> repository, UserManager userManager, IPasswordHasher<User> passwordHasher, IRepository<Role> roleRepository)
             : base(repository)
         {
-            //todo@ismail: move to AbpAuthorize attribute when this is resolved https://github.com/aspnetboilerplate/aspnetboilerplate/issues/2253
-            CreatePermissionName
-                = GetAllPermissionName
-                    = GetPermissionName
-                        = UpdatePermissionName
-                            = DeletePermissionName = PermissionNames.Pages_Users;
-
             _userManager = userManager;
             _passwordHasher = passwordHasher;
             _roleRepository = roleRepository;
