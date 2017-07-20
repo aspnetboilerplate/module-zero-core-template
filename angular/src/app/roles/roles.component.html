@@ -12,7 +12,7 @@
                             <i class="material-icons">more_vert</i>
                         </a>
                         <ul class="dropdown-menu pull-right">
-                            <li><a href="javascript:void(0);" class=" waves-effect <waves-block></waves-block>" (click)="refresh();"><i class="material-icons">refresh</i> Refresh</a></li>
+                            <li><a href="javascript:void(0);" class=" waves-effect <waves-block></waves-block>" (click)="refresh();"><i class="material-icons">refresh</i> {{l('Refresh')}}</a></li>
                         </ul>
                     </li>
                 </ul>
@@ -36,8 +36,8 @@
                                     <i class="material-icons">menu</i>
                                 </a>
                                 <ul class="dropdown-menu pull-right">
-                                    <li><a href="javascript:void(0);" class="waves-effect waves-block" (click)="editRole(role)"><i class="material-icons">create</i>Edit</a></li>
-                                    <li><a href="javascript:void(0);" class="waves-effect waves-block" (click)="delete(role)"><i class="material-icons">delete_sweep</i>Delete</a></li>
+                                    <li><a href="javascript:void(0);" class="waves-effect waves-block" (click)="editRole(role)"><i class="material-icons">create</i>{{l('Edit')}}</a></li>
+                                    <li><a href="javascript:void(0);" class="waves-effect waves-block" (click)="delete(role)"><i class="material-icons">delete_sweep</i>{{l('Delete')}}</a></li>
                                 </ul>
                             </td>
                         </tr>

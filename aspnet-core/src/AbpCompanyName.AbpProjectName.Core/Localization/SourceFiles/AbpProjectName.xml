@@ -5,9 +5,20 @@
     <text name="About" value="About" />
     <text name="WellcomeMessage" value="Welcome to AbpProjectName!" />
 
+    <text name="MultiLevelMenu">Multi Level Menu</text>
+    <text name="ASPNETBoilerplate">ASP.NET Boilerplate</text>
+    <text name="Home">Home</text>
+    <text name="Templates">Templates</text>
+    <text name="Samples">Samples</text>
+    <text name="Documents">Documents</text>
+    <text name="ASPNETZero">ASP.NET Zero</text>
+    <text name="Description">Description</text>
+    <text name="Features">Features</text>    
+    <text name="Pricing">Pricing</text>
+    <text name="Faq">Faq</text>
+
     <text name="FormIsNotValidMessage" value="Form is not valid. Please check and fix errors." />
     <text name="TenantNameCanNotBeEmpty" value="Tenant name can not be empty" />
-
     <text name="InvalidUserNameOrPassword" value="Invalid user name or password" />
     <text name="ThereIsNoTenantDefinedWithName{0}" value="There is no tenant defined with name {0}" />
     <text name="TenantIsNotActive" value="Tenant {0} is not active." />
@@ -20,60 +31,83 @@
     <text name="Password" value="Password" />
     <text name="RememberMe" value="Remember me" />
     <text name="LogIn" value="Log in" />
-
     <text name="LoginFailed" value="Login failed!" />
 
+    <text name="Users" value="Users" />
+    <text name="IsActive" value="Is active" />
+    <text name="FullName" value="Full name" />
+    <text name="CreateNewUser" value="Create new user" />
+    <text name="RegisterFormUserNameInvalidMessage">Please dont enter an email address for username.</text>
     <text name="NameSurname" value="Name surname" />
     <text name="UserName" value="User name" />
     <text name="Name" value="Name" />
     <text name="Surname" value="Surname" />
     <text name="EmailAddress" value="Email address" />
 
+    <text name="EditUser" value="Edit user" />
+    <text name="UserDetails" value="User details" />
+    <text name="UserRoles" value="User roles" />
+    <text name="ErrorMessageConfirmPassword" value="Edit user" />
+    <text name="ConfirmPassword" value="Confirm password" />
+
     <text name="Tenants" value="Tenants" />
     <text name="SavedSuccessfully" value="Saved successfully" />
     <text name="CreateNewTenant" value="Create new tenant" />
     <text name="AdminEmailAddress" value="Admin email address" />
-    <text name="Save" value="Save" />
-    <text name="Cancel" value="Cancel" />
     <text name="TenantName_Regex_Description" value="Tenant name must be at least 2 chars, starts with a letter and continue with letter, number, dash or underscore." />
     <text name="DefaultPasswordIs" value="Default password is {0}" />
     <text name="CanBeEmptyToLoginAsHost" value="Can be empty to login as host." />
+    <text name="EditTenant" value="Edit tenant" />
+
     <text name="Register" value="Register" />
     <text name="OrLoginWith" value="Or login with" />
+    
     <text name="WaitingForActivationMessage" value="Your account is waiting to be activated by system admin." />
+    <text name="SuccessfullyRegistered">Successfully registered</text>
+    <text name="WaitingForEmailActivation">Your email address should be activated</text>
     <text name="TenantSelection" value="Tenant Selection" />
     <text name="TenantSelection_Detail" value="Please select one of the following tenants." />
-    <text name="Logout" value="Logout" />
-
-    <text name="RegisterFormUserNameInvalidMessage">Please dont enter an email address for username.</text>
-
     <text name="DatabaseConnectionString" value="Database connection string" />
-    <text name="Users" value="Users" />
-    <text name="IsActive" value="Is active" />
-    <text name="FullName" value="Full name" />
-    <text name="CreateNewUser" value="Create new user" />
-    <text name="Yes" value="Yes" />
-    <text name="No" value="No" />
-    <text name="Optional" value="Optional" />
-    <text name="LeaveEmptyToSwitchToHost">Leave empty to switch to the host</text>
+    <text name="DeleteTenantWithName{0}" value="Delete tenant '{0}'?" />
+    <text name="DeletedTenantWithName{0}" value="Deleted tenant: {0}" />
+    <text name="DeleteTenantTitle" value="Delete Tenant" />
 
+    <!-- Change Tenant Component -->
+    <text name="LeaveEmptyToSwitchToHost">Leave empty to switch to the host</text>
     <text name="CurrentTenant">Current tenant</text>
     <text name="NotSelected">Not selected</text>
     <text name="Change">Change</text>
     <text name="ChangeTenant">Change tenant</text>
 
-    <text name="MultiLevelMenu">Multi Level Menu</text>
-    <text name="Back">Back</text>
-    <text name="SuccessfullyRegistered">Successfully registered</text>
-    <text name="WaitingForEmailActivation">Your email address should be activated</text>
     <text name="Roles">Roles</text>
-    <text name="DisplayName">Display Name</text>
+    <text name="CreateNewRole">Create new role</text>
+    <text name="RoleName">Role name</text>
+    <text name="DisplayName">Display name</text>
+    <text name="RoleDescription">Role description</text>
+    <text name="EditRole">Edit role</text>
+    <text name="DeleteRoleRemoveUsersFromRoleNamed{0}">Remove users from role and delete role '{0}'?</text>
+    <text name="DeleteRoleTitle">Delete this role</text>
+    <text name="DeletedRoleWithName{0}">Deleted role: {0}</text>
 
+    <text name="CannotDeleteAStaticRole" value="Unable to delete a static role."/>
+
+    <text name="Actions">Actions</text>
+    <text name="Refresh">Refresh</text>
     <text name="Edit">Edit</text>
     <text name="Delete">Delete</text>
+    
+    <text name="Back">Back</text>
+    <text name="Save" value="Save" />
+    <text name="Cancel" value="Cancel" />
+    <text name="Logout" value="Logout" />
+    <text name="Yes" value="Yes" />
+    <text name="No" value="No" />
+    <text name="Optional" value="Optional" />
+        
+    <text name="UnknownTenantId{0}" value="Unknown tenantId {0}" />
+    <text name="TenantIdIsNotActive{0}" value="TenantId is not active: {0}" />
+    <text name="CouldNotValidateExternalUser{0}" value="Could not validate external user: {0}" />
+    <text name="CouldNotCompleteLoginOperation" value="Could not complete login operation."/>
 
-    <text name="CreateNewRole">Create New Role</text>
-    <text name="RoleName">Role Name</text>
-    <text name="Actions">Actions</text>
   </texts>
 </localizationDictionary>

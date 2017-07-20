@@ -4,13 +4,14 @@ import { RoleServiceProxy, RoleDto, ListResultDtoOfPermissionDto } from '@shared
 import { AppComponentBase } from '@shared/app-component-base';
 
 @Component({
-    selector: 'edit-role-modal',
-    templateUrl: './edit-role.component.html'
+  selector: 'edit-role-modal',
+  templateUrl: './edit-role.component.html'
 })
 export class EditRoleComponent extends AppComponentBase implements OnInit {
+
     @ViewChild('editRoleModal') modal: ModalDirective;
     @ViewChild('modalContent') modalContent: ElementRef;
-
+    
     active: boolean = false;
     saving: boolean = false;
 
@@ -29,7 +30,7 @@ export class EditRoleComponent extends AppComponentBase implements OnInit {
         this._roleService.getAllPermissions()
             .subscribe((permissions: ListResultDtoOfPermissionDto) => {
                 this.permissions = permissions;
-                console.log(permissions);
+                console.log(permissions);// TODO: remove logging
             });
     }
 
@@ -46,7 +47,7 @@ export class EditRoleComponent extends AppComponentBase implements OnInit {
 
     onShown(): void {
         $.AdminBSB.input.activate($(this.modalContent.nativeElement));
-    }
+            }
 
     checkPermission(permissionName: string): string {
         if (this.role.permissions.indexOf(permissionName) != -1) {
@@ -60,8 +61,8 @@ export class EditRoleComponent extends AppComponentBase implements OnInit {
     save(): void {
         var permissions = [];
         $(this.modalContent.nativeElement).find("[name=permission]").each(
-            function (index: number, elem: Element) {
-                if ($(elem).is(":checked") == true) {
+            function( index:number, elem: Element){
+                if($(elem).is(":checked") == true){
                     permissions.push(elem.getAttribute("value").valueOf());
                 }
             }

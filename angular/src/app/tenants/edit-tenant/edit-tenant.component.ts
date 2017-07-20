@@ -28,19 +28,19 @@ export class EditTenantComponent extends AppComponentBase{
     }
 
     show(id:number): void {
-		this._tenantService.get(id)
-			.finally(()=>{
-				this.active = true;
-				this.modal.show();
-			})
+        this._tenantService.get(id)
+            .finally(()=>{
+                this.active = true;
+                this.modal.show();
+            })
 			.subscribe((result: TenantDto)=>{
-				this.tenant = result;
-			});
+                this.tenant = result;
+            });
     }
 
     onShown(): void {
         $.AdminBSB.input.activate($(this.modalContent.nativeElement));
-    }
+            }
 
     save(): void {
         this.saving = true;

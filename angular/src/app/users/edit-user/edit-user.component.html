@@ -13,13 +13,13 @@
                 </div>
                 <div class="modal-body">
                     <ul class="nav nav-tabs tab-nav-right" role="tablist">
-                        <li role="presentation" class="active"><a href="#edit-user-details" data-toggle="tab">User Details</a></li>
-                        <li role="presentation"><a href="#edit-user-roles" data-toggle="tab">User Roles</a></li>
+                        <li role="presentation" class="active"><a href="#edit-user-details" data-toggle="tab">{{l("UserDetails")}}</a></li>
+                        <li role="presentation"><a href="#edit-user-roles" data-toggle="tab">{{l("UserRoles")}}</a></li>
                     </ul>
                     <div class="tab-content">
                         <div role="tabpanel" class="tab-pane animated fadeIn active" id="edit-user-details">
 
-                            <div class="row clearfix" style="margin-top:10px;">
+                            <div class="row clearfix m-t-10">
                                 <div class="col-sm-12">
                                     <div class="form-group form-float">
                                         <div class="form-line">
@@ -77,7 +77,7 @@
                                 <div class="col-sm-12 ">
                                     <ng-template ngFor let-role [ngForOf]="roles" let-roleIndex="index">
                                         <div class="col-sm-6">
-                                            <input type="checkbox" name="role" value="{{role.normalizedName}}" title="{{role.description}}" class="filled-in" id="role-{{roleIndex}}" checked="{{userInRole(role,user)}}" />
+                                            <input type="checkbox" name="role" value="{{role.normalizedName}}" title="{{role.description}}" class="form-control" id="role-{{roleIndex}}" checked="{{userInRole(role,user)}}" />
                                             <label for="role-{{roleIndex}}" title="{{role.displayName}}">{{role.name}}</label>
                                         </div>
                                     </ng-template>

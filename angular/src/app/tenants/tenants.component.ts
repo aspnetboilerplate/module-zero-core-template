@@ -26,29 +26,30 @@ export class TenantsComponent extends PagedListingComponentBase<TenantDto> {
 
     list(request:PagedRequestDto, pageNumber:number, finishedCallback: Function): void {
         this._tenantService.getAll(request.skipCount, request.maxResultCount)
-            .finally(()=>{
+            .finally(() => {
                 finishedCallback();
             })
             .subscribe((result:PagedResultDtoOfTenantDto)=>{
-				this.tenants = result.items;
-				this.showPaging(result, pageNumber);
+                this.tenants = result.items;
+                this.showPaging(result, pageNumber);
             });
     }
 
     delete(tenant: TenantDto): void {
-		abp.message.confirm(
-			"Delete tenant '"+ tenant.name +"'?",
-			(result:boolean) => {
-				if(result) {
-					this._tenantService.delete(tenant.id)
-						.finally(() => {
-					        abp.notify.info("Deleted tenant: " + tenant.name );
-							this.refresh();
-						})
-						.subscribe(() => { });
-				}
-			}
-		);
+        abp.message.confirm(
+            this.l("DeleteTenantWithName{0}", tenant.name),
+            this.l("DeleteTenantTitle"),
+            (result:boolean) => {
+                if(result) {
+                    this._tenantService.delete(tenant.id)
+                        .finally(() => {
+                            abp.notify.info(this.l("DeletedTenantWithName{0}", tenant.name));
+                            this.refresh();
+                        })
+                        .subscribe(() => { });
+                }
+            }
+        );
     }
 
     // Show modals

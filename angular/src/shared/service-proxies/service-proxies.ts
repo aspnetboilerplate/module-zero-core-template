@@ -38,7 +38,7 @@ export class AccountServiceProxy {
             method: "post",
             headers: new Headers({
                 "Content-Type": "application/json; charset=UTF-8", 
-				"Accept": "application/json; charset=UTF-8"
+                "Accept": "application/json; charset=UTF-8"
             })
         }).map((response) => {
             return this.processIsTenantAvailable(response);
@@ -82,7 +82,7 @@ export class AccountServiceProxy {
             method: "post",
             headers: new Headers({
                 "Content-Type": "application/json; charset=UTF-8", 
-				"Accept": "application/json; charset=UTF-8"
+                "Accept": "application/json; charset=UTF-8"
             })
         }).map((response) => {
             return this.processRegister(response);
@@ -145,7 +145,7 @@ export class ConfigurationServiceProxy {
             method: "post",
             headers: new Headers({
                 "Content-Type": "application/json; charset=UTF-8", 
-				"Accept": "application/json; charset=UTF-8"
+                "Accept": "application/json; charset=UTF-8"
             })
         }).map((response) => {
             return this.processChangeUiTheme(response);
@@ -205,7 +205,7 @@ export class RoleServiceProxy {
             method: "post",
             headers: new Headers({
                 "Content-Type": "application/json; charset=UTF-8", 
-				"Accept": "application/json; charset=UTF-8"
+                "Accept": "application/json; charset=UTF-8"
             })
         }).map((response) => {
             return this.processCreate(response);
@@ -249,7 +249,7 @@ export class RoleServiceProxy {
             method: "put",
             headers: new Headers({
                 "Content-Type": "application/json; charset=UTF-8", 
-				"Accept": "application/json; charset=UTF-8"
+                "Accept": "application/json; charset=UTF-8"
             })
         }).map((response) => {
             return this.processUpdate(response);
@@ -296,7 +296,7 @@ export class RoleServiceProxy {
             method: "delete",
             headers: new Headers({
                 "Content-Type": "application/json; charset=UTF-8", 
-				"Accept": "application/json; charset=UTF-8"
+                "Accept": "application/json; charset=UTF-8"
             })
         }).map((response) => {
             return this.processDelete(response);
@@ -337,7 +337,7 @@ export class RoleServiceProxy {
             method: "get",
             headers: new Headers({
                 "Content-Type": "application/json; charset=UTF-8", 
-				"Accept": "application/json; charset=UTF-8"
+                "Accept": "application/json; charset=UTF-8"
             })
         }).map((response) => {
             return this.processGetAllPermissions(response);
@@ -384,7 +384,7 @@ export class RoleServiceProxy {
             method: "get",
             headers: new Headers({
                 "Content-Type": "application/json; charset=UTF-8", 
-				"Accept": "application/json; charset=UTF-8"
+                "Accept": "application/json; charset=UTF-8"
             })
         }).map((response) => {
             return this.processGet(response);
@@ -435,7 +435,7 @@ export class RoleServiceProxy {
             method: "get",
             headers: new Headers({
                 "Content-Type": "application/json; charset=UTF-8", 
-				"Accept": "application/json; charset=UTF-8"
+                "Accept": "application/json; charset=UTF-8"
             })
         }).map((response) => {
             return this.processGetAll(response);
@@ -498,7 +498,7 @@ export class SessionServiceProxy {
             method: "get",
             headers: new Headers({
                 "Content-Type": "application/json; charset=UTF-8", 
-				"Accept": "application/json; charset=UTF-8"
+                "Accept": "application/json; charset=UTF-8"
             })
         }).map((response) => {
             return this.processGetCurrentLoginInformations(response);
@@ -561,7 +561,7 @@ export class TenantServiceProxy {
             method: "post",
             headers: new Headers({
                 "Content-Type": "application/json; charset=UTF-8", 
-				"Accept": "application/json; charset=UTF-8"
+                "Accept": "application/json; charset=UTF-8"
             })
         }).map((response) => {
             return this.processCreate(response);
@@ -608,7 +608,7 @@ export class TenantServiceProxy {
             method: "delete",
             headers: new Headers({
                 "Content-Type": "application/json; charset=UTF-8", 
-				"Accept": "application/json; charset=UTF-8"
+                "Accept": "application/json; charset=UTF-8"
             })
         }).map((response) => {
             return this.processDelete(response);
@@ -652,7 +652,7 @@ export class TenantServiceProxy {
             method: "get",
             headers: new Headers({
                 "Content-Type": "application/json; charset=UTF-8", 
-				"Accept": "application/json; charset=UTF-8"
+                "Accept": "application/json; charset=UTF-8"
             })
         }).map((response) => {
             return this.processGet(response);
@@ -703,7 +703,7 @@ export class TenantServiceProxy {
             method: "get",
             headers: new Headers({
                 "Content-Type": "application/json; charset=UTF-8", 
-				"Accept": "application/json; charset=UTF-8"
+                "Accept": "application/json; charset=UTF-8"
             })
         }).map((response) => {
             return this.processGetAll(response);
@@ -747,7 +747,7 @@ export class TenantServiceProxy {
             method: "put",
             headers: new Headers({
                 "Content-Type": "application/json; charset=UTF-8", 
-				"Accept": "application/json; charset=UTF-8"
+                "Accept": "application/json; charset=UTF-8"
             })
         }).map((response) => {
             return this.processUpdate(response);
@@ -810,7 +810,7 @@ export class TokenAuthServiceProxy {
             method: "post",
             headers: new Headers({
                 "Content-Type": "application/json; charset=UTF-8", 
-				"Accept": "application/json; charset=UTF-8"
+                "Accept": "application/json; charset=UTF-8"
             })
         }).map((response) => {
             return this.processAuthenticate(response);
@@ -854,7 +854,7 @@ export class TokenAuthServiceProxy {
             method: "get",
             headers: new Headers({
                 "Content-Type": "application/json; charset=UTF-8", 
-				"Accept": "application/json; charset=UTF-8"
+                "Accept": "application/json; charset=UTF-8"
             })
         }).map((response) => {
             return this.processGetExternalAuthenticationProviders(response);
@@ -902,7 +902,7 @@ export class TokenAuthServiceProxy {
             method: "post",
             headers: new Headers({
                 "Content-Type": "application/json; charset=UTF-8", 
-				"Accept": "application/json; charset=UTF-8"
+                "Accept": "application/json; charset=UTF-8"
             })
         }).map((response) => {
             return this.processExternalAuthenticate(response);
@@ -965,7 +965,7 @@ export class UserServiceProxy {
             method: "post",
             headers: new Headers({
                 "Content-Type": "application/json; charset=UTF-8", 
-				"Accept": "application/json; charset=UTF-8"
+                "Accept": "application/json; charset=UTF-8"
             })
         }).map((response) => {
             return this.processCreate(response);
@@ -1009,7 +1009,7 @@ export class UserServiceProxy {
             method: "put",
             headers: new Headers({
                 "Content-Type": "application/json; charset=UTF-8", 
-				"Accept": "application/json; charset=UTF-8"
+                "Accept": "application/json; charset=UTF-8"
             })
         }).map((response) => {
             return this.processUpdate(response);
@@ -1056,7 +1056,7 @@ export class UserServiceProxy {
             method: "delete",
             headers: new Headers({
                 "Content-Type": "application/json; charset=UTF-8", 
-				"Accept": "application/json; charset=UTF-8"
+                "Accept": "application/json; charset=UTF-8"
             })
         }).map((response) => {
             return this.processDelete(response);
@@ -1097,7 +1097,7 @@ export class UserServiceProxy {
             method: "get",
             headers: new Headers({
                 "Content-Type": "application/json; charset=UTF-8", 
-				"Accept": "application/json; charset=UTF-8"
+                "Accept": "application/json; charset=UTF-8"
             })
         }).map((response) => {
             return this.processGetRoles(response);
@@ -1144,7 +1144,7 @@ export class UserServiceProxy {
             method: "get",
             headers: new Headers({
                 "Content-Type": "application/json; charset=UTF-8", 
-				"Accept": "application/json; charset=UTF-8"
+                "Accept": "application/json; charset=UTF-8"
             })
         }).map((response) => {
             return this.processGet(response);
@@ -1195,7 +1195,7 @@ export class UserServiceProxy {
             method: "get",
             headers: new Headers({
                 "Content-Type": "application/json; charset=UTF-8", 
-				"Accept": "application/json; charset=UTF-8"
+                "Accept": "application/json; charset=UTF-8"
             })
         }).map((response) => {
             return this.processGetAll(response);

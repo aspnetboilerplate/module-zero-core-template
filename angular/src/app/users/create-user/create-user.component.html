@@ -15,13 +15,13 @@
                 <div class="modal-body">
 
                     <ul class="nav nav-tabs tab-nav-right" role="tablist">
-                        <li role="presentation" class="active"><a href="#user-details" data-toggle="tab">User Details</a></li>
-                        <li role="presentation"><a href="#user-roles" data-toggle="tab">User Roles</a></li>
+                        <li role="presentation" class="active"><a href="#user-details" data-toggle="tab">{{l("UserDetails")}}</a></li>
+                        <li role="presentation"><a href="#user-roles" data-toggle="tab">{{l("UserRoles")}}</a></li>
                     </ul>
                     <div class="tab-content">
                         <div role="tabpanel" class="tab-pane animated fadeIn active" id="user-details">
 
-                            <div class="row clearfix" style="margin-top:10px;">
+                            <div class="row clearfix m-t-10">
                                 <div class="col-sm-12">
                                     <div class="form-group form-float">
                                         <div class="form-line">
@@ -77,8 +77,8 @@
                                 <div class="col-sm-12">
                                     <div class="form-group form-float">
                                         <div class="form-line">
-                                            <input id="confirmpassword" type="password" name="ConfirmPassword" class="validate form-control" [(ngModel)]="user.confirmPassword" equalTo="#password" data-msg-equalto="Please enter the same password again." required maxlength="32">
-                                            <label for="confirmpassword" class="form-label">Confirm Password</label>
+                                            <input id="confirmpassword" type="password" name="ConfirmPassword" class="validate form-control" [(ngModel)]="user.confirmPassword" equalTo="#password" required maxlength="32">
+                                            <label for="confirmpassword" class="form-label">{{l("ConfirmPassword")}}</label>
                                         </div>
                                     </div>
                                 </div>
@@ -101,7 +101,7 @@
                                 <div class="col-sm-12 ">
                                     <ng-template ngFor let-role [ngForOf]="roles" let-roleIndex="index">
                                         <div class="col-sm-6">
-                                            <input type="checkbox" name="role" value="{{role.normalizedName}}" title="{{role.description}}" class="filled-in" id="role-{{roleIndex}}" checked="checked" />
+                                            <input type="checkbox" name="role" value="{{role.normalizedName}}" title="{{role.description}}" class="form-control" id="role-{{roleIndex}}" checked="checked" />
                                             <label for="role-{{roleIndex}}" title="{{role.displayName}}">{{role.name}}</label>
                                         </div>
                                     </ng-template>
