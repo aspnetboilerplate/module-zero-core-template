@@ -51,7 +51,7 @@ namespace AbpCompanyName.AbpProjectName.Authorization.Users
                 EmailAddress = emailAddress,
                 IsActive = true,
                 UserName = userName,
-                IsEmailConfirmed = true,
+                IsEmailConfirmed = isEmailConfirmed,
                 Roles = new List<UserRole>()
             };
 
