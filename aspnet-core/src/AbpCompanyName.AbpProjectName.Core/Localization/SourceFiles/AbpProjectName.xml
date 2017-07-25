@@ -12,7 +12,7 @@
     <text name="ThereIsNoTenantDefinedWithName{0}" value="There is no tenant defined with name {0}" />
     <text name="TenantIsNotActive" value="Tenant {0} is not active." />
     <text name="UserIsNotActiveAndCanNotLogin" value="User {0} is not active and can not log in." />
-    <text name="UserEmailIsNotConfirmedAndCanNotLogin">Your email address is not confirmed. You can not login</text>
+    <text name="UserEmailIsNotConfirmedAndCanNotLogin">Your email address is not confirmed. You can not login.</text>
     <text name="UserLockedOutMessage">The user account has been locked out. Please try again later.</text>
     <text name="PleaseEnterLoginInformation" value="Please enter login information" />
     <text name="TenancyName" value="Tenancy name" />
@@ -45,7 +45,7 @@
     <text name="TenantSelection_Detail" value="Please select one of the following tenants." />
     <text name="Logout" value="Logout" />
 
-    <text name="RegisterFormUserNameInvalidMessage">Please dont enter an email address for username.</text>
+    <text name="RegisterFormUserNameInvalidMessage">Please don't enter an email address for username.</text>
 
     <text name="DatabaseConnectionString" value="Database connection string" />
     <text name="Users" value="Users" />
@@ -75,5 +75,7 @@
     <text name="CreateNewRole">Create New Role</text>
     <text name="RoleName">Role Name</text>
     <text name="Actions">Actions</text>
+
+    <text name="CouldNotCompleteLoginOperation">Could not complete login operation. Please try again later.</text>
   </texts>
 </localizationDictionary>
