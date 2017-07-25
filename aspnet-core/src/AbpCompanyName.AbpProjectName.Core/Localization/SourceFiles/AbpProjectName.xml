@@ -75,5 +75,7 @@
     <text name="CreateNewRole">Create New Role</text>
     <text name="RoleName">Role Name</text>
     <text name="Actions">Actions</text>
+
+    <text name="CouldNotCompleteLoginOperation">Could not complete login operation. Please try again later.</text>
   </texts>
 </localizationDictionary>
