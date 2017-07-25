@@ -45,7 +45,7 @@
     <text name="TenantSelection_Detail" value="Please select one of the following tenants." />
     <text name="Logout" value="Logout" />
 
-    <text name="RegisterFormUserNameInvalidMessage">Please dont enter an email address for username.</text>
+    <text name="RegisterFormUserNameInvalidMessage">Please don't enter an email address for username.</text>
 
     <text name="DatabaseConnectionString" value="Database connection string" />
     <text name="Users" value="Users" />
