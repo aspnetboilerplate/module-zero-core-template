@@ -25,7 +25,7 @@
 }
 <div class="card">
     <div class="body">
-        <form id="LoginForm" method="post" asp-action="Login">
+        <form id="LoginForm" asp-action="Login" method="post">
             <input type="hidden" name="returnUrl" value="@Model.ReturnUrl" />
             <input type="hidden" name="returnUrlHash" />
             <h4 class="text-center">@L("LogIn")</h4>
