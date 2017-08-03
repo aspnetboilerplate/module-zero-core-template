@@ -10,35 +10,6 @@ import { TokenService } from '@abp/auth/token.service';
 import { UtilsService } from '@abp/utils/utils.service';
 
 import * as _ from 'lodash';
-declare const FB: any; //Facebook API
-declare const gapi: any; //Facebook API
-
-export class ExternalLoginProvider extends ExternalLoginProviderInfoModel {
-
-    static readonly FACEBOOK: string = 'Facebook';
-    static readonly GOOGLE: string = 'Google';
-
-    icon: string;
-    initialized = false;
-
-    constructor(providerInfo: ExternalLoginProviderInfoModel) {
-        super();
-
-        this.name = providerInfo.name;
-        this.clientId = providerInfo.clientId;
-        this.icon = ExternalLoginProvider.getSocialIcon(this.name);
-    }
-
-    private static getSocialIcon(providerName: string): string {
-        providerName = providerName.toLowerCase();
-
-        if (providerName === 'google') {
-            providerName = 'googleplus';
-        }
-
-        return providerName;
-    }
-}
 
 @Injectable()
 export class LoginService {
@@ -47,8 +18,6 @@ export class LoginService {
 
     authenticateModel: AuthenticateModel;
     authenticateResult: AuthenticateResultModel;
-
-    externalLoginProviders: ExternalLoginProvider[] = [];
 
     rememberMe: boolean;
 
@@ -72,20 +41,6 @@ export class LoginService {
             .subscribe((result: AuthenticateResultModel) => {
                 this.processAuthenticateResult(result);
             });
-    }
-
-    externalAuthenticate(provider: ExternalLoginProvider): void {
-        this.ensureExternalLoginProviderInitialized(provider, () => {
-            if (provider.name === ExternalLoginProvider.FACEBOOK) {
-                FB.login();
-            } else if (provider.name === ExternalLoginProvider.GOOGLE) {
-                gapi.auth2.getAuthInstance().signIn();
-            }
-        });
-    }
-
-    init(): void {
-        this.initExternalLoginProviders();
     }
 
     private processAuthenticateResult(authenticateResult: AuthenticateResultModel) {
@@ -132,90 +87,5 @@ export class LoginService {
         this.authenticateModel.rememberClient = false;
         this.authenticateResult = null;
         this.rememberMe = false;
-    }
-
-    private initExternalLoginProviders() {
-        this._tokenAuthService
-            .getExternalAuthenticationProviders()
-            .subscribe((providers: ExternalLoginProviderInfoModel[]) => {
-                this.externalLoginProviders = _.map(providers, p => new ExternalLoginProvider(p));
-            });
-    }
-
-    ensureExternalLoginProviderInitialized(loginProvider: ExternalLoginProvider, callback: () => void) {
-        if (loginProvider.initialized) {
-            callback();
-            return;
-        }
-
-        if (loginProvider.name === ExternalLoginProvider.FACEBOOK) {
-            jQuery.getScript('//connect.facebook.net/en_US/sdk.js', () => {
-                FB.init({
-                    appId: loginProvider.clientId,
-                    cookie: false,
-                    xfbml: true,
-                    version: 'v2.5'
-                });
-
-                FB.getLoginStatus(response => {
-                    this.facebookLoginStatusChangeCallback(response);
-                });
-
-                callback();
-            });
-        } else if (loginProvider.name === ExternalLoginProvider.GOOGLE) {
-            jQuery.getScript('https://apis.google.com/js/api.js', () => {
-                gapi.load('client:auth2',
-                    () => {
-                        gapi.client.init({
-                            clientId: loginProvider.clientId,
-                            scope: 'openid profile email'
-                        }).then(() => {
-                            gapi.auth2.getAuthInstance().isSignedIn.listen((isSignedIn) => {
-                                this.googleLoginStatusChangeCallback(isSignedIn);
-                            });
-                            this.googleLoginStatusChangeCallback(gapi.auth2.getAuthInstance().isSignedIn.get());
-                        });
-
-                        callback();
-                    });
-            });
-        }
-    }
-
-    private facebookLoginStatusChangeCallback(resp) {
-        if (resp.status === 'connected') {
-            var model = new ExternalAuthenticateModel();
-            model.authProvider = ExternalLoginProvider.FACEBOOK;
-            model.providerAccessCode = resp.authResponse.accessToken;
-            model.providerKey = resp.authResponse.userID;
-            this._tokenAuthService.externalAuthenticate(model)
-                .subscribe((result: ExternalAuthenticateResultModel) => {
-                    if (result.waitingForActivation) {
-                        this._messageService.info('You have successfully registered. Waiting for activation!');
-                        return;
-                    }
-
-                    this.login(result.accessToken, result.encryptedAccessToken, result.expireInSeconds);
-                });
-        }
-    }
-
-    private googleLoginStatusChangeCallback(isSignedIn) {
-        if (isSignedIn) {
-            var model = new ExternalAuthenticateModel();
-            model.authProvider = ExternalLoginProvider.GOOGLE;
-            model.providerAccessCode = gapi.auth2.getAuthInstance().currentUser.get().getAuthResponse().access_token;
-            model.providerKey = gapi.auth2.getAuthInstance().currentUser.get().getBasicProfile().getId();
-            this._tokenAuthService.externalAuthenticate(model)
-                .subscribe((result: ExternalAuthenticateResultModel) => {
-                    if (result.waitingForActivation) {
-                        this._messageService.info('You have successfully registered. Waiting for activation!');
-                        return;
-                    }
-
-                    this.login(result.accessToken, result.encryptedAccessToken, result.expireInSeconds);
-                });
-        }
     }
 }

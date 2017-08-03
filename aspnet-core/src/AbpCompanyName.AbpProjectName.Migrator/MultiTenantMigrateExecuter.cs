@@ -7,6 +7,7 @@ using Abp.Domain.Uow;
 using Abp.Extensions;
 using Abp.MultiTenancy;
 using Abp.Runtime.Security;
+using Abp.Zero.EntityFrameworkCore;
 using AbpCompanyName.AbpProjectName.EntityFrameworkCore;
 using AbpCompanyName.AbpProjectName.EntityFrameworkCore.Seed;
 using AbpCompanyName.AbpProjectName.Migrator;
@@ -18,12 +19,12 @@ namespace AbpCompanyName.AbpProjectName.Migrator
     {
         public Log Log { get; private set; }
 
-        private readonly AbpZeroDbMigrator _migrator;
+        private readonly AbpZeroDbMigrator<AbpProjectNameDbContext> _migrator;
         private readonly IRepository<Tenant> _tenantRepository;
         private readonly IDbPerTenantConnectionStringResolver _connectionStringResolver;
 
         public MultiTenantMigrateExecuter(
-            AbpZeroDbMigrator migrator,
+            AbpZeroDbMigrator<AbpProjectNameDbContext> migrator,
             IRepository<Tenant> tenantRepository,
             Log log,
             IDbPerTenantConnectionStringResolver connectionStringResolver)

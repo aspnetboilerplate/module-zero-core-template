@@ -63,45 +63,5 @@
                 </div>
             }
         </form>
-
-        @{
-            var loginProviders = Context.Authentication
-                .GetAuthenticationSchemes()
-                .Where(s => !s.DisplayName.IsNullOrWhiteSpace())
-                .ToList();
-
-            Func<string, string> getSocialIconClass = (provider) =>
-            {
-                provider = provider.ToLowerInvariant();
-
-                if (provider == "microsoft")
-                {
-                    return "windows";
-                }
-
-                return provider;
-            };
-        }
-
-        @if (Model.MultiTenancySide == MultiTenancySides.Tenant && loginProviders.Count > 0)
-        {
-            <div class="login-options">
-                <h4>@L("OrLoginWith")</h4>
-                <ul class="social-icons">
-                    <form asp-action="ExternalLogin" method="post">
-                        <input type="hidden" name="returnUrl" value="@ViewBag.ReturnUrl" />
-                        <input type="hidden" name="provider" value="" />
-
-                        @foreach (var p in loginProviders)
-                        {
-                            <a class="btn btn-default btn-sm fa fa-@(getSocialIconClass(p.DisplayName)) social-login-link" title="@p.DisplayName"
-                               data-provider="@p.DisplayName"
-                               href="javascript:;">
-                            </a>
-                        }
-                    </form>
-                </ul>
-            </div>
-        }
     </div>
 </div>

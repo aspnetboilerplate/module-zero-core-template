@@ -2,9 +2,6 @@
 using System.Linq;
 using System.Threading.Tasks;
 using Abp.Runtime.Security;
-using AbpCompanyName.AbpProjectName.Authentication.External;
-using AbpCompanyName.AbpProjectName.Authentication.External.Facebook;
-using AbpCompanyName.AbpProjectName.Authentication.External.Google;
 using AbpCompanyName.AbpProjectName.Authentication.JwtBearer;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.AspNetCore.Builder;
@@ -26,32 +23,6 @@ namespace AbpCompanyName.AbpProjectName.Web.Host.Startup
             if (bool.Parse(configuration["Authentication:JwtBearer:IsEnabled"]))
             {
                 app.UseJwtBearerAuthentication(CreateJwtBearerAuthenticationOptions(app));
-            }
-
-            var externalAuthConfiguration = app.ApplicationServices.GetRequiredService<ExternalAuthConfiguration>();
-
-            if (bool.Parse(configuration["Authentication:Facebook:IsEnabled"]))
-            {
-                externalAuthConfiguration.Providers.Add(
-                    new ExternalLoginProviderInfo(
-                        FacebookAuthProviderApi.Name,
-                        configuration["Authentication:Facebook:AppId"],
-                        configuration["Authentication:Facebook:AppSecret"],
-                        typeof(FacebookAuthProviderApi)
-                    )
-                );
-            }
-
-            if (bool.Parse(configuration["Authentication:Google:IsEnabled"]))
-            {
-                externalAuthConfiguration.Providers.Add(
-                    new ExternalLoginProviderInfo(
-                        GoogleAuthProviderApi.Name,
-                        configuration["Authentication:Google:ClientId"],
-                        configuration["Authentication:Google:ClientSecret"],
-                        typeof(GoogleAuthProviderApi)
-                    )
-                );
             }
         }
 

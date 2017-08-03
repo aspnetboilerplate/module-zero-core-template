@@ -36,16 +36,5 @@
                 </div>
             </div>
         </form>
-
-        <div class="login-options" *ngIf="multiTenancySideIsTeanant && loginService.externalLoginProviders.length > 0">
-            <h4>{{l("OrLoginWith")}}</h4>
-            <ul class="social-icons">
-                <li *ngFor="let provider of loginService.externalLoginProviders">
-                    <a class="btn btn-default btn-sm fa fa-{{provider.icon == 'googleplus' ? 'google-plus' : provider.icon}}"
-                       (click)="externalLogin(provider)"
-                       title="{{provider.name}}"></a>
-                </li>
-            </ul>
-        </div>
     </div>
 </div>

@@ -6,6 +6,7 @@ using Abp.Configuration.Startup;
 using Abp.Net.Mail;
 using Abp.TestBase;
 using Abp.Zero.Configuration;
+using Abp.Zero.EntityFrameworkCore;
 using AbpCompanyName.AbpProjectName.EntityFrameworkCore;
 using AbpCompanyName.AbpProjectName.Tests.DependencyInjection;
 using Castle.MicroKernel.Registration;
@@ -37,7 +38,7 @@ namespace AbpCompanyName.AbpProjectName.Tests
             //Use database for language management
             Configuration.Modules.Zero().LanguageManagement.EnableDbLocalization();
 
-            RegisterFakeService<AbpZeroDbMigrator>();
+            RegisterFakeService<AbpZeroDbMigrator<AbpProjectNameDbContext>>();
 
             Configuration.ReplaceService<IEmailSender, NullEmailSender>(DependencyLifeStyle.Transient);
         }

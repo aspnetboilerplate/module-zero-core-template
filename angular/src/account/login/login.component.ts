@@ -1,7 +1,7 @@
 ﻿import { Component, Injector, ElementRef, ViewChild } from '@angular/core';
 import { Router } from '@angular/router';
 import { AppComponentBase } from '@shared/app-component-base';
-import { LoginService, ExternalLoginProvider } from './login.service';
+import { LoginService } from './login.service';
 import { accountModuleAnimation } from '@shared/animations/routerTransition';
 import { AbpSessionService } from '@abp/session/abp-session.service';
 
@@ -48,9 +48,5 @@ export class LoginComponent extends AppComponentBase {
         this.loginService.authenticate(
             () => this.submitting = false
         );
-    }
-
-    externalLogin(provider: ExternalLoginProvider) {
-        this.loginService.externalAuthenticate(provider);
     }
 }

@@ -5,7 +5,7 @@
         abp.notifications.showUiNotifyForUserNotification(userNotification);
 
         //Desktop notification
-        Push.create("AbpZeroTemplate", {
+        Push.create("AbpProjectName", {
             body: userNotification.notification.data.message,
             icon: abp.appPath + 'images/app-logo-small.png',
             timeout: 6000,
