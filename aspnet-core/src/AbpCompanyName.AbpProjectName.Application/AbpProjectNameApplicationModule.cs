@@ -1,19 +1,8 @@
 ﻿using System.Reflection;
-using System.Threading.Tasks;
-using Abp.Authorization;
-using Abp.Authorization.Roles;
-using Abp.Authorization.Users;
 using Abp.AutoMapper;
-using Abp.Domain.Repositories;
 using Abp.Modules;
 using Abp.Reflection.Extensions;
 using AbpCompanyName.AbpProjectName.Authorization;
-using AbpCompanyName.AbpProjectName.Authorization.Roles;
-using AbpCompanyName.AbpProjectName.Authorization.Users;
-using AbpCompanyName.AbpProjectName.MultiTenancy;
-using AbpCompanyName.AbpProjectName.Roles.Dto;
-using AbpCompanyName.AbpProjectName.Users.Dto;
-using AutoMapper;
 
 namespace AbpCompanyName.AbpProjectName
 {
@@ -22,7 +11,6 @@ namespace AbpCompanyName.AbpProjectName
         typeof(AbpAutoMapperModule))]
     public class AbpProjectNameApplicationModule : AbpModule
     {
-
         public override void PreInitialize()
         {
             Configuration.Authorization.Providers.Add<AbpProjectNameAuthorizationProvider>();
