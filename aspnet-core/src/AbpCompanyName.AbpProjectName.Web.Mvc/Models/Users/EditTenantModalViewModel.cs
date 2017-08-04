@@ -13,7 +13,7 @@ namespace AbpCompanyName.AbpProjectName.Web.Models.Users
 
         public bool UserIsInRole(RoleDto role)
         {
-            return User.Roles != null && User.Roles.Any(r => r == role.DisplayName);
+            return User.RoleNames != null && User.RoleNames.Any(r => r == role.NormalizedName);
         }
     }
 }

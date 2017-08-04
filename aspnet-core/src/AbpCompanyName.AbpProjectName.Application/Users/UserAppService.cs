@@ -20,17 +20,24 @@ namespace AbpCompanyName.AbpProjectName.Users
     public class UserAppService : AsyncCrudAppService<User, UserDto, long, PagedResultRequestDto, CreateUserDto, UserDto>, IUserAppService
     {
         private readonly UserManager _userManager;
+        private readonly RoleManager _roleManager;
         private readonly IPasswordHasher<User> _passwordHasher;
         private readonly IRepository<Role> _roleRepository;
 
-        public UserAppService(IRepository<User, long> repository, UserManager userManager, IPasswordHasher<User> passwordHasher, IRepository<Role> roleRepository)
+        public UserAppService(
+            IRepository<User, long> repository,
+            UserManager userManager,
+            IPasswordHasher<User> passwordHasher,
+            IRepository<Role> roleRepository,
+            RoleManager roleManager)
             : base(repository)
         {
             _userManager = userManager;
             _passwordHasher = passwordHasher;
             _roleRepository = roleRepository;
+            _roleManager = roleManager;
         }
-        
+
         public override async Task<UserDto> Create(CreateUserDto input)
         {
             CheckCreatePermission();
@@ -43,9 +50,9 @@ namespace AbpCompanyName.AbpProjectName.Users
 
             CheckErrors(await _userManager.CreateAsync(user));
 
-            if (input.Roles != null)
+            if (input.RoleNames != null)
             {
-                CheckErrors(await _userManager.SetRoles(user, input.Roles));
+                CheckErrors(await _userManager.SetRoles(user, input.RoleNames));
             }
 
             CurrentUnitOfWork.SaveChanges();
@@ -63,9 +70,9 @@ namespace AbpCompanyName.AbpProjectName.Users
 
             CheckErrors(await _userManager.UpdateAsync(user));
 
-            if (input.Roles != null)
+            if (input.RoleNames != null)
             {
-                CheckErrors(await _userManager.SetRoles(user, input.Roles));
+                CheckErrors(await _userManager.SetRoles(user, input.RoleNames));
             }
 
             return await Get(input);
@@ -75,7 +82,7 @@ namespace AbpCompanyName.AbpProjectName.Users
         {
             var user = await _userManager.GetUserByIdAsync(input.Id);
             await _userManager.DeleteAsync(user);
-		}
+        }
 
         public async Task<ListResultDto<RoleDto>> GetRoles()
         {
@@ -95,7 +102,15 @@ namespace AbpCompanyName.AbpProjectName.Users
             ObjectMapper.Map(input, user);
             user.SetNormalizedNames();
         }
-        
+
+        protected override UserDto MapToEntityDto(User user)
+        {
+            var roles = _roleManager.Roles.Where(r => user.Roles.Any(ur => ur.RoleId == r.Id)).Select(r => r.NormalizedName);
+            var userDto = base.MapToEntityDto(user);
+            userDto.RoleNames = roles.ToArray();
+            return userDto;
+        }
+
         protected override IQueryable<User> CreateFilteredQuery(PagedResultRequestDto input)
         {
             return Repository.GetAllIncluding(x => x.Roles);
@@ -105,7 +120,7 @@ namespace AbpCompanyName.AbpProjectName.Users
         {
             return await Repository.GetAllIncluding(x => x.Roles).FirstOrDefaultAsync(x => x.Id == id);
         }
-        
+
         protected override IQueryable<User> ApplySorting(IQueryable<User> query, PagedResultRequestDto input)
         {
             return query.OrderBy(r => r.UserName);

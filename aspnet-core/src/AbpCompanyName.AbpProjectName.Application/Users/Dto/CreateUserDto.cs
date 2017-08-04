@@ -28,7 +28,7 @@ namespace AbpCompanyName.AbpProjectName.Users.Dto
 
         public bool IsActive { get; set; }
 
-        public string[] Roles { get; set; }
+        public string[] RoleNames { get; set; }
 
         [Required]
         [StringLength(AbpUserBase.MaxPlainPasswordLength)]

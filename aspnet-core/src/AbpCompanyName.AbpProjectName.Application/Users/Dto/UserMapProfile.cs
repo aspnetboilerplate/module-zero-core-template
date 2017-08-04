@@ -1,9 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using AbpCompanyName.AbpProjectName.Authorization.Users;
+﻿using AbpCompanyName.AbpProjectName.Authorization.Users;
 using AutoMapper;
 
 namespace AbpCompanyName.AbpProjectName.Users.Dto
@@ -12,7 +7,6 @@ namespace AbpCompanyName.AbpProjectName.Users.Dto
     {
         public UserMapProfile()
         {
-
             CreateMap<UserDto, User>();
             CreateMap<UserDto, User>().ForMember(x => x.Roles, opt => opt.Ignore());
 

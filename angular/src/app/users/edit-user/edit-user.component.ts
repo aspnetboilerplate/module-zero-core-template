@@ -6,8 +6,8 @@ import { AppComponentBase } from '@shared/app-component-base';
 import * as _ from "lodash";
 
 @Component({
-  selector: 'edit-user-modal',
-  templateUrl: './edit-user.component.html'
+    selector: 'edit-user-modal',
+    templateUrl: './edit-user.component.html'
 })
 export class EditUserComponent extends AppComponentBase {
 
@@ -29,29 +29,29 @@ export class EditUserComponent extends AppComponentBase {
         super(injector);
     }
 
-	userInRole(role:RoleDto, user:UserDto): string {
-		if(user.roles.indexOf(role.displayName)!= -1) {
-			return "checked";
-		}
-		else {
-			return "";
-		}
-	}
+    userInRole(role: RoleDto, user: UserDto): string {
+        if (user.roleNames.indexOf(role.normalizedName) !== -1) {
+            return "checked";
+        }
+        else {
+            return "";
+        }
+    }
 
-    show(id:number): void {
+    show(id: number): void {
         this._userService.getRoles()
             .subscribe((result) => {
                 this.roles = result.items;
             });
 
-		this._userService.get(id)
-			.subscribe(
-				(result) => {
-					this.user = result;
-					this.active = true;
-        			this.modal.show();
-				}
-			);
+        this._userService.get(id)
+            .subscribe(
+            (result) => {
+                this.user = result;
+                this.active = true;
+                this.modal.show();
+            }
+            );
     }
 
     onShown(): void {
@@ -60,13 +60,14 @@ export class EditUserComponent extends AppComponentBase {
 
     save(): void {
         var roles = [];
-        $(this.modalContent.nativeElement).find("[name=role]").each(function(ind:number, elem:Element){
-            if($(elem).is(":checked")){
+        $(this.modalContent.nativeElement).find("[name=role]").each(function (ind: number, elem: Element) {
+            if ($(elem).is(":checked")) {
                 roles.push(elem.getAttribute("value").valueOf());
             }
         });
 
-        this.user.roles = roles;
+        this.user.roleNames = roles;
+
         this.saving = true;
         this._userService.update(this.user)
             .finally(() => { this.saving = false; })
