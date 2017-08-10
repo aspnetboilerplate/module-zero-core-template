@@ -19,12 +19,12 @@ namespace AbpCompanyName.AbpProjectName.Migrator
     {
         public Log Log { get; private set; }
 
-        private readonly AbpZeroDbMigrator<AbpProjectNameDbContext> _migrator;
+        private readonly AbpZeroDbMigrator _migrator;
         private readonly IRepository<Tenant> _tenantRepository;
         private readonly IDbPerTenantConnectionStringResolver _connectionStringResolver;
 
         public MultiTenantMigrateExecuter(
-            AbpZeroDbMigrator<AbpProjectNameDbContext> migrator,
+            AbpZeroDbMigrator migrator,
             IRepository<Tenant> tenantRepository,
             Log log,
             IDbPerTenantConnectionStringResolver connectionStringResolver)
