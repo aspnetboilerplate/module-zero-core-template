@@ -84,13 +84,24 @@ namespace AbpCompanyName.AbpProjectName.Web.Host.Startup
 
             AuthConfigurer.Configure(app, _appConfiguration);
 
-            app.UseStaticFiles();
-
 #if FEATURE_SIGNALR
             //Integrate to OWIN
             app.UseAppBuilder(ConfigureOwinServices);
 #endif
 
+            // serve wwwroot if path doesn't start with /api/
+            app.Use(async (context, next) => {
+                await next();
+                if (context.Response.StatusCode == 404 &&
+                    !Path.HasExtension(context.Request.Path.Value) &&
+                    !context.Request.Path.Value.StartsWith("/api/"))
+                {
+                    context.Request.Path = "/index.html";
+                    await next();
+                }
+            });
+
+            
             app.UseMvc(routes =>
             {
                 routes.MapRoute(
@@ -101,6 +112,9 @@ namespace AbpCompanyName.AbpProjectName.Web.Host.Startup
                     name: "default",
                     template: "{controller=Home}/{action=Index}/{id?}");
             });
+
+            app.UseDefaultFiles();
+            app.UseStaticFiles();
 
             // Enable middleware to serve generated Swagger as a JSON endpoint
             app.UseSwagger();
