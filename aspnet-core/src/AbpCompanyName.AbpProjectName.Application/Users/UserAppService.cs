@@ -9,6 +9,7 @@ using AbpCompanyName.AbpProjectName.Users.Dto;
 using Microsoft.AspNetCore.Identity;
 using System.Linq;
 using Abp.Authorization;
+using Abp.Authorization.Users;
 using Microsoft.EntityFrameworkCore;
 using Abp.IdentityFramework;
 using AbpCompanyName.AbpProjectName.Authorization.Roles;
