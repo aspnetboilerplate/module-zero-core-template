@@ -39,6 +39,8 @@ namespace AbpCompanyName.AbpProjectName.Web.Startup
 
             IdentityRegistrar.Register(services);
 
+            AuthConfigurer.Configure(services, _appConfiguration);
+
             services.AddScoped<IWebResourceManager, WebResourceManager>();
 
             //Configure Abp and Dependency Injection
@@ -64,7 +66,7 @@ namespace AbpCompanyName.AbpProjectName.Web.Startup
                 app.UseExceptionHandler("/Error");
             }
 
-            AuthConfigurer.Configure(app, _appConfiguration);
+            app.UseAuthentication();
 
             app.UseStaticFiles();
 

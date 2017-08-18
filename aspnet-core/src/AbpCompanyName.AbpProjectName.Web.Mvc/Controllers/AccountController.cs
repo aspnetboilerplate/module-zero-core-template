@@ -27,6 +27,7 @@ using AbpCompanyName.AbpProjectName.Controllers;
 using AbpCompanyName.AbpProjectName.Identity;
 using AbpCompanyName.AbpProjectName.Sessions;
 using AbpCompanyName.AbpProjectName.Web.Views.Shared.Components.TenantChange;
+using Microsoft.AspNetCore.Authentication;
 using Microsoft.AspNetCore.Identity;
 
 namespace AbpCompanyName.AbpProjectName.Web.Controllers
@@ -276,11 +277,12 @@ namespace AbpCompanyName.AbpProjectName.Web.Controllers
                 });
 
             return Challenge(
-                new Microsoft.AspNetCore.Http.Authentication.AuthenticationProperties
-                {
-                    Items = { { "LoginProvider", provider } },
-                    RedirectUri = redirectUrl
-                },
+                //TODO: ...?
+                //new Microsoft.AspNetCore.Http.Authentication.AuthenticationProperties
+                //{
+                //    Items = { { "LoginProvider", provider } },
+                //    RedirectUri = redirectUrl
+                //},
                 provider
             );
         }
