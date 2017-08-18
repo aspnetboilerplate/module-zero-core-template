@@ -2,7 +2,7 @@
 
   <PropertyGroup>
     <TargetFramework>netcoreapp2.0</TargetFramework>
-    <PackageTargetFallback>$(PackageTargetFallback);dotnet5.6;portable-net45+win8</PackageTargetFallback>
+    <AssetTargetFallback>$(AssetTargetFallback);portable-net45+win8+wp8+wpa81;</AssetTargetFallback>
     <PreserveCompilationContext>true</PreserveCompilationContext>
     <AssemblyName>AbpCompanyName.AbpProjectName.Web.Host</AssemblyName>
     <OutputType>Exe</OutputType>

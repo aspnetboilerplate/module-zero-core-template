@@ -2,7 +2,7 @@
 
   <PropertyGroup>
     <TargetFramework>netcoreapp2.0</TargetFramework>
-    <PackageTargetFallback>$(PackageTargetFallback);dotnet5.6;portable-net45+win8</PackageTargetFallback>
+    <AssetTargetFallback>$(AssetTargetFallback);portable-net45+win8+wp8+wpa81;</AssetTargetFallback>
     <PreserveCompilationContext>true</PreserveCompilationContext>
     <AssemblyName>AbpCompanyName.AbpProjectName.Web.Mvc</AssemblyName>
     <OutputType>Exe</OutputType>
@@ -34,6 +34,7 @@
   </ItemGroup>
 
   <ItemGroup>
+    <PackageReference Include="Microsoft.AspNetCore.Hosting" Version="2.0.0" />
     <PackageReference Include="Microsoft.VisualStudio.Web.CodeGeneration.Design" Version="2.0.0">
       <PrivateAssets>All</PrivateAssets>
     </PackageReference>
@@ -53,6 +54,7 @@
     <PackageReference Include="Abp.HangFire" Version="2.3.1" />
     <PackageReference Include="Abp.RedisCache" Version="2.3.1" />
     <PackageReference Include="Abp.Castle.Log4Net" Version="2.3.1" />
+    <PackageReference Include="Microsoft.AspNetCore.Mvc.Razor.ViewCompilation" Version="2.0.0" PrivateAssets="All" />
   </ItemGroup>
 
   <ItemGroup Condition=" '$(TargetFramework)' == 'net461' ">
