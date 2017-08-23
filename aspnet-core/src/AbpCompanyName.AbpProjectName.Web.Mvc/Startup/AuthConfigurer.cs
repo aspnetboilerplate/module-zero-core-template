@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Text;
+using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.IdentityModel.Tokens;
@@ -15,6 +16,8 @@ namespace AbpCompanyName.AbpProjectName.Web.Startup
                 services.AddAuthentication()
                     .AddJwtBearer(options =>
                     {
+                        options.Audience = configuration["Authentication:JwtBearer:Audience"];
+                        
                         options.TokenValidationParameters = new TokenValidationParameters
                         {
                             // The signing key must match!

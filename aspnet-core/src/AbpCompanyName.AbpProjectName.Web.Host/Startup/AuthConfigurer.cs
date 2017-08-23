@@ -19,6 +19,8 @@ namespace AbpCompanyName.AbpProjectName.Web.Host.Startup
                 services.AddAuthentication()
                     .AddJwtBearer(options =>
                     {
+                        options.Audience = configuration["Authentication:JwtBearer:Audience"];
+
                         options.TokenValidationParameters = new TokenValidationParameters
                         {
                             // The signing key must match!

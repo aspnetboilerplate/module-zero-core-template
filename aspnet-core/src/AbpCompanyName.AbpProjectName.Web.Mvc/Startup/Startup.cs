@@ -1,6 +1,7 @@
 ﻿using System;
 using Abp.AspNetCore;
 using Abp.Castle.Logging.Log4Net;
+using AbpCompanyName.AbpProjectName.Authentication.JwtBearer;
 using AbpCompanyName.AbpProjectName.Configuration;
 using AbpCompanyName.AbpProjectName.Identity;
 using AbpCompanyName.AbpProjectName.Web.Resources;
@@ -11,6 +12,8 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Logging;
+using Microsoft.AspNetCore.Authentication;
+using Microsoft.AspNetCore.Authentication.JwtBearer;
 
 #if FEATURE_SIGNALR
 using Owin;
@@ -38,7 +41,6 @@ namespace AbpCompanyName.AbpProjectName.Web.Startup
             });
 
             IdentityRegistrar.Register(services);
-
             AuthConfigurer.Configure(services, _appConfiguration);
 
             services.AddScoped<IWebResourceManager, WebResourceManager>();
@@ -66,9 +68,10 @@ namespace AbpCompanyName.AbpProjectName.Web.Startup
                 app.UseExceptionHandler("/Error");
             }
 
-            app.UseAuthentication();
-
             app.UseStaticFiles();
+
+            app.UseAuthentication();
+            app.UseJwtTokenMiddleware();
 
 #if FEATURE_SIGNALR
             //Integrate to OWIN

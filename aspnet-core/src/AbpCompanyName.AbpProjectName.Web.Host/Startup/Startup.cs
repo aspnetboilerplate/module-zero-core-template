@@ -13,6 +13,9 @@ using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Logging;
 using Swashbuckle.AspNetCore.Swagger;
 using Abp.Extensions;
+using Microsoft.AspNetCore.Authentication;
+using Microsoft.AspNetCore.Authentication.JwtBearer;
+using AbpCompanyName.AbpProjectName.Authentication.JwtBearer;
 
 #if FEATURE_SIGNALR
 using Owin;
@@ -83,9 +86,10 @@ namespace AbpCompanyName.AbpProjectName.Web.Host.Startup
 
             app.UseCors(DefaultCorsPolicyName); //Enable CORS!
 
-            app.UseAuthentication();
-
             app.UseStaticFiles();
+
+            app.UseAuthentication();
+            app.UseJwtTokenMiddleware();
 
 #if FEATURE_SIGNALR
             //Integrate to OWIN

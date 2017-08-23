@@ -11,7 +11,7 @@
     <GenerateAssemblyProductAttribute>false</GenerateAssemblyProductAttribute>
     <RootNamespace>AbpCompanyName.AbpProjectName</RootNamespace>
   </PropertyGroup>
-
+  
   <ItemGroup>
     <ProjectReference Include="..\AbpCompanyName.AbpProjectName.Core\AbpCompanyName.AbpProjectName.Core.csproj" />
   </ItemGroup>
