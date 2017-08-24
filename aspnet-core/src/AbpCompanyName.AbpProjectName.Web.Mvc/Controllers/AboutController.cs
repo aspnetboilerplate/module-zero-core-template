@@ -1,4 +1,5 @@
-﻿using AbpCompanyName.AbpProjectName.Controllers;
+﻿using Abp.AspNetCore.Mvc.Authorization;
+using AbpCompanyName.AbpProjectName.Controllers;
 using Microsoft.AspNetCore.Mvc;
 
 namespace AbpCompanyName.AbpProjectName.Web.Controllers
