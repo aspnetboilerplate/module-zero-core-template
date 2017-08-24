@@ -18,9 +18,9 @@
   </ItemGroup>
 
   <ItemGroup>
-    <PackageReference Include="Abp" Version="3.0.0-beta2" />
-    <PackageReference Include="Abp.AutoMapper" Version="3.0.0-beta2" />
-    <PackageReference Include="Abp.ZeroCore.EntityFrameworkCore" Version="3.0.0-beta2" />
+    <PackageReference Include="Abp" Version="3.0.0-beta3" />
+    <PackageReference Include="Abp.AutoMapper" Version="3.0.0-beta3" />
+    <PackageReference Include="Abp.ZeroCore.EntityFrameworkCore" Version="3.0.0-beta3" />
     <PackageReference Include="Microsoft.Extensions.Configuration.EnvironmentVariables" Version="2.0.0" />
     <PackageReference Include="Microsoft.Extensions.Configuration.Json" Version="2.0.0" />
     <PackageReference Include="Microsoft.Extensions.Configuration.UserSecrets" Version="2.0.0" />
