@@ -25,6 +25,7 @@ namespace AbpCompanyName.AbpProjectName.Identity
                 .AddAbpSignInManager<SignInManager>()
                 .AddAbpSecurityStampValidator<SecurityStampValidator>()
                 .AddAbpUserClaimsPrincipalFactory<UserClaimsPrincipalFactory>()
+                .AddPermissionChecker<PermissionChecker>()
                 .AddDefaultTokenProviders();
         }
     }
