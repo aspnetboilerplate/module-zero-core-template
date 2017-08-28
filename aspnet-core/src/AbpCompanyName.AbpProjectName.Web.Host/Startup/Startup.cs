@@ -64,6 +64,8 @@ namespace AbpCompanyName.AbpProjectName.Web.Host.Startup
             {
                 options.SwaggerDoc("v1", new Info { Title = "AbpProjectName API", Version = "v1" });
                 options.DocInclusionPredicate((docName, description) => true);
+
+                // Define the BearerAuth scheme that's in use
                 options.AddSecurityDefinition("bearerAuth", new ApiKeyScheme()
                 {
                     Description = "JWT Authorization header using the Bearer scheme. Example: \"Authorization: Bearer {token}\"",
@@ -71,6 +73,8 @@ namespace AbpCompanyName.AbpProjectName.Web.Host.Startup
                     In = "header",
                     Type = "apiKey"
                 });
+                // Assign scope requirements to operations based on AuthorizeAttribute
+                options.OperationFilter<SecurityRequirementsOperationFilter>();
             });
 
             //Configure Abp and Dependency Injection
