@@ -1,3 +1,4 @@
+var abp = abp || {};
 (function () {
 
     /* Swagger */
