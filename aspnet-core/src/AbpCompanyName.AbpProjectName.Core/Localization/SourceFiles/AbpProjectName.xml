@@ -77,5 +77,9 @@
     <text name="Actions">Actions</text>
 
     <text name="CouldNotCompleteLoginOperation">Could not complete login operation. Please try again later.</text>
+
+    <text name="EditRole">Edit role</text>
+    <text name="EditTenant">Edit tenant</text>
+    <text name="EditUser">Edit user</text>
   </texts>
 </localizationDictionary>
