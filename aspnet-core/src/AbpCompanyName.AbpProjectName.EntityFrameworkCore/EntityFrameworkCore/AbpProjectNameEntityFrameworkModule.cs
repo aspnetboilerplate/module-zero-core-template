@@ -16,14 +16,20 @@ namespace AbpCompanyName.AbpProjectName.EntityFrameworkCore
 
         public bool SkipDbSeed { get; set; }
 
-
         public override void PreInitialize()
         {
             if (!SkipDbContextRegistration)
             {
-                Configuration.Modules.AbpEfCore().AddDbContext<AbpProjectNameDbContext>(configuration =>
+                Configuration.Modules.AbpEfCore().AddDbContext<AbpProjectNameDbContext>(options =>
                 {
-                    AbpProjectNameDbContextConfigurer.Configure(configuration.DbContextOptions, configuration.ConnectionString);
+                    if (options.ExistingConnection != null)
+                    {
+                        AbpProjectNameDbContextConfigurer.Configure(options.DbContextOptions, options.ExistingConnection);
+                    }
+                    else
+                    {
+                        AbpProjectNameDbContextConfigurer.Configure(options.DbContextOptions, options.ConnectionString);
+                    }
                 });
             }
         }
