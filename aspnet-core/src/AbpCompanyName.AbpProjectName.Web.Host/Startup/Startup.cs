@@ -107,6 +107,8 @@ namespace AbpCompanyName.AbpProjectName.Web.Host.Startup
             // Enable middleware to serve swagger-ui assets (HTML, JS, CSS etc.)
             app.UseSwaggerUI(options =>
             {
+                options.InjectOnCompleteJavaScript("/swagger/ui/abp.js");
+                options.InjectOnCompleteJavaScript("/swagger/ui/on-complete.js");
                 options.SwaggerEndpoint("/swagger/v1/swagger.json", "AbpProjectName API V1");
             }); //URL: /swagger
         }
