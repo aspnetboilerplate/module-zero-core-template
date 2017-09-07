@@ -14,7 +14,6 @@ using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Logging;
 using Microsoft.AspNetCore.Authentication;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
-using Swashbuckle.AspNetCore.Swagger;
 
 #if FEATURE_SIGNALR
 using Owin;
@@ -46,12 +45,6 @@ namespace AbpCompanyName.AbpProjectName.Web.Startup
 
             services.AddScoped<IWebResourceManager, WebResourceManager>();
 
-            services.AddSwaggerGen(options =>
-            {
-                options.SwaggerDoc("v1", new Info { Title = "AbpZeroTemplate API", Version = "v1" });
-                options.DocInclusionPredicate((docName, description) => true);
-            });
-
             //Configure Abp and Dependency Injection
             return services.AddAbp<AbpProjectNameWebMvcModule>(options =>
             {
@@ -79,13 +72,6 @@ namespace AbpCompanyName.AbpProjectName.Web.Startup
 
             app.UseAuthentication();
             app.UseJwtTokenMiddleware();
-
-            app.UseSwagger();
-            //Enable middleware to serve swagger - ui assets(HTML, JS, CSS etc.)
-            app.UseSwaggerUI(options =>
-            {
-                options.SwaggerEndpoint("/swagger/v1/swagger.json", "AbpZeroTemplate API V1");
-            }); //URL: /swagger
 
 #if FEATURE_SIGNALR
             //Integrate to OWIN
