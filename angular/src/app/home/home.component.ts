@@ -1,4 +1,4 @@
-﻿import { Component, Injector, AfterViewInit } from '@angular/core';
+import { Component, Injector, AfterViewInit } from '@angular/core';
 import { AppComponentBase } from '@shared/app-component-base';
 import { appModuleAnimation } from '@shared/animations/routerTransition';
 
@@ -73,7 +73,7 @@ export class HomeComponent extends AppComponentBase implements AfterViewInit {
             updateRealTime();
 
             $('#realtime').on('change', function () {
-                realtime = this.checked ? 'on' : 'off';
+                realtime = (this as any).checked ? 'on' : 'off';
                 updateRealTime();
             });
             //====================================================================================================
