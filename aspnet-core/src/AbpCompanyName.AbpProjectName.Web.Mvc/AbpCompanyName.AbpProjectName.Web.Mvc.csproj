@@ -39,7 +39,7 @@
       <PrivateAssets>All</PrivateAssets>
     </PackageReference>
     <PackageReference Include="AspNet.Security.OpenIdConnect.Server" Version="1.0.1" />
-    <PackageReference Include="PaulMiami.AspNetCore.Mvc.Recaptcha" Version="1.2.0" />
+    <PackageReference Include="PaulMiami.AspNetCore.Mvc.Recaptcha" Version="1.2.1" />
     <PackageReference Include="Castle.LoggingFacility.MsLogging" Version="3.0.0" />
     <PackageReference Include="Microsoft.AspNetCore.Authentication.Cookies" Version="2.0.0" />
     <PackageReference Include="Microsoft.AspNetCore.Authentication.Twitter" Version="2.0.0" />
