@@ -4,7 +4,7 @@ using Abp.Domain.Uow;
 using AbpCompanyName.AbpProjectName.Authorization.Roles;
 using AbpCompanyName.AbpProjectName.Authorization.Users;
 using AbpCompanyName.AbpProjectName.MultiTenancy;
-using Microsoft.AspNetCore.Builder;
+using Microsoft.AspNetCore.Authentication;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.Extensions.Logging;
@@ -21,7 +21,8 @@ namespace AbpCompanyName.AbpProjectName.Identity
             IOptions<IdentityOptions> optionsAccessor, 
             ILogger<SignInManager<User>> logger,
             IUnitOfWorkManager unitOfWorkManager,
-            ISettingManager settingManager
+            ISettingManager settingManager,
+            IAuthenticationSchemeProvider schemes
             ) : base(
                 userManager, 
                 contextAccessor, 
@@ -29,7 +30,8 @@ namespace AbpCompanyName.AbpProjectName.Identity
                 optionsAccessor, 
                 logger,
                 unitOfWorkManager,
-                settingManager)
+                settingManager,
+                schemes)
         {
         }
     }

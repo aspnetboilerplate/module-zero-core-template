@@ -1,6 +1,6 @@
 ﻿using Abp.Authorization;
 using AbpCompanyName.AbpProjectName.Authorization.Roles;
-using Microsoft.AspNetCore.Builder;
+using Microsoft.AspNetCore.Identity;
 using Microsoft.Extensions.Options;
 
 namespace AbpCompanyName.AbpProjectName.Authorization.Users

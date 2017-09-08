@@ -3,17 +3,18 @@ using AbpCompanyName.AbpProjectName.Authorization.Roles;
 using AbpCompanyName.AbpProjectName.Authorization.Users;
 using AbpCompanyName.AbpProjectName.Editions;
 using AbpCompanyName.AbpProjectName.MultiTenancy;
+using Microsoft.AspNetCore.Identity;
 using Microsoft.Extensions.DependencyInjection;
 
 namespace AbpCompanyName.AbpProjectName.Identity
 {
     public static class IdentityRegistrar
     {
-        public static void Register(IServiceCollection services)
+        public static IdentityBuilder Register(IServiceCollection services)
         {
             services.AddLogging();
 
-            services.AddAbpIdentity<Tenant, User, Role>()
+            return services.AddAbpIdentity<Tenant, User, Role>()
                 .AddAbpTenantManager<TenantManager>()
                 .AddAbpUserManager<UserManager>()
                 .AddAbpRoleManager<RoleManager>()
@@ -24,6 +25,7 @@ namespace AbpCompanyName.AbpProjectName.Identity
                 .AddAbpSignInManager<SignInManager>()
                 .AddAbpSecurityStampValidator<SecurityStampValidator>()
                 .AddAbpUserClaimsPrincipalFactory<UserClaimsPrincipalFactory>()
+                .AddPermissionChecker<PermissionChecker>()
                 .AddDefaultTokenProviders();
         }
     }

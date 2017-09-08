@@ -2,6 +2,7 @@
 using Abp.Configuration;
 using Abp.Localization;
 using Abp.Net.Mail;
+using Microsoft.EntityFrameworkCore;
 
 namespace AbpCompanyName.AbpProjectName.EntityFrameworkCore.Seed.Host
 {
@@ -26,7 +27,7 @@ namespace AbpCompanyName.AbpProjectName.EntityFrameworkCore.Seed.Host
 
         private void AddSettingIfNotExists(string name, string value, int? tenantId = null)
         {
-            if (_context.Settings.Any(s => s.Name == name && s.TenantId == tenantId && s.UserId == null))
+            if (_context.Settings.IgnoreQueryFilters().Any(s => s.Name == name && s.TenantId == tenantId && s.UserId == null))
             {
                 return;
             }

@@ -29,6 +29,7 @@ namespace AbpCompanyName.AbpProjectName.Tests
         public override void PreInitialize()
         {
             Configuration.UnitOfWork.Timeout = TimeSpan.FromMinutes(30);
+            Configuration.UnitOfWork.IsTransactional = false;
 
             //Disable static mapper usage since it breaks unit tests (see https://github.com/aspnetboilerplate/aspnetboilerplate/issues/2052)
             Configuration.Modules.AbpAutoMapper().UseStaticMapper = false;

@@ -13,6 +13,9 @@ using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Logging;
 using Swashbuckle.AspNetCore.Swagger;
 using Abp.Extensions;
+using Microsoft.AspNetCore.Authentication;
+using Microsoft.AspNetCore.Authentication.JwtBearer;
+using AbpCompanyName.AbpProjectName.Authentication.JwtBearer;
 
 #if FEATURE_SIGNALR
 using Owin;
@@ -45,6 +48,7 @@ namespace AbpCompanyName.AbpProjectName.Web.Host.Startup
             });
 
             IdentityRegistrar.Register(services);
+            AuthConfigurer.Configure(services, _appConfiguration);
 
             //Configure CORS for angular2 UI
             services.AddCors(options =>
@@ -93,9 +97,10 @@ namespace AbpCompanyName.AbpProjectName.Web.Host.Startup
 
             app.UseCors(DefaultCorsPolicyName); //Enable CORS!
 
-            AuthConfigurer.Configure(app, _appConfiguration);
-
             app.UseStaticFiles();
+
+            app.UseAuthentication();
+            app.UseJwtTokenMiddleware();
 
 #if FEATURE_SIGNALR
             //Integrate to OWIN

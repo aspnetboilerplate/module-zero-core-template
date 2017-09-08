@@ -5,7 +5,6 @@ using Abp.Domain.Uow;
 using Abp.Runtime.Caching;
 using Abp.Zero.Configuration;
 using AbpCompanyName.AbpProjectName.Authorization.Users;
-using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.Extensions.Logging;
 
@@ -19,7 +18,6 @@ namespace AbpCompanyName.AbpProjectName.Authorization.Roles
             ILookupNormalizer keyNormalizer, 
             IdentityErrorDescriber errors, 
             ILogger<AbpRoleManager<Role, User>> logger,
-            IHttpContextAccessor contextAccessor, 
             IPermissionManager permissionManager, 
             ICacheManager cacheManager, 
             IUnitOfWorkManager unitOfWorkManager,
@@ -29,7 +27,6 @@ namespace AbpCompanyName.AbpProjectName.Authorization.Roles
                   roleValidators, 
                   keyNormalizer, 
                   errors, logger, 
-                  contextAccessor, 
                   permissionManager,
                   cacheManager, 
                   unitOfWorkManager,

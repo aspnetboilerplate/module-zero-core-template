@@ -6,6 +6,7 @@ using Abp.MultiTenancy;
 using AbpCompanyName.AbpProjectName.Authorization;
 using AbpCompanyName.AbpProjectName.Authorization.Roles;
 using AbpCompanyName.AbpProjectName.Authorization.Users;
+using Microsoft.EntityFrameworkCore;
 
 namespace AbpCompanyName.AbpProjectName.EntityFrameworkCore.Seed.Host
 {
@@ -27,7 +28,7 @@ namespace AbpCompanyName.AbpProjectName.EntityFrameworkCore.Seed.Host
         {
             //Admin role for host
 
-            var adminRoleForHost = _context.Roles.FirstOrDefault(r => r.TenantId == null && r.Name == StaticRoleNames.Host.Admin);
+            var adminRoleForHost = _context.Roles.IgnoreQueryFilters().FirstOrDefault(r => r.TenantId == null && r.Name == StaticRoleNames.Host.Admin);
             if (adminRoleForHost == null)
             {
                 adminRoleForHost = _context.Roles.Add(new Role(null, StaticRoleNames.Host.Admin, StaticRoleNames.Host.Admin) { IsStatic = true, IsDefault = true }).Entity;
