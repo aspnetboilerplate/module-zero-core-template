@@ -115,8 +115,8 @@
                             @foreach (var permission in Model.Permissions)
                             {
                                 <div class="col-sm-6">
-                                    <input type="checkbox" name="permission" value="@permission.Name" class="filled-in" id="@string.Format("permission{0}",permission.Name)" checked="checked" />
-                                    <label for="@string.Format("permission{0}",permission.Name)">@permission.DisplayName</label>
+                                    <input type="checkbox" name="permission" value="@permission.Name" class="filled-in" id="permission-@permission.Name" checked="checked" />
+                                    <label for="permission-@permission.Name">@permission.DisplayName</label>
                                 </div>
                             }
                         </div>
