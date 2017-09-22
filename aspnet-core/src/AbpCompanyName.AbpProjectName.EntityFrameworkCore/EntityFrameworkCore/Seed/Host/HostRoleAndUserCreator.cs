@@ -37,7 +37,7 @@ namespace AbpCompanyName.AbpProjectName.EntityFrameworkCore.Seed.Host
 
             //admin user for host
 
-            var adminUserForHost = _context.Users.FirstOrDefault(u => u.TenantId == null && u.UserName == AbpUserBase.AdminUserName);
+            var adminUserForHost = _context.Users.IgnoreQueryFilters().FirstOrDefault(u => u.TenantId == null && u.UserName == AbpUserBase.AdminUserName);
             if (adminUserForHost == null)
             {
                 var user = new User
@@ -81,16 +81,6 @@ namespace AbpCompanyName.AbpProjectName.EntityFrameworkCore.Seed.Host
 
                 _context.SaveChanges();
 
-                //User account of admin user
-                _context.UserAccounts.Add(new UserAccount
-                {
-                    TenantId = null,
-                    UserId = adminUserForHost.Id,
-                    UserName = AbpUserBase.AdminUserName,
-                    EmailAddress = adminUserForHost.EmailAddress
-                });
-
-                _context.SaveChanges();
             }
         }
     }
