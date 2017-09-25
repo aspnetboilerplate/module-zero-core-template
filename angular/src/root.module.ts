@@ -1,6 +1,6 @@
-﻿import { BrowserModule } from '@angular/platform-browser';
+import { BrowserModule } from '@angular/platform-browser';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
-import { NgModule, Injector, APP_INITIALIZER } from '@angular/core';
+import { NgModule, Injector, APP_INITIALIZER, LOCALE_ID } from '@angular/core';
 
 import { AbpModule, ABP_HTTP_PROVIDER } from '@abp/abp.module';
 
@@ -43,6 +43,10 @@ export function getRemoteServiceBaseUrl(): string {
   return AppConsts.remoteServiceBaseUrl;
 }
 
+export function getCurrentLanguage(): string {
+    return abp.localization.currentLanguage.name;
+}
+
 @NgModule({
   imports: [
     BrowserModule,
@@ -64,7 +68,11 @@ export function getRemoteServiceBaseUrl(): string {
       useFactory: appInitializerFactory,
       deps: [Injector],
       multi: true
-    }
+    },
+      {
+          provide: LOCALE_ID,
+          useFactory: getCurrentLanguage
+      }
   ],
   bootstrap: [RootComponent]
 })
