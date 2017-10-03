@@ -38,7 +38,8 @@ export class CreateUserComponent extends AppComponentBase implements OnInit {
     show(): void {
         this.active = true;
         this.modal.show();
-        this.user = new CreateUserDto({ isActive: true });
+        this.user = new CreateUserDto();
+        this.user.init({ isActive: true });
     }
 
     onShown(): void {
