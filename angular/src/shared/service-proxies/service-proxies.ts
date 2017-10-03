@@ -2844,3 +2844,5 @@ function blobToText(blob: any): Observable<string> {
         reader.readAsText(blob); 
     });
 }
+
+import 'rxjs/add/operator/finally';
