@@ -1,1 +1,1 @@
-﻿import * as moment from 'moment';
+﻿import 'rxjs/add/operator/finally';

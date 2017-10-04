@@ -34,7 +34,8 @@ export class CreateRoleComponent extends AppComponentBase implements OnInit {
 
     show(): void {
         this.active = true;
-        this.role = new CreateRoleDto({ isStatic: false });
+        this.role = new CreateRoleDto();
+        this.role.init({ isStatic: false });
 
         this.modal.show();
     }
