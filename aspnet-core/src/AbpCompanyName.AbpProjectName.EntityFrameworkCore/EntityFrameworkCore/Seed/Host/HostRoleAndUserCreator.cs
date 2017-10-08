@@ -81,16 +81,6 @@ namespace AbpCompanyName.AbpProjectName.EntityFrameworkCore.Seed.Host
 
                 _context.SaveChanges();
 
-                //User account of admin user
-                _context.UserAccounts.Add(new UserAccount
-                {
-                    TenantId = null,
-                    UserId = adminUserForHost.Id,
-                    UserName = AbpUserBase.AdminUserName,
-                    EmailAddress = adminUserForHost.EmailAddress
-                });
-
-                _context.SaveChanges();
             }
         }
     }
