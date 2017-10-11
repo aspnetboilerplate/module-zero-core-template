@@ -7,7 +7,7 @@ namespace AbpCompanyName.AbpProjectName.Authorization.Roles
     {
         public static void Configure(IRoleManagementConfig roleManagementConfig)
         {
-            //Static host roles
+            // Static host roles
 
             roleManagementConfig.StaticRoles.Add(
                 new StaticRoleDefinition(
@@ -15,7 +15,7 @@ namespace AbpCompanyName.AbpProjectName.Authorization.Roles
                     MultiTenancySides.Host)
                 );
 
-            //Static tenant roles
+            // Static tenant roles
 
             roleManagementConfig.StaticRoles.Add(
                 new StaticRoleDefinition(

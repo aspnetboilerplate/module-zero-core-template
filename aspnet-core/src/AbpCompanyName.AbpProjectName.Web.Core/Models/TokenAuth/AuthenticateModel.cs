@@ -1,6 +1,5 @@
 ﻿using System.ComponentModel.DataAnnotations;
 using Abp.Authorization.Users;
-using AbpCompanyName.AbpProjectName.Authorization.Users;
 
 namespace AbpCompanyName.AbpProjectName.Models.TokenAuth
 {
@@ -11,7 +10,7 @@ namespace AbpCompanyName.AbpProjectName.Models.TokenAuth
         public string UserNameOrEmailAddress { get; set; }
 
         [Required]
-        [StringLength(User.MaxPlainPasswordLength)]
+        [StringLength(AbpUserBase.MaxPlainPasswordLength)]
         public string Password { get; set; }
         
         public bool RememberClient { get; set; }

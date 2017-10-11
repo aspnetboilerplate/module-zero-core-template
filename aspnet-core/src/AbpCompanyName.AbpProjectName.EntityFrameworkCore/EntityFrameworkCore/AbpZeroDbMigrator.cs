@@ -10,13 +10,12 @@ namespace AbpCompanyName.AbpProjectName.EntityFrameworkCore
         public AbpZeroDbMigrator(
             IUnitOfWorkManager unitOfWorkManager,
             IDbPerTenantConnectionStringResolver connectionStringResolver,
-            IDbContextResolver dbContextResolver) :
-            base(
+            IDbContextResolver dbContextResolver)
+            : base(
                 unitOfWorkManager,
                 connectionStringResolver,
                 dbContextResolver)
         {
-
         }
     }
 }

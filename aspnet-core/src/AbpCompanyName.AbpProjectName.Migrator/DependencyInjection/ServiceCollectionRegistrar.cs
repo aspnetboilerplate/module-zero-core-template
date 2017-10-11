@@ -1,7 +1,7 @@
-﻿using Abp.Dependency;
-using AbpCompanyName.AbpProjectName.Identity;
+﻿using Microsoft.Extensions.DependencyInjection;
 using Castle.Windsor.MsDependencyInjection;
-using Microsoft.Extensions.DependencyInjection;
+using Abp.Dependency;
+using AbpCompanyName.AbpProjectName.Identity;
 
 namespace AbpCompanyName.AbpProjectName.Migrator.DependencyInjection
 {

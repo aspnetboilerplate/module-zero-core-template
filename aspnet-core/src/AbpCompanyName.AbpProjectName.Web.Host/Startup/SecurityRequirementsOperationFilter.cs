@@ -1,22 +1,13 @@
-﻿using Abp.Authorization;
-using Microsoft.AspNetCore.Authorization;
-using Microsoft.Extensions.Options;
+﻿using System.Collections.Generic;
+using System.Linq;
 using Swashbuckle.AspNetCore.Swagger;
 using Swashbuckle.AspNetCore.SwaggerGen;
-using System.Collections.Generic;
-using System.Linq;
+using Abp.Authorization;
 
 namespace AbpCompanyName.AbpProjectName.Web.Host.Startup
 {
     public class SecurityRequirementsOperationFilter : IOperationFilter
     {
-        private readonly IOptions<AuthorizationOptions> authorizationOptions;
-
-        public SecurityRequirementsOperationFilter(IOptions<AuthorizationOptions> authorizationOptions)
-        {
-            this.authorizationOptions = authorizationOptions;
-        }
-
         public void Apply(Operation operation, OperationFilterContext context)
         {
             var controllerPermissions = context.ApiDescription.ControllerAttributes()

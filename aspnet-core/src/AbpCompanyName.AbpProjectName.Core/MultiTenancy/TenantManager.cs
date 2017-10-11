@@ -12,14 +12,12 @@ namespace AbpCompanyName.AbpProjectName.MultiTenancy
             IRepository<Tenant> tenantRepository, 
             IRepository<TenantFeatureSetting, long> tenantFeatureRepository, 
             EditionManager editionManager,
-            IAbpZeroFeatureValueStore featureValueStore
-            ) 
+            IAbpZeroFeatureValueStore featureValueStore) 
             : base(
                 tenantRepository, 
                 tenantFeatureRepository, 
                 editionManager,
-                featureValueStore
-            )
+                featureValueStore)
         {
         }
     }

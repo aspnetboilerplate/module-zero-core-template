@@ -3,7 +3,6 @@ using System.ComponentModel.DataAnnotations;
 using System.Text.RegularExpressions;
 using Abp.Authorization.Users;
 using Abp.Extensions;
-using AbpCompanyName.AbpProjectName.Authorization.Users;
 
 namespace AbpCompanyName.AbpProjectName.Web.Models.Account
 {

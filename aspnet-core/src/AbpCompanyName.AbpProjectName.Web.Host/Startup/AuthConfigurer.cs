@@ -2,11 +2,11 @@
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-using Abp.Runtime.Security;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.IdentityModel.Tokens;
+using Abp.Runtime.Security;
 
 namespace AbpCompanyName.AbpProjectName.Web.Host.Startup
 {
@@ -57,18 +57,18 @@ namespace AbpCompanyName.AbpProjectName.Web.Host.Startup
             if (!context.HttpContext.Request.Path.HasValue ||
                 !context.HttpContext.Request.Path.Value.StartsWith("/signalr"))
             {
-                //We are just looking for signalr clients
+                // We are just looking for signalr clients
                 return Task.CompletedTask;
             }
 
             var qsAuthToken = context.HttpContext.Request.Query["enc_auth_token"].FirstOrDefault();
             if (qsAuthToken == null)
             {
-                //Cookie value does not matches to querystring value
+                // Cookie value does not matches to querystring value
                 return Task.CompletedTask;
             }
 
-            //Set auth token from cookie
+            // Set auth token from cookie
             context.Token = SimpleStringCipher.Instance.Decrypt(qsAuthToken, AppConsts.DefaultPassPhrase);
             return Task.CompletedTask;
         }

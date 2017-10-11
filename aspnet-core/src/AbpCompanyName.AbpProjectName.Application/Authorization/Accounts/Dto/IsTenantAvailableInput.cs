@@ -10,4 +10,3 @@ namespace AbpCompanyName.AbpProjectName.Authorization.Accounts.Dto
         public string TenancyName { get; set; }
     }
 }
-

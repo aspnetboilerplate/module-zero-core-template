@@ -15,10 +15,9 @@ namespace AbpCompanyName.AbpProjectName.EntityFrameworkCore.Repositories
         protected AbpProjectNameRepositoryBase(IDbContextProvider<AbpProjectNameDbContext> dbContextProvider)
             : base(dbContextProvider)
         {
-
         }
 
-        //add your common methods for all repositories
+        // Add your common methods for all repositories
     }
 
     /// <summary>
@@ -32,9 +31,8 @@ namespace AbpCompanyName.AbpProjectName.EntityFrameworkCore.Repositories
         protected AbpProjectNameRepositoryBase(IDbContextProvider<AbpProjectNameDbContext> dbContextProvider)
             : base(dbContextProvider)
         {
-
         }
 
-        //do not add any method here, add to the class above (since this inherits it)!!!
+        // Do not add any method here, add to the class above (since this inherits it)!!!
     }
 }

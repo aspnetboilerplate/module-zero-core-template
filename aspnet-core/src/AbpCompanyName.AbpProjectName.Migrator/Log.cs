@@ -1,7 +1,7 @@
 using System;
+using Castle.Core.Logging;
 using Abp.Dependency;
 using Abp.Timing;
-using Castle.Core.Logging;
 
 namespace AbpCompanyName.AbpProjectName.Migrator
 {

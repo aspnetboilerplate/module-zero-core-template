@@ -7,10 +7,8 @@ using Abp.Domain.Uow;
 using Abp.Extensions;
 using Abp.MultiTenancy;
 using Abp.Runtime.Security;
-using Abp.Zero.EntityFrameworkCore;
 using AbpCompanyName.AbpProjectName.EntityFrameworkCore;
 using AbpCompanyName.AbpProjectName.EntityFrameworkCore.Seed;
-using AbpCompanyName.AbpProjectName.Migrator;
 using AbpCompanyName.AbpProjectName.MultiTenancy;
 
 namespace AbpCompanyName.AbpProjectName.Migrator
@@ -76,7 +74,7 @@ namespace AbpCompanyName.AbpProjectName.Migrator
 
             var migratedDatabases = new HashSet<string>();
             var tenants = _tenantRepository.GetAllList(t => t.ConnectionString != null && t.ConnectionString != "");
-            for (int i = 0; i < tenants.Count; i++)
+            for (var i = 0; i < tenants.Count; i++)
             {
                 var tenant = tenants[i];
                 Log.Write(string.Format("Tenant database migration started... ({0} / {1})", (i + 1), tenants.Count));

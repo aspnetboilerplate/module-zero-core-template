@@ -10,11 +10,11 @@ namespace AbpCompanyName.AbpProjectName.MultiTenancy.Dto
     {
         [Required]
         [StringLength(AbpTenantBase.MaxTenancyNameLength)]
-        [RegularExpression(Tenant.TenancyNameRegex)]
+        [RegularExpression(AbpTenantBase.TenancyNameRegex)]
         public string TenancyName { get; set; }
 
         [Required]
-        [StringLength(Tenant.MaxNameLength)]
+        [StringLength(AbpTenantBase.MaxNameLength)]
         public string Name { get; set; }
 
         [Required]

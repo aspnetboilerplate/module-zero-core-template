@@ -9,7 +9,6 @@ namespace AbpCompanyName.AbpProjectName.Authorization
         public PermissionChecker(UserManager userManager)
             : base(userManager)
         {
-
         }
     }
 }

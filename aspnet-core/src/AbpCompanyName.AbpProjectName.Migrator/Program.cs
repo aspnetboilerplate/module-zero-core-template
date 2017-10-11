@@ -1,9 +1,9 @@
 ﻿using System;
+using Castle.Facilities.Logging;
 using Abp;
+using Abp.Castle.Logging.Log4Net;
 using Abp.Collections.Extensions;
 using Abp.Dependency;
-using Castle.Facilities.Logging;
-using Abp.Castle.Logging.Log4Net;
 
 namespace AbpCompanyName.AbpProjectName.Migrator
 {
@@ -41,7 +41,7 @@ namespace AbpCompanyName.AbpProjectName.Migrator
                 return;
             }
 
-            for (int i = 0; i < args.Length; i++)
+            for (var i = 0; i < args.Length; i++)
             {
                 var arg = args[i];
                 switch (arg)
