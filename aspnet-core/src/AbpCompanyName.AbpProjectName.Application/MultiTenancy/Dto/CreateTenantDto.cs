@@ -21,7 +21,7 @@ namespace AbpCompanyName.AbpProjectName.MultiTenancy.Dto
         [StringLength(AbpUserBase.MaxEmailAddressLength)]
         public string AdminEmailAddress { get; set; }
 
-        [MaxLength(AbpTenantBase.MaxConnectionStringLength)]
+        [StringLength(AbpTenantBase.MaxConnectionStringLength)]
         public string ConnectionString { get; set; }
 
         public bool IsActive {get; set;}

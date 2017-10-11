@@ -24,7 +24,7 @@ namespace AbpCompanyName.AbpProjectName.Authorization.Roles
 
         }
 
-        [MaxLength(MaxDescriptionLength)]
+        [StringLength(MaxDescriptionLength)]
         public string Description {get; set;}
     }
 }
