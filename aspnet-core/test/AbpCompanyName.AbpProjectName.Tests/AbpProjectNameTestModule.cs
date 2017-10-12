@@ -1,5 +1,6 @@
 using System;
 using Castle.MicroKernel.Registration;
+using NSubstitute;
 using Abp.AutoMapper;
 using Abp.Dependency;
 using Abp.Modules;
@@ -10,7 +11,6 @@ using Abp.Zero.Configuration;
 using Abp.Zero.EntityFrameworkCore;
 using AbpCompanyName.AbpProjectName.EntityFrameworkCore;
 using AbpCompanyName.AbpProjectName.Tests.DependencyInjection;
-using NSubstitute;
 
 namespace AbpCompanyName.AbpProjectName.Tests
 {

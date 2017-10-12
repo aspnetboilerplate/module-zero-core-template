@@ -1,7 +1,7 @@
 ﻿using System.Threading.Tasks;
-using AbpCompanyName.AbpProjectName.Sessions;
 using Shouldly;
 using Xunit;
+using AbpCompanyName.AbpProjectName.Sessions;
 
 namespace AbpCompanyName.AbpProjectName.Tests.Sessions
 {

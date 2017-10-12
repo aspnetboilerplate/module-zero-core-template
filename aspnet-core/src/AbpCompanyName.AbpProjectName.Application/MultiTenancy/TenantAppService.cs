@@ -34,8 +34,8 @@ namespace AbpCompanyName.AbpProjectName.MultiTenancy
             UserManager userManager,            
             RoleManager roleManager, 
             IAbpZeroDbMigrator abpZeroDbMigrator, 
-            IPasswordHasher<User> passwordHasher
-            ) : base(repository)
+            IPasswordHasher<User> passwordHasher) 
+            : base(repository)
         {
             _tenantManager = tenantManager; 
             _editionManager = editionManager;
