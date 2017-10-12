@@ -7,7 +7,7 @@ using AbpCompanyName.AbpProjectName.Authorization.Roles;
 
 namespace AbpCompanyName.AbpProjectName.Roles.Dto
 {
-    [AutoMapFrom(typeof(Role)), AutoMapTo(typeof(Role))]
+    [AutoMap(typeof(Role))]
     public class RoleDto : EntityDto<int>
     {
         [Required]

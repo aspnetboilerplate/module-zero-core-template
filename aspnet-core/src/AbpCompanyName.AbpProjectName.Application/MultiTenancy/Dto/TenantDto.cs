@@ -5,7 +5,7 @@ using Abp.MultiTenancy;
 
 namespace AbpCompanyName.AbpProjectName.MultiTenancy.Dto
 {
-    [AutoMapTo(typeof(Tenant)), AutoMapFrom(typeof(Tenant))]
+    [AutoMapFrom(typeof(Tenant))]
     public class TenantDto : EntityDto
     {
         [Required]
