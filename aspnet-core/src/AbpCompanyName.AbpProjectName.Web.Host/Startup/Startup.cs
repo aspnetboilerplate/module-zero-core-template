@@ -16,18 +16,18 @@ using AbpCompanyName.AbpProjectName.Configuration;
 using AbpCompanyName.AbpProjectName.Identity;
 
 #if FEATURE_SIGNALR
-using Owin;
-using Microsoft.Owin.Cors;
 using Microsoft.AspNet.SignalR;
-using AbpCompanyName.AbpProjectName.Owin;
+using Microsoft.Owin.Cors;
+using Owin;
 using Abp.Owin;
+using AbpCompanyName.AbpProjectName.Owin;
 #endif
 
 namespace AbpCompanyName.AbpProjectName.Web.Host.Startup
 {
     public class Startup
     {
-        private const string DefaultCorsPolicyName = "localhost";
+        private const string _defaultCorsPolicyName = "localhost";
 
         private readonly IConfigurationRoot _appConfiguration;
 
@@ -41,7 +41,7 @@ namespace AbpCompanyName.AbpProjectName.Web.Host.Startup
             // MVC
             services.AddMvc(options =>
             {
-                options.Filters.Add(new CorsAuthorizationFilterFactory(DefaultCorsPolicyName));
+                options.Filters.Add(new CorsAuthorizationFilterFactory(_defaultCorsPolicyName));
             });
 
             IdentityRegistrar.Register(services);
@@ -50,7 +50,7 @@ namespace AbpCompanyName.AbpProjectName.Web.Host.Startup
             // Configure CORS for angular2 UI
             services.AddCors(options =>
             {
-                options.AddPolicy(DefaultCorsPolicyName, builder =>
+                options.AddPolicy(_defaultCorsPolicyName, builder =>
                 {
                     // App:CorsOrigins in appsettings.json can contain more than one address separated by comma.
                     builder
@@ -94,7 +94,7 @@ namespace AbpCompanyName.AbpProjectName.Web.Host.Startup
         {
             app.UseAbp(); // Initializes ABP framework.
 
-            app.UseCors(DefaultCorsPolicyName); // Enable CORS!
+            app.UseCors(_defaultCorsPolicyName); // Enable CORS!
 
             app.UseStaticFiles();
 
