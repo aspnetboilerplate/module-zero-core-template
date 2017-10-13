@@ -1,4 +1,5 @@
 using System.Linq;
+using Microsoft.EntityFrameworkCore;
 using Abp.Authorization;
 using Abp.Authorization.Roles;
 using Abp.Authorization.Users;
@@ -6,7 +7,6 @@ using Abp.MultiTenancy;
 using AbpCompanyName.AbpProjectName.Authorization;
 using AbpCompanyName.AbpProjectName.Authorization.Roles;
 using AbpCompanyName.AbpProjectName.Authorization.Users;
-using Microsoft.EntityFrameworkCore;
 
 namespace AbpCompanyName.AbpProjectName.EntityFrameworkCore.Seed.Host
 {
@@ -26,7 +26,7 @@ namespace AbpCompanyName.AbpProjectName.EntityFrameworkCore.Seed.Host
 
         private void CreateHostRoleAndUsers()
         {
-            //Admin role for host
+            // Admin role for host
 
             var adminRoleForHost = _context.Roles.IgnoreQueryFilters().FirstOrDefault(r => r.TenantId == null && r.Name == StaticRoleNames.Host.Admin);
             if (adminRoleForHost == null)
@@ -35,7 +35,7 @@ namespace AbpCompanyName.AbpProjectName.EntityFrameworkCore.Seed.Host
                 _context.SaveChanges();
             }
 
-            //admin user for host
+            // Admin user for host
 
             var adminUserForHost = _context.Users.IgnoreQueryFilters().FirstOrDefault(u => u.TenantId == null && u.UserName == AbpUserBase.AdminUserName);
             if (adminUserForHost == null)
@@ -49,7 +49,7 @@ namespace AbpCompanyName.AbpProjectName.EntityFrameworkCore.Seed.Host
                     EmailAddress = "admin@aspnetboilerplate.com",
                     IsEmailConfirmed = true,
                     IsActive = true,
-                    Password = "AM4OLBpptxBYmM79lGOX9egzZk3vIQU3d/gFCJzaBjAPXzYIK3tQ2N7X4fcrHtElTw==" //123qwe
+                    Password = "AM4OLBpptxBYmM79lGOX9egzZk3vIQU3d/gFCJzaBjAPXzYIK3tQ2N7X4fcrHtElTw==" // 123qwe
                 };
 
                 user.SetNormalizedNames();
@@ -57,11 +57,11 @@ namespace AbpCompanyName.AbpProjectName.EntityFrameworkCore.Seed.Host
                 adminUserForHost = _context.Users.Add(user).Entity;
                 _context.SaveChanges();
 
-                //Assign Admin role to admin user
+                // Assign Admin role to admin user
                 _context.UserRoles.Add(new UserRole(null, adminUserForHost.Id, adminRoleForHost.Id));
                 _context.SaveChanges();
 
-                //Grant all permissions
+                // Grant all permissions
                 var permissions = PermissionFinder
                     .GetAllPermissions(new AbpProjectNameAuthorizationProvider())
                     .Where(p => p.MultiTenancySides.HasFlag(MultiTenancySides.Host))
@@ -81,7 +81,7 @@ namespace AbpCompanyName.AbpProjectName.EntityFrameworkCore.Seed.Host
 
                 _context.SaveChanges();
 
-                //User account of admin user
+                // User account of admin user
                 _context.UserAccounts.Add(new UserAccount
                 {
                     TenantId = null,

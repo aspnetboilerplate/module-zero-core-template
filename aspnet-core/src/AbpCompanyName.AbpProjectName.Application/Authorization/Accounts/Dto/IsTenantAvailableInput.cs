@@ -6,8 +6,7 @@ namespace AbpCompanyName.AbpProjectName.Authorization.Accounts.Dto
     public class IsTenantAvailableInput
     {
         [Required]
-        [MaxLength(AbpTenantBase.MaxTenancyNameLength)]
+        [StringLength(AbpTenantBase.MaxTenancyNameLength)]
         public string TenancyName { get; set; }
     }
 }
-

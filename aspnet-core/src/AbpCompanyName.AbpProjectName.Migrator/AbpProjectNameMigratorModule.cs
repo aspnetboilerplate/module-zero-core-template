@@ -1,8 +1,8 @@
+using Microsoft.Extensions.Configuration;
+using Castle.MicroKernel.Registration;
 using Abp.Events.Bus;
 using Abp.Modules;
 using Abp.Reflection.Extensions;
-using Castle.MicroKernel.Registration;
-using Microsoft.Extensions.Configuration;
 using AbpCompanyName.AbpProjectName.Configuration;
 using AbpCompanyName.AbpProjectName.EntityFrameworkCore;
 using AbpCompanyName.AbpProjectName.Migrator.DependencyInjection;
@@ -27,7 +27,7 @@ namespace AbpCompanyName.AbpProjectName.Migrator
         {
             Configuration.DefaultNameOrConnectionString = _appConfiguration.GetConnectionString(
                 AbpProjectNameConsts.ConnectionStringName
-                );
+            );
 
             Configuration.BackgroundJobs.IsJobExecutionEnabled = false;
             Configuration.ReplaceService(typeof(IEventBus), () =>

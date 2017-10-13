@@ -1,11 +1,11 @@
 ﻿using System;
+using Microsoft.EntityFrameworkCore;
+using Microsoft.Extensions.DependencyInjection;
+using Castle.MicroKernel.Registration;
+using Castle.Windsor.MsDependencyInjection;
 using Abp.Dependency;
 using AbpCompanyName.AbpProjectName.EntityFrameworkCore;
 using AbpCompanyName.AbpProjectName.Identity;
-using Castle.MicroKernel.Registration;
-using Castle.Windsor.MsDependencyInjection;
-using Microsoft.EntityFrameworkCore;
-using Microsoft.Extensions.DependencyInjection;
 
 namespace AbpCompanyName.AbpProjectName.Tests.DependencyInjection
 {

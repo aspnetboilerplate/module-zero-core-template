@@ -10,18 +10,18 @@ namespace AbpCompanyName.AbpProjectName.MultiTenancy.Dto
     {
         [Required]
         [StringLength(AbpTenantBase.MaxTenancyNameLength)]
-        [RegularExpression(Tenant.TenancyNameRegex)]
+        [RegularExpression(AbpTenantBase.TenancyNameRegex)]
         public string TenancyName { get; set; }
 
         [Required]
-        [StringLength(Tenant.MaxNameLength)]
+        [StringLength(AbpTenantBase.MaxNameLength)]
         public string Name { get; set; }
 
         [Required]
         [StringLength(AbpUserBase.MaxEmailAddressLength)]
         public string AdminEmailAddress { get; set; }
 
-        [MaxLength(AbpTenantBase.MaxConnectionStringLength)]
+        [StringLength(AbpTenantBase.MaxConnectionStringLength)]
         public string ConnectionString { get; set; }
 
         public bool IsActive {get; set;}

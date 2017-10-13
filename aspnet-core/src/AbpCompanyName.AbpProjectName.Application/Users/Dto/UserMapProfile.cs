@@ -1,5 +1,5 @@
-﻿using AbpCompanyName.AbpProjectName.Authorization.Users;
-using AutoMapper;
+﻿using AutoMapper;
+using AbpCompanyName.AbpProjectName.Authorization.Users;
 
 namespace AbpCompanyName.AbpProjectName.Users.Dto
 {

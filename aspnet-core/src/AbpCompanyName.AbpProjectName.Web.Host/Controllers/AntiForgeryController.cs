@@ -1,5 +1,5 @@
-using AbpCompanyName.AbpProjectName.Controllers;
 using Microsoft.AspNetCore.Antiforgery;
+using AbpCompanyName.AbpProjectName.Controllers;
 
 namespace AbpCompanyName.AbpProjectName.Web.Host.Controllers
 {

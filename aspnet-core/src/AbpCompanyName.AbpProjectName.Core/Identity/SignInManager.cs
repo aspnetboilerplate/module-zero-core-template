@@ -1,14 +1,14 @@
-﻿using Abp.Authorization;
+﻿using Microsoft.AspNetCore.Authentication;
+using Microsoft.AspNetCore.Http;
+using Microsoft.AspNetCore.Identity;
+using Microsoft.Extensions.Logging;
+using Microsoft.Extensions.Options;
+using Abp.Authorization;
 using Abp.Configuration;
 using Abp.Domain.Uow;
 using AbpCompanyName.AbpProjectName.Authorization.Roles;
 using AbpCompanyName.AbpProjectName.Authorization.Users;
 using AbpCompanyName.AbpProjectName.MultiTenancy;
-using Microsoft.AspNetCore.Authentication;
-using Microsoft.AspNetCore.Http;
-using Microsoft.AspNetCore.Identity;
-using Microsoft.Extensions.Logging;
-using Microsoft.Extensions.Options;
 
 namespace AbpCompanyName.AbpProjectName.Identity
 {
@@ -22,8 +22,8 @@ namespace AbpCompanyName.AbpProjectName.Identity
             ILogger<SignInManager<User>> logger,
             IUnitOfWorkManager unitOfWorkManager,
             ISettingManager settingManager,
-            IAuthenticationSchemeProvider schemes
-            ) : base(
+            IAuthenticationSchemeProvider schemes) 
+            : base(
                 userManager, 
                 contextAccessor, 
                 claimsFactory, 

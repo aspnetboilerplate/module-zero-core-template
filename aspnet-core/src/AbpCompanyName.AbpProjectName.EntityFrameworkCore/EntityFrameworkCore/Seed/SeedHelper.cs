@@ -1,12 +1,12 @@
 ﻿using System;
 using System.Transactions;
+using Microsoft.EntityFrameworkCore;
 using Abp.Dependency;
 using Abp.Domain.Uow;
 using Abp.EntityFrameworkCore.Uow;
 using Abp.MultiTenancy;
 using AbpCompanyName.AbpProjectName.EntityFrameworkCore.Seed.Host;
 using AbpCompanyName.AbpProjectName.EntityFrameworkCore.Seed.Tenants;
-using Microsoft.EntityFrameworkCore;
 
 namespace AbpCompanyName.AbpProjectName.EntityFrameworkCore.Seed
 {
@@ -21,10 +21,10 @@ namespace AbpCompanyName.AbpProjectName.EntityFrameworkCore.Seed
         {
             context.SuppressAutoSetTenantId = true;
 
-            //Host seed
+            // Host seed
             new InitialHostDbBuilder(context).Create();
 
-            //Default tenant seed (in host database).
+            // Default tenant seed (in host database).
             new DefaultTenantBuilder(context).Create();
             new TenantRoleAndUserBuilder(context, 1).Create();
         }

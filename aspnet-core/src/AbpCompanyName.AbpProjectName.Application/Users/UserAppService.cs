@@ -1,18 +1,17 @@
 using System.Collections.Generic;
 using System.Threading.Tasks;
+using System.Linq;
+using Microsoft.AspNetCore.Identity;
+using Microsoft.EntityFrameworkCore;
 using Abp.Application.Services;
 using Abp.Application.Services.Dto;
+using Abp.Authorization;
 using Abp.Domain.Repositories;
+using Abp.IdentityFramework;
 using AbpCompanyName.AbpProjectName.Authorization;
 using AbpCompanyName.AbpProjectName.Authorization.Users;
-using AbpCompanyName.AbpProjectName.Users.Dto;
-using Microsoft.AspNetCore.Identity;
-using System.Linq;
-using Abp.Authorization;
-using Abp.Authorization.Users;
-using Microsoft.EntityFrameworkCore;
-using Abp.IdentityFramework;
 using AbpCompanyName.AbpProjectName.Authorization.Roles;
+using AbpCompanyName.AbpProjectName.Users.Dto;
 using AbpCompanyName.AbpProjectName.Roles.Dto;
 
 namespace AbpCompanyName.AbpProjectName.Users
@@ -22,21 +21,21 @@ namespace AbpCompanyName.AbpProjectName.Users
     {
         private readonly UserManager _userManager;
         private readonly RoleManager _roleManager;
-        private readonly IPasswordHasher<User> _passwordHasher;
         private readonly IRepository<Role> _roleRepository;
+        private readonly IPasswordHasher<User> _passwordHasher;
 
         public UserAppService(
             IRepository<User, long> repository,
             UserManager userManager,
-            IPasswordHasher<User> passwordHasher,
+            RoleManager roleManager,
             IRepository<Role> roleRepository,
-            RoleManager roleManager)
+            IPasswordHasher<User> passwordHasher)
             : base(repository)
         {
             _userManager = userManager;
-            _passwordHasher = passwordHasher;
-            _roleRepository = roleRepository;
             _roleManager = roleManager;
+            _roleRepository = roleRepository;
+            _passwordHasher = passwordHasher;
         }
 
         public override async Task<UserDto> Create(CreateUserDto input)

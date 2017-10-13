@@ -1,23 +1,23 @@
 ﻿using System.Collections.Concurrent;
+using Microsoft.Extensions.Configuration;
 using Abp.Extensions;
 using Abp.Reflection.Extensions;
-using Microsoft.Extensions.Configuration;
 
 namespace AbpCompanyName.AbpProjectName.Configuration
 {
     public static class AppConfigurations
     {
-        private static readonly ConcurrentDictionary<string, IConfigurationRoot> ConfigurationCache;
+        private static readonly ConcurrentDictionary<string, IConfigurationRoot> _configurationCache;
 
         static AppConfigurations()
         {
-            ConfigurationCache = new ConcurrentDictionary<string, IConfigurationRoot>();
+            _configurationCache = new ConcurrentDictionary<string, IConfigurationRoot>();
         }
 
         public static IConfigurationRoot Get(string path, string environmentName = null, bool addUserSecrets = false)
         {
             var cacheKey = path + "#" + environmentName + "#" + addUserSecrets;
-            return ConfigurationCache.GetOrAdd(
+            return _configurationCache.GetOrAdd(
                 cacheKey,
                 _ => BuildConfiguration(path, environmentName, addUserSecrets)
             );

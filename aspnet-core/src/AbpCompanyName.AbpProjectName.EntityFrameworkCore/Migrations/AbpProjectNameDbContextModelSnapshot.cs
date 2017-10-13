@@ -2,11 +2,7 @@
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
-using Microsoft.EntityFrameworkCore.Migrations;
 using AbpCompanyName.AbpProjectName.EntityFrameworkCore;
-using Abp.Authorization;
-using Abp.BackgroundJobs;
-using Abp.Notifications;
 
 namespace AbpCompanyName.AbpProjectName.Migrations
 {

@@ -8,7 +8,6 @@ namespace AbpCompanyName.AbpProjectName.Authorization.Accounts.Dto
 
         public IsTenantAvailableOutput()
         {
-
         }
 
         public IsTenantAvailableOutput(TenantAvailabilityState state, int? tenantId = null)

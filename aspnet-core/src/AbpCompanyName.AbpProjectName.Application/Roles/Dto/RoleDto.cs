@@ -1,13 +1,13 @@
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using Abp.Application.Services.Dto;
+using Abp.Authorization.Roles;
 using Abp.AutoMapper;
 using AbpCompanyName.AbpProjectName.Authorization.Roles;
-using Abp.Authorization.Roles;
 
 namespace AbpCompanyName.AbpProjectName.Roles.Dto
 {
-    [AutoMapFrom(typeof(Role)), AutoMapTo(typeof(Role))]
+    [AutoMap(typeof(Role))]
     public class RoleDto : EntityDto<int>
     {
         [Required]

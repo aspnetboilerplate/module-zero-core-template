@@ -1,7 +1,7 @@
 ﻿using System.Linq;
+using Microsoft.EntityFrameworkCore;
 using AbpCompanyName.AbpProjectName.Editions;
 using AbpCompanyName.AbpProjectName.MultiTenancy;
-using Microsoft.EntityFrameworkCore;
 
 namespace AbpCompanyName.AbpProjectName.EntityFrameworkCore.Seed.Tenants
 {
@@ -21,7 +21,7 @@ namespace AbpCompanyName.AbpProjectName.EntityFrameworkCore.Seed.Tenants
 
         private void CreateDefaultTenant()
         {
-            //Default tenant
+            // Default tenant
 
             var defaultTenant = _context.Tenants.IgnoreQueryFilters().FirstOrDefault(t => t.TenancyName == Tenant.DefaultTenantName);
             if (defaultTenant == null)

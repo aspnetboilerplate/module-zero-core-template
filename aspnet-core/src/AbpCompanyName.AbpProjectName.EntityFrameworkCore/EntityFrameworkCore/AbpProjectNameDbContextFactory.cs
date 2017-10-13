@@ -1,8 +1,8 @@
-﻿using AbpCompanyName.AbpProjectName.Configuration;
-using AbpCompanyName.AbpProjectName.Web;
-using Microsoft.EntityFrameworkCore;
+﻿using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Design;
 using Microsoft.Extensions.Configuration;
+using AbpCompanyName.AbpProjectName.Configuration;
+using AbpCompanyName.AbpProjectName.Web;
 
 namespace AbpCompanyName.AbpProjectName.EntityFrameworkCore
 {

@@ -13,8 +13,7 @@ namespace AbpCompanyName.AbpProjectName.Editions
             IAbpZeroFeatureValueStore featureValueStore)
             : base(
                 editionRepository,
-                featureValueStore
-            )
+                featureValueStore)
         {
         }
     }
