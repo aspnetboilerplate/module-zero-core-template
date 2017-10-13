@@ -2,6 +2,7 @@ using System.Collections.Generic;
 using System.Collections.Immutable;
 using Abp.Collections.Extensions;
 using Abp.Extensions;
+using Abp.Timing;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Mvc.Razor;
 
@@ -34,7 +35,7 @@ namespace AbpCompanyName.AbpProjectName.Web.Resources
             {
                 foreach (var scriptUrl in _scriptUrls)
                 {
-                    await writer.WriteAsync($"<script src=\"{scriptUrl}\" asp-append-version=\"true\"></script>");
+                    await writer.WriteAsync($"<script src=\"{scriptUrl}?v=" + Clock.Now.Ticks + "\"></script>");
                 }
             });
         }
