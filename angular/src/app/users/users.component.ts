@@ -41,11 +41,10 @@ export class UsersComponent extends PagedListingComponentBase<UserDto> {
             (result: boolean) => {
                 if (result) {
                     this._userService.delete(user.id)
-                        .finally(() => {
+                        .subscribe(() => {
                             abp.notify.info("Deleted User: " + user.fullName);
                             this.refresh();
-                        })
-                        .subscribe(() => { });
+                        });
                 }
             }
         );
