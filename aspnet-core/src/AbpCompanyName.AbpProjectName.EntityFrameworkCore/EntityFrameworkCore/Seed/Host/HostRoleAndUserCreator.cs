@@ -58,7 +58,8 @@ namespace AbpCompanyName.AbpProjectName.EntityFrameworkCore.Seed.Host
                         Name = permission.Name,
                         IsGranted = true,
                         RoleId = adminRoleForHost.Id
-                    }));
+                    })
+                );
                 _context.SaveChanges();
             }
 
