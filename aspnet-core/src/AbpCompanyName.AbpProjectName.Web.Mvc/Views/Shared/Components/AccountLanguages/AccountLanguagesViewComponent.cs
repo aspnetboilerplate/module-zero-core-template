@@ -1,7 +1,7 @@
 ﻿using System.Linq;
 using System.Threading.Tasks;
-using Abp.Localization;
 using Microsoft.AspNetCore.Mvc;
+using Abp.Localization;
 
 namespace AbpCompanyName.AbpProjectName.Web.Views.Shared.Components.AccountLanguages
 {

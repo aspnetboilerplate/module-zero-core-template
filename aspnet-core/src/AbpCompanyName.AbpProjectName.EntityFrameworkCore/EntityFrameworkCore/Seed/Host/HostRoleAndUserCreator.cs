@@ -78,7 +78,6 @@ namespace AbpCompanyName.AbpProjectName.EntityFrameworkCore.Seed.Host
                             RoleId = adminRoleForHost.Id
                         });
                 }
-
                 _context.SaveChanges();
 
                 // User account of admin user
@@ -89,7 +88,6 @@ namespace AbpCompanyName.AbpProjectName.EntityFrameworkCore.Seed.Host
                     UserName = AbpUserBase.AdminUserName,
                     EmailAddress = adminUserForHost.EmailAddress
                 });
-
                 _context.SaveChanges();
             }
         }

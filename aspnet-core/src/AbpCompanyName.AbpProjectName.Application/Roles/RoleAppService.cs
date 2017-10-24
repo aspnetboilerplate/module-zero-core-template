@@ -1,6 +1,6 @@
 ﻿using System.Collections.Generic;
-using System.Threading.Tasks;
 using System.Linq;
+using System.Threading.Tasks;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
 using Abp.Application.Services;
@@ -9,9 +9,9 @@ using Abp.Authorization;
 using Abp.Domain.Repositories;
 using Abp.IdentityFramework;
 using Abp.UI;
+using AbpCompanyName.AbpProjectName.Authorization;
 using AbpCompanyName.AbpProjectName.Authorization.Roles;
 using AbpCompanyName.AbpProjectName.Authorization.Users;
-using AbpCompanyName.AbpProjectName.Authorization;
 using AbpCompanyName.AbpProjectName.Roles.Dto;
 
 namespace AbpCompanyName.AbpProjectName.Roles

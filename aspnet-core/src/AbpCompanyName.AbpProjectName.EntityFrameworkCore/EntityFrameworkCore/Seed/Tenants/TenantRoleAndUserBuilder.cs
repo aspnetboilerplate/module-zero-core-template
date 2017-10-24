@@ -1,7 +1,7 @@
 ﻿using System.Linq;
 using Microsoft.AspNetCore.Identity;
-using Microsoft.Extensions.Options;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.Extensions.Options;
 using Abp.Authorization;
 using Abp.Authorization.Roles;
 using Abp.Authorization.Users;
@@ -55,7 +55,6 @@ namespace AbpCompanyName.AbpProjectName.EntityFrameworkCore.Seed.Tenants
                             RoleId = adminRole.Id
                         });
                 }
-
                 _context.SaveChanges();
             }
 

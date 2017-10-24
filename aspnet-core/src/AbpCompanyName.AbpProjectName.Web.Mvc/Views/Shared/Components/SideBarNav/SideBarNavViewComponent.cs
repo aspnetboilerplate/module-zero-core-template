@@ -1,7 +1,7 @@
 ﻿using System.Threading.Tasks;
+using Microsoft.AspNetCore.Mvc;
 using Abp.Application.Navigation;
 using Abp.Runtime.Session;
-using Microsoft.AspNetCore.Mvc;
 
 namespace AbpCompanyName.AbpProjectName.Web.Views.Shared.Components.SideBarNav
 {

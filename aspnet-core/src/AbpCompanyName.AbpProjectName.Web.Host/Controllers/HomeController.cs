@@ -39,11 +39,11 @@ namespace AbpCompanyName.AbpProjectName.Web.Host.Controllers
             var hostAdmin = new UserIdentifier(null, 1);
 
             await _notificationPublisher.PublishAsync(
-                    "App.SimpleMessage",
-                    new MessageNotificationData(message),
-                    severity: NotificationSeverity.Info,
-                    userIds: new[] { defaultTenantAdmin, hostAdmin }
-                 );
+                "App.SimpleMessage",
+                new MessageNotificationData(message),
+                severity: NotificationSeverity.Info,
+                userIds: new[] { defaultTenantAdmin, hostAdmin }
+            );
 
             return Content("Sent notification: " + message);
         }

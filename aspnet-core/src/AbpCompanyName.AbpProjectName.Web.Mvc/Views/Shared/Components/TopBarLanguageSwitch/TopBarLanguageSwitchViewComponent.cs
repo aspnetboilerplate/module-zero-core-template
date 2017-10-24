@@ -1,6 +1,6 @@
 ﻿using System.Linq;
-using Abp.Localization;
 using Microsoft.AspNetCore.Mvc;
+using Abp.Localization;
 
 namespace AbpCompanyName.AbpProjectName.Web.Views.Shared.Components.TopBarLanguageSwitch
 {

@@ -8,7 +8,7 @@ namespace AbpCompanyName.AbpProjectName.EntityFrameworkCore
 {
     public class AbpProjectNameDbContext : AbpZeroDbContext<Tenant, Role, User, AbpProjectNameDbContext>
     {
-        /* Define an IDbSet for each entity of the application */
+        /* Define a DbSet for each entity of the application */
         
         public AbpProjectNameDbContext(DbContextOptions<AbpProjectNameDbContext> options)
             : base(options)

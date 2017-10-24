@@ -1,10 +1,10 @@
 ﻿using System.Threading.Tasks;
+using Microsoft.AspNetCore.Mvc;
 using Abp.Application.Services.Dto;
 using Abp.AspNetCore.Mvc.Authorization;
 using AbpCompanyName.AbpProjectName.Authorization;
 using AbpCompanyName.AbpProjectName.Controllers;
 using AbpCompanyName.AbpProjectName.MultiTenancy;
-using Microsoft.AspNetCore.Mvc;
 
 namespace AbpCompanyName.AbpProjectName.Web.Controllers
 {
@@ -20,7 +20,7 @@ namespace AbpCompanyName.AbpProjectName.Web.Controllers
 
         public async Task<ActionResult> Index()
         {
-            var output = await _tenantAppService.GetAll(new PagedResultRequestDto { MaxResultCount = int.MaxValue }); //Paging not implemented yet
+            var output = await _tenantAppService.GetAll(new PagedResultRequestDto { MaxResultCount = int.MaxValue }); // Paging not implemented yet
             return View(output);
         }
 

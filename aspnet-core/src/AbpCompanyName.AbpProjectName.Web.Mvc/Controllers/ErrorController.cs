@@ -1,9 +1,9 @@
 ﻿using System;
+using Microsoft.AspNetCore.Diagnostics;
+using Microsoft.AspNetCore.Mvc;
 using Abp.AspNetCore.Mvc.Controllers;
 using Abp.Web.Models;
 using Abp.Web.Mvc.Models;
-using Microsoft.AspNetCore.Diagnostics;
-using Microsoft.AspNetCore.Mvc;
 
 namespace AbpCompanyName.AbpProjectName.Web.Controllers
 {

@@ -38,7 +38,7 @@ namespace AbpCompanyName.AbpProjectName.Web.Models.Account
                 var emailRegex = new Regex(@"^\w+([-+.']\w+)*@\w+([-.]\w+)*\.\w+([-.]\w+)*$");
                 if (!UserName.Equals(EmailAddress) && emailRegex.IsMatch(UserName))
                 {
-                    yield return new ValidationResult("Username cannot be an email address unless it's same with your email address !");
+                    yield return new ValidationResult("Username cannot be an email address unless it's the same as your email address!");
                 }
             }
         }

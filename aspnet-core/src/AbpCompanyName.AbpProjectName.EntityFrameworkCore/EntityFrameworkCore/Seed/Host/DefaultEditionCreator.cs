@@ -35,17 +35,18 @@ namespace AbpCompanyName.AbpProjectName.EntityFrameworkCore.Seed.Host
 
         private void CreateFeatureIfNotExists(int editionId, string featureName, bool isEnabled)
         {
-            var defaultEditionChatFeature = _context.EditionFeatureSettings.IgnoreQueryFilters().FirstOrDefault(ef => ef.EditionId == editionId && ef.Name == featureName);
-
-            if (defaultEditionChatFeature == null)
+            if (_context.EditionFeatureSettings.IgnoreQueryFilters().Any(ef => ef.EditionId == editionId && ef.Name == featureName))
             {
-                _context.EditionFeatureSettings.Add(new EditionFeatureSetting
-                {
-                    Name = featureName,
-                    Value = isEnabled.ToString(),
-                    EditionId = editionId
-                });
+                return;
             }
+
+            _context.EditionFeatureSettings.Add(new EditionFeatureSetting
+            {
+                Name = featureName,
+                Value = isEnabled.ToString(),
+                EditionId = editionId
+            });
+            _context.SaveChanges();
         }
     }
 }

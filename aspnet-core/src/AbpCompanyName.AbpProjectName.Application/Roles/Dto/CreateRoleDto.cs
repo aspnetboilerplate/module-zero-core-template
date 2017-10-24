@@ -1,9 +1,8 @@
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
+using Abp.Authorization.Roles;
 using Abp.AutoMapper;
 using AbpCompanyName.AbpProjectName.Authorization.Roles;
-
-using Abp.Authorization.Roles;
 
 namespace AbpCompanyName.AbpProjectName.Roles.Dto
 {
