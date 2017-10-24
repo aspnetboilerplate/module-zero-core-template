@@ -37,25 +37,33 @@ namespace AbpCompanyName.AbpProjectName.EntityFrameworkCore.Seed.Tenants
             {
                 adminRole = _context.Roles.Add(new Role(_tenantId, StaticRoleNames.Tenants.Admin, StaticRoleNames.Tenants.Admin) { IsStatic = true }).Entity;
                 _context.SaveChanges();
+            }
 
-                // Grant all permissions to admin role
-                var permissions = PermissionFinder
-                    .GetAllPermissions(new AbpProjectNameAuthorizationProvider())
-                    .Where(p => p.MultiTenancySides.HasFlag(MultiTenancySides.Tenant))
-                    .ToList();
+            // Grant all permissions to admin role
 
-                foreach (var permission in permissions)
-                {
-                    _context.Permissions.Add(
-                        new RolePermissionSetting
-                        {
-                            TenantId = _tenantId,
-                            Name = permission.Name,
-                            IsGranted = true,
-                            RoleId = adminRole.Id
-                        });
-                }
+            var grantedPermissions = _context.Permissions.IgnoreQueryFilters()
+                .OfType<RolePermissionSetting>()
+                .Where(p => p.TenantId == _tenantId && p.RoleId == adminRole.Id)
+                .Select(p => p.Name)
+                .ToList();
 
+            var permissions = PermissionFinder
+                .GetAllPermissions(new AbpProjectNameAuthorizationProvider())
+                .Where(p => p.MultiTenancySides.HasFlag(MultiTenancySides.Tenant) &&
+                            !grantedPermissions.Contains(p.Name))
+                .ToList();
+
+            if (permissions.Any())
+            {
+                _context.Permissions.AddRange(
+                    permissions.Select(permission => new RolePermissionSetting
+                    {
+                        TenantId = _tenantId,
+                        Name = permission.Name,
+                        IsGranted = true,
+                        RoleId = adminRole.Id
+                    })
+                );
                 _context.SaveChanges();
             }
 
