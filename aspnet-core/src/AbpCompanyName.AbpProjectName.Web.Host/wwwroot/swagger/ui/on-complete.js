@@ -11,7 +11,7 @@ var abp = abp || {};
             return false;
         }
         var cookieAuth = new SwaggerClient.ApiKeyAuthorization(abp.auth.tokenHeaderName, 'Bearer ' + authToken, 'header');
-        swaggerUi.api.clientAuthorizations.add(abp.auth.tokenHeaderName, cookieAuth);
+        swaggerUi.api.clientAuthorizations.add('bearerAuth', cookieAuth);
         return true;
     }
 
