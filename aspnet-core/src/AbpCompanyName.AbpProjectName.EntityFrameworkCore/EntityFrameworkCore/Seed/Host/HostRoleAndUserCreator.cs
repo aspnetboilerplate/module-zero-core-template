@@ -35,6 +35,34 @@ namespace AbpCompanyName.AbpProjectName.EntityFrameworkCore.Seed.Host
                 _context.SaveChanges();
             }
 
+            // Grant all permissions to admin role for host
+
+            var grantedPermissions = _context.Permissions.IgnoreQueryFilters()
+                .OfType<RolePermissionSetting>()
+                .Where(p => p.TenantId == null && p.RoleId == adminRoleForHost.Id)
+                .Select(p => p.Name)
+                .ToList();
+
+            var permissions = PermissionFinder
+                .GetAllPermissions(new AbpProjectNameAuthorizationProvider())
+                .Where(p => p.MultiTenancySides.HasFlag(MultiTenancySides.Host) &&
+                            !grantedPermissions.Contains(p.Name))
+                .ToList();
+
+            if (permissions.Any())
+            {
+                _context.Permissions.AddRange(
+                    permissions.Select(permission => new RolePermissionSetting
+                    {
+                        TenantId = null,
+                        Name = permission.Name,
+                        IsGranted = true,
+                        RoleId = adminRoleForHost.Id
+                    })
+                );
+                _context.SaveChanges();
+            }
+
             // Admin user for host
 
             var adminUserForHost = _context.Users.IgnoreQueryFilters().FirstOrDefault(u => u.TenantId == null && u.UserName == AbpUserBase.AdminUserName);
@@ -61,26 +89,6 @@ namespace AbpCompanyName.AbpProjectName.EntityFrameworkCore.Seed.Host
                 _context.UserRoles.Add(new UserRole(null, adminUserForHost.Id, adminRoleForHost.Id));
                 _context.SaveChanges();
 
-                // Grant all permissions
-                var permissions = PermissionFinder
-                    .GetAllPermissions(new AbpProjectNameAuthorizationProvider())
-                    .Where(p => p.MultiTenancySides.HasFlag(MultiTenancySides.Host))
-                    .ToList();
-
-                foreach (var permission in permissions)
-                {
-                    _context.Permissions.Add(
-                        new RolePermissionSetting
-                        {
-                            TenantId = null,
-                            Name = permission.Name,
-                            IsGranted = true,
-                            RoleId = adminRoleForHost.Id
-                        });
-                }
-
-                _context.SaveChanges();
-
                 // User account of admin user
                 _context.UserAccounts.Add(new UserAccount
                 {
@@ -89,7 +97,6 @@ namespace AbpCompanyName.AbpProjectName.EntityFrameworkCore.Seed.Host
                     UserName = AbpUserBase.AdminUserName,
                     EmailAddress = adminUserForHost.EmailAddress
                 });
-
                 _context.SaveChanges();
             }
         }
