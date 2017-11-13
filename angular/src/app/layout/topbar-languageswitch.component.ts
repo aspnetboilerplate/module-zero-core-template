@@ -1,5 +1,6 @@
-﻿import { Component, OnInit, Injector, ViewEncapsulation } from '@angular/core';
+import { Component, OnInit, Injector, ViewEncapsulation } from '@angular/core';
 import { AppComponentBase } from '@shared/app-component-base';
+import { UserServiceProxy, ChangeUserLanguageDto } from '@shared/service-proxies/service-proxies';
 
 import * as _ from 'lodash';
 
@@ -14,7 +15,8 @@ export class TopBarLanguageSwitchComponent extends AppComponentBase implements O
   currentLanguage: abp.localization.ILanguageInfo;
   
   constructor(
-    injector: Injector
+      injector: Injector,
+      private _userService: UserServiceProxy
   ) {
     super(injector);
   }
@@ -25,13 +27,18 @@ export class TopBarLanguageSwitchComponent extends AppComponentBase implements O
   }
 
   changeLanguage(languageName: string): void {
-    abp.utils.setCookieValue(
-      "Abp.Localization.CultureName",
-      languageName,
-      new Date(new Date().getTime() + 5 * 365 * 86400000), //5 year
-      abp.appPath
-    );
+      const input = new ChangeUserLanguageDto();
+      input.languageName = languageName;
 
-    location.reload();
+      this._userService.changeLanguage(input).subscribe(() => {
+          abp.utils.setCookieValue(
+              'Abp.Localization.CultureName',
+              languageName,
+              new Date(new Date().getTime() + 5 * 365 * 86400000), //5 year
+              abp.appPath
+          );
+
+          window.location.reload();
+      });
   }
 }

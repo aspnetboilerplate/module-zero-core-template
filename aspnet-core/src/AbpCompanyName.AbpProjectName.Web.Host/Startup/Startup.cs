@@ -92,7 +92,7 @@ namespace AbpCompanyName.AbpProjectName.Web.Host.Startup
 
         public void Configure(IApplicationBuilder app, IHostingEnvironment env, ILoggerFactory loggerFactory)
         {
-            app.UseAbp(); // Initializes ABP framework.
+            app.UseAbp(options => { options.UseAbpRequestLocalization = false; }); // Initializes ABP framework.
 
             app.UseCors(_defaultCorsPolicyName); // Enable CORS!
 
@@ -100,6 +100,8 @@ namespace AbpCompanyName.AbpProjectName.Web.Host.Startup
 
             app.UseAuthentication();
             app.UseJwtTokenMiddleware();
+
+            app.UseAbpRequestLocalization();
 
 #if FEATURE_SIGNALR
             // Integrate to OWIN
