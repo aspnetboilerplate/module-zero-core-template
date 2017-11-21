@@ -1,4 +1,4 @@
-﻿{
+{
   "runtime": "Default",
   "swaggerGenerator": {
     "fromSwagger": {
@@ -38,6 +38,7 @@
       "importRequiredTypes": true,
       "useGetBaseUrlMethod": false,
       "baseUrlTokenName": "API_BASE_URL",
+      "injectionTokenType": "InjectionToken",
       "output": "../src/shared/service-proxies/service-proxies.ts"
     },
     "swaggerToCSharpClient": {
