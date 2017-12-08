@@ -29,7 +29,6 @@
                 "../node_modules/font-awesome/css/font-awesome.css",
                 "../node_modules/famfamfam-flags/dist/sprite/famfamfam-flags.css",
                 "../node_modules/toastr/build/toastr.css",
-                "../node_modules/sweetalert/dist/sweetalert.css",
                 "../node_modules/node-waves/dist/waves.css",
                 "../src/bsb-theme/css/materialize.css",
                 "../src/bsb-theme/css/style.css",
