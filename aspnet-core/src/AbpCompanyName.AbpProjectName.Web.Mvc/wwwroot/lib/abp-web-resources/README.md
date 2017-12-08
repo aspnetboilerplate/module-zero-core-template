@@ -12,3 +12,7 @@ bower:
 ```bash
 bower install abp-web-resources --save
 ```
+
+## Contribution
+
+Please send PRs to https://github.com/aspnetboilerplate/aspnetboilerplate repository since this is a copy of this folder: https://github.com/aspnetboilerplate/aspnetboilerplate/tree/dev/src/Abp.Web.Resources/Abp/Framework
