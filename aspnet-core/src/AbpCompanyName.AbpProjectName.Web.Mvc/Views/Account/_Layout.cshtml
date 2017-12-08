@@ -1,6 +1,6 @@
 ﻿@using System.Globalization
-@using Abp.Web.Security.AntiForgery
 @using Abp.Configuration.Startup
+@using Abp.Web.Security.AntiForgery
 @using AbpCompanyName.AbpProjectName
 @using AbpCompanyName.AbpProjectName.Web.Resources
 @inject AbpCompanyName.AbpProjectName.Timing.AppTimes AppTimes
@@ -46,7 +46,7 @@
     @RenderSection("styles", required: false)
 
     <script type="text/javascript">
-        //This is used to get the application's root path from javascript. It's useful if you're running application in a virtual directory under IIS.
+        // This is used to get the application's root path from javascript. It's useful if you're running application in a virtual directory under IIS.
         var abp = abp || {};
         abp.appPath = '@ApplicationPath';
     </script>
@@ -104,7 +104,7 @@
     </environment>
 
     <script>
-    //Localizing momentjs
+    // Localizing momentjs
     moment.locale('@CultureInfo.CurrentUICulture.Name');
     </script>
 

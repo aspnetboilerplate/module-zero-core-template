@@ -52,7 +52,7 @@ namespace AbpCompanyName.AbpProjectName.Web.Startup
                         url: "About",
                         icon: "info"
                     )
-                ).AddItem( //Menu items below is just for demonstration!
+                ).AddItem( // Menu items below is just for demonstration!
                     new MenuItemDefinition(
                         "MultiLevelMenu",
                         L("MultiLevelMenu"),

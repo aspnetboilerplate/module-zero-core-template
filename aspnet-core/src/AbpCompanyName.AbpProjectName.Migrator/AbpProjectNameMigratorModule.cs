@@ -30,12 +30,12 @@ namespace AbpCompanyName.AbpProjectName.Migrator
             );
 
             Configuration.BackgroundJobs.IsJobExecutionEnabled = false;
-            Configuration.ReplaceService(typeof(IEventBus), () =>
-            {
-                IocManager.IocContainer.Register(
+            Configuration.ReplaceService(
+                typeof(IEventBus), 
+                () => IocManager.IocContainer.Register(
                     Component.For<IEventBus>().Instance(NullEventBus.Instance)
-                );
-            });
+                )
+            );
         }
 
         public override void Initialize()

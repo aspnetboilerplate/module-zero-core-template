@@ -39,28 +39,29 @@ namespace AbpCompanyName.AbpProjectName.Web.Host.Startup
         public IServiceProvider ConfigureServices(IServiceCollection services)
         {
             // MVC
-            services.AddMvc(options =>
-            {
-                options.Filters.Add(new CorsAuthorizationFilterFactory(_defaultCorsPolicyName));
-            });
+            services.AddMvc(
+                options => options.Filters.Add(new CorsAuthorizationFilterFactory(_defaultCorsPolicyName))
+            );
 
             IdentityRegistrar.Register(services);
             AuthConfigurer.Configure(services, _appConfiguration);
 
             // Configure CORS for angular2 UI
-            services.AddCors(options =>
-            {
-                options.AddPolicy(_defaultCorsPolicyName, builder =>
-                {
-                    // App:CorsOrigins in appsettings.json can contain more than one address separated by comma.
-                    builder
-                        .WithOrigins(_appConfiguration["App:CorsOrigins"].Split(",", StringSplitOptions.RemoveEmptyEntries)
-                                                                         .Select(o => o.RemovePostFix("/"))
-                                                                         .ToArray())
+            services.AddCors(
+                options => options.AddPolicy(
+                    _defaultCorsPolicyName,
+                    builder => builder
+                        .WithOrigins(
+                            // App:CorsOrigins in appsettings.json can contain more than one address separated by comma.
+                            _appConfiguration["App:CorsOrigins"]
+                                .Split(",", StringSplitOptions.RemoveEmptyEntries)
+                                .Select(o => o.RemovePostFix("/"))
+                                .ToArray()
+                        )
                         .AllowAnyHeader()
-                        .AllowAnyMethod();
-                });
-            });
+                        .AllowAnyMethod()
+                )
+            );
 
             // Swagger - Enable this line and the related lines in Configure method to enable swagger UI
             services.AddSwaggerGen(options =>
@@ -81,13 +82,12 @@ namespace AbpCompanyName.AbpProjectName.Web.Host.Startup
             });
 
             // Configure Abp and Dependency Injection
-            return services.AddAbp<AbpProjectNameWebHostModule>(options =>
-            {
+            return services.AddAbp<AbpProjectNameWebHostModule>(
                 // Configure Log4Net logging
-                options.IocManager.IocContainer.AddFacility<LoggingFacility>(
+                options => options.IocManager.IocContainer.AddFacility<LoggingFacility>(
                     f => f.UseAbpLog4Net().WithConfig("log4net.config")
-                );
-            });
+                )
+            );
         }
 
         public void Configure(IApplicationBuilder app, IHostingEnvironment env, ILoggerFactory loggerFactory)
@@ -99,12 +99,13 @@ namespace AbpCompanyName.AbpProjectName.Web.Host.Startup
             app.UseStaticFiles();
 
             app.UseAuthentication();
+
             app.UseJwtTokenMiddleware();
 
             app.UseAbpRequestLocalization();
 
 #if FEATURE_SIGNALR
-            // Integrate to OWIN
+            // Integrate with OWIN
             app.UseAppBuilder(ConfigureOwinServices);
 #endif
 

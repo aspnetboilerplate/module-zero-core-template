@@ -4,6 +4,8 @@ using System.Diagnostics;
 using System.Linq;
 using System.Security.Claims;
 using System.Threading.Tasks;
+using Microsoft.AspNetCore.Identity;
+using Microsoft.AspNetCore.Mvc;
 using Abp;
 using Abp.Authorization;
 using Abp.Authorization.Users;
@@ -18,16 +20,14 @@ using Abp.Timing;
 using Abp.UI;
 using Abp.Web.Models;
 using Abp.Zero.Configuration;
-using Microsoft.AspNetCore.Mvc;
 using AbpCompanyName.AbpProjectName.Authorization;
-using AbpCompanyName.AbpProjectName.MultiTenancy;
-using AbpCompanyName.AbpProjectName.Web.Models.Account;
 using AbpCompanyName.AbpProjectName.Authorization.Users;
 using AbpCompanyName.AbpProjectName.Controllers;
 using AbpCompanyName.AbpProjectName.Identity;
+using AbpCompanyName.AbpProjectName.MultiTenancy;
 using AbpCompanyName.AbpProjectName.Sessions;
+using AbpCompanyName.AbpProjectName.Web.Models.Account;
 using AbpCompanyName.AbpProjectName.Web.Views.Shared.Components.TenantChange;
-using Microsoft.AspNetCore.Identity;
 
 namespace AbpCompanyName.AbpProjectName.Web.Controllers
 {
@@ -147,7 +147,7 @@ namespace AbpCompanyName.AbpProjectName.Web.Controllers
         {
             if (!AbpSession.TenantId.HasValue)
             {
-                return false; //No registration enabled for host users!
+                return false; // No registration enabled for host users!
             }
 
             return true;
@@ -185,10 +185,10 @@ namespace AbpCompanyName.AbpProjectName.Web.Controllers
                     model.EmailAddress,
                     model.UserName,
                     model.Password,
-                    true //Assumed email address is always confirmed. Change this if you want to implement email confirmation.
+                    true // Assumed email address is always confirmed. Change this if you want to implement email confirmation.
                 );
 
-                //Getting tenant-specific settings
+                // Getting tenant-specific settings
                 var isEmailConfirmationRequiredForLogin = await SettingManager.GetSettingValueAsync<bool>(AbpZeroSettingNames.UserManagement.IsEmailConfirmationRequiredForLogin);
 
                 if (model.IsExternalLogin)
@@ -217,7 +217,7 @@ namespace AbpCompanyName.AbpProjectName.Web.Controllers
 
                 var tenant = await _tenantManager.GetByIdAsync(user.TenantId.Value);
 
-                //Directly login if possible
+                // Directly login if possible
                 if (user.IsActive && (user.IsEmailConfirmed || !isEmailConfirmationRequiredForLogin))
                 {
                     AbpLoginResult<Tenant, User> loginResult;
@@ -275,12 +275,12 @@ namespace AbpCompanyName.AbpProjectName.Web.Controllers
                 });
 
             return Challenge(
-                //TODO: ...?
-                //new Microsoft.AspNetCore.Http.Authentication.AuthenticationProperties
-                //{
-                //    Items = { { "LoginProvider", provider } },
-                //    RedirectUri = redirectUrl
-                //},
+                // TODO: ...?
+                // new Microsoft.AspNetCore.Http.Authentication.AuthenticationProperties
+                // {
+                //     Items = { { "LoginProvider", provider } },
+                //     RedirectUri = redirectUrl
+                // },
                 provider
             );
         }

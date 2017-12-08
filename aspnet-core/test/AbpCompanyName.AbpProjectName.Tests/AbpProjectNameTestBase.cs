@@ -6,6 +6,7 @@ using Abp;
 using Abp.Authorization.Users;
 using Abp.Events.Bus;
 using Abp.Events.Bus.Entities;
+using Abp.MultiTenancy;
 using Abp.Runtime.Session;
 using Abp.TestBase;
 using AbpCompanyName.AbpProjectName.Authorization.Users;
@@ -143,7 +144,7 @@ namespace AbpCompanyName.AbpProjectName.Tests
 
         protected void LoginAsDefaultTenantAdmin()
         {
-            LoginAsTenant(Tenant.DefaultTenantName, AbpUserBase.AdminUserName);
+            LoginAsTenant(AbpTenantBase.DefaultTenantName, AbpUserBase.AdminUserName);
         }
 
         protected void LoginAsHost(string userName)

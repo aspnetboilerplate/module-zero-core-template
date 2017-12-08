@@ -1,6 +1,6 @@
 ﻿using System.Collections.Generic;
-using Abp.Localization;
 using Microsoft.AspNetCore.Http;
+using Abp.Localization;
 
 namespace AbpCompanyName.AbpProjectName.Web.Views.Shared.Components.AccountLanguages
 {

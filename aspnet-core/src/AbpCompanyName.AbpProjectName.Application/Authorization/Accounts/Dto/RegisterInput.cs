@@ -40,7 +40,7 @@ namespace AbpCompanyName.AbpProjectName.Authorization.Accounts.Dto
             {
                 if (!UserName.Equals(EmailAddress) && ValidationHelper.IsEmail(UserName))
                 {
-                    yield return new ValidationResult("Username cannot be an email address unless it's same with your email address !");
+                    yield return new ValidationResult("Username cannot be an email address unless it's the same as your email address!");
                 }
             }
         }

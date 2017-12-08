@@ -1,10 +1,10 @@
 using System.Collections.Generic;
 using System.Collections.Immutable;
+using Microsoft.AspNetCore.Hosting;
+using Microsoft.AspNetCore.Mvc.Razor;
 using Abp.Collections.Extensions;
 using Abp.Extensions;
 using Abp.Timing;
-using Microsoft.AspNetCore.Hosting;
-using Microsoft.AspNetCore.Mvc.Razor;
 
 namespace AbpCompanyName.AbpProjectName.Web.Resources
 {

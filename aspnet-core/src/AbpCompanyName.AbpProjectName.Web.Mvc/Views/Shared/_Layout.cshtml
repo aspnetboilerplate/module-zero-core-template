@@ -1,21 +1,20 @@
 ﻿@using System.Globalization
 @using Abp.Configuration
-@using Abp.Web.Security.AntiForgery
 @using Abp.Configuration.Startup
+@using Abp.Web.Security.AntiForgery
 @using AbpCompanyName.AbpProjectName
+@using AbpCompanyName.AbpProjectName.Configuration
 @using AbpCompanyName.AbpProjectName.SignalR
 @using AbpCompanyName.AbpProjectName.Web.Resources
 @using AbpCompanyName.AbpProjectName.Web.Views.Shared.Components.SideBarNav
 @using AbpCompanyName.AbpProjectName.Web.Views.Shared.Components.SideBarUserArea
 @using AbpCompanyName.AbpProjectName.Web.Views.Shared.Components.TopBarLanguageSwitch
-@using AbpCompanyName.AbpProjectName.Configuration
 @using AbpCompanyName.AbpProjectName.Web.Views.Shared.Components.RightSideBar
 @inject AbpCompanyName.AbpProjectName.Timing.AppTimes AppTimes
 @inject IAbpAntiForgeryManager AbpAntiForgeryManager
 @inject IMultiTenancyConfig MultiTenancyConfig
 @inject IWebResourceManager WebResourceManager
 @inject ISettingManager SettingManager;
-
 @{
     Layout = null;
     AbpAntiForgeryManager.SetCookie(Context);
@@ -60,7 +59,7 @@
     @RenderSection("styles", required: false)
 
     <script type="text/javascript">
-        //This is used to get the application's root path from javascript. It's useful if you're running application in a virtual directory under IIS.
+        // This is used to get the application's root path from javascript. It's useful if you're running application in a virtual directory under IIS.
         var abp = abp || {};
         abp.appPath = '@ApplicationPath';
     </script>
@@ -185,7 +184,7 @@
     </environment>
 
     <script>
-    //Localizing momentjs
+    // Localizing momentjs
     moment.locale('@CultureInfo.CurrentUICulture.Name');
     </script>
 
