@@ -1,6 +1,7 @@
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.Text.RegularExpressions;
+using Abp.Auditing;
 using Abp.Authorization.Users;
 using Abp.Extensions;
 
@@ -25,6 +26,7 @@ namespace AbpCompanyName.AbpProjectName.Web.Models.Account
         public string EmailAddress { get; set; }
 
         [StringLength(AbpUserBase.MaxPlainPasswordLength)]
+        [DisableAuditing]
         public string Password { get; set; }
 
         public bool IsExternalLogin { get; set; }
