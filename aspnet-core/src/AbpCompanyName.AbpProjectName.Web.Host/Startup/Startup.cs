@@ -15,7 +15,7 @@ using AbpCompanyName.AbpProjectName.Authentication.JwtBearer;
 using AbpCompanyName.AbpProjectName.Configuration;
 using AbpCompanyName.AbpProjectName.Identity;
 
-#if FEATURE_SIGNALR
+#if FEATURE_SIGNALR_OWIN
 using Microsoft.AspNet.SignalR;
 using Microsoft.Owin.Cors;
 using Owin;
@@ -104,7 +104,7 @@ namespace AbpCompanyName.AbpProjectName.Web.Host.Startup
 
             app.UseAbpRequestLocalization();
 
-#if FEATURE_SIGNALR
+#if FEATURE_SIGNALR_OWIN
             // Integrate with OWIN
             app.UseAppBuilder(ConfigureOwinServices);
 #endif
@@ -131,7 +131,7 @@ namespace AbpCompanyName.AbpProjectName.Web.Host.Startup
             }); // URL: /swagger
         }
 
-#if FEATURE_SIGNALR
+#if FEATURE_SIGNALR_OWIN
         private static void ConfigureOwinServices(IAppBuilder app)
         {
             app.Properties["host.AppName"] = "AbpProjectName";

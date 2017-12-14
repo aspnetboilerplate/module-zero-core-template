@@ -13,7 +13,7 @@ using AbpCompanyName.AbpProjectName.Configuration;
 using AbpCompanyName.AbpProjectName.Identity;
 using AbpCompanyName.AbpProjectName.Web.Resources;
 
-#if FEATURE_SIGNALR
+#if FEATURE_SIGNALR_OWIN
 using Owin;
 using Abp.Owin;
 using AbpCompanyName.AbpProjectName.Owin;
@@ -70,7 +70,7 @@ namespace AbpCompanyName.AbpProjectName.Web.Startup
 
             app.UseJwtTokenMiddleware();
 
-#if FEATURE_SIGNALR
+#if FEATURE_SIGNALR_OWIN
             // Integrate with OWIN
             app.UseAppBuilder(ConfigureOwinServices);
 #endif
@@ -87,7 +87,7 @@ namespace AbpCompanyName.AbpProjectName.Web.Startup
             });
         }
 
-#if FEATURE_SIGNALR
+#if FEATURE_SIGNALR_OWIN
         private static void ConfigureOwinServices(IAppBuilder app)
         {
             app.Properties["host.AppName"] = "AbpProjectName";
