@@ -19,6 +19,10 @@ using Abp.Owin;
 using AbpCompanyName.AbpProjectName.Owin;
 #endif
 
+#if FEATURE_SIGNALR_ASPNETCORE
+using Abp.Web.SignalR.Hubs;
+#endif
+
 namespace AbpCompanyName.AbpProjectName.Web.Startup
 {
     public class Startup
@@ -41,6 +45,10 @@ namespace AbpCompanyName.AbpProjectName.Web.Startup
             AuthConfigurer.Configure(services, _appConfiguration);
 
             services.AddScoped<IWebResourceManager, WebResourceManager>();
+
+#if FEATURE_SIGNALR_ASPNETCORE
+            services.AddSignalR();
+#endif
 
             // Configure Abp and Dependency Injection
             return services.AddAbp<AbpProjectNameWebMvcModule>(
@@ -73,6 +81,13 @@ namespace AbpCompanyName.AbpProjectName.Web.Startup
 #if FEATURE_SIGNALR_OWIN
             // Integrate with OWIN
             app.UseAppBuilder(ConfigureOwinServices);
+#endif
+
+#if FEATURE_SIGNALR_ASPNETCORE
+            app.UseSignalR(routes =>
+            {
+                routes.MapHub<AbpCommonHub>("/abpCommonHub");
+            });
 #endif
 
             app.UseMvc(routes =>
