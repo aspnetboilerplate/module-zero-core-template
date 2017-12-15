@@ -84,6 +84,8 @@
         }(signalR.TransportType.WebSockets);
     }
 
+    abp.signalr.startConnection = startConnection;
+
     if (abp.signalr.autoConnect === undefined) {
         abp.signalr.autoConnect = true;
     }
