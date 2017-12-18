@@ -86,7 +86,7 @@ namespace AbpCompanyName.AbpProjectName.Web.Startup
 #if FEATURE_SIGNALR_ASPNETCORE
             app.UseSignalR(routes =>
             {
-                routes.MapHub<AbpCommonHub>("/abpCommonHub");
+                routes.MapHub<AbpCommonHub>("/signalr");
             });
 #endif
 
