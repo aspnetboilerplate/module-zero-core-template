@@ -43,6 +43,7 @@
                 "../node_modules/lodash/lodash.min.js",
                 "../node_modules/moment/min/moment.min.js",
                 "../node_modules/signalr/jquery.signalR.js",
+                "../node_modules/@aspnet/signalr-client/dist/browser/signalr-client.min.js",
                 "../node_modules/toastr/toastr.js",
                 "../node_modules/sweetalert/dist/sweetalert.min.js",
                 "../node_modules/block-ui/jquery.blockUI.js",
