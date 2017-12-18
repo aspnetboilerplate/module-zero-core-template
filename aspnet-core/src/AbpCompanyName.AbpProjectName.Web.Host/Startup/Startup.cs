@@ -14,7 +14,6 @@ using Abp.Extensions;
 using AbpCompanyName.AbpProjectName.Authentication.JwtBearer;
 using AbpCompanyName.AbpProjectName.Configuration;
 using AbpCompanyName.AbpProjectName.Identity;
-using AbpCompanyName.AbpProjectName.Web.Startup;
 
 #if FEATURE_SIGNALR_OWIN
 using Microsoft.AspNet.SignalR;
