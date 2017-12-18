@@ -33,7 +33,7 @@
         "@types/signalr": "^2.2.33",
         "@types/toastr": "^2.1.33",
         "abp-ng2-module": "^1.3.0",
-        "abp-web-resources": "^3.2.3",
+        "abp-web-resources": "^3.3.0",
         "animate.css": "^3.5.2",
         "block-ui": "^2.70.1",
         "bootstrap": "^3.3.7",
