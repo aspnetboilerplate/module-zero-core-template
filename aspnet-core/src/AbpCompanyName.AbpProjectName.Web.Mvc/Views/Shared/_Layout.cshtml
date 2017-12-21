@@ -173,7 +173,7 @@
         <script src="~/js/main.js" asp-append-version="true"></script>
         <script src="~/view-resources/Views/Shared/_Layout.js" asp-append-version="true"></script>
         
-        @if (SignalRFeature.IsAvailable)
+        @if (SignalRFeature.IsAvailable && !SignalRFeature.IsAspNetCore)
         {
             <script src="~/lib/signalr/jquery.signalR.js" asp-append-version="true"></script>
         }
@@ -195,8 +195,16 @@
     @if (SignalRFeature.IsAvailable)
     {
         <!-- SignalR scripts -->
-        <script src="~/signalr/hubs"></script>
-        <script src="~/lib/abp-web-resources/Abp/Framework/scripts/libs/abp.signalr.js" type="text/javascript"></script>
+        if (SignalRFeature.IsAspNetCore)
+        {
+            <script src="~/lib/signalr-client/signalr-client.min.js" asp-append-version="true"></script>
+            <script src="~/lib/abp-web-resources/Abp/Framework/scripts/libs/abp.signalr-client.js" asp-append-version="true"></script>
+        }
+        else
+        {
+            <script src="~/signalr/hubs"></script>
+            <script src="~/lib/abp-web-resources/Abp/Framework/scripts/libs/abp.signalr.js" type="text/javascript"></script>
+        }
     }
 
     @WebResourceManager.RenderScripts();

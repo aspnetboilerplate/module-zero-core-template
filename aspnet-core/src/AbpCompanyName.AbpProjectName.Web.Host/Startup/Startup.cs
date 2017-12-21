@@ -15,12 +15,16 @@ using AbpCompanyName.AbpProjectName.Authentication.JwtBearer;
 using AbpCompanyName.AbpProjectName.Configuration;
 using AbpCompanyName.AbpProjectName.Identity;
 
-#if FEATURE_SIGNALR
+#if FEATURE_SIGNALR_OWIN
 using Microsoft.AspNet.SignalR;
 using Microsoft.Owin.Cors;
 using Owin;
 using Abp.Owin;
 using AbpCompanyName.AbpProjectName.Owin;
+#endif
+
+#if FEATURE_SIGNALR_ASPNETCORE
+using Abp.Web.SignalR.Hubs;
 #endif
 
 namespace AbpCompanyName.AbpProjectName.Web.Host.Startup
@@ -45,6 +49,10 @@ namespace AbpCompanyName.AbpProjectName.Web.Host.Startup
 
             IdentityRegistrar.Register(services);
             AuthConfigurer.Configure(services, _appConfiguration);
+
+#if FEATURE_SIGNALR_ASPNETCORE
+            services.AddSignalR();
+#endif
 
             // Configure CORS for angular2 UI
             services.AddCors(
@@ -104,9 +112,16 @@ namespace AbpCompanyName.AbpProjectName.Web.Host.Startup
 
             app.UseAbpRequestLocalization();
 
-#if FEATURE_SIGNALR
+#if FEATURE_SIGNALR_OWIN
             // Integrate with OWIN
             app.UseAppBuilder(ConfigureOwinServices);
+#endif
+
+#if FEATURE_SIGNALR_ASPNETCORE
+            app.UseSignalR(routes =>
+            {
+                routes.MapHub<AbpCommonHub>("/signalr");
+            });
 #endif
 
             app.UseMvc(routes =>
@@ -131,7 +146,7 @@ namespace AbpCompanyName.AbpProjectName.Web.Host.Startup
             }); // URL: /swagger
         }
 
-#if FEATURE_SIGNALR
+#if FEATURE_SIGNALR_OWIN
         private static void ConfigureOwinServices(IAppBuilder app)
         {
             app.Properties["host.AppName"] = "AbpProjectName";

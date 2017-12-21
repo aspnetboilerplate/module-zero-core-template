@@ -12,7 +12,11 @@
   </PropertyGroup>
 
   <PropertyGroup Condition=" '$(TargetFramework)' == 'net461' ">
-    <DefineConstants>FEATURE_SIGNALR</DefineConstants>
+    <DefineConstants>FEATURE_SIGNALR;FEATURE_SIGNALR_OWIN</DefineConstants>
+  </PropertyGroup>
+
+  <PropertyGroup Condition=" '$(TargetFramework)' == 'netcoreapp2.0' ">
+    <DefineConstants>FEATURE_SIGNALR;FEATURE_SIGNALR_ASPNETCORE</DefineConstants>
   </PropertyGroup>
 
   <ItemGroup>
