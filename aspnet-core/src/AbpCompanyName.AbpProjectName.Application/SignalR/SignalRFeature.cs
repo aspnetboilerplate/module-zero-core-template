@@ -8,6 +8,8 @@
             {
 #if FEATURE_SIGNALR
                 return true;
+#elif FEATURE_SIGNALR_ASPNETCORE
+                return true;
 #else
                 return false;
 #endif

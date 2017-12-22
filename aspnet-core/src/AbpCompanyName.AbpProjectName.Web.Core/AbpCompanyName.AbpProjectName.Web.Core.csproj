@@ -18,11 +18,11 @@
   </PropertyGroup>
 
   <PropertyGroup Condition=" '$(TargetFramework)' == 'net461' ">
-    <DefineConstants>FEATURE_SIGNALR;FEATURE_SIGNALR_OWIN</DefineConstants>
+    <DefineConstants>FEATURE_SIGNALR</DefineConstants>
   </PropertyGroup>
 
   <PropertyGroup Condition=" '$(TargetFramework)' == 'netcoreapp2.0' ">
-    <DefineConstants>FEATURE_SIGNALR</DefineConstants>
+    <DefineConstants>FEATURE_SIGNALR_ASPNETCORE</DefineConstants>
   </PropertyGroup>
 
     <ItemGroup>
@@ -49,7 +49,7 @@
   </ItemGroup>
 
   <ItemGroup Condition=" '$(TargetFramework)' == 'netcoreapp2.0' ">
-    <PackageReference Include="Abp.Web.SignalR.AspNetCore" Version="3.3.0" />
+    <PackageReference Include="Abp.AspNetCore.SignalR" Version="3.3.0-preview1" />
   </ItemGroup>
 
 </Project>
