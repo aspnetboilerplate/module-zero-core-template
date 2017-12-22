@@ -13,14 +13,12 @@ using AbpCompanyName.AbpProjectName.Configuration;
 using AbpCompanyName.AbpProjectName.Identity;
 using AbpCompanyName.AbpProjectName.Web.Resources;
 
-#if FEATURE_SIGNALR_OWIN
+#if FEATURE_SIGNALR
 using Owin;
 using Abp.Owin;
 using AbpCompanyName.AbpProjectName.Owin;
-#endif
-
-#if FEATURE_SIGNALR_ASPNETCORE
-using Abp.Web.SignalR.Hubs;
+#elif FEATURE_SIGNALR_ASPNETCORE
+using Abp.AspNetCore.SignalR.Hubs;
 #endif
 
 namespace AbpCompanyName.AbpProjectName.Web.Startup
@@ -78,12 +76,10 @@ namespace AbpCompanyName.AbpProjectName.Web.Startup
 
             app.UseJwtTokenMiddleware();
 
-#if FEATURE_SIGNALR_OWIN
+#if FEATURE_SIGNALR
             // Integrate with OWIN
             app.UseAppBuilder(ConfigureOwinServices);
-#endif
-
-#if FEATURE_SIGNALR_ASPNETCORE
+#elif FEATURE_SIGNALR_ASPNETCORE
             app.UseSignalR(routes =>
             {
                 routes.MapHub<AbpCommonHub>("/signalr");
@@ -102,7 +98,7 @@ namespace AbpCompanyName.AbpProjectName.Web.Startup
             });
         }
 
-#if FEATURE_SIGNALR_OWIN
+#if FEATURE_SIGNALR
         private static void ConfigureOwinServices(IAppBuilder app)
         {
             app.Properties["host.AppName"] = "AbpProjectName";
