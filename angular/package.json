@@ -1,5 +1,5 @@
 {
-    "name": "abp-project-name-template",
+    "name": "AbpProjectName",
     "version": "0.0.0",
     "license": "MIT",
     "angular-cli": {},
