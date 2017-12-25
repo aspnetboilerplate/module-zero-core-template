@@ -3,6 +3,7 @@ import { AppConsts } from '@shared/AppConsts';
 import { AppComponentBase } from '@shared/app-component-base';
 
 import { SignalRHelper } from '@shared/helpers/SignalRHelper';
+import { SignalRAspNetCoreHelper } from '@shared/helpers/SignalRAspNetCoreHelper';
 
 @Component({
   templateUrl: './app.component.html'
@@ -19,7 +20,11 @@ export class AppComponent extends AppComponentBase implements OnInit, AfterViewI
 
   ngOnInit(): void {
     if (this.appSession.application.features['SignalR']) {
-      SignalRHelper.initSignalR();
+      if (this.appSession.application.features['SignalR.AspNetCore']) {
+        SignalRAspNetCoreHelper.initSignalR();
+      } else {
+        SignalRHelper.initSignalR();
+      }
     }
 
     abp.event.on('abp.notifications.received', userNotification => {

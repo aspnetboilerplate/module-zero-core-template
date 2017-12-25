@@ -21,6 +21,8 @@ using Microsoft.Owin.Cors;
 using Owin;
 using Abp.Owin;
 using AbpCompanyName.AbpProjectName.Owin;
+#elif FEATURE_SIGNALR_ASPNETCORE
+using Abp.AspNetCore.SignalR.Hubs;
 #endif
 
 namespace AbpCompanyName.AbpProjectName.Web.Host.Startup
@@ -45,6 +47,10 @@ namespace AbpCompanyName.AbpProjectName.Web.Host.Startup
 
             IdentityRegistrar.Register(services);
             AuthConfigurer.Configure(services, _appConfiguration);
+
+#if FEATURE_SIGNALR_ASPNETCORE
+            services.AddSignalR();
+#endif
 
             // Configure CORS for angular2 UI
             services.AddCors(
@@ -107,6 +113,11 @@ namespace AbpCompanyName.AbpProjectName.Web.Host.Startup
 #if FEATURE_SIGNALR
             // Integrate with OWIN
             app.UseAppBuilder(ConfigureOwinServices);
+#elif FEATURE_SIGNALR_ASPNETCORE
+            app.UseSignalR(routes =>
+            {
+                routes.MapHub<AbpCommonHub>("/signalr");
+            });
 #endif
 
             app.UseMvc(routes =>

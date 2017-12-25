@@ -1,7 +1,7 @@
 {
     "$schema": "./node_modules/@angular/cli/lib/config/schema.json",
     "project": {
-        "name": "abp-project-name-template"
+        "name": "AbpProjectName"
     },
     "apps": [
         {
@@ -12,6 +12,11 @@
                 "favicon.ico",
                 {
                     "glob": "abp.signalr.js",
+                    "input": "../node_modules/abp-web-resources/Abp/Framework/scripts/libs/",
+                    "output": "./assets/abp/"
+                },
+                {
+                    "glob": "abp.signalr-client.js",
                     "input": "../node_modules/abp-web-resources/Abp/Framework/scripts/libs/",
                     "output": "./assets/abp/"
                 }
@@ -43,6 +48,7 @@
                 "../node_modules/lodash/lodash.min.js",
                 "../node_modules/moment/min/moment.min.js",
                 "../node_modules/signalr/jquery.signalR.js",
+                "../node_modules/@aspnet/signalr-client/dist/browser/signalr-client.min.js",
                 "../node_modules/toastr/toastr.js",
                 "../node_modules/sweetalert/dist/sweetalert.min.js",
                 "../node_modules/block-ui/jquery.blockUI.js",

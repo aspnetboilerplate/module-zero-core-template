@@ -1,6 +1,6 @@
 import { AbpProjectNameTemplatePage } from './app.po';
 
-describe('abp-project-name-template App', function() {
+describe('AbpProjectName App', function() {
   let page: AbpProjectNameTemplatePage;
 
   beforeEach(() => {
