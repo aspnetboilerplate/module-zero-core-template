@@ -29,8 +29,11 @@ namespace AbpCompanyName.AbpProjectName.Migrator
                     migrateExecuter.Object.Run(_skipConnVerification);
                 }
 
-                Console.WriteLine("Press ENTER to exit...");
-                Console.ReadLine();
+                if (!_skipConnVerification)
+                {
+                    Console.WriteLine("Press ENTER to exit...");
+                    Console.ReadLine();
+                }
             }
         }
 
