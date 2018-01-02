@@ -9,7 +9,7 @@ namespace AbpCompanyName.AbpProjectName.Migrator
 {
     public class Program
     {
-        private static bool _skipConnVerification = false;
+        private static bool _quietMode = false;
 
         public static void Main(string[] args)
         {
@@ -26,10 +26,10 @@ namespace AbpCompanyName.AbpProjectName.Migrator
 
                 using (var migrateExecuter = bootstrapper.IocManager.ResolveAsDisposable<MultiTenantMigrateExecuter>())
                 {
-                    migrateExecuter.Object.Run(_skipConnVerification);
+                    migrateExecuter.Object.Run(_quietMode);
                 }
 
-                if (!_skipConnVerification)
+                if (!_quietMode)
                 {
                     Console.WriteLine("Press ENTER to exit...");
                     Console.ReadLine();
@@ -44,13 +44,12 @@ namespace AbpCompanyName.AbpProjectName.Migrator
                 return;
             }
 
-            for (var i = 0; i < args.Length; i++)
+            foreach (var arg in args)
             {
-                var arg = args[i];
                 switch (arg)
                 {
-                    case "-s":
-                        _skipConnVerification = true;
+                    case "-q":
+                        _quietMode = true;
                         break;
                 }
             }
