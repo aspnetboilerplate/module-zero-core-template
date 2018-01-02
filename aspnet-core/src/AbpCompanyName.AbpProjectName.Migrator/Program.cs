@@ -10,6 +10,7 @@ namespace AbpCompanyName.AbpProjectName.Migrator
     public class Program
     {
         private static bool _skipConnVerification = false;
+        private static bool _runQuietMode = false;
 
         public static void Main(string[] args)
         {
@@ -29,7 +30,7 @@ namespace AbpCompanyName.AbpProjectName.Migrator
                     migrateExecuter.Object.Run(_skipConnVerification);
                 }
 
-                if (!_skipConnVerification)
+                if (!_runQuietMode)
                 {
                     Console.WriteLine("Press ENTER to exit...");
                     Console.ReadLine();
@@ -44,13 +45,15 @@ namespace AbpCompanyName.AbpProjectName.Migrator
                 return;
             }
 
-            for (var i = 0; i < args.Length; i++)
+            foreach (var arg in args)
             {
-                var arg = args[i];
                 switch (arg)
                 {
                     case "-s":
                         _skipConnVerification = true;
+                        break;
+                    case "-q":
+                        _runQuietMode = true;
                         break;
                 }
             }
