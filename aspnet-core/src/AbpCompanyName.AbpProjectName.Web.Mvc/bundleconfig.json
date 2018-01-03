@@ -108,6 +108,12 @@
     ]
   },
   {
+    "outputFileName": "wwwroot/view-resources/Views/Account/Login.min.css",
+    "inputFiles": [
+      "wwwroot/view-resources/Views/Account/Login.css"
+    ]
+  },
+  {
     "outputFileName": "wwwroot/view-resources/Views/Account/Register.min.js",
     "inputFiles": [
       "wwwroot/view-resources/Views/Account/Register.js"
