@@ -16,37 +16,39 @@ namespace AbpCompanyName.AbpProjectName.Web.Host.Startup
         {
             if (bool.Parse(configuration["Authentication:JwtBearer:IsEnabled"]))
             {
-                services.AddAuthentication()
-                    .AddJwtBearer(options =>
+                services.AddAuthentication(options => {
+                    options.DefaultAuthenticateScheme = "JwtBearer";
+                    options.DefaultChallengeScheme = "JwtBearer";
+                }).AddJwtBearer("JwtBearer", options =>
+                {
+                    options.Audience = configuration["Authentication:JwtBearer:Audience"];
+
+                    options.TokenValidationParameters = new TokenValidationParameters
                     {
-                        options.Audience = configuration["Authentication:JwtBearer:Audience"];
+                        // The signing key must match!
+                        ValidateIssuerSigningKey = true,
+                        IssuerSigningKey = new SymmetricSecurityKey(Encoding.ASCII.GetBytes(configuration["Authentication:JwtBearer:SecurityKey"])),
 
-                        options.TokenValidationParameters = new TokenValidationParameters
-                        {
-                            // The signing key must match!
-                            ValidateIssuerSigningKey = true,
-                            IssuerSigningKey = new SymmetricSecurityKey(Encoding.ASCII.GetBytes(configuration["Authentication:JwtBearer:SecurityKey"])),
+                        // Validate the JWT Issuer (iss) claim
+                        ValidateIssuer = true,
+                        ValidIssuer = configuration["Authentication:JwtBearer:Issuer"],
 
-                            // Validate the JWT Issuer (iss) claim
-                            ValidateIssuer = true,
-                            ValidIssuer = configuration["Authentication:JwtBearer:Issuer"],
+                        // Validate the JWT Audience (aud) claim
+                        ValidateAudience = true,
+                        ValidAudience = configuration["Authentication:JwtBearer:Audience"],
 
-                            // Validate the JWT Audience (aud) claim
-                            ValidateAudience = true,
-                            ValidAudience = configuration["Authentication:JwtBearer:Audience"],
+                        // Validate the token expiry
+                        ValidateLifetime = true,
 
-                            // Validate the token expiry
-                            ValidateLifetime = true,
+                        // If you want to allow a certain amount of clock drift, set that here
+                        ClockSkew = TimeSpan.Zero
+                    };
 
-                            // If you want to allow a certain amount of clock drift, set that here
-                            ClockSkew = TimeSpan.Zero
-                        };
-
-                        options.Events = new JwtBearerEvents
-                        {
-                            OnMessageReceived = QueryStringTokenResolver
-                        };
-                    });
+                    options.Events = new JwtBearerEvents
+                    {
+                        OnMessageReceived = QueryStringTokenResolver
+                    };
+                });
             }
         }
 

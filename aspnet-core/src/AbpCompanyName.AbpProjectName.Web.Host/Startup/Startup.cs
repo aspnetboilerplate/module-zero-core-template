@@ -106,8 +106,6 @@ namespace AbpCompanyName.AbpProjectName.Web.Host.Startup
 
             app.UseAuthentication();
 
-            app.UseJwtTokenMiddleware();
-
             app.UseAbpRequestLocalization();
 
 #if FEATURE_SIGNALR
