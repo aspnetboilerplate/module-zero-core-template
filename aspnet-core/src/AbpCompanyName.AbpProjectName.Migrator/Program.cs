@@ -26,7 +26,11 @@ namespace AbpCompanyName.AbpProjectName.Migrator
 
                 using (var migrateExecuter = bootstrapper.IocManager.ResolveAsDisposable<MultiTenantMigrateExecuter>())
                 {
-                    migrateExecuter.Object.Run(_quietMode);
+                    var migrationSucceeded = migrateExecuter.Object.Run(_quietMode);
+                    // exit clean (with exit code 0) if migration is a success, otherwise exit with code 1
+                    var exitCode = Convert.ToInt32(!migrationSucceeded);
+
+                    Environment.Exit(exitCode);
                 }
 
                 if (!_quietMode)
