@@ -34,13 +34,13 @@ namespace AbpCompanyName.AbpProjectName.Migrator
             _connectionStringResolver = connectionStringResolver;
         }
 
-        public void Run(bool skipConnVerification)
+        public bool Run(bool skipConnVerification)
         {
             var hostConnStr = _connectionStringResolver.GetNameOrConnectionString(new ConnectionStringResolveArgs(MultiTenancySides.Host));
             if (hostConnStr.IsNullOrWhiteSpace())
             {
                 Log.Write("Configuration file should contain a connection string named 'Default'");
-                return;
+                return false;
             }
 
             Log.Write("Host database: " + ConnectionStringHelper.GetConnectionString(hostConnStr));
@@ -51,7 +51,7 @@ namespace AbpCompanyName.AbpProjectName.Migrator
                 if (!command.IsIn("Y", "y"))
                 {
                     Log.Write("Migration canceled.");
-                    return;
+                    return false;
                 }
             }
 
@@ -66,7 +66,7 @@ namespace AbpCompanyName.AbpProjectName.Migrator
                 Log.Write("An error occured during migration of host database:");
                 Log.Write(ex.ToString());
                 Log.Write("Canceled migrations.");
-                return;
+                return false;
             }
 
             Log.Write("HOST database migration completed.");
@@ -108,6 +108,8 @@ namespace AbpCompanyName.AbpProjectName.Migrator
             }
 
             Log.Write("All databases have been migrated.");
+
+            return true;
         }
     }
 }
