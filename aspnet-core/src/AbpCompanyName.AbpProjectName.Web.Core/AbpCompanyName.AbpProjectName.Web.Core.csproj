@@ -35,8 +35,8 @@
     <PackageReference Include="Microsoft.AspNetCore.Authentication.JwtBearer" Version="2.0.1" />
     <PackageReference Include="Microsoft.AspNetCore.Owin" Version="2.0.1" />
     <PackageReference Include="Swashbuckle.AspNetCore" Version="1.1.0" />
-    <PackageReference Include="Abp.AspNetCore" Version="3.3.0" />
-    <PackageReference Include="Abp.ZeroCore" Version="3.3.0" />
+    <PackageReference Include="Abp.AspNetCore" Version="3.4.0" />
+    <PackageReference Include="Abp.ZeroCore" Version="3.4.0" />
     <PackageReference Include="Microsoft.AspNetCore" Version="2.0.1" />
   </ItemGroup>
 
@@ -44,8 +44,8 @@
     <Reference Include="System" />
     <Reference Include="Microsoft.CSharp" />
 
-    <PackageReference Include="Abp.Web.SignalR" Version="3.3.0" />
-    <PackageReference Include="Abp.Owin" Version="3.3.0" />
+    <PackageReference Include="Abp.Web.SignalR" Version="3.4.0" />
+    <PackageReference Include="Abp.Owin" Version="3.4.0" />
   </ItemGroup>
 
   <ItemGroup Condition=" '$(TargetFramework)' == 'netcoreapp2.0' ">
