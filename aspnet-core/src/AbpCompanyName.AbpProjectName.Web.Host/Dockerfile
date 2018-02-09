@@ -1,4 +1,4 @@
-FROM microsoft/aspnetcore:1.1.2
+FROM microsoft/aspnetcore:2.0.1
 
 WORKDIR /app
 COPY . .
