@@ -1,7 +1,8 @@
-﻿import { NgModule } from '@angular/core';
+import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
-import { HttpModule, JsonpModule } from '@angular/http';
+import { JsonpModule } from '@angular/http';
+import { HttpClientModule, HttpResponse } from '@angular/common/http';
 
 import { ModalModule } from 'ngx-bootstrap';
 import { NgxPaginationModule } from 'ngx-pagination';
@@ -58,7 +59,7 @@ import { MaterialInput } from '@shared/directives/material-input.directive';
     imports: [
         CommonModule,
         FormsModule,
-        HttpModule,
+        HttpClientModule,
         JsonpModule,
         ModalModule.forRoot(),
         AbpModule,
