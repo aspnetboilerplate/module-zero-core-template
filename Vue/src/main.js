@@ -15,22 +15,29 @@ import AppConsts from './libs/appconst'
 util.ajax.get('/AbpUserConfiguration/GetAll').then(result=>{
     Vue.use(VueI18n);
     Vue.use(iView);
+
     window.abp=$.extend(true,abp,result.data.result);
-    Vue.prototype.L=function(text,...args){
-        let localizedText=window.abp.localization.localize(text,AppConsts.localization.defaultLocalizationSourceName);
+
+    Vue.prototype.L = function(text,...args){
+        debugger;
+        let localizedText = window.abp.localization.localize(text,AppConsts.localization.defaultLocalizationSourceName);
         if (!localizedText) {
             localizedText=text;
         }
+
         if (!args || !args.length) {
             return localizedText;
         }
+
         args.unshift(localizedText);
         return abp.utils.formatString.apply(this, args)
     }
+
     Vue.filter('l', function (value) {
         if (!value) return ''
         return window.abp.localization.localize(value,AppConsts.localization.defaultLocalizationSourceName);
-    })
+    });
+
     new Vue({
         el: '#app',
         router: router,

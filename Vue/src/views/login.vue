@@ -52,8 +52,8 @@
          v-model="modalShow"
          @on-ok="changeTenant"
         >
-             <Input :placeholder="'TenancyName'|l" v-model="changedTenancyName"></Input>
-             <p>{{'LeaveEmptyToSwitchToHost'|l}}</p>
+             <Input :placeholder="'TenancyName' | l" v-model="changedTenancyName"></Input>
+             <p>{{'LeaveEmptyToSwitchToHost' | l}}</p>
              <div slot="footer">
                 <Button @click="modalShow=false">{{'Cancel'|l}}</Button>
                 <Button @click="changeTenant" type="primary">{{'Save'|l}}</Button>
@@ -63,8 +63,10 @@
 </template>
 
 <script>
+
 import Cookies from 'js-cookie';
 import abp from '../abp'
+ 
 export default {
     data () {
         return {
@@ -81,10 +83,10 @@ export default {
             },
             rules: {
                 userNameOrEmailAddress: [
-                    { required: true, message: '账号不能为空', trigger: 'blur' }
+                    { required: true, message: this.L('ThisFieldIsRequired'), trigger: 'blur' }
                 ],
                 password: [
-                    { required: true, message: '密码不能为空', trigger: 'blur' }
+                    { required: true, message: this.L('ThisFieldIsRequired'), trigger: 'blur' }
                 ]
             }
         };
@@ -126,7 +128,7 @@ export default {
                         });
                         break;
                     case 3:
-                        let message2=this.L('ThereIsNoTenantDefinedWithName{0}',this.changedTenancyName)
+                        let message2 = this.L('ThereIsNoTenantDefinedWithName{0}',this.changedTenancyName)
                         this.$Modal.error({
                             title:'',
                             content:message2
@@ -141,7 +143,7 @@ export default {
             this.$refs.loginForm.validate(async (valid) => {
                 if (valid) {
                     this.$Message.loading({
-                        content:'登录中...',
+                        content: this.L('PleaseWait'),
                         duration:0
                     })
                     await this.$store.dispatch({
@@ -149,10 +151,6 @@ export default {
                         data:this.form
                     })
                     location.reload();
-                    // this.$store.commit('setAvator', 'https://ss1.bdstatic.com/70cFvXSh_Q1YnxGkpoWK1HF6hhy/it/u=3448484253,3685836170&fm=27&gp=0.jpg');
-                    // this.$router.push({
-                    //     name: 'home_index'
-                    // });
                 }
             });
         }
