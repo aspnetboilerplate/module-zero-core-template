@@ -58,10 +58,10 @@ export const otherRouter = {
 // 作为Main组件的子页面展示并且在左侧菜单显示的路由写在appRouter里
 export const appRouter = [
     {
-        path: '/permission',
+        path: '/administration',
         icon: 'settings',
-        title: 'Permission',
-        name: 'permission',
+        title: 'Administration',
+        name: 'administration',
         component: Main,
         children: [
             { path: 'tenants', title: 'Tenants', name: 'tenants',permission:'Pages.Tenants', component: () => import('@/views/permission/tenants/tenants.vue') },

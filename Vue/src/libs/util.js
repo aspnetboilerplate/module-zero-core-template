@@ -155,7 +155,7 @@ util.setCurrentPath = function (vm, name) {
         if (currentPathObj.children.length <= 1 && currentPathObj.name === 'home') {
             currentPathArr = [
                 {
-                    title: '首页',
+                    title: this.localize('HomePage'),
                     path: '',
                     name: 'home_index'
                 }
@@ -163,7 +163,7 @@ util.setCurrentPath = function (vm, name) {
         } else if (currentPathObj.children.length <= 1 && currentPathObj.name !== 'home') {
             currentPathArr = [
                 {
-                    title: '首页',
+                    title: this.localize('HomePage'),
                     path: '/home',
                     name: 'home_index'
                 },
@@ -179,7 +179,7 @@ util.setCurrentPath = function (vm, name) {
             })[0];
             currentPathArr = [
                 {
-                    title: '首页',
+                    title: this.localize('HomePage'),
                     path: '/home',
                     name: 'home_index'
                 },
