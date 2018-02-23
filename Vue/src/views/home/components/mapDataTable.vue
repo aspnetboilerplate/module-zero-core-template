@@ -11,11 +11,11 @@ export default {
         return {
             columns: [
                 {
-                    title: '城市',
+                    title: 'City',
                     key: 'name'
                 },
                 {
-                    title: '流量(k)',
+                    title: 'Flow(k)',
                     key: 'value',
                     sortable: true
                 }
