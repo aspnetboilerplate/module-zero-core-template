@@ -3,14 +3,15 @@ import env from '../../build/env';
 import semver from 'semver';
 import packjson from '../../package.json';
 import abp from '../abp';
+import AppConsts from '../libs/appconst';
 
 let util = {
 
 };
 
 util.title = function (title) {
-    title = title || 'iView admin';
-    window.document.title = title;
+    title = title || 'AbpProjectName';
+    window.document.title = this.localize(title);
 };
 
 const ajaxUrl = env === 'development'
@@ -33,7 +34,6 @@ util.ajax.interceptors.request.use(function (config) {
     config.headers.common["Abp.TenantId"] = abp.multiTenancy.getTenantIdCookie();
     return config;
 }, function (error) {
-
     return Promise.reject(error);
 });
 
@@ -272,6 +272,10 @@ util.toDefaultPage = function (routers, name, route, next) {
 util.fullscreenEvent = function (vm) {
     vm.$store.commit('initCachepage');
     vm.$store.commit('updateMenulist');
+};
+
+util.localize = function(key){
+    return abp.localization.localize(key, 'AbpProjectName');
 };
 
 export default util;

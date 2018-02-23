@@ -107,11 +107,11 @@ export default {
         async changeTenant(){
             if (!this.changedTenancyName) {
                 abp.multiTenancy.setTenantIdCookie(undefined);;
-                this.modalShow=false;
+                this.modalShow = false;
                 location.reload();
                 return;
             }else{
-                let tenant=await this.$store.dispatch({
+                let tenant = await this.$store.dispatch({
                     type:'account/isTenantAvailable',
                     data:{tenancyName:this.changedTenancyName}
                 })
@@ -135,6 +135,7 @@ export default {
                         });
                         break;
                 }
+
                 this.modalShow=false;
                 this.modalShow=true;
             }
@@ -142,15 +143,22 @@ export default {
         async handleSubmit () {
             this.$refs.loginForm.validate(async (valid) => {
                 if (valid) {
+                    let self = this;
                     this.$Message.loading({
                         content: this.L('PleaseWait'),
                         duration:0
-                    })
-                    await this.$store.dispatch({
-                        type:'user/login',
-                        data:this.form
-                    })
-                    location.reload();
+                    });
+
+                 await this.$store.dispatch('user/login', this.form)
+                        .then(response => {
+                             location.reload();
+                        }, (error) => {
+                            this.$Modal.error({
+                                title:'',
+                                content: 'Login failed !'
+                            });
+                            this.$Message.destroy();
+                        });
                 }
             });
         }
