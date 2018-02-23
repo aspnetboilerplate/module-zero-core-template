@@ -87,5 +87,9 @@
     <text name="ThisFieldIsRequired">This field is required</text>
     <text name="PleaseWait">Please wait...</text>
     <text name="Administration">Administration</text>
+  
+    <text name="ClearAll">Clear all</text>
+    <text name="ClearOthers">Clear others</text>
+    <text name="LabelOptions">Label options</text>
   </texts>
 </localizationDictionary>

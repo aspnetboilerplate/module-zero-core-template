@@ -143,22 +143,26 @@ export default {
         async handleSubmit () {
             this.$refs.loginForm.validate(async (valid) => {
                 if (valid) {
-                    let self = this;
                     this.$Message.loading({
                         content: this.L('PleaseWait'),
                         duration:0
                     });
 
-                 await this.$store.dispatch('user/login', this.form)
-                        .then(response => {
-                             location.reload();
-                        }, (error) => {
-                            this.$Modal.error({
-                                title:'',
-                                content: 'Login failed !'
-                            });
-                            this.$Message.destroy();
-                        });
+                let self = this;
+
+                await this.$store.dispatch({
+                    type: 'user/login',
+                    data: self.form
+                 }).then(response => {
+                    Cookies.set('userNameOrEmailAddress', self.form.userNameOrEmailAddress);
+                    location.reload();
+                }, (error) => {
+                    this.$Modal.error({
+                        title:'',
+                        content: 'Login failed !'
+                    });
+                    this.$Message.destroy();
+                });
                 }
             });
         }

@@ -7,12 +7,12 @@
         <div class="close-all-tag-con">
             <Dropdown transfer @on-click="handleTagsOption">
                 <Button size="small" type="primary">
-                    标签选项
+                    {{"LabelOptions" | l}}
                     <Icon type="arrow-down-b"></Icon>
                 </Button>
                 <DropdownMenu slot="list">
-                    <DropdownItem name="clearAll">关闭所有</DropdownItem>
-                    <DropdownItem name="clearOthers">关闭其他</DropdownItem>
+                    <DropdownItem name="clearAll">{{"ClearAll" | l}}</DropdownItem>
+                    <DropdownItem name="clearOthers">{{"ClearOthers" | l}}</DropdownItem>
                 </DropdownMenu>
             </Dropdown>
         </div>
