@@ -41,13 +41,13 @@ module.exports = merge(webpackBaseConfig, {
                 from:'node_modules/abp-web-resources/abp/framework/scripts/abp.js',
                 to:'abp'
             },{
-                from:'node_modules/jquery/dist/jquery.min.js'
+                from:'node_modules/jquery/dist/jquery.js'
             },
             {
                 from:'node_modules/signalr/jquery.signalR.js'
             },
             {
-                from:'node_modules/@aspnet/signalr-client/dist/browser/signalr-client.js'
+                from:'node_modules/@aspnet/signalr/dist/browser/signalr.js'
             },{
                 from:'node_modules/abp-web-resources/Abp/Framework/scripts/libs/abp.signalr.js',
                 to:'abp'
