@@ -2,8 +2,7 @@ import axios from 'axios';
 import env from '../../build/env';
 import semver from 'semver';
 import packjson from '../../package.json';
-import abp from '../abp';
-
+import AppConsts from './appconst'
 let util = {
 
 };
@@ -13,7 +12,7 @@ util.title = function (title) {
 };
 
 const ajaxUrl = env === 'development'
-    ? 'http://localhost:21021'
+    ? AppConsts.remoteServiceBaseUrl
     : env === 'production'
         ? 'https://www.url.com'
         : 'https://debug.url.com';
@@ -157,7 +156,7 @@ util.setCurrentPath = function (vm, name) {
         } else if (currentPathObj.children.length <= 1 && currentPathObj.name !== 'home') {
             currentPathArr = [
                 {
-                    title: '首页',
+                    title: 'HomePage',
                     path: '/home',
                     name: 'home_index'
                 },
@@ -173,7 +172,7 @@ util.setCurrentPath = function (vm, name) {
             })[0];
             currentPathArr = [
                 {
-                    title: '首页',
+                    title: 'HomePage',
                     path: '/home',
                     name: 'home_index'
                 },

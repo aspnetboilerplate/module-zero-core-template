@@ -84,7 +84,6 @@ module.exports = {
         alias: {
             'vue': 'vue/dist/vue.esm.js',
             '@': resolve('../src'),
-            jQuery:'jquery/dist/jquery.min.js',
             'flag':'famfamfam-flags/dist/sprite/famfamfam-flags.css'
         }
     }

@@ -64,7 +64,6 @@
 
 <script>
 import Cookies from 'js-cookie';
-import abp from '../abp'
 export default {
     data () {
         return {

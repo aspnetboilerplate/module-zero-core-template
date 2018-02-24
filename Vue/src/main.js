@@ -8,8 +8,6 @@ import '@/locale';
 import 'iview/dist/styles/iview.css';
 import VueI18n from 'vue-i18n';
 import util from './libs/util';
-import abp from './abp'
-import $ from 'jquery'
 import AppConsts from './libs/appconst'
 
 util.ajax.get('/AbpUserConfiguration/GetAll').then(result=>{
@@ -58,6 +56,69 @@ util.ajax.get('/AbpUserConfiguration/GetAll').then(result=>{
             }
             });
             this.$store.commit('setTagsList', tagsList);
+            abp.message.info =  (message, title)=> {
+                this.$Modal.info({
+                    title:title,
+                    content:message
+                })
+            };
+        
+            abp.message.success = (message, title)=> {
+                this.$Modal.success({
+                    title:title,
+                    content:message
+                })
+            };
+        
+            abp.message.warn =  (message, title)=> {
+                this.$Modal.warning({
+                    title:title,
+                    content:message
+                })
+            };
+        
+            abp.message.error = (message, title)=> {
+                this.$Modal.error({
+                    title:title,
+                    content:message
+                })
+            };
+            abp.message.confirm=(message,titleOrCallback, callback)=>{
+                var userOpts = {
+                    content: message
+                };        
+                if ($.isFunction(titleOrCallback)) {
+                    callback = titleOrCallback;
+                } else if (titleOrCallback) {
+                    userOpts.title = titleOrCallback;
+                };
+                userOpts.onOk=callback||function(){};
+                this.$Modal.confirm(userOpts);
+            }
+            abp.notify.success =  (message, title, options)=> {
+                this.$Notice.success({
+                    title:title,
+                    desc:message
+                })
+            };
+            abp.notify.info =  (message, title, options)=> {
+                this.$Notice.info({
+                    title:title,
+                    desc:message
+                })
+            };
+            abp.notify.warn =  (message, title, options)=> {
+                this.$Notice.warning({
+                    title:title,
+                    desc:message
+                })
+            };
+            abp.notify.error =  (message, title, options) =>{
+                this.$Notice.error({
+                    title:title,
+                    desc:message
+                })
+            };
         }
     });
 })
