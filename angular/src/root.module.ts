@@ -2,7 +2,9 @@ import { BrowserModule } from '@angular/platform-browser';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { NgModule, Injector, APP_INITIALIZER, LOCALE_ID } from '@angular/core';
 
-import { AbpModule, ABP_HTTP_PROVIDER } from '@abp/abp.module';
+import { AbpModule } from '@abp/abp.module';
+import { AbpHttpInterceptor } from '@abp/abpHttpInterceptor';
+import { HTTP_INTERCEPTORS } from '@angular/common/http';
 
 import { SharedModule } from '@shared/shared.module';
 import { ServiceProxyModule } from '@shared/service-proxies/service-proxy.module';
@@ -15,7 +17,7 @@ import { API_BASE_URL } from '@shared/service-proxies/service-proxies';
 import { RootComponent } from './root.component';
 import { AppPreBootstrap } from './AppPreBootstrap';
 import { ModalModule } from 'ngx-bootstrap';
-
+import { HttpClientModule, HttpResponse } from '@angular/common/http';
 
 export function appInitializerFactory(injector: Injector) {
   return () => {
@@ -55,13 +57,14 @@ export function getCurrentLanguage(): string {
     ModalModule.forRoot(),
     AbpModule,
     ServiceProxyModule,
-    RootRoutingModule
+    RootRoutingModule,
+    HttpClientModule
   ],
   declarations: [
     RootComponent
   ],
   providers: [
-    ABP_HTTP_PROVIDER,
+    { provide: HTTP_INTERCEPTORS, useClass: AbpHttpInterceptor, multi: true },
     { provide: API_BASE_URL, useFactory: getRemoteServiceBaseUrl },
     {
       provide: APP_INITIALIZER,
