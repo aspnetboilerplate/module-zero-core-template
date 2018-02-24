@@ -14,6 +14,14 @@ util.ajax.get('/AbpUserConfiguration/GetAll').then(result=>{
     Vue.use(VueI18n);
     Vue.use(iView);
     window.abp=$.extend(true,abp,result.data.result);
+    abp.ajax.defaultError.message = abp.localization.abpWeb('DefaultError');
+    abp.ajax.defaultError.details = abp.localization.abpWeb('DefaultErrorDetail');
+    abp.ajax.defaultError401.message = abp.localization.abpWeb('DefaultError401');
+    abp.ajax.defaultError401.details = abp.localization.abpWeb('DefaultErrorDetail401');
+    abp.ajax.defaultError403.message = abp.localization.abpWeb('DefaultError403');
+    abp.ajax.defaultError403.details = abp.localization.abpWeb('DefaultErrorDetail403');
+    abp.ajax.defaultError404.message = abp.localization.abpWeb('DefaultError404');
+    abp.ajax.defaultError404.details = abp.localization.abpWeb('DefaultErrorDetail404');
     Vue.prototype.L=function(text,...args){
         let localizedText=window.abp.localization.localize(text,AppConsts.localization.defaultLocalizationSourceName);
         if (!localizedText) {
