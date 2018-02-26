@@ -7,7 +7,7 @@
         <Card>
             <p slot="title">
                 <Icon type="person"></Icon>
-                个人信息
+                {{'Personal Information'|l}}
             </p>
             <div>
                 <Form 
@@ -39,58 +39,59 @@
                             </div>
                         </div>
                     </FormItem>
-                    <FormItem label="公司：">
+                    <FormItem label="{{'Company'|l}}:">
                         <span>{{ userForm.company }}</span>
                     </FormItem>
-                    <FormItem label="部门：">
+                    <FormItem label="{{'Department'|l}}:">
                         <span>{{ userForm.department }}</span>
                     </FormItem>
-                    <FormItem label="登录密码：">
-                        <Button type="text" size="small" @click="showEditPassword">修改密码</Button>
+                    <FormItem label="{{'Password'|l}}:">
+                        <Button type="text" size="small" @click="showEditPassword">{{'Change Password'|l}}</Button>
                     </FormItem>
                     <div>
-                        <Button type="text" style="width: 100px;" @click="cancelEditUserInfor">取消</Button>
-                        <Button type="primary" style="width: 100px;" :loading="save_loading" @click="saveEdit">保存</Button>
+                        <Button type="text" style="width: 100px;" @click="cancelEditUserInfor">{{'Cancel'|l}}</Button>
+                        <Button type="primary" style="width: 100px;" :loading="save_loading" @click="saveEdit">{{'Save'|l}}</Button>
                     </div>
                 </Form>
             </div>
         </Card>
         <Modal v-model="editPasswordModal" :closable='false' :mask-closable=false :width="500">
-            <h3 slot="header" style="color:#2D8CF0">修改密码</h3>
+            <h3 slot="header" style="color:#2D8CF0">{{'Change Password'|l}}</h3>
             <Form ref="editPasswordForm" :model="editPasswordForm" :label-width="100" label-position="right" :rules="passwordValidate">
-                <FormItem label="原密码" prop="oldPass" :error="oldPassError">
-                    <Input v-model="editPasswordForm.oldPass" placeholder="请输入现在使用的密码" ></Input>
+                <FormItem label="OldPassword" prop="oldPass" :error="oldPassError">
+                    <Input v-model="editPasswordForm.oldPass" placeholder="{{'Please enter the password you are using now'|l}}" ></Input>
                 </FormItem>
-                <FormItem label="新密码" prop="newPass">
-                    <Input v-model="editPasswordForm.newPass" placeholder="请输入新密码，至少6位字符" ></Input>
+                <FormItem label="NewPassword" prop="newPass">
+                    <Input v-model="editPasswordForm.newPass" placeholder="{{'Please enter a new password, at least 6 characters'|l}}" ></Input>
                 </FormItem>
-                <FormItem label="确认新密码" prop="rePass">
-                    <Input v-model="editPasswordForm.rePass" placeholder="请再次输入新密码" ></Input>
+                <FormItem label="ConfirmNewPassword" prop="rePass">
+                    <Input v-model="editPasswordForm.rePass" placeholder="{{'Please re-enter the new password'|l}}" ></Input>
                 </FormItem>
             </Form>
             <div slot="footer">
-                <Button type="text" @click="cancelEditPass">取消</Button>
-                <Button type="primary" :loading="savePassLoading" @click="saveEditPass">保存</Button>
+                <Button type="text" @click="cancelEditPass">{{'Cancel'|l}}</Button>
+                <Button type="primary" :loading="savePassLoading" @click="saveEditPass">{{'Save'|l}}</Button>
             </div>
         </Modal>
     </div>
 </template>
 
 <script>
+import util from '@/libs/util.js';
 export default {
     name: 'ownspace_index',
     data () {
         const validePhone = (rule, value, callback) => {
             var re = /^1[0-9]{10}$/;
             if (!re.test(value)) {
-                callback(new Error('请输入正确格式的手机号'));
+                callback(new Error(util.l('Please enter the phone number in the correct format')));
             } else {
                 callback();
             }
         };
         const valideRePassword = (rule, value, callback) => {
             if (value !== this.editPasswordForm.newPass) {
-                callback(new Error('两次输入密码不一致'));
+                callback(new Error(util.l('New password does not match with old password')));
             } else {
                 callback();
             }
@@ -102,24 +103,24 @@ export default {
                 company: '',
                 department: ''
             },
-            uid: '', // 登录用户的userId
-            securityCode: '', // 验证码
-            phoneHasChanged: false, // 是否编辑了手机
+            uid: '', 
+            securityCode: '', 
+            phoneHasChanged: false,
             save_loading: false,
-            identifyError: '', // 验证码错误
-            editPasswordModal: false, // 修改密码模态框显示
+            identifyError: '', 
+            editPasswordModal: false,
             savePassLoading: false,
             oldPassError: '',
-            identifyCodeRight: false, // 验证码是否正确
-            hasGetIdentifyCode: false, // 是否点了获取验证码
-            canGetIdentifyCode: false, // 是否可点获取验证码
+            identifyCodeRight: false,
+            hasGetIdentifyCode: false,
+            canGetIdentifyCode: false,
             checkIdentifyCodeLoading: false,
             inforValidate: {
                 name: [
-                    { required: true, message: '请输入姓名', trigger: 'blur' }
+                    { required: true, message: util.l('Please type in your name'), trigger: 'blur' }
                 ],
                 cellphone: [
-                    { required: true, message: '请输入手机号码' },
+                    { required: true, message: util.l('Please enter the phone number') },
                     { validator: validePhone }
                 ]
             },
@@ -130,21 +131,21 @@ export default {
             },
             passwordValidate: {
                 oldPass: [
-                    { required: true, message: '请输入原密码', trigger: 'blur' }
+                    { required: true, message: util.l('Please enter the original password'), trigger: 'blur' }
                 ],
                 newPass: [
-                    { required: true, message: '请输入新密码', trigger: 'blur' },
-                    { min: 6, message: '请至少输入6个字符', trigger: 'blur' },
-                    { max: 32, message: '最多输入32个字符', trigger: 'blur' }
+                    { required: true, message: util.l('Please enter the new psasword'), trigger: 'blur' },
+                    { min: 6, message: util.l('Please enter at least 6 characters'), trigger: 'blur' },
+                    { max: 32, message: util.l('Please enter maximum 32 characters'), trigger: 'blur' }
                 ],
                 rePass: [
-                    { required: true, message: '请再次输入新密码', trigger: 'blur' },
+                    { required: true, message: util.l('Please re-enter the new password'), trigger: 'blur' },
                     { validator: valideRePassword, trigger: 'blur' }
                 ]
             },
-            inputCodeVisible: false, // 显示填写验证码box
+            inputCodeVisible: false,
             initPhone: '',
-            gettingIdentifyCodeBtnContent: '获取验证码' // “获取验证码”按钮的文字
+            gettingIdentifyCodeBtnContent: util.l('Get verification code')
         };
     },
     methods: {
@@ -165,7 +166,6 @@ export default {
                         }
                     }, 1000);
                     this.inputCodeVisible = true;
-                    // you can write ajax request here
                 }
             });
         },
@@ -188,15 +188,15 @@ export default {
         saveEdit () {
             this.$refs['userForm'].validate((valid) => {
                 if (valid) {
-                    if (this.phoneHasChanged && this.userForm.cellphone !== this.initPhone) { // 手机号码修改过了而且修改之后的手机号和原来的不一样
-                        if (this.hasGetIdentifyCode) { // 判断是否点了获取验证码
-                            if (this.identifyCodeRight) { // 判断验证码是否正确
+                    if (this.phoneHasChanged && this.userForm.cellphone !== this.initPhone) {
+                        if (this.hasGetIdentifyCode) { 
+                            if (this.identifyCodeRight) {
                                 this.saveInfoAjax();
                             } else {
-                                this.$Message.error('验证码错误，请重新输入');
+                                this.$Message.error(util.l('Verification code error, please re-enter'));
                             }
                         } else {
-                            this.$Message.warning('请先点击获取验证码');
+                            this.$Message.warning(util.l('Please click to get the verification code'));
                         }
                     } else {
                         this.saveInfoAjax();
@@ -211,7 +211,6 @@ export default {
             this.$refs['editPasswordForm'].validate((valid) => {
                 if (valid) {
                     this.savePassLoading = true;
-                    // you can write ajax request here
                 }
             });
         },
@@ -219,8 +218,8 @@ export default {
             this.userForm.name = 'Lison';
             this.userForm.cellphone = '17712345678';
             this.initPhone = '17712345678';
-            this.userForm.company = 'TalkingData';
-            this.userForm.department = '可视化部门';
+            this.userForm.company = 'AbpProjectName';
+            this.userForm.department = 'IT';
         },
         cancelInputCodeBox () {
             this.inputCodeVisible = false;
@@ -230,10 +229,10 @@ export default {
             let vm = this;
             vm.checkIdentifyCodeLoading = true;
             if (this.securityCode.length === 0) {
-                this.$Message.error('请填写短信验证码');
+                this.$Message.error(util.l('Please fill in SMS verification code'));
             } else {
                 setTimeout(() => {
-                    this.$Message.success('验证码正确');
+                    this.$Message.success(util.l('The verification code is correct'));
                     this.inputCodeVisible = false;
                     this.checkIdentifyCodeLoading = false;
                 }, 1000);
@@ -247,7 +246,7 @@ export default {
         saveInfoAjax () {
             this.save_loading = true;
             setTimeout(() => {
-                this.$Message.success('保存成功');
+                this.$Message.success(util.l('SavedSuccessfully'));
                 this.save_loading = false;
             }, 1000);
         }
