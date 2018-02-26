@@ -18,7 +18,7 @@ export default {
             let data1 = [];
             let data2 = [];
             for (let i = 0; i < 20; i++) {
-                xAxisData.push('类目' + i);
+                xAxisData.push('Category' + i);
                 data1.push((Math.sin(i / 5) * (i / 5 - 10) + i / 6) * 5);
                 data2.push((Math.cos(i / 5) * (i / 5 - 10) + i / 6) * 5);
             }
@@ -50,7 +50,7 @@ export default {
                 },
                 series: [
                     {
-                        name: '访问量',
+                        name: 'Views',
                         type: 'bar',
                         data: [
                             {value: 453682, name: 'Mon', itemStyle: {normal: {color: '#2d8cf0'}}},

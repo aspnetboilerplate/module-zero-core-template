@@ -84,5 +84,12 @@
     <text name="EditUser">Edit user</text>
     <text name="TenantIdIsNotActive{0}">TenantId {0} is not active</text>
     <text name="UnknownTenantId{0}">Unknown tenantId {0}</text>
+    <text name="ThisFieldIsRequired">This field is required</text>
+    <text name="PleaseWait">Please wait...</text>
+    <text name="Administration">Administration</text>
+  
+    <text name="ClearAll">Clear all</text>
+    <text name="ClearOthers">Clear others</text>
+    <text name="LabelOptions">Label options</text>
   </texts>
 </localizationDictionary>

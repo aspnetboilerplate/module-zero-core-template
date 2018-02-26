@@ -1,11 +1,13 @@
 import Main from '@/views/Main.vue';
+import util from '@/libs/util.js';
 
-// 不作为Main组件的子页面展示的页面单独写，如下
+//title properties are localization keys.
+
 export const loginRouter = {
     path: '/login',
     name: 'login',
     meta: {
-        title: 'Login - 登录'
+        title: 'LogIn'
     },
     component: () => import('@/views/login.vue')
 };
@@ -56,10 +58,10 @@ export const otherRouter = {
 // 作为Main组件的子页面展示并且在左侧菜单显示的路由写在appRouter里
 export const appRouter = [
     {
-        path: '/permission',
+        path: '/administration',
         icon: 'settings',
-        title: 'Permission',
-        name: 'permission',
+        title: 'Administration',
+        name: 'administration',
         component: Main,
         children: [
             { path: 'tenants', title: 'Tenants', name: 'tenants',permission:'Pages.Tenants', component: () => import('@/views/permission/tenants/tenants.vue') },
@@ -70,7 +72,7 @@ export const appRouter = [
     }
 ];
 
-// 所有上面定义的路由都要写在下面的routers里
+// All the routes defined above should be written in the routers below
 export const routers = [
     loginRouter,
     otherRouter,

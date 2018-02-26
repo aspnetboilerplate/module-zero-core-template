@@ -6,9 +6,10 @@ import AppConsts from './appconst'
 let util = {
 
 };
+
 util.title = function (title) {
-    title = title || 'iView admin';
-    window.document.title = title;
+    title = title || 'AbpProjectName';
+    window.document.title = this.localize(title);
 };
 
 const ajaxUrl = env === 'development'
@@ -21,17 +22,20 @@ util.ajax = axios.create({
     baseURL: ajaxUrl,
     timeout: 30000
 });
+
 util.ajax.interceptors.request.use(function (config) {
-    if(!!abp.auth.getToken()){
-        config.headers.common["Authorization"]="Bearer "+abp.auth.getToken();
+    if (!!abp.auth.getToken()) {
+        config.headers.common["Authorization"] = "Bearer " + abp.auth.getToken();
     }
-    config.headers.common[".AspNetCore.Culture"]=abp.utils.getCookieValue("Abp.Localization.CultureName");
-    config.headers.common["Abp.TenantId"]=abp.multiTenancy.getTenantIdCookie();
+
+    config.headers.common[".AspNetCore.Culture"] = abp.utils.getCookieValue("Abp.Localization.CultureName");
+    config.headers.common["Abp.TenantId"] = abp.multiTenancy.getTenantIdCookie();
     return config;
   }, function (error) {
 
     return Promise.reject(error);
 });
+
 util.ajax.interceptors.response.use(function (response) {
     // Do something with response data
     return response;
@@ -64,6 +68,10 @@ util.ajax.interceptors.response.use(function (response) {
     }
     return Promise.reject(error);
   })
+}, function (error) {
+    return Promise.reject(error);
+});
+
 util.inOf = function (arr, targetArr) {
     let res = true;
     arr.forEach(item => {
@@ -94,7 +102,7 @@ util.getRouterObjByName = function (routers, name) {
     if (!name || !routers || !routers.length) {
         return null;
     }
-    // debugger;
+
     let routerObj = null;
     for (let item of routers) {
         if (item.name === name) {
@@ -138,6 +146,7 @@ util.setCurrentPath = function (vm, name) {
             });
         }
     });
+
     let currentPathArr = [];
     if (name === 'home_index') {
         currentPathArr = [
@@ -177,10 +186,11 @@ util.setCurrentPath = function (vm, name) {
                 return false;
             }
         })[0];
+
         if (currentPathObj.children.length <= 1 && currentPathObj.name === 'home') {
             currentPathArr = [
                 {
-                    title: '首页',
+                    title: this.localize('HomePage'),
                     path: '',
                     name: 'home_index'
                 }
@@ -188,7 +198,7 @@ util.setCurrentPath = function (vm, name) {
         } else if (currentPathObj.children.length <= 1 && currentPathObj.name !== 'home') {
             currentPathArr = [
                 {
-                    title: 'HomePage',
+                    title: this.localize('HomePage'),
                     path: '/home',
                     name: 'home_index'
                 },
@@ -204,7 +214,7 @@ util.setCurrentPath = function (vm, name) {
             })[0];
             currentPathArr = [
                 {
-                    title: 'HomePage',
+                    title: this.localize('HomePage'),
                     path: '/home',
                     name: 'home_index'
                 },
@@ -221,6 +231,7 @@ util.setCurrentPath = function (vm, name) {
             ];
         }
     }
+
     vm.$store.commit('setCurrentPath', currentPathArr);
 
     return currentPathArr;
@@ -243,6 +254,7 @@ util.openNewPage = function (vm, name, argu, query) {
         }
         i++;
     }
+
     if (!tagHasOpened) {
         let tag = vm.$store.state.app.tagsList.filter((item) => {
             if (item.children) {
@@ -251,7 +263,9 @@ util.openNewPage = function (vm, name, argu, query) {
                 return name === item.name;
             }
         });
+
         tag = tag[0];
+
         if (tag) {
             tag = tag.children ? tag.children[0] : tag;
             if (argu) {
@@ -263,6 +277,7 @@ util.openNewPage = function (vm, name, argu, query) {
             vm.$store.commit('increateTag', tag);
         }
     }
+
     vm.$store.commit('setCurrentPageName', name);
 };
 
@@ -270,6 +285,7 @@ util.toDefaultPage = function (routers, name, route, next) {
     let len = routers.length;
     let i = 0;
     let notHandle = true;
+
     while (i < len) {
         if (routers[i].name === name && routers[i].children && routers[i].redirect === undefined) {
             route.replace({
@@ -279,8 +295,10 @@ util.toDefaultPage = function (routers, name, route, next) {
             next();
             break;
         }
+
         i++;
     }
+
     if (notHandle) {
         next();
     }
@@ -288,8 +306,11 @@ util.toDefaultPage = function (routers, name, route, next) {
 
 util.fullscreenEvent = function (vm) {
     vm.$store.commit('initCachepage');
-    // 权限菜单过滤相关
     vm.$store.commit('updateMenulist');
-    // 全屏相关
 };
+
+util.localize = function(key){
+    return abp.localization.localize(key, 'AbpProjectName');
+};
+
 export default util;

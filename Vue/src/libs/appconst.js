@@ -1,11 +1,11 @@
-const AppConsts= {
-    userManagement:{
+const AppConsts = {
+    userManagement: {
         defaultAdminUserName: 'admin'
     },
-    localization:{
-        defaultLocalizationSourceName: 'AbpVue'
+    localization: {
+        defaultLocalizationSourceName: 'AbpProjectName'
     },
-    authorization:{
+    authorization: {
         encrptedAuthTokenName: 'enc_auth_token'
     },
     appBaseUrl: "http://localhost:8080",

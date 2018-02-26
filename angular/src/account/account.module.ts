@@ -1,7 +1,9 @@
-﻿import { CommonModule } from '@angular/common';
+import { CommonModule } from '@angular/common';
 import { NgModule } from '@angular/core';
 import { FormsModule } from '@angular/forms';
-import { HttpModule, JsonpModule } from '@angular/http';
+import { JsonpModule } from '@angular/http';
+import { HttpClientModule } from '@angular/common/http';
+
 import { ModalModule } from 'ngx-bootstrap';
 
 import { AbpModule } from '@abp/abp.module';
@@ -25,7 +27,7 @@ import { LoginService } from './login/login.service';
     imports: [
         CommonModule,
         FormsModule,
-        HttpModule,
+        HttpClientModule,
         JsonpModule,
         AbpModule,
         SharedModule,

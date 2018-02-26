@@ -50,16 +50,35 @@ export default {
         }
     },
     methods: {
-        validator () {
-            return true; // 你可以在这里写密码验证方式，如发起ajax请求将用户输入的密码this.password与数据库用户密码对比
+        async validator () {
+            var username = Cookies.get('userNameOrEmailAddress');
+            if(!username){
+                return false;
+            }
+            
+            var password = this.password;
+            var result = false;
+            await this.$store.dispatch({
+                    type: 'user/login',
+                    data: {
+                        userNameOrEmailAddress: username,
+                        password: password
+                    }
+                 }).then(response => {
+                   result = true;
+                }, (error) => {
+                   result = false;
+                });
+            
+            return result;
         },
         handleClickAvator () {
             this.avatorLeft = '-180px';
             this.inputLeft = '0px';
             this.$refs.inputEle.focus();
         },
-        handleUnlock () {
-            if (this.validator()) {
+        async handleUnlock () {
+            if (await this.validator()) {
                 this.avatorLeft = '0px';
                 this.inputLeft = '400px';
                 this.password = '';
