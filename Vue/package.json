@@ -16,7 +16,9 @@
   },
   "author": "Lison<zhigang.li@tendcloud.com>",
   "license": "MIT",
+  "private": true,
   "dependencies": {
+    "@aspnet/signalr": "1.0.0-preview1-28189",
     "abp-web-resources": "^3.3.0",
     "area-data": "^1.0.0",
     "axios": "^0.17.1",
@@ -31,6 +33,7 @@
     "jquery": "^3.3.1",
     "js-cookie": "^2.2.0",
     "rasterizehtml": "^1.2.4",
+    "signalr": "^2.2.2",
     "simplemde": "^1.11.2",
     "sortablejs": "^1.7.0",
     "tinymce": "^4.7.4",

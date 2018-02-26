@@ -18,7 +18,7 @@ fs.open('./build/env.js', 'w', function(err, fd) {
 
 module.exports = merge(webpackBaseConfig, {
     output: {
-        publicPath: 'https://iview.github.io/iview-admin/dist/',  // 修改 https://iv...admin 这部分为你的服务器域名 
+        publicPath: '/dist/',  // 修改 https://iv...admin 这部分为你的服务器域名 
         filename: '[name].[hash].js',
         chunkFilename: '[name].[hash].chunk.js'
     },
@@ -67,7 +67,22 @@ module.exports = merge(webpackBaseConfig, {
                 from: 'src/views/main-components/theme-switch/theme'
             },
             {
-                from: 'src/views/my-components/text-editor/tinymce'
+                from:'node_modules/abp-web-resources/abp/framework/scripts/abp.js',
+                to:'abp'
+            },{
+                from:'node_modules/jquery/dist/jquery.min.js'
+            },
+            {
+                from:'node_modules/signalr/jquery.signalR.min.js'
+            },
+            {
+                from:'node_modules/@aspnet/signalr/dist/browser/signalr.min.js'
+            },{
+                from:'node_modules/abp-web-resources/Abp/Framework/scripts/libs/abp.signalr.js',
+                to:'abp'
+            },{
+                from:'node_modules/abp-web-resources/Abp/Framework/scripts/libs/abp.signalr-client.js',
+                to:'abp'
             }
         ], {
             ignore: [
