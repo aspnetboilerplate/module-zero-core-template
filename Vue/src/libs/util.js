@@ -31,20 +31,20 @@ util.ajax.interceptors.request.use(function (config) {
     config.headers.common[".AspNetCore.Culture"] = abp.utils.getCookieValue("Abp.Localization.CultureName");
     config.headers.common["Abp.TenantId"] = abp.multiTenancy.getTenantIdCookie();
     return config;
-  }, function (error) {
+}, function (error) {
 
     return Promise.reject(error);
 });
 
-util.ajax.interceptors.response.use(function (response) {
++util.ajax.interceptors.response.use(function (response) {
     // Do something with response data
     return response;
-  }, function (error) {
+}, function (error) {
     // Do something with response error
-    if(!!error.response&&!!error.response.data&&!!error.response.data.__abp){
+    if (!!error.response && !!error.response.data && !!error.response.data.__abp) {
         abp.ajax.showError(error.response.data.error);
-    }else{
-        if(!error.response){
+    } else {
+        if (!error.response) {
             abp.ajax.showError(abp.ajax.defaultError);
             return
         }
@@ -67,10 +67,7 @@ util.ajax.interceptors.response.use(function (response) {
         }
     }
     return Promise.reject(error);
-  })
-}, function (error) {
-    return Promise.reject(error);
-});
+})
 
 util.inOf = function (arr, targetArr) {
     let res = true;
@@ -309,7 +306,7 @@ util.fullscreenEvent = function (vm) {
     vm.$store.commit('updateMenulist');
 };
 
-util.localize = function(key){
+util.localize = function (key) {
     return abp.localization.localize(key, 'AbpProjectName');
 };
 
