@@ -17,12 +17,12 @@
                     label-position="right"
                     :rules="inforValidate"
                 >
-                    <FormItem label="用户姓名：" prop="name">
+                    <FormItem label="{{'Username'|l}}:" prop="name">
                         <div style="display:inline-block;width:300px;">
                             <Input v-model="userForm.name" ></Input>
                         </div>
                     </FormItem>
-                    <FormItem label="用户手机：" prop="cellphone" >
+                    <FormItem label="Phone：" prop="cellphone" >
                         <div style="display:inline-block;width:204px;">
                             <Input v-model="userForm.cellphone" @on-keydown="hasChangePhone"></Input>
                         </div>
@@ -30,10 +30,10 @@
                             <Button @click="getIdentifyCode" :disabled="canGetIdentifyCode">{{ gettingIdentifyCodeBtnContent }}</Button>
                             <div class="own-space-input-identifycode-con" v-if="inputCodeVisible">
                                 <div style="background-color:white;z-index:110;margin:10px;">
-                                    <Input v-model="securityCode" placeholder="请填写短信验证码" ></Input>
+                                    <Input v-model="securityCode" placeholder="Please fill security code" ></Input>
                                     <div style="margin-top:10px;text-align:right">
-                                        <Button type="ghost" @click="cancelInputCodeBox">取消</Button>
-                                        <Button type="primary" @click="submitCode" :loading="checkIdentifyCodeLoading">确定</Button>
+                                        <Button type="ghost" @click="cancelInputCodeBox">{{'Cancel'|l}}</Button>
+                                        <Button type="primary" @click="submitCode" :loading="checkIdentifyCodeLoading">{{'Login'|l}}</Button>
                                     </div>
                                 </div>
                             </div>

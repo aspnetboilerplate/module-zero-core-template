@@ -1,6 +1,6 @@
 <template>
     <div @click="handleChange" v-if="showFullScreenBtn" class="full-screen-btn-con">
-        <Tooltip :content="value ? '退出全屏' : '全屏'" placement="bottom">
+        <Tooltip :content="value ? 'Exit full screen' : 'Full screen'" placement="bottom">
             <Icon :type="value ? 'arrow-shrink' : 'arrow-expand'" :size="23"></Icon>
         </Tooltip>
     </div>
