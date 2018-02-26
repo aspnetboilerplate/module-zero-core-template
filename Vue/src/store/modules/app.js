@@ -11,6 +11,7 @@ const app = {
         openedSubmenuArr: [], // 要展开的菜单数组
         menuTheme: 'dark', // 主题
         themeColor: '',
+        initSignalR:false,
         pageOpenedList: [{
             title: 'HomePage',
             path: '',
@@ -34,6 +35,9 @@ const app = {
         dontCache: [] // 在这里定义你不想要缓存的页面的name属性值(参见路由配置router.js)
     },
     mutations: {
+        initSignalR(state){
+            state.initSignalR=true;
+        },
         setTagsList (state, list) {
             state.tagsList.push(...list);
         },

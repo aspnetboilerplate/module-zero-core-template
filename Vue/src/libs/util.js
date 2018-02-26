@@ -2,9 +2,7 @@ import axios from 'axios';
 import env from '../../build/env';
 import semver from 'semver';
 import packjson from '../../package.json';
-import abp from '../abp';
-import AppConsts from '../libs/appconst';
-
+import AppConsts from './appconst'
 let util = {
 
 };
@@ -15,7 +13,7 @@ util.title = function (title) {
 };
 
 const ajaxUrl = env === 'development'
-    ? 'http://localhost:21021'
+    ? AppConsts.remoteServiceBaseUrl
     : env === 'production'
         ? 'https://www.url.com'
         : 'https://debug.url.com';
@@ -33,6 +31,43 @@ util.ajax.interceptors.request.use(function (config) {
     config.headers.common[".AspNetCore.Culture"] = abp.utils.getCookieValue("Abp.Localization.CultureName");
     config.headers.common["Abp.TenantId"] = abp.multiTenancy.getTenantIdCookie();
     return config;
+  }, function (error) {
+
+    return Promise.reject(error);
+});
+
+util.ajax.interceptors.response.use(function (response) {
+    // Do something with response data
+    return response;
+  }, function (error) {
+    // Do something with response error
+    if(!!error.response&&!!error.response.data&&!!error.response.data.__abp){
+        abp.ajax.showError(error.response.data.error);
+    }else{
+        if(!error.response){
+            abp.ajax.showError(abp.ajax.defaultError);
+            return
+        }
+        switch (error.response.status) {
+            case 401:
+                abp.ajax.handleUnAuthorizedRequest(
+                    abp.ajax.showError(abp.ajax.defaultError401),
+                    abp.appPath
+                );
+                break;
+            case 403:
+                abp.ajax.showError(abp.ajax.defaultError403);
+                break;
+            case 404:
+                abp.ajax.showError(abp.ajax.defaultError404);
+                break;
+            default:
+                abp.ajax.showError(abp.ajax.defaultError);
+                break;
+        }
+    }
+    return Promise.reject(error);
+  })
 }, function (error) {
     return Promise.reject(error);
 });

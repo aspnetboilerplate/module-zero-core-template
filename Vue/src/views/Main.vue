@@ -74,7 +74,8 @@
     import changeLanguage from './main-components/changelanguage.vue';
     import Cookies from 'js-cookie';
     import util from '@/libs/util.js';
-    
+    import AppConsts from '../libs/appconst.js'
+
     export default {
         components: {
             shrinkableMenu,
@@ -91,7 +92,8 @@
                 shrink: false,
                 userName: '',
                 isFullScreen: false,
-                openedSubmenuArr: this.$store.state.app.openedSubmenuArr
+                openedSubmenuArr: this.$store.state.app.openedSubmenuArr,
+                appConsts:AppConsts,
             };
         },
         computed: {
@@ -190,7 +192,14 @@
             }
         },
         mounted () {
-            this.init();
+            this.init();           
+            // if(this.$store.state.session.application.features['SignalR']){
+            //     if (this.$store.state.session.application.features['SignalR.AspNetCore']) {
+            //         SignalRAspNetCoreHelper.initSignalR();
+            //     } else {
+            //         SignalRHelper.initSignalR();
+            //     }
+            // }
         },
         created () {
             // 显示打开的页面的列表
