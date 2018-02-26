@@ -1,6 +1,6 @@
 import Cookies from 'js-cookie';
-import Util from '../../libs/util'
-import appconst from '../../libs/appconst'
+import Util from '@/libs/util'
+import appconst from '@/libs/appconst'
 const user = {
     namespaced:true,
     state: {

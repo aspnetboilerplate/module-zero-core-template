@@ -74,7 +74,7 @@
     import changeLanguage from './main-components/changelanguage.vue';
     import Cookies from 'js-cookie';
     import util from '@/libs/util.js';
-    import AppConsts from '../libs/appconst.js'
+    import AppConsts from '@/libs/appconst.js'
 
     export default {
         components: {
@@ -181,7 +181,7 @@
             '$route' (to) {
                 this.$store.commit('setCurrentPageName', to.name);
                 let pathArr = util.setCurrentPath(this, to.name);
-                debugger;
+                
                 if (pathArr.length > 2) {
                     this.$store.commit('addOpenSubmenu', pathArr[1].name);
                 }

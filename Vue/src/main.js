@@ -43,12 +43,12 @@ util.ajax.get('/AbpUserConfiguration/GetAll').then(result => {
         },
         mounted() {
             this.currentPageName = this.$route.name;
-            // 显示打开的页面的列表
+            // Display a list of open pages
             this.$store.commit('setOpenedList');
             this.$store.commit('initCachepage');
-            // 权限菜单过滤相关
+
+            //Filtering admin menu
             this.$store.commit('updateMenulist');
-            // iview-admin检查更新
         },
         created() {
             let tagsList = [];

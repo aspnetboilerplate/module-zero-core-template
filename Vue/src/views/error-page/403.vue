@@ -9,8 +9,8 @@
                 <div class="error403-body-con-title">4<span class="error403-0-span"><Icon type="android-lock"></Icon></span><span class="error403-key-span"><Icon size="220" type="ios-bolt"></Icon></span></div>
                 <p class="error403-body-con-message">You don't have permission</p>
                 <div class="error403-btn-con">
-                    <Button @click="goHome" size="large" style="width: 200px;" type="text">返回首页</Button>
-                    <Button @click="backPage" size="large" style="width: 200px;margin-left: 40px;" type="primary">返回上一页</Button>
+                    <Button @click="goHome" size="large" style="width: 200px;" type="text">{{'Return to Home page'|l}}</Button>
+                    <Button @click="backPage" size="large" style="width: 200px;margin-left: 40px;" type="primary">{{'Back to last page'|l}}</Button>
                 </div>
             </Card>
         </div>
