@@ -1,5 +1,0 @@
-{
-    "presets": ["stage-3", "env"],
-    "plugins": ["transform-runtime", "syntax-dynamic-import"],
-    "comments": false
-}
