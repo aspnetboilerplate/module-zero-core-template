@@ -23,7 +23,6 @@ export class AccountLanguagesComponent extends AppComponentBase implements OnIni
 
     ngOnInit() {
         this.languages = _.filter(this.localization.languages, l => !l.isDisabled);
-        this.languages = this.localization.languages;
         this.currentLanguage = this.localization.currentLanguage;
     }
 
