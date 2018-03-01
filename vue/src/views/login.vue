@@ -8,7 +8,7 @@
             <Card :bordered="false">
                 <p slot="title">
                     <Icon type="log-in"></Icon>
-                    <span v-if="isMultiTenancyEnabled">{{'CurrentTenant'|l}}:<span v-if="tenant">{{tenant.name}}</span><span v-if="!tenant">{{'NotSelected'|l}}</span></span>
+                    <span v-if="isMultiTenancyEnabled" class="multi-tenancy">{{'CurrentTenant'|l}}:<span v-if="tenant" class="tenant-name"> {{tenant.name}}</span><span v-if="!tenant"> {{'NotSelected'|l}}</span></span>
                 </p>
                 <a href="#" slot="extra" @click="showChangeModal">
                    {{'Change'|l}}
