@@ -28,7 +28,7 @@
                     @click.native="linkTo(item)"
                     :closable="item.name==='home_index'?false:true"
                     :color="item.children?(item.children[0].name===currentPageName?'blue':'default'):(item.name===currentPageName?'blue':'default')"
-                >{{ itemTitle(item) }}</Tag>
+                >{{ itemTitle(item) | l}}</Tag>
             </transition-group>
         </div>
     </div>
