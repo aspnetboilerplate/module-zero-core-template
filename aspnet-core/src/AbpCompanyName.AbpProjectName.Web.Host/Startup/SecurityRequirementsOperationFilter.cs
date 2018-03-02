@@ -10,18 +10,18 @@ namespace AbpCompanyName.AbpProjectName.Web.Host.Startup
     {
         public void Apply(Operation operation, OperationFilterContext context)
         {
-            var controllerPermissions = context.ApiDescription.ControllerAttributes()
+            var controllerAbpAuthorizeAttrs = context.ApiDescription.ControllerAttributes()
                 .OfType<AbpAuthorizeAttribute>();
 
-            var actionPermissions = context.ApiDescription.ActionAttributes()
+            var actionAbpAuthorizeAtrrs = context.ApiDescription.ActionAttributes()
                 .OfType<AbpAuthorizeAttribute>();
 
-            if (controllerPermissions.Any() || actionPermissions.Any())
+            if (controllerAbpAuthorizeAttrs.Any() || actionAbpAuthorizeAtrrs.Any())
             {
                 operation.Responses.Add("401", new Response { Description = "Unauthorized" });
                 operation.Responses.Add("403", new Response { Description = "Forbidden" });
 
-                var permissions = controllerPermissions.Union(actionPermissions)
+                var permissions = controllerAbpAuthorizeAttrs.Union(actionAbpAuthorizeAtrrs)
                     .SelectMany(p => p.Permissions)
                     .Distinct();
 
