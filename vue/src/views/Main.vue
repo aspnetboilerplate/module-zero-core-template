@@ -148,7 +148,6 @@
             },
             handleClickUserDropdown (name) {
                 if (name === 'loginout') {
-                    // 退出登录
                     this.$store.commit('clearOpenedSubmenu');
                     this.$store.commit('user/logout', this);                    
                 }
@@ -159,23 +158,19 @@
                         return true;
                     }
                 });
-                if (!openpageHasTag) { //  解决关闭当前标签后再点击回退按钮会退到当前页时没有标签的问题
+
+                if (!openpageHasTag) {
                     util.openNewPage(this, name, this.$route.params || {}, this.$route.query || {});
                 }
             },
             handleSubmenuChange (val) {
-                // console.log(val)
+                
             },
             beforePush (name) {
-                // if (name === 'accesstest_index') {
-                //     return false;
-                // } else {
-                //     return true;
-                // }
                 return true;
             },
             fullscreenChange (isFullScreen) {
-                // console.log(isFullScreen);
+
             }
         },
         watch: {
@@ -190,7 +185,7 @@
                 localStorage.currentPageName = to.name;
             },
             lang () {
-                util.setCurrentPath(this, this.$route.name); // 在切换语言时用于刷新面包屑
+                util.setCurrentPath(this, this.$route.name); // Used to refresh the breadcrumbs when switching languages
             }
         },
         mounted () {
@@ -204,7 +199,7 @@
             // }
         },
         created () {
-            // 显示打开的页面的列表
+            // Display a list of open pages
             this.$store.commit('setOpenedList');
         }
     };
