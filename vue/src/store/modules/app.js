@@ -10,8 +10,9 @@ const app = {
         isFullScreen: false,
         openedSubmenuArr: ['administration'], // 要展开的菜单数组
         menuTheme: 'dark', // 主题
+
         themeColor: '',
-        initSignalR:false,
+        initSignalR: false,
         pageOpenedList: [{
             title: 'HomePage',
             path: '',
@@ -24,7 +25,7 @@ const app = {
                 path: '',
                 name: 'home_index'
             }
-        ], // 面包屑数组
+        ], 
         menuList: [],
         routers: [
             otherRouter,
@@ -32,7 +33,7 @@ const app = {
         ],
         tagsList: [...otherRouter.children],
         messageCount: 0,
-        dontCache: [] // 在这里定义你不想要缓存的页面的name属性值(参见路由配置router.js)
+        dontCache: [] 
     },
     mutations: {
         initSignalR(state){
@@ -61,6 +62,7 @@ const app = {
                     }                   
                 }                
             });
+            
             state.menuList = menuList;
         },
         changeMenuTheme (state, theme) {

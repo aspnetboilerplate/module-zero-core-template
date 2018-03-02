@@ -19,7 +19,7 @@
             <div>
                 <Form ref="newUserForm" label-position="top" :rules="newUserRule" :model="editUser">
                     <Tabs value="detail">
-                        <TabPane :label="'User Details'|l" name="detail">
+                        <TabPane :label="L('UserDetails')" name="detail">
                             <FormItem :label="L('UserName')" prop="userName">
                                 <Input v-model="editUser.userName" :maxlength="32" :minlength="2"></Input>
                             </FormItem>
@@ -42,7 +42,7 @@
                                 <Checkbox v-model="editUser.isActive">{{'IsActive'|l}}</Checkbox>
                             </FormItem>
                         </TabPane>
-                        <TabPane :label="'User Roles'|l" name="roles">
+                        <TabPane :label="L('UserRoles')" name="roles">
                             <CheckboxGroup v-model="editUser.roleNames">
                                 <Checkbox :label="role.normalizedName" v-for="role in roles" :key="role.id"><span>{{role.name}}</span></Checkbox>
                             </CheckboxGroup>
@@ -60,7 +60,7 @@
             <div>
                 <Form ref="userForm" label-position="top" :rules="userRule" :model="editUser">
                     <Tabs value="detail">
-                        <TabPane :label="'User Details'|l" name="detail">
+                        <TabPane :label="L('UserDetails')" name="detail">
                             <FormItem :label="L('UserName')" prop="userName">
                                 <Input v-model="editUser.userName" :maxlength="32" :minlength="2"></Input>
                             </FormItem>
@@ -77,7 +77,7 @@
                                 <Checkbox v-model="editUser.isActive">{{'IsActive'|l}}</Checkbox>
                             </FormItem>
                         </TabPane>
-                        <TabPane :label="'User Roles'|l" name="roles">
+                        <TabPane :label="L('UserRoles')" name="roles">
                             <CheckboxGroup v-model="editUser.roleNames">
                                 <Checkbox :label="role.normalizedName" v-for="role in roles" :key="role.id"><span>{{role.name}}</span></Checkbox>
                             </CheckboxGroup>

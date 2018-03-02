@@ -4,10 +4,8 @@
     <text name="HomePage" value="Home page" />
     <text name="About" value="About" />
     <text name="WellcomeMessage" value="Welcome to AbpProjectName!" />
-
     <text name="FormIsNotValidMessage" value="Form is not valid. Please check and fix errors." />
     <text name="TenantNameCanNotBeEmpty" value="Tenant name can not be empty" />
-
     <text name="InvalidUserNameOrPassword" value="Invalid user name or password" />
     <text name="ThereIsNoTenantDefinedWithName{0}" value="There is no tenant defined with name {0}" />
     <text name="TenantIsNotActive" value="Tenant {0} is not active." />
@@ -20,15 +18,12 @@
     <text name="Password" value="Password" />
     <text name="RememberMe" value="Remember me" />
     <text name="LogIn" value="Log in" />
-
     <text name="LoginFailed" value="Login failed!" />
-
     <text name="NameSurname" value="Name surname" />
     <text name="UserName" value="User name" />
     <text name="Name" value="Name" />
     <text name="Surname" value="Surname" />
     <text name="EmailAddress" value="Email address" />
-
     <text name="Tenants" value="Tenants" />
     <text name="SavedSuccessfully" value="Saved successfully" />
     <text name="CreateNewTenant" value="Create new tenant" />
@@ -44,9 +39,7 @@
     <text name="TenantSelection" value="Tenant Selection" />
     <text name="TenantSelection_Detail" value="Please select one of the following tenants." />
     <text name="Logout" value="Logout" />
-
     <text name="RegisterFormUserNameInvalidMessage">Please don't enter an email address for username.</text>
-
     <text name="DatabaseConnectionString" value="Database connection string" />
     <text name="Users" value="Users" />
     <text name="IsActive" value="Is active" />
@@ -56,28 +49,22 @@
     <text name="No" value="No" />
     <text name="Optional" value="Optional" />
     <text name="LeaveEmptyToSwitchToHost">Leave empty to switch to the host</text>
-
     <text name="CurrentTenant">Current tenant</text>
     <text name="NotSelected">Not selected</text>
     <text name="Change">Change</text>
     <text name="ChangeTenant">Change tenant</text>
-
     <text name="MultiLevelMenu">Multi Level Menu</text>
     <text name="Back">Back</text>
     <text name="SuccessfullyRegistered">Successfully registered</text>
     <text name="WaitingForEmailActivation">Your email address should be activated</text>
     <text name="Roles">Roles</text>
     <text name="DisplayName">Display Name</text>
-
     <text name="Edit">Edit</text>
     <text name="Delete">Delete</text>
-
     <text name="CreateNewRole">Create new role</text>
     <text name="RoleName">Role Name</text>
     <text name="Actions">Actions</text>
-
     <text name="CouldNotCompleteLoginOperation">Could not complete login operation. Please try again later.</text>
-
     <text name="CouldNotValidateExternalUser">Could not validate external user</text>
     <text name="EditRole">Edit role</text>
     <text name="EditTenant">Edit tenant</text>
@@ -86,10 +73,15 @@
     <text name="UnknownTenantId{0}">Unknown tenantId {0}</text>
     <text name="ThisFieldIsRequired">This field is required</text>
     <text name="PleaseWait">Please wait...</text>
-    <text name="Administration">Administration</text>
-  
+    <text name="Administration">Administration</text>  
     <text name="ClearAll">Clear all</text>
     <text name="ClearOthers">Clear others</text>
     <text name="LabelOptions">Label options</text>
+	<text name="Permissions">Permissions</text>
+	<text name="RoleDescription">Role description</text>
+	<text name="Refresh">Refresh</text>
+	<text name="Create">Create</text>
+	<text name="UserDetails">User details</text>
+	<text name="UserRoles">User roles</text>	
   </texts>
 </localizationDictionary>

@@ -88,6 +88,7 @@
             changeLanguage
         },
         data () {
+		
             return {
                 shrink: false,
                 userName: '',
@@ -101,10 +102,10 @@
                 return this.$store.state.app.menuList;
             },
             pageTagsList () {
-                return this.$store.state.app.pageOpenedList; // 打开的页面的页面对象
+                return this.$store.state.app.pageOpenedList; 
             },
             currentPath () {
-                return this.$store.state.app.currentPath; // 当前面包屑数组
+                return this.$store.state.app.currentPath; 
             },
             avatorPath () {
                 return localStorage.avatorImgPath;

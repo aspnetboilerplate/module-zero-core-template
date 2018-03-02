@@ -8,8 +8,8 @@
                     <Icon type="android-more-vertical"></Icon>
                 </a>
                 <DropdownMenu slot="list">
-                    <DropdownItem name='Refresh'>{{'Refresh'|l}}</DropdownItem>
-                    <DropdownItem name='Create'>{{'Create'|l}}</DropdownItem>
+                    <DropdownItem name='Refresh'>{{'Refresh' | l}}</DropdownItem>
+                    <DropdownItem name='Create'>{{'Create' | l}}</DropdownItem>
                 </DropdownMenu>
             </Dropdown>
             <Table :columns="columns" border :data="roles"></Table>
@@ -24,10 +24,10 @@
                     <FormItem :label="L('DisplayName')" prop="displayName">
                         <Input v-model="editRole.displayName" :maxlength="32" :minlength="2"></Input>
                     </FormItem>
-                    <FormItem label="Role description" prop="description">
+                    <FormItem :label="L('RoleDescription')" prop="description">
                         <Input v-model="editRole.description"></Input>
                     </FormItem>
-                    <FormItem label="Permissions">
+                    <FormItem :label="L('Permissions')">
                         <CheckboxGroup v-model="editRole.permissions">
                             <Checkbox :label="permission.name" v-for="permission in permissions" :key="permission.name"><span>{{permission.displayName}}</span></Checkbox>
                         </CheckboxGroup>
@@ -48,10 +48,10 @@
                     <FormItem :label="L('DisplayName')" prop="displayName">
                         <Input v-model="editRole.displayName" :maxlength="32" :minlength="2"></Input>
                     </FormItem>
-                    <FormItem label="Role description" prop="description">
+                    <FormItem :label="L('RoleDescription')" prop="description">
                         <Input v-model="editRole.description"></Input>
                     </FormItem>
-                    <FormItem label="Permissions">
+                    <FormItem :label="L('Permissions')">
                         <CheckboxGroup v-model="editRole.permissions">
                             <Checkbox :label="permission.name" v-for="permission in permissions" :key="permission.name"><span>{{permission.displayName}}</span></Checkbox>
                         </CheckboxGroup>

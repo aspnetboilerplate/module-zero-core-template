@@ -28,7 +28,7 @@
                     @click.native="linkTo(item)"
                     :closable="item.name==='home_index'?false:true"
                     :color="item.children?(item.children[0].name===currentPageName?'blue':'default'):(item.name===currentPageName?'blue':'default')"
-                >{{ itemTitle(item) }}</Tag>
+                >{{ itemTitle(item) | l}}</Tag>
             </transition-group>
         </div>
     </div>
@@ -147,14 +147,11 @@ export default {
             this.tagBodyLeft = 0;
         },
         moveToView (tag) {
-            if (tag.offsetLeft < -this.tagBodyLeft) {
-                // 标签在可视区域左侧
+            if (tag.offsetLeft < -this.tagBodyLeft) {               
                 this.tagBodyLeft = -tag.offsetLeft + 10;
             } else if (tag.offsetLeft + 10 > -this.tagBodyLeft && tag.offsetLeft + tag.offsetWidth < -this.tagBodyLeft + this.$refs.scrollCon.offsetWidth - 100) {
-                // 标签在可视区域
                 this.tagBodyLeft = Math.min(0, this.$refs.scrollCon.offsetWidth - 100 - tag.offsetWidth - tag.offsetLeft - 20);
             } else {
-                // 标签在可视区域右侧
                 this.tagBodyLeft = -(tag.offsetLeft - (this.$refs.scrollCon.offsetWidth - 100 - tag.offsetWidth) + 20);
             }
         }
@@ -168,7 +165,7 @@ export default {
                     this.moveToView(tag);
                 }
             });
-        }, 1); // 这里不设定时器就会有偏移bug
+        }, 1); //bug
         this.tagsCount = this.tagsList.length;
     },
     watch: {

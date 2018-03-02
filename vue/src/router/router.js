@@ -64,6 +64,7 @@ export const appRouter = [
         name: 'administration',
         component: Main,
         children: [
+            { path: 'home', title: 'HomePage', name: 'home_index', component: () => import('@/views/home/home.vue') },
             { path: 'tenants', title: 'Tenants', name: 'tenants',permission:'Pages.Tenants', component: () => import('@/views/admin/tenants/tenants.vue') },
             { path: 'users', title: 'Users', name: 'users',permission:'Pages.Users', component: () => import('@/views/admin/users/users.vue') },
             { path: 'roles', title: 'Roles', name: 'roles',permission:'Pages.Roles', component: () => import('@/views/admin/roles/roles.vue') },

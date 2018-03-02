@@ -31,7 +31,7 @@
                             </Row>
                             <Row class="margin-top-8">
                                 <Col span="8"><p class="notwrap">Last login location:</p></Col>
-                                <Col span="16" class="padding-left-8">Beijing</Col>
+                                <Col span="16" class="padding-left-8">London</Col>
                             </Row>
                         </Card>
                     </Col>
