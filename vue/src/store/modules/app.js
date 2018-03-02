@@ -8,7 +8,7 @@ const app = {
         cachePage: [],
         lang: '',
         isFullScreen: false,
-        openedSubmenuArr: [], // 要展开的菜单数组
+        openedSubmenuArr: ['administration'], // 要展开的菜单数组
         menuTheme: 'dark', // 主题
         themeColor: '',
         initSignalR:false,
