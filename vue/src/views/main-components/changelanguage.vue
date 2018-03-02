@@ -1,5 +1,5 @@
 <template>
-    <div  style="display:inline-block;">
+    <div  style="display:inline-block;" class="topbar-menu-item">
         <Row type="flex" justify="start" align="middle">
         <i :class="currentLanguage.icon" style="margin-right:5px"></i>
         <Dropdown trigger="click" @on-click="setLanguage">

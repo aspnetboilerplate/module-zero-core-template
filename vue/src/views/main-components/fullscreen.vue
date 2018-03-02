@@ -1,5 +1,5 @@
 <template>
-    <div @click="handleChange" v-if="showFullScreenBtn" class="full-screen-btn-con">
+    <div @click="handleChange" v-if="showFullScreenBtn" class="full-screen-btn-con topbar-menu-item">
         <Tooltip :content="value ? 'Exit full screen' : 'Full screen'" placement="bottom">
             <Icon :type="value ? 'arrow-shrink' : 'arrow-expand'" :size="23"></Icon>
         </Tooltip>
