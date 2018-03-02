@@ -11,20 +11,19 @@ namespace AbpCompanyName.AbpProjectName.Web.Host.Startup
         public void Apply(Operation operation, OperationFilterContext context)
         {
             var controllerPermissions = context.ApiDescription.ControllerAttributes()
-                .OfType<AbpAuthorizeAttribute>()
-                .Select(attr => attr.Permissions);
+                .OfType<AbpAuthorizeAttribute>();
 
             var actionPermissions = context.ApiDescription.ActionAttributes()
-                .OfType<AbpAuthorizeAttribute>()
-                .Select(attr => attr.Permissions);
+                .OfType<AbpAuthorizeAttribute>();
 
-            var permissions = controllerPermissions.Union(actionPermissions).Distinct()
-                .SelectMany(p => p);
-
-            if (permissions.Any())
+            if (controllerPermissions.Any() || actionPermissions.Any())
             {
                 operation.Responses.Add("401", new Response { Description = "Unauthorized" });
                 operation.Responses.Add("403", new Response { Description = "Forbidden" });
+
+                var permissions = controllerPermissions.Union(actionPermissions)
+                    .SelectMany(p => p.Permissions)
+                    .Distinct();
 
                 operation.Security = new List<IDictionary<string, IEnumerable<string>>>
                 {
