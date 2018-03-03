@@ -28,7 +28,8 @@ namespace AbpCompanyName.AbpProjectName.Web.Host.Startup
                     .SelectMany(p => p.Permissions)
                     .Distinct();
                     
-                if(permissions.Any()){
+                if (permissions.Any())
+                {
                     operation.Responses.Add("403", new Response { Description = "Forbidden" });
                 }
                 
