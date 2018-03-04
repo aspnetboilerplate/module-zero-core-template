@@ -1,4 +1,4 @@
-﻿using System.Collections.Generic;
+using System.Collections.Generic;
 using System.Linq;
 using Swashbuckle.AspNetCore.Swagger;
 using Swashbuckle.AspNetCore.SwaggerGen;
@@ -16,10 +16,15 @@ namespace AbpCompanyName.AbpProjectName.Web.Host.Startup
                 return;
             }
 
+            var controllerAttrs = context.ApiDescription.ControllerAttributes();
             var actionAbpAuthorizeAttrs = actionAttrs.OfType<AbpAuthorizeAttribute>();
-            var controllerAbpAuthorizeAttrs = context.ApiDescription.ControllerAttributes()
-                .OfType<AbpAuthorizeAttribute>();
 
+            if (!actionAbpAuthorizeAttrs.Any() && controllerAttrs.OfType<AbpAllowAnonymousAttribute>().Any())
+            {
+                return;
+            }
+
+            var controllerAbpAuthorizeAttrs = controllerAttrs.OfType<AbpAuthorizeAttribute>();
             if (controllerAbpAuthorizeAttrs.Any() || actionAbpAuthorizeAttrs.Any())
             {
                 operation.Responses.Add("401", new Response { Description = "Unauthorized" });
