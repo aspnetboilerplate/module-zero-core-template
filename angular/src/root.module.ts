@@ -25,6 +25,7 @@ export function appInitializerFactory(injector: Injector) {
     abp.ui.setBusy();
     return new Promise<boolean>((resolve, reject) => {
       AppPreBootstrap.run(() => {
+        abp.event.trigger('abp.dynamicScriptsInitialized');
         var appSessionService: AppSessionService = injector.get(AppSessionService);
         appSessionService.init().then(
           (result) => {
