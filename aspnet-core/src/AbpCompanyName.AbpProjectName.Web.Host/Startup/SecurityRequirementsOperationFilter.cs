@@ -1,4 +1,4 @@
-﻿using System.Collections.Generic;
+using System.Collections.Generic;
 using System.Linq;
 using Swashbuckle.AspNetCore.Swagger;
 using Swashbuckle.AspNetCore.SwaggerGen;
@@ -10,21 +10,33 @@ namespace AbpCompanyName.AbpProjectName.Web.Host.Startup
     {
         public void Apply(Operation operation, OperationFilterContext context)
         {
-            var controllerPermissions = context.ApiDescription.ControllerAttributes()
-                .OfType<AbpAuthorizeAttribute>()
-                .Select(attr => attr.Permissions);
+            var actionAttrs = context.ApiDescription.ActionAttributes();
+            if (actionAttrs.OfType<AbpAllowAnonymousAttribute>().Any())
+            {
+                return;
+            }
 
-            var actionPermissions = context.ApiDescription.ActionAttributes()
-                .OfType<AbpAuthorizeAttribute>()
-                .Select(attr => attr.Permissions);
+            var controllerAttrs = context.ApiDescription.ControllerAttributes();
+            var actionAbpAuthorizeAttrs = actionAttrs.OfType<AbpAuthorizeAttribute>();
 
-            var permissions = controllerPermissions.Union(actionPermissions).Distinct()
-                .SelectMany(p => p);
+            if (!actionAbpAuthorizeAttrs.Any() && controllerAttrs.OfType<AbpAllowAnonymousAttribute>().Any())
+            {
+                return;
+            }
 
-            if (permissions.Any())
+            var controllerAbpAuthorizeAttrs = controllerAttrs.OfType<AbpAuthorizeAttribute>();
+            if (controllerAbpAuthorizeAttrs.Any() || actionAbpAuthorizeAttrs.Any())
             {
                 operation.Responses.Add("401", new Response { Description = "Unauthorized" });
-                operation.Responses.Add("403", new Response { Description = "Forbidden" });
+
+                var permissions = controllerAbpAuthorizeAttrs.Union(actionAbpAuthorizeAttrs)
+                    .SelectMany(p => p.Permissions)
+                    .Distinct();
+
+                if (permissions.Any())
+                {
+                    operation.Responses.Add("403", new Response { Description = "Forbidden" });
+                }
 
                 operation.Security = new List<IDictionary<string, IEnumerable<string>>>
                 {
