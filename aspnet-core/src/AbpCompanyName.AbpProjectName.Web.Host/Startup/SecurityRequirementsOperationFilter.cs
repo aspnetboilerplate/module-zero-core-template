@@ -28,16 +28,16 @@ namespace AbpCompanyName.AbpProjectName.Web.Host.Startup
             if (controllerAbpAuthorizeAttrs.Any() || actionAbpAuthorizeAttrs.Any())
             {
                 operation.Responses.Add("401", new Response { Description = "Unauthorized" });
-                
+
                 var permissions = controllerAbpAuthorizeAttrs.Union(actionAbpAuthorizeAttrs)
                     .SelectMany(p => p.Permissions)
                     .Distinct();
-                    
+
                 if (permissions.Any())
                 {
                     operation.Responses.Add("403", new Response { Description = "Forbidden" });
                 }
-                
+
                 operation.Security = new List<IDictionary<string, IEnumerable<string>>>
                 {
                     new Dictionary<string, IEnumerable<string>>
