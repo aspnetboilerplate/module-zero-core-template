@@ -83,5 +83,6 @@
 	<text name="Create">Create</text>
 	<text name="UserDetails">User details</text>
 	<text name="UserRoles">User roles</text>	
+	<text name="ConfirmPassword">Confirm password</text>
   </texts>
 </localizationDictionary>
