@@ -73,7 +73,7 @@
     <text name="UnknownTenantId{0}">Unknown tenantId {0}</text>
     <text name="ThisFieldIsRequired">This field is required</text>
     <text name="PleaseWait">Please wait...</text>
-    <text name="Administration">Administration</text>  
+    <text name="Administration">Administration</text>
     <text name="ClearAll">Clear all</text>
     <text name="ClearOthers">Clear others</text>
     <text name="LabelOptions">Label options</text>
@@ -82,7 +82,7 @@
 	<text name="Refresh">Refresh</text>
 	<text name="Create">Create</text>
 	<text name="UserDetails">User details</text>
-	<text name="UserRoles">User roles</text>	
+	<text name="UserRoles">User roles</text>
 	<text name="ConfirmPassword">Confirm password</text>
   </texts>
 </localizationDictionary>
