@@ -18,7 +18,7 @@
   "license": "MIT",
   "private": true,
   "dependencies": {
-    "@aspnet/signalr": "1.0.0-preview1-28189",
+    "@aspnet/signalr": "1.0.0-preview1-update1",
     "abp-web-resources": "^3.5.0",
     "area-data": "^1.0.0",
     "axios": "^0.17.1",
