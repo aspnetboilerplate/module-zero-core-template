@@ -1,0 +1,48 @@
+{
+  "name": "iview",
+  "version": "0.1.0",
+  "private": true,
+  "scripts": {
+    "serve": "vue-cli-service serve",
+    "build": "vue-cli-service build"
+  },
+  "dependencies": {
+    "@aspnet/signalr": "^1.0.0-preview2-final",
+    "abp-web-resources": "^3.5.0",
+    "axios": "^0.18.0",
+    "iview": "^2.13.1",
+    "js-cookie": "^2.2.0",
+    "register-service-worker": "^1.0.0",
+    "vue": "^2.5.16",
+    "vue-class-component": "^6.0.0",
+    "vue-property-decorator": "^6.0.0",
+    "vue-router": "^3.0.1",
+    "vuex": "^3.0.1"
+  },
+  "devDependencies": {
+    "@types/axios": "^0.14.0",
+    "@types/js-cookie": "^2.1.0",
+    "@vue/cli-plugin-babel": "^3.0.0-beta.9",
+    "@vue/cli-plugin-pwa": "^3.0.0-beta.9",
+    "@vue/cli-plugin-typescript": "^3.0.0-beta.9",
+    "@vue/cli-service": "^3.0.0-beta.9",
+    "less": "^2.7.3",
+    "less-loader": "^4.0.5",
+    "vue-template-compiler": "^2.5.13"
+  },
+  "babel": {
+    "presets": [
+      "@vue/app"
+    ]
+  },
+  "postcss": {
+    "plugins": {
+      "autoprefixer": {}
+    }
+  },
+  "browserslist": [
+    "> 1%",
+    "last 2 versions",
+    "not ie <= 8"
+  ]
+}
