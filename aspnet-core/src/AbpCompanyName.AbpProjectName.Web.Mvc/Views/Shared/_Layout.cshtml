@@ -19,7 +19,6 @@
     Layout = null;
     AbpAntiForgeryManager.SetCookie(Context);
     var uiTheme = await SettingManager.GetSettingValueAsync(AppSettingNames.UiTheme);
-
 }
 <!DOCTYPE html>
 <html lang="en">
@@ -92,7 +91,7 @@
         <div class="search-icon">
             <i class="material-icons">search</i>
         </div>
-        <input type="text" placeholder="START TYPING...">
+        <input type="text" placeholder="@L("StartTyping")...">
         <div class="close-search">
             <i class="material-icons">close</i>
         </div>
@@ -132,7 +131,7 @@
                     &copy; @DateTime.Now.Year <a href="javascript:void(0);">AbpProjectName</a>.
                 </div>
                 <div class="version">
-                    <b>Version </b> @AppVersionHelper.Version [@AppVersionHelper.ReleaseDate.ToString("yyyyMMdd")]
+                    <b>@L("Version") </b> @AppVersionHelper.Version [@AppVersionHelper.ReleaseDate.ToString("yyyyMMdd")]
                 </div>
             </div>
             <!-- #Footer -->
@@ -174,9 +173,14 @@
         <script src="~/view-resources/Views/Shared/_Layout.js" asp-append-version="true"></script>
 
         @if (SignalRFeature.IsAvailable && !SignalRFeature.IsAspNetCore)
-        {
-            <script src="~/lib/signalr/jquery.signalR.js" asp-append-version="true"></script>
-        }
+    {
+        <script src="~/lib/signalr/jquery.signalR.js" asp-append-version="true"></script>
+}
+
+        @if (CultureInfo.CurrentUICulture.Name != "en")
+    {
+        <script src="~/lib/jquery-validation/src/localization/messages_@Html.Raw(CultureInfo.CurrentUICulture.Name.Replace("-", "_") + ".js")" asp-append-version="true"></script>
+}
     </environment>
 
     <environment names="Staging,Production">
