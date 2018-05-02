@@ -3,7 +3,7 @@
   <texts>
     <text name="HomePage" value="Página Inicial" />
     <text name="About" value="Sobre" />
-    <text name="WellcomeMessage" value="Bem Vindo ao BoilerPlateTeste!" />
+    <text name="WellcomeMessage" value="Bem Vindo ao AbpProjectName!" />
     <text name="FormIsNotValidMessage" value="Formulário não é válido. Por favor, verifique e corrija os erros." />
     <text name="TenantNameCanNotBeEmpty" value="Tenant não pode estar vazio" />
     <text name="InvalidUserNameOrPassword" value="Nome de usuário ou senha inválida" />
