@@ -13,7 +13,7 @@
                     <span>{{menuItem.name}}</span>
                 </a>
                 <!-- Has child menu items (so, this is a parent menu) -->
-                <a href="javascript:void(0);" class="menu-toggle" *ngIf="menuItem.items">
+                <a href="javascript:void(0);" [ngClass]="{'menu-toggle': menuItem.items.length}">
                     <i *ngIf="menuItem.icon" class="material-icons">{{menuItem.icon}}</i>
                     <span>{{menuItem.name}}</span>
                 </a>
@@ -31,7 +31,7 @@
                                 <span>{{subMenuItem.name}}</span>
                             </a>
                             <!-- Has child menu items (so, this is a parent menu) -->
-                            <a href="javascript:void(0);" class="menu-toggle" *ngIf="subMenuItem.items">
+                            <a href="javascript:void(0);" [ngClass]="{'menu-toggle': subMenuItem.items.length}">
                                 <i *ngIf="subMenuItem.icon" class="material-icons">{{subMenuItem.icon}}</i>
                                 <span>{{subMenuItem.name}}</span>
                             </a>
