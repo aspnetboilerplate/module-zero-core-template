@@ -30,7 +30,7 @@
                         </Col>
                     </Row>
                     <Row>
-                        <Button @click="create" :disabled="!hasPermission('Pages.Administration.Users.Create')" icon="android-add" type="primary" size="large">{{L('Add')}}</Button>
+                        <Button @click="create" icon="android-add" type="primary" size="large">{{L('Add')}}</Button>
                         <Button icon="ios-search" type="primary" size="large" @click="getpage" class="toolbar-btn">{{L('Find')}}</Button>
                     </Row>
                 </Form>
@@ -123,7 +123,7 @@
         },{
             title:this.L('IsActive'),
             render:(h:any,params:any)=>{
-               return h('span',params.row.isActive?'是':'否')
+               return h('span',params.row.isActive?this.L('Yes'):this.L('No'))
             }
         },{
             title:this.L('CreationTime'),
@@ -145,8 +145,7 @@
                     h('Button',{
                         props:{
                             type:'primary',
-                            size:'small',
-                            disabled:!this.hasPermission('Pages.Administration.Users.Edit')
+                            size:'small'
                         },
                         style:{
                             marginRight:'5px'
@@ -161,8 +160,7 @@
                     h('Button',{
                         props:{
                             type:'error',
-                            size:'small',
-                            disabled:!this.hasPermission('Pages.Administration.Users.Delete')
+                            size:'small'
                         },
                         on:{
                             click:async ()=>{

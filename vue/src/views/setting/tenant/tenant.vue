@@ -2,7 +2,7 @@
     <div>
         <Card dis-hover>
             <div class="page-body">
-                <Form ref="queryForm" :label-width="90" label-position="left" inline>
+                <Form ref="queryForm" :label-width="100" label-position="left" inline>
                     <Row :gutter="16">
                         <Col span="8">
                             <FormItem :label="L('TenancyName')+':'" style="width:100%">
@@ -25,7 +25,7 @@
                         </Col>
                     </Row>
                     <Row>
-                        <Button @click="create" :disabled="!hasPermission('Pages.Tenants.Create')" icon="android-add" type="primary" size="large">{{L('Add')}}</Button>
+                        <Button @click="create" icon="android-add" type="primary" size="large">{{L('Add')}}</Button>
                         <Button icon="ios-search" type="primary" size="large" @click="getpage" class="toolbar-btn">{{L('Find')}}</Button>
                     </Row>
                 </Form>
@@ -117,7 +117,7 @@
         },{
             title:this.L('IsActive'),
             render:(h:any,params:any)=>{
-                return h('span',params.row.isActive?'是':'否')
+                return h('span',params.row.isActive?this.L('Yes'):this.L('No'))
             }
         },{
             title:this.L('Actions'),
@@ -128,8 +128,7 @@
                     h('Button',{
                         props:{
                             type:'primary',
-                            size:'small',
-                            disabled:!this.hasPermission('Pages.Tenants.Edit')
+                            size:'small'
                         },
                         style:{
                             marginRight:'5px'
@@ -144,8 +143,7 @@
                     h('Button',{
                         props:{
                             type:'error',
-                            size:'small',
-                            disabled:!this.hasPermission('Pages.Tenants.Delete')
+                            size:'small'
                         },
                         on:{
                             click:async ()=>{

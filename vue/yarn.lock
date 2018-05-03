@@ -2562,6 +2562,10 @@ extsprintf@^1.2.0:
   version "1.4.0"
   resolved "http://registry.npm.taobao.org/extsprintf/download/extsprintf-1.4.0.tgz#e2689f8f356fad62cca65a3a91c5df5f9551692f"
 
+famfamfam-flags@^1.0.0:
+  version "1.0.0"
+  resolved "http://registry.npm.taobao.org/famfamfam-flags/download/famfamfam-flags-1.0.0.tgz#cd78f776173a2c5962713310dd70c1b141d1103c"
+
 fast-deep-equal@^1.0.0:
   version "1.1.0"
   resolved "http://registry.npm.taobao.org/fast-deep-equal/download/fast-deep-equal-1.1.0.tgz#c053477817c86b51daa853c81e059b733d023614"

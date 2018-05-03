@@ -36,6 +36,7 @@
         <div style="margin-top:15px">
           <Button type="primary" @click="login" long size="large">{{L('LogIn')}}</Button>
         </div>
+        <language-switch></language-switch>
       </div>
     </div>
     <Footer :copyright="L('CopyRight')"></Footer>
@@ -46,10 +47,11 @@
 import { Component, Vue,Inject } from 'vue-property-decorator';
 import Footer from '../components/Footer.vue'
 import TenantSwitch from '../components/tenant-switch.vue'
+import LanguageSwitch from '../components/language-switch.vue'
 import iView from 'iview';
 import AbpBase from '../lib/abpbase'
 @Component({
-  components:{Footer,TenantSwitch}
+  components:{Footer,TenantSwitch,LanguageSwitch}
 })
 export default class Login extends AbpBase {
   loginModel={
@@ -58,7 +60,6 @@ export default class Login extends AbpBase {
     rememberMe:false
   }
   showChangeTenant:boolean=false
-  rememberMe:Boolean=false
   async login(){
     (this.$refs.loginform as any).validate(async (valid:boolean)=>{
        if(valid){
@@ -70,6 +71,7 @@ export default class Login extends AbpBase {
             type:'app/login',
             data:this.loginModel
           })
+          sessionStorage.setItem('rememberMe',this.loginModel.rememberMe?'1':'0');
         location.reload();
        }
     });      
@@ -149,5 +151,6 @@ export default class Login extends AbpBase {
     margin-bottom: 24px;
     text-align: center;
   }
+  
 </style>
 

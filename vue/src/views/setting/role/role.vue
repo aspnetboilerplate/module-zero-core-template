@@ -21,7 +21,7 @@
                         </Col>
                     </Row>
                     <Row>
-                        <Button @click="create" :disabled="!hasPermission('Pages.Administration.Roles.Create')" icon="android-add" type="primary" size="large">{{L('Add')}}</Button>
+                        <Button @click="create" icon="android-add" type="primary" size="large">{{L('Add')}}</Button>
                         <Button icon="ios-search" type="primary" size="large" @click="getpage" class="toolbar-btn">{{L('Find')}}</Button>
                     </Row>
                 </Form>
@@ -118,8 +118,7 @@
                     h('Button',{
                         props:{
                             type:'primary',
-                            size:'small',
-                            disabled:!this.hasPermission('Pages.Administration.Roles.Edit')
+                            size:'small'
                         },
                         style:{
                             marginRight:'5px'
@@ -134,8 +133,7 @@
                     h('Button',{
                         props:{
                             type:'error',
-                            size:'small',
-                            disabled:!this.hasPermission('Pages.Administration.Roles.Delete')
+                            size:'small'
                         },
                         on:{
                             click:async ()=>{

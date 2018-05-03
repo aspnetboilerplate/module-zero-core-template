@@ -10,6 +10,7 @@
     "@aspnet/signalr": "^1.0.0-preview2-final",
     "abp-web-resources": "^3.5.0",
     "axios": "^0.18.0",
+    "famfamfam-flags": "^1.0.0",
     "iview": "^2.13.1",
     "js-cookie": "^2.2.0",
     "register-service-worker": "^1.0.0",

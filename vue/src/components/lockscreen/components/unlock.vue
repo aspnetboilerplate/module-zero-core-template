@@ -40,16 +40,28 @@ export default class UnLock extends AbpBase {
     get avatorPath(){
         return localStorage.avatorImgPath;
     }
-    validator () {
-        return true;            
+    async validator () {
+        let loginModel={
+            userNameOrEmailAddress:this.$store.state.session.user.userName,
+            password:this.password,
+            rememberMe:false
+        }
+        if(sessionStorage.getItem('rememberMe')==='1'){
+            loginModel.rememberMe=true;
+        }
+        await this.$store.dispatch({
+            type:'app/login',
+            data:loginModel
+        }) 
+        return true;         
     }
     handleClickAvator () {
         this.avatorLeft = '-180px';
         this.inputLeft = '0px';
         (this.$refs.inputEle as any).focus();
     }
-    handleUnlock () {
-        if (this.validator()) {
+    async handleUnlock () {
+        if (await this.validator()) {
             this.avatorLeft = '0px';
             this.inputLeft = '400px';
             this.password = '';

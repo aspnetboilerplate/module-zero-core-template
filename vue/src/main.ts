@@ -3,6 +3,7 @@ import App from './App.vue'
 import iView from 'iview'
 import {router} from './router/index';
 //import 'iview/dist/styles/iview.css';
+import 'famfamfam-flags/dist/sprite/famfamfam-flags.css';
 import './theme.less';
 import Vuex from 'vuex';
 import Ajax from './lib/ajax';
@@ -13,9 +14,11 @@ Vue.use(iView);
 import store from './store/index';
 Vue.config.productionTip = false
 import { appRouters,otherRouters} from './router/router'
-let language=navigator.language;
-(window as any).abp.utils.setCookieValue('Abp.Localization.CultureName',language,new Date(new Date().getTime() + 5 * 365 * 86400000),
-(window as any).abp.appPath);
+if(!abp.utils.getCookieValue('Abp.Localization.CultureName')){
+  let language=navigator.language;
+  abp.utils.setCookieValue('Abp.Localization.CultureName',language,new Date(new Date().getTime() + 5 * 365 * 86400000),abp.appPath);
+}
+
 Ajax.get('/AbpUserConfiguration/GetAll').then(data=>{
   Util.abp=Util.extend(true,Util.abp,data.data.result);
   new Vue({
