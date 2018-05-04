@@ -97,6 +97,11 @@
         <script src="~/lib/abp-web-resources/Abp/Framework/scripts/libs/abp.sweet-alert.js" asp-append-version="true"></script>
         <script src="~/js/admin.js" asp-append-version="true"></script>
         <script src="~/js/main.js" asp-append-version="true"></script>
+
+        @if (CultureInfo.CurrentUICulture.Name != "en")
+    {
+        <script src="~/lib/jquery-validation/src/localization/messages_@Html.Raw(CultureInfo.CurrentUICulture.Name.Replace("-", "_") + ".js")" asp-append-version="true"></script>
+}
     </environment>
 
     <environment names="Staging,Production">

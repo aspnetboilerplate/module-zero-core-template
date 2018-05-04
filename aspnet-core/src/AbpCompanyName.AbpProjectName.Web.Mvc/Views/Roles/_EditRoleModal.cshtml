@@ -36,7 +36,7 @@
                 <div class="form-group form-float">
                     <div class="form-line">
                         <textarea id="role-description" name="Description" class="validate form-control">@Model.Role.Description</textarea>
-                        <label for="role-description" class="form-label">Role Description</label>
+                        <label for="role-description" class="form-label">@L("RoleDescription")</label>
                     </div>
                 </div>
             </div>
@@ -44,7 +44,7 @@
 
         <div class="row clearfix">
             <div class="col-sm-12">
-                <h4>Permissions</h4>
+                <h4>@L("Permissions")</h4>
 
                 @foreach (var permission in Model.Permissions)
                 {
