@@ -35,7 +35,8 @@
                 <div class="header-avator-con">
                     <full-screen v-model="isFullScreen" @on-change="fullscreenChange"></full-screen>
                     <lock-screen></lock-screen>  
-                    <notice></notice>            
+                    <notice></notice>   
+                    <language-list></language-list>         
                     <div class="user-dropdown-menu-con">
                         <Row type="flex" justify="end" align="middle" class="user-dropdown-innercon">
                             <Dropdown transfer trigger="click" @on-click="handleClickUserDropdown">
@@ -77,9 +78,10 @@
     import notice from '../components/notices/notice.vue';
     import util from '../lib/util';
     import copyfooter from '../components/Footer.vue'
+    import LanguageList from '../components/language-list.vue'
     import AbpBase from '../lib/abpbase'
     @Component({
-      components:{shrinkableMenu,tagsPageOpened,breadcrumbNav,fullScreen,lockScreen,notice,copyfooter}
+      components:{shrinkableMenu,tagsPageOpened,breadcrumbNav,fullScreen,lockScreen,notice,copyfooter,LanguageList}
     })
     export default class Main extends AbpBase {
         shrink:boolean=false;
