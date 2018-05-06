@@ -26,7 +26,11 @@ export default class LanguageList extends AbpBase{
             return !val.isDisabled&&val.name!==this.currentLanguage.name;
         });
     }
-    changeLanguage(languageName:string){
+    async changeLanguage(languageName:string){
+        await this.$store.dispatch({
+            type:'user/changeLanguage',
+            data:{languageName:languageName}
+        })
         abp.utils.setCookieValue(
             "Abp.Localization.CultureName",
             languageName,

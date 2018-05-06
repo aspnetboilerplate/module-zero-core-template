@@ -49,6 +49,9 @@ class UserModule extends ListModule<UserState,any,User>{
         async getRoles(context:ActionContext<UserState,any>){
             let reponse=await Ajax.get('/api/services/app/User/GetRoles');
             context.state.roles=reponse.data.result.items as Role[];
+        },
+        async changeLanguage(context:ActionContext<UserState,any>,payload:any){
+            await Ajax.post('/api/services/app/User/ChangeLanguage',payload.data);
         }
     };
     mutations={
