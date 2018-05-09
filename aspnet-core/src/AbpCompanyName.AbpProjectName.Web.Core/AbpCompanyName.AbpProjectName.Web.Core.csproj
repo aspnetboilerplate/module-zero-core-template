@@ -32,20 +32,20 @@
 
   <ItemGroup>
     <PackageReference Include="System.ValueTuple" Version="4.4.0" />
-    <PackageReference Include="Microsoft.AspNetCore.Authentication.JwtBearer" Version="2.0.1" />
-    <PackageReference Include="Microsoft.AspNetCore.Owin" Version="2.0.1" />
+    <PackageReference Include="Microsoft.AspNetCore.Authentication.JwtBearer" Version="2.0.4" />
+    <PackageReference Include="Microsoft.AspNetCore.Owin" Version="2.0.3" />
     <PackageReference Include="Swashbuckle.AspNetCore" Version="1.1.0" />
-    <PackageReference Include="Abp.AspNetCore" Version="3.5.0" />
-    <PackageReference Include="Abp.ZeroCore" Version="3.5.0" />
-    <PackageReference Include="Microsoft.AspNetCore" Version="2.0.1" />
+    <PackageReference Include="Abp.AspNetCore" Version="3.6.1" />
+    <PackageReference Include="Abp.ZeroCore" Version="3.6.1" />
+    <PackageReference Include="Microsoft.AspNetCore" Version="2.0.3" />
   </ItemGroup>
 
   <ItemGroup Condition=" '$(TargetFramework)' == 'net461' ">
     <Reference Include="System" />
     <Reference Include="Microsoft.CSharp" />
 
-    <PackageReference Include="Abp.Web.SignalR" Version="3.5.0" />
-    <PackageReference Include="Abp.Owin" Version="3.5.0" />
+    <PackageReference Include="Abp.Web.SignalR" Version="3.6.1" />
+    <PackageReference Include="Abp.Owin" Version="3.6.1" />
   </ItemGroup>
 
   <ItemGroup Condition=" '$(TargetFramework)' == 'netcoreapp2.0' ">
