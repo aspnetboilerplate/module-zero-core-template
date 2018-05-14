@@ -39,7 +39,6 @@ Ajax.get('/AbpUserConfiguration/GetAll').then(data=>{
         }
       }
       this.$store.commit('app/initCachepage');
-      // 权限菜单过滤相关
       this.$store.commit('app/updateMenulist');
     },
     created () {

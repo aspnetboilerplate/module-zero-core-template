@@ -68,7 +68,7 @@ export default class UnLock extends AbpBase {
             Cookies.set('locking', '0');
             this.$emit('on-unlock');
         } else {
-            this.$Message.error('密码错误,请重新输入');
+            this.$Message.error('WrongPassword,Wrong password');
         }
     }
     unlockMousedown () {

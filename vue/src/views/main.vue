@@ -97,10 +97,10 @@
           return this.$store.state.app.menuList;
         }
         get pageTagsList () {
-          return this.$store.state.app.pageOpenedList as Array<any>;  // 打开的页面的页面对象
+          return this.$store.state.app.pageOpenedList as Array<any>;
         }
         get currentPath () {
-          return this.$store.state.app.currentPath;  // 当前面包屑数组
+          return this.$store.state.app.currentPath;
         }
         get lang(){
           return this.$store.state.app.lang;
@@ -150,7 +150,7 @@
               return false
             }
           });
-          if (!openpageHasTag) {  //  解决关闭当前标签后再点击回退按钮会退到当前页时没有标签的问题
+          if (!openpageHasTag) { 
             util.openNewPage(this, name as string, this.$route.params || {}, this.$route.query || {});
           }
         }
