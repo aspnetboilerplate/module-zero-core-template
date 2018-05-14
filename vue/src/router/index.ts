@@ -18,7 +18,7 @@ export const router = new VueRouter(RouterConfig);
 router.beforeEach((to, from, next) => {
     iView.LoadingBar.start();
     Util.title(to.meta.title);
-    if (Cookies.get('locking') === '1' && to.name !== 'locking') { // 判断当前是否是锁定状态
+    if (Cookies.get('locking') === '1' && to.name !== 'locking') {
         next({
             replace: true,
             name: 'locking'
@@ -26,27 +26,27 @@ router.beforeEach((to, from, next) => {
     }else if (Cookies.get('locking') === '0' && to.name === 'locking') {
         next(false);
     } else {
-        if (!Util.abp.session.userId&& to.name !== 'login') { // 判断是否已经登录且前往的页面不是登录页
+        if (!Util.abp.session.userId&& to.name !== 'login') {
             next({
                 name: 'login'
             });
-        } else if (!!Util.abp.session.userId && to.name === 'login') { // 判断是否已经登录且前往的是登录页
+        } else if (!!Util.abp.session.userId && to.name === 'login') {
             Util.title(to.meta.title);
             next({
                 name: 'home'
             });
         } else {
             const curRouterObj = Util.getRouterObjByName([otherRouters, ...appRouters], to.name);
-            if (curRouterObj && curRouterObj.permission) { // 需要判断权限的路由
+            if (curRouterObj && curRouterObj.permission) {
                 if (window.abp.auth.hasPermission(curRouterObj.permission)) {
-                    Util.toDefaultPage([otherRouters, ...appRouters], to.name, router, next); // 如果在地址栏输入的是一级菜单则默认打开其第一个二级菜单的页面
+                    Util.toDefaultPage([otherRouters, ...appRouters], to.name, router, next);
                 } else {
                     next({
                         replace: true,
                         name: 'error-403'
                     });
                 }
-            } else { // 没有配置权限的路由, 直接通过
+            } else {
                 Util.toDefaultPage([...routers], to.name, router, next);
             }
         }

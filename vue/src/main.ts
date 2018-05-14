@@ -1,5 +1,5 @@
 import Vue from 'vue'
-import App from './App.vue'
+import App from './app.vue'
 import iView from 'iview'
 import {router} from './router/index';
 //import 'iview/dist/styles/iview.css';
@@ -39,7 +39,6 @@ Ajax.get('/AbpUserConfiguration/GetAll').then(data=>{
         }
       }
       this.$store.commit('app/initCachepage');
-      // 权限菜单过滤相关
       this.$store.commit('app/updateMenulist');
     },
     created () {

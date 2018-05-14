@@ -10,12 +10,12 @@ interface AppState{
     cachePage:Array<any>;
     lang:string;
     isFullScreen: boolean;
-    openedSubmenuArr: Array<any>;  // 要展开的菜单数组
-    menuTheme: string; // 主题
+    openedSubmenuArr: Array<any>;
+    menuTheme: string;
     themeColor: string,
     pageOpenedList:Array<any>;
     currentPageName: string;
-    currentPath:Array<any>;  // 面包屑数组
+    currentPath:Array<any>;
     menuList: Array<any>;
     routers:Array<any>;
     tagsList: Array<any>;
@@ -29,8 +29,8 @@ class AppModule implements Module<AppState,any>{
         cachePage: [],
         lang: '',
         isFullScreen: false,
-        openedSubmenuArr: [],  // 要展开的菜单数组
-        menuTheme: 'dark', // 主题
+        openedSubmenuArr: [], 
+        menuTheme: 'dark',
         themeColor: '',
         pageOpenedList: [{
             meta:{title: 'HomePage'},
@@ -44,7 +44,7 @@ class AppModule implements Module<AppState,any>{
                 path: '',
                 name: 'home'
             }
-        ],  // 面包屑数组
+        ],
         menuList: [],
         routers: [
             otherRouters,
@@ -53,7 +53,7 @@ class AppModule implements Module<AppState,any>{
         tagsList: [...otherRouters.children],
         messageCount: 0,
         dontCache: [],
-        noticeList:[{read:false,type:0,title:'第一条通知',description:'一天前'},{read:false,type:1},{read:false,type:0,title:'第二条通知',description:'一月前'}]
+        noticeList:[{read:false,type:0,title:'First notice',description:'One day ago'},{read:false,type:1},{read:false,type:0,title:'Second notice',description:'One month ago'}]
     };
     mutations= {
         logout(state:AppState){
