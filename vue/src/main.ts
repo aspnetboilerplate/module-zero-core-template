@@ -1,5 +1,5 @@
 import Vue from 'vue'
-import App from './App.vue'
+import App from './app.vue'
 import iView from 'iview'
 import {router} from './router/index';
 //import 'iview/dist/styles/iview.css';
