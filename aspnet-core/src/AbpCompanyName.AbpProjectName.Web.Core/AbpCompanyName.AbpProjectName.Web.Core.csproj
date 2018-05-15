@@ -34,7 +34,7 @@
     <PackageReference Include="System.ValueTuple" Version="4.4.0" />
     <PackageReference Include="Microsoft.AspNetCore.Authentication.JwtBearer" Version="2.0.4" />
     <PackageReference Include="Microsoft.AspNetCore.Owin" Version="2.0.3" />
-    <PackageReference Include="Swashbuckle.AspNetCore" Version="1.1.0" />
+    <PackageReference Include="Swashbuckle.AspNetCore" Version="2.4.0" />
     <PackageReference Include="Abp.AspNetCore" Version="3.6.1" />
     <PackageReference Include="Abp.ZeroCore" Version="3.6.1" />
     <PackageReference Include="Microsoft.AspNetCore" Version="2.0.3" />
