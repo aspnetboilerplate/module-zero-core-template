@@ -2,9 +2,9 @@
 # yarn lockfile v1
 
 
-"@aspnet/signalr@^1.0.0-preview2-final":
-  version "1.0.0-preview2-final"
-  resolved "http://registry.npm.taobao.org/@aspnet/signalr/download/@aspnet/signalr-1.0.0-preview2-final.tgz#77652fd0b5a22de6444a5e97455ce7bffbc92116"
+"@aspnet/signalr@^1.0.0-rc1-update1":
+  version "1.0.0-rc1-update1"
+  resolved "https://registry.yarnpkg.com/@aspnet/signalr/-/signalr-1.0.0-rc1-update1.tgz#7110703e976f1203f6799efb45f57645a62cbcbd"
 
 "@babel/code-frame@7.0.0-beta.46":
   version "7.0.0-beta.46"
