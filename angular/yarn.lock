@@ -175,9 +175,9 @@
   version "2.1.3"
   resolved "https://registry.yarnpkg.com/@angularclass/hmr/-/hmr-2.1.3.tgz#34e658ed3da37f23b0a200e2da5a89be92bb209f"
 
-"@aspnet/signalr@1.0.0-preview1-28189":
-  version "1.0.0-preview1-28189"
-  resolved "https://dotnet.myget.org/F/aspnetcore-dev/npm/@aspnet/signalr/-/@aspnet/signalr-1.0.0-preview1-28189.tgz#5762e30527b4114e6fbfcc334aa34a8ad149aade"
+"@aspnet/signalr@1.0.0-rc1-update1":
+  version "1.0.0-rc1-update1"
+  resolved "https://registry.yarnpkg.com/@aspnet/signalr/-/signalr-1.0.0-rc1-update1.tgz#7110703e976f1203f6799efb45f57645a62cbcbd"
 
 "@ngtools/webpack@6.0.3":
   version "6.0.3"
