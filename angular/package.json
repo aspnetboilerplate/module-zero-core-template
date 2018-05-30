@@ -22,7 +22,7 @@
     "@angular/platform-browser": "^6.0.3",
     "@angular/platform-browser-dynamic": "^6.0.3",
     "@angular/router": "^6.0.3",
-    "@aspnet/signalr": "1.0.0-preview1-28189",
+    "@aspnet/signalr": "1.0.0-rc1-update1",
     "@types/bootstrap": "^3.3.33",
     "@types/jquery": "^3.2.12",
     "@types/jquery.blockui": "0.0.28",

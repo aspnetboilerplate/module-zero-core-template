@@ -67,6 +67,9 @@ namespace AbpCompanyName.AbpProjectName.Web.Host.Startup
                         )
                         .AllowAnyHeader()
                         .AllowAnyMethod()
+#if FEATURE_SIGNALR_ASPNETCORE
+                        .AllowCredentials()
+#endif
                 )
             );
 
