@@ -1,5 +1,5 @@
 ﻿<?xml version="1.0" encoding="utf-8" ?>
-<localizationDictionary culture="zh-CN">
+<localizationDictionary culture="zh-Hans">
   <texts>
     <text name="HomePage" value="主页" />
     <text name="About" value="关于我们" />
@@ -18,7 +18,7 @@
     <text name="Password" value="密码" />
     <text name="RememberMe" value="记住我" />
     <text name="LogIn" value="登录" />
-
+    
     <text name="LoginFailed" value="登录失败!" />
     
   </texts>
