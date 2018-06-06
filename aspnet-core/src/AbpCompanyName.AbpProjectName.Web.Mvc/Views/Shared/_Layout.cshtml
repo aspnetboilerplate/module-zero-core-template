@@ -1,6 +1,7 @@
 ﻿@using System.Globalization
 @using Abp.Configuration
 @using Abp.Configuration.Startup
+@using Abp.Web.Mvc.Alerts
 @using Abp.Web.Security.AntiForgery
 @using AbpCompanyName.AbpProjectName
 @using AbpCompanyName.AbpProjectName.Configuration
@@ -15,6 +16,7 @@
 @inject IMultiTenancyConfig MultiTenancyConfig
 @inject IWebResourceManager WebResourceManager
 @inject ISettingManager SettingManager
+@inject IAlertManager AlertManager
 @{
     Layout = null;
     AbpAntiForgeryManager.SetCookie(Context);
@@ -143,6 +145,22 @@
 
     <section class="content">
         <div class="container-fluid">
+            @if (AlertManager.Alerts.Any())
+            {
+                <div id="AbpPageAlerts">
+                    @foreach (var alertMessage in AlertManager.Alerts)
+                    {
+                        <div class="alert alert-@alertMessage.Type.ToString().ToLower() @(alertMessage.Dismissible ? "alert-dismisable" : "")" role="alert">
+                            @if (alertMessage.Dismissible)
+                            {
+                                <button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                            }
+                            <strong>@alertMessage.Title</strong> @alertMessage.Text
+                        </div>
+                    }
+                </div>
+            }
+
             @RenderBody()
         </div>
     </section>
