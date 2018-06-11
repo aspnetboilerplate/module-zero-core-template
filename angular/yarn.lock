@@ -175,9 +175,9 @@
   version "2.1.3"
   resolved "https://registry.yarnpkg.com/@angularclass/hmr/-/hmr-2.1.3.tgz#34e658ed3da37f23b0a200e2da5a89be92bb209f"
 
-"@aspnet/signalr@1.0.0-rc1-update1":
-  version "1.0.0-rc1-update1"
-  resolved "https://registry.yarnpkg.com/@aspnet/signalr/-/signalr-1.0.0-rc1-update1.tgz#7110703e976f1203f6799efb45f57645a62cbcbd"
+"@aspnet/signalr@^1.0.0":
+  version "1.0.0"
+  resolved "https://registry.yarnpkg.com/@aspnet/signalr/-/signalr-1.0.0.tgz#26b10a32014a65c540cc5053cffa883c320788ce"
 
 "@ngtools/webpack@6.0.3":
   version "6.0.3"
@@ -412,9 +412,9 @@ abp-web-resources@^3.1.0:
   version "3.3.0"
   resolved "https://registry.yarnpkg.com/abp-web-resources/-/abp-web-resources-3.3.0.tgz#ff09008326f90b6e1734b7c23cd9dd5d3f89ad81"
 
-abp-web-resources@^3.5.0:
-  version "3.5.0"
-  resolved "https://registry.yarnpkg.com/abp-web-resources/-/abp-web-resources-3.5.0.tgz#bfad1eb60597e37ebfdd025bfb7d843bdabf17f8"
+abp-web-resources@^3.7.0:
+  version "3.7.0"
+  resolved "https://registry.yarnpkg.com/abp-web-resources/-/abp-web-resources-3.7.0.tgz#eaf35870765421c6fd989b008e2d0eb855d3d266"
 
 accepts@1.3.3:
   version "1.3.3"
