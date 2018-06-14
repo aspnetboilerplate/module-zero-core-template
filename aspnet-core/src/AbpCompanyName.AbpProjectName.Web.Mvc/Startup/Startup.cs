@@ -12,14 +12,8 @@ using AbpCompanyName.AbpProjectName.Authentication.JwtBearer;
 using AbpCompanyName.AbpProjectName.Configuration;
 using AbpCompanyName.AbpProjectName.Identity;
 using AbpCompanyName.AbpProjectName.Web.Resources;
-
-#if FEATURE_SIGNALR
-using Owin;
-using Abp.Owin;
-using AbpCompanyName.AbpProjectName.Owin;
-#elif FEATURE_SIGNALR_ASPNETCORE
 using Abp.AspNetCore.SignalR.Hubs;
-#endif
+
 
 namespace AbpCompanyName.AbpProjectName.Web.Startup
 {
@@ -44,9 +38,7 @@ namespace AbpCompanyName.AbpProjectName.Web.Startup
 
             services.AddScoped<IWebResourceManager, WebResourceManager>();
 
-#if FEATURE_SIGNALR_ASPNETCORE
             services.AddSignalR();
-#endif
 
             // Configure Abp and Dependency Injection
             return services.AddAbp<AbpProjectNameWebMvcModule>(
@@ -76,15 +68,10 @@ namespace AbpCompanyName.AbpProjectName.Web.Startup
 
             app.UseJwtTokenMiddleware();
 
-#if FEATURE_SIGNALR
-            // Integrate with OWIN
-            app.UseAppBuilder(ConfigureOwinServices);
-#elif FEATURE_SIGNALR_ASPNETCORE
             app.UseSignalR(routes =>
             {
                 routes.MapHub<AbpCommonHub>("/signalr");
             });
-#endif
 
             app.UseMvc(routes =>
             {
@@ -97,16 +84,5 @@ namespace AbpCompanyName.AbpProjectName.Web.Startup
                     template: "{controller=Home}/{action=Index}/{id?}");
             });
         }
-
-#if FEATURE_SIGNALR
-        private static void ConfigureOwinServices(IAppBuilder app)
-        {
-            app.Properties["host.AppName"] = "AbpProjectName";
-
-            app.UseAbp();
-
-            app.MapSignalR();
-        }
-#endif
     }
 }

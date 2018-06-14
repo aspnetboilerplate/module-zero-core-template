@@ -16,15 +16,7 @@ using AbpCompanyName.AbpProjectName.Authentication.JwtBearer;
 using AbpCompanyName.AbpProjectName.Configuration;
 using AbpCompanyName.AbpProjectName.Identity;
 
-#if FEATURE_SIGNALR
-using Microsoft.AspNet.SignalR;
-using Microsoft.Owin.Cors;
-using Owin;
-using Abp.Owin;
-using AbpCompanyName.AbpProjectName.Owin;
-#elif FEATURE_SIGNALR_ASPNETCORE
 using Abp.AspNetCore.SignalR.Hubs;
-#endif
 
 namespace AbpCompanyName.AbpProjectName.Web.Host.Startup
 {
@@ -49,9 +41,7 @@ namespace AbpCompanyName.AbpProjectName.Web.Host.Startup
             IdentityRegistrar.Register(services);
             AuthConfigurer.Configure(services, _appConfiguration);
 
-#if FEATURE_SIGNALR_ASPNETCORE
             services.AddSignalR();
-#endif
 
             // Configure CORS for angular2 UI
             services.AddCors(
@@ -67,9 +57,7 @@ namespace AbpCompanyName.AbpProjectName.Web.Host.Startup
                         )
                         .AllowAnyHeader()
                         .AllowAnyMethod()
-#if FEATURE_SIGNALR_ASPNETCORE
                         .AllowCredentials()
-#endif
                 )
             );
 
@@ -112,15 +100,11 @@ namespace AbpCompanyName.AbpProjectName.Web.Host.Startup
 
             app.UseAbpRequestLocalization();
 
-#if FEATURE_SIGNALR
-            // Integrate with OWIN
-            app.UseAppBuilder(ConfigureOwinServices);
-#elif FEATURE_SIGNALR_ASPNETCORE
+
             app.UseSignalR(routes =>
             {
                 routes.MapHub<AbpCommonHub>("/signalr");
             });
-#endif
 
             app.UseMvc(routes =>
             {
@@ -143,24 +127,5 @@ namespace AbpCompanyName.AbpProjectName.Web.Host.Startup
                     .GetManifestResourceStream("AbpCompanyName.AbpProjectName.Web.Host.wwwroot.swagger.ui.index.html");
             }); // URL: /swagger
         }
-
-#if FEATURE_SIGNALR
-        private static void ConfigureOwinServices(IAppBuilder app)
-        {
-            app.Properties["host.AppName"] = "AbpProjectName";
-
-            app.UseAbp();
-            
-            app.Map("/signalr", map =>
-            {
-                map.UseCors(CorsOptions.AllowAll);
-                var hubConfiguration = new HubConfiguration
-                {
-                    EnableJSONP = true
-                };
-                map.RunSignalR(hubConfiguration);
-            });
-        }
-#endif
     }
 }
