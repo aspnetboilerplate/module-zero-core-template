@@ -17,15 +17,7 @@
     <RootNamespace>AbpCompanyName.AbpProjectName</RootNamespace>
   </PropertyGroup>
 
-  <PropertyGroup Condition=" '$(TargetFramework)' == 'net461' ">
-    <DefineConstants>FEATURE_SIGNALR</DefineConstants>
-  </PropertyGroup>
-
-  <PropertyGroup Condition=" '$(TargetFramework)' == 'netcoreapp2.1' ">
-    <DefineConstants>FEATURE_SIGNALR_ASPNETCORE</DefineConstants>
-  </PropertyGroup>
-
-    <ItemGroup>
+  <ItemGroup>
     <ProjectReference Include="..\AbpCompanyName.AbpProjectName.Application\AbpCompanyName.AbpProjectName.Application.csproj" />
     <ProjectReference Include="..\AbpCompanyName.AbpProjectName.EntityFrameworkCore\AbpCompanyName.AbpProjectName.EntityFrameworkCore.csproj" />
   </ItemGroup>
@@ -33,23 +25,16 @@
   <ItemGroup>
     <PackageReference Include="System.ValueTuple" Version="4.5.0" />
     <PackageReference Include="Microsoft.AspNetCore.Authentication.JwtBearer" Version="2.1.0" />
-    <PackageReference Include="Microsoft.AspNetCore.Owin" Version="2.1.0" />
     <PackageReference Include="Swashbuckle.AspNetCore" Version="2.5.0" />
-    <PackageReference Include="Abp.AspNetCore" Version="3.7.0" />
-    <PackageReference Include="Abp.ZeroCore" Version="3.7.0" />
+    <PackageReference Include="Abp.AspNetCore" Version="3.7.2" />
+    <PackageReference Include="Abp.ZeroCore" Version="3.7.2" />
     <PackageReference Include="Microsoft.AspNetCore" Version="2.1.0" />
+    <PackageReference Include="Abp.AspNetCore.SignalR" Version="3.7.2" />
   </ItemGroup>
 
   <ItemGroup Condition=" '$(TargetFramework)' == 'net461' ">
     <Reference Include="System" />
     <Reference Include="Microsoft.CSharp" />
-
-    <PackageReference Include="Abp.Web.SignalR" Version="3.7.0" />
-    <PackageReference Include="Abp.Owin" Version="3.7.0" />
-  </ItemGroup>
-
-  <ItemGroup Condition=" '$(TargetFramework)' == 'netcoreapp2.1' ">
-    <PackageReference Include="Abp.AspNetCore.SignalR" Version="3.7.0" />
   </ItemGroup>
 
 </Project>

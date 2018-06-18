@@ -11,14 +11,6 @@
     <RootNamespace>AbpCompanyName.AbpProjectName.Web</RootNamespace>
   </PropertyGroup>
 
-  <PropertyGroup Condition=" '$(TargetFramework)' == 'net461' ">
-    <DefineConstants>FEATURE_SIGNALR</DefineConstants>
-  </PropertyGroup>
-
-  <PropertyGroup Condition=" '$(TargetFramework)' == 'netcoreapp2.1' ">
-    <DefineConstants>FEATURE_SIGNALR_ASPNETCORE</DefineConstants>
-  </PropertyGroup>
-
   <ItemGroup>
     <None Include="app.config" />
     <None Update="Dockerfile">
@@ -55,9 +47,9 @@
     <PackageReference Include="Microsoft.Extensions.Options.ConfigurationExtensions" Version="2.1.0" />
     <PackageReference Include="Microsoft.VisualStudio.Web.BrowserLink" Version="2.1.0" />
     <PackageReference Include="Microsoft.AspNetCore.Mvc" Version="2.1.0" />
-    <PackageReference Include="Abp.HangFire" Version="3.7.0" />
-    <PackageReference Include="Abp.RedisCache" Version="3.7.0" />
-    <PackageReference Include="Abp.Castle.Log4Net" Version="3.7.0" />
+    <PackageReference Include="Abp.HangFire" Version="3.7.2" />
+    <PackageReference Include="Abp.RedisCache" Version="3.7.2" />
+    <PackageReference Include="Abp.Castle.Log4Net" Version="3.7.2" />
     <PackageReference Include="Microsoft.AspNetCore.Mvc.Razor.ViewCompilation" Version="2.1.0" PrivateAssets="All" />
   </ItemGroup>
 

@@ -5,7 +5,6 @@
 @using Abp.Web.Security.AntiForgery
 @using AbpCompanyName.AbpProjectName
 @using AbpCompanyName.AbpProjectName.Configuration
-@using AbpCompanyName.AbpProjectName.SignalR
 @using AbpCompanyName.AbpProjectName.Web.Resources
 @using AbpCompanyName.AbpProjectName.Web.Views.Shared.Components.SideBarNav
 @using AbpCompanyName.AbpProjectName.Web.Views.Shared.Components.SideBarUserArea
@@ -193,11 +192,6 @@
         <script src="~/js/main.js" asp-append-version="true"></script>
         <script src="~/view-resources/Views/Shared/_Layout.js" asp-append-version="true"></script>
 
-        @if (SignalRFeature.IsAvailable && !SignalRFeature.IsAspNetCore)
-        {
-            <script src="~/lib/signalr/jquery.signalR.js" asp-append-version="true"></script>
-        }
-
         @if (CultureInfo.CurrentUICulture.Name != "en")
         {
             <script src="~/lib/jquery-validation/src/localization/messages_@Html.Raw(CultureInfo.CurrentUICulture.Name.Replace("-", "_") + ".js")" asp-append-version="true"></script>
@@ -217,20 +211,8 @@
     <script src="~/AbpServiceProxies/GetAll?v=@(AppTimes.StartupTime.Ticks)" type="text/javascript"></script>
     <script src="~/AbpScripts/GetScripts?v=@(AppTimes.StartupTime.Ticks)" type="text/javascript"></script>
 
-    @if (SignalRFeature.IsAvailable)
-    {
-        <!-- SignalR scripts -->
-        if (SignalRFeature.IsAspNetCore)
-        {
-            <script src="~/lib/signalr-client/signalr.min.js" asp-append-version="true"></script>
-            <script src="~/lib/abp-web-resources/Abp/Framework/scripts/libs/abp.signalr-client.js" asp-append-version="true"></script>
-        }
-        else
-        {
-            <script src="~/signalr/hubs"></script>
-            <script src="~/lib/abp-web-resources/Abp/Framework/scripts/libs/abp.signalr.js" type="text/javascript"></script>
-        }
-    }
+    <script src="~/lib/signalr-client/signalr.min.js" asp-append-version="true"></script>
+    <script src="~/lib/abp-web-resources/Abp/Framework/scripts/libs/abp.signalr-client.js" asp-append-version="true"></script>
 
     @WebResourceManager.RenderScripts()
 
