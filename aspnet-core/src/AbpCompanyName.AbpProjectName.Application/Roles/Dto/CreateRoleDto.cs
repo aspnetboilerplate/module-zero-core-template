@@ -6,7 +6,6 @@ using AbpCompanyName.AbpProjectName.Authorization.Roles;
 
 namespace AbpCompanyName.AbpProjectName.Roles.Dto
 {
-    [AutoMapTo(typeof(Role))]
     public class CreateRoleDto
     {
         [Required]

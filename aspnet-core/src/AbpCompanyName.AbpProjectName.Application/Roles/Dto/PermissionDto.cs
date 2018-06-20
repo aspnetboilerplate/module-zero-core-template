@@ -4,8 +4,7 @@ using Abp.Authorization;
 
 namespace AbpCompanyName.AbpProjectName.Roles.Dto
 {
-    [AutoMapFrom(typeof(Permission))]
-    public class PermissionDto : EntityDto<long>
+    public class PermissionDto
     {
         public string Name { get; set; }
 
