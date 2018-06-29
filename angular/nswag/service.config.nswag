@@ -1,4 +1,4 @@
-﻿{
+{
   "runtime": "Default",
   "swaggerGenerator": {
     "fromSwagger": {
@@ -34,7 +34,6 @@
       "markOptionalProperties": false,
       "generateCloneMethod": true,
       "typeStyle": "Class",
-      "extensionCode": "service.extensions.ts",
       "generateDefaultValues": true,
       "excludedTypeNames": [],
       "handleReferences": false,
