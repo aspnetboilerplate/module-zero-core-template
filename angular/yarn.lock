@@ -114,7 +114,7 @@
     symbol-observable "^1.2.0"
     yargs-parser "^10.0.0"
 
-"@angular/common@^6.0.0", "@angular/common@^6.0.5":
+"@angular/common@^6.0.5":
   version "6.0.5"
   resolved "https://registry.yarnpkg.com/@angular/common/-/common-6.0.5.tgz#7960e1cfc180afb4a1bd56371c48840173cc5a92"
   dependencies:
@@ -135,7 +135,7 @@
   dependencies:
     tslib "^1.9.0"
 
-"@angular/core@^6.0.0", "@angular/core@^6.0.5":
+"@angular/core@^6.0.5":
   version "6.0.5"
   resolved "https://registry.yarnpkg.com/@angular/core/-/core-6.0.5.tgz#5846f1b3143f43657dc704fe4bcf9e75b94ec325"
   dependencies:
@@ -394,15 +394,11 @@ abbrev@1.0.x:
   version "1.0.9"
   resolved "https://registry.yarnpkg.com/abbrev/-/abbrev-1.0.9.tgz#91b4792588a7738c25f35dd6f63752a2f8776135"
 
-abp-ng2-module@^3.0.0:
-  version "3.0.0"
-  resolved "https://registry.yarnpkg.com/abp-ng2-module/-/abp-ng2-module-3.0.0.tgz#97cad30c98d9aebffb33742dc68710c02efb6a18"
-  dependencies:
-    "@angular/common" "^6.0.0"
-    "@angular/core" "^6.0.0"
-    abp-web-resources "^3.1.0"
+abp-ng2-module@^3.1.0:
+  version "3.1.0"
+  resolved "http://localhost:4873/abp-ng2-module/-/abp-ng2-module-3.1.0.tgz#9c82ca816d7d02fe0fb1ef474fcd27dbacd41fd9"
 
-abp-web-resources@^3.1.0, abp-web-resources@^3.7.0:
+abp-web-resources@^3.7.0:
   version "3.7.0"
   resolved "https://registry.yarnpkg.com/abp-web-resources/-/abp-web-resources-3.7.0.tgz#eaf35870765421c6fd989b008e2d0eb855d3d266"
 
