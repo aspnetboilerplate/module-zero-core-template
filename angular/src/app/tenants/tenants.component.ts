@@ -1,10 +1,11 @@
-﻿import { Component, Injector, ViewChild } from '@angular/core';
+import { Component, Injector, ViewChild } from '@angular/core';
 import { appModuleAnimation } from '@shared/animations/routerTransition';
 import { TenantServiceProxy, TenantDto, PagedResultDtoOfTenantDto } from '@shared/service-proxies/service-proxies';
 
 import { PagedListingComponentBase, PagedRequestDto } from "shared/paged-listing-component-base";
 import { EditTenantComponent } from "app/tenants/edit-tenant/edit-tenant.component";
 import { CreateTenantComponent } from "app/tenants/create-tenant/create-tenant.component";
+import { finalize } from 'rxjs/operators';
 
 @Component({
     templateUrl: './tenants.component.html',
@@ -26,9 +27,7 @@ export class TenantsComponent extends PagedListingComponentBase<TenantDto> {
 
     list(request:PagedRequestDto, pageNumber:number, finishedCallback: Function): void {
         this._tenantService.getAll(request.skipCount, request.maxResultCount)
-            .finally(()=>{
-                finishedCallback();
-            })
+            .pipe(finalize(() => { finishedCallback() }))
             .subscribe((result:PagedResultDtoOfTenantDto)=>{
 				this.tenants = result.items;
 				this.showPaging(result, pageNumber);
@@ -40,11 +39,11 @@ export class TenantsComponent extends PagedListingComponentBase<TenantDto> {
 			"Delete tenant '"+ tenant.name +"'?",
 			(result:boolean) => {
 				if(result) {
-					this._tenantService.delete(tenant.id)
-						.finally(() => {
-					        abp.notify.info("Deleted tenant: " + tenant.name );
-							this.refresh();
-						})
+                    this._tenantService.delete(tenant.id)
+                        .pipe(finalize(() => {
+                            abp.notify.info("Deleted tenant: " + tenant.name);
+                            this.refresh();
+                        }))
 						.subscribe(() => { });
 				}
 			}

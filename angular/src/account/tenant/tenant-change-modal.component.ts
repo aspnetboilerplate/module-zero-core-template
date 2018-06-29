@@ -1,9 +1,10 @@
-﻿import { Component, OnInit, ViewChild, Injector, ElementRef } from '@angular/core';
+import { Component, OnInit, ViewChild, Injector, ElementRef } from '@angular/core';
 import { AppComponentBase } from '@shared/app-component-base';
 import { AccountServiceProxy } from '@shared/service-proxies/service-proxies';
-import { IsTenantAvailableInput } from '@shared/service-proxies/service-proxies';
+import { IsTenantAvailableInput, IsTenantAvailableOutput } from '@shared/service-proxies/service-proxies';
 import { AppTenantAvailabilityState } from '@shared/AppEnums';
 import { ModalDirective } from 'ngx-bootstrap';
+import { finalize } from 'rxjs/operators';
 
 @Component({
     selector: 'tenantChangeModal',
@@ -50,8 +51,8 @@ export class TenantChangeModalComponent extends AppComponentBase {
 
         this.saving = true;
         this._accountService.isTenantAvailable(input)
-            .finally(() => { this.saving = false; })
-            .subscribe((result) => {
+            .pipe(finalize(() => { this.saving = false; }))
+            .subscribe((result: IsTenantAvailableOutput) => {
                 switch (result.state) {
                     case AppTenantAvailabilityState.Available:
                         abp.multiTenancy.setTenantIdCookie(result.tenantId);

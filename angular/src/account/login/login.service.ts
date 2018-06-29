@@ -8,6 +8,7 @@ import { MessageService } from '@abp/message/message.service';
 import { LogService } from '@abp/log/log.service';
 import { TokenService } from '@abp/auth/token.service';
 import { UtilsService } from '@abp/utils/utils.service';
+import { finalize } from 'rxjs/operators';
 
 @Injectable()
 export class LoginService {
@@ -35,7 +36,7 @@ export class LoginService {
 
         this._tokenAuthService
             .authenticate(this.authenticateModel)
-            .finally(finallyCallback)
+            .pipe(finalize(() => { finallyCallback() }))
             .subscribe((result: AuthenticateResultModel) => {
                 this.processAuthenticateResult(result);
             });

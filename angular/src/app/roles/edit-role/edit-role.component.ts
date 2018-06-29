@@ -1,7 +1,8 @@
-﻿import { Component, ViewChild, Injector, Output, EventEmitter, ElementRef, OnInit } from '@angular/core';
+import { Component, ViewChild, Injector, Output, EventEmitter, ElementRef, OnInit } from '@angular/core';
 import { ModalDirective } from 'ngx-bootstrap';
 import { RoleServiceProxy, RoleDto, ListResultDtoOfPermissionDto } from '@shared/service-proxies/service-proxies';
 import { AppComponentBase } from '@shared/app-component-base';
+import { finalize } from 'rxjs/operators';
 
 @Component({
     selector: 'edit-role-modal',
@@ -34,10 +35,10 @@ export class EditRoleComponent extends AppComponentBase implements OnInit {
 
     show(id: number): void {
         this._roleService.get(id)
-            .finally(() => {
+            .pipe(finalize(() => {
                 this.active = true;
                 this.modal.show();
-            })
+            }))
             .subscribe((result: RoleDto) => {
                 this.role = result;
             });
@@ -69,7 +70,7 @@ export class EditRoleComponent extends AppComponentBase implements OnInit {
         this.role.permissions = permissions;
         this.saving = true;
         this._roleService.update(this.role)
-            .finally(() => { this.saving = false; })
+            .pipe(finalize(() => { this.saving = false; }))
             .subscribe(() => {
                 this.notify.info(this.l('SavedSuccessfully'));
                 this.close();

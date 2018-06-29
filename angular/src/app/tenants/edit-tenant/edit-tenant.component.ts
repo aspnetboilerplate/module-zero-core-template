@@ -2,6 +2,7 @@ import { Component, ViewChild, Injector, Output, EventEmitter, ElementRef} from 
 import { ModalDirective } from 'ngx-bootstrap';
 import { TenantServiceProxy, TenantDto } from '@shared/service-proxies/service-proxies';
 import { AppComponentBase } from '@shared/app-component-base';
+import { finalize } from 'rxjs/operators';
 
 @Component({
   selector: 'edit-tenant-modal',
@@ -27,10 +28,10 @@ export class EditTenantComponent extends AppComponentBase{
 
     show(id:number): void {
 		this._tenantService.get(id)
-			.finally(()=>{
-				this.active = true;
-				this.modal.show();
-			})
+		    .pipe(finalize(() => {
+		        this.active = true;
+		        this.modal.show();
+		    }))
 			.subscribe((result: TenantDto)=>{
 				this.tenant = result;
 			});
@@ -43,7 +44,7 @@ export class EditTenantComponent extends AppComponentBase{
     save(): void {
         this.saving = true;
         this._tenantService.update(this.tenant)
-            .finally(() => { this.saving = false; })
+            .pipe(finalize(() => { this.saving = false; }))
             .subscribe(() => {
                 this.notify.info(this.l('SavedSuccessfully'));
                 this.close();
