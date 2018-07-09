@@ -1,9 +1,9 @@
 import { Component, Injector, ViewChild } from '@angular/core';
-import { PagedListingComponentBase, PagedRequestDto } from "shared/paged-listing-component-base";
-import { RoleServiceProxy, RoleDto, PagedResultDtoOfRoleDto } from "shared/service-proxies/service-proxies";
+import { PagedListingComponentBase, PagedRequestDto } from 'shared/paged-listing-component-base';
+import { RoleServiceProxy, RoleDto, PagedResultDtoOfRoleDto } from 'shared/service-proxies/service-proxies';
 import { appModuleAnimation } from '@shared/animations/routerTransition';
-import { CreateRoleComponent } from "app/roles/create-role/create-role.component";
-import { EditRoleComponent } from "app/roles/edit-role/edit-role.component";
+import { CreateRoleComponent } from 'app/roles/create-role/create-role.component';
+import { EditRoleComponent } from 'app/roles/edit-role/edit-role.component';
 import { finalize } from 'rxjs/operators';
 
 @Component({

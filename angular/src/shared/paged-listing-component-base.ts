@@ -1,4 +1,4 @@
-﻿import { AppComponentBase } from "shared/app-component-base";
+﻿import { AppComponentBase } from 'shared/app-component-base';
 import { Injector, OnInit } from '@angular/core';
 
 export class PagedResultDto {
