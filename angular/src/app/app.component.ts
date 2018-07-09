@@ -1,4 +1,4 @@
-import { Component, ViewContainerRef, Injector, OnInit, AfterViewInit } from '@angular/core';
+import { Component, ViewContainerRef, Injector, OnInit, AfterViewInit, ChangeDetectorRef } from '@angular/core';
 import { AppComponentBase } from '@shared/app-component-base';
 
 import { SignalRAspNetCoreHelper } from '@shared/helpers/SignalRAspNetCoreHelper';
@@ -17,6 +17,7 @@ export class AppComponent extends AppComponentBase implements OnInit, AfterViewI
     }
 
     ngOnInit(): void {
+
         SignalRAspNetCoreHelper.initSignalR();
 
         abp.event.on('abp.notifications.received', userNotification => {
@@ -36,7 +37,17 @@ export class AppComponent extends AppComponentBase implements OnInit, AfterViewI
     }
 
     ngAfterViewInit(): void {
-        ($ as any).AdminBSB.activateAll();
-        ($ as any).AdminBSB.activateDemo();
+        $.AdminBSB.activateAll();
+        $.AdminBSB.activateDemo();
+    }
+
+    onResize(event) {
+        // exported from $.AdminBSB.activateAll
+        $.AdminBSB.leftSideBar.setMenuHeight();
+        $.AdminBSB.leftSideBar.checkStatuForResize(false);
+
+        // exported from $.AdminBSB.activateDemo
+        $.AdminBSB.demo.setSkinListHeightAndScroll();
+        $.AdminBSB.demo.setSettingListHeightAndScroll();
     }
 }

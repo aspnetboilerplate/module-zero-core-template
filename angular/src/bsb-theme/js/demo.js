@@ -1,12 +1,12 @@
-﻿$.AdminBSB.activateDemo = function() {
-  activateNotificationAndTasksScroll();
+$.AdminBSB.activateDemo = function () {
+    activateNotificationAndTasksScroll();
 
-  setSkinListHeightAndScroll();
-  setSettingListHeightAndScroll();
-  $(window).resize(function() {
     setSkinListHeightAndScroll();
     setSettingListHeightAndScroll();
-  });
+    //$(window).resize(function () {
+    //    setSkinListHeightAndScroll();
+    //    setSettingListHeightAndScroll();
+    //});
 };
 
 //Skin tab content set height and show scroll
@@ -56,3 +56,7 @@ function activateNotificationAndTasksScroll() {
         railBorderRadius: '0'
     });
 }
+
+$.AdminBSB.demo = $.AdminBSB.demo || {};
+$.AdminBSB.demo.setSkinListHeightAndScroll = setSkinListHeightAndScroll;
+$.AdminBSB.demo.setSettingListHeightAndScroll = setSettingListHeightAndScroll;
