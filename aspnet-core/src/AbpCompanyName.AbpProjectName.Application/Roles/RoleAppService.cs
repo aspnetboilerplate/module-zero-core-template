@@ -111,5 +111,15 @@ namespace AbpCompanyName.AbpProjectName.Roles
         {
             identityResult.CheckErrors(LocalizationManager);
         }
+
+        public override async Task<RoleDto> Get(EntityDto<int> input)
+        {
+            CheckGetPermission();
+
+            var role = await GetEntityByIdAsync(input.Id);
+            role.Permissions = role.Permissions.Where(p => p.IsGranted).ToList();
+
+            return MapToEntityDto(role);
+        }
     }
 }
