@@ -1,9 +1,9 @@
 import { Component, Injector, ViewChild } from '@angular/core';
 import { appModuleAnimation } from '@shared/animations/routerTransition';
 import { UserServiceProxy, UserDto, PagedResultDtoOfUserDto } from '@shared/service-proxies/service-proxies';
-import { PagedListingComponentBase, PagedRequestDto } from "shared/paged-listing-component-base";
-import { CreateUserComponent } from "app/users/create-user/create-user.component";
-import { EditUserComponent } from "app/users/edit-user/edit-user.component";
+import { PagedListingComponentBase, PagedRequestDto } from 'shared/paged-listing-component-base';
+import { CreateUserComponent } from 'app/users/create-user/create-user.component';
+import { EditUserComponent } from 'app/users/edit-user/edit-user.component';
 import { finalize } from 'rxjs/operators';
 
 @Component({

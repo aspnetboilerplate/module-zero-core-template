@@ -2,9 +2,9 @@ import { Component, Injector, ViewChild } from '@angular/core';
 import { appModuleAnimation } from '@shared/animations/routerTransition';
 import { TenantServiceProxy, TenantDto, PagedResultDtoOfTenantDto } from '@shared/service-proxies/service-proxies';
 
-import { PagedListingComponentBase, PagedRequestDto } from "shared/paged-listing-component-base";
-import { EditTenantComponent } from "app/tenants/edit-tenant/edit-tenant.component";
-import { CreateTenantComponent } from "app/tenants/create-tenant/create-tenant.component";
+import { PagedListingComponentBase, PagedRequestDto } from 'shared/paged-listing-component-base';
+import { EditTenantComponent } from 'app/tenants/edit-tenant/edit-tenant.component';
+import { CreateTenantComponent } from 'app/tenants/create-tenant/create-tenant.component';
 import { finalize } from 'rxjs/operators';
 
 @Component({
