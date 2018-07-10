@@ -112,14 +112,19 @@ namespace AbpCompanyName.AbpProjectName.Roles
             identityResult.CheckErrors(LocalizationManager);
         }
 
-        public override async Task<RoleDto> Get(EntityDto<int> input)
+        public async Task<GetRoleForEditOutput> GetRoleForEdit(EntityDto input)
         {
-            CheckGetPermission();
+            var permissions = PermissionManager.GetAllPermissions();
+            var role = await _roleManager.GetRoleByIdAsync(input.Id);
+            var grantedPermissions = (await _roleManager.GetGrantedPermissionsAsync(role)).ToArray();
+            var roleEditDto = ObjectMapper.Map<RoleEditDto>(role);
 
-            var role = await GetEntityByIdAsync(input.Id);
-            role.Permissions = role.Permissions.Where(p => p.IsGranted).ToList();
-
-            return MapToEntityDto(role);
+            return new GetRoleForEditOutput
+            {
+                Role = roleEditDto,
+                Permissions = ObjectMapper.Map<List<FlatPermissionDto>>(permissions).OrderBy(p => p.DisplayName).ToList(),
+                GrantedPermissionNames = grantedPermissions.Select(p => p.Name).ToList()
+            };
         }
     }
 }

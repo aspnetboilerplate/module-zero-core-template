@@ -34,13 +34,9 @@ namespace AbpCompanyName.AbpProjectName.Web.Controllers
 
         public async Task<ActionResult> EditRoleModal(int roleId)
         {
-            var role = await _roleAppService.Get(new EntityDto(roleId));
-            var permissions = (await _roleAppService.GetAllPermissions()).Items;
-            var model = new EditRoleModalViewModel
-            {
-                Role = role,
-                Permissions = permissions
-            };
+            var output = await _roleAppService.GetRoleForEdit(new EntityDto(roleId));
+            var model = new EditRoleModalViewModel(output);
+
             return View("_EditRoleModal", model);
         }
     }
