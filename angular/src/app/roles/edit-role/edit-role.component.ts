@@ -1,6 +1,6 @@
-import { Component, ViewChild, Injector, Output, EventEmitter, ElementRef, OnInit } from '@angular/core';
+import { Component, ViewChild, Injector, Output, EventEmitter, ElementRef } from '@angular/core';
 import { ModalDirective } from 'ngx-bootstrap';
-import { RoleServiceProxy, ListResultDtoOfPermissionDto, GetRoleForEditOutput, RoleDto } from '@shared/service-proxies/service-proxies';
+import { RoleServiceProxy, GetRoleForEditOutput, RoleDto } from '@shared/service-proxies/service-proxies';
 import { AppComponentBase } from '@shared/app-component-base';
 import { finalize } from 'rxjs/operators';
 
@@ -8,14 +8,13 @@ import { finalize } from 'rxjs/operators';
     selector: 'edit-role-modal',
     templateUrl: './edit-role.component.html'
 })
-export class EditRoleComponent extends AppComponentBase implements OnInit {
+export class EditRoleComponent extends AppComponentBase {
     @ViewChild('editRoleModal') modal: ModalDirective;
     @ViewChild('modalContent') modalContent: ElementRef;
 
     active: boolean = false;
     saving: boolean = false;
 
-    //permissions: ListResultDtoOfPermissionDto = null;
     model: GetRoleForEditOutput = null;
 
     @Output() modalSave: EventEmitter<any> = new EventEmitter<any>();
@@ -25,13 +24,6 @@ export class EditRoleComponent extends AppComponentBase implements OnInit {
     ) {
         super(injector);
     }
-
-    //ngOnInit(): void {
-    //    this._roleService.getAllPermissions()
-    //        .subscribe((permissions: ListResultDtoOfPermissionDto) => {
-    //            this.permissions = permissions;
-    //        });
-    //}
 
     show(id: number): void {
         this._roleService.getRoleForEdit(id)
