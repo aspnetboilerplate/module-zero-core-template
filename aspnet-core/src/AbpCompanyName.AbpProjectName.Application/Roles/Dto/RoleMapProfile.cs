@@ -13,8 +13,8 @@ namespace AbpCompanyName.AbpProjectName.Roles.Dto
             CreateMap<Permission, string>().ConvertUsing(r => r.Name);
             CreateMap<RolePermissionSetting, string>().ConvertUsing(r => r.Name);
 
-            CreateMap<CreateRoleDto, Role>().ForMember(x => x.Permissions, opt => opt.Ignore());
-            CreateMap<RoleDto, Role>().ForMember(x => x.Permissions, opt => opt.Ignore());
+            CreateMap<CreateRoleDto, Role>(MemberList.Source).ForMember(x => x.Permissions, opt => opt.Ignore());
+            CreateMap<RoleDto, Role>(MemberList.Source).ForMember(x => x.Permissions, opt => opt.Ignore());
         }
     }
 }

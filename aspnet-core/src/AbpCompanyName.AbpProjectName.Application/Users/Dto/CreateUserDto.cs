@@ -7,7 +7,6 @@ using AbpCompanyName.AbpProjectName.Authorization.Users;
 
 namespace AbpCompanyName.AbpProjectName.Users.Dto
 {
-    [AutoMapTo(typeof(User))]
     public class CreateUserDto : IShouldNormalize
     {
         [Required]
