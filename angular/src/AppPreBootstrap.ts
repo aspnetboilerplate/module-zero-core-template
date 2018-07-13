@@ -1,12 +1,13 @@
-﻿import * as moment from 'moment';
+import * as moment from 'moment';
 import { AppConsts } from '@shared/AppConsts';
 import { platformBrowserDynamic } from '@angular/platform-browser-dynamic';
 import { Type, CompilerOptions, NgModuleRef } from '@angular/core';
+import { environment } from './environments/environment';
 
 export class AppPreBootstrap {
 
-    static run(callback: () => void): void {
-        AppPreBootstrap.getApplicationConfig(() => {
+    static run(appRootUrl: string, callback: () => void): void {
+        AppPreBootstrap.getApplicationConfig(appRootUrl, () => {
             AppPreBootstrap.getUserConfiguration(callback);
         });
     }
@@ -15,9 +16,9 @@ export class AppPreBootstrap {
         return platformBrowserDynamic().bootstrapModule(moduleType, compilerOptions);
     }
 
-    private static getApplicationConfig(callback: () => void) {
+    private static getApplicationConfig(appRootUrl: string, callback: () => void) {
         return abp.ajax({
-            url: '/assets/appconfig.json',
+            url: appRootUrl + 'assets/' + environment.appConfig,
             method: 'GET',
             headers: {
                 'Abp.TenantId': abp.multiTenancy.getTenantIdCookie()
