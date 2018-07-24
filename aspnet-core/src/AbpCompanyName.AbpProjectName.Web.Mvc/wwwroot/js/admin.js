@@ -70,6 +70,8 @@ $.AdminBSB.leftSideBar = {
         //When page load
         $.each($('.menu .list li.active'), function (i, val) {
             var $activeAnchors = $(val).find('a:eq(0)');
+            var $parentAnchors = $(val).parentsUntil('.menu .list', 'li').children('a:first-child');
+            $activeAnchors = $activeAnchors.add($parentAnchors);
 
             $activeAnchors.addClass('toggled');
             $activeAnchors.next().show();
