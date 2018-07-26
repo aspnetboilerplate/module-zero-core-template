@@ -18,12 +18,12 @@
   </ItemGroup>
 
   <ItemGroup>
-    <PackageReference Include="Abp.AutoMapper" Version="3.7.2" />
-    <PackageReference Include="Abp.ZeroCore.EntityFrameworkCore" Version="3.7.2" />
-    <PackageReference Include="Microsoft.Extensions.Configuration.EnvironmentVariables" Version="2.1.0" />
-    <PackageReference Include="Microsoft.Extensions.Configuration.Json" Version="2.1.0" />
-    <PackageReference Include="Microsoft.Extensions.Configuration.UserSecrets" Version="2.1.0" />
-    <PackageReference Include="Castle.Windsor.MsDependencyInjection" Version="3.3.0" />
+    <PackageReference Include="Abp.AutoMapper" Version="3.8.0" />
+    <PackageReference Include="Abp.ZeroCore.EntityFrameworkCore" Version="3.8.0" />
+    <PackageReference Include="Microsoft.Extensions.Configuration.EnvironmentVariables" Version="2.1.1" />
+    <PackageReference Include="Microsoft.Extensions.Configuration.Json" Version="2.1.1" />
+    <PackageReference Include="Microsoft.Extensions.Configuration.UserSecrets" Version="2.1.1" />
+    <PackageReference Include="Castle.Windsor.MsDependencyInjection" Version="3.3.1" />
   </ItemGroup>
 
   <ItemGroup Condition=" '$(TargetFramework)' == 'net461' ">
