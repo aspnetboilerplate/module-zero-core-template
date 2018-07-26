@@ -10,28 +10,28 @@ namespace AbpCompanyName.AbpProjectName.Web.Host.Startup
     {
         public void Apply(Operation operation, OperationFilterContext context)
         {
-            var actionAttrs = context.ApiDescription.ActionAttributes();
+            var actionAttrs = context.ControllerActionDescriptor.MethodInfo.GetCustomAttributes(true).ToList();
             if (actionAttrs.OfType<AbpAllowAnonymousAttribute>().Any())
             {
                 return;
             }
 
-            var controllerAttrs = context.ApiDescription.ControllerAttributes();
-            var actionAbpAuthorizeAttrs = actionAttrs.OfType<AbpAuthorizeAttribute>();
+            var controllerAttrs = context.ControllerActionDescriptor.ControllerTypeInfo.GetCustomAttributes(true);
+            var actionAbpAuthorizeAttrs = actionAttrs.OfType<AbpAuthorizeAttribute>().ToList();
 
             if (!actionAbpAuthorizeAttrs.Any() && controllerAttrs.OfType<AbpAllowAnonymousAttribute>().Any())
             {
                 return;
             }
 
-            var controllerAbpAuthorizeAttrs = controllerAttrs.OfType<AbpAuthorizeAttribute>();
+            var controllerAbpAuthorizeAttrs = controllerAttrs.OfType<AbpAuthorizeAttribute>().ToList();
             if (controllerAbpAuthorizeAttrs.Any() || actionAbpAuthorizeAttrs.Any())
             {
                 operation.Responses.Add("401", new Response { Description = "Unauthorized" });
 
                 var permissions = controllerAbpAuthorizeAttrs.Union(actionAbpAuthorizeAttrs)
                     .SelectMany(p => p.Permissions)
-                    .Distinct();
+                    .Distinct().ToList();
 
                 if (permissions.Any())
                 {
