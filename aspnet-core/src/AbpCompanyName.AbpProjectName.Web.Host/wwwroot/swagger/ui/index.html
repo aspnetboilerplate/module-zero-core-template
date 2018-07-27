@@ -79,7 +79,8 @@
             configObject.presets = [SwaggerUIBundle.presets.apis, SwaggerUIStandalonePreset];
             configObject.layout = "StandaloneLayout";
             configObject.requestInterceptor = function (request) {
-                request.headers.Authorization = "Bearer " + abp.auth.getToken();
+                var token = abp.auth.getToken();
+                request.headers.Authorization = token ? "Bearer " + token : null;
                 return request;
             };
             if (!configObject.hasOwnProperty("oauth2RedirectUrl")) {
