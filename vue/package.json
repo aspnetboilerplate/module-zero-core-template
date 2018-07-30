@@ -8,7 +8,7 @@
   },
   "dependencies": {
     "@aspnet/signalr": "^1.0.0",
-    "abp-web-resources": "^3.7.0",
+    "abp-web-resources": "^3.8.2",
     "axios": "^0.18.0",
     "famfamfam-flags": "^1.0.0",
     "iview": "^2.13.1",
