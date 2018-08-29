@@ -48,10 +48,9 @@ namespace AbpCompanyName.AbpProjectName.Users
             var user = ObjectMapper.Map<User>(input);
 
             user.TenantId = AbpSession.TenantId;
-            user.Password = _passwordHasher.HashPassword(user, input.Password);
             user.IsEmailConfirmed = true;
 
-            CheckErrors(await _userManager.CreateAsync(user));
+            CheckErrors(await _userManager.CreateAsync(user, input.Password));
 
             if (input.RoleNames != null)
             {
