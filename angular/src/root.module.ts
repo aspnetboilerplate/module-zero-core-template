@@ -1,7 +1,7 @@
 import { BrowserModule } from '@angular/platform-browser';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { NgModule, Injector, APP_INITIALIZER, LOCALE_ID } from '@angular/core';
-import { PlatformLocation } from '@angular/common';
+import { PlatformLocation, registerLocaleData } from '@angular/common';
 
 import { AbpModule } from '@abp/abp.module';
 import { AbpHttpInterceptor } from '@abp/abpHttpInterceptor';
@@ -20,6 +20,8 @@ import { AppPreBootstrap } from './AppPreBootstrap';
 import { ModalModule } from 'ngx-bootstrap';
 import { HttpClientModule } from '@angular/common/http';
 
+import * as _ from 'lodash';
+
 export function appInitializerFactory(injector: Injector,
     platformLocation: PlatformLocation) {
     return () => {
@@ -35,7 +37,17 @@ export function appInitializerFactory(injector: Injector,
                 appSessionService.init().then(
                     (result) => {
                         abp.ui.clearBusy();
-                        resolve(result);
+
+                        if (shouldLoadLocale()) {
+                            let angularLocale = convertAbpLocaleToAngularLocale(abp.localization.currentLanguage.name);
+                            import(`@angular/common/locales/${angularLocale}.js`)
+                                .then(module => {
+                                    registerLocaleData(module.default);
+                                    resolve(result);
+                                }, reject);
+                        } else {
+                            resolve(result);
+                        }
                     },
                     (err) => {
                         abp.ui.clearBusy();
@@ -45,6 +57,23 @@ export function appInitializerFactory(injector: Injector,
             });
         });
     }
+}
+
+export function convertAbpLocaleToAngularLocale(locale: string): string {
+    if (!AppConsts.localeMappings) {
+        return locale;
+    }
+
+    let localeMapings = _.filter(AppConsts.localeMappings, { from: locale });
+    if (localeMapings && localeMapings.length) {
+        return localeMapings[0]['to'];
+    }
+
+    return locale;
+}
+
+export function shouldLoadLocale(): boolean {
+    return abp.localization.currentLanguage.name && abp.localization.currentLanguage.name !== 'en-US';
 }
 
 export function getRemoteServiceBaseUrl(): string {
