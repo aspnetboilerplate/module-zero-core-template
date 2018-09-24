@@ -8,7 +8,8 @@ using Abp.Application.Services.Dto;
 using Abp.Authorization;
 using Abp.Domain.Repositories;
 using Abp.IdentityFramework;
-using Abp.UI;
+using Abp.Linq.Extensions;
+using Abp.Extensions;
 using AbpCompanyName.AbpProjectName.Authorization;
 using AbpCompanyName.AbpProjectName.Authorization.Roles;
 using AbpCompanyName.AbpProjectName.Authorization.Users;
@@ -46,6 +47,19 @@ namespace AbpCompanyName.AbpProjectName.Roles
             await _roleManager.SetGrantedPermissionsAsync(role, grantedPermissions);
 
             return MapToEntityDto(role);
+        }
+
+        public async Task<ListResultDto<RoleListDto>> GetRolesAsync(GetRolesInput input)
+        {
+            var roles = await _roleManager
+                .Roles
+                .WhereIf(
+                    !input.Permission.IsNullOrWhiteSpace(),
+                    r => r.Permissions.Any(rp => rp.Name == input.Permission && rp.IsGranted)
+                )
+                .ToListAsync();
+
+            return new ListResultDto<RoleListDto>(ObjectMapper.Map<List<RoleListDto>>(roles));
         }
 
         public override async Task<RoleDto> Update(RoleDto input)
