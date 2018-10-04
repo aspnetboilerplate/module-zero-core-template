@@ -6,7 +6,7 @@ import Role from '../entities/role'
 import Ajax from '../../lib/ajax'
 import PageResult from '@/store/entities/page-result';
 import ListMutations from './list-mutations'
-import { stat } from 'fs';
+
 interface UserState extends ListState<User>{
     editUser:User,
     roles:Role[]

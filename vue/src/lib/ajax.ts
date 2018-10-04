@@ -1,5 +1,4 @@
 import axios from 'axios'
-import Util from './util'
 import appconst from './appconst'
 import Vue from 'vue'
 const ajax = axios.create({
