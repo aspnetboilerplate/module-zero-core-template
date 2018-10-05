@@ -1,5 +1,6 @@
 using System.Collections.Generic;
 using System.Linq;
+using System.Reflection;
 using Swashbuckle.AspNetCore.Swagger;
 using Swashbuckle.AspNetCore.SwaggerGen;
 using Abp.Authorization;
@@ -10,13 +11,13 @@ namespace AbpCompanyName.AbpProjectName.Web.Host.Startup
     {
         public void Apply(Operation operation, OperationFilterContext context)
         {
-            var actionAttrs = context.ControllerActionDescriptor.MethodInfo.GetCustomAttributes(true).ToList();
+            var actionAttrs = context.MethodInfo.GetCustomAttributes(true).ToList();
             if (actionAttrs.OfType<AbpAllowAnonymousAttribute>().Any())
             {
                 return;
             }
 
-            var controllerAttrs = context.ControllerActionDescriptor.ControllerTypeInfo.GetCustomAttributes(true);
+            var controllerAttrs = context.MethodInfo.DeclaringType.GetTypeInfo().GetCustomAttributes(true);
             var actionAbpAuthorizeAttrs = actionAttrs.OfType<AbpAuthorizeAttribute>().ToList();
 
             if (!actionAbpAuthorizeAttrs.Any() && controllerAttrs.OfType<AbpAllowAnonymousAttribute>().Any())
