@@ -5,7 +5,7 @@ using Xunit;
 
 namespace AbpCompanyName.AbpProjectName.Tests.IntegrationTests.Sessions
 {
-    public class SessionAppService_Tests : AbpProjectNameTestBase
+    public class SessionAppService_Tests : AbpProjectNameIntegrationTestBase
     {
         private readonly ISessionAppService _sessionAppService;
 

@@ -8,7 +8,7 @@ using Xunit;
 
 namespace AbpCompanyName.AbpProjectName.Tests.IntegrationTests.Users
 {
-    public class UserAppService_Tests : AbpProjectNameTestBase
+    public class UserAppService_Tests : AbpProjectNameIntegrationTestBase
     {
         private readonly IUserAppService _userAppService;
 

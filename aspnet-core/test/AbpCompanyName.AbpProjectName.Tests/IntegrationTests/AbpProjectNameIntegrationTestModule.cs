@@ -19,9 +19,9 @@ namespace AbpCompanyName.AbpProjectName.Tests.IntegrationTests
         typeof(AbpProjectNameEntityFrameworkModule),
         typeof(AbpTestBaseModule)
         )]
-    public class AbpProjectNameTestModule : AbpModule
+    public class AbpProjectNameIntegrationTestModule : AbpModule
     {
-        public AbpProjectNameTestModule(AbpProjectNameEntityFrameworkModule abpProjectNameEntityFrameworkModule)
+        public AbpProjectNameIntegrationTestModule(AbpProjectNameEntityFrameworkModule abpProjectNameEntityFrameworkModule)
         {
             abpProjectNameEntityFrameworkModule.SkipDbContextRegistration = true;
             abpProjectNameEntityFrameworkModule.SkipDbSeed = true;

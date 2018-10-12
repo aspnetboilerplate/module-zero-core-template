@@ -17,9 +17,9 @@ using Microsoft.EntityFrameworkCore;
 
 namespace AbpCompanyName.AbpProjectName.Tests.IntegrationTests
 {
-    public abstract class AbpProjectNameTestBase : AbpIntegratedTestBase<AbpProjectNameTestModule>
+    public abstract class AbpProjectNameIntegrationTestBase : AbpIntegratedTestBase<AbpProjectNameIntegrationTestModule>
     {
-        protected AbpProjectNameTestBase()
+        protected AbpProjectNameIntegrationTestBase()
         {
             void NormalizeDbContext(AbpProjectNameDbContext context)
             {
