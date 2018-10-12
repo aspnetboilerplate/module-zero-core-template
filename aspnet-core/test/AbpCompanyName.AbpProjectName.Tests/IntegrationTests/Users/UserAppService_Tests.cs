@@ -1,12 +1,12 @@
 ﻿using System.Threading.Tasks;
-using Microsoft.EntityFrameworkCore;
-using Shouldly;
-using Xunit;
 using Abp.Application.Services.Dto;
 using AbpCompanyName.AbpProjectName.Users;
 using AbpCompanyName.AbpProjectName.Users.Dto;
+using Microsoft.EntityFrameworkCore;
+using Shouldly;
+using Xunit;
 
-namespace AbpCompanyName.AbpProjectName.Tests.Users
+namespace AbpCompanyName.AbpProjectName.Tests.IntegrationTests.Users
 {
     public class UserAppService_Tests : AbpProjectNameTestBase
     {

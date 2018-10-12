@@ -1,6 +1,6 @@
 ﻿using Xunit;
 
-namespace AbpCompanyName.AbpProjectName.Tests
+namespace AbpCompanyName.AbpProjectName.Tests.IntegrationTests
 {
     public sealed class MultiTenantFactAttribute : FactAttribute
     {

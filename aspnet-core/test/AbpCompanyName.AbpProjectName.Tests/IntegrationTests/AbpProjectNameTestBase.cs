@@ -1,7 +1,6 @@
 ﻿using System;
 using System.Linq;
 using System.Threading.Tasks;
-using Microsoft.EntityFrameworkCore;
 using Abp;
 using Abp.Authorization.Users;
 using Abp.Events.Bus;
@@ -14,8 +13,9 @@ using AbpCompanyName.AbpProjectName.EntityFrameworkCore;
 using AbpCompanyName.AbpProjectName.EntityFrameworkCore.Seed.Host;
 using AbpCompanyName.AbpProjectName.EntityFrameworkCore.Seed.Tenants;
 using AbpCompanyName.AbpProjectName.MultiTenancy;
+using Microsoft.EntityFrameworkCore;
 
-namespace AbpCompanyName.AbpProjectName.Tests
+namespace AbpCompanyName.AbpProjectName.Tests.IntegrationTests
 {
     public abstract class AbpProjectNameTestBase : AbpIntegratedTestBase<AbpProjectNameTestModule>
     {
