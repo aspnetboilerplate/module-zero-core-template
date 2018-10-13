@@ -26,10 +26,10 @@
     <PackageReference Include="System.ValueTuple" Version="4.5.0" />
     <PackageReference Include="Microsoft.AspNetCore.Authentication.JwtBearer" Version="2.1.2" />
     <PackageReference Include="Swashbuckle.AspNetCore" Version="3.0.0" />
-    <PackageReference Include="Abp.AspNetCore" Version="3.8.3" />
-    <PackageReference Include="Abp.ZeroCore" Version="3.8.3" />
+    <PackageReference Include="Abp.AspNetCore" Version="3.9.0" />
+    <PackageReference Include="Abp.ZeroCore" Version="3.9.0" />
     <PackageReference Include="Microsoft.AspNetCore" Version="2.1.4" />
-    <PackageReference Include="Abp.AspNetCore.SignalR" Version="3.8.3" />
+    <PackageReference Include="Abp.AspNetCore.SignalR" Version="3.9.0" />
   </ItemGroup>
 
   <ItemGroup Condition=" '$(TargetFramework)' == 'net461' ">
