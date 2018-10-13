@@ -7,7 +7,7 @@ using Castle.MicroKernel.Registration;
 
 namespace AbpCompanyName.AbpProjectName.Tests.UnitTests
 {
-    public abstract class AbpProjectNameUnitTestBase : AbpIntegratedTestBase<UnitTestModule>
+    public abstract class AbpProjectNameUnitTestBase : AbpIntegratedTestBase<AbpProjectNameUnitTestModule>
     {
         private FakeLogger FakeLogger { get; set; }
         private new IIocManager LocalIocManager { get; set; }

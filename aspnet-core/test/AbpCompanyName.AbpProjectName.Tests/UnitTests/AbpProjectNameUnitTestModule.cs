@@ -5,7 +5,7 @@ using Abp.Reflection.Extensions;
 namespace AbpCompanyName.AbpProjectName.Tests.UnitTests
 {
     [DependsOn(typeof(AbpAutoMapperModule))]
-    public class UnitTestModule : AbpModule
+    public class AbpProjectNameUnitTestModule : AbpModule
     {
         public override void Initialize()
         {
