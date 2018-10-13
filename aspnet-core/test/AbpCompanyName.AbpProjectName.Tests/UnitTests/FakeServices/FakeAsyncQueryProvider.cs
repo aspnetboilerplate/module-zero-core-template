@@ -14,18 +14,30 @@ namespace AbpCompanyName.AbpProjectName.Tests.UnitTests.FakeServices
 {
     internal static class TestQueryableUtil
     {
+        /// <summary>
+        /// Create a mock IRepository that contains a single item
+        /// This mock will only cover 80% of cases, consider an integration test for more complex scenarios.
+        /// </summary>
         internal static IRepository<T> AsRepository<T>(this T item) where T : class, IEntity<int>
         {
             var items = item == null ? new List<T>() : new List<T> { item };
             return AsRepository(items);
         }
 
+        /// <summary>
+        /// Create a mock IRepository that contains a single item
+        /// This mock will only cover 80% of cases, consider an integration test for more complex scenarios.
+        /// </summary>
         internal static IRepository<T, TPrimaryKey> AsRepository<T, TPrimaryKey>(this T item) where T : class, IEntity<TPrimaryKey>
         {
             var items = item == null ? new List<T>() : new List<T> {item};
             return AsRepository<T, TPrimaryKey>(items);
         }
 
+        /// <summary>
+        /// Create a mock IRepository that contains a list of items
+        /// This mock will only cover 80% of cases, consider an integration test for more complex scenarios.
+        /// </summary>
         internal static IRepository<T> AsRepository<T>(this List<T> items) where T : class, IEntity<int>
         {
             var repository = Substitute.For<IRepository<T>>();
@@ -33,6 +45,10 @@ namespace AbpCompanyName.AbpProjectName.Tests.UnitTests.FakeServices
             return repository;
         }
 
+        /// <summary>
+        /// Create a mock IRepository that contains a list of items.
+        /// This mock will only cover 80% of cases, consider an integration test for more complex scenarios.
+        /// </summary>
         internal static IRepository<T, TPrimaryKey> AsRepository<T, TPrimaryKey>(this List<T> items) where T : class, IEntity<TPrimaryKey>
         {
             var repository = Substitute.For<IRepository<T, TPrimaryKey>>();
@@ -40,6 +56,10 @@ namespace AbpCompanyName.AbpProjectName.Tests.UnitTests.FakeServices
             return repository;
         }
 
+        /// <summary>
+        /// Try to mock out all of the methods that might be called on an IRepository.  The list of methods
+        /// below is not complete but should cover 80% of cases.
+        /// </summary>
         private static void MockRepositoryMethods<T, TPrimaryKey>(List<T> items, IRepository<T, TPrimaryKey> repository) where T : class, IEntity<TPrimaryKey>
         {
             repository.GetAll().Returns(items.AsAsyncQueryable());
