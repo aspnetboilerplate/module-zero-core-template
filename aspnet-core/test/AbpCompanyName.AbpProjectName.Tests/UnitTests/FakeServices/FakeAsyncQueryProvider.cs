@@ -17,7 +17,7 @@ namespace AbpCompanyName.AbpProjectName.Tests.UnitTests.FakeServices
         internal static IRepository<T> AsRepository<T>(this T item) where T : class, IEntity<int>
         {
             var items = item == null ? new List<T>() : new List<T> { item };
-            return AsRepository<T>(items);
+            return AsRepository(items);
         }
 
         internal static IRepository<T, TPrimaryKey> AsRepository<T, TPrimaryKey>(this T item) where T : class, IEntity<TPrimaryKey>
@@ -51,6 +51,7 @@ namespace AbpCompanyName.AbpProjectName.Tests.UnitTests.FakeServices
             repository.GetAsync(Arg.Any<TPrimaryKey>())
                 .Returns(callInfo => items.Single(item => item.Id.Equals(callInfo.Arg<TPrimaryKey>())));
             repository.When(i => i.DeleteAsync(Arg.Any<T>())).Do(i => items.Remove(i.Arg<T>()));
+            repository.Count().Returns(callInfo => items.Count);
         }
 
         internal static IQueryable<T> AsAsyncQueryable<T>(this IEnumerable<T> items)
