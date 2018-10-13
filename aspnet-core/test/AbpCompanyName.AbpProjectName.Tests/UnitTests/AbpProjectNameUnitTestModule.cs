@@ -10,7 +10,7 @@ namespace AbpCompanyName.AbpProjectName.Tests.UnitTests
         public override void Initialize()
         {
             // Scan the assembly for classes which inherit from AutoMapper.Profile
-            // Alternately we could DependsOn(typeof(ShieldedAlphaApplicationModule)), but that would require EF module dependencies
+            // Alternately we could DependsOn(typeof(AbpProjectNameApplicationModule)), but that would require EF module dependencies
             InitAutoMapper();
         }
 
