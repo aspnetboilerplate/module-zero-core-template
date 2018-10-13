@@ -14,9 +14,7 @@ namespace AbpCompanyName.AbpProjectName.Tests.UnitTests.Users
         {
             // Arrange
             var role = new Role(29, "John Nash");
-            var roleRepository = role.AsRepository<Role>();
-            var userAppService = new UserAppService(null, null, null, roleRepository, null);
-            userAppService.ObjectMapper = ObjectMapper;
+            var userAppService = GetUserAppService(role);
 
             // Act
             var listResultDto = await userAppService.GetRoles();
@@ -24,6 +22,29 @@ namespace AbpCompanyName.AbpProjectName.Tests.UnitTests.Users
             // Assert
             var item = listResultDto.Items.ShouldHaveSingleItem();
             item.DisplayName.ShouldBe("John Nash");
+        }
+
+        [Fact]
+        public async Task GivenNoRoleExists_WhenGetRoles_ThenNothingIsReturned()
+        {
+            // Arrange
+            var userAppService = GetUserAppService(null);
+
+            // Act
+            var listResultDto = await userAppService.GetRoles();
+
+            // Assert
+            listResultDto.Items.ShouldBeEmpty();
+        }
+
+        private UserAppService GetUserAppService(Role role)
+        {
+            var roleRepository = role.AsRepository<Role>();
+            var userAppService = new UserAppService(null, null, null, roleRepository, null)
+            {
+                ObjectMapper = ObjectMapper
+            };
+            return userAppService;
         }
     }
 }
