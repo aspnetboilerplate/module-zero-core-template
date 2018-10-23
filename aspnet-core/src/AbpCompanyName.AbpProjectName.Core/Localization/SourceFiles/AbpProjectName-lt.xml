@@ -84,5 +84,26 @@
     <text name="EditUser">Keisti vartotoją</text>
     <text name="TenantIdIsNotActive{0}">Savininkas su Id {0} yra neaktyvus</text>
     <text name="UnknownTenantId{0}">Nežinomas savininko Id {0}</text>
+	
+	<text name="ThisFieldIsRequired">Šis laukas yra privalomas</text>
+    <text name="PleaseWait">Prašome palaukti...</text>
+    <text name="Administration">Administration</text>
+    <text name="ClearAll">Išvalyti visus</text>
+    <text name="ClearOthers">Išvalyti kitus</text>
+    <text name="LabelOptions">Etiketės nustatymai</text>
+    <text name="Permissions">Leidimai</text>
+    <text name="RoleDescription">Rolės aprašymas</text>
+    <text name="Refresh">Atnaujinti</text>
+    <text name="Create">Sukurti</text>
+    <text name="UserDetails">Vartotojo detalės</text>
+    <text name="UserRoles">Vartotojo rolės</text>
+    <text name="ConfirmPassword">Patvirtinti slaptažodį</text>
+    <text name="Version">Versija</text>
+    <text name="On">Įjungta</text>
+    <text name="Off">Išjungta</text>
+    <text name="AreYouSureWantToDelete">Ar tikrai norite pašalinti {0}?</text>
+    <text name="StartTyping">Pradėkite rašyti</text>
+    <text name="Skins">Apvalkalai</text>
+	<text name="Settings">Nustatymai</text>
   </texts>
 </localizationDictionary>
