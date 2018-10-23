@@ -134,7 +134,7 @@
   {
     "outputFileName": "wwwroot/view-resources/Views/Roles/Index.min.js",
     "inputFiles": [
-      " Index.js"
+      "wwwroot/view-resources/Views/Roles/Index.js"
     ]
   },
   {
