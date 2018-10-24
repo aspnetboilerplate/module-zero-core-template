@@ -1,4 +1,18 @@
-﻿class UtilsService {
+﻿import { injectable } from "inversify";
+
+export interface IUtilsService {
+  getCookieValue(key: string): string;
+  setCookieValue(
+    key: string,
+    value: string,
+    expireDate?: Date,
+    path?: string
+  ): void;
+  deleteCookie(key: string, path?: string): void;
+}
+
+@injectable()
+export class UtilsService implements IUtilsService {
   getCookieValue(key: string): string {
     return abp.utils.getCookieValue(key);
   }
@@ -16,6 +30,3 @@
     abp.utils.deleteCookie(key, path);
   }
 }
-export default UtilsService;
-//newing class is making an Immediately Invoked Function Expression,
-//so I can achieve Angular's Dependency Injection.

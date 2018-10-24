@@ -1,4 +1,15 @@
-﻿class LogService {
+﻿import { injectable } from "inversify";
+
+export interface ILogService {
+  debug(logObject?: any): void;
+  info(logObject?: any): void;
+  warn(logObject?: any): void;
+  error(logObject?: any): void;
+  fatal(logObject?: any): void;
+}
+
+@injectable()
+export class LogService implements ILogService {
   debug(logObject?: any): void {
     abp.log.debug(logObject);
   }
@@ -19,7 +30,3 @@
     abp.log.fatal(logObject);
   }
 }
-
-export default LogService;
-//newing class is making an Immediately Invoked Function Expression,
-//so I can achieve Angular's Dependency Injection.

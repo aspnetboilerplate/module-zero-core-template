@@ -1,4 +1,14 @@
-﻿class TokenService {
+﻿import { injectable } from "inversify";
+
+export interface ITokenService {
+  getToken(): string;
+  getTokenCookieName(): string;
+  clearToken(): void;
+  setToken(authToken: string, expireDate?: Date): void;
+}
+
+@injectable()
+export class TokenService implements ITokenService {
   getToken(): string {
     return abp.auth.getToken();
   }
@@ -15,7 +25,3 @@
     abp.auth.setToken(authToken, expireDate);
   }
 }
-
-export default TokenService;
-//newing class is making an Immediately Invoked Function Expression,
-//so I can achieve Angular's Dependency Injection.

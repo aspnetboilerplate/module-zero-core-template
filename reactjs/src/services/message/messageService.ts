@@ -1,4 +1,25 @@
-﻿class MessageService {
+﻿import { injectable } from "inversify";
+
+export interface IMessageService {
+  info(message: string, title?: string): any;
+  success(message: string, title?: string): any;
+  warn(message: string, title?: string): any;
+  error(message: string, title?: string): any;
+  confirm(message: string, callback?: (result: boolean) => void): any;
+  confirm(
+    message: string,
+    title?: string,
+    callback?: (result: boolean) => void
+  ): any;
+  confirm(
+    message: string,
+    titleOrCallBack?: string | ((result: boolean) => void),
+    callback?: (result: boolean) => void
+  ): any;
+}
+
+@injectable()
+export class MessageService implements IMessageService {
   info(message: string, title?: string): any {
     return abp.message.info(message, title);
   }
@@ -36,5 +57,3 @@
     }
   }
 }
-
-export default new MessageService();

@@ -14,4 +14,4 @@ This framework is designed by utilizing MVC design pattern and layered architect
 
 InversifyJS IoC container is used to ensure dependency inversion. All of services has one interface and one implementation, so mocks can be used easily when writing tests.
 
-![](images/architecture.jpg)
+![](_screenshots/architecture.jpg)

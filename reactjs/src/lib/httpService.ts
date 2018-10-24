@@ -23,39 +23,43 @@ http.interceptors.request.use(
 );
 // TODO: Below code will be modified when react-toastify is added
 // let vm = new Vue({});
-// http.interceptors.response.use(
-//   respon => {
-//     return respon;
-//   },
-//   error => {
-//     if (
-//       !!error.response &&
-//       !!error.response.data.error &&
-//       !!error.response.data.error.message &&
-//       error.response.data.error.details
-//     ) {
-//       vm.$Modal.error({
-//         title: error.response.data.error.message,
-//         content: error.response.data.error.details
-//       });
-//     } else if (
-//       !!error.response &&
-//       !!error.response.data.error &&
-//       !!error.response.data.error.message
-//     ) {
-//       vm.$Modal.error({
-//         title: window.abp.localization.localize("LoginFailed"),
-//         content: error.response.data.error.message
-//       });
-//     } else if (!error.response) {
-//       vm.$Modal.error(window.abp.localization.localize("UnknownError"));
-//     }
-//     setTimeout(() => {
-//       vm.$Message.destroy();
-//     }, 1000);
-//     return Promise.reject(error);
-//   }
-// );
+http.interceptors.response.use(
+  respon => {
+    return respon;
+  },
+  error => {
+    if (
+      !!error.response &&
+      !!error.response.data.error &&
+      !!error.response.data.error.message &&
+      error.response.data.error.details
+    ) {
+      // TODO: Below code will be modified when react-toastify is added
+      // vm.$Modal.error({
+      //   title: error.response.data.error.message,
+      //   content: error.response.data.error.details
+      // });
+    } else if (
+      !!error.response &&
+      !!error.response.data.error &&
+      !!error.response.data.error.message
+    ) {
+      // TODO: Below code will be modified when react-toastify is added
+      // vm.$Modal.error({
+      //   title: window.abp.localization.localize("LoginFailed"),
+      //   content: error.response.data.error.message
+      // });
+    } else if (!error.response) {
+      // TODO: Below code will be modified when react-toastify is added
+      // vm.$Modal.error(window.abp.localization.localize("UnknownError"));
+    }
+    setTimeout(() => {
+      // TODO: Below code will be modified when react-toastify is added
+      // vm.$Message.destroy();
+    }, 1000);
+    return Promise.reject(error);
+  }
+);
 
 export default {
   get: axios.get,

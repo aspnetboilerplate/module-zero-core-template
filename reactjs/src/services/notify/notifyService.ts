@@ -1,4 +1,14 @@
-﻿class NotifyService {
+﻿import { injectable } from "inversify";
+
+export interface INotifyService {
+  info(message: string, title?: string, options?: any): void;
+  success(message: string, title?: string, options?: any): void;
+  warn(message: string, title?: string, options?: any): void;
+  error(message: string, title?: string, options?: any): void;
+}
+
+@injectable()
+export class NotifyService implements INotifyService {
   info(message: string, title?: string, options?: any): void {
     abp.notify.info(message, title, options);
   }
@@ -15,7 +25,3 @@
     abp.notify.error(message, title, options);
   }
 }
-
-export default NotifyService;
-//newing class is making an Immediately Invoked Function Expression,
-//so I can achieve Angular's Dependency Injection.
