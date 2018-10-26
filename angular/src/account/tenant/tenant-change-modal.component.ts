@@ -54,15 +54,15 @@ export class TenantChangeModalComponent extends AppComponentBase {
             .pipe(finalize(() => { this.saving = false; }))
             .subscribe((result: IsTenantAvailableOutput) => {
                 switch (result.state) {
-                    case AppTenantAvailabilityState.Available:
+                    case IsTenantAvailableOutputState.Available:
                         abp.multiTenancy.setTenantIdCookie(result.tenantId);
                         this.close();
                         location.reload();
                         return;
-                    case AppTenantAvailabilityState.InActive:
+                    case IsTenantAvailableOutputState.InActive:
                         this.message.warn(this.l('TenantIsNotActive', this.tenancyName));
                         break;
-                    case AppTenantAvailabilityState.NotFound: //NotFound
+                    case IsTenantAvailableOutputState.NotFound: //NotFound
                         this.message.warn(this.l('ThereIsNoTenantDefinedWithName{0}', this.tenancyName));
                         break;
                 }

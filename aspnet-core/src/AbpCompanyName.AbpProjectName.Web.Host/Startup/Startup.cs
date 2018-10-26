@@ -74,6 +74,8 @@ namespace AbpCompanyName.AbpProjectName.Web.Host.Startup
                     In = "header",
                     Type = "apiKey"
                 });
+				
+				options.DescribeAllEnumsAsStrings();
             });
 
             // Configure Abp and Dependency Injection
