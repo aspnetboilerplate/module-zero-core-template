@@ -1,23 +1,28 @@
 import * as React from "react";
 import "./App.css";
-import { Button } from "antd";
-import logo from "./logo.svg";
 
+import * as abpUserConfiguration from "./services/abpUserConfigurationService";
+import { Switch, Route, withRouter } from "react-router-dom";
+import Login from "./scenes/Login";
 class App extends React.Component {
+  componentDidMount() {
+    console.log(abpUserConfiguration.initialize());
+  }
   public render() {
     return (
-      <div className="App">
-        <header className="App-header">
-          <img src={logo} className="App-logo" alt="logo" />
-          <h1 className="App-title">Welcome to React</h1>
-        </header>
-        <p className="App-intro">
-          To get started, edit <code>src/App.tsx</code> and save to reload.
-        </p>
-        <Button type="primary">Button</Button>
-      </div>
+      <Switch>
+        <Route path="/login" component={Login} />
+        <Route path="/" component={Login} />
+        {/* <PrivateRouter path="/activity" component={Activity} />
+        <PublicRouter path="/login" component={Login} />
+        <PublicRouter path="/forgetPassword" component={ForgetPassword} />
+        <PrivateRouter path="/profile/:id" component={Profile} />
+        <PrivateRouter path="/pushNotification" component={PushNotification} />
+        <PublicRouter path="/" component={Login} />
+        <PrivateRouter path="/activity/create" component={Profile} /> */}
+      </Switch>
     );
   }
 }
 
-export default App;
+export default withRouter<any>(App);
