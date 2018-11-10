@@ -66,7 +66,6 @@ class Login extends React.Component<any, any> {
                     rules: [
                       {
                         required: true,
-                        // tslint:disable-next-line:object-literal-sort-keys
                         message: "Tenant name is required."
                       }
                     ]
@@ -80,7 +79,6 @@ class Login extends React.Component<any, any> {
                       }
                       placeholder=""
                       size="large"
-                      //   onChange={}
                     />
                   )}
                 </FormItem>
@@ -94,7 +92,6 @@ class Login extends React.Component<any, any> {
                   rules: [
                     {
                       required: true,
-                      // tslint:disable-next-line:object-literal-sort-keys
                       message: "User Name is required."
                     }
                   ]
