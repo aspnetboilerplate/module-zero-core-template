@@ -2,14 +2,16 @@ import * as React from "react";
 import { Layout, Menu, Icon, Avatar, Col } from "antd";
 import "./index.css";
 import { Route, Switch, withRouter } from 'react-router';
-import Logins from '../Login';
 import Users from '../Users';
 import Tenants from '../Tenants';
 import Rules from '../Rules';
 import SubMenu from 'antd/lib/menu/SubMenu';
 import AbpLogo from "src/images/abp-logo-long.png";
+import About from '../About';
+import Dashboard from '../Dashboard';
+import LayoutHeader from './components/Header';
 
-const { Header, Sider, Content } = Layout;
+const { Sider, Content } = Layout;
 
 class LayoutComponent extends React.Component<any> {
   state = {
@@ -28,9 +30,10 @@ class LayoutComponent extends React.Component<any> {
   render() {
     return (
 
-
       <Layout style={{ minHeight: '100vh' }}>
         <Sider
+          trigger={null}
+          className={"sidebar"}
           width={256}
           collapsible
           collapsed={this.state.collapsed}
@@ -43,7 +46,7 @@ class LayoutComponent extends React.Component<any> {
             </Col>}
 
           <Menu theme="dark" mode="inline" defaultSelectedKeys={['1']}>
-            <Menu.Item onClick={() => this.props.history.push("/")} key="1">
+            <Menu.Item onClick={() => this.props.history.push("/dashboard")} key="1">
               <Icon type="home" />
               <span>Home</span>
             </Menu.Item>
@@ -108,18 +111,19 @@ class LayoutComponent extends React.Component<any> {
 
         </Sider>
         <Layout>
-          <Header style={{ background: '#fff', minHeight: 83, padding: 0 }} >
-            <Col style={{ marginTop: 10, marginRight: 10, textAlign: "right" }}>
-              <Avatar size={64} icon="user" />
-            </Col>
-          </Header>
+          <LayoutHeader
+            collapsed={this.state.collapsed}
+            toggle={this.toggle}
+          />
           <Content style={{ margin: '0 16px' }}>
             <div style={{ marginTop: 24, padding: 24, background: '#fff', minHeight: 360 }}>
               <Switch>
-                <Route path="/login" component={Logins} />
+                {/* <Route path="/login" component={Logins} /> */}
+                <Route path="/dashboard" component={Dashboard} />
                 <Route path="/users" component={Users} />
                 <Route path="/tenants" component={Tenants} />
                 <Route path="/rules" component={Rules} />
+                <Route path="/about" component={About} />
               </Switch>
             </div>
           </Content>
