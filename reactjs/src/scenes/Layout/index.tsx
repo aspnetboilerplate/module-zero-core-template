@@ -1,11 +1,13 @@
 import * as React from "react";
-import { Layout, Menu, Icon } from "antd";
+import { Layout, Menu, Icon, Avatar, Col } from "antd";
 import "./index.css";
 import { Route, Switch, withRouter } from 'react-router';
 import Logins from '../Login';
 import Users from '../Users';
 import Tenants from '../Tenants';
 import Rules from '../Rules';
+import SubMenu from 'antd/lib/menu/SubMenu';
+import AbpLogo from "src/images/abp-logo-long.png";
 
 const { Header, Sider, Content } = Layout;
 
@@ -19,51 +21,111 @@ class LayoutComponent extends React.Component<any> {
       collapsed: !this.state.collapsed,
     });
   }
+  onCollapse = (collapsed: any) => {
+    this.setState({ collapsed });
+  }
 
   render() {
     return (
-      <Layout>
+
+
+      <Layout style={{ minHeight: '100vh' }}>
         <Sider
-          trigger={null}
+          width={256}
           collapsible
           collapsed={this.state.collapsed}
+          onCollapse={this.onCollapse}
         >
-          <div className="logo" />
+          {this.state.collapsed ? <Col style={{ textAlign: "center", marginTop: 15, marginBottom: 10 }}>
+            <Avatar shape="square" style={{ height: 27, width: 64 }} src={AbpLogo} />
+          </Col> : <Col style={{ textAlign: "center", marginTop: 15, marginBottom: 10 }}>
+              <Avatar shape="square" style={{ height: 54, width: 128 }} src={AbpLogo} />
+            </Col>}
+
           <Menu theme="dark" mode="inline" defaultSelectedKeys={['1']}>
-            <Menu.Item key="1">
+            <Menu.Item onClick={() => this.props.history.push("/")} key="1">
               <Icon type="home" />
-              <span onClick={() => this.props.history.push("/")}>Home</span>
+              <span>Home</span>
             </Menu.Item>
-            <Menu.Item key="2">
-              <Icon type="video-camera" />
-              <span onClick={() => this.props.history.push("/tenants")}>Tenants</span>
+            <Menu.Item onClick={() => this.props.history.push("/tenants")} key="2">
+              <Icon type="appstore" />
+              <span>Tenants</span>
             </Menu.Item>
-            <Menu.Item key="3">
+            <Menu.Item onClick={() => this.props.history.push("/users")} key="3">
               <Icon type="user" />
-              <span onClick={() => this.props.history.push("/users")}>Users</span>
+              <span>Users</span>
             </Menu.Item>
-            <Menu.Item key="4">
-              <Icon type="upload" />
-              <span onClick={() => this.props.history.push("/rules")}>Rules</span>
+            <Menu.Item onClick={() => this.props.history.push("/rules")} key="4">
+              <Icon type="tags" />
+              <span>Rules</span>
             </Menu.Item>
+            <Menu.Item onClick={() => this.props.history.push("/about")} key="5">
+              <Icon type="info-circle" />
+              <span>About</span>
+            </Menu.Item>
+            <SubMenu
+              key="6"
+              title={<span><Icon type="bars" /><span>Multi Level Menu</span></span>}
+            >
+              <SubMenu
+                key="7"
+                title={<span><Icon type="bars" /><span>ASP.NET Boilerplate</span></span>}
+              >
+                <Menu.Item key="8">
+                  <span>Home</span>
+                </Menu.Item>
+                <Menu.Item key="9">
+                  <span>Templates</span>
+                </Menu.Item>
+                <Menu.Item key="10">
+                  <span>Samples</span>
+                </Menu.Item>
+                <Menu.Item key="11">
+                  <span>Documents</span>
+                </Menu.Item>
+              </SubMenu>
+              <SubMenu
+                key="12"
+                title={<span><Icon type="bars" /><span>ASP.NET Zero</span></span>}>
+                <Menu.Item key="13">
+                  <span>Home</span>
+                </Menu.Item>
+                <Menu.Item key="14">
+                  <span>Description</span>
+                </Menu.Item>
+                <Menu.Item key="15">
+                  <span>Features</span>
+                </Menu.Item>
+                <Menu.Item key="16">
+                  <span>Pricing</span>
+                </Menu.Item>
+                <Menu.Item key="17">
+                  <span>Faq</span>
+                </Menu.Item>
+              </SubMenu>
+            </SubMenu>
           </Menu>
+
         </Sider>
         <Layout>
-          <Header style={{ background: '#fff', padding: 0 }}>
-            <Icon
-              className="trigger"
-              type={this.state.collapsed ? 'menu-unfold' : 'menu-fold'}
-              onClick={this.toggle}
-            />
+          <Header style={{ background: '#fff', minHeight: 83, padding: 0 }} >
+            <Col style={{ marginTop: 10, marginRight: 10, textAlign: "right" }}>
+              <Avatar size={64} icon="user" />
+            </Col>
           </Header>
-          <Content style={{ margin: '24px 16px', padding: 24, background: '#fff', minHeight: 280 }}>
-            <Switch>
-              <Route path="/login" component={Logins} />
-              <Route path="/users" component={Users} />
-              <Route path="/tenants" component={Tenants} />
-              <Route path="/rules" component={Rules} />
-            </Switch>
+          <Content style={{ margin: '0 16px' }}>
+            <div style={{ marginTop: 24, padding: 24, background: '#fff', minHeight: 360 }}>
+              <Switch>
+                <Route path="/login" component={Logins} />
+                <Route path="/users" component={Users} />
+                <Route path="/tenants" component={Tenants} />
+                <Route path="/rules" component={Rules} />
+              </Switch>
+            </div>
           </Content>
+          <Layout.Footer style={{ textAlign: 'center' }}>
+            Asp.Net Boilerplate - React ©2018 <a href="https://github.com/ryoldash/module-zero-core-template">Github Page</a>
+          </Layout.Footer>
         </Layout>
       </Layout>
     );
