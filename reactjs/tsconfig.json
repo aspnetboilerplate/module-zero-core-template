@@ -6,6 +6,7 @@
     "target": "es5",
     "lib": ["es6", "dom"],
     "sourceMap": true,
+    "allowJs": true,
     "jsx": "react",
     "moduleResolution": "node",
     "rootDir": "src",
@@ -18,7 +19,7 @@
     "suppressImplicitAnyIndexErrors": true,
     "noUnusedLocals": true,
     "emitDecoratorMetadata": true,
-    "experimentalDecorators": true,
+    "experimentalDecorators": true
   },
   "exclude": [
     "node_modules",

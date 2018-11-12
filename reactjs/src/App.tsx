@@ -1,9 +1,9 @@
-import * as React from "react";
-import "./App.css";
+import * as React from 'react';
+import './App.css';
 
-import * as abpUserConfiguration from "./services/abpUserConfigurationService";
-import { Switch, Route, withRouter } from "react-router-dom";
-import Login from "./scenes/Login";
+import * as abpUserConfiguration from './services/abpUserConfigurationService';
+import { Switch, Route, withRouter } from 'react-router-dom';
+import Login from './scenes/Login';
 class App extends React.Component {
   componentDidMount() {
     console.log(abpUserConfiguration.initialize());
