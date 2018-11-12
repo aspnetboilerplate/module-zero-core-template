@@ -57,7 +57,7 @@ class Login extends React.Component<any, any> {
             xl={{ span: 4, offset: 10 }}
             xxl={{ span: 4, offset: 10 }}
           >
-            <div style={group}>{"Test"}</div>
+            <div style={group}>{"Tenant Name"}</div>
 
             <Form className="login-form" onSubmit={this.handleSubmit}>
               {!this.props.item ? (
@@ -66,8 +66,7 @@ class Login extends React.Component<any, any> {
                     rules: [
                       {
                         required: true,
-                        // tslint:disable-next-line:object-literal-sort-keys
-                        message: "Lütfen  asd Tenant Name giriniz"
+                        message: "Tenant name is required."
                       }
                     ]
                   })(
@@ -80,7 +79,6 @@ class Login extends React.Component<any, any> {
                       }
                       placeholder=""
                       size="large"
-                      //   onChange={}
                     />
                   )}
                 </FormItem>
@@ -94,8 +92,7 @@ class Login extends React.Component<any, any> {
                   rules: [
                     {
                       required: true,
-                      // tslint:disable-next-line:object-literal-sort-keys
-                      message: "Lütfen Kullanıcı adı veya mail giriniz"
+                      message: "User Name is required."
                     }
                   ]
                 })(
@@ -113,7 +110,7 @@ class Login extends React.Component<any, any> {
               <FormItem>
                 {getFieldDecorator("password", {
                   rules: [
-                    { required: true, message: "Lütfen Şifrenizi giriniz" }
+                    { required: true, message: "Password is is required." }
                   ]
                 })(
                   <Input
@@ -138,7 +135,7 @@ class Login extends React.Component<any, any> {
               </Row>
               <Row>
                 <Col span={14} push={4}>
-                  <Button htmlType={"submit"}>adasdfas</Button>
+                  <Button htmlType={"submit"}>Login</Button>
                 </Col>
               </Row>
               <Row>

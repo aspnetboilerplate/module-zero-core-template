@@ -4,7 +4,7 @@ import GetRoleAsyncOutput from './dto/getRoleAsyncOutput';
 import { UpdateRoleInput } from './dto/updateRoleInput';
 import { UpdateRoleOutput } from './dto/updateRoleOutput';
 import { EntityDto } from '../../model/entityDto';
-import api from '../apiServiceBase';
+import http from '../httpService';
 
 class RoleService {
   public async create(
