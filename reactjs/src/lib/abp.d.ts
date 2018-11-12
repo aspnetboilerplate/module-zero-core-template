@@ -1,4 +1,4 @@
-﻿declare namespace abp {
+﻿export  namespace abp {
   let appPath: string;
 
   let pageLoadTime: Date;

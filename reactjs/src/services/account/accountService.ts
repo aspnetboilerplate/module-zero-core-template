@@ -13,15 +13,15 @@ class AccountService {
       isTenantAvaibleInput,
     );
     console.log(result);
-    return result;
+    return result.data;
   }
   public async register(registerInput: RegisterInput): Promise<RegisterOutput> {
     var result = await http.post(
       'services/app/Account/Register',
-      registerInput,
+      registerInput
     );
     console.log(result);
-    return result;
+    return result.data;
   }
 }
 
