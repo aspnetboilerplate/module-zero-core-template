@@ -1,15 +1,15 @@
-import * as React from "react";
-import { Layout, Menu, Icon, Avatar, Col } from "antd";
-import "./index.css";
+import * as React from 'react';
+import { Layout, Menu, Icon, Avatar, Col } from 'antd';
+import './index.css';
 import { Route, Switch, withRouter } from 'react-router';
 import Users from '../Users';
 import Tenants from '../Tenants';
 import Rules from '../Rules';
 import SubMenu from 'antd/lib/menu/SubMenu';
-import AbpLogo from "src/images/abp-logo-long.png";
+import AbpLogo from 'src/images/abp-logo-long.png';
 import About from '../About';
 import Dashboard from '../Dashboard';
-import LayoutHeader from './components/Header';
+import LayoutHeader from 'src/components/Header';
 
 const { Sider, Content } = Layout;
 
@@ -22,57 +22,63 @@ class LayoutComponent extends React.Component<any> {
     this.setState({
       collapsed: !this.state.collapsed,
     });
-  }
+  };
   onCollapse = (collapsed: any) => {
     this.setState({ collapsed });
-  }
+  };
 
   render() {
     return (
-
       <Layout style={{ minHeight: '100vh' }}>
-        <Sider
-          trigger={null}
-          className={"sidebar"}
-          width={256}
-          collapsible
-          collapsed={this.state.collapsed}
-          onCollapse={this.onCollapse}
-        >
-          {this.state.collapsed ? <Col style={{ textAlign: "center", marginTop: 15, marginBottom: 10 }}>
-            <Avatar shape="square" style={{ height: 27, width: 64 }} src={AbpLogo} />
-          </Col> : <Col style={{ textAlign: "center", marginTop: 15, marginBottom: 10 }}>
+        <Sider trigger={null} className={'sidebar'} width={256} collapsible collapsed={this.state.collapsed} onCollapse={this.onCollapse}>
+          {this.state.collapsed ? (
+            <Col style={{ textAlign: 'center', marginTop: 15, marginBottom: 10 }}>
+              <Avatar shape="square" style={{ height: 27, width: 64 }} src={AbpLogo} />
+            </Col>
+          ) : (
+            <Col style={{ textAlign: 'center', marginTop: 15, marginBottom: 10 }}>
               <Avatar shape="square" style={{ height: 54, width: 128 }} src={AbpLogo} />
-            </Col>}
+            </Col>
+          )}
 
           <Menu theme="dark" mode="inline" defaultSelectedKeys={['1']}>
-            <Menu.Item onClick={() => this.props.history.push("/dashboard")} key="1">
+            <Menu.Item onClick={() => this.props.history.push('/dashboard')} key="1">
               <Icon type="home" />
               <span>Home</span>
             </Menu.Item>
-            <Menu.Item onClick={() => this.props.history.push("/tenants")} key="2">
+            <Menu.Item onClick={() => this.props.history.push('/tenants')} key="2">
               <Icon type="appstore" />
               <span>Tenants</span>
             </Menu.Item>
-            <Menu.Item onClick={() => this.props.history.push("/users")} key="3">
+            <Menu.Item onClick={() => this.props.history.push('/users')} key="3">
               <Icon type="user" />
               <span>Users</span>
             </Menu.Item>
-            <Menu.Item onClick={() => this.props.history.push("/rules")} key="4">
+            <Menu.Item onClick={() => this.props.history.push('/rules')} key="4">
               <Icon type="tags" />
               <span>Rules</span>
             </Menu.Item>
-            <Menu.Item onClick={() => this.props.history.push("/about")} key="5">
+            <Menu.Item onClick={() => this.props.history.push('/about')} key="5">
               <Icon type="info-circle" />
               <span>About</span>
             </Menu.Item>
             <SubMenu
               key="6"
-              title={<span><Icon type="bars" /><span>Multi Level Menu</span></span>}
+              title={
+                <span>
+                  <Icon type="bars" />
+                  <span>Multi Level Menu</span>
+                </span>
+              }
             >
               <SubMenu
                 key="7"
-                title={<span><Icon type="bars" /><span>ASP.NET Boilerplate</span></span>}
+                title={
+                  <span>
+                    <Icon type="bars" />
+                    <span>ASP.NET Boilerplate</span>
+                  </span>
+                }
               >
                 <Menu.Item key="8">
                   <span>Home</span>
@@ -89,7 +95,13 @@ class LayoutComponent extends React.Component<any> {
               </SubMenu>
               <SubMenu
                 key="12"
-                title={<span><Icon type="bars" /><span>ASP.NET Zero</span></span>}>
+                title={
+                  <span>
+                    <Icon type="bars" />
+                    <span>ASP.NET Zero</span>
+                  </span>
+                }
+              >
                 <Menu.Item key="13">
                   <span>Home</span>
                 </Menu.Item>
@@ -108,13 +120,9 @@ class LayoutComponent extends React.Component<any> {
               </SubMenu>
             </SubMenu>
           </Menu>
-
         </Sider>
         <Layout>
-          <LayoutHeader
-            collapsed={this.state.collapsed}
-            toggle={this.toggle}
-          />
+          <LayoutHeader collapsed={this.state.collapsed} toggle={this.toggle} />
           <Content style={{ margin: '0 16px' }}>
             <div style={{ marginTop: 24, padding: 24, background: '#fff', minHeight: 360 }}>
               <Switch>

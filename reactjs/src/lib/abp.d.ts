@@ -1,4 +1,4 @@
-﻿export  namespace abp {
+﻿declare namespace abp {
   let appPath: string;
 
   let pageLoadTime: Date;
@@ -9,7 +9,7 @@
     enum sides {
       TENANT = 1,
 
-      HOST = 2
+      HOST = 2,
     }
 
     let isEnabled: boolean;
@@ -126,7 +126,7 @@
 
       Tenant = 2,
 
-      User = 4
+      User = 4,
     }
   }
 
@@ -166,12 +166,12 @@
       SUCCESS,
       WARN,
       ERROR,
-      FATAL
+      FATAL,
     }
 
     enum userNotificationState {
       UNREAD,
-      READ
+      READ,
     }
 
     //TODO: We can extend this interface to define built-in notification types, like ILocalizableMessageNotificationData
@@ -211,22 +211,13 @@
 
     let messageFormatters: any;
 
-    function getUserNotificationStateAsString(
-      userNotificationState: userNotificationState
-    ): string;
+    function getUserNotificationStateAsString(userNotificationState: userNotificationState): string;
 
-    function getUiNotifyFuncBySeverity(
-      severity: severity
-    ): (message: string, title?: string, options?: any) => void;
+    function getUiNotifyFuncBySeverity(severity: severity): (message: string, title?: string, options?: any) => void;
 
-    function getFormattedMessageFromUserNotification(
-      userNotification: IUserNotification
-    ): string;
+    function getFormattedMessageFromUserNotification(userNotification: IUserNotification): string;
 
-    function showUiNotifyForUserNotification(
-      userNotification: IUserNotification,
-      options?: any
-    ): void;
+    function showUiNotifyForUserNotification(userNotification: IUserNotification, options?: any): void;
   }
 
   namespace log {
@@ -235,7 +226,7 @@
       INFO,
       WARN,
       ERROR,
-      FATAL
+      FATAL,
     }
 
     let level: levels;
@@ -274,16 +265,9 @@
 
     function error(message: string, title?: string): any;
 
-    function confirm(
-      message: string,
-      callback?: (result: boolean) => void
-    ): any;
+    function confirm(message: string, callback?: (result: boolean) => void): any;
 
-    function confirm(
-      message: string,
-      title?: string,
-      callback?: (result: boolean) => void
-    ): any;
+    function confirm(message: string, title?: string, callback?: (result: boolean) => void): any;
   }
 
   namespace ui {
@@ -322,18 +306,11 @@
 
     function truncateString(str: string, maxLength: number): string;
 
-    function truncateStringWithPostfix(
-      str: string,
-      maxLength: number,
-      postfix?: string
-    ): string;
+    function truncateStringWithPostfix(str: string, maxLength: number, postfix?: string): string;
 
     function isFunction(obj: any): boolean;
 
-    function buildQueryString(
-      parameterInfos: INameValue[],
-      includeQuestionMark?: boolean
-    ): string;
+    function buildQueryString(parameterInfos: INameValue[], includeQuestionMark?: boolean): string;
 
     /**
      * Sets a cookie value for given key.
@@ -344,12 +321,7 @@
      * @param {Date} expireDate (optional). If not specified the cookie will expire at the end of session.
      * @param {string} path (optional)
      */
-    function setCookieValue(
-      key: string,
-      value: string,
-      expireDate?: Date,
-      path?: string
-    ): void;
+    function setCookieValue(key: string, value: string, expireDate?: Date, path?: string): void;
 
     /**
      * Gets a cookie with given key.

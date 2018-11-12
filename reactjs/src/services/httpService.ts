@@ -1,29 +1,26 @@
-import axios from "axios";
-import AppConsts from "./../lib/appconst";
+import axios from 'axios';
+import AppConsts from './../lib/appconst';
 
 const http = axios.create({
   baseURL: AppConsts.remoteServiceBaseUrl,
-  timeout: 30000
+  timeout: 30000,
 });
 
-// http.interceptors.request.use(
-//   function (config) {
-//     // if (!!abp.auth.getToken()) {
-//     //   config.headers.common["Authorization"] = "Bearer " + abp.auth.getToken();
-//     // }
-//     // config.headers.common[".AspNetCore.Culture"] = abp.utils.getCookieValue(
-//     //   "Abp.Localization.CultureName"
-//     // );
-//     // config.headers.common[
-//     //   "Abp.TenantId"
-//     // ] = abp.multiTenancy.getTenantIdCookie();
-//     // return config;
-//     return null;
-//   },
-//   function (error) {
-//     return Promise.reject(error);
-//   }
-// );
+http.interceptors.request.use(
+  function(config) {
+    if (!!abp.auth.getToken()) {
+      config.headers.common['Authorization'] = 'Bearer ' + abp.auth.getToken();
+    }
+
+    config.headers.common['.AspNetCore.Culture'] = abp.utils.getCookieValue('Abp.Localization.CultureName');
+    config.headers.common['Abp.TenantId'] = abp.multiTenancy.getTenantIdCookie();
+
+    return config;
+  },
+  function(error) {
+    return Promise.reject(error);
+  }
+);
 // TODO: Below code will be modified when react-toastify is added
 // let vm = new Vue({});
 http.interceptors.response.use(
@@ -31,12 +28,7 @@ http.interceptors.response.use(
     return respon;
   },
   error => {
-    if (
-      !!error.response &&
-      !!error.response.data.error &&
-      !!error.response.data.error.message &&
-      error.response.data.error.details
-    ) {
+    if (!!error.response && !!error.response.data.error && !!error.response.data.error.message && error.response.data.error.details) {
       // TODO: Below code will be modified when react-toastify is added
       // vm.$Modal.error({
       //   title: error.response.data.error.message,
@@ -44,11 +36,7 @@ http.interceptors.response.use(
       // });
 
       console.log(`title:${error.response.data.error.message} content:$`);
-    } else if (
-      !!error.response &&
-      !!error.response.data.error &&
-      !!error.response.data.error.message
-    ) {
+    } else if (!!error.response && !!error.response.data.error && !!error.response.data.error.message) {
       // TODO: Below code will be modified when react-toastify is added
       // vm.$Modal.error({
       //   title: window.abp.localization.localize("LoginFailed"),
