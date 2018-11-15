@@ -1,5 +1,6 @@
 import * as React from 'react';
 import { Col, Icon, Layout, Avatar, Menu, Dropdown, Badge } from 'antd';
+import { Link } from 'react-router-dom';
 
 export interface LayoutHeaderProps {
   collapsed?: any;
@@ -10,7 +11,7 @@ const userDropdownMenu = (
   <Menu>
     <Menu.Item key="2">
       <Icon type="logout" />
-      <span>Logout</span>
+      <span> <Link to="/login">Logout</Link></span>
     </Menu.Item>
   </Menu>
 );

@@ -4,7 +4,7 @@ import tokenAuthService from 'src/services/tokenAuth/tokenAuthService';
 
 const tokenStorageName = 'abp.AuthToken';
 
-class AuthenticationStores {
+class TokenAuthStores {
   @observable
   public authenticateResult: AuthenticationOutput | null;
 
@@ -97,4 +97,4 @@ class AuthenticationStores {
   }
 }
 
-export default new AuthenticationStores();
+export default new TokenAuthStores();

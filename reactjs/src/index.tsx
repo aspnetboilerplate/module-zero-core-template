@@ -4,11 +4,17 @@ import * as ReactDOM from "react-dom";
 import "./index.css";
 import registerServiceWorker from "./registerServiceWorker";
 import App from "./App";
-import AuthenticationStores from "./stores/authenticationStore";
+import AuthenticationStores from "./stores/tokenAuthStore";
 import { Provider } from "mobx-react";
 import { HashRouter } from "react-router-dom";
+import RoleStores from "./stores/roleStore"
+import TenantStores from './stores/tenantStore';
+import UserStores from "./stores/userStore"
 const stores = {
-  AuthenticationStores
+  AuthenticationStores,
+  RoleStores,
+  TenantStores,
+  UserStores,
 };
 
 ReactDOM.render(

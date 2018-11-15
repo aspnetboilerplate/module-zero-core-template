@@ -4,7 +4,7 @@ import './index.css';
 import { Route, Switch, withRouter } from 'react-router';
 import Users from '../Users';
 import Tenants from '../Tenants';
-import Rules from '../Rules';
+import Roles from '../Roles';
 import SubMenu from 'antd/lib/menu/SubMenu';
 import AbpLogo from 'src/images/abp-logo-long.png';
 import About from '../About';
@@ -54,7 +54,7 @@ class LayoutComponent extends React.Component<any> {
               <Icon type="user" />
               <span>Users</span>
             </Menu.Item>
-            <Menu.Item onClick={() => this.props.history.push('/rules')} key="4">
+            <Menu.Item onClick={() => this.props.history.push('/roles')} key="4">
               <Icon type="tags" />
               <span>Rules</span>
             </Menu.Item>
@@ -130,7 +130,7 @@ class LayoutComponent extends React.Component<any> {
                 <Route path="/dashboard" component={Dashboard} />
                 <Route path="/users" component={Users} />
                 <Route path="/tenants" component={Tenants} />
-                <Route path="/rules" component={Rules} />
+                <Route path="/roles" component={Roles} />
                 <Route path="/about" component={About} />
               </Switch>
             </div>

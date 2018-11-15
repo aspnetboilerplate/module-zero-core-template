@@ -5,12 +5,15 @@ import { UpdateRoleInput } from './dto/updateRoleInput';
 import { UpdateRoleOutput } from './dto/updateRoleOutput';
 import { EntityDto } from '../dto/entityDto';
 import http from '../httpService';
+import { GetAllRoleOutput } from './dto/getAllRoleOutput';
+import { PagedResultDto } from '../dto/pagedResultDto';
+import { GetRoleForEditOutput } from './dto/getRoleForEditOutput';
 
 class RoleService {
-  public async create(createRoleInput: CreateRoleInput): Promise<CreateRoleOutput> {
+  public async create(createRoleInput: CreateRoleInput): Promise<PagedResultDto<CreateRoleOutput>> {
     var result = await http.post('services/app/Role/Create', createRoleInput);
     console.log(result);
-    return result.data.result as CreateRoleOutput;
+    return result.data.result;
   }
 
   public async getRolesAsync(getRoleAsyncInput: GetRoleAsyncInput): Promise<GetRoleAsyncOutput> {
@@ -25,8 +28,8 @@ class RoleService {
     return result.data.result as UpdateRoleOutput;
   }
 
-  public async Delete(entityDto: EntityDto) {
-    var result = await http.delete('services/app/Role/Delete', { params: entityDto });
+  public async delete(entityDto: EntityDto) {
+    var result = await http.delete('services/app/Role/Delete1', { params: entityDto });
     console.log(result);
     return result.data;
   }
@@ -37,7 +40,7 @@ class RoleService {
     return result.data;
   }
 
-  public async getRoleForEdit(entityDto: EntityDto) {
+  public async getRoleForEdit(entityDto: EntityDto): Promise<GetRoleForEditOutput> {
     var result = await http.get('services/app/Role/GetRoleForEdit', { params: entityDto });
     console.log(result);
     return result.data;
@@ -49,10 +52,13 @@ class RoleService {
     return result.data;
   }
 
-  public async getAll(pagedFilterAndSortedRequest: PagedFilterAndSortedRequest) {
+  public async getAll(pagedFilterAndSortedRequest: PagedFilterAndSortedRequest): Promise<PagedResultDto<GetAllRoleOutput>> {
+    
+   
     var result = await http.get('services/app/Role/GetAll', { params: pagedFilterAndSortedRequest });
     console.log(result);
-    return result.data;
+ 
+    return result.data.result;
   }
 }
 
