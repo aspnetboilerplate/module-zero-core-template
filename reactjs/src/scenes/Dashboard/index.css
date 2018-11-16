@@ -21,7 +21,6 @@
 	border-radius: 5px;
 }
 
-
 .dashboardCardCounter{
     font-size: 36px;
      color: #fff; 
@@ -36,4 +35,11 @@
 .dashboardCardIcon{
     font-size: 48px;
     color: #fff; 
+}
+
+.dasboardChart{
+    margin-top: 24px; 
+    padding: 24px;
+    background: #fff;
+    min-Height: 360px;
 }
