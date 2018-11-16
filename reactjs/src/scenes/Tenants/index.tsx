@@ -48,7 +48,7 @@ class Tenant extends React.Component<any> {
   }
 
   delete(input: EntityDto) {
-    debugger;
+    ;
     this.props.TenantStores.delete(input);
   }
 

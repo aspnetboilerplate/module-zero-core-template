@@ -19,10 +19,12 @@ class Role extends React.Component<any> {
   };
 
   async componentWillMount() {
+    ;
     await this.getAll();
   }
 
   async getAll() {
+    ;
     await this.props.RoleStores.getAll({ maxResultCount: this.state.maxResultCount, skipCount: this.state.skipCount });
   }
   handleTableChange = (pagination: any) => {
@@ -45,7 +47,7 @@ class Role extends React.Component<any> {
   }
 
   delete(input: EntityDto) {
-    debugger;
+    ;
     this.props.RoleStores.delete(input);
   }
   public render() {

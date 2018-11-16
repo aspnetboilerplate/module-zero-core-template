@@ -56,7 +56,7 @@ class Team extends React.Component<any> {
   }
 
   delete(input: EntityDto) {
-    debugger;
+    ;
     this.props.UserStores.delete(input);
   }
 

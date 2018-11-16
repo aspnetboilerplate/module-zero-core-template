@@ -18,7 +18,8 @@ class App extends React.Component {
           <Route path="/tenants" component={Layout} />
           <Route path="/roles" component={Layout} />
           <Route path="/about" component={Layout} />
-          <Route path="/login" component={Login } />         
+          <Route path="/login" component={Login } /> 
+          <Route path="/" component={Login } />         
         </Switch>
      )
   }

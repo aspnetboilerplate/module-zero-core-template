@@ -56,11 +56,14 @@ this.roleForEdit=result;
   @action async get(entityDto:EntityDto) {
     var result = await roleService.get(entityDto);
     console.log(result);
+    ;
+    this.roles=result.data.result;
     
   }
 
   @action async getAll(pagedFilterAndSortedRequest:PagedFilterAndSortedRequest){
     
+    ;
     var result = await roleService.getAll(pagedFilterAndSortedRequest);
     console.log(result);
     this.roles=result;

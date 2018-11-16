@@ -52,9 +52,9 @@ class RoleService {
     return result.data;
   }
 
-  public async getAll(pagedFilterAndSortedRequest: PagedFilterAndSortedRequest): Promise<PagedResultDto<GetAllRoleOutput>> {
-    
-   
+  public async getAll(pagedFilterAndSortedRequest: PagedFilterAndSortedRequest): 
+  Promise<PagedResultDto<GetAllRoleOutput>> {
+  ;   
     var result = await http.get('services/app/Role/GetAll', { params: pagedFilterAndSortedRequest });
     console.log(result);
  
