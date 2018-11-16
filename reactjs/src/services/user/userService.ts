@@ -21,7 +21,7 @@ class UserService {
   }
 
   public async delete(entityDto: EntityDto) {
-    var result = await http.delete('services/app/User/Delete', { params: entityDto });
+    var result = await http.delete('services/app/User/Delete1', { params: entityDto });
     console.log(result);
     return result.data;
   }
@@ -44,10 +44,10 @@ class UserService {
     return result.data;
   }
 
-  public async GetAll(pagedFilterAndSortedRequest: PagedFilterAndSortedRequest): Promise<PagedResultDto<GetAllUserOutput>> {
+  public async getAll(pagedFilterAndSortedRequest: PagedFilterAndSortedRequest): Promise<PagedResultDto<GetAllUserOutput>> {
     var result = await http.get('services/app/User/GetAll', { params: pagedFilterAndSortedRequest });
     console.log(result);
-    return result.data;
+    return result.data.result;
   }
 }
 

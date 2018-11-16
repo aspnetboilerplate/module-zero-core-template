@@ -4,7 +4,7 @@ import './index.css';
 import { Route, Switch, withRouter } from 'react-router';
 import Users from '../Users';
 import Tenants from '../Tenants';
-import Rules from '../Rules';
+import Roles from '../Roles';
 import SubMenu from 'antd/lib/menu/SubMenu';
 import AbpLogo from 'src/images/abp-logo-long.png';
 import About from '../About';
@@ -28,58 +28,45 @@ class LayoutComponent extends React.Component<any> {
   };
 
   render() {
-    return (
-      <Layout style={{ minHeight: '100vh' }}>
-        <Sider trigger={null} className={'sidebar'} width={256} collapsible collapsed={this.state.collapsed} onCollapse={this.onCollapse}>
-          {this.state.collapsed ? (
-            <Col style={{ textAlign: 'center', marginTop: 15, marginBottom: 10 }}>
-              <Avatar shape="square" style={{ height: 27, width: 64 }} src={AbpLogo} />
-            </Col>
-          ) : (
-            <Col style={{ textAlign: 'center', marginTop: 15, marginBottom: 10 }}>
-              <Avatar shape="square" style={{ height: 54, width: 128 }} src={AbpLogo} />
-            </Col>
-          )}
+    const {path} = this.props.match;
 
-          <Menu theme="dark" mode="inline" defaultSelectedKeys={['1']}>
-            <Menu.Item onClick={() => this.props.history.push('/dashboard')} key="1">
+    return <Layout style={{ minHeight: '100vh' }}>
+        <Sider trigger={null} className={'sidebar'} width={256} collapsible collapsed={this.state.collapsed} onCollapse={this.onCollapse}>
+          {this.state.collapsed ? <Col style={{ textAlign: 'center', marginTop: 15, marginBottom: 10 }}>
+              <Avatar shape="square" style={{ height: 27, width: 64 }} src={AbpLogo} />
+            </Col> : <Col style={{ textAlign: 'center', marginTop: 15, marginBottom: 10 }}>
+              <Avatar shape="square" style={{ height: 54, width: 128 }} src={AbpLogo} />
+            </Col>}
+
+          <Menu theme="dark" mode="inline" defaultSelectedKeys={path}>
+            <Menu.Item key={'/dashboard'} onClick={() => this.props.history.push('/dashboard')}>
               <Icon type="home" />
               <span>Home</span>
             </Menu.Item>
-            <Menu.Item onClick={() => this.props.history.push('/tenants')} key="2">
+            <Menu.Item key={'/tenants'} onClick={() => this.props.history.push('/tenants')}>
               <Icon type="appstore" />
               <span>Tenants</span>
             </Menu.Item>
-            <Menu.Item onClick={() => this.props.history.push('/users')} key="3">
+            <Menu.Item key={'/users'} onClick={() => this.props.history.push('/users')}>
               <Icon type="user" />
               <span>Users</span>
             </Menu.Item>
-            <Menu.Item onClick={() => this.props.history.push('/rules')} key="4">
+            <Menu.Item key={'/roles'} onClick={() => this.props.history.push('/roles')}>
               <Icon type="tags" />
               <span>Rules</span>
             </Menu.Item>
-            <Menu.Item onClick={() => this.props.history.push('/about')} key="5">
+          <Menu.Item key={'/about'} onClick={() => this.props.history.push('/about')}>
               <Icon type="info-circle" />
               <span>About</span>
             </Menu.Item>
-            <SubMenu
-              key="6"
-              title={
-                <span>
+            <SubMenu key="6" title={<span>
                   <Icon type="bars" />
                   <span>Multi Level Menu</span>
-                </span>
-              }
-            >
-              <SubMenu
-                key="7"
-                title={
-                  <span>
+                </span>}>
+              <SubMenu key="7" title={<span>
                     <Icon type="bars" />
                     <span>ASP.NET Boilerplate</span>
-                  </span>
-                }
-              >
+                  </span>}>
                 <Menu.Item key="8">
                   <span>Home</span>
                 </Menu.Item>
@@ -93,15 +80,10 @@ class LayoutComponent extends React.Component<any> {
                   <span>Documents</span>
                 </Menu.Item>
               </SubMenu>
-              <SubMenu
-                key="12"
-                title={
-                  <span>
+              <SubMenu key="12" title={<span>
                     <Icon type="bars" />
                     <span>ASP.NET Zero</span>
-                  </span>
-                }
-              >
+                  </span>}>
                 <Menu.Item key="13">
                   <span>Home</span>
                 </Menu.Item>
@@ -130,7 +112,7 @@ class LayoutComponent extends React.Component<any> {
                 <Route path="/dashboard" component={Dashboard} />
                 <Route path="/users" component={Users} />
                 <Route path="/tenants" component={Tenants} />
-                <Route path="/rules" component={Rules} />
+                <Route path="/roles" component={Roles} />
                 <Route path="/about" component={About} />
               </Switch>
             </div>
@@ -139,8 +121,7 @@ class LayoutComponent extends React.Component<any> {
             Asp.Net Boilerplate - React ©2018 <a href="https://github.com/ryoldash/module-zero-core-template">Github Page</a>
           </Layout.Footer>
         </Layout>
-      </Layout>
-    );
+      </Layout>;
   }
 }
 

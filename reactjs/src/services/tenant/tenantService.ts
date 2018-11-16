@@ -1,11 +1,12 @@
 import CreateTenantInput from './dto/createTenantInput';
-import CreateTenantOutput from './dto/creteTenantOutput';
 import GetTenantOutput from './dto/getTenantOutput';
 import { GetAllTenantOutput } from './dto/getAllTenantOutput';
 import UpdateTenantOutput from './dto/updateTenantOutput';
 import { EntityDto } from 'src/services/dto/entityDto';
 import { PagedResultDto } from 'src/services/dto/pagedResultDto';
 import http from '../httpService';
+import UpdateTenantInput from './dto/updateTenantInput';
+import CreateTenantOutput from './dto/createTenantOutput';
 
 class TenantService {
   public async create(createTenantInput: CreateTenantInput): Promise<CreateTenantOutput> {
@@ -15,7 +16,7 @@ class TenantService {
   }
 
   public async delete(entityDto: EntityDto) {
-    var result = await http.delete('services/app/Tenant/Delete', { params: entityDto });
+    var result = await http.delete('services/app/Tenant/Delete1', { params: entityDto });
     console.log(result);
     return result.data;
   }
@@ -29,13 +30,13 @@ class TenantService {
   public async getAll(pagedFilterAndSortedRequest: PagedFilterAndSortedRequest): Promise<PagedResultDto<GetAllTenantOutput>> {
     var result = await http.get('services/app/Tenant/GetAll', { params: pagedFilterAndSortedRequest });
     console.log(result);
-    return result.data;
+    return result.data.result;
   }
 
   public async update(updateTenantInput: UpdateTenantInput): Promise<UpdateTenantOutput> {
     var result = await http.get('services/app/Tenant/Update', { params: updateTenantInput });
     console.log(result);
-    return result.data;
+    return result.data.result;
   }
 }
 

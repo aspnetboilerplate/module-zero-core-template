@@ -1,10 +1,7 @@
-export interface UpdateTenantOutputItem {
+export default interface UpdateTenantOutput {
   tenancyName: string;
   name: string;
   isActive: boolean;
   id: number;
 }
 
-export default interface UpdateTenantOutput {
-  result: UpdateTenantOutputItem;
-}
