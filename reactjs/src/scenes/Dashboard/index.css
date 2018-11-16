@@ -1,0 +1,39 @@
+.dashboardCard{
+    margin-top: 16px;
+}
+
+.ant-card.dasboardCard1{
+    background-color: #E91E63;
+    border-radius: 5px;        
+}
+
+.ant-card.dasboardCard2{
+    background-color: #00BCD4;
+	border-radius: 5px;
+}
+
+.ant-card.dasboardCard3{
+    background-color: #8BC34A;
+	border-radius: 5px;
+}
+.ant-card.dasboardCard4{
+    background-color: #FF9800;
+	border-radius: 5px;
+}
+
+
+.dashboardCardCounter{
+    font-size: 36px;
+     color: #fff; 
+}
+
+.dashboardCardName{
+    font-size: 18px;
+    color: #fff;
+    margin-bottom: -5;
+}
+
+.dashboardCardIcon{
+    font-size: 48px;
+    color: #fff; 
+}
