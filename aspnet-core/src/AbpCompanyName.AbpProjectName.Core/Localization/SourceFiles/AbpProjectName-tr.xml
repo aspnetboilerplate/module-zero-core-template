@@ -3,7 +3,7 @@
   <texts>
     <text name="HomePage" value="Ana Sayfa" />
     <text name="About" value="Hakkında" />
-    <text name="WellcomeMessage" value="AbpProjectName projesine hoşgeldiniz!" />
+    <text name="WelcomeMessage" value="AbpProjectName projesine hoşgeldiniz!" />
     <text name="FormIsNotValidMessage" value="Form geçerli değil. Lütfen kontrol edip hataları düzeltin." />
     <text name="TenantNameCanNotBeEmpty" value="Müşteri adı boş bırakılamaz." />
     <text name="InvalidUserNameOrPassword" value="Kullanıcı adı ya da şifre hatalı." />

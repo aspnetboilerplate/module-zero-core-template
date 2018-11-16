@@ -3,7 +3,7 @@
   <texts>
     <text name="HomePage" value="Pagrindinis" />
     <text name="About" value="Apie" />
-    <text name="WellcomeMessage" value="Sveiki atvykė į AbpProjectName!" />
+    <text name="WelcomeMessage" value="Sveiki atvykė į AbpProjectName!" />
 
     <text name="FormIsNotValidMessage" value="Forma blogai užpildyta. Peržiūrėkite ir pataisykite klaidas." />
     <text name="TenantNameCanNotBeEmpty" value="Savininko pavadinimas negali būti tuščias" />
