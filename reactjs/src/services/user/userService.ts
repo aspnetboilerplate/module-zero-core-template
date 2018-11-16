@@ -9,43 +9,43 @@ import { PagedResultDto } from 'src/services/dto/pagedResultDto';
 
 class UserService {
   public async create(createUserInput: CreateUserInput) {
-    var result = await http.post('services/app/User/Create', createUserInput);
+    var result = await http.post('api/services/app/User/Create', createUserInput);
     console.log(result);
     return result.data;
   }
 
   public async update(updateUserInput: UpdateUserInput) {
-    var result = await http.put('services/app/User/Update', updateUserInput);
+    var result = await http.put('api/services/app/User/Update', updateUserInput);
     console.log(result);
     return result.data;
   }
 
   public async delete(entityDto: EntityDto) {
-    var result = await http.delete('services/app/User/Delete1', { params: entityDto });
+    var result = await http.delete('api/services/app/User/Delete1', { params: entityDto });
     console.log(result);
     return result.data;
   }
 
   public async getRoles() {
-    var result = await http.get('services/app/User/GetRoles');
+    var result = await http.get('api/services/app/User/GetRoles');
     console.log(result);
     return result.data;
   }
 
   public async changeLanguage(changeLanguageInput: ChangeLanguagaInput) {
-    var result = await http.post('services/app/User/ChangeLanguage', changeLanguageInput);
+    var result = await http.post('api/services/app/User/ChangeLanguage', changeLanguageInput);
     console.log(result);
     return result.data;
   }
 
   public async get(entityDto: EntityDto): Promise<GetUserOutput> {
-    var result = await http.get('services/app/User/Get', { params: entityDto });
+    var result = await http.get('api/services/app/User/Get', { params: entityDto });
     console.log(result);
     return result.data;
   }
 
   public async getAll(pagedFilterAndSortedRequest: PagedFilterAndSortedRequest): Promise<PagedResultDto<GetAllUserOutput>> {
-    var result = await http.get('services/app/User/GetAll', { params: pagedFilterAndSortedRequest });
+    var result = await http.get('api/services/app/User/GetAll', { params: pagedFilterAndSortedRequest });
     console.log(result);
     return result.data.result;
   }

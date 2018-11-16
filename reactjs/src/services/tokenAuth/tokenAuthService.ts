@@ -4,7 +4,7 @@ import http from '../httpService';
 
 class TokenAuth {
   public async authenticate(authenticationInput: AuthenticationInput): Promise<AuthenticationOutput> {
-    var result = await http.post('TokenAuth/Authenticate', authenticationInput);
+    var result = await http.post('api/TokenAuth/Authenticate', authenticationInput);
     console.log(result);
     return result.data;
   }
