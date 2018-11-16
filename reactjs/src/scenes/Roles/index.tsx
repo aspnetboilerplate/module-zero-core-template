@@ -1,41 +1,40 @@
-import { Card, Col, Row, Modal, Button, Table, Tag, Dropdown, Menu } from 'antd';
+import { Card, Col, Row, Modal, Button, Table, Dropdown, Menu } from 'antd';
 import 'antd/dist/antd.css';
 import *as React from 'react';
 import { EntityDto } from 'src/services/dto/entityDto';
-import CreateOrUpdateTenant from "./components/createOrUpdateTenant"
-import { inject, observer } from 'mobx-react';
+import CreateOrUpdateRules from "./components/createOrUpdateRoles"
+import { observer, inject } from 'mobx-react';
 
 
-@inject("TenantStores")
+@inject('RoleStores')
 @observer
-class Tenant extends React.Component<any> {
+class Role extends React.Component<any> {
   constructor(props: any) {
     super(props);
-   
   }
- state = {
-  modalVisible: false,
-   maxResultCount: 10,
-   skipCount: 0
-};
-
+  state = {
+    modalVisible: false,
+    maxResultCount: 10,
+    skipCount:0
+  };
 
   async componentWillMount() {
+    ;
     await this.getAll();
   }
 
   async getAll() {
-    await this.props.TenantStores.getAll({ maxResultCount: this.state.maxResultCount, skipCount: this.state.skipCount });
+    ;
+    await this.props.RoleStores.getAll({ maxResultCount: this.state.maxResultCount, skipCount: this.state.skipCount });
   }
   handleTableChange = (pagination: any) => {
 
-    this.setState({ skipCount: (pagination.current-1) * this.state.maxResultCount! }, async () => await this.getAll());
+    this.setState({ skipCount: (pagination.current - 1) * this.state.maxResultCount! }, async () => await this.getAll());
   };
-
-   Modal = () => {
+  Modal = () => {
     this.setState({
       modalVisible: !this.state.modalVisible,
-       });
+    });
   };
 
   createOrUpdateModalOpen(entityDto: EntityDto) {
@@ -49,36 +48,45 @@ class Tenant extends React.Component<any> {
 
   delete(input: EntityDto) {
     ;
-    this.props.TenantStores.delete(input);
+    this.props.RoleStores.delete(input);
   }
-
   public render() {
-    const { tenants } = this.props.TenantStores;
-;
-    const columns = [{ title: 'Tenancy Name', dataIndex: 'tenancyName', key: 'tenancyName', width: 150, render: (text: string) => <div>
-            {text}
-          </div> }, { title: 'Name', dataIndex: 'name', key: 'name', width: 150, render: (text: string) => <div>
-            {text}
-          </div> }, { title: 'Active', dataIndex: 'isActive', key: 'isActive', width: 150, render: (text: boolean) => (text == true ? <Tag color="#2db7f5">
-              Yes
-            </Tag> : <Tag color="red">No</Tag>) }, { title: 'Actions', width: 150, render: (text: string, item: any) => <div>
-            <Dropdown trigger={['click']} overlay={<Menu>
+    const { roles } = this.props.RoleStores;
+    ;
+    const columns = [
+      { title: 'Role Name', dataIndex: 'name', key: 'name', width: 150, render: (text: string) => <div>{text}</div> },
+      { title: 'Display Name', dataIndex: 'displayName', key: 'displayName', width: 150, render: (text: string) => <div>{text}</div> },
+      {
+        title: 'Actions',
+        width: 150,
+        render: (text: string, item: any) => (
+          <div>
+            <Dropdown
+              trigger={['click']}
+              overlay={
+                <Menu>
                   <Menu.Item>
                     <a onClick={() => this.createOrUpdateModalOpen({ id: item.id })}>Düzenle</a>
                   </Menu.Item>
                   <Menu.Item>
                     <a onClick={() => this.delete({ id: item.id })}>Sil</a>
                   </Menu.Item>
-                </Menu>} placement="bottomLeft">
+                </Menu>
+              }
+              placement="bottomLeft"
+            >
               <Button type="primary" icon="setting">
                 işlemler
               </Button>
             </Dropdown>
-          </div> }];
+          </div>
+        ),
+      },
+    ];
     return <Card>
         <Row>
           <Col xs={{ span: 4, offset: 0 }} sm={{ span: 4, offset: 0 }} md={{ span: 4, offset: 0 }} lg={{ span: 2, offset: 0 }} xl={{ span: 2, offset: 0 }} xxl={{ span: 2, offset: 0 }}>
-            <h2>Tenants</h2>
+            <h2>Roles</h2>
           </Col>
           <Col xs={{ span: 14, offset: 0 }} sm={{ span: 15, offset: 0 }} md={{ span: 15, offset: 0 }} lg={{ span: 1, offset: 21 }} xl={{ span: 1, offset: 21 }} xxl={{ span: 1, offset: 21 }}>
             <Button type="primary" shape="circle" icon="plus" onClick={() => this.createOrUpdateModalOpen({ id: 0 })} />
@@ -86,22 +94,14 @@ class Tenant extends React.Component<any> {
         </Row>
         <Row style={{ marginTop: 20 }}>
           <Col xs={{ span: 24, offset: 0 }} sm={{ span: 24, offset: 0 }} md={{ span: 24, offset: 0 }} lg={{ span: 24, offset: 0 }} xl={{ span: 24, offset: 0 }} xxl={{ span: 24, offset: 0 }}>
-            <Table size={'default'}
-             bordered={true}
-              pagination={{ 
-                pageSize: this.state.maxResultCount, 
-                total: tenants == undefined ? 0 : tenants.totalCount,
-                defaultCurrent: 1 }} 
-              columns={columns} 
-              loading={tenants == undefined ? true : false} 
-            dataSource={tenants == undefined ? [] : tenants.items} onChange={this.handleTableChange}/>
+          <Table size={'default'} bordered={true} pagination={{ pageSize: this.state.maxResultCount, total: roles == undefined ? 0 : roles.totalCount, defaultCurrent: 1 }} columns={columns} loading={roles == undefined ? true : false} dataSource={roles == undefined ? [] : roles.items} onChange={this.handleTableChange} />
           </Col>
         </Row>
         <Modal visible={this.state.modalVisible} onCancel={() => this.setState({ modalVisible: false })} title={'User'} width={550}>
-          <CreateOrUpdateTenant />
+          <CreateOrUpdateRules />
         </Modal>
       </Card>;
   }
 }
 
-export default Tenant;
+export default Role;

@@ -1,24 +1,12 @@
-import { observable, action, computed } from "mobx";
-import http from "./../services/httpService";
+import { observable, action, computed } from 'mobx';
+import { AuthenticationOutput } from 'src/services/tokenAuth/dto/authenticationOutput';
+import tokenAuthService from 'src/services/tokenAuth/tokenAuthService';
 
-const tokenStorageName = "abp.AuthToken";
+const tokenStorageName = 'abp.AuthToken';
 
-export class AuthenticateResultModel {
-  accessToken: string;
-  encryptedAccessToken: string;
-  expireInSeconds: number;
-  shouldResetPassword: boolean;
-  passwordResetCode: string;
-  userId: number;
-  requiresTwoFactorVerification: boolean;
-  twoFactorAuthProviders: string[];
-  twoFactorRememberClientToken: string;
-  returnUrl: string;
-}
-
-class AuthenticationStores {
+class TokenAuthStores {
   @observable
-  public authenticateResult: AuthenticateResultModel | null = null;
+  public authenticateResult: AuthenticationOutput | null;
 
   constructor() {
     //Kullanıcı herhangi bir nedende dolayı sayfadan cıkışşsa
@@ -63,15 +51,15 @@ class AuthenticationStores {
   public async login(
     userNameOrEmailAddress: string,
     password: string,
-    tenancyName: string
+    tenancyName: string,
   ) {
-    var token = await http.post("/api/TokenAuth/Authenticate", {
-      userNameOrEmailAddress,
-      password,
-      tenancyName
+    var token = await tokenAuthService.authenticate({
+      userNameOrEmailAddress: userNameOrEmailAddress,
+      password: password,
+      rememberClient: false,
     });
     console.log(token);
-    // this.authenticateResult = token;
+
     this.setLocalStorage(JSON.stringify(token));
   }
   public getBearerToken(): any {
@@ -81,7 +69,7 @@ class AuthenticationStores {
     ) {
       this.logOut();
     } else {
-      return this.authenticateResult.accessToken;
+      return this.authenticateResult.result.accessToken;
     }
   }
   public getBearerTokenForNonServices(): any {
@@ -89,9 +77,9 @@ class AuthenticationStores {
       this.authenticateResult === null ||
       this.authenticateResult === undefined
     ) {
-      return "";
+      return;
     } else {
-      return this.authenticateResult.accessToken;
+      return this.authenticateResult.result.accessToken;
     }
   }
 
@@ -109,4 +97,4 @@ class AuthenticationStores {
   }
 }
 
-export default new AuthenticationStores();
+export default new TokenAuthStores();

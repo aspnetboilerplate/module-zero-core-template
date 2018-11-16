@@ -1,4 +1,4 @@
-import { Form, Col, Input, Icon, Row, Checkbox, Button } from "antd";
+import { Form, Col, Input, Icon, Row, Checkbox, Button, Card } from "antd";
 import * as React from "react";
 import { inject, observer } from "mobx-react";
 import { withRouter } from "react-router";
@@ -38,7 +38,7 @@ class Login extends React.Component<any, any> {
     e.preventDefault();
     this.props.form.validateFields((err: any, values: any) => {
       if (!err) {
-        debugger;
+        
         this.props.AuthenticationStores.Login(values).then(console.log("TRUE"));
       }
     });
@@ -47,7 +47,7 @@ class Login extends React.Component<any, any> {
   public render() {
     const { getFieldDecorator } = this.props.form;
     return (
-      <div>
+      <Card>
         <Row>
           <Col
             xs={{ span: 20, offset: 2 }}
@@ -146,7 +146,7 @@ class Login extends React.Component<any, any> {
             </Form>
           </Col>
         </Row>
-      </div>
+      </Card>
     );
   }
 }
