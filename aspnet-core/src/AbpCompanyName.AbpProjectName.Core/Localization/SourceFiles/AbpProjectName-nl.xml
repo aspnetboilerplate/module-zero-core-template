@@ -3,7 +3,7 @@
   <texts>
     <text name="HomePage" value="Startpagina" />
     <text name="About" value="Over" />
-    <text name="WellcomeMessage" value="Welkom bij AbpProjectName!" />
+    <text name="WelcomeMessage" value="Welkom bij AbpProjectName!" />
 
     <text name="FormIsNotValidMessage" value="Formulier is onjuist ingevuld. Controleer en herstel de fouten." />
     <text name="TenantNameCanNotBeEmpty" value="Naam van de huurder mag niet leeg zijn" />

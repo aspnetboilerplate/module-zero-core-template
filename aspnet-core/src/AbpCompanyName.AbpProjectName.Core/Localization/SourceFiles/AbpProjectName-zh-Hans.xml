@@ -3,7 +3,7 @@
   <texts>
     <text name="HomePage" value="主页" />
     <text name="About" value="关于我们" />
-    <text name="WellcomeMessage" value="欢迎使用 AbpProjectName!" />
+    <text name="WelcomeMessage" value="欢迎使用 AbpProjectName!" />
     
     <text name="FormIsNotValidMessage" value="部分输入信息不符合要求，请检查并改正.." />
     <text name="TenantNameCanNotBeEmpty" value="租户名不能为空" />

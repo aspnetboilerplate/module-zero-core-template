@@ -9,7 +9,7 @@
           </a>
         </div>
         <div class="desc">
-          {{L('WellcomeMessage')}}
+          {{L('WelcomeMessage')}}
         </div>
       </div>
       <div class="main">
