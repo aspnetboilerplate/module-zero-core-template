@@ -1,7 +1,7 @@
 import * as React from 'react';
 import AppConsts from 'src/lib/appconst';
 
-class AppBaseComponent extends React.Component {
+class AppComponentBase<P = {}, S = {}, SS = any> extends React.Component<P, S, SS> {
   localizationSourceName = AppConsts.localization.defaultLocalizationSourceName;
 
   L(key: string, sourceName?: string): string {
@@ -13,4 +13,4 @@ class AppBaseComponent extends React.Component {
   }
 }
 
-export default AppBaseComponent;
+export default AppComponentBase;
