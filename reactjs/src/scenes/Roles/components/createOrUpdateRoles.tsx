@@ -1,32 +1,35 @@
 import * as React from 'react';
 import { Form, Input, Checkbox, Row } from 'antd';
 import FormItem from 'antd/lib/form/FormItem';
+import { inject, observer } from 'mobx-react';
 
+
+@inject('RoleStores')
+@observer
 class CreateOrUpdateRoles extends React.Component<any> {
   constructor(props: any) {
     super(props);
-   
   }
-state = {
-  confirmDirty: false,
-}
-  compareToFirstPassword = (rule:any, value:any, callback:any) => {
-    const form = this.props.form;
-    if (value && value !== form.getFieldValue('password')) {
-      callback('Two passwords that you enter is inconsistent!');
-    } else {
-      callback();
-    }
+  
+  onChangeRoleName() {
+    this.props.RoleStores.roleForEdit.role.name = 'test';
+  }
+  onChangeDisplayName() {
+    debugger;
+    this.props.RoleStores.roleForEdit.role.displayName = 'test';
+  }
+  onChangeRoleDescription() {
+    this.props.RoleStores.roleForEdit.role.roleDescription = 'test';
   }
 
-  validateToNextPassword = (rule:any, value:any, callback:any) => {
-    const form = this.props.form;
-    if (value && this.state.confirmDirty) {
-      form.validateFields(['confirm'], { force: true });
-    }
-    callback();
-  }
+
+  state = {
+    confirmDirty: false,
+  };
+
   render() {
+    const { roleForEdit } = this.props.RoleStores;
+debugger;
     const formItemLayout = {
       labelCol: {
         xs: { span: 6 },
@@ -64,41 +67,26 @@ state = {
       },
     };
     const { getFieldDecorator } = this.props.form;
-    return (
-      
-      <Row>
+    return <Row>
         <FormItem label={'Role Name'} {...formItemLayout}>
           {getFieldDecorator('roleName', {
             rules: [{ required: true, message: 'Please input your name!' }],
-          })(
-          <Input   />)}
+            onchange: this.onChangeDisplayName,
+            valuePropName: 'value',
+            defaultValue: roleForEdit == undefined ? '' : roleForEdit.role.name,
+          })(<Input  />)}
         </FormItem>
         <FormItem label={'Display Name'} {...formItemLayout}>
-          {getFieldDecorator('displayName', {
-            rules: [{ required: true, message: 'Please input your surname!' }],
-          })(
-          <Input   />)}
+          {getFieldDecorator('displayName', { rules: [{ required: true, message: 'Please input your surname!' }] })(<Input />)}
         </FormItem>
         <FormItem label={'Role Description'} {...formItemLayout}>
-          {getFieldDecorator('roleDescription', {
-            rules: [{ required: true, message: 'Please input your username!' }],
-          })(
-          <Input    />)}
+          {getFieldDecorator('roleDescription', { rules: [{ required: true, message: 'Please input your username!' }] })(<Input />)}
         </FormItem>
-      
+
         <FormItem label={'isActive'} {...tailFormItemLayout}>
-         
-            {getFieldDecorator('password(repeat)', {
-              rules: [{ required: true, message: 'Please input your username!' }],
-            })(
-      
-          <Checkbox  >
-            Aktif
-          </Checkbox>)}
+          {getFieldDecorator('isActive', { rules: [{ required: true, message: 'Please input your username!' }] })(<Checkbox>Aktif</Checkbox>)}
         </FormItem>
-       
-      </Row>
-    )
+      </Row>;
   }
 }
 

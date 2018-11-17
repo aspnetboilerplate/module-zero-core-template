@@ -14,18 +14,18 @@ class Role extends React.Component<any> {
   }
   state = {
     modalVisible: false,
+    
     maxResultCount: 10,
     skipCount:0
   };
 
   async componentWillMount() {
-    ;
+    
     await this.getAll();
   }
 
   async getAll() {
-    ;
-    await this.props.RoleStores.getAll({ maxResultCount: this.state.maxResultCount, skipCount: this.state.skipCount });
+        await this.props.RoleStores.getAll({ maxResultCount: this.state.maxResultCount, skipCount: this.state.skipCount });
   }
   handleTableChange = (pagination: any) => {
 
@@ -38,16 +38,16 @@ class Role extends React.Component<any> {
   };
 
   createOrUpdateModalOpen(entityDto: EntityDto) {
-    // if (entityDto.id == 0) {
-    //   this.props.UserStores.onCreate();
-    // } else {
-    //   this.props.UserStores.getUserForEdit(entityDto);
-    // }
-    this.Modal();
+    if (entityDto.id == 0) {
+     
+    } else {
+      this.props.RoleStores.getRoleForEdit({ id: entityDto.id });
+    }
+  this.Modal();
   }
 
   delete(input: EntityDto) {
-    ;
+    
     this.props.RoleStores.delete(input);
   }
   public render() {
@@ -98,7 +98,7 @@ class Role extends React.Component<any> {
           </Col>
         </Row>
         <Modal visible={this.state.modalVisible} onCancel={() => this.setState({ modalVisible: false })} title={'User'} width={550}>
-          <CreateOrUpdateRules />
+        <CreateOrUpdateRules />
         </Modal>
       </Card>;
   }

@@ -49,7 +49,9 @@ console.log(result);
   }
 
   @action async getRoleForEdit(entityDto:EntityDto){
-var result=await roleService.getRoleForEdit(entityDto);
+
+    var result=await roleService.getRoleForEdit(entityDto);
+   
 this.roleForEdit=result;
   }
 

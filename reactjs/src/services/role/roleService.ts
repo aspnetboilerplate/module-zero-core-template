@@ -43,7 +43,7 @@ class RoleService {
   public async getRoleForEdit(entityDto: EntityDto): Promise<GetRoleForEditOutput> {
     var result = await http.get('services/app/Role/GetRoleForEdit', { params: entityDto });
     console.log(result);
-    return result.data;
+    return result.data.result;
   }
 
   public async get(entityDto: EntityDto) {
