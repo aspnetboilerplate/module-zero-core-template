@@ -37,9 +37,10 @@
     color: #fff; 
 }
 
-.dasboardChart{
+.dashboardBox{
     margin-top: 24px; 
     padding: 24px;
     background: #fff;
-    min-Height: 360px;
+    min-Height: 240px;
+    border-radius: 5px;   
 }

@@ -20,7 +20,7 @@ class LineChartExample extends React.Component<any>{
     
     render() {
         return (
-            <LineChart width={1200} height={300} data={data}
+            <LineChart width={1150} height={300} data={data}
                 margin={{ top: 5, right: 30, left: 20, bottom: 5 }}>
                 <XAxis dataKey="name" />
                 <YAxis />
