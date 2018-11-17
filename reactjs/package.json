@@ -17,7 +17,8 @@
     "react-app-rewired": "^1.6.2",
     "react-dom": "^16.6.0",
     "react-router-dom": "^4.3.1",
-    "react-scripts-ts": "3.1.0",
+    "react-scripts-ts": "^4.0.8",
+    "recharts": "^1.4.1",
     "ts-import-plugin": "^1.5.5"
   },
   "scripts": {
@@ -32,7 +33,14 @@
     "@types/react": "^16.4.18",
     "@types/react-dom": "^16.0.9",
     "@types/react-router-dom": "^4.3.1",
+    "@types/recharts": "^1.1.1",
     "copy-webpack-plugin": "^4.5.4",
     "typescript": "^3.1.3"
-  }
+  },
+  "browserslist": [
+    ">0.2%",
+    "not dead",
+    "not ie <= 11",
+    "not op_mini all"
+  ]
 }

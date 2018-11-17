@@ -1,18 +1,22 @@
 import * as React from 'react';
 import { Row, Col, Card, Icon } from 'antd';
+
 import "./index.css"
+import LineChartExample from './LineChartExample';
 
 export class Dashboard extends React.Component<any>{
     constructor(props: any) {
         super(props);
-        setInterval(() => this.setState({ loading: false }), 1000);
+        setInterval(() => this.setState({ cardLoading: false }), 1000);
+        setInterval(() => this.setState({ lineChartLoading: false }), 1500);
     }
     state = {
-        loading: true,
+        cardLoading: true,
+        lineChartLoading: true,
     }
 
     render() {
-        const { loading } = this.state;
+        const { cardLoading, lineChartLoading } = this.state;
         return (
             <React.Fragment>
 
@@ -26,7 +30,7 @@ export class Dashboard extends React.Component<any>{
                         xl={{ offset: 0, span: 6 }}
                         xxl={{ offset: 0, span: 6 }}
                     >
-                        <Card className={"dasboardCard-task"} bodyStyle={{ padding: 10 }} loading={loading} bordered={false}>
+                        <Card className={"dasboardCard-task"} bodyStyle={{ padding: 10 }} loading={cardLoading} bordered={false}>
                             <Col span={8}>
                                 <Icon className={"dashboardCardIcon"} type="check" />
                             </Col>
@@ -45,7 +49,7 @@ export class Dashboard extends React.Component<any>{
                         xl={{ offset: 0, span: 6 }}
                         xxl={{ offset: 0, span: 6 }}
                     >
-                        <Card className={"dasboardCard-ticket"} bodyStyle={{ padding: 10 }} loading={loading} bordered={false}>
+                        <Card className={"dasboardCard-ticket"} bodyStyle={{ padding: 10 }} loading={cardLoading} bordered={false}>
                             <Col span={8}>
                                 <Icon className={"dashboardCardIcon"} type="question" />
                             </Col>
@@ -64,7 +68,7 @@ export class Dashboard extends React.Component<any>{
                         xl={{ offset: 0, span: 6 }}
                         xxl={{ offset: 0, span: 6 }}
                     >
-                        <Card className={"dasboardCard-comment"} bodyStyle={{ padding: 10 }} loading={loading} bordered={false}>
+                        <Card className={"dasboardCard-comment"} bodyStyle={{ padding: 10 }} loading={cardLoading} bordered={false}>
                             <Col span={8}>
                                 <Icon className={"dashboardCardIcon"} type="message" />
                             </Col>
@@ -83,7 +87,7 @@ export class Dashboard extends React.Component<any>{
                         xl={{ offset: 0, span: 6 }}
                         xxl={{ offset: 0, span: 6 }}
                     >
-                        <Card className={"dasboardCard-visitor"} bodyStyle={{ padding: 10 }} loading={loading} bordered={false}>
+                        <Card className={"dasboardCard-visitor"} bodyStyle={{ padding: 10 }} loading={cardLoading} bordered={false}>
                             <Col span={8}>
                                 <Icon className={"dashboardCardIcon"} type="user-add" />
                             </Col>
@@ -96,6 +100,9 @@ export class Dashboard extends React.Component<any>{
                 </Row>
                 <Row>
                     <Col className={"dasboardChart"}>
+                    <Card loading={lineChartLoading} bordered={false}>
+                        <LineChartExample />
+                    </Card >
                     </Col>
                 </Row>
 
