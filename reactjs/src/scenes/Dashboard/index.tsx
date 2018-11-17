@@ -26,7 +26,7 @@ export class Dashboard extends React.Component<any>{
                         xl={{ offset: 0, span: 6 }}
                         xxl={{ offset: 0, span: 6 }}
                     >
-                        <Card className={"dasboardCard1"} bodyStyle={{ padding: 10 }} loading={loading} bordered={false}>
+                        <Card className={"dasboardCard-task"} bodyStyle={{ padding: 10 }} loading={loading} bordered={false}>
                             <Col span={8}>
                                 <Icon className={"dashboardCardIcon"} type="check" />
                             </Col>
@@ -45,7 +45,7 @@ export class Dashboard extends React.Component<any>{
                         xl={{ offset: 0, span: 6 }}
                         xxl={{ offset: 0, span: 6 }}
                     >
-                        <Card className={"dasboardCard2"} bodyStyle={{ padding: 10 }} loading={loading} bordered={false}>
+                        <Card className={"dasboardCard-ticket"} bodyStyle={{ padding: 10 }} loading={loading} bordered={false}>
                             <Col span={8}>
                                 <Icon className={"dashboardCardIcon"} type="question" />
                             </Col>
@@ -64,7 +64,7 @@ export class Dashboard extends React.Component<any>{
                         xl={{ offset: 0, span: 6 }}
                         xxl={{ offset: 0, span: 6 }}
                     >
-                        <Card className={"dasboardCard3"} bodyStyle={{ padding: 10 }} loading={loading} bordered={false}>
+                        <Card className={"dasboardCard-comment"} bodyStyle={{ padding: 10 }} loading={loading} bordered={false}>
                             <Col span={8}>
                                 <Icon className={"dashboardCardIcon"} type="message" />
                             </Col>
@@ -83,7 +83,7 @@ export class Dashboard extends React.Component<any>{
                         xl={{ offset: 0, span: 6 }}
                         xxl={{ offset: 0, span: 6 }}
                     >
-                        <Card className={"dasboardCard4"} bodyStyle={{ padding: 10 }} loading={loading} bordered={false}>
+                        <Card className={"dasboardCard-visitor"} bodyStyle={{ padding: 10 }} loading={loading} bordered={false}>
                             <Col span={8}>
                                 <Icon className={"dashboardCardIcon"} type="user-add" />
                             </Col>
