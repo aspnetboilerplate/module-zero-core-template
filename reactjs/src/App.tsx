@@ -2,10 +2,22 @@ import * as React from 'react';
 import './App.css';
 import { withRouter, Switch, Route } from 'react-router-dom';
 import Layout from './scenes/Layout';
-
 import Login from './scenes/Login';
-class App extends React.Component {
-  componentDidMount() {}
+import { inject } from 'mobx-react';
+import SignalRAspNetCoreHelper from 'src/lib/signalRAspNetCoreHelper';
+
+@inject('SessionStore')
+class App extends React.Component<any> {
+  async componentDidMount() {
+    await this.props.SessionStore.getCurrentLoginInformations();
+
+    if (!!this.props.SessionStore.currentLogin.user && this.props.SessionStore.currentLogin.application.features['SignalR']) {
+      if (this.props.SessionStore.currentLogin.application.features['SignalR.AspNetCore']) {
+        SignalRAspNetCoreHelper.initSignalR();
+      }
+    }
+  }
+
   public render() {
     return (
       <Switch>

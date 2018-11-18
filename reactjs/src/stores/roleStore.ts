@@ -9,65 +9,68 @@ import { UpdateRoleInput } from 'src/services/role/dto/updateRoleInput';
 import { GetAllPermissionsOutput } from 'src/services/role/dto/getAllPermissionsOutput';
 
 class RoleStores {
-  
   @observable
   roles: PagedResultDto<GetAllRoleOutput>;
   @observable
-  roleForEdit:GetRoleForEditOutput;
+  roleForEdit: GetRoleForEditOutput;
   @observable
-  allPermissions: GetAllPermissionsOutput
+  allPermissions: GetAllPermissionsOutput;
 
-  @action async create(createRoleInput:CreateRoleInput){
-var result=await roleService.create(createRoleInput);
-console.log(result);
+  @action
+  async create(createRoleInput: CreateRoleInput) {
+    var result = await roleService.create(createRoleInput);
+    console.log(result);
   }
 
-  @action async getRolesAsync(getRoleAsyncInput: GetRoleAsyncInput) {
+  @action
+  async getRolesAsync(getRoleAsyncInput: GetRoleAsyncInput) {
     var result = await roleService.getRolesAsync(getRoleAsyncInput);
     console.log(result);
   }
 
-  @action async update(updateRoleInput: UpdateRoleInput) {
+  @action
+  async update(updateRoleInput: UpdateRoleInput) {
     var result = await roleService.update(updateRoleInput);
     console.log(result);
-    this.roles.items.filter((x: GetAllRoleOutput) => x.id == updateRoleInput.id).map((x: GetAllRoleOutput) => {
-      return x = updateRoleInput;
-
-    })
+    this.roles.items
+      .filter((x: GetAllRoleOutput) => x.id == updateRoleInput.id)
+      .map((x: GetAllRoleOutput) => {
+        return (x = updateRoleInput);
+      });
   }
- 
-  @action async delete(entityDto: EntityDto) {
+
+  @action
+  async delete(entityDto: EntityDto) {
     // var result = await roleService.delete(entityDto);
     // console.log(result);
-    this.roles.items=this.roles.items.filter((x: GetAllRoleOutput) => x.id != entityDto.id);
+    this.roles.items = this.roles.items.filter((x: GetAllRoleOutput) => x.id != entityDto.id);
   }
 
-  @action async getAllPermissions() {
+  @action
+  async getAllPermissions() {
     var result = await roleService.getAllPermissions();
     console.log(result);
-    this.allPermissions=result;
+    this.allPermissions = result;
   }
 
-  @action async getRoleForEdit(entityDto:EntityDto){
-var result=await roleService.getRoleForEdit(entityDto);
-this.roleForEdit=result;
+  @action
+  async getRoleForEdit(entityDto: EntityDto) {
+    var result = await roleService.getRoleForEdit(entityDto);
+    this.roleForEdit = result;
   }
 
-  @action async get(entityDto:EntityDto) {
+  @action
+  async get(entityDto: EntityDto) {
     var result = await roleService.get(entityDto);
     console.log(result);
-    ;
-    this.roles=result.data.result;
-    
+    this.roles = result.data.result;
   }
 
-  @action async getAll(pagedFilterAndSortedRequest:PagedFilterAndSortedRequest){
-    
-    ;
+  @action
+  async getAll(pagedFilterAndSortedRequest: PagedFilterAndSortedRequest) {
     var result = await roleService.getAll(pagedFilterAndSortedRequest);
     console.log(result);
-    this.roles=result;
-   
+    this.roles = result;
   }
 }
 

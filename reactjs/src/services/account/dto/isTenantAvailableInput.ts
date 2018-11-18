@@ -1,3 +1,3 @@
 export interface IsTenantAvaibleInput {
-    tenancyName: string;
+  tenancyName: string;
 }

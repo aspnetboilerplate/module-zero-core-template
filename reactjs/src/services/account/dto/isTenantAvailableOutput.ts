@@ -1,4 +1,4 @@
 export interface IsTenantAvaibleOutput {
-    state: number;
-    tenantId: number;
+  state: number;
+  tenantId: number;
 }

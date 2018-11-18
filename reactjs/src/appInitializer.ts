@@ -1,9 +1,11 @@
 import * as moment from 'moment';
-import { initialize } from 'src/services/abpUserConfigurationService';
+import abpUserConfigurationService from 'src/services/abpUserConfigurationService';
 import Utils from 'src/utils/utils';
 
 export default function init() {
-  initialize().then(data => {
+  setLocalization();
+
+  abpUserConfigurationService.getAll().then(data => {
     Utils.extend(true, abp, data.data.result);
     abp.clock.provider = getCurrentClockProvider(data.data.result.clock.provider);
 
@@ -13,6 +15,13 @@ export default function init() {
       moment.tz.setDefault(abp.timing.timeZoneInfo.iana.timeZoneId);
     }
   });
+}
+
+function setLocalization() {
+  if (!abp.utils.getCookieValue('Abp.Localization.CultureName')) {
+    let language = navigator.language;
+    abp.utils.setCookieValue('Abp.Localization.CultureName', language, new Date(new Date().getTime() + 5 * 365 * 86400000), abp.appPath);
+  }
 }
 
 function getCurrentClockProvider(currentProviderName: string): abp.timing.IClockProvider {

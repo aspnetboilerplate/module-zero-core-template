@@ -1,13 +1,13 @@
-import { AuthenticationInput } from './dto/authenticationInput';
-import { AuthenticationOutput } from './dto/authenticationOutput';
+import { AuthenticationModel } from './dto/authenticationModel';
+import { AuthenticationResultModel } from './dto/authenticationResultModel';
 import http from '../httpService';
 
-class TokenAuth {
-  public async authenticate(authenticationInput: AuthenticationInput): Promise<AuthenticationOutput> {
+class TokenAuthService {
+  public async authenticate(authenticationInput: AuthenticationModel): Promise<AuthenticationResultModel> {
     var result = await http.post('api/TokenAuth/Authenticate', authenticationInput);
     console.log(result);
-    return result.data;
+    return result.data.result;
   }
 }
 
-export default new TokenAuth();
+export default new TokenAuthService();

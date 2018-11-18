@@ -1,12 +1,12 @@
 import { observable, action, computed } from 'mobx';
-import { AuthenticationOutput } from 'src/services/tokenAuth/dto/authenticationOutput';
 import tokenAuthService from 'src/services/tokenAuth/tokenAuthService';
+import { AuthenticationResultModel } from './../services/tokenAuth/dto/authenticationResultModel';
 
 const tokenStorageName = 'abp.AuthToken';
 
 class TokenAuthStores {
   @observable
-  public authenticateResult: AuthenticationOutput | null;
+  public authenticateResult: AuthenticationResultModel | null;
 
   constructor() {
     //Kullanıcı herhangi bir nedende dolayı sayfadan cıkışşsa
@@ -15,17 +15,12 @@ class TokenAuthStores {
   }
   @action
   getToken(): any {
-    if (typeof this.authenticateResult !== undefined)
-      return this.authenticateResult;
+    if (typeof this.authenticateResult !== undefined) return this.authenticateResult;
   }
   //false ise login olunmamıştır
   @computed
   get isAuthenticated(): boolean {
-    if (
-      this.authenticateResult === undefined ||
-      this.authenticateResult === null
-    )
-      return false;
+    if (this.authenticateResult === undefined || this.authenticateResult === null) return false;
     return true;
   }
   @action
@@ -48,11 +43,7 @@ class TokenAuthStores {
   }
 
   @action
-  public async login(
-    userNameOrEmailAddress: string,
-    password: string,
-    tenancyName: string,
-  ) {
+  public async login(userNameOrEmailAddress: string, password: string, tenancyName: string) {
     var token = await tokenAuthService.authenticate({
       userNameOrEmailAddress: userNameOrEmailAddress,
       password: password,
@@ -63,23 +54,17 @@ class TokenAuthStores {
     this.setLocalStorage(JSON.stringify(token));
   }
   public getBearerToken(): any {
-    if (
-      this.authenticateResult === null ||
-      this.authenticateResult === undefined
-    ) {
+    if (this.authenticateResult === null || this.authenticateResult === undefined) {
       this.logOut();
     } else {
-      return this.authenticateResult.result.accessToken;
+      return this.authenticateResult.accessToken;
     }
   }
   public getBearerTokenForNonServices(): any {
-    if (
-      this.authenticateResult === null ||
-      this.authenticateResult === undefined
-    ) {
+    if (this.authenticateResult === null || this.authenticateResult === undefined) {
       return;
     } else {
-      return this.authenticateResult.result.accessToken;
+      return this.authenticateResult.accessToken;
     }
   }
 

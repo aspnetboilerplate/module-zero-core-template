@@ -6,43 +6,46 @@ import CreateTenantInput from 'src/services/tenant/dto/createTenantInput';
 import UpdateTenantInput from 'src/services/tenant/dto/updateTenantInput';
 import { EntityDto } from 'src/services/dto/entityDto';
 
-
 class TenantStores {
-    @observable
-    tenants: PagedResultDto<GetAllTenantOutput>;
-  
-    @action async create(createTenantInput: CreateTenantInput) {
-        var result = await tenantService.create(createTenantInput);
-        console.log(result);
-       
-    }
+  @observable
+  tenants: PagedResultDto<GetAllTenantOutput>;
 
-    @action async update(updateTenantInput: UpdateTenantInput) {
-        var result = await tenantService.update(updateTenantInput);
-        console.log(result);
-        this.tenants.items.filter((x: GetAllTenantOutput) => x.id == updateTenantInput.id).map((x: GetAllTenantOutput) => {
-            return x = result;
-        })
-    }
+  @action
+  async create(createTenantInput: CreateTenantInput) {
+    var result = await tenantService.create(createTenantInput);
+    console.log(result);
+  }
 
-    @action async delete(entityDto: EntityDto) {
-        // var result = await tenantService.delete(entityDto);
-        // console.log(result);
-        this.tenants.items=this.tenants.items.filter((x: GetAllTenantOutput) => x.id != entityDto.id);
-    }
+  @action
+  async update(updateTenantInput: UpdateTenantInput) {
+    var result = await tenantService.update(updateTenantInput);
+    console.log(result);
+    this.tenants.items
+      .filter((x: GetAllTenantOutput) => x.id == updateTenantInput.id)
+      .map((x: GetAllTenantOutput) => {
+        return (x = result);
+      });
+  }
 
-    @action async get(entityDto: EntityDto) {
-        var result = await tenantService.get(entityDto);
-        console.log(result);
+  @action
+  async delete(entityDto: EntityDto) {
+    // var result = await tenantService.delete(entityDto);
+    // console.log(result);
+    this.tenants.items = this.tenants.items.filter((x: GetAllTenantOutput) => x.id != entityDto.id);
+  }
 
-    }
+  @action
+  async get(entityDto: EntityDto) {
+    var result = await tenantService.get(entityDto);
+    console.log(result);
+  }
 
-    @action async getAll(pagedFilterAndSortedRequest: PagedFilterAndSortedRequest) {
-        var result = await tenantService.getAll(pagedFilterAndSortedRequest);
-        console.log(result);
-        this.tenants = result;
-       
-    }
+  @action
+  async getAll(pagedFilterAndSortedRequest: PagedFilterAndSortedRequest) {
+    var result = await tenantService.getAll(pagedFilterAndSortedRequest);
+    console.log(result);
+    this.tenants = result;
+  }
 }
 
 export default new TenantStores();
