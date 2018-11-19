@@ -1,7 +1,6 @@
 import * as React from 'react';
 import { LineChart, Line, XAxis, YAxis, CartesianGrid, Tooltip, Legend } from 'recharts';
 
-// const { LineChart, Line, XAxis, YAxis, CartesianGrid, Tooltip, Legend } = Recharts;
 const data = [
     { name: 'page 1', visit: 4000, session: 2400, amt: 2400 },
     { name: 'page 2', visit: 3000, session: 1398, amt: 2210 },

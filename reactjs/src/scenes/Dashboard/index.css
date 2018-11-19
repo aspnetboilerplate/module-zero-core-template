@@ -44,3 +44,21 @@
     min-Height: 240px;
     border-radius: 5px;   
 }
+
+.dashboardCardTinyLine{
+    margin-top: 16px;
+    background-color: #E91E63; 
+	border-radius: 5px;
+}
+
+.latestSocialTrendsList {
+    margin-top: 16px;
+    background: #00BCD4;
+	border-radius: 5px;
+}
+
+.answeredTickeds {    
+    margin-top: 16px;
+    background: #009688;
+	border-radius: 5px;
+}
