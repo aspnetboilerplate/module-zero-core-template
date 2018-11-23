@@ -8,13 +8,10 @@ import { GetRoleForEditOutput } from 'src/services/role/dto/getRoleForEditOutput
 import { UpdateRoleInput } from 'src/services/role/dto/updateRoleInput';
 import { GetAllPermissionsOutput } from 'src/services/role/dto/getAllPermissionsOutput';
 
-class RoleStores {
-  @observable
-  roles: PagedResultDto<GetAllRoleOutput>;
-  @observable
-  roleForEdit: GetRoleForEditOutput;
-  @observable
-  allPermissions: GetAllPermissionsOutput;
+class RoleStore {
+  @observable roles: PagedResultDto<GetAllRoleOutput>;
+  @observable roleForEdit: GetRoleForEditOutput;
+  @observable allPermissions: GetAllPermissionsOutput;
 
   @action
   async create(createRoleInput: CreateRoleInput) {
@@ -74,4 +71,4 @@ class RoleStores {
   }
 }
 
-export default new RoleStores();
+export default RoleStore;

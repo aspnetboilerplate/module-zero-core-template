@@ -6,9 +6,8 @@ import CreateTenantInput from 'src/services/tenant/dto/createTenantInput';
 import UpdateTenantInput from 'src/services/tenant/dto/updateTenantInput';
 import { EntityDto } from 'src/services/dto/entityDto';
 
-class TenantStores {
-  @observable
-  tenants: PagedResultDto<GetAllTenantOutput>;
+class TenantStore {
+  @observable tenants: PagedResultDto<GetAllTenantOutput>;
 
   @action
   async create(createTenantInput: CreateTenantInput) {
@@ -48,4 +47,4 @@ class TenantStores {
   }
 }
 
-export default new TenantStores();
+export default TenantStore;

@@ -6,6 +6,7 @@
     "@aspnet/signalr": "^1.0.0",
     "@types/moment": "^2.13.0",
     "@types/moment-timezone": "^0.5.9",
+    "@types/recharts": "^1.1.1",
     "abp-web-resources": "^3.8.2",
     "antd": "^3.10.3",
     "axios": "^0.18.0",

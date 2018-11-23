@@ -1,41 +1,45 @@
 import { Card, Col, Row, Modal, Button, Table, Tag, Dropdown, Menu } from 'antd';
 import 'antd/dist/antd.css';
-import *as React from 'react';
+import * as React from 'react';
 import CreateOrUpdateUserContainer from './components/createOrUpdateUserContainer';
 import { EntityDto } from 'src/services/dto/entityDto';
 import { observer, inject } from 'mobx-react';
+import UserStore from 'src/stores/userStore';
+import Stores from './../../stores/storeIdentifier';
 
-@inject("UserStores")
+export interface IUserProps {
+  userStore: UserStore;
+}
+
+@inject(Stores.UserStore)
 @observer
-class Team extends React.Component<any> {
-  constructor(props: any) {
+class Team extends React.Component<IUserProps> {
+  constructor(props: IUserProps) {
     super(props);
-   
   }
- state = {
-  modalVisible: false,
-  maxResultCount: 10,
-  skipCount: 0,
-  modalComponents: "",
-
-};
-  async componentWillMount(){
-  await this.getAll();
-  } 
- async componentWillUnmount() {
+  state = {
+    modalVisible: false,
+    maxResultCount: 10,
+    skipCount: 0,
+    modalComponents: '',
+  };
+  async componentWillMount() {
+    await this.getAll();
+  }
+  async componentWillUnmount() {
     // allows us to ignore an inflight request in scenario 4
     await this.getAll();
   }
 
-  async getAll(){
-    await this.props.UserStores.getAll({maxResultCount:this.state.maxResultCount,skipCount:this.state.skipCount});
+  async getAll() {
+    await this.props.userStore.getAll({ maxResultCount: this.state.maxResultCount, skipCount: this.state.skipCount });
   }
   handleTableChange = (pagination: any) => {
     this.setState({ skipCount: (pagination.current - 1) * this.state.maxResultCount! }, async () => await this.getAll());
   };
 
   setPermissions() {
-    this.props.UserStores.updateUserPermissions();
+    // this.props.userStore.updateUserPermissions(); // TODO:
     this.Modal();
   }
 
@@ -56,23 +60,20 @@ class Team extends React.Component<any> {
   }
 
   delete(input: EntityDto) {
-    ;
-    this.props.UserStores.delete(input);
+    this.props.userStore.delete(input);
   }
 
   async createOrUpdateUser() {
-    await this.props.UserStores.createOrUpdateUser();
-    this.Modal(<CreateOrUpdateUserContainer />);
-
-    this.props.UserStores.users = undefined;
-    await this.props.UserStores.getUsers(this.state);
+    // TODO:
+    // await this.props.userStore.createOrUpdateUser();
+    // this.Modal(<CreateOrUpdateUserContainer />);
+    // this.props.userStore.users = undefined;
+    // await this.props.userStore.getUsers(this.state);
   }
- 
-  public render() {
 
-    const { users } = this.props.UserStores;
+  public render() {
+    const { users } = this.props.userStore;
     const columns = [
-     
       {
         title: 'User Name',
         dataIndex: 'userName',
@@ -99,8 +100,7 @@ class Team extends React.Component<any> {
         dataIndex: 'isActive',
         key: 'isActive',
         width: 150,
-        render: (text: boolean) =>
-          text == true ? <Tag color="#2db7f5">Yes</Tag> : <Tag color="red">No</Tag>,
+        render: (text: boolean) => (text == true ? <Tag color="#2db7f5">Yes</Tag> : <Tag color="red">No</Tag>),
       },
       {
         title: 'Actions',
@@ -127,7 +127,7 @@ class Team extends React.Component<any> {
             </Dropdown>
           </div>
         ),
-      }
+      },
     ];
     return (
       <Card>
@@ -139,8 +139,9 @@ class Team extends React.Component<any> {
             lg={{ span: 2, offset: 0 }}
             xl={{ span: 2, offset: 0 }}
             xxl={{ span: 2, offset: 0 }}
-          > <h2>Users</h2>
-            
+          >
+            {' '}
+            <h2>Users</h2>
           </Col>
           <Col
             xs={{ span: 14, offset: 0 }}
@@ -169,22 +170,15 @@ class Team extends React.Component<any> {
               pagination={{
                 pageSize: 10,
                 total: users == undefined ? 0 : users.totalCount,
-                defaultCurrent: 1
+                defaultCurrent: 1,
               }}
               loading={users == undefined ? true : false}
-              dataSource={users == undefined ? [] : users.items} 
-              onChange={this.handleTableChange}/>
-              
-            
+              dataSource={users == undefined ? [] : users.items}
+              onChange={this.handleTableChange}
+            />
           </Col>
         </Row>
-        <Modal
-          visible={this.state.modalVisible}
-          onCancel={() => this.setState({ modalVisible: false })}
-          title={'User'}
-          width={550}
-        
-        >
+        <Modal visible={this.state.modalVisible} onCancel={() => this.setState({ modalVisible: false })} title={'User'} width={550}>
           {this.state.modalComponents}
         </Modal>
       </Card>

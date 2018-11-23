@@ -3,8 +3,7 @@ import { action, observable } from 'mobx';
 import { GetCurrentLoginInformations } from 'src/services/session/dto/getCurrentLoginInformations';
 
 class SessionStore {
-  @observable
-  currentLogin: GetCurrentLoginInformations = new GetCurrentLoginInformations();
+  @observable currentLogin: GetCurrentLoginInformations = new GetCurrentLoginInformations();
 
   @action
   async getCurrentLoginInformations() {
@@ -13,4 +12,4 @@ class SessionStore {
   }
 }
 
-export default new SessionStore();
+export default SessionStore;

@@ -4,6 +4,12 @@ import AppConsts from './../lib/appconst';
 import LoginModel from 'src/models/Login/loginModel';
 
 class AuthenticationStore {
+  get isAuthenticated(): boolean {
+    if (!abp.session.userId) return false;
+
+    return true;
+  }
+
   @action
   public async login(model: LoginModel) {
     let result = await tokenAuthService.authenticate({
@@ -17,4 +23,4 @@ class AuthenticationStore {
     abp.utils.setCookieValue(AppConsts.authorization.encrptedAuthTokenName, result.encryptedAccessToken, tokenExpireDate, abp.appPath);
   }
 }
-export default new AuthenticationStore();
+export default AuthenticationStore;

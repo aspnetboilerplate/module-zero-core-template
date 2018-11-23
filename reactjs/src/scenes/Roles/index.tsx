@@ -5,11 +5,23 @@ import { EntityDto } from 'src/services/dto/entityDto';
 import CreateOrUpdateRules from './components/createOrUpdateRoles';
 import { observer, inject } from 'mobx-react';
 import AppComponentBase from 'src/components/AppComponentBase';
+import RoleStore from 'src/stores/roleStore';
+import Stores from './../../stores/storeIdentifier';
 
-@inject('RoleStores')
+export interface IRoleProps {
+  roleStore: RoleStore;
+}
+
+export interface IRoleState {
+  modalVisible: boolean;
+  maxResultCount: number;
+  skipCount: number;
+}
+
+@inject(Stores.RoleStore)
 @observer
-class Role extends AppComponentBase<any> {
-  constructor(props: any) {
+class Role extends AppComponentBase<IRoleProps, IRoleState> {
+  constructor(props: IRoleProps) {
     super(props);
   }
 
@@ -24,7 +36,7 @@ class Role extends AppComponentBase<any> {
   }
 
   async getAll() {
-    await this.props.RoleStores.getAll({ maxResultCount: this.state.maxResultCount, skipCount: this.state.skipCount });
+    await this.props.roleStore.getAll({ maxResultCount: this.state.maxResultCount, skipCount: this.state.skipCount });
   }
 
   handleTableChange = (pagination: any) => {
@@ -47,11 +59,11 @@ class Role extends AppComponentBase<any> {
   }
 
   delete(input: EntityDto) {
-    this.props.RoleStores.delete(input);
+    this.props.roleStore.delete(input);
   }
 
   public render() {
-    const { roles } = this.props.RoleStores;
+    const { roles } = this.props.roleStore;
     const columns = [
       { title: 'Role Name', dataIndex: 'name', key: 'name', width: 150, render: (text: string) => <div>{text}</div> },
       { title: 'Display Name', dataIndex: 'displayName', key: 'displayName', width: 150, render: (text: string) => <div>{text}</div> },

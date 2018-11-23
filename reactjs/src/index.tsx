@@ -4,23 +4,13 @@ import './index.css';
 import appInitializer from './appInitializer';
 import registerServiceWorker from './registerServiceWorker';
 import App from './App';
-import AuthenticationStores from './stores/authenticationStore';
 import { Provider } from 'mobx-react';
 import { HashRouter } from 'react-router-dom';
-import RoleStores from './stores/roleStore';
-import TenantStores from './stores/tenantStore';
-import UserStores from './stores/userStore';
-import SessionStore from './stores/sessionStore';
+import initializeStores from './stores/storeInitializer';
 
 appInitializer();
 
-const stores = {
-  AuthenticationStores,
-  RoleStores,
-  TenantStores,
-  UserStores,
-  SessionStore,
-};
+const stores = initializeStores();
 
 ReactDOM.render(
   <Provider {...stores}>

@@ -5,14 +5,20 @@ import Layout from './scenes/Layout';
 import Login from './scenes/Login';
 import { inject } from 'mobx-react';
 import SignalRAspNetCoreHelper from 'src/lib/signalRAspNetCoreHelper';
+import SessionStore from './stores/sessionStore';
+import Stores from './stores/storeIdentifier';
 
-@inject('SessionStore')
-class App extends React.Component<any> {
+export interface IAppProps {
+  sessionStore: SessionStore;
+}
+
+@inject(Stores.SessionStore)
+class App extends React.Component<IAppProps> {
   async componentDidMount() {
-    await this.props.SessionStore.getCurrentLoginInformations();
+    await this.props.sessionStore.getCurrentLoginInformations();
 
-    if (!!this.props.SessionStore.currentLogin.user && this.props.SessionStore.currentLogin.application.features['SignalR']) {
-      if (this.props.SessionStore.currentLogin.application.features['SignalR.AspNetCore']) {
+    if (!!this.props.sessionStore.currentLogin.user && this.props.sessionStore.currentLogin.application.features['SignalR']) {
+      if (this.props.sessionStore.currentLogin.application.features['SignalR.AspNetCore']) {
         SignalRAspNetCoreHelper.initSignalR();
       }
     }

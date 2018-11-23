@@ -6,9 +6,8 @@ import { GetUserOutput } from 'src/services/user/dto/getUserOutput';
 import { UpdateUserInput } from 'src/services/user/dto/updateUserInput';
 import { EntityDto } from 'src/services/dto/entityDto';
 
-class UserStores {
-  @observable
-  users: PagedResultDto<GetUserOutput>;
+class UserStore {
+  @observable users: PagedResultDto<GetUserOutput>;
 
   @action
   async create(createUserInput: CreateUserInput) {
@@ -50,4 +49,4 @@ class UserStores {
   }
 }
 
-export default new UserStores();
+export default UserStore;

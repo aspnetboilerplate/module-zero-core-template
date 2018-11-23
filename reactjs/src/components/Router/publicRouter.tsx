@@ -1,24 +1,23 @@
-import * as React from "react";
-import { Route } from "react-router-dom";
-import { observer, inject } from "mobx-react";
+import * as React from 'react';
+import { Route } from 'react-router-dom';
+import { observer, inject } from 'mobx-react';
+import AuthenticationStore from 'src/stores/authenticationStore';
+import Stores from './../../stores/storeIdentifier';
 
-export interface IPublicRouter {
+export interface IPublicRouterProps {
   component: any;
   path: string;
   permission: string;
+  authenticationStore: AuthenticationStore;
 }
 
-@inject("AuthenticationStores")
+@inject(Stores.AuthenticationStore)
 @observer
-class PublicRouter extends React.Component<any> {
+class PublicRouter extends React.Component<IPublicRouterProps> {
   public render() {
     const { component, path } = this.props;
 
-    return this.props.AuthenticationStores.isAuthenticated ? (
-      <Route path={path} component={component} />
-    ) : (
-      <Route path={path} component={component} />
-    );
+    return this.props.authenticationStore.isAuthenticated ? <Route path={path} component={component} /> : <Route path={path} component={component} />;
   }
 }
 

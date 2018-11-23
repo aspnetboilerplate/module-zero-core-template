@@ -4,9 +4,8 @@ import { AuthenticationResultModel } from './../services/tokenAuth/dto/authentic
 
 const tokenStorageName = 'abp.AuthToken';
 
-class TokenAuthStores {
-  @observable
-  public authenticateResult: AuthenticationResultModel | null;
+class TokenAuthStore {
+  @observable authenticateResult: AuthenticationResultModel | null;
 
   constructor() {
     //Kullanıcı herhangi bir nedende dolayı sayfadan cıkışşsa
@@ -53,6 +52,7 @@ class TokenAuthStores {
 
     this.setLocalStorage(JSON.stringify(token));
   }
+
   public getBearerToken(): any {
     if (this.authenticateResult === null || this.authenticateResult === undefined) {
       this.logOut();
@@ -82,4 +82,4 @@ class TokenAuthStores {
   }
 }
 
-export default new TokenAuthStores();
+export default TokenAuthStore;
