@@ -1,0 +1,64 @@
+.dashboardCard{
+    margin-top: 16px;
+}
+
+.dasboardCard-task{
+    background-color: #E91E63;
+    border-radius: 5px;        
+}
+
+.dasboardCard-ticket{
+    background-color: #00BCD4;
+	border-radius: 5px;
+}
+
+.dasboardCard-comment{
+    background-color: #8BC34A;
+	border-radius: 5px;
+}
+.dasboardCard-visitor{
+    background-color: #FF9800;
+	border-radius: 5px;
+}
+
+.dashboardCardCounter{
+    font-size: 36px;
+     color: #fff; 
+}
+
+.dashboardCardName{
+    font-size: 18px;
+    color: #fff;
+    margin-bottom: -5;
+}
+
+.dashboardCardIcon{
+    font-size: 48px;
+    color: #fff; 
+}
+
+.dashboardBox{
+    margin-top: 24px; 
+    padding: 24px;
+    background: #fff;
+    min-Height: 240px;
+    border-radius: 5px;   
+}
+
+.dashboardCardTinyLine{
+    margin-top: 16px;
+    background-color: #E91E63; 
+	border-radius: 5px;
+}
+
+.latestSocialTrendsList {
+    margin-top: 16px;
+    background: #00BCD4;
+	border-radius: 5px;
+}
+
+.answeredTickeds {    
+    margin-top: 16px;
+    background: #009688;
+	border-radius: 5px;
+}

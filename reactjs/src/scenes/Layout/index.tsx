@@ -106,8 +106,7 @@ class LayoutComponent extends React.Component<any> {
         <Layout>
           <LayoutHeader collapsed={this.state.collapsed} toggle={this.toggle} />
           <Content style={{ margin: '0 16px' }}>
-            <div style={{ marginTop: 24, padding: 24, background: '#fff', minHeight: 360 }}>
-              <Switch>
+          <Switch>
                 {/* <Route path="/login" component={Logins} /> */}
                 <Route path="/dashboard" component={Dashboard} />
                 <Route path="/users" component={Users} />
@@ -115,7 +114,9 @@ class LayoutComponent extends React.Component<any> {
                 <Route path="/roles" component={Roles} />
                 <Route path="/about" component={About} />
               </Switch>
-            </div>
+            {/* <div style={{ marginTop: 24, padding: 24, background: '#fff', minHeight: 360 }}>
+              
+            </div> */}
           </Content>
           <Layout.Footer style={{ textAlign: 'center' }}>
             Asp.Net Boilerplate - React ©2018 <a href="https://github.com/ryoldash/module-zero-core-template">Github Page</a>
