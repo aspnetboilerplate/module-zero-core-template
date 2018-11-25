@@ -1,7 +1,7 @@
 import * as React from 'react';
 import './App.css';
 import { withRouter, Switch, Route } from 'react-router-dom';
-import Layout from './scenes/Layout';
+import Layout from './components/Layout';
 import Login from './scenes/Login';
 import { inject } from 'mobx-react';
 import SignalRAspNetCoreHelper from 'src/lib/signalRAspNetCoreHelper';

@@ -1,15 +1,13 @@
 import * as React from 'react';
-import AppConsts from 'src/lib/appconst';
+import { L, isGranted } from 'src/lib/abpUtility';
 
 class AppComponentBase<P = {}, S = {}, SS = any> extends React.Component<P, S, SS> {
-  localizationSourceName = AppConsts.localization.defaultLocalizationSourceName;
-
   L(key: string, sourceName?: string): string {
-    return abp.localization.localize(key, sourceName ? sourceName : this.localizationSourceName);
+    return L(key);
   }
 
   isGranted(permissionName: string): boolean {
-    return abp.auth.isGranted(permissionName);
+    return isGranted(permissionName);
   }
 }
 

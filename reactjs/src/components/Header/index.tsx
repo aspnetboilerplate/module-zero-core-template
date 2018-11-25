@@ -1,8 +1,10 @@
 import * as React from 'react';
-import { Col, Icon, Layout, Avatar, Menu, Dropdown, Badge } from 'antd';
+import { Col, Icon, Avatar, Menu, Dropdown, Badge } from 'antd';
 import { Link } from 'react-router-dom';
+import LanguageSelect from '../LanguageSelect';
+import './index.css';
 
-export interface LayoutHeaderProps {
+export interface IHeaderProps {
   collapsed?: any;
   toggle?: any;
 }
@@ -11,29 +13,18 @@ const userDropdownMenu = (
   <Menu>
     <Menu.Item key="2">
       <Icon type="logout" />
-      <span> <Link to="/login">Logout</Link></span>
+      <span>
+        {' '}
+        <Link to="/login">Logout</Link>
+      </span>
     </Menu.Item>
   </Menu>
 );
 
-const languageMenu = (
-  <Menu>
-    <Menu.Item key="1">
-      <span>English</span>
-    </Menu.Item>
-    <Menu.Item key="2">
-      <span>Deutsch</span>
-    </Menu.Item>
-    <Menu.Item key="3">
-      <span>Türkçe</span>
-    </Menu.Item>
-  </Menu>
-);
-
-export class LayoutHeader extends React.Component<LayoutHeaderProps> {
+export class Header extends React.Component<IHeaderProps> {
   render() {
     return (
-      <Layout.Header style={{ background: '#fff', minHeight: 83, padding: 0 }}>
+      <React.Fragment>
         <Col style={{ textAlign: 'left' }} span={12}>
           <Icon
             style={{ marginTop: 10, marginRight: 10, textAlign: 'left' }}
@@ -43,18 +34,16 @@ export class LayoutHeader extends React.Component<LayoutHeaderProps> {
           />
         </Col>
         <Col style={{ margin: 15, marginLeft: 10, textAlign: 'right' }}>
-          <Dropdown overlay={languageMenu} trigger={['click']}>
-            <Icon style={{ margin: 20 }} type="global" />
-          </Dropdown>
+          <LanguageSelect />
           <Dropdown overlay={userDropdownMenu} trigger={['click']}>
             <Badge style={{ margin: 10 }} count={3}>
               <Avatar style={{ margin: 10 }} size={48} alt={'profile'} src="https://sametkabay.com/images/smtkby/smtkby240.png" />
             </Badge>
           </Dropdown>
         </Col>
-      </Layout.Header>
+      </React.Fragment>
     );
   }
 }
 
-export default LayoutHeader;
+export default Header;
