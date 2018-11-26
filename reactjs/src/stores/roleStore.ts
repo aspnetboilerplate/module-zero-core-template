@@ -15,9 +15,12 @@ class RoleStores {
   @observable
   roleForEdit:GetRoleForEditOutput;
   @observable
-  allPermissions: GetAllPermissionsOutput
+  allPermissions: GetAllPermissionsOutput[]=[];
 
   @action async create(createRoleInput:CreateRoleInput){
+    debugger;
+
+    console.log(JSON.stringify(createRoleInput));
 var result=await roleService.create(createRoleInput);
 console.log(result);
   }
@@ -28,6 +31,7 @@ console.log(result);
   }
 
   @action async update(updateRoleInput: UpdateRoleInput) {
+    console.log(JSON.stringify(updateRoleInput));
     var result = await roleService.update(updateRoleInput);
     console.log(result);
     this.roles.items.filter((x: GetAllRoleOutput) => x.id == updateRoleInput.id).map((x: GetAllRoleOutput) => {
@@ -37,8 +41,8 @@ console.log(result);
   }
  
   @action async delete(entityDto: EntityDto) {
-    // var result = await roleService.delete(entityDto);
-    // console.log(result);
+    var result = await roleService.delete(entityDto);
+    console.log(result);
     this.roles.items=this.roles.items.filter((x: GetAllRoleOutput) => x.id != entityDto.id);
   }
 
@@ -49,23 +53,32 @@ console.log(result);
   }
 
   @action async getRoleForEdit(entityDto:EntityDto){
-
-    var result=await roleService.getRoleForEdit(entityDto);
-   
-this.roleForEdit=result;
+  var result=await roleService.getRoleForEdit(entityDto);
+  this.roleForEdit=result;
   }
 
   @action async get(entityDto:EntityDto) {
     var result = await roleService.get(entityDto);
     console.log(result);
-    ;
     this.roles=result.data.result;
     
   }
-
+  @action
+  async createRole() {
+    this.roleForEdit = {
+    grantedPermissionNames:[],
+    role: {
+        name: "",
+        displayName: "",
+        description: "",
+        isStatic: false,
+        id: 0},
+   permissions:[{name:"",displayName:"",description:""}]
+     
+    };
+  
+  }
   @action async getAll(pagedFilterAndSortedRequest:PagedFilterAndSortedRequest){
-    
-    ;
     var result = await roleService.getAll(pagedFilterAndSortedRequest);
     console.log(result);
     this.roles=result;

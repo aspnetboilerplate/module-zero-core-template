@@ -4,6 +4,8 @@
   "private": true,
   "dependencies": {
     "@aspnet/signalr": "^1.0.0",
+    "@types/moment": "^2.13.0",
+    "@types/moment-timezone": "^0.5.9",
     "abp-web-resources": "^3.8.2",
     "antd": "^3.10.3",
     "axios": "^0.18.0",
@@ -11,6 +13,8 @@
     "lodash": "^4.17.11",
     "mobx": "^5.5.2",
     "mobx-react": "^5.3.6",
+    "moment": "^2.22.2",
+    "moment-timezone": "^0.5.23",
     "query-string": "^6.2.0",
     "react": "^16.6.0",
     "react-app-rewire-less": "^2.1.3",

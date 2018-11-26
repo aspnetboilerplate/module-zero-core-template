@@ -3,12 +3,12 @@ const AppConsts = {
     defaultAdminUserName: 'admin',
   },
   localization: {
-    defaultLocalizationSourceName: 'TR',
+    defaultLocalizationSourceName: 'AbpProjectName',
   },
   authorization: {
     encrptedAuthTokenName: 'enc_auth_token',
   },
-  appBaseUrl: 'http://localhost:8080',
-  remoteServiceBaseUrl: process.env.REACT_APP_API_URL,
+  appBaseUrl: process.env.REACT_APP_APP_BASE_URL,
+  remoteServiceBaseUrl: process.env.REACT_APP_REMOTE_SERVICE_BASE_URL,
 };
 export default AppConsts;

@@ -1,10 +1,7 @@
-export interface GetTenantOutputItems {
+export default class GetTenantOutput {
   tenancyName: string;
   name: string;
   isActive: boolean;
   id: number;
 }
 
-export default interface GetTenantOutput {
-  result: GetTenantOutputItems;
-}

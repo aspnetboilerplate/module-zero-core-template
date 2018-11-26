@@ -3,6 +3,8 @@
 
   let pageLoadTime: Date;
 
+  let signalr: any;
+
   function toAbsAppPath(path: string): string;
 
   namespace multiTenancy {

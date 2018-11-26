@@ -1,58 +1,95 @@
-import { Card, Col, Row, Modal, Button, Table, Dropdown, Menu } from 'antd';
+import { Card, Col, Row, Button, Table, Dropdown, Menu } from 'antd';
 import 'antd/dist/antd.css';
-import *as React from 'react';
+import * as React from 'react';
 import { EntityDto } from 'src/services/dto/entityDto';
-import CreateOrUpdateRules from "./components/createOrUpdateRoles"
+import CreateOrUpdateRules from './components/createOrUpdateRoles';
 import { observer, inject } from 'mobx-react';
-
+import AppComponentBase from 'src/components/AppComponentBase';
 
 @inject('RoleStores')
 @observer
-class Role extends React.Component<any> {
+class Role extends AppComponentBase<any> {
+  formRef: any;
   constructor(props: any) {
     super(props);
   }
+
   state = {
     modalVisible: false,
-    
     maxResultCount: 10,
-    skipCount:0
+    skipCount: 0,
+    roleId: 0
   };
 
   async componentWillMount() {
-    
     await this.getAll();
   }
 
   async getAll() {
-        await this.props.RoleStores.getAll({ maxResultCount: this.state.maxResultCount, skipCount: this.state.skipCount });
+    await this.props.RoleStores.getAll({ maxResultCount: this.state.maxResultCount, skipCount: this.state.skipCount });
   }
-  handleTableChange = (pagination: any) => {
 
+  handleTableChange = (pagination: any) => {
     this.setState({ skipCount: (pagination.current - 1) * this.state.maxResultCount! }, async () => await this.getAll());
   };
+
   Modal = () => {
     this.setState({
       modalVisible: !this.state.modalVisible,
     });
   };
 
-  createOrUpdateModalOpen(entityDto: EntityDto) {
+  async createOrUpdateModalOpen(entityDto: EntityDto) {
+  
+
     if (entityDto.id == 0) {
-     
-    } else {
-      this.props.RoleStores.getRoleForEdit({ id: entityDto.id });
+      await this.props.RoleStores.createRole();
+      await this.props.RoleStores.getAllPermissions();
     }
-  this.Modal();
+    else {
+      await this.props.RoleStores.getRoleForEdit(entityDto);
+      await this.props.RoleStores.getAllPermissions();
+    }
+
+    this.setState({ roleId: entityDto.id })
+    this.Modal();
+
+    debugger;
+    this.formRef.props.form.setFieldsValue({
+      ...this.props.RoleStores.roleForEdit.role,
+      permissions: this.props.RoleStores.roleForEdit.grantedPermissionNames,
+    });
   }
 
   delete(input: EntityDto) {
-    
     this.props.RoleStores.delete(input);
   }
+  handleCreate = () => {
+    const form = this.formRef.props.form;
+    form.validateFields(async (err: any, values: any) => {
+      debugger;
+      if (err) {
+        return;
+      }
+      else {
+        if (this.state.roleId == 0) {
+          await this.props.RoleStores.create(values);
+        }
+        else {
+          await this.props.RoleStores.update({ id: this.state.roleId, ...values });
+        }
+      }
+      await this.getAll();
+      this.setState({ modalVisible: false });
+      form.resetFields();
+    });
+  }
+
+  saveFormRef = (formRef: any) => {
+    this.formRef = formRef;
+  }
   public render() {
-    const { roles } = this.props.RoleStores;
-    ;
+    const { allPermissions,roles} = this.props.RoleStores;
     const columns = [
       { title: 'Role Name', dataIndex: 'name', key: 'name', width: 150, render: (text: string) => <div>{text}</div> },
       { title: 'Display Name', dataIndex: 'displayName', key: 'displayName', width: 150, render: (text: string) => <div>{text}</div> },
@@ -94,12 +131,19 @@ class Role extends React.Component<any> {
         </Row>
         <Row style={{ marginTop: 20 }}>
           <Col xs={{ span: 24, offset: 0 }} sm={{ span: 24, offset: 0 }} md={{ span: 24, offset: 0 }} lg={{ span: 24, offset: 0 }} xl={{ span: 24, offset: 0 }} xxl={{ span: 24, offset: 0 }}>
-          <Table size={'default'} bordered={true} pagination={{ pageSize: this.state.maxResultCount, total: roles == undefined ? 0 : roles.totalCount, defaultCurrent: 1 }} columns={columns} loading={roles == undefined ? true : false} dataSource={roles == undefined ? [] : roles.items} onChange={this.handleTableChange} />
+            <Table size={'default'} bordered={true} pagination={{ pageSize: this.state.maxResultCount, total: roles == undefined ? 0 : roles.totalCount, defaultCurrent: 1 }} columns={columns} loading={roles == undefined ? true : false} dataSource={roles == undefined ? [] : roles.items} onChange={this.handleTableChange} />
           </Col>
         </Row>
-        <Modal visible={this.state.modalVisible} onCancel={() => this.setState({ modalVisible: false })} title={'User'} width={550}>
-        <CreateOrUpdateRules />
-        </Modal>
+
+        <CreateOrUpdateRules 
+        wrappedComponentRef={this.saveFormRef} 
+        visible={this.state.modalVisible} 
+        onCancel={() => this.setState({
+              modalVisible: false,
+            })} 
+            modalType={this.state.roleId == 0 ? 'edit' : 'create'} 
+            onOk={this.handleCreate} 
+            permission={allPermissions} />
       </Card>;
   }
 }

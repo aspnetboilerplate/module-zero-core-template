@@ -5,18 +5,6 @@ import CreateOrUpdateUserRole from './createOrUpdateUserRole';
 import * as React from 'react';
 
 
-const tabs = [
-  {
-    tabName: 'Kullanıcı Bilgileri',
-    key: 'userInfo',
-    component: <CreateOrUpdateUser />,
-  },
-  {
-    tabName: 'Roller',
-    key: 'team',
-    component: <CreateOrUpdateUserRole />,
-  }
-];
 
 const TabPane = Tabs.TabPane;
 
@@ -25,6 +13,19 @@ class CreateOrUpdateUserContainer extends React.Component<any> {
     super(props);
   }
   render() {
+    const tabs = [
+      {
+        tabName: 'Kullanıcı Bilgileri',
+        key: 'userInfo',
+        component: <CreateOrUpdateUser onCreate={this.props.onCreateonCreate} />,
+      },
+      {
+        tabName: 'Roller',
+        key: 'team',
+        component: <CreateOrUpdateUserRole onChangeRole={this.props.onChangeRole} />,
+      }
+    ];
+
     const item = tabs.map((item: any) => (
       <TabPane
         tab={item.tabName}

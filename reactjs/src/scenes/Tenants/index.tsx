@@ -1,14 +1,16 @@
-import { Card, Col, Row, Modal, Button, Table, Tag, Dropdown, Menu } from 'antd';
+import { Card, Col, Row,  Button, Table, Tag, Dropdown, Menu } from 'antd';
 import 'antd/dist/antd.css';
 import *as React from 'react';
 import { EntityDto } from 'src/services/dto/entityDto';
 import CreateOrUpdateTenant from "./components/createOrUpdateTenant"
 import { inject, observer } from 'mobx-react';
+import { __await } from 'tslib';
 
 
 @inject("TenantStores")
 @observer
 class Tenant extends React.Component<any> {
+  formRef: any;
   constructor(props: any) {
     super(props);
    
@@ -16,7 +18,8 @@ class Tenant extends React.Component<any> {
  state = {
   modalVisible: false,
    maxResultCount: 10,
-   skipCount: 0
+   skipCount: 0,
+   tenantId:0
 };
 
 
@@ -25,10 +28,10 @@ class Tenant extends React.Component<any> {
   }
 
   async getAll() {
+    
     await this.props.TenantStores.getAll({ maxResultCount: this.state.maxResultCount, skipCount: this.state.skipCount });
   }
   handleTableChange = (pagination: any) => {
-
     this.setState({ skipCount: (pagination.current-1) * this.state.maxResultCount! }, async () => await this.getAll());
   };
 
@@ -38,23 +41,53 @@ class Tenant extends React.Component<any> {
        });
   };
 
-  createOrUpdateModalOpen(entityDto: EntityDto) {
-    // if (entityDto.id == 0) {
-    //   this.props.UserStores.onCreate();
-    // } else {
-    //   this.props.UserStores.getUserForEdit(entityDto);
-    // }
+  async createOrUpdateModalOpen(entityDto: EntityDto) {
+    if (entityDto.id==0){
+    await this.props.TenantStores.createTenant();
+  }
+   else{
+    await this.props.TenantStores.get(entityDto);
+   }   
+
+   this.setState({tenantId:entityDto.id})
     this.Modal();
+    
+    this.formRef.props.form.setFieldsValue({
+      tenancyName: this.props.TenantStores.editTenant.tenancyName,
+      name: this.props.TenantStores.editTenant.name,
+      isActive:this.props.TenantStores.editTenant.isActive,
+    });
   }
 
   delete(input: EntityDto) {
-    ;
     this.props.TenantStores.delete(input);
   }
 
+  handleCreate = () => {
+    const form = this.formRef.props.form;
+    form.validateFields(async (err:any, values:any) => {     
+      if (err) {
+        return;
+      }
+      else{
+        if(this.state.tenantId ==0){
+       await this.props.TenantStores.create(values);
+        } 
+        else{
+        await this.props.TenantStores.update({ id: this.state.tenantId, ...values });
+        }
+      }
+      await this.getAll();
+      this.setState({ modalVisible: false });
+      form.resetFields();
+    });
+  }
+
+  saveFormRef = (formRef:any) => {
+    this.formRef = formRef;
+  }
   public render() {
     const { tenants } = this.props.TenantStores;
-;
     const columns = [{ title: 'Tenancy Name', dataIndex: 'tenancyName', key: 'tenancyName', width: 150, render: (text: string) => <div>
             {text}
           </div> }, { title: 'Name', dataIndex: 'name', key: 'name', width: 150, render: (text: string) => <div>
@@ -86,20 +119,17 @@ class Tenant extends React.Component<any> {
         </Row>
         <Row style={{ marginTop: 20 }}>
           <Col xs={{ span: 24, offset: 0 }} sm={{ span: 24, offset: 0 }} md={{ span: 24, offset: 0 }} lg={{ span: 24, offset: 0 }} xl={{ span: 24, offset: 0 }} xxl={{ span: 24, offset: 0 }}>
-            <Table size={'default'}
-             bordered={true}
-              pagination={{ 
-                pageSize: this.state.maxResultCount, 
-                total: tenants == undefined ? 0 : tenants.totalCount,
-                defaultCurrent: 1 }} 
-              columns={columns} 
-              loading={tenants == undefined ? true : false} 
-            dataSource={tenants == undefined ? [] : tenants.items} onChange={this.handleTableChange}/>
+            <Table size={'default'} bordered={true} pagination={{ pageSize: this.state.maxResultCount, total: tenants == undefined ? 0 : tenants.totalCount, defaultCurrent: 1 }} columns={columns} loading={tenants == undefined ? true : false} dataSource={tenants == undefined ? [] : tenants.items} onChange={this.handleTableChange} />
           </Col>
         </Row>
-        <Modal visible={this.state.modalVisible} onCancel={() => this.setState({ modalVisible: false })} title={'User'} width={550}>
-          <CreateOrUpdateTenant />
-        </Modal>
+        <CreateOrUpdateTenant 
+        wrappedComponentRef={this.saveFormRef} 
+        visible={this.state.modalVisible} 
+        onCancel={() => this.setState({
+              modalVisible: false,
+            })} 
+        modalType={this.state.tenantId == 0 ? "edit" :"create"}
+        onCreate={this.handleCreate} />
       </Card>;
   }
 }

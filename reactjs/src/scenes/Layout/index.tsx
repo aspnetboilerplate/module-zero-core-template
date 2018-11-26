@@ -28,7 +28,7 @@ class LayoutComponent extends React.Component<any> {
   };
 
   render() {
-    const {path} = this.props.match;
+    // const {path} = this.props.match;
 
     return <Layout style={{ minHeight: '100vh' }}>
         <Sider trigger={null} className={'sidebar'} width={256} collapsible collapsed={this.state.collapsed} onCollapse={this.onCollapse}>
@@ -38,7 +38,7 @@ class LayoutComponent extends React.Component<any> {
               <Avatar shape="square" style={{ height: 54, width: 128 }} src={AbpLogo} />
             </Col>}
 
-          <Menu theme="dark" mode="inline" defaultSelectedKeys={path}>
+          <Menu theme="dark" mode="inline" >
             <Menu.Item key={'/dashboard'} onClick={() => this.props.history.push('/dashboard')}>
               <Icon type="home" />
               <span>Home</span>
