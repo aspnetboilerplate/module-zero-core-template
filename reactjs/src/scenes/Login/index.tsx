@@ -47,10 +47,7 @@ class Login extends React.Component<any, any> {
   handleSubmit = (e: any) => {
     e.preventDefault();
     this.props.form.validateFields((err: any, values: any) => {
-      ;
-      if (!err) {
-        
-        ;
+            if (!err) {
         this.props.AuthenticationStores.authenticate(values)
         .then(this.props.history.push("/dashboard"))
         .catch(console.log("False"));

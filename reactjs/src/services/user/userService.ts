@@ -22,7 +22,7 @@ class UserService {
   }
 
   public async delete(entityDto: EntityDto) {
-    var result = await http.delete('api/services/app/User/Delete1', { params: entityDto });
+    var result = await http.delete('api/services/app/User/Delete', { params: entityDto });
     console.log(result);
     return result.data;
   }

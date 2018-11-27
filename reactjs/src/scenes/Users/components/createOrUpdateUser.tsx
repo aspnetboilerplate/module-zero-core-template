@@ -77,7 +77,7 @@ class CreateOrUpdateUser extends React.Component<any> {
      var test= { label: x.displayName, value:x.normalizedName}
      return test;
     })
-    return <Modal visible={visible} onCancel={onCancel} onOk={onCreate}>
+    return <Modal visible={visible} onCancel={onCancel} onOk={onCreate} title={"User"}>
         <Row style={{ marginTop: 10 }}>
           <FormItem label={'Name'} {...formItemLayout}>
             {getFieldDecorator('name', { rules: [{ required: true, message: 'Please input your name!' }] })(<Input />)}
