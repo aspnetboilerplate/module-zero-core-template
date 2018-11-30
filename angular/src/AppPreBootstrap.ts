@@ -69,7 +69,7 @@ export class AppPreBootstrap {
         });
     }
 
-    // Dynamic scripts of ABP system (They are created on runtime and can not be bundled) 
+    // Dynamic Service Proxies of ABP system (They are created on runtime and can not be bundled) 
     // Similar to <script src="~/AbpServiceProxies/GetAll?type=jquery" type="text/javascript"></script>
     private static getAbpServiceProxies(callback: () => void): JQueryPromise<any> {
         return abp.ajax({
