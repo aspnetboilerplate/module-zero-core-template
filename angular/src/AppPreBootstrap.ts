@@ -9,6 +9,7 @@ export class AppPreBootstrap {
     static run(appRootUrl: string, callback: () => void): void {
         AppPreBootstrap.getApplicationConfig(appRootUrl, () => {
             AppPreBootstrap.getUserConfiguration(callback);
+            AppPreBootstrap.getAbpServiceProxies(callback);
         });
     }
 
@@ -63,6 +64,33 @@ export class AppPreBootstrap {
             if (abp.clock.provider.supportsMultipleTimezone) {
                 moment.tz.setDefault(abp.timing.timeZoneInfo.iana.timeZoneId);
             }
+
+            callback();
+        });
+    }
+
+    // Dynamic scripts of ABP system (They are created on runtime and can not be bundled) 
+    // Similar to <script src="~/AbpServiceProxies/GetAll?type=jquery" type="text/javascript"></script>
+    private static getAbpServiceProxies(callback: () => void): JQueryPromise<any> {
+        return abp.ajax({
+            url: AppConsts.remoteServiceBaseUrl + '/AbpServiceProxies/GetAll?type=jquery',
+            method: 'GET',
+            dataType: 'text', // default is 'json'
+            headers: {
+                Authorization: 'Bearer ' + abp.auth.getToken(),
+                '.AspNetCore.Culture': abp.utils.getCookieValue("Abp.Localization.CultureName"),
+                'Abp.TenantId': abp.multiTenancy.getTenantIdCookie()
+            }
+        }).done(result => {
+            // create a script tag
+            var script = document.createElement('script');
+            script.type = 'text/javascript';
+
+            // append the script tag as last element of body
+            $("body").append(script);
+
+            // fill the script tag with the result
+            $(script).append(result);
 
             callback();
         });
