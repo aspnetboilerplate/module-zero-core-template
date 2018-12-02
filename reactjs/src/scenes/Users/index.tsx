@@ -1,11 +1,13 @@
-import { Card, Col, Row, Modal, Button, Table, Tag, Dropdown, Menu } from 'antd';
+import { Card, Col, Row, Button, Table, Tag, Dropdown, Menu } from 'antd';
 import 'antd/dist/antd.css';
-import * as React from 'react';
-import CreateOrUpdateUserContainer from './components/createOrUpdateUserContainer';
+import *as React from 'react';
+import CreateOrUpdateUser from './components/createOrUpdateUser';
 import { EntityDto } from 'src/services/dto/entityDto';
 import { observer, inject } from 'mobx-react';
+import Stores from 'src/stores/storeIdentifier';
 import UserStore from 'src/stores/userStore';
-import Stores from './../../stores/storeIdentifier';
+import { L } from 'src/lib/abpUtility';
+
 
 export interface IUserProps {
   userStore: UserStore;
@@ -13,21 +15,18 @@ export interface IUserProps {
 
 @inject(Stores.UserStore)
 @observer
-class Team extends React.Component<IUserProps> {
-  constructor(props: IUserProps) {
+class User extends React.Component<any> {
+  formRef: any;
+  constructor(props: any) {
     super(props);
   }
   state = {
     modalVisible: false,
     maxResultCount: 10,
     skipCount: 0,
-    modalComponents: '',
+    userId: 0,
   };
   async componentWillMount() {
-    await this.getAll();
-  }
-  async componentWillUnmount() {
-    // allows us to ignore an inflight request in scenario 4
     await this.getAll();
   }
 
@@ -37,153 +36,105 @@ class Team extends React.Component<IUserProps> {
   handleTableChange = (pagination: any) => {
     this.setState({ skipCount: (pagination.current - 1) * this.state.maxResultCount! }, async () => await this.getAll());
   };
-
-  setPermissions() {
-    // this.props.userStore.updateUserPermissions(); // TODO:
-    this.Modal();
-  }
-
-  Modal = (components: any = null) => {
+  Modal = () => {
     this.setState({
       modalVisible: !this.state.modalVisible,
-      modalComponents: components,
     });
   };
+  setPermissions() {
+    this.props.userStore.updateUserPermissions();
+    this.Modal();
+  }
+  async createOrUpdateModalOpen(entityDto: EntityDto) {
+    if (entityDto.id == 0) {
+      await this.props.userStore.createUser();
+      await this.props.userStore.getRoles();
+    } else {
+      await this.props.userStore.get(entityDto);
+      await this.props.userStore.getRoles();
+    }
+    this.setState({ userId: entityDto.id });
+    this.Modal();
 
-  createOrUpdateModalOpen(entityDto: EntityDto) {
-    // if (entityDto.id == 0) {
-    //   this.props.UserStores.onCreate();
-    // } else {
-    //   this.props.UserStores.getUserForEdit(entityDto);
-    // }
-    this.Modal(<CreateOrUpdateUserContainer />);
+    debugger;
+    this.formRef.props.form.setFieldsValue({ ...this.props.userStore.editUser, roleNames: this.props.userStore.editUser.roleNames });
   }
 
   delete(input: EntityDto) {
     this.props.userStore.delete(input);
   }
+  handleCreate = () => {
+    debugger;
+    const form = this.formRef.props.form;
 
-  async createOrUpdateUser() {
-    // TODO:
-    // await this.props.userStore.createOrUpdateUser();
-    // this.Modal(<CreateOrUpdateUserContainer />);
-    // this.props.userStore.users = undefined;
-    // await this.props.userStore.getUsers(this.state);
-  }
+    form.validateFields(async (err: any, values: any) => {
+      debugger;
+      if (err) {
+        return;
+      } else {
+        if (this.state.userId == 0) {
+          await this.props.userStore.create(values);
+        } else {
+          await this.props.userStore.update({ id: this.state.userId, ...values });
+        }
+      }
+      await this.getAll();
+      this.setState({ modalVisible: false });
+      form.resetFields();
+    });
+  };
 
+  saveFormRef = (formRef: any) => {
+    this.formRef = formRef;
+  };
   public render() {
+    debugger;
     const { users } = this.props.userStore;
-    const columns = [
-      {
-        title: 'User Name',
-        dataIndex: 'userName',
-        key: 'userName',
-        width: 150,
-        render: (text: string) => <div>{text}</div>,
-      },
-      {
-        title: 'Full Name',
-        dataIndex: 'name',
-        key: 'name',
-        width: 150,
-        render: (text: string) => <div>{text}</div>,
-      },
-      {
-        title: 'Email Adress',
-        dataIndex: 'surname',
-        key: 'surname',
-        width: 150,
-        render: (text: string) => <div>{text}</div>,
-      },
-      {
-        title: 'Active',
-        dataIndex: 'isActive',
-        key: 'isActive',
-        width: 150,
-        render: (text: boolean) => (text == true ? <Tag color="#2db7f5">Yes</Tag> : <Tag color="red">No</Tag>),
-      },
-      {
-        title: 'Actions',
-        width: 150,
-        render: (text: string, item: any) => (
-          <div>
-            <Dropdown
-              trigger={['click']}
-              overlay={
-                <Menu>
+    const columns = [{ title: L('UserName'), dataIndex: 'userName', key: 'userName', width: 150, render: (text: string) => <div>
+            {text}
+    </div>
+    }, { title: L('FullName') , dataIndex: 'name', key: 'name', width: 150, render: (text: string) => <div>
+            {text}
+          </div> }, { title: L('EmailAddress'), dataIndex: 'surname', key: 'surname', width: 150, render: (text: string) => <div>
+            {text}
+          </div> }, { title: L('IsActive'), dataIndex: 'isActive', key: 'isActive', width: 150, render: (text: boolean) => (text == true ? <Tag color="#2db7f5">
+              {L('Yes')}
+      </Tag> : <Tag color="red">{L('No')}</Tag>)
+      }, {
+        title: L('Actions'), width: 150, render: (text: string, item: any) => <div>
+            <Dropdown trigger={['click']} overlay={<Menu>
                   <Menu.Item>
-                    <a onClick={() => this.createOrUpdateModalOpen({ id: item.id })}>Düzenle</a>
+                    <a onClick={() => this.createOrUpdateModalOpen({ id: item.id })}> {L('Edit')}</a>
                   </Menu.Item>
                   <Menu.Item>
-                    <a onClick={() => this.delete({ id: item.id })}>Sil</a>
+              <a onClick={() => this.delete({ id: item.id })}>{L('Delete')}</a>
                   </Menu.Item>
-                </Menu>
-              }
-              placement="bottomLeft"
-            >
+                </Menu>} placement="bottomLeft">
               <Button type="primary" icon="setting">
-                işlemler
+            {L('Actions')}
               </Button>
             </Dropdown>
-          </div>
-        ),
-      },
-    ];
-    return (
-      <Card>
+          </div> }];
+    return <Card>
         <Row>
-          <Col
-            xs={{ span: 4, offset: 0 }}
-            sm={{ span: 4, offset: 0 }}
-            md={{ span: 4, offset: 0 }}
-            lg={{ span: 2, offset: 0 }}
-            xl={{ span: 2, offset: 0 }}
-            xxl={{ span: 2, offset: 0 }}
-          >
+          <Col xs={{ span: 4, offset: 0 }} sm={{ span: 4, offset: 0 }} md={{ span: 4, offset: 0 }} lg={{ span: 2, offset: 0 }} xl={{ span: 2, offset: 0 }} xxl={{ span: 2, offset: 0 }}>
             {' '}
-            <h2>Users</h2>
+            <h2>{L('Users')}</h2>
           </Col>
-          <Col
-            xs={{ span: 14, offset: 0 }}
-            sm={{ span: 15, offset: 0 }}
-            md={{ span: 15, offset: 0 }}
-            lg={{ span: 1, offset: 21 }}
-            xl={{ span: 1, offset: 21 }}
-            xxl={{ span: 1, offset: 21 }}
-          >
+          <Col xs={{ span: 14, offset: 0 }} sm={{ span: 15, offset: 0 }} md={{ span: 15, offset: 0 }} lg={{ span: 1, offset: 21 }} xl={{ span: 1, offset: 21 }} xxl={{ span: 1, offset: 21 }}>
             <Button type="primary" shape="circle" icon="plus" onClick={() => this.createOrUpdateModalOpen({ id: 0 })} />
           </Col>
         </Row>
         <Row style={{ marginTop: 20 }}>
-          <Col
-            xs={{ span: 24, offset: 0 }}
-            sm={{ span: 24, offset: 0 }}
-            md={{ span: 24, offset: 0 }}
-            lg={{ span: 24, offset: 0 }}
-            xl={{ span: 24, offset: 0 }}
-            xxl={{ span: 24, offset: 0 }}
-          >
-            <Table
-              size={'default'}
-              bordered={true}
-              columns={columns}
-              pagination={{
-                pageSize: 10,
-                total: users == undefined ? 0 : users.totalCount,
-                defaultCurrent: 1,
-              }}
-              loading={users == undefined ? true : false}
-              dataSource={users == undefined ? [] : users.items}
-              onChange={this.handleTableChange}
-            />
+          <Col xs={{ span: 24, offset: 0 }} sm={{ span: 24, offset: 0 }} md={{ span: 24, offset: 0 }} lg={{ span: 24, offset: 0 }} xl={{ span: 24, offset: 0 }} xxl={{ span: 24, offset: 0 }}>
+            <Table size={'default'} bordered={true} columns={columns} pagination={{ pageSize: 10, total: users == undefined ? 0 : users.totalCount, defaultCurrent: 1 }} loading={users == undefined ? true : false} dataSource={users == undefined ? [] : users.items} onChange={this.handleTableChange} />
           </Col>
         </Row>
-        <Modal visible={this.state.modalVisible} onCancel={() => this.setState({ modalVisible: false })} title={'User'} width={550}>
-          {this.state.modalComponents}
-        </Modal>
-      </Card>
-    );
+        <CreateOrUpdateUser wrappedComponentRef={this.saveFormRef} visible={this.state.modalVisible} onCancel={() => this.setState({
+              modalVisible: false,
+            })} modalType={this.state.userId == 0 ? 'edit' : 'create'} onCreate={this.handleCreate} roles={this.props.userStore.roles} />
+      </Card>;
   }
 }
 
-export default Team;
+export default User;

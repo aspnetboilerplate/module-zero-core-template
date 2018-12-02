@@ -1,27 +1,28 @@
-import { CreateUserInput } from './dto/createUserInput';
+
 import { UpdateUserInput } from './dto/updateUserInput';
 import { ChangeLanguagaInput } from './dto/changeLanguageInput';
-import { GetUserOutput } from './dto/getUserOutput';
 import { EntityDto } from 'src/services/dto/entityDto';
 import http from '../httpService';
 import { GetAllUserOutput } from './dto/getAllUserOutput';
 import { PagedResultDto } from 'src/services/dto/pagedResultDto';
+import { CreateOrUpdateUserInput } from './dto/createOrUpdateUserInput';
 
 class UserService {
-  public async create(createUserInput: CreateUserInput) {
+  public async create(createUserInput: CreateOrUpdateUserInput) {
     var result = await http.post('api/services/app/User/Create', createUserInput);
     console.log(result);
-    return result.data;
+    return result.data.result;
   }
 
   public async update(updateUserInput: UpdateUserInput) {
+    console.log(JSON.stringify(updateUserInput));
     var result = await http.put('api/services/app/User/Update', updateUserInput);
     console.log(result);
     return result.data;
   }
 
   public async delete(entityDto: EntityDto) {
-    var result = await http.delete('api/services/app/User/Delete1', { params: entityDto });
+    var result = await http.delete('api/services/app/User/Delete', { params: entityDto });
     console.log(result);
     return result.data;
   }
@@ -29,7 +30,7 @@ class UserService {
   public async getRoles() {
     var result = await http.get('api/services/app/User/GetRoles');
     console.log(result);
-    return result.data;
+    return result.data.result.items;
   }
 
   public async changeLanguage(changeLanguageInput: ChangeLanguagaInput) {
@@ -38,10 +39,10 @@ class UserService {
     return result.data;
   }
 
-  public async get(entityDto: EntityDto): Promise<GetUserOutput> {
+  public async get(entityDto: EntityDto): Promise<CreateOrUpdateUserInput> {
     var result = await http.get('api/services/app/User/Get', { params: entityDto });
     console.log(result);
-    return result.data;
+    return result.data.result;
   }
 
   public async getAll(pagedFilterAndSortedRequest: PagedFilterAndSortedRequest): Promise<PagedResultDto<GetAllUserOutput>> {

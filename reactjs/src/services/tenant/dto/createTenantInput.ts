@@ -1,4 +1,4 @@
-export default interface CreateTenantInput {
+export default class CreateTenantInput {
   tenancyName: string;
   name: string;
   adminEmailAddress: string;
