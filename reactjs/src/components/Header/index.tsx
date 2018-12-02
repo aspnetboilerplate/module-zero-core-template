@@ -26,18 +26,13 @@ export class Header extends React.Component<IHeaderProps> {
     return (
       <React.Fragment>
         <Col style={{ textAlign: 'left' }} span={12}>
-          <Icon
-            style={{ marginTop: 10, marginRight: 10, textAlign: 'left' }}
-            className="trigger"
-            type={this.props.collapsed ? 'menu-unfold' : 'menu-fold'}
-            onClick={this.props.toggle}
-          />
+          <Icon className="trigger" type={this.props.collapsed ? 'menu-unfold' : 'menu-fold'} onClick={this.props.toggle} />
         </Col>
-        <Col style={{ margin: 15, marginLeft: 10, textAlign: 'right' }}>
-          <LanguageSelect />
+        <Col style={{ margin: '0px 15px 0px 15px', marginLeft: 10, textAlign: 'right' }}>
+          <LanguageSelect /> {'   '}
           <Dropdown overlay={userDropdownMenu} trigger={['click']}>
-            <Badge style={{ margin: 10 }} count={3}>
-              <Avatar style={{ margin: 10 }} size={48} alt={'profile'} src="https://sametkabay.com/images/smtkby/smtkby240.png" />
+            <Badge style={{}} count={3}>
+              <Avatar style={{}} size={24} alt={'profile'} src="https://sametkabay.com/images/smtkby/smtkby240.png" />
             </Badge>
           </Dropdown>
         </Col>
