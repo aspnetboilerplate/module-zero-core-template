@@ -24,7 +24,6 @@ export interface ILoginProps extends FormComponentProps {
 @observer
 class Login extends React.Component<ILoginProps> {
   changeTenant = async () => {
-    debugger;
     let tenancyName = this.props.form.getFieldValue('tenancyName');
     const { loginModel } = this.props.authenticationStore!;
 
@@ -71,10 +70,9 @@ class Login extends React.Component<ILoginProps> {
 
     const { loginModel } = this.props.authenticationStore!;
     const { getFieldDecorator, getFieldValue } = this.props.form;
-    debugger;
     return (
       <Form className="login-form" onSubmit={this.handleSubmit}>
-        <Row style={{ height: '100vh', backgroundColor: '#00bcd4' }}>
+        <Row>
           <Row style={{ marginTop: 100 }}>
             <Col span={8} offset={8}>
               <Card>
