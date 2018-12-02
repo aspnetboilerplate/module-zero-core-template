@@ -55,14 +55,14 @@ class CreateOrUpdateTenant extends React.Component<any> {
       return <Modal visible={visible} onCancel={onCancel} onOk={onCreate} title={'User'} width={550}>
           <Form>
           <FormItem label={L('TenancyName')} {...formItemLayout}>
-              {this.props.form.getFieldDecorator('tenancyName', { rules: [{ required: true, message: 'Please input your name!' }] })(<Input />)}
+            {this.props.form.getFieldDecorator('tenancyName', { rules: [{ required: true, message: 'Please input TenancyName!' }] })(<Input />)}
             </FormItem>
           <FormItem label={L('Name')} {...formItemLayout}>
-              {getFieldDecorator('name', { rules: [{ required: true, message: 'Please input your surname!' }] })(<Input />)}
+            {getFieldDecorator('name', { rules: [{ required: true, message: 'Please input your name!' }] })(<Input />)}
             </FormItem>
           {this.props.modalType == 'edit' ? <FormItem label={L('AdminEmailAddress')} {...formItemLayout}>
                 {getFieldDecorator('adminEmailAddress', {
-                  rules: [{ type: 'email', required: true, message: 'Please input your username!' }],
+              rules: [{ type: 'email', required: true, message: 'Please input your email!' }],
                 })(<Input />)}
               </FormItem> : null}
             {this.props.modalType == 'edit' ? <FormItem label={L('DatabaseConnectionString')} {...formItemLayout}>

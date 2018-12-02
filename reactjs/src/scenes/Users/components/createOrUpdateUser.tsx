@@ -32,7 +32,7 @@ class CreateOrUpdateUser extends React.Component<any> {
   };
   render() {
     const { roles}=this.props
-    debugger;
+    
     const formItemLayout = {
       labelCol: {
         xs: { span: 6 },

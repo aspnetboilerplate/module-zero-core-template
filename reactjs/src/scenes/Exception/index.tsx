@@ -7,23 +7,7 @@ import './index.css';
 import * as React from 'react';
 import { Row, Col, Avatar, Button } from 'antd';
 
-const exception = [
-  {
-    errorCode: '404',
-    errorImg: error404,
-    errorDescription: 'Sorry, the page you visited does not exist',
-  },
-  {
-    errorCode: '401',
-    errorImg: error401,
-    errorDescription: 'Kardeş, Nere gidiyon',
-  },
-  {
-    errorCode: '500',
-    errorImg: error500,
-    errorDescription: 'Kardeş yavas , Sunucu Gitti',
-  },
-];
+
 
 class Exception extends React.Component<any, any> {
   constructor(props: any) {
@@ -31,6 +15,9 @@ class Exception extends React.Component<any, any> {
   }
 
   public render() {
+    const exception = [{ errorCode: '404', errorImg: error404, errorDescription: 'Sorry, the page you visited does not exist' }, {
+      errorCode: '401', errorImg: error401, errorDescription: 'Sorry, you dont have access to this page' }, 
+      { errorCode: '500', errorImg: error500, errorDescription: 'Sorry, the server is reporting an error' }];
     let params = new URLSearchParams(this.props.location.search);
     const test = params.get('type');
 
@@ -46,9 +33,9 @@ class Exception extends React.Component<any, any> {
           xs={{ span: 7, offset: 1 }}
           sm={{ span: 7, offset: 1 }}
           md={{ span: 7, offset: 1 }}
-          lg={{ span: 5, offset: 8 }}
-          xl={{ span: 5, offset: 8 }}
-          xxl={{ span: 5, offset: 8 }}
+          lg={{ span: 10, offset: 4 }}
+          xl={{ span: 10, offset: 4 }}
+          xxl={{ span: 10, offset: 4 }}
         >
           <Avatar shape="square" className={'errorAvatar'} src={error!.errorImg} />
         </Col>

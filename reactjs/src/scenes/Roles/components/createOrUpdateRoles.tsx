@@ -19,9 +19,9 @@ class CreateOrUpdateRoles extends React.Component<any> {
   };
 
   render() {
-    debugger;
+    
     const { permission } = this.props;
-    debugger;
+    
     const options = permission.map((x: GetAllPermissionsOutput) => {
       var test = { label: x.displayName, value: x.name };
       return test;

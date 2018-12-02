@@ -18,7 +18,7 @@ class RoleStore {
   allPermissions: GetAllPermissionsOutput[]=[];
 
   @action async create(createRoleInput:CreateRoleInput){
-    debugger;
+    
 
     console.log(JSON.stringify(createRoleInput));
 var result=await roleService.create(createRoleInput);
