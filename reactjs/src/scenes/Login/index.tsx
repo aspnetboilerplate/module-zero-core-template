@@ -9,6 +9,7 @@ import { L } from 'src/lib/abpUtility';
 import SessionStore from 'src/stores/sessionStore';
 import AccountStore from 'src/stores/accountStore';
 import TenantAvailabilityState from 'src/services/account/dto/tenantAvailabilityState';
+import './index.less'
 
 const FormItem = Form.Item;
 
@@ -71,100 +72,103 @@ class Login extends React.Component<ILoginProps> {
     const { loginModel } = this.props.authenticationStore!;
     const { getFieldDecorator, getFieldValue } = this.props.form;
     return (
-      <Form className="login-form" onSubmit={this.handleSubmit}>
-        <Row>
-          <Row style={{ marginTop: 100 }}>
-            <Col span={8} offset={8}>
-              <Card>
-                <Row>
-                  {!!this.props.sessionStore!.currentLogin.tenant ? (
-                    <Col span={24} offset={0} style={{ textAlign: 'center' }}>
-                      <a onClick={loginModel.toggleShowModal}>
-                        {L('CurrentTenant')} : {this.props.sessionStore!.currentLogin.tenant.tenancyName}
-                      </a>
-                    </Col>
-                  ) : (
-                    <Col span={24} offset={0} style={{ textAlign: 'center' }}>
-                      <a onClick={loginModel.toggleShowModal}> {L('NotSelected')}</a>
-                    </Col>
-                  )}
-                </Row>
-              </Card>
-            </Col>
-          </Row>
-
+      <Col className="name">
+        <Form className="" onSubmit={this.handleSubmit}>
           <Row>
-            <Modal
-              visible={loginModel.showModal}
-              onCancel={loginModel.toggleShowModal}
-              onOk={this.changeTenant}
-              title={L('ChangeTenant')}
-              okText={L('OK')}
-              cancelText={L('Cancel')}
-            >
-              <Row>
-                <Col span={8} offset={8}>
-                  <h3>{L('TenancyName')}</h3>
-                </Col>
-                <Col>
+            <Row style={{ marginTop: 100 }}>
+              <Col span={8} offset={8}>
+                <Card>
+                  <Row>
+                    {!!this.props.sessionStore!.currentLogin.tenant ? (
+                      <Col span={24} offset={0} style={{ textAlign: 'center' }}>
+                        <a onClick={loginModel.toggleShowModal}>
+                          {L('CurrentTenant')} : {this.props.sessionStore!.currentLogin.tenant.tenancyName}
+                        </a>
+                      </Col>
+                    ) : (
+                        <Col span={24} offset={0} style={{ textAlign: 'center' }}>
+                          <a onClick={loginModel.toggleShowModal}> {L('NotSelected')}</a>
+                        </Col>
+                      )}
+                  </Row>
+                </Card>
+              </Col>
+            </Row>
+
+            <Row>
+              <Modal
+                visible={loginModel.showModal}
+                onCancel={loginModel.toggleShowModal}
+                onOk={this.changeTenant}
+                title={L('ChangeTenant')}
+                okText={L('OK')}
+                cancelText={L('Cancel')}
+              >
+                <Row>
+                  <Col span={8} offset={8}>
+                    <h3>{L('TenancyName')}</h3>
+                  </Col>
+                  <Col>
+                    <FormItem>
+                      {getFieldDecorator('tenancyName', {})(
+                        <Input placeholder={L('TenancyName')} prefix={<Icon type="user" style={{ color: 'rgba(0,0,0,.25)' }} />} size="large" />
+                      )}
+                    </FormItem>
+                    {!getFieldValue('tenancyName') ? <div>{L('LeaveEmptyToSwitchToHost')}</div> : ''}
+                  </Col>
+                </Row>
+              </Modal>
+            </Row>
+            <Row style={{ marginTop: 10 }}>
+              <Col span={8} offset={8}>
+                <Card>
+                  <div style={{ textAlign: 'center' }}>
+                    <h3>{L('WellcomeMessage')}</h3>
+                  </div>
                   <FormItem>
-                    {getFieldDecorator('tenancyName', {})(
-                      <Input placeholder={L('TenancyName')} prefix={<Icon type="user" style={{ color: 'rgba(0,0,0,.25)' }} />} size="large" />
+                    {getFieldDecorator('userNameOrEmailAddress', {
+                      rules: [
+                        {
+                          required: true,
+                          message: L('ThisFieldIsRequired'),
+                        },
+                      ],
+                    })(<Input placeholder={L('UserNameOrEmail')} prefix={<Icon type="user" style={{ color: 'rgba(0,0,0,.25)' }} />} size="large" />)}
+                  </FormItem>
+
+                  <FormItem>
+                    {getFieldDecorator('password', {
+                      rules: [{ required: true, message: L('ThisFieldIsRequired') }],
+                    })(
+                      <Input
+                        placeholder={L('Password')}
+                        prefix={<Icon type="lock" style={{ color: 'rgba(0,0,0,.25)' }} />}
+                        type="password"
+                        size="large"
+                      />
                     )}
                   </FormItem>
-                  {!getFieldValue('tenancyName') ? <div>{L('LeaveEmptyToSwitchToHost')}</div> : ''}
-                </Col>
-              </Row>
-            </Modal>
-          </Row>
-          <Row style={{ marginTop: 10 }}>
-            <Col span={8} offset={8}>
-              <Card>
-                <div style={{ textAlign: 'center' }}>
-                  <h3>{L('WellcomeMessage')}</h3>
-                </div>
-                <FormItem>
-                  {getFieldDecorator('userNameOrEmailAddress', {
-                    rules: [
-                      {
-                        required: true,
-                        message: L('ThisFieldIsRequired'),
-                      },
-                    ],
-                  })(<Input placeholder={L('UserNameOrEmail')} prefix={<Icon type="user" style={{ color: 'rgba(0,0,0,.25)' }} />} size="large" />)}
-                </FormItem>
+                  <Row style={{ margin: '0px 0px 10px 15px ' }}>
+                    <Col span={12} offset={0}>
+                      <Checkbox checked={loginModel.rememberMe} onChange={loginModel.toggleRememberMe} />
+                      {L('RememberMe')}
+                      <br />
+                      <a>{L('ForgotPassword')}</a>
+                    </Col>
 
-                <FormItem>
-                  {getFieldDecorator('password', {
-                    rules: [{ required: true, message: L('ThisFieldIsRequired') }],
-                  })(
-                    <Input
-                      placeholder={L('Password')}
-                      prefix={<Icon type="lock" style={{ color: 'rgba(0,0,0,.25)' }} />}
-                      type="password"
-                      size="large"
-                    />
-                  )}
-                </FormItem>
-                <Row style={{ margin: '0px 0px 10px 15px ' }}>
-                  <Col span={12} offset={0}>
-                    <Checkbox checked={loginModel.rememberMe} onChange={loginModel.toggleRememberMe} />
-                    {L('RememberMe')}
-                    <br />
-                    <a>{L('ForgotPassword')}</a>
-                  </Col>
-
-                  <Col span={8} offset={4}>
-                    <Button style={{ backgroundColor: '#f5222d', color: 'white' }} htmlType={'submit'} type="danger">
-                      {L('LogIn')}
-                    </Button>
-                  </Col>
-                </Row>
-              </Card>
-            </Col>
+                    <Col span={8} offset={4}>
+                      <Button style={{ backgroundColor: '#f5222d', color: 'white' }} htmlType={'submit'} type="danger">
+                        {L('LogIn')}
+                      </Button>
+                    </Col>
+                  </Row>
+                </Card>
+              </Col>
+            </Row>
           </Row>
-        </Row>
-      </Form>
+        </Form>
+
+      </Col>
     );
   }
 }
