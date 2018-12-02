@@ -1,4 +1,4 @@
-import {  action, observable } from 'mobx';
+import { action, observable } from 'mobx';
 
 import userService from 'src/services/user/userService';
 import { PagedResultDto } from 'src/services/dto/pagedResultDto';
@@ -9,12 +9,9 @@ import { CreateOrUpdateUserInput } from 'src/services/user/dto/createOrUpdateUse
 import { GetRoles } from 'src/services/user/dto/getRolesOuput';
 
 class UserStore {
-  @observable
-  users: PagedResultDto<GetUserOutput>;
-  @observable
-  editUser: CreateOrUpdateUserInput;
-  @observable
-  roles: GetRoles[]=[];
+  @observable users: PagedResultDto<GetUserOutput>;
+  @observable editUser: CreateOrUpdateUserInput;
+  @observable roles: GetRoles[] = [];
 
   @action
   async create(createUserInput: CreateOrUpdateUserInput) {
@@ -54,7 +51,7 @@ class UserStore {
   async get(entityDto: EntityDto) {
     var result = await userService.get(entityDto);
     console.log(result);
-    this.editUser=result;
+    this.editUser = result;
   }
 
   @action
@@ -69,13 +66,18 @@ class UserStore {
       password: '',
       id: 0,
     };
-    this.roles=[];
+    this.roles = [];
   }
+
   @action
   async getAll(pagedFilterAndSortedRequest: PagedFilterAndSortedRequest) {
     var result = await userService.getAll(pagedFilterAndSortedRequest);
     console.log(result);
     this.users = result;
+  }
+
+  async changeLanguage(languageName: string) {
+    await userService.changeLanguage({ languageName: languageName });
   }
 }
 

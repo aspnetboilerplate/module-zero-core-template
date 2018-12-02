@@ -84,6 +84,15 @@ export const appRouters: any = [
     showInMenu: false,
     component: LoadableComponent(() => import('src/components/Logout')),
   },
+  {
+    path: '/exception',
+    permission: '',
+    title: 'exception',
+    name: 'exception',
+    icon: 'info-circle',
+    showInMenu: false,
+    component: LoadableComponent(() => import('src/scenes/Exception')),
+  },
 ];
 
 export const routers = [...userRouter, ...appRouters];

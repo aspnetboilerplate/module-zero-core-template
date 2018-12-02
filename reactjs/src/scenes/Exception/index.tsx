@@ -1,16 +1,11 @@
-
-
-
-
 import error404 from 'src/images/404.png';
 import error401 from 'src/images/401.png';
 import error500 from 'src/images/500.png';
 import { Link } from 'react-router-dom';
 
 import './index.css';
-import  * as  React from 'react';
+import * as React from 'react';
 import { Row, Col, Avatar, Button } from 'antd';
-
 
 const exception = [
   {
@@ -97,7 +92,7 @@ class Exception extends React.Component<any, any> {
             <Button type={'primary'}>
               <Link
                 to={{
-                  pathname: '/dashboard',
+                  pathname: '/',
                 }}
               >
                 Back to Home

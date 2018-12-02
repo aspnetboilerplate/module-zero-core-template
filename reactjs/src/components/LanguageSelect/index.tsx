@@ -3,15 +3,25 @@ import { Menu, Dropdown, Icon } from 'antd';
 import classNames from 'classnames';
 import './index.less';
 import 'famfamfam-flags/dist/sprite/famfamfam-flags.css';
+import UserStore from 'src/stores/userStore';
+import { inject } from 'mobx-react';
+import Stores from 'src/stores/storeIdentifier';
+import { L } from 'src/lib/abpUtility';
 
-class LanguageSelect extends React.Component {
+export interface ILanguageSelectProps {
+  userStore?: UserStore;
+}
+
+@inject(Stores.UserStore)
+class LanguageSelect extends React.Component<ILanguageSelectProps> {
   get languages() {
     return abp.localization.languages.filter(val => {
       return !val.isDisabled;
     });
   }
 
-  changeLanguage(languageName: string) {
+  async changeLanguage(languageName: string) {
+    await this.props.userStore!.changeLanguage(languageName);
     abp.utils.setCookieValue(
       'Abp.Localization.CultureName',
       languageName,
@@ -38,7 +48,7 @@ class LanguageSelect extends React.Component {
     );
     return (
       <Dropdown overlay={langMenu} placement="bottomRight">
-        <Icon type="global" className={classNames('dropDown', 'className')} title={'Diller'} />
+        <Icon type="global" className={classNames('dropDown', 'className')} title={L('Languages')} />
       </Dropdown>
     );
   }
