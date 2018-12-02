@@ -1,4 +1,4 @@
-export interface GetRolesItem {
+export interface GetRoles {
   name: string;
   displayName: string;
   normalizedName: string;
@@ -8,6 +8,3 @@ export interface GetRolesItem {
   id: number;
 }
 
-export interface GetRoles {
-  items: GetRolesItem[];
-}

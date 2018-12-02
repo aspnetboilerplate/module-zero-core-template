@@ -10,13 +10,13 @@ import CreateTenantOutput from './dto/createTenantOutput';
 
 class TenantService {
   public async create(createTenantInput: CreateTenantInput): Promise<CreateTenantOutput> {
-    var result = await http.post('api/services/app/Tenant/Create', createTenantInput);
-    console.log(result);
-    return result.data;
+   
+    var result = await http.post('api/services/app/Tenant/Create', createTenantInput);   
+    return result.data.result;
   }
 
   public async delete(entityDto: EntityDto) {
-    var result = await http.delete('api/services/app/Tenant/Delete1', { params: entityDto });
+    var result = await http.delete('api/services/app/Tenant/Delete', { params: entityDto });
     console.log(result);
     return result.data;
   }
@@ -24,7 +24,7 @@ class TenantService {
   public async get(entityDto: EntityDto): Promise<GetTenantOutput> {
     var result = await http.get('api/services/app/Tenant/Get', { params: entityDto });
     console.log(result);
-    return result.data;
+    return result.data.result;
   }
 
   public async getAll(pagedFilterAndSortedRequest: PagedFilterAndSortedRequest): Promise<PagedResultDto<GetAllTenantOutput>> {
@@ -34,7 +34,7 @@ class TenantService {
   }
 
   public async update(updateTenantInput: UpdateTenantInput): Promise<UpdateTenantOutput> {
-    var result = await http.get('api/services/app/Tenant/Update', { params: updateTenantInput });
+    var result = await http.put('api/services/app/Tenant/Update', updateTenantInput);
     console.log(result);
     return result.data.result;
   }

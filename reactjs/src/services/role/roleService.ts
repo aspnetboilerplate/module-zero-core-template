@@ -11,12 +11,14 @@ import { GetRoleForEditOutput } from './dto/getRoleForEditOutput';
 
 class RoleService {
   public async create(createRoleInput: CreateRoleInput): Promise<PagedResultDto<CreateRoleOutput>> {
-    let result = await http.post('api/services/app/Role/Create', createRoleInput);
+    var result = await http.post('api/services/app/Role/Create', createRoleInput);
+    console.log(result);
     return result.data.result;
   }
 
   public async getRolesAsync(getRoleAsyncInput: GetRoleAsyncInput): Promise<GetRoleAsyncOutput> {
-    let result = await http.get('api/services/app/Role/GetRolesAsync', { params: getRoleAsyncInput });
+    var result = await http.get('api/services/app/Role/GetRolesAsync', { params: getRoleAsyncInput });
+    console.log(result);
     return result.data.result;
   }
 
@@ -27,7 +29,7 @@ class RoleService {
   }
 
   public async delete(entityDto: EntityDto) {
-    var result = await http.delete('api/services/app/Role/Delete1', { params: entityDto });
+    var result = await http.delete('api/services/app/Role/Delete', { params: entityDto });
     console.log(result);
     return result.data;
   }
@@ -35,13 +37,13 @@ class RoleService {
   public async getAllPermissions() {
     var result = await http.get('api/services/app/Role/GetAllPermissions');
     console.log(result);
-    return result.data;
+    return result.data.result.items;
   }
 
   public async getRoleForEdit(entityDto: EntityDto): Promise<GetRoleForEditOutput> {
     var result = await http.get('api/services/app/Role/GetRoleForEdit', { params: entityDto });
     console.log(result);
-    return result.data;
+    return result.data.result;
   }
 
   public async get(entityDto: EntityDto) {
