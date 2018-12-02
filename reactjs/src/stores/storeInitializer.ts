@@ -3,6 +3,7 @@ import TenantStore from './tenantStore';
 import UserStore from './userStore';
 import SessionStore from './sessionStore';
 import AuthenticationStore from './authenticationStore';
+import AccountStore from './accountStore';
 
 export default function initializeStores() {
   return {
@@ -11,5 +12,6 @@ export default function initializeStores() {
     tenantStore: new TenantStore(),
     userStore: new UserStore(),
     sessionStore: new SessionStore(),
+    accountStore: new AccountStore(),
   };
 }

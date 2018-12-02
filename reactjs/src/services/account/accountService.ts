@@ -1,6 +1,6 @@
 import { IsTenantAvaibleInput } from './dto/isTenantAvailableInput';
 import { RegisterInput } from './dto/registerInput';
-import { IsTenantAvaibleOutput } from './dto/isTenantAvailableOutput';
+import IsTenantAvaibleOutput from './dto/isTenantAvailableOutput';
 import { RegisterOutput } from './dto/registerOutput';
 import http from '../httpService';
 

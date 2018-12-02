@@ -7,7 +7,7 @@ class SessionStore {
 
   @action
   async getCurrentLoginInformations() {
-    var result = await sessionService.getCurrentLoginInformations();
+    let result = await sessionService.getCurrentLoginInformations();
     this.currentLogin = result;
   }
 }
