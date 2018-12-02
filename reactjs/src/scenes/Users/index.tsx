@@ -1,4 +1,4 @@
-import { Card, Col, Row, Button, Table, Tag, Dropdown, Menu } from 'antd';
+import { Card, Col, Row, Button, Table, Tag, Dropdown, Menu, Modal } from 'antd';
 import 'antd/dist/antd.css';
 import *as React from 'react';
 import CreateOrUpdateUser from './components/createOrUpdateUser';
@@ -12,7 +12,7 @@ import { L } from 'src/lib/abpUtility';
 export interface IUserProps {
   userStore: UserStore;
 }
-
+const confirm = Modal.confirm;
 @inject(Stores.UserStore)
 @observer
 class User extends React.Component<any> {
@@ -56,19 +56,29 @@ class User extends React.Component<any> {
     this.setState({ userId: entityDto.id });
     this.Modal();
 
-    debugger;
+    
     this.formRef.props.form.setFieldsValue({ ...this.props.userStore.editUser, roleNames: this.props.userStore.editUser.roleNames });
   }
 
   delete(input: EntityDto) {
-    this.props.userStore.delete(input);
+    const self = this;
+    confirm({
+      title: 'Do you Want to delete these items?',
+      onOk() {
+        self.props.userStore.delete(input);
+      },
+      onCancel() {
+        console.log('Cancel');
+      },
+    });
+   
   }
   handleCreate = () => {
-    debugger;
+    
     const form = this.formRef.props.form;
 
     form.validateFields(async (err: any, values: any) => {
-      debugger;
+      
       if (err) {
         return;
       } else {
@@ -88,7 +98,7 @@ class User extends React.Component<any> {
     this.formRef = formRef;
   };
   public render() {
-    debugger;
+    
     const { users } = this.props.userStore;
     const columns = [{ title: L('UserName'), dataIndex: 'userName', key: 'userName', width: 150, render: (text: string) => <div>
             {text}

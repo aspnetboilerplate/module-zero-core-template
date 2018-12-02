@@ -15,7 +15,7 @@ class UserStore {
 
   @action
   async create(createUserInput: CreateOrUpdateUserInput) {
-    debugger;
+    
     var result = await userService.create(createUserInput);
     console.log(result);
     this.users.items.push(result);
@@ -23,7 +23,7 @@ class UserStore {
 
   @action
   async update(updateUserInput: UpdateUserInput) {
-    debugger;
+    
     var result = await userService.update(updateUserInput);
     console.log(result);
     this.users.items = this.users.items.map((x: GetUserOutput) => {

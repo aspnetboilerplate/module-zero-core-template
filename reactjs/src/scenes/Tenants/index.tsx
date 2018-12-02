@@ -1,4 +1,4 @@
-import { Card, Col, Row,  Button, Table, Tag, Dropdown, Menu } from 'antd';
+import { Card, Col, Row,  Button, Table, Tag, Dropdown, Menu, Modal } from 'antd';
 import 'antd/dist/antd.css';
 import *as React from 'react';
 import { EntityDto } from 'src/services/dto/entityDto';
@@ -12,7 +12,7 @@ import { L } from 'src/lib/abpUtility';
 export interface ITenantProps {
   tenantStore: TenantStore;
 }
-
+const confirm = Modal.confirm;
 @inject(Stores.TenantStore)
 @observer
 class Tenant extends React.Component<any> {
@@ -61,8 +61,18 @@ class Tenant extends React.Component<any> {
     });
   }
 
-  delete(input: EntityDto) {
-    this.props.tenantStore.delete(input);
+  delete (input: EntityDto) {
+    const self=this;
+    confirm({
+      title: 'Do you Want to delete these items?',
+     onOk() {
+        self.props.tenantStore.delete(input);
+      },
+      onCancel() {
+        console.log('Cancel');
+      },
+    });
+    
   }
 
   handleCreate = () => {

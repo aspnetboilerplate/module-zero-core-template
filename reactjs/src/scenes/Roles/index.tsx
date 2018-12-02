@@ -1,4 +1,4 @@
-import { Card, Col, Row, Button, Table, Dropdown, Menu } from 'antd';
+import { Card, Col, Row, Button, Table, Dropdown, Menu, Modal } from 'antd';
 import 'antd/dist/antd.css';
 import * as React from 'react';
 import { EntityDto } from 'src/services/dto/entityDto';
@@ -18,7 +18,7 @@ export interface IRoleState {
   maxResultCount: number;
   skipCount: number;
 }
-
+const confirm = Modal.confirm;
 @inject(Stores.RoleStore)
 @observer
 class Role extends AppComponentBase<any> {
@@ -39,7 +39,7 @@ class Role extends AppComponentBase<any> {
   }
 
   async getAll() {
-    debugger;
+    
     await this.props.roleStore.getAll({ maxResultCount: this.state.maxResultCount, skipCount: this.state.skipCount });
   }
 
@@ -68,7 +68,7 @@ class Role extends AppComponentBase<any> {
     this.setState({ roleId: entityDto.id })
     this.Modal();
 
-    debugger;
+    
     this.formRef.props.form.setFieldsValue({
       ...this.props.roleStore.roleForEdit.role,
       permissions: this.props.roleStore.roleForEdit.grantedPermissionNames,
@@ -76,12 +76,22 @@ class Role extends AppComponentBase<any> {
   }
 
   delete(input: EntityDto) {
-    this.props.roleStore.delete(input);
+    const self = this;
+    confirm({
+      title: 'Do you Want to delete these items?',
+      onOk() {
+        self.props.roleStore.delete(input);
+      },
+      onCancel() {
+        console.log('Cancel');
+      },
+    });
+    
   }
   handleCreate = () => {
     const form = this.formRef.props.form;
     form.validateFields(async (err: any, values: any) => {
-      debugger;
+      
       if (err) {
         return;
       }
