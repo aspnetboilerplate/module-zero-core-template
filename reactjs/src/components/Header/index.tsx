@@ -13,11 +13,10 @@ export interface IHeaderProps {
 const userDropdownMenu = (
   <Menu>
     <Menu.Item key="2">
-      <Icon type="logout" />
-      <span>
-        {' '}
-        <Link to="/logout">{L('Logout')}</Link>
-      </span>
+      <Link to="/logout">
+        <Icon type="logout" />
+        <span> {L('Logout')}</span>
+      </Link>
     </Menu.Item>
   </Menu>
 );

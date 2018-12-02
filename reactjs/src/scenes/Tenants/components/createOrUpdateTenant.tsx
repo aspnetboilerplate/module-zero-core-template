@@ -1,32 +1,17 @@
 import * as React from 'react';
-import { Form, Input, Checkbox, Row, Col } from 'antd';
+import { Form, Input, Checkbox,Col, Modal } from 'antd';
 import FormItem from 'antd/lib/form/FormItem';
+import { L } from 'src/lib/abpUtility';
+
+
+export declare type ModalType  = 'edit' | 'create';
+
 
 class CreateOrUpdateTenant extends React.Component<any> {
   constructor(props: any) {
     super(props);
-   
   }
-state = {
-  confirmDirty: false,
-}
-  compareToFirstPassword = (rule:any, value:any, callback:any) => {
-    const form = this.props.form;
-    if (value && value !== form.getFieldValue('password')) {
-      callback('Two passwords that you enter is inconsistent!');
-    } else {
-      callback();
-    }
-  }
-
-  validateToNextPassword = (rule:any, value:any, callback:any) => {
-    const form = this.props.form;
-    if (value && this.state.confirmDirty) {
-      form.validateFields(['confirm'], { force: true });
-    }
-    callback();
-  }
-  render() {
+    render() {  
     const formItemLayout = {
       labelCol: {
         xs: { span: 6 },
@@ -63,47 +48,33 @@ state = {
         xxl: { span: 18 },
       },
     };
+      
     const { getFieldDecorator } = this.props.form;
-    return (
-      
-      <Row>
-        <FormItem label={'Tenant Name'} {...formItemLayout}>
-          {getFieldDecorator('tenancyName', {
-            rules: [{ required: true, message: 'Please input your name!' }],
-          })(
-          <Input   />)}
-        </FormItem>
-        <FormItem label={'Name'} {...formItemLayout}>
-          {getFieldDecorator('name', {
-            rules: [{ required: true, message: 'Please input your surname!' }],
-          })(
-          <Input   />)}
-        </FormItem>
-        <FormItem label={'Database connection string(Optional)'} {...formItemLayout}>
-          {getFieldDecorator('username', {
-            rules: [{ required: true, message: 'Please input your username!' }],
-          })(
-          <Input    />)}
-        </FormItem>
-        <FormItem label={'Admin Email Adress'} {...formItemLayout}>
-          {getFieldDecorator('email', {
-            rules: [{ required: true, message: 'Please input your email!' }],
-          })(
-          <Input   />)}
-        </FormItem>  
-        <FormItem label={'isActive'} {...tailFormItemLayout}>
-         
-            {getFieldDecorator('password(repeat)', {
-              rules: [{ required: true, message: 'Please input your username!' }],
-            })(
-      
-          <Checkbox  >
-            Aktif
-          </Checkbox>)}
-        </FormItem>
-       <Col>{"Default password is  123qwe"}</Col>
-      </Row>
-    )
+      const { visible, onCancel, onCreate } = this.props;
+     
+      return <Modal visible={visible} onCancel={onCancel} onOk={onCreate} title={'User'} width={550}>
+          <Form>
+          <FormItem label={L('TenancyName')} {...formItemLayout}>
+              {this.props.form.getFieldDecorator('tenancyName', { rules: [{ required: true, message: 'Please input your name!' }] })(<Input />)}
+            </FormItem>
+          <FormItem label={L('Name')} {...formItemLayout}>
+              {getFieldDecorator('name', { rules: [{ required: true, message: 'Please input your surname!' }] })(<Input />)}
+            </FormItem>
+          {this.props.modalType == 'edit' ? <FormItem label={L('AdminEmailAddress')} {...formItemLayout}>
+                {getFieldDecorator('adminEmailAddress', {
+                  rules: [{ type: 'email', required: true, message: 'Please input your username!' }],
+                })(<Input />)}
+              </FormItem> : null}
+            {this.props.modalType == 'edit' ? <FormItem label={L('DatabaseConnectionString')} {...formItemLayout}>
+                {getFieldDecorator('connectionString')(<Input />)}
+              </FormItem> : null}
+          <FormItem label={L('IsActive')} {...tailFormItemLayout}>
+              {getFieldDecorator('isActive', { valuePropName: 'checked' })(<Checkbox>Aktif</Checkbox>)}
+            </FormItem>
+            <Col>{'Default password is  123qwe'}</Col>
+          </Form>
+        </Modal>;
+     
   }
 }
 

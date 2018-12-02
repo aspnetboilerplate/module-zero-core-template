@@ -1,10 +1,10 @@
-export interface GetUserOutput {
+export interface CreateOrUpdateUserInput {
   userName: string;
   name: string;
   surname: string;
   emailAddress: string;
   isActive: boolean;
-  fullName: string;
   roleNames: string[];
+  password: string;
   id: number;
 }
