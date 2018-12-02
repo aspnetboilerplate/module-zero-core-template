@@ -48,9 +48,7 @@ class Login extends React.Component<ILoginProps, any> {
     e.preventDefault();
     await this.props.form.validateFields(async (err: any, values: any) => {
       if (!err) {
-        debugger;
         await this.props.authenticationStore!.login(values);
-        debugger;
         sessionStorage.setItem('rememberMe', this.state.rememberMe ? '1' : '0');
         const { state } = this.props.location;
         window.location = state ? state.from.pathname : '/';

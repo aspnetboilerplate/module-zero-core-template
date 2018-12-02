@@ -3,6 +3,7 @@ import { Col, Icon, Avatar, Menu, Dropdown, Badge } from 'antd';
 import { Link } from 'react-router-dom';
 import LanguageSelect from '../LanguageSelect';
 import './index.css';
+import { L } from 'src/lib/abpUtility';
 
 export interface IHeaderProps {
   collapsed?: any;
@@ -15,7 +16,7 @@ const userDropdownMenu = (
       <Icon type="logout" />
       <span>
         {' '}
-        <Link to="/login">Logout</Link>
+        <Link to="/logout">{L('Logout')}</Link>
       </span>
     </Menu.Item>
   </Menu>

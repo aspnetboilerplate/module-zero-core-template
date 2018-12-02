@@ -2,13 +2,10 @@ import * as React from 'react';
 import DocumentTitle from 'react-document-title';
 import { Switch, Route, Redirect } from 'react-router-dom';
 import utils from 'src/utils/utils';
-// import { userRouter } from '../Router/router.config';
-// import Login from 'src/scenes/Login';
 import { userRouter } from '../Router/router.config';
 
 class UserLayout extends React.Component<any> {
   render() {
-    debugger;
     const {
       location: { pathname },
     } = this.props;

@@ -28,7 +28,6 @@ class AppLayout extends React.Component<any> {
   };
 
   render() {
-    debugger;
     const {
       history,
       location: { pathname },

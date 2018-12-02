@@ -4,12 +4,10 @@ import { Route, Redirect } from 'react-router-dom';
 // import { isGranted } from 'src/lib/abpUtility';
 
 const ProtectedRoute = ({ path, component: Component, permission, render, ...rest }: any) => {
-  debugger;
   return (
     <Route
       {...rest}
       render={props => {
-        debugger;
         if (!abp.session.userId)
           return (
             <Redirect

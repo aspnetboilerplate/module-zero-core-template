@@ -39,7 +39,6 @@ http.interceptors.response.use(
         title: L('LoginFailed'),
         content: error.response.data.error.message,
       });
-      console.log(`title: Login Failed content:$`);
     } else if (!error.response) {
       Modal.error({ content: L('UnknownError') });
     }

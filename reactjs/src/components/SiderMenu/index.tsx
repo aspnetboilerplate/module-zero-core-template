@@ -30,7 +30,7 @@ const SiderMenu = (props: ISiderMenuProps) => {
 
       <Menu theme="dark" mode="inline">
         {appRouters
-          .filter((item: any) => !item.isLayout)
+          .filter((item: any) => !item.isLayout && item.showInMenu)
           .map((route: any, index: number) => {
             if (route.permission && !isGranted(route.permission)) return null;
 

@@ -7,12 +7,14 @@ export const userRouter: any = [
     title: 'User',
     component: LoadableComponent(() => import('src/components/Layout/UserLayout')),
     isLayout: true,
+    showInMenu: false,
   },
   {
     path: '/user/login',
     name: 'login',
     title: 'LogIn',
     component: LoadableComponent(() => import('src/scenes/Login')),
+    showInMenu: false,
   },
 ];
 
@@ -26,6 +28,7 @@ export const appRouters: any = [
     icon: 'home',
     component: LoadableComponent(() => import('src/components/Layout/AppLayout')),
     isLayout: true,
+    showInMenu: false,
   },
   {
     path: '/dashboard',
@@ -33,6 +36,7 @@ export const appRouters: any = [
     permission: '',
     title: 'Dashboard',
     icon: 'home',
+    showInMenu: true,
     component: LoadableComponent(() => import('src/scenes/Dashboard')),
   },
   {
@@ -41,6 +45,7 @@ export const appRouters: any = [
     title: 'Users',
     name: 'user',
     icon: 'user',
+    showInMenu: true,
     component: LoadableComponent(() => import('src/scenes/Users')),
   },
   {
@@ -49,6 +54,7 @@ export const appRouters: any = [
     title: 'Roles',
     name: 'role',
     icon: 'tags',
+    showInMenu: true,
     component: LoadableComponent(() => import('src/scenes/Roles')),
   },
   {
@@ -57,6 +63,7 @@ export const appRouters: any = [
     title: 'Tenants',
     name: 'tenant',
     icon: 'appstore',
+    showInMenu: true,
     component: LoadableComponent(() => import('src/scenes/Tenants')),
   },
   {
@@ -65,7 +72,17 @@ export const appRouters: any = [
     title: 'About',
     name: 'about',
     icon: 'info-circle',
+    showInMenu: true,
     component: LoadableComponent(() => import('src/scenes/About')),
+  },
+  {
+    path: '/logout',
+    permission: '',
+    title: 'Logout',
+    name: 'logout',
+    icon: 'info-circle',
+    showInMenu: false,
+    component: LoadableComponent(() => import('src/components/Logout')),
   },
 ];
 
