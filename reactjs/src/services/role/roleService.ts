@@ -11,14 +11,12 @@ import { GetRoleForEditOutput } from './dto/getRoleForEditOutput';
 
 class RoleService {
   public async create(createRoleInput: CreateRoleInput): Promise<PagedResultDto<CreateRoleOutput>> {
-    var result = await http.post('api/services/app/Role/Create', createRoleInput);
-    console.log(result);
+    let result = await http.post('api/services/app/Role/Create', createRoleInput);
     return result.data.result;
   }
 
   public async getRolesAsync(getRoleAsyncInput: GetRoleAsyncInput): Promise<GetRoleAsyncOutput> {
-    var result = await http.get('api/services/app/Role/GetRolesAsync', { params: getRoleAsyncInput });
-    console.log(result);
+    let result = await http.get('api/services/app/Role/GetRolesAsync', { params: getRoleAsyncInput });
     return result.data.result;
   }
 

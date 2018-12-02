@@ -29,17 +29,18 @@ const SiderMenu = (props: ISiderMenuProps) => {
       )}
 
       <Menu theme="dark" mode="inline">
-        {appRouters.map((route: any, index: number) => {
-          console.log(route.permission);
-          if (route.permission && !isGranted(route.permission)) return null;
+        {appRouters
+          .filter((item: any) => !item.isLayout)
+          .map((route: any, index: number) => {
+            if (route.permission && !isGranted(route.permission)) return null;
 
-          return (
-            <Menu.Item key={route.path} onClick={() => history.push(route.path)}>
-              <Icon type={route.icon} />
-              <span>{L(route.title)}</span>
-            </Menu.Item>
-          );
-        })}
+            return (
+              <Menu.Item key={route.path} onClick={() => history.push(route.path)}>
+                <Icon type={route.icon} />
+                <span>{L(route.title)}</span>
+              </Menu.Item>
+            );
+          })}
       </Menu>
     </Sider>
   );

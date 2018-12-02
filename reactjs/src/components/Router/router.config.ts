@@ -1,11 +1,22 @@
-export const loginRouter = {
-  path: '/login',
-  name: 'login',
-  title: 'LogIn',
-  component: () => import('src/scenes/Login'),
-};
+import LoadableComponent from './../Loadable/index';
 
-export const appRouters = [
+export const userRouter: any = [
+  {
+    path: '/user',
+    name: 'user',
+    title: 'User',
+    component: LoadableComponent(() => import('src/components/Layout/UserLayout')),
+    isLayout: true,
+  },
+  {
+    path: '/user/login',
+    name: 'login',
+    title: 'LogIn',
+    component: LoadableComponent(() => import('src/scenes/Login')),
+  },
+];
+
+export const appRouters: any = [
   {
     path: '/',
     exact: true,
@@ -13,7 +24,16 @@ export const appRouters = [
     permission: '',
     title: 'Home',
     icon: 'home',
-    component: () => import('src/scenes/Dashboard'),
+    component: LoadableComponent(() => import('src/components/Layout/AppLayout')),
+    isLayout: true,
+  },
+  {
+    path: '/dashboard',
+    name: 'dashboard',
+    permission: '',
+    title: 'Dashboard',
+    icon: 'home',
+    component: LoadableComponent(() => import('src/scenes/Dashboard')),
   },
   {
     path: '/users',
@@ -21,7 +41,7 @@ export const appRouters = [
     title: 'Users',
     name: 'user',
     icon: 'user',
-    component: () => import('src/scenes/Users'),
+    component: LoadableComponent(() => import('src/scenes/Users')),
   },
   {
     path: '/roles',
@@ -29,7 +49,7 @@ export const appRouters = [
     title: 'Roles',
     name: 'role',
     icon: 'tags',
-    component: () => import('src/scenes/Roles'),
+    component: LoadableComponent(() => import('src/scenes/Roles')),
   },
   {
     path: '/tenants',
@@ -37,14 +57,16 @@ export const appRouters = [
     title: 'Tenants',
     name: 'tenant',
     icon: 'appstore',
-    component: () => import('src/scenes/Tenants'),
+    component: LoadableComponent(() => import('src/scenes/Tenants')),
   },
   {
     path: '/about',
+    permission: '',
     title: 'About',
     name: 'about',
     icon: 'info-circle',
-    component: () => import('src/scenes/About'),
+    component: LoadableComponent(() => import('src/scenes/About')),
   },
 ];
-export const routers = [loginRouter, ...appRouters];
+
+export const routers = [...userRouter, ...appRouters];

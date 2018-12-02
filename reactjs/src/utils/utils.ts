@@ -1,3 +1,6 @@
+import { L } from 'src/lib/abpUtility';
+import { routers } from 'src/components/Router/router.config';
+
 class Utils {
   loadScript(url: string) {
     var script = document.createElement('script');
@@ -55,6 +58,39 @@ class Utils {
       }
     }
     return target;
+  }
+
+  getPageTitle = (pathname: string) => {
+    const route = routers.filter(route => route.path === pathname);
+    const localizedAppName = L('AppName');
+    if (!route) {
+      return localizedAppName;
+    }
+
+    return L(route[0].title) + ' | ' + localizedAppName;
+  };
+
+  getRoute = (path: string): any => {
+    return routers.filter(route => route.path === path)[0];
+  };
+
+  setLocalization() {
+    if (!abp.utils.getCookieValue('Abp.Localization.CultureName')) {
+      let language = navigator.language;
+      abp.utils.setCookieValue('Abp.Localization.CultureName', language, new Date(new Date().getTime() + 5 * 365 * 86400000), abp.appPath);
+    }
+  }
+
+  getCurrentClockProvider(currentProviderName: string): abp.timing.IClockProvider {
+    if (currentProviderName === 'unspecifiedClockProvider') {
+      return abp.timing.unspecifiedClockProvider;
+    }
+
+    if (currentProviderName === 'utcClockProvider') {
+      return abp.timing.utcClockProvider;
+    }
+
+    return abp.timing.localClockProvider;
   }
 }
 

@@ -3,7 +3,7 @@ import http from '../httpService';
 
 class SessionService {
   public async getCurrentLoginInformations(): Promise<GetCurrentLoginInformations> {
-    var result = await http.get('api/services/app/Session/GetCurrentLoginInformations', {
+    let result = await http.get('api/services/app/Session/GetCurrentLoginInformations', {
       headers: {
         'Abp.TenantId': abp.multiTenancy.getTenantIdCookie(),
       },

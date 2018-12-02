@@ -6,15 +6,13 @@ import http from '../httpService';
 
 class AccountService {
   public async isTenantAvailable(isTenantAvaibleInput: IsTenantAvaibleInput): Promise<IsTenantAvaibleOutput> {
-    var result = await http.post('api/services/app/Account/IsTenantAvailable', isTenantAvaibleInput);
-    console.log(result);
-    return result.data;
+    let result = await http.post('api/services/app/Account/IsTenantAvailable', isTenantAvaibleInput);
+    return result.data.result;
   }
 
   public async register(registerInput: RegisterInput): Promise<RegisterOutput> {
-    var result = await http.post('api/services/app/Account/Register', registerInput);
-    console.log(result);
-    return result.data;
+    let result = await http.post('api/services/app/Account/Register', registerInput);
+    return result.data.result;
   }
 }
 
