@@ -15,17 +15,13 @@ class UserStore {
 
   @action
   async create(createUserInput: CreateOrUpdateUserInput) {
-    
-    var result = await userService.create(createUserInput);
-    console.log(result);
+    let result = await userService.create(createUserInput);
     this.users.items.push(result);
   }
 
   @action
   async update(updateUserInput: UpdateUserInput) {
-    
-    var result = await userService.update(updateUserInput);
-    console.log(result);
+    let result = await userService.update(updateUserInput);
     this.users.items = this.users.items.map((x: GetUserOutput) => {
       if (x.id == updateUserInput.id) x = result;
       return x;
@@ -34,23 +30,19 @@ class UserStore {
 
   @action
   async delete(entityDto: EntityDto) {
-    var result = await userService.delete(entityDto);
-    console.log(result);
-
+    await userService.delete(entityDto);
     this.users.items = this.users.items.filter((x: GetUserOutput) => x.id != entityDto.id);
   }
 
   @action
   async getRoles() {
-    var result = await userService.getRoles();
-    console.log(result);
+    let result = await userService.getRoles();
     this.roles = result;
   }
 
   @action
   async get(entityDto: EntityDto) {
-    var result = await userService.get(entityDto);
-    console.log(result);
+    let result = await userService.get(entityDto);
     this.editUser = result;
   }
 
@@ -71,8 +63,7 @@ class UserStore {
 
   @action
   async getAll(pagedFilterAndSortedRequest: PagedFilterAndSortedRequest) {
-    var result = await userService.getAll(pagedFilterAndSortedRequest);
-    console.log(result);
+    let result = await userService.getAll(pagedFilterAndSortedRequest);
     this.users = result;
   }
 

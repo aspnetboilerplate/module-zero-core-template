@@ -16,7 +16,7 @@ const confirm = Modal.confirm;
 
 @inject(Stores.UserStore)
 @observer
-class User extends React.Component<any> {
+class User extends React.Component<IUserProps> {
   formRef: any;
 
   constructor(props: any) {
@@ -48,11 +48,6 @@ class User extends React.Component<any> {
     });
   };
 
-  setPermissions() {
-    this.props.userStore.updateUserPermissions();
-    this.Modal();
-  }
-
   async createOrUpdateModalOpen(entityDto: EntityDto) {
     if (entityDto.id == 0) {
       await this.props.userStore.createUser();
@@ -61,6 +56,7 @@ class User extends React.Component<any> {
       await this.props.userStore.get(entityDto);
       await this.props.userStore.getRoles();
     }
+
     this.setState({ userId: entityDto.id });
     this.Modal();
 
@@ -93,6 +89,7 @@ class User extends React.Component<any> {
           await this.props.userStore.update({ id: this.state.userId, ...values });
         }
       }
+
       await this.getAll();
       this.setState({ modalVisible: false });
       form.resetFields();
@@ -143,6 +140,7 @@ class User extends React.Component<any> {
         ),
       },
     ];
+
     return (
       <Card>
         <Row>
@@ -178,7 +176,7 @@ class User extends React.Component<any> {
             xxl={{ span: 24, offset: 0 }}
           >
             <Table
-              rowKey="id"
+              rowKey={record => record.id}
               size={'default'}
               bordered={true}
               columns={columns}

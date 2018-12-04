@@ -56,7 +56,7 @@ class CreateOrUpdateTenant extends React.Component<ICreateOrUpdateTenantProps> {
     const { visible, onCancel, onCreate } = this.props;
 
     return (
-      <Modal visible={visible} onCancel={onCancel} onOk={onCreate} title={L('CreateNewTenant')} width={550}>
+      <Modal visible={visible} onCancel={onCancel} onOk={onCreate} title={L('Tenants')} width={550}>
         <Form>
           <FormItem label={L('TenancyName')} {...formItemLayout}>
             {this.props.form.getFieldDecorator('tenancyName', { rules: rules.tenancyName })(<Input />)}
@@ -77,7 +77,7 @@ class CreateOrUpdateTenant extends React.Component<ICreateOrUpdateTenantProps> {
           <FormItem label={L('IsActive')} {...tailFormItemLayout}>
             {getFieldDecorator('isActive', { valuePropName: 'checked' })(<Checkbox />)}
           </FormItem>
-          <Col>{'Default password is  123qwe'}</Col>
+          <Col>{L('Default password is  123qwe')}</Col>
         </Form>
       </Modal>
     );
