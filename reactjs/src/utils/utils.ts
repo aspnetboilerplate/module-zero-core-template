@@ -15,7 +15,6 @@ class Utils {
       src,
       srcType,
       copy,
-      //   copyType,
       copyIsArray,
       clone,
       target = args[0] || {},
@@ -57,6 +56,7 @@ class Utils {
         }
       }
     }
+
     return target;
   }
 

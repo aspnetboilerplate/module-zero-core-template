@@ -1,7 +1,7 @@
 import * as React from 'react';
 import { Layout, Menu, Icon, Avatar, Col } from 'antd';
 import AbpLogo from 'src/images/abp-logo-long.png';
-import './index.css';
+import './index.less';
 import { appRouters } from 'src/components/Router/router.config';
 import { L, isGranted } from 'src/lib/abpUtility';
 

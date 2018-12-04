@@ -1,30 +1,34 @@
 import * as React from 'react';
 import { Form, Input, Checkbox, Modal, Tabs } from 'antd';
 import FormItem from 'antd/lib/form/FormItem';
-
 import CheckboxGroup from 'antd/lib/checkbox/Group';
 import { GetAllPermissionsOutput } from 'src/services/role/dto/getAllPermissionsOutput';
 import { L } from 'src/lib/abpUtility';
-
-
+import rules from './createOrUpdateRole.validation';
+import { FormComponentProps } from 'antd/lib/form';
+import RoleStore from 'src/stores/roleStore';
 
 const TabPane = Tabs.TabPane;
-class CreateOrUpdateRoles extends React.Component<any> {
-  constructor(props: any) {
-    super(props);
-  }
 
+export interface ICreateOrUpdateRoleProps extends FormComponentProps {
+  roleStore: RoleStore;
+  visible: boolean;
+  onCancel: () => void;
+  modalType: string;
+  onOk: () => void;
+  permissions: GetAllPermissionsOutput[];
+}
+
+class CreateOrUpdateRole extends React.Component<ICreateOrUpdateRoleProps> {
   state = {
     confirmDirty: false,
   };
 
   render() {
-    
-    const { permission } = this.props;
-    
-    const options = permission.map((x: GetAllPermissionsOutput) => {
-      var test = { label: x.displayName, value: x.name };
-      return test;
+    const { permissions } = this.props;
+
+    const options = permissions.map((x: GetAllPermissionsOutput) => {
+      return { label: x.displayName, value: x.name };
     });
 
     const formItemLayout = {
@@ -45,6 +49,7 @@ class CreateOrUpdateRoles extends React.Component<any> {
         xxl: { span: 18 },
       },
     };
+
     const tailFormItemLayout = {
       labelCol: {
         xs: { span: 6 },
@@ -63,41 +68,42 @@ class CreateOrUpdateRoles extends React.Component<any> {
         xxl: { span: 18 },
       },
     };
+
     const { getFieldDecorator } = this.props.form;
-    return <Modal 
-    visible={this.props.visible} 
-    cancelText={L('Cancel')} 
-    okText={L('OK')} 
-    onCancel={this.props.onCancel}  
-    title={L('Role')} 
-    onOk={this.props.onOk}>
-        <Tabs defaultActiveKey={'Role'} size={'small'} tabBarGutter={64}>
-        <TabPane tab={L('RoleDetails')} key={'role'}>
+
+    return (
+      <Modal
+        visible={this.props.visible}
+        cancelText={L('Cancel')}
+        okText={L('OK')}
+        onCancel={this.props.onCancel}
+        title={L('Role')}
+        onOk={this.props.onOk}
+      >
+        <Tabs defaultActiveKey={'role'} size={'small'} tabBarGutter={64}>
+          <TabPane tab={L('RoleDetails')} key={'role'}>
             <FormItem label={L('RoleName')} {...formItemLayout}>
-              {getFieldDecorator('name', { rules: [{ required: true, message: 'Please input your name!' }] })(<Input />)}
+              {getFieldDecorator('name', { rules: rules.name })(<Input />)}
             </FormItem>
             <FormItem label={L('DisplayName')} {...formItemLayout}>
-              {getFieldDecorator('displayName', { rules: [{ required: true, message: 'Please input your surname!' }] })(<Input />)}
+              {getFieldDecorator('displayName', { rules: rules.displayName })(<Input />)}
             </FormItem>
             <FormItem label={L('Description')} {...formItemLayout}>
-              {getFieldDecorator('description', { rules: [{ required: true, message: 'Please input your username!' }] })(<Input />)}
+              {getFieldDecorator('description', { rules: rules.description })(<Input />)}
             </FormItem>
-          <FormItem label={L('IsActive')} {...tailFormItemLayout}>
-              {getFieldDecorator('isStatic', {
-                rules: [{ required: true, message: 'Please input your username!' }],
-                valuePropName: 'checked',
-              })(<Checkbox>Aktif</Checkbox>)}
+            <FormItem label={L('IsStatic')} {...tailFormItemLayout}>
+              {getFieldDecorator('isStatic', { rules: rules.isStatic, valuePropName: 'checked' })(<Checkbox />)}
             </FormItem>
           </TabPane>
-        <TabPane tab={L('RolePermission')} key={'permission'}>
+          <TabPane tab={L('RolePermission')} key={'permission'}>
             <FormItem {...tailFormItemLayout}>
               {getFieldDecorator('permissions', { valuePropName: 'value' })(<CheckboxGroup options={options} />)}
             </FormItem>
           </TabPane>
         </Tabs>
-      </Modal>;
+      </Modal>
+    );
   }
 }
 
-const nwUserInfoCreateOrEdit = Form.create()(CreateOrUpdateRoles);
-export default nwUserInfoCreateOrEdit;
+export default Form.create()(CreateOrUpdateRole);

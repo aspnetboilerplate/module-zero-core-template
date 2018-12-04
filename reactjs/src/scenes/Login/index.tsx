@@ -9,7 +9,8 @@ import { L } from 'src/lib/abpUtility';
 import SessionStore from 'src/stores/sessionStore';
 import AccountStore from 'src/stores/accountStore';
 import TenantAvailabilityState from 'src/services/account/dto/tenantAvailabilityState';
-import './index.less'
+import './index.less';
+import rules from './index.validation';
 
 const FormItem = Form.Item;
 
@@ -86,10 +87,10 @@ class Login extends React.Component<ILoginProps> {
                         </a>
                       </Col>
                     ) : (
-                        <Col span={24} offset={0} style={{ textAlign: 'center' }}>
-                          <a onClick={loginModel.toggleShowModal}> {L('NotSelected')}</a>
-                        </Col>
-                      )}
+                      <Col span={24} offset={0} style={{ textAlign: 'center' }}>
+                        <a onClick={loginModel.toggleShowModal}> {L('NotSelected')}</a>
+                      </Col>
+                    )}
                   </Row>
                 </Card>
               </Col>
@@ -126,20 +127,13 @@ class Login extends React.Component<ILoginProps> {
                     <h3>{L('WellcomeMessage')}</h3>
                   </div>
                   <FormItem>
-                    {getFieldDecorator('userNameOrEmailAddress', {
-                      rules: [
-                        {
-                          required: true,
-                          message: L('ThisFieldIsRequired'),
-                        },
-                      ],
-                    })(<Input placeholder={L('UserNameOrEmail')} prefix={<Icon type="user" style={{ color: 'rgba(0,0,0,.25)' }} />} size="large" />)}
+                    {getFieldDecorator('userNameOrEmailAddress', { rules: rules.userNameOrEmailAddress })(
+                      <Input placeholder={L('UserNameOrEmail')} prefix={<Icon type="user" style={{ color: 'rgba(0,0,0,.25)' }} />} size="large" />
+                    )}
                   </FormItem>
 
                   <FormItem>
-                    {getFieldDecorator('password', {
-                      rules: [{ required: true, message: L('ThisFieldIsRequired') }],
-                    })(
+                    {getFieldDecorator('password', { rules: rules.password })(
                       <Input
                         placeholder={L('Password')}
                         prefix={<Icon type="lock" style={{ color: 'rgba(0,0,0,.25)' }} />}
@@ -167,7 +161,6 @@ class Login extends React.Component<ILoginProps> {
             </Row>
           </Row>
         </Form>
-
       </Col>
     );
   }

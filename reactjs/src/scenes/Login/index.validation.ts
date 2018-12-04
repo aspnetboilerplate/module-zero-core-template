@@ -1,3 +1,13 @@
-// const rules = [];
+import { L } from 'src/lib/abpUtility';
 
-// export default rules;
+const rules = {
+  userNameOrEmailAddress: [
+    {
+      required: true,
+      message: L('ThisFieldIsRequired'),
+    },
+  ],
+  password: [{ required: true, message: L('ThisFieldIsRequired') }],
+};
+
+export default rules;

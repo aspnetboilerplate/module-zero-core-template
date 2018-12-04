@@ -4,4 +4,3 @@ export default interface UpdateTenantOutput {
   isActive: boolean;
   id: number;
 }
-

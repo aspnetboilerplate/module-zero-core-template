@@ -7,4 +7,3 @@ export interface GetRoles {
   permissions: string[];
   id: number;
 }
-

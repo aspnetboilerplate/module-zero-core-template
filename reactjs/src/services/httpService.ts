@@ -42,9 +42,9 @@ http.interceptors.response.use(
     } else if (!error.response) {
       Modal.error({ content: L('UnknownError') });
     }
-    setTimeout(() => {
-      // Modal.destroy();
-    }, 1000);
+
+    setTimeout(() => {}, 1000);
+
     return Promise.reject(error);
   }
 );

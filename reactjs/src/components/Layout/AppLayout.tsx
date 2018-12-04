@@ -1,6 +1,6 @@
 import * as React from 'react';
 import { Layout } from 'antd';
-import './AppLayout.css';
+import './AppLayout.less';
 import { Switch, Redirect } from 'react-router-dom';
 import Header from 'src/components/Header';
 import SiderMenu from 'src/components/SiderMenu';

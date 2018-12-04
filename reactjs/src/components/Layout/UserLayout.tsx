@@ -4,7 +4,6 @@ import { Switch, Route, Redirect } from 'react-router-dom';
 import utils from 'src/utils/utils';
 import { userRouter } from '../Router/router.config';
 import { Col } from 'antd';
-// import "./UserLayout.css";
 import './UserLayout.less';
 import Footer from '../Footer';
 import LanguageSelect from '../LanguageSelect';
@@ -14,6 +13,7 @@ class UserLayout extends React.Component<any> {
     const {
       location: { pathname },
     } = this.props;
+
     return (
       <DocumentTitle title={utils.getPageTitle(pathname)}>
         <Col className="container">

@@ -22,14 +22,17 @@ class LanguageSelect extends React.Component<ILanguageSelectProps> {
 
   async changeLanguage(languageName: string) {
     await this.props.userStore!.changeLanguage(languageName);
+
     abp.utils.setCookieValue(
       'Abp.Localization.CultureName',
       languageName,
       new Date(new Date().getTime() + 5 * 365 * 86400000), //5 year
       abp.appPath
     );
+
     location.reload();
   }
+
   get currentLanguage() {
     return abp.localization.currentLanguage;
   }
@@ -46,6 +49,7 @@ class LanguageSelect extends React.Component<ILanguageSelectProps> {
         ))}
       </Menu>
     );
+
     return (
       <Dropdown overlay={langMenu} placement="bottomRight">
         <Icon type="global" className={classNames('dropDown', 'className')} title={L('Languages')} />

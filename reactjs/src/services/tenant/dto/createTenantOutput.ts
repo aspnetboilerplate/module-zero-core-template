@@ -4,4 +4,3 @@ export default interface CreateTenantOutput {
   isActive: boolean;
   id: number;
 }
-

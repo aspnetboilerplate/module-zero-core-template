@@ -2,7 +2,7 @@ import * as React from 'react';
 import { Col, Icon, Avatar, Menu, Dropdown, Badge } from 'antd';
 import { Link } from 'react-router-dom';
 import LanguageSelect from '../LanguageSelect';
-import './index.css';
+import './index.less';
 import { L } from 'src/lib/abpUtility';
 
 export interface IHeaderProps {
