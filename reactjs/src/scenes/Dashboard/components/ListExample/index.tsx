@@ -13,24 +13,22 @@ export interface IListExampleProps {
   footer?: string;
 }
 
-class ListExample extends React.Component<IListExampleProps> {
-  render() {
-    return (
-      <List
-        header={this.props.header}
-        footer={this.props.footer}
-        split={false}
-        size="small"
-        dataSource={this.props.value}
-        renderItem={(item: any) => (
-          <List.Item>
-            <List.Item.Meta title={item.title} />
-            {item.body}
-          </List.Item>
-        )}
-      />
-    );
-  }
-}
+const ListExample: React.SFC<IListExampleProps> = (props: IListExampleProps) => {
+  return (
+    <List
+      header={props.header}
+      footer={props.footer}
+      split={false}
+      size="small"
+      dataSource={props.value}
+      renderItem={(item: any) => (
+        <List.Item>
+          <List.Item.Meta title={item.title} />
+          {item.body}
+        </List.Item>
+      )}
+    />
+  );
+};
 
 export default ListExample;

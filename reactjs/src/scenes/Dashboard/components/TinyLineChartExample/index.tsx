@@ -11,14 +11,12 @@ const data = [
   { name: 'Page G', uv: 3490, pv: 4300, amt: 2100 },
 ];
 
-class TinyLineChartExample extends React.Component<any> {
-  render() {
-    return (
-      <LineChart width={300} height={100} data={data}>
-        <Line type="monotone" dataKey="pv" stroke="#fff" strokeWidth={2} />
-      </LineChart>
-    );
-  }
-}
+const TinyLineChartExample: React.SFC = () => {
+  return (
+    <LineChart width={300} height={100} data={data}>
+      <Line type="monotone" dataKey="pv" stroke="#fff" strokeWidth={2} />
+    </LineChart>
+  );
+};
 
 export default TinyLineChartExample;

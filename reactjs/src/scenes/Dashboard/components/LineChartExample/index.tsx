@@ -16,20 +16,18 @@ const data = [
   { name: 'page 12', visit: 3200, session: 3300, amt: 1900 },
 ];
 
-class LineChartExample extends React.Component<any> {
-  render() {
-    return (
-      <LineChart width={1150} height={300} data={data} margin={{ top: 5, right: 30, left: 20, bottom: 5 }}>
-        <XAxis dataKey="name" />
-        <YAxis />
-        <CartesianGrid strokeDasharray="3 3" />
-        <Tooltip />
-        <Legend />
-        <Line type="monotone" dataKey="visit" stroke="#8884d8" activeDot={{ r: 12 }} />
-        <Line type="monotone" dataKey="session" stroke="#82ca9d" />
-      </LineChart>
-    );
-  }
-}
+const LineChartExample: React.SFC = () => {
+  return (
+    <LineChart width={1150} height={300} data={data} margin={{ top: 5, right: 30, left: 20, bottom: 5 }}>
+      <XAxis dataKey="name" />
+      <YAxis />
+      <CartesianGrid strokeDasharray="3 3" />
+      <Tooltip />
+      <Legend />
+      <Line type="monotone" dataKey="visit" stroke="#8884d8" activeDot={{ r: 12 }} />
+      <Line type="monotone" dataKey="session" stroke="#82ca9d" />
+    </LineChart>
+  );
+};
 
 export default LineChartExample;

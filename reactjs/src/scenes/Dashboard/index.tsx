@@ -8,12 +8,11 @@ import LineChartExample from './components/LineChartExample';
 import ListExample from './components/ListExample';
 
 export class Dashboard extends React.Component<any> {
-  constructor(props: any) {
-    super(props);
-    setInterval(() => this.setState({ cardLoading: false }), 1000);
-    setInterval(() => this.setState({ lineChartLoading: false }), 1500);
-    setInterval(() => this.setState({ barChartLoading: false }), 2000);
-    setInterval(() => this.setState({ pieChartLoading: false }), 1000);
+  componentDidMount() {
+    setTimeout(() => this.setState({ cardLoading: false }), 1000);
+    setTimeout(() => this.setState({ lineChartLoading: false }), 1500);
+    setTimeout(() => this.setState({ barChartLoading: false }), 2000);
+    setTimeout(() => this.setState({ pieChartLoading: false }), 1000);
   }
 
   state = {
