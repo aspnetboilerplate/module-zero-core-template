@@ -2,7 +2,7 @@
 
 The React.js integration for ABP Boilerplate framework. This template is built on React+Mobx+Typescript. SOLID, SoC principles are used.
 
-![](_screenshots/dashboard.jpg)
+![](_screenshots/dashboard.png)
 
 ## Getting Started
 
