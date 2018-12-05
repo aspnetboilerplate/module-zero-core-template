@@ -43,7 +43,7 @@ class AppLayout extends React.Component<any> {
           <Layout.Header style={{ background: '#fff', minHeight: 52, padding: 0 }}>
             <Header collapsed={this.state.collapsed} toggle={this.toggle} />
           </Layout.Header>
-          <Content style={{ margin: '0 16px' }}>
+          <Content style={{ margin: 16 }}>
             <Switch>
               {appRouters
                 .filter((item: any) => !item.isLayout)

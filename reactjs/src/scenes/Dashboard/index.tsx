@@ -112,12 +112,10 @@ export class Dashboard extends React.Component<any> {
           </Col>
         </Row>
 
-        <Row gutter={16}>
-          <Col className={'dashboardBox'}>
-            <Card title="Visit Statistics" loading={lineChartLoading} bordered={false}>
-              <LineChartExample />
-            </Card>
-          </Col>
+        <Row>
+          <Card className={'dashboardBox'} title="Visit Statistics" loading={lineChartLoading} bordered={false}>
+            <LineChartExample />
+          </Card>
         </Row>
 
         <Row gutter={16}>

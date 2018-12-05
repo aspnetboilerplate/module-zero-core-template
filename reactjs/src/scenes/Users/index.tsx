@@ -1,5 +1,4 @@
 import { Card, Col, Row, Button, Table, Tag, Dropdown, Menu, Modal } from 'antd';
-import 'antd/dist/antd.css';
 import * as React from 'react';
 import CreateOrUpdateUser from './components/createOrUpdateUser';
 import { EntityDto } from 'src/services/dto/entityDto';
