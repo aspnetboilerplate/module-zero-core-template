@@ -76,7 +76,7 @@
             this.getpage();
         }
         async getpage(){
-            let where= Util.buildFilters(this.filters);
+            let where= Util.buildFilters(this.filters);//TODO@personball fix this sql injection
             let pagerequest=new PageRequest();
             pagerequest.maxResultCount=this.pageSize;
             pagerequest.skipCount=(this.currentPage-1)*this.pageSize;
