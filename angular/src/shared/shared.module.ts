@@ -1,7 +1,8 @@
-﻿import { CommonModule } from '@angular/common';
+import { CommonModule } from '@angular/common';
 import { NgModule, ModuleWithProviders } from '@angular/core';
 import { AbpModule } from '@abp/abp.module';
 import { RouterModule } from '@angular/router';
+import { NgxPaginationModule } from 'ngx-pagination';
 
 import { AppSessionService } from './session/app-session.service';
 import { AppUrlService } from './nav/app-url.service';
@@ -14,7 +15,8 @@ import { AbpPaginationControlsComponent } from './pagination/abp-pagination-cont
     imports: [
         CommonModule,
         AbpModule,
-        RouterModule
+        RouterModule,
+        NgxPaginationModule
     ],
     declarations: [
         MaterialInput,
