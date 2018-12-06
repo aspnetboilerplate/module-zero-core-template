@@ -10,6 +10,7 @@ class Util{
         document.body.appendChild(script);
     }
     buildFilters(filters:Filter[]){
+        console.warn('SQL Injection warning.');
         let fileswhere:string[]=[];
         filters.forEach(f=>{
             let where='';
