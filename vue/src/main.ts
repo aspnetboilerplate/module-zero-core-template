@@ -1,19 +1,16 @@
-import Vue from 'vue'
-import App from './app.vue'
-import iView from 'iview'
+import Vue from 'vue';
+import App from './app.vue';
+import iView from 'iview';
 import {router} from './router/index';
-//import 'iview/dist/styles/iview.css';
 import 'famfamfam-flags/dist/sprite/famfamfam-flags.css';
 import './theme.less';
-import Vuex from 'vuex';
 import Ajax from './lib/ajax';
-import Util from './lib/util'
-import SignalRAspNetCoreHelper from './lib/SignalRAspNetCoreHelper'
+import Util from './lib/util';
+import SignalRAspNetCoreHelper from './lib/SignalRAspNetCoreHelper';
 Vue.use(iView);
-//Vue.use(Vuex)
 import store from './store/index';
-Vue.config.productionTip = false
-import { appRouters,otherRouters} from './router/router'
+Vue.config.productionTip = false;
+import { appRouters,otherRouters} from './router/router';
 if(!abp.utils.getCookieValue('Abp.Localization.CultureName')){
   let language=navigator.language;
   abp.utils.setCookieValue('Abp.Localization.CultureName',language,new Date(new Date().getTime() + 5 * 365 * 86400000),abp.appPath);

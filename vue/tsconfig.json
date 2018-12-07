@@ -3,6 +3,8 @@
     "target": "esnext",
     "module": "esnext",
     "strict": true,
+    "strictNullChecks":false,
+    "noImplicitAny":false,
     "jsx": "preserve",
     "moduleResolution": "node",
     "experimentalDecorators": true,
@@ -12,7 +14,8 @@
     "sourceMap": true,
     "baseUrl": ".",
     "types": [
-      "node"    ],
+      "webpack-env"
+        ],
     "paths": {
       "@/*": [
         "src/*"

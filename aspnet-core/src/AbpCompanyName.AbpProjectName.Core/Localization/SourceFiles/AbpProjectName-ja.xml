@@ -3,7 +3,7 @@
   <texts>
     <text name="HomePage" value="ホームページ" />
     <text name="About" value="我々について" />
-    <text name="WellcomeMessage" value="ようこそ AbpProjectName へ!" />
+    <text name="WelcomeMessage" value="ようこそ AbpProjectName へ!" />
 
     <text name="FormIsNotValidMessage" value="フォームは無効です。エラーを修正してください。" />
     <text name="TenantNameCanNotBeEmpty" value="テナント名を空にすることはできません" />

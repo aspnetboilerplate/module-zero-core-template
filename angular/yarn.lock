@@ -394,9 +394,9 @@ abbrev@1.0.x:
   version "1.0.9"
   resolved "https://registry.yarnpkg.com/abbrev/-/abbrev-1.0.9.tgz#91b4792588a7738c25f35dd6f63752a2f8776135"
 
-abp-ng2-module@^3.2.1:
-  version "3.2.1"
-  resolved "https://registry.yarnpkg.com/abp-ng2-module/-/abp-ng2-module-3.2.1.tgz#61edf440e085056680f7ccaa9efb88cc7837f6ae"
+abp-ng2-module@^3.2.2:
+  version "3.2.2"
+  resolved "https://registry.yarnpkg.com/abp-ng2-module/-/abp-ng2-module-3.2.2.tgz#e82ed131795e2f11f7540e8396adcfedd9718e72"
 
 abp-web-resources@^3.8.2:
   version "3.8.2"

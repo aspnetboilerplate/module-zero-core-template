@@ -10,7 +10,7 @@ import main from '../views/main.vue'
 export const locking = {
     path: '/locking',
     name: 'locking',
-    component: () => System.import('../components/lockscreen/components/locking-page.vue')
+    component: () => import('../components/lockscreen/components/locking-page.vue')
 };
 export const loginRouter = {
     path: '/',
@@ -18,7 +18,7 @@ export const loginRouter = {
     meta: {
         title: 'LogIn'
     },
-    component:()=>System.import('../views/login.vue')
+    component:()=>import('../views/login.vue')
 };
 export const otherRouters={
     path:'/main',
@@ -27,7 +27,7 @@ export const otherRouters={
     meta:{title:'ManageMenu'},
     component:main,
     children:[
-        {path: 'home', meta:{title:'HomePage'}, name: 'home', component:()=>System.import('../views/home/home.vue')}
+        {path: 'home', meta:{title:'HomePage'}, name: 'home', component:()=>import('../views/home/home.vue')}
     ]
 }
 export const appRouters=[{
@@ -38,9 +38,9 @@ export const appRouters=[{
     icon:'&#xe68a;',
     component:main,
     children:[
-        {path: 'user',permission:'Pages.Users', meta:{title:'Users'}, name: 'user', component:()=>System.import('../views/setting/user/user.vue')},
-        {path: 'role',permission:'Pages.Roles', meta:{title:'Roles'}, name: 'role', component:()=>System.import('../views/setting/role/role.vue')},
-        {path: 'tenant',permission:'Pages.Tenants', meta:{title:'Tenants'}, name: 'tenant', component:()=>System.import('../views/setting/tenant/tenant.vue')}
+        {path: 'user',permission:'Pages.Users', meta:{title:'Users'}, name: 'user', component:()=>import('../views/setting/user/user.vue')},
+        {path: 'role',permission:'Pages.Roles', meta:{title:'Roles'}, name: 'role', component:()=>import('../views/setting/role/role.vue')},
+        {path: 'tenant',permission:'Pages.Tenants', meta:{title:'Tenants'}, name: 'tenant', component:()=>import('../views/setting/tenant/tenant.vue')}
     ]
 }]
 export const routers = [

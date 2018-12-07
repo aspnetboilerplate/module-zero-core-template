@@ -19,16 +19,15 @@ export default class FullScreen extends AbpBase {
     }
     handleFullscreen () {
         let main = document.body as any;
-        let documentAany=document as any;
         if (this.value) {
             if (document.exitFullscreen) {
                 document.exitFullscreen();
-            } else if (documentAany.mozCancelFullScreen) {
-                documentAany.mozCancelFullScreen();
+            } else if (document.mozCancelFullScreen) {
+                document.mozCancelFullScreen();
             } else if (document.webkitCancelFullScreen) {
                  document.webkitCancelFullScreen();
-            } else if (documentAany.msExitFullscreen) {
-                 documentAany.msExitFullscreen();
+            } else if (document.msExitFullscreen) {
+                 document.msExitFullscreen();
             }
         } else {
             if (main.requestFullscreen) {
@@ -46,8 +45,7 @@ export default class FullScreen extends AbpBase {
         this.handleFullscreen();
     }
     created () {
-        let documentAny=document as any;
-        let isFullscreen = document.fullscreenElement || documentAny.mozFullScreenElement || document.webkitFullscreenElement || documentAny.fullScreen || documentAny.mozFullScreen || document.webkitIsFullScreen;
+        let isFullscreen = document.fullscreenElement || document.mozFullScreenElement || document.webkitFullscreenElement || document.fullScreen || document.mozFullScreen || document.webkitIsFullScreen;
         isFullscreen = !!isFullscreen;
         document.addEventListener('fullscreenchange', () => {
             this.$emit('input', !this.value);
@@ -66,6 +64,19 @@ export default class FullScreen extends AbpBase {
             this.$emit('on-change', !this.value);
         });
         this.$emit('input', isFullscreen);
+    }
+}
+declare global {
+    interface Document {
+        mozCancelFullScreen: () => void;
+        webkitCancelFullScreen: () => void;
+        msExitFullscreen: () => void;
+        fullscreenElement: Element;
+        mozFullScreenElement: Element;
+        webkitFullscreenElement: Element;
+        fullScreen: boolean;
+        mozFullScreen: boolean;
+        webkitIsFullScreen: boolean;
     }
 }
 </script>

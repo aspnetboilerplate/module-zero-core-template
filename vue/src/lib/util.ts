@@ -1,4 +1,3 @@
-import axios from 'axios';
 import Vue from 'vue';
 import {FieldType,CompareType,Filter} from '../store/entities/filter'
 import appconst from './appconst'

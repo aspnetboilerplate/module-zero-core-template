@@ -3,7 +3,7 @@
   <texts>
     <text name="HomePage" value="Accueil" />
     <text name="About" value="A propos" />
-    <text name="WellcomeMessage" value="Bienvenue sur AbpProjectName !" />
+    <text name="WelcomeMessage" value="Bienvenue sur AbpProjectName !" />
     
     <text name="FormIsNotValidMessage" value="Le formulaire n'est pas valide. Veuillez le corriger." />
     <text name="TenantNameCanNotBeEmpty" value="Le nom de client (tenant) doit être renseigné." />
