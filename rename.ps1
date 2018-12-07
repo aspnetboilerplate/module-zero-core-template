@@ -6,12 +6,12 @@ $OutputEncoding = [Text.UTF8Encoding]::UTF8
 # 替换前的公司名称
 $oldCompanyName="AbpCompanyName"
 # 替换后的公司名称
-$newCompanyName="FamilySrv"
+$newCompanyName="YourCompanyName"
 
 # 替换前的项目名称
 $oldProjectName="AbpProjectName"
 # 替换后的项目名称
-$newProjectName="PlanFork"
+$newProjectName="YourProjectName"
 
 # 文件类型名称
 $fileType="FileInfo"
