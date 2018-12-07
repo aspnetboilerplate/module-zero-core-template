@@ -89,7 +89,7 @@
             this.getpage();
         }
         async getpage(){
-            let where= Util.buildFilters(this.filters);
+            let where= Util.buildFilters(this.filters);//TODO fix this sql injection. see user.vue
             let pagerequest=new PageRequest();
             pagerequest.maxResultCount=this.pageSize;
             pagerequest.skipCount=(this.currentPage-1)*this.pageSize;

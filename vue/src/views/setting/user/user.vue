@@ -6,12 +6,12 @@
                     <Row :gutter="16">
                         <Col span="6">
                             <FormItem :label="L('UserName')+':'" style="width:100%">
-                                <Input v-model="filters[0].Value"></Input>
+                                <Input v-model="filterUserName"></Input>
                             </FormItem>
                         </Col>
                         <Col span="6">
                             <FormItem :label="L('Name')+':'" style="width:100%">
-                                <Input v-model="filters[1].Value"></Input>
+                                <Input v-model="filterName"></Input>
                             </FormItem>
                         </Col>
                         <Col span="6">
@@ -25,7 +25,7 @@
                         </Col>
                         <Col span="6">
                             <FormItem :label="L('CreationTime')+':'" style="width:100%">
-                                <DatePicker  v-model="filters[2].Value" type="datetimerange" format="yyyy-MM-dd" style="width:100%" placement="bottom-end" :placeholder="L('SelectDate')"></DatePicker>
+                                <DatePicker  v-model="filterCreationTime" type="datetimerange" format="yyyy-MM-dd" style="width:100%" placement="bottom-end" :placeholder="L('SelectDate')"></DatePicker>
                             </FormItem>
                         </Col>
                     </Row>
@@ -53,6 +53,17 @@
     import PageRequest from '../../../store/entities/page-request'
     import CreateUser from './create-user.vue'
     import EditUser from './edit-user.vue'
+
+    class PageUserRequest extends PageRequest{
+        userName:string='';
+        name:string='';
+        isActive:boolean=null;
+        from:Date=null;
+        to:Date=null;
+    }
+    //should update IUserAppService in AbpCompanyName.AbpProjectName.Application
+    //create PagedUserResultRequestDto derived from PagedResultRequestDto, to replace PagedResultRequestDto in declaration of IUserAppService
+
     @Component({
         components:{CreateUser,EditUser}
     })
@@ -60,12 +71,12 @@
         edit(){
             this.editModalShow=true;
         }
-        filters:Filter[]=[
-            {Type:FieldType.String,Value:'',FieldName:'UserName',CompareType:CompareType.Contains},
-            {Type:FieldType.String,Value:'',FieldName:'Name',CompareType:CompareType.Contains},
-            {Type:FieldType.DataRange,Value:'',FieldName:'CreationTime',CompareType:CompareType.Contains},
-            {Type:FieldType.Boolean,Value:null,FieldName:'IsActive',CompareType:CompareType.Equal}
-        ]
+
+        filterUserName:string='';
+        filterName:string='';
+        filterCreationTime:Date[]=[];
+        filterIsActive:boolean=null;
+
         createModalShow:boolean=false;
         editModalShow:boolean=false;
         get list(){
@@ -79,11 +90,11 @@
         }
         isActiveChange(val:string){
             if(val==='Actived'){
-                this.filters[3].Value=true;
+                this.filterIsActive=true;
             }else if(val==='NoActive'){
-                this.filters[3].Value=false;
+                this.filterIsActive=false;
             }else{
-                this.filters[3].Value=null;
+                this.filterIsActive=null;
             }
         }
         pageChange(page:number){
@@ -95,11 +106,23 @@
             this.getpage();
         }
         async getpage(){
-            let where= Util.buildFilters(this.filters);
-            let pagerequest=new PageRequest();
+            //let where= Util.buildFilters(this.filters);//sql injection
+            let pagerequest=new PageUserRequest();
             pagerequest.maxResultCount=this.pageSize;
             pagerequest.skipCount=(this.currentPage-1)*this.pageSize;
-            pagerequest.where=where;
+            
+            pagerequest.userName=this.filterUserName;
+            pagerequest.name=this.filterName;
+            pagerequest.isActive=this.filterIsActive;
+            
+            if (this.filterCreationTime.length>0) {
+                pagerequest.from=this.filterCreationTime[0];
+            } 
+
+            if (this.filterCreationTime.length>1) {
+                pagerequest.to=this.filterCreationTime[1];
+            }
+
             await this.$store.dispatch({
                 type:'user/getAll',
                 data:pagerequest

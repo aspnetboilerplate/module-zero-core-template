@@ -20,6 +20,46 @@
     <text name="LogIn" value="登录" />
     
     <text name="LoginFailed" value="登录失败!" />
-    
+
+    <text name="AppName" >AbpProjectName</text>
+    <text name="UserNamePlaceholder" >请输入账户</text>
+    <text name="PasswordPlaceholder" >请输入密码</text>
+    <text name="CopyRight" >© 2018 AbpProjectName</text>
+    <text name="LoginPrompt" >正在登陆，请稍候！</text>
+
+    <text name="UserProfile" >用户资料</text>
+    <text name="Users" >用户</text>
+    <text name="Roles" >角色</text>
+    <text name="Tenants" >租户</text>
+    <text name="Logout" >注销</text>
+
+    <text name="ManageMenu" >菜单</text>
+    <text name="LabelOptions" >页签操作</text>
+    <text name="ClearAll" >关闭所有</text>
+    <text name="ClearOthers" >关闭其他</text>
+    <text name="Create" >创建</text>
+    <text name="Add" >添加</text>
+    <text name="Edit" >编辑</text>
+    <text name="Delete">删除</text>
+    <text name="Find" >查找</text>
+    <text name="CreationTime">创建时间</text>
+    <text name="Actions">操作</text>
+    <text name="Keyword">关键字</text>
+    <text name="NoDatas">没有结果</text>
+    <text name="Select">请选择</text>
+    <text name="SelectDate">请选择</text>
+    <text name="Tips">提示</text>
+    <text name="DeleteConfirm">确定删除？</text>
+    <text name="Title" >标题</text>
+    <text name="Content" >内容</text>
+
+    <text name="ChangePassword" >修改密码</text>
+
+    <text name="PasswordComplexityNotSatisfied">密码复杂度要求不符.</text>
+    <text name="PasswordRequireDigit">密码至少需要一位是0到9的数字.</text>
+    <text name="PasswordRequireLowercase">密码至少需要一位是a到z的小写字母.</text>
+    <text name="PasswordRequireNonAlphanumeric">密码至少需要包含一个特殊字符（非字母或数字的字符）.</text>
+    <text name="PasswordRequireUppercase">密码至少需要一位是A到Z的大写字母.</text>
+    <text name="PasswordTooShort">密码长度太短</text>
   </texts>
 </localizationDictionary>

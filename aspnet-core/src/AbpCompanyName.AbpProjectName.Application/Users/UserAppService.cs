@@ -16,11 +16,13 @@ using AbpCompanyName.AbpProjectName.Authorization.Roles;
 using AbpCompanyName.AbpProjectName.Authorization.Users;
 using AbpCompanyName.AbpProjectName.Roles.Dto;
 using AbpCompanyName.AbpProjectName.Users.Dto;
+using Abp.Linq.Extensions;
+using Abp.Extensions;
 
 namespace AbpCompanyName.AbpProjectName.Users
 {
     [AbpAuthorize(PermissionNames.Pages_Users)]
-    public class UserAppService : AsyncCrudAppService<User, UserDto, long, PagedResultRequestDto, CreateUserDto, UserDto>, IUserAppService
+    public class UserAppService : AsyncCrudAppService<User, UserDto, long, PagedUserResultRequestDto, CreateUserDto, UserDto>, IUserAppService
     {
         private readonly UserManager _userManager;
         private readonly RoleManager _roleManager;
@@ -124,9 +126,15 @@ namespace AbpCompanyName.AbpProjectName.Users
             return userDto;
         }
 
-        protected override IQueryable<User> CreateFilteredQuery(PagedResultRequestDto input)
+        protected override IQueryable<User> CreateFilteredQuery(PagedUserResultRequestDto input)
         {
-            return Repository.GetAllIncluding(x => x.Roles);
+            return
+                Repository.GetAllIncluding(x => x.Roles)
+                .WhereIf(!input.UserName.IsNullOrWhiteSpace(), x => x.UserName.Contains(input.UserName))
+                .WhereIf(!input.Name.IsNullOrWhiteSpace(), x => x.Name.Contains(input.Name))
+                .WhereIf(input.IsActive.HasValue, x => x.IsActive)
+                .WhereIf(input.From.HasValue, x => x.CreationTime >= input.From.Value.LocalDateTime)
+                .WhereIf(input.To.HasValue, x => x.CreationTime <= input.To.Value.LocalDateTime);
         }
 
         protected override async Task<User> GetEntityByIdAsync(long id)
@@ -141,7 +149,7 @@ namespace AbpCompanyName.AbpProjectName.Users
             return user;
         }
 
-        protected override IQueryable<User> ApplySorting(IQueryable<User> query, PagedResultRequestDto input)
+        protected override IQueryable<User> ApplySorting(IQueryable<User> query, PagedUserResultRequestDto input)
         {
             return query.OrderBy(r => r.UserName);
         }
