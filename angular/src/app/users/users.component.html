@@ -3,7 +3,7 @@
         <div class="card main-content">
             <div class="header">
                 <h2>
-                    {{l('Users')}}
+                    {{ 'Users' | localize }}
                 </h2>
                 <ul class="header-dropdown m-r--5">
                     <i class="fa fa-spin fa-spinner" *ngIf="isTableLoading"></i>
@@ -12,7 +12,7 @@
                             <i class="material-icons">more_vert</i>
                         </a>
                         <ul class="dropdown-menu pull-right">
-                            <li><a href="javascript:void(0);" class=" waves-effect waves-block()" (click)="refresh();"><i class="material-icons">refresh</i> {{l('Refresh')}}</a></li>
+                            <li><a href="javascript:void(0);" class=" waves-effect waves-block()" (click)="refresh();"><i class="material-icons">refresh</i> {{ 'Refresh' | localize }}</a></li>
                         </ul>
                     </li>
                 </ul>
@@ -23,13 +23,13 @@
                 <table class="table table-hover table-striped">
                     <thead>
                         <tr>
-                            <th>{{l('UserName')}}</th>
-                            <th>{{l('FullName')}}</th>
-                            <th>{{l('EmailAddress')}}</th>
+                            <th>{{ 'UserName' | localize }}</th>
+                            <th>{{ 'FullName' | localize }}</th>
+                            <th>{{ 'EmailAddress' | localize }}</th>
                             <th>
-                                <div style="text-align:center">{{l('IsActive')}}</div>
+                                <div style="text-align:center">{{ 'IsActive' | localize }}</div>
                             </th>
-                            <th>{{l('Actions')}}</th>
+                            <th>{{ 'Actions' | localize }}</th>
                         </tr>
                     </thead>
                     <tbody>
@@ -46,8 +46,8 @@
                                     <i class="material-icons">menu</i>
                                 </a>
                                 <ul class="dropdown-menu pull-right">
-                                    <li><a href="javascript:void(0);" class="waves-effect waves-block" (click)="editUser(user)"><i class="material-icons">create</i>{{l('Edit')}}</a></li>
-                                    <li><a href="javascript:void(0);" class="waves-effect waves-block" (click)="delete(user)"><i class="material-icons">delete_sweep</i>{{l('Delete')}}</a></li>
+                                    <li><a href="javascript:void(0);" class="waves-effect waves-block" (click)="editUser(user)"><i class="material-icons">create</i>{{ 'Edit' | localize }}</a></li>
+                                    <li><a href="javascript:void(0);" class="waves-effect waves-block" (click)="delete(user)"><i class="material-icons">delete_sweep</i>{{ 'Delete' | localize }}</a></li>
                                 </ul>
                             </td>
                         </tr>

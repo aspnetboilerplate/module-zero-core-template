@@ -10,7 +10,7 @@
                         <span aria-hidden="true">&times;</span>
                     </button>
                     <h4 class="modal-title">
-                        <span>{{l("ChangeTenant")}}</span>
+                        <span>{{ "ChangeTenant" | localize }}</span>
                     </h4>
                 </div>
 
@@ -18,15 +18,15 @@
                     <div class="form-group form-float">
                         <div class="form-line">
                             <input #tenancyNameInput materialInput  type="text" name="TenancyName" class="form-control" [ngClass]="{'edited':tenancyName}" [(ngModel)]="tenancyName" maxlength="64">
-                            <label class="form-label">{{l("TenancyName")}}</label>
+                            <label class="form-label">{{ "TenancyName" | localize }}</label>
                         </div>
                     </div>
-                    <span class="help-block">{{l("LeaveEmptyToSwitchToHost")}}</span>
+                    <span class="help-block">{{ "LeaveEmptyToSwitchToHost" | localize }}</span>
                 </div>
 
                 <div class="modal-footer">
-                    <button [disabled]="saving" type="button" class="btn btn-default waves-effect" (click)="close()">{{l("Cancel")}}</button>
-                    <button type="submit" class="btn btn-primary waves-effect" [disabled]="!changeTenantForm.form.valid">{{l("Save")}}</button>
+                    <button [disabled]="saving" type="button" class="btn btn-default waves-effect" (click)="close()">{{ "Cancel" | localize }}</button>
+                    <button type="submit" class="btn btn-primary waves-effect" [disabled]="!changeTenantForm.form.valid">{{ "Save" | localize }}</button>
                 </div>
 
             </form>
