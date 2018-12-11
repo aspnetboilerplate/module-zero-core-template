@@ -10,7 +10,7 @@
                         <span aria-hidden="true">&times;</span>
                     </button>
                     <h4 class="modal-title">
-                        <span>{{l("CreateNewTenant")}}</span>
+                        <span>{{ "CreateNewTenant" | localize }}</span>
                     </h4>
                 </div>
 
@@ -18,39 +18,39 @@
                     <div class="form-group form-float">
                         <div class="form-line">
                             <input class="form-control" type="text" name="TenancyName" [(ngModel)]="tenant.tenancyName" required maxlength="64" minlength="2">
-                            <label class="form-label">{{l("TenancyName")}}</label>
+                            <label class="form-label">{{ "TenancyName" | localize }}</label>
                         </div>
                     </div>
                     <div class="form-group form-float">
                         <div class="form-line">
                             <input type="text" name="Name" class="form-control" [(ngModel)]="tenant.name" required maxlength="128">
-                            <label class="form-label">{{l("Name")}}</label>
+                            <label class="form-label">{{ "Name" | localize }}</label>
                         </div>
                     </div>
                     <div class="form-group form-float">
                         <div class="form-line">
                             <input type="text" name="ConnectionString" class="form-control" [(ngModel)]="tenant.connectionString" maxlength="1024">
-                            <label class="form-label">{{l("DatabaseConnectionString")}} ({{l("Optional")}})</label>
+                            <label class="form-label">{{ "DatabaseConnectionString" | localize }} ({{ "Optional" | localize }})</label>
                         </div>
                     </div>
                     <div class="form-group form-float">
                         <div class="form-line">
-                            <input type="email" name="AdminEmailAddress" class="form-control" [(ngModel)]="tenant.adminEmailAddress" required maxlength="256" pattern="^\w+([-+.']\w+)*@\w+([-.]\w+)*\.\w+([-.]\w+)*$">
-                            <label class="form-label">{{l("AdminEmailAddress")}}</label>
+                            <input type="email" name="AdminEmailAddress" class="form-control" [(ngModel)]="tenant.adminEmailAddress" required maxlength="256" pattern="^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{1,})+$">
+                            <label class="form-label">{{ "AdminEmailAddress" | localize }}</label>
                         </div>
                     </div>
                     <div class="form-group form-float">
                         <div class="">
                             <input id="isactive" type="checkbox" name="IsActive" [(ngModel)]="tenant.isActive" checked class="form-control" />
-                            <label for="isactive" class="form-label">{{l("IsActive")}}</label>
+                            <label for="isactive" class="form-label">{{ "IsActive" | localize }}</label>
                         </div>
                     </div>
-                    <p>{{l("DefaultPasswordIs","123qwe")}}</p>
+                    <p>{{ "DefaultPasswordIs" | localize }} 123qwe</p>
                 </div>
 
                 <div class="modal-footer">
-                    <button [disabled]="saving" type="button" class="btn btn-default" (click)="close()">{{l("Cancel")}}</button>
-                    <button [disabled]="!createTenantForm.form.valid || saving" type="submit" class="btn btn-primary blue">{{l("Save")}}</button>
+                    <button [disabled]="saving" type="button" class="btn btn-default" (click)="close()">{{ "Cancel" | localize }}</button>
+                    <button [disabled]="!createTenantForm.form.valid || saving" type="submit" class="btn btn-primary blue">{{ "Save" | localize }}</button>
                 </div>
 
             </form>

@@ -14,6 +14,7 @@ import { AbpModule } from '@abp/abp.module';
 
 import { ServiceProxyModule } from '@shared/service-proxies/service-proxy.module';
 import { SharedModule } from '@shared/shared.module';
+import { LocalizePipe } from '@shared/pipes/localize.pipe';
 
 import { HomeComponent } from '@app/home/home.component';
 import { AboutComponent } from '@app/about/about.component';
@@ -52,7 +53,8 @@ import { RightSideBarComponent } from '@app/layout/right-sidebar.component';
         SideBarUserAreaComponent,
         SideBarNavComponent,
         SideBarFooterComponent,
-        RightSideBarComponent
+        RightSideBarComponent,
+        LocalizePipe
     
     ],
     imports: [

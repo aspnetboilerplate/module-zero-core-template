@@ -3,7 +3,7 @@
         <div class="card main-content">
             <div class="header">
                 <h2>
-                    {{l('Roles')}}
+                    {{ 'Roles' | localize }}
                 </h2>
                 <ul class="header-dropdown m-r--5">
                     <i class="fa fa-spin fa-spinner" *ngIf="isTableLoading"></i>
@@ -22,9 +22,9 @@
                 <table class="table table-hover table-striped">
                     <thead>
                         <tr>
-                            <th>{{l('RoleName')}}</th>
-                            <th>{{l('DisplayName')}}</th>
-                            <th>{{l('Actions')}}</th>
+                            <th>{{ 'RoleName' | localize }}</th>
+                            <th>{{ 'DisplayName' | localize }}</th>
+                            <th>{{ 'Actions' | localize }}</th>
                         </tr>
                     </thead>
                     <tbody>
@@ -45,7 +45,7 @@
                 </table>
 
                 <div class="text-align: center;" *ngIf="totalItems > pageSize">
-                    <pagination-controls (pageChange)="getDataPage($event)" id="server"></pagination-controls>
+                    <abp-pagination-controls (pageChange)="getDataPage($event)" id="server"></abp-pagination-controls>
                 </div>
                 <button type="button" data-toggle="modal" class="btn btn-primary btn-circle waves-effect waves-circle waves-float pull-right" (click)="createRole()">
                     <i class="material-icons">add</i>
