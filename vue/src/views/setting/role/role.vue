@@ -107,7 +107,7 @@
         },{
             title:this.L('IsStatic'),
             render:(h:any,params:any)=>{
-                return h('span',params.row.isStatic?'是':'否')
+                return h('span',params.row.isStatic?this.L('Yes'):this.L('No'))
             }
         },{
             title:this.L('Actions'),

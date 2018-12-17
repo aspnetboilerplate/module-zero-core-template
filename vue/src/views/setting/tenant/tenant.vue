@@ -10,7 +10,7 @@
                             </FormItem>
                         </Col>
                         <Col span="8">
-                            <FormItem :label="L('TenantName')+':'" style="width:100%">
+                            <FormItem :label="L('Name')+':'" style="width:100%">
                                 <Input v-model="filters[0].Value"></Input>
                             </FormItem>
                         </Col>                        
@@ -112,7 +112,7 @@
             title:this.L('TenancyName'),
             key:'tenancyName'
         },{
-            title:this.L('TenantName'),
+            title:this.L('Name'),
             key:'name'
         },{
             title:this.L('IsActive'),
