@@ -6,17 +6,18 @@
                     <Row :gutter="16">
                         <Col span="6">
                             <FormItem :label="L('UserName')+':'" style="width:100%">
-                                <Input v-model="filterUserName"></Input>
+                                <Input v-model="pagerequest.userName"></Input>
                             </FormItem>
                         </Col>
                         <Col span="6">
                             <FormItem :label="L('Name')+':'" style="width:100%">
-                                <Input v-model="filterName"></Input>
+                                <Input v-model="pagerequest.name"></Input>
                             </FormItem>
                         </Col>
                         <Col span="6">
                             <FormItem :label="L('IsActive')+':'" style="width:100%">
-                                <Select :value="'All'" :placeholder="L('Select')" @on-change="isActiveChange">
+                                <!--Select should not set :value="'All'" it may not trigger on-change when first select 'NoActive'(or 'Actived') then select 'All'-->
+                                <Select :placeholder="L('Select')" @on-change="isActiveChange">
                                     <Option value="All">{{L('All')}}</Option>
                                     <Option value="Actived">{{L('Actived')}}</Option>
                                     <Option value="NoActive">{{L('NoActive')}}</Option>
@@ -25,7 +26,7 @@
                         </Col>
                         <Col span="6">
                             <FormItem :label="L('CreationTime')+':'" style="width:100%">
-                                <DatePicker  v-model="filterCreationTime" type="datetimerange" format="yyyy-MM-dd" style="width:100%" placement="bottom-end" :placeholder="L('SelectDate')"></DatePicker>
+                                <DatePicker  v-model="creationTime" type="datetimerange" format="yyyy-MM-dd" style="width:100%" placement="bottom-end" :placeholder="L('SelectDate')"></DatePicker>
                             </FormItem>
                         </Col>
                     </Row>
@@ -53,16 +54,13 @@
     import PageRequest from '../../../store/entities/page-request'
     import CreateUser from './create-user.vue'
     import EditUser from './edit-user.vue'
-
-    class PageUserRequest extends PageRequest{
-        userName:string='';
-        name:string='';
-        isActive:boolean=null;
-        from:Date=null;
-        to:Date=null;
+    class  PageUserRequest extends PageRequest{
+        userName:string;
+        name:string;
+        isActive:boolean=null;//nullable
+        from:Date;
+        to:Date;
     }
-    //should update IUserAppService in AbpCompanyName.AbpProjectName.Application
-    //create PagedUserResultRequestDto derived from PagedResultRequestDto, to replace PagedResultRequestDto in declaration of IUserAppService
 
     @Component({
         components:{CreateUser,EditUser}
@@ -71,11 +69,9 @@
         edit(){
             this.editModalShow=true;
         }
-
-        filterUserName:string='';
-        filterName:string='';
-        filterCreationTime:Date[]=[];
-        filterIsActive:boolean=null;
+        //filters
+        pagerequest:PageUserRequest=new PageUserRequest();
+        creationTime:Date[]=[];
 
         createModalShow:boolean=false;
         editModalShow:boolean=false;
@@ -89,12 +85,13 @@
             this.createModalShow=true;
         }
         isActiveChange(val:string){
+            console.log(val);
             if(val==='Actived'){
-                this.filterIsActive=true;
+                this.pagerequest.isActive=true;
             }else if(val==='NoActive'){
-                this.filterIsActive=false;
+                this.pagerequest.isActive=false;
             }else{
-                this.filterIsActive=null;
+                this.pagerequest.isActive=null;
             }
         }
         pageChange(page:number){
@@ -106,26 +103,21 @@
             this.getpage();
         }
         async getpage(){
-            //let where= Util.buildFilters(this.filters);//sql injection
-            let pagerequest=new PageUserRequest();
-            pagerequest.maxResultCount=this.pageSize;
-            pagerequest.skipCount=(this.currentPage-1)*this.pageSize;
+          
+            this.pagerequest.maxResultCount=this.pageSize;
+            this.pagerequest.skipCount=(this.currentPage-1)*this.pageSize;
+            //filters
             
-            pagerequest.userName=this.filterUserName;
-            pagerequest.name=this.filterName;
-            pagerequest.isActive=this.filterIsActive;
-            
-            if (this.filterCreationTime.length>0) {
-                pagerequest.from=this.filterCreationTime[0];
-            } 
-
-            if (this.filterCreationTime.length>1) {
-                pagerequest.to=this.filterCreationTime[1];
+            if (this.creationTime.length>0) {
+                this.pagerequest.from=this.creationTime[0];
+            }
+            if (this.creationTime.length>1) {
+                this.pagerequest.to=this.creationTime[1];
             }
 
             await this.$store.dispatch({
                 type:'user/getAll',
-                data:pagerequest
+                data:this.pagerequest
             })
         }
         get pageSize(){

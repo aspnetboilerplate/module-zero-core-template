@@ -18,7 +18,7 @@ using AbpCompanyName.AbpProjectName.Roles.Dto;
 namespace AbpCompanyName.AbpProjectName.Roles
 {
     [AbpAuthorize(PermissionNames.Pages_Roles)]
-    public class RoleAppService : AsyncCrudAppService<Role, RoleDto, int, PagedResultRequestDto, CreateRoleDto, RoleDto>, IRoleAppService
+    public class RoleAppService : AsyncCrudAppService<Role, RoleDto, int, PagedRoleResultRequestDto, CreateRoleDto, RoleDto>, IRoleAppService
     {
         private readonly RoleManager _roleManager;
         private readonly UserManager _userManager;
@@ -106,9 +106,12 @@ namespace AbpCompanyName.AbpProjectName.Roles
             ));
         }
 
-        protected override IQueryable<Role> CreateFilteredQuery(PagedResultRequestDto input)
+        protected override IQueryable<Role> CreateFilteredQuery(PagedRoleResultRequestDto input)
         {
-            return Repository.GetAllIncluding(x => x.Permissions);
+            return Repository.GetAllIncluding(x => x.Permissions)
+                .WhereIf(!input.RoleName.IsNullOrWhiteSpace(), x => x.Name.Contains(input.RoleName))
+                .WhereIf(!input.DisplayName.IsNullOrWhiteSpace(), x => x.DisplayName.Contains(input.DisplayName))
+                .WhereIf(!input.Description.IsNullOrWhiteSpace(), x => x.Description.Contains(input.Description));
         }
 
         protected override async Task<Role> GetEntityByIdAsync(int id)
@@ -116,7 +119,7 @@ namespace AbpCompanyName.AbpProjectName.Roles
             return await Repository.GetAllIncluding(x => x.Permissions).FirstOrDefaultAsync(x => x.Id == id);
         }
 
-        protected override IQueryable<Role> ApplySorting(IQueryable<Role> query, PagedResultRequestDto input)
+        protected override IQueryable<Role> ApplySorting(IQueryable<Role> query, PagedRoleResultRequestDto input)
         {
             return query.OrderBy(r => r.DisplayName);
         }
@@ -142,3 +145,4 @@ namespace AbpCompanyName.AbpProjectName.Roles
         }
     }
 }
+
