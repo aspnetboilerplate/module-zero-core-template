@@ -10,7 +10,7 @@
                 <FormItem :label="L('TenancyName')" prop="tenancyName">
                     <Input v-model="tenant.tenancyName" :maxlength="32" :minlength="2"></Input>
                 </FormItem>
-                <FormItem :label="L('TenantName')" prop="name">
+                <FormItem :label="L('Name')" prop="name">
                     <Input v-model="tenant.name" :maxlength="32" :minlength="2"></Input>
                 </FormItem>
                 <FormItem :label="L('DatabaseConnectionString')" prop="databaseConnectionString">

@@ -6,17 +6,17 @@
                     <Row :gutter="16">
                         <Col span="8">
                             <FormItem :label="L('RoleName')+':'" style="width:100%">
-                                <Input v-model="filters[0].Value"></Input>
+                                <Input v-model="pagerequest.roleName"></Input>
                             </FormItem>
                         </Col>
                         <Col span="8">
                             <FormItem :label="L('DisplayName')+':'" style="width:100%">
-                                <Input v-model="filters[1].Value"></Input>
+                                <Input v-model="pagerequest.displayName"></Input>
                             </FormItem>
                         </Col>
                         <Col span="8">
                             <FormItem :label="L('Description')+':'" style="width:100%">
-                                <Input v-model="filters[2].Value"></Input>
+                                <Input v-model="pagerequest.description"></Input>
                             </FormItem>
                         </Col>
                     </Row>
@@ -44,6 +44,13 @@
     import PageRequest from '../../../store/entities/page-request'
     import CreateRole from './create-role.vue'
     import EditRole from './edit-role.vue'
+   
+    class PageRoleRequest extends PageRequest{
+        roleName:string='';
+        displayName:string='';
+        description:string='';
+    }
+    
     @Component({
         components:{CreateRole,EditRole}
     })
@@ -51,11 +58,9 @@
         edit(){
             this.editModalShow=true;
         }
-        filters:Filter[]=[
-            {Type:FieldType.String,Value:'',FieldName:'Name',CompareType:CompareType.Contains},
-            {Type:FieldType.String,Value:'',FieldName:'DisplayName',CompareType:CompareType.Contains},
-            {Type:FieldType.DataRange,Value:'',FieldName:'Description',CompareType:CompareType.Contains}
-        ]
+
+        pagerequest:PageRoleRequest=new PageRoleRequest();
+
         createModalShow:boolean=false;
         editModalShow:boolean=false;
         get list(){
@@ -76,14 +81,13 @@
             this.getpage();
         }
         async getpage(){
-            let where= Util.buildFilters(this.filters);//TODO fix this sql injection. see user.vue
-            let pagerequest=new PageRequest();
-            pagerequest.maxResultCount=this.pageSize;
-            pagerequest.skipCount=(this.currentPage-1)*this.pageSize;
-            pagerequest.where=where;
+            
+            this.pagerequest.maxResultCount=this.pageSize;
+            this.pagerequest.skipCount=(this.currentPage-1)*this.pageSize;
+            
             await this.$store.dispatch({
                 type:'role/getAll',
-                data:pagerequest
+                data:this.pagerequest
             })
         }
         get pageSize(){
