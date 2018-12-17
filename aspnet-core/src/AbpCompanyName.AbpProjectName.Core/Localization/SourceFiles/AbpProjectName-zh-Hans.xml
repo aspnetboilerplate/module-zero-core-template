@@ -61,5 +61,21 @@
     <text name="PasswordRequireNonAlphanumeric">密码至少需要包含一个特殊字符（非字母或数字的字符）.</text>
     <text name="PasswordRequireUppercase">密码至少需要一位是A到Z的大写字母.</text>
     <text name="PasswordTooShort">密码长度太短</text>
+
+     <text name="UserName">用户名</text>
+    <text name="Name">名称</text>
+    <text name="IsActive">是否启用</text>
+    <text name="LastLoginTime">最近登陆时间</text>
+    <text name="RoleName">角色名</text>
+    <text name="DisplayName">显示名</text>
+    <text name="Description">描述</text>
+    <text name="IsStatic">是否内置</text>
+
+    <text name="All">全部</text>
+    <text name="Actived">启用</text>
+    <text name="NoActive">未启用</text>
+    
+    <text name="Yes">是</text>
+    <text name="No">否</text>
   </texts>
 </localizationDictionary>
