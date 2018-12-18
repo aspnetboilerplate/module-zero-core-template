@@ -10,6 +10,7 @@ import { AppAuthService } from './auth/app-auth.service';
 import { AppRouteGuard } from './auth/auth-route-guard';
 import { MaterialInput } from 'shared/directives/material-input.directive';
 import { AbpPaginationControlsComponent } from './pagination/abp-pagination-controls.component';
+import { LocalizePipe } from '@shared/pipes/localize.pipe';
 
 @NgModule({
     imports: [
@@ -20,11 +21,13 @@ import { AbpPaginationControlsComponent } from './pagination/abp-pagination-cont
     ],
     declarations: [
         MaterialInput,
-        AbpPaginationControlsComponent
+        AbpPaginationControlsComponent,
+        LocalizePipe
     ],
     exports: [
         MaterialInput,
-        AbpPaginationControlsComponent
+        AbpPaginationControlsComponent,
+        LocalizePipe
     ]
 })
 export class SharedModule {
