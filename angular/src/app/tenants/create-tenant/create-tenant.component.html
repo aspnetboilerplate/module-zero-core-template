@@ -1,4 +1,4 @@
-﻿<div bsModal #createTenantModal="bs-modal" class="modal fade" (onShown)="onShown()" tabindex="-1" role="dialog" aria-labelledby="createUserModal" aria-hidden="true" [config]="{backdrop: 'static'}">
+<div bsModal #createTenantModal="bs-modal" class="modal fade" (onShown)="onShown()" tabindex="-1" role="dialog" aria-labelledby="createUserModal" aria-hidden="true" [config]="{backdrop: 'static'}">
     <div class="modal-dialog">
 
         <div #modalContent class="modal-content">
@@ -45,7 +45,7 @@
                             <label for="isactive" class="form-label">{{ "IsActive" | localize }}</label>
                         </div>
                     </div>
-                    <p>{{ "DefaultPasswordIs" | localize }} 123qwe</p>
+                    <p>{{ "DefaultPasswordIs" | localize:'123qwe' }}</p>
                 </div>
 
                 <div class="modal-footer">
