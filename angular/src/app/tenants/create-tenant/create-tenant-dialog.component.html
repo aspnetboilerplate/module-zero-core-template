@@ -1,0 +1,60 @@
+<form autocomplete="off"
+      #createTenantForm="ngForm"
+      (ngSubmit)="save()">
+    <h1 mat-dialog-title>{{ "CreateNewTenant" | localize }}</h1>
+    <mat-dialog-content>
+        <mat-form-field>
+            <input matInput
+                   name="TenancyName"
+                   [(ngModel)]="tenant.tenancyName"
+                   required
+                   minlength="2"
+                   maxlength="64"
+                   [placeholder]="'TenancyName' | localize">
+        </mat-form-field>
+        <mat-form-field>
+            <input matInput
+                   name="Name"
+                   [(ngModel)]="tenant.name"
+                   required
+                   maxlength="128"
+                   [placeholder]="'Name' | localize">
+        </mat-form-field>
+        <mat-form-field>
+            <input matInput
+                   name="ConnectionString"
+                   [(ngModel)]="tenant.connectionString"
+                   maxlength="1024"
+                   [placeholder]="'DatabaseConnectionString' | localize">
+        </mat-form-field>
+        <mat-form-field>
+            <input matInput
+                   type="email"
+                   name="AdminEmailAddress"
+                   [(ngModel)]="tenant.adminEmailAddress"
+                   required
+                   maxlength="256"
+                   pattern="^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{1,})+$"
+                   [placeholder]="'AdminEmailAddress' | localize">
+        </mat-form-field>
+        <div class="checkbox-wrapper">
+            <mat-checkbox name="IsActive"
+                          [(ngModel)]="tenant.isActive"
+                          style="padding-bottom: 5px">{{ "IsActive" | localize }}</mat-checkbox>
+        </div>
+
+        <p>{{ "DefaultPasswordIs" | localize }} 123qwe</p>
+    </mat-dialog-content>
+    <div mat-dialog-actions
+         align="end">
+        <button mat-button
+                type="button"
+                [disabled]="saving"
+                (click)="close()">{{ "Cancel" | localize }}</button>
+        <button mat-flat-button
+                type="submit"
+                flex="15"
+                color="primary"
+                [disabled]="!createTenantForm.form.valid || saving">{{ "Save" | localize }}</button>
+    </div>
+</form>

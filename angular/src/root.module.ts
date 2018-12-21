@@ -95,9 +95,7 @@ export function getCurrentLanguage(): string {
         AbpModule,
         ServiceProxyModule,
         RootRoutingModule,
-        HttpClientModule,
-        // TODO: is this necessary? https://material.angular.io/guide/getting-started#step-2-configure-animations
-        NoopAnimationsModule
+        HttpClientModule
     ],
     declarations: [
         RootComponent

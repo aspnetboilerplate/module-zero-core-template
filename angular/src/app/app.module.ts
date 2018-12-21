@@ -24,14 +24,14 @@ import { RolesComponent } from '@app/roles/roles.component';
 import { CreateRoleComponent } from '@app/roles/create-role/create-role.component';
 import { EditRoleComponent } from './roles/edit-role/edit-role.component';
 import { TenantsComponent } from '@app/tenants/tenants.component';
-import { CreateTenantComponent } from './tenants/create-tenant/create-tenant.component';
-import { EditTenantComponent } from './tenants/edit-tenant/edit-tenant.component';
 import { TopBarComponent } from '@app/layout/topbar.component';
 import { TopBarLanguageSwitchComponent } from '@app/layout/topbar-languageswitch.component';
 import { SideBarUserAreaComponent } from '@app/layout/sidebar-user-area.component';
 import { SideBarNavComponent } from '@app/layout/sidebar-nav.component';
 import { SideBarFooterComponent } from '@app/layout/sidebar-footer.component';
 import { RightSideBarComponent } from '@app/layout/right-sidebar.component';
+import { CreateTenantDialogComponent } from './tenants/create-tenant/create-tenant-dialog.component';
+import { EditTenantDialogComponent } from './tenants/edit-tenant/edit-tenant-dialog.component';
 
 @NgModule({
     declarations: [
@@ -39,21 +39,21 @@ import { RightSideBarComponent } from '@app/layout/right-sidebar.component';
         HomeComponent,
         AboutComponent,
         TenantsComponent,
-		CreateTenantComponent,
-		EditTenantComponent,
+        CreateTenantDialogComponent,
+        EditTenantDialogComponent,
         UsersComponent,
-		CreateUserComponent,
-		EditUserComponent,
-      	RolesComponent,        
-		CreateRoleComponent,
-		EditRoleComponent,
+        CreateUserComponent,
+        EditUserComponent,
+        RolesComponent,
+        CreateRoleComponent,
+        EditRoleComponent,
         TopBarComponent,
         TopBarLanguageSwitchComponent,
         SideBarUserAreaComponent,
         SideBarNavComponent,
         SideBarFooterComponent,
         RightSideBarComponent
-    
+
     ],
     imports: [
         CommonModule,
@@ -69,6 +69,10 @@ import { RightSideBarComponent } from '@app/layout/right-sidebar.component';
     ],
     providers: [
 
+    ],
+    entryComponents: [
+        CreateTenantDialogComponent,
+        EditTenantDialogComponent
     ]
 })
 export class AppModule { }

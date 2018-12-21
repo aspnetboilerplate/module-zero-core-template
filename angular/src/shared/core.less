@@ -9,7 +9,8 @@
 }
 
 /* Portlet */
-.portlet.light > .portlet-title .inputs.inputs-full-width {
+
+.portlet.light>.portlet-title .inputs.inputs-full-width {
     display: block;
     float: none;
 }
@@ -22,11 +23,9 @@ topbar-languageswitch {
     float: left;
     margin-top: 25px;
     margin-left: 10px;
-
     a {
         text-decoration: none;
         color: #fff;
-
         &:hover {
             text-decoration: none;
             color: #fff;
@@ -35,5 +34,15 @@ topbar-languageswitch {
 }
 
 .swal-footer {
-     text-align: center;
+    text-align: center;
+}
+
+// mat-checkbox woraround
+// https://github.com/angular/material2/issues/8798
+.checkbox-wrapper {
+    min-height: 50px;
+    display: flex;
+    >mat-checkbox {
+        align-self: center;
+    }
 }

@@ -54,6 +54,7 @@
                 <div class="text-align: center;" *ngIf="totalItems > pageSize">
                     <abp-pagination-controls (pageChange)="getDataPage($event)" id="server"></abp-pagination-controls>
                 </div>
+
                 <button type="button" data-toggle="modal" class="btn btn-primary btn-circle waves-effect waves-circle waves-float pull-right" (click)="createTenant()">
                     <i class="material-icons">add</i>
                 </button>
@@ -61,6 +62,3 @@
         </div>
     </div>
 </div>
-
-<create-tenant-modal #createTenantModal (modalSave)="refresh()"></create-tenant-modal>
-<edit-tenant-modal #editTenantModal (modalSave)="refresh()"></edit-tenant-modal>
