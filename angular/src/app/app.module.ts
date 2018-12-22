@@ -20,9 +20,6 @@ import { AboutComponent } from '@app/about/about.component';
 import { UsersComponent } from '@app/users/users.component';
 import { CreateUserComponent } from '@app/users/create-user/create-user.component';
 import { EditUserComponent } from './users/edit-user/edit-user.component';
-import { RolesComponent } from '@app/roles/roles.component';
-import { CreateRoleComponent } from '@app/roles/create-role/create-role.component';
-import { EditRoleComponent } from './roles/edit-role/edit-role.component';
 import { TenantsComponent } from '@app/tenants/tenants.component';
 import { TopBarComponent } from '@app/layout/topbar.component';
 import { TopBarLanguageSwitchComponent } from '@app/layout/topbar-languageswitch.component';
@@ -32,6 +29,11 @@ import { SideBarFooterComponent } from '@app/layout/sidebar-footer.component';
 import { RightSideBarComponent } from '@app/layout/right-sidebar.component';
 import { CreateTenantDialogComponent } from './tenants/create-tenant/create-tenant-dialog.component';
 import { EditTenantDialogComponent } from './tenants/edit-tenant/edit-tenant-dialog.component';
+// roles
+import { RolesComponent } from "@app/roles/roles.component";
+import { CreateRoleDialogComponent } from "@app/roles/create-role/create-role-dialog.component";
+import { EditRoleDialogComponent } from "./roles/edit-role/edit-role-dialog.component";
+
 
 @NgModule({
     declarations: [
@@ -44,16 +46,16 @@ import { EditTenantDialogComponent } from './tenants/edit-tenant/edit-tenant-dia
         UsersComponent,
         CreateUserComponent,
         EditUserComponent,
-        RolesComponent,
-        CreateRoleComponent,
-        EditRoleComponent,
         TopBarComponent,
         TopBarLanguageSwitchComponent,
         SideBarUserAreaComponent,
         SideBarNavComponent,
         SideBarFooterComponent,
-        RightSideBarComponent
-
+        RightSideBarComponent,
+        // roles
+        RolesComponent,
+        CreateRoleDialogComponent,
+        EditRoleDialogComponent
     ],
     imports: [
         CommonModule,
@@ -72,7 +74,12 @@ import { EditTenantDialogComponent } from './tenants/edit-tenant/edit-tenant-dia
     ],
     entryComponents: [
         CreateTenantDialogComponent,
-        EditTenantDialogComponent
+        EditTenantDialogComponent,
+
+        // roles
+        RolesComponent,
+        CreateRoleDialogComponent,
+        EditRoleDialogComponent
     ]
 })
 export class AppModule { }
