@@ -16,14 +16,7 @@ import { EditRoleDialogComponent } from "@app/roles/edit-role/edit-role-dialog.c
 
 @Component({
   templateUrl: "./roles.component.html",
-  animations: [appModuleAnimation()],
-  styles: [
-    `
-      .abp-mini-fab mat-icon {
-        font-size: 15px;
-      }
-    `
-  ]
+  animations: [appModuleAnimation()]
 })
 export class RolesComponent extends PagedListingComponentBase<RoleDto> {
   roles: RoleDto[] = [];
