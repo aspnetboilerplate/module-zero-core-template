@@ -19,7 +19,6 @@
 @grey: #9E9E9E;
 @blue-grey: #607D8B;
 @black: #000;
-
 .make-theme(@color) {
     .sidebar .menu .list .ml-menu li.active a.toggled:not(.menu-toggle):before {
         color: @color;
@@ -30,7 +29,9 @@
     .mat-slide-toggle.mat-checked:not(.mat-disabled) .mat-slide-toggle-bar {
         background-color: fade(@color, 50%);
     }
-    .mat-fab.mat-primary, .mat-mini-fab.mat-primary, .mat-raised-button.mat-primary {
+    .mat-fab.mat-primary,
+    .mat-mini-fab.mat-primary,
+    .mat-raised-button.mat-primary {
         background-color: @color;
     }
     .mat-radio-button.mat-accent.mat-radio-checked .mat-radio-outer-circle {
@@ -39,114 +40,147 @@
     .mat-radio-button.mat-accent .mat-radio-inner-circle {
         background-color: @color;
     }
-    .mat-checkbox-checked.mat-accent .mat-checkbox-background, .mat-checkbox-indeterminate.mat-accent .mat-checkbox-background {
+    .mat-checkbox-checked.mat-accent:not(.mat-checkbox-disabled) .mat-checkbox-background,
+    .mat-checkbox-indeterminate.mat-accent:not(.mat-checkbox-disabled) .mat-checkbox-background {
         background-color: @color;
     }
     .card .action .material-icons {
-        color: @color !important;
+        color: @color  !important;
     }
     /* add theme-links to a parent element to indicate that all children anchors should use the current theme's color */
     .theme-links a {
-        color: @color !important;
+        color: @color  !important;
     }
     .theme-active-link {
         .active a {
-            color: @color !important;
+            color: @color  !important;
         }
         a:hover {
-            color: @color !important;
+            color: @color  !important;
         }
         a:focus {
-            color: @color !important;
+            color: @color  !important;
         }
     }
     .ngx-pagination .current {
         background-color: @color;
     }
-    .btn-primary, .btn-primary:hover, .btn-primary:active, .btn-primary:focus {
-        background-color: @color !important;
+    .btn-primary,
+    .btn-primary:hover,
+    .btn-primary:active,
+    .btn-primary:focus {
+        background-color: @color  !important;
     }
-    a.dropdown-toggle {
-        color: @color !important;
-    }
-    .mat-tab-group.mat-primary .mat-ink-bar, .mat-tab-nav-bar.mat-primary .mat-ink-bar {
+    // a.dropdown-toggle {
+    //     color: @color !important;
+    // }
+    .mat-tab-group.mat-primary .mat-ink-bar,
+    .mat-tab-nav-bar.mat-primary .mat-ink-bar {
         background-color: @color;
     }
-    .mat-fab.mat-primary, .mat-flat-button.mat-primary, .mat-mini-fab.mat-primary, .mat-raised-button.mat-primary {
+    .mat-fab.mat-primary:not([disabled]),
+    .mat-flat-button.mat-primary:not([disabled]),
+    .mat-mini-fab.mat-primary:not([disabled]),
+    .mat-raised-button.mat-primary:not([disabled]) {
         background-color: @color;
     }
-    .mat-form-field-invalid .mat-input-element, .mat-warn .mat-input-element {
+    .mat-form-field-invalid .mat-input-element,
+    .mat-warn .mat-input-element {
         caret-color: @color;
     }
     .form-group .form-line:after {
         border-bottom-color: @color;
     }
     .mat-form-field.mat-focused {
-        .mat-form-field-label { color: @color; }
-        .mat-form-field-ripple{ background-color: @color; }
+        .mat-form-field-label {
+            color: @color;
+        }
+        .mat-form-field-ripple {
+            background-color: @color;
+        }
     }
 }
 
 .theme-red {
     .make-theme(@red)
 }
+
 .theme-pink {
     .make-theme(@pink)
 }
+
 .theme-purple {
     .make-theme(@purple)
 }
+
 .theme-deep-purple {
     .make-theme(@deep-purple)
 }
+
 .theme-indigo {
     .make-theme(@indigo)
 }
+
 .theme-blue {
     .make-theme(@blue)
 }
+
 .theme-light-blue {
     .make-theme(@light-blue)
 }
+
 .theme-cyan {
     .make-theme(@cyan)
 }
+
 .theme-teal {
     .make-theme(@teal)
 }
+
 .theme-indigo {
     .make-theme(@indigo)
 }
+
 .theme-green {
     .make-theme(@green)
 }
+
 .theme-light-green {
     .make-theme(@light-green)
 }
+
 .theme-lime {
     .make-theme(@lime)
 }
+
 .theme-yellow {
     .make-theme(@yellow)
 }
+
 .theme-amber {
     .make-theme(@amber)
 }
+
 .theme-orange {
     .make-theme(@orange)
 }
+
 .theme-deep-orange {
     .make-theme(@deep-orange)
 }
+
 .theme-brown {
     .make-theme(@brown)
 }
+
 .theme-grey {
     .make-theme(@grey)
 }
+
 .theme-blue-grey {
     .make-theme(@blue-grey)
 }
+
 .theme-black {
     .make-theme(@black)
 }

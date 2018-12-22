@@ -34,8 +34,6 @@ export class RolesComponent extends PagedListingComponentBase<RoleDto> {
     pageNumber: number,
     finishedCallback: Function
   ): void {
-    //abp.ui.setBusy($("#roles-table"));
-
     this._rolesService
       .getAll(request.skipCount, request.maxResultCount)
       .pipe(
@@ -46,8 +44,6 @@ export class RolesComponent extends PagedListingComponentBase<RoleDto> {
       .subscribe((result: PagedResultDtoOfRoleDto) => {
         this.roles = result.items;
         this.showPaging(result, pageNumber);
-
-        //abp.ui.clearBusy($("#roles-table"));
       });
   }
 
