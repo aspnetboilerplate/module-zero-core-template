@@ -49,14 +49,16 @@
     .theme-links a {
         color: @color !important;
     }
-    .theme-active-link .active a {
-        color: @color !important;
-    }
-    .theme-active-link a:hover {
-        color: @color !important;
-    }
-    .theme-active-link a:focus {
-        color: @color !important;
+    .theme-active-link {
+        .active a {
+            color: @color !important;
+        }
+        a:hover {
+            color: @color !important;
+        }
+        a:focus {
+            color: @color !important;
+        }
     }
     .ngx-pagination .current {
         background-color: @color;
@@ -75,6 +77,13 @@
     }
     .mat-form-field-invalid .mat-input-element, .mat-warn .mat-input-element {
         caret-color: @color;
+    }
+    .form-group .form-line:after {
+        border-bottom-color: @color;
+    }
+    .mat-form-field.mat-focused {
+        .mat-form-field-label { color: @color; }
+        .mat-form-field-ripple{ background-color: @color; }
     }
 }
 
