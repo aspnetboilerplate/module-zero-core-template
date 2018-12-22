@@ -34,7 +34,7 @@ export class RolesComponent extends PagedListingComponentBase<RoleDto> {
     pageNumber: number,
     finishedCallback: Function
   ): void {
-    abp.ui.setBusy($("#roles-table"));
+    //abp.ui.setBusy($("#roles-table"));
 
     this._rolesService
       .getAll(request.skipCount, request.maxResultCount)
@@ -46,8 +46,8 @@ export class RolesComponent extends PagedListingComponentBase<RoleDto> {
       .subscribe((result: PagedResultDtoOfRoleDto) => {
         this.roles = result.items;
         this.showPaging(result, pageNumber);
-        
-        abp.ui.clearBusy($("#roles-table"));
+
+        //abp.ui.clearBusy($("#roles-table"));
       });
   }
 
@@ -64,7 +64,7 @@ export class RolesComponent extends PagedListingComponentBase<RoleDto> {
                 this.refresh();
               })
             )
-            .subscribe(() => {});
+            .subscribe(() => { });
         }
       }
     );

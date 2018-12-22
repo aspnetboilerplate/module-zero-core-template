@@ -6,7 +6,7 @@
                     {{ 'Roles' | localize }}
                 </h2>
                 <ul class="header-dropdown m-r--5">
-                    <li>                
+                    <li>
                         <button mat-icon-button [matMenuTriggerFor]="headerMenu" style="bottom: 10px;">
                             <mat-icon>more_vert</mat-icon>
                         </button>
@@ -20,15 +20,15 @@
                 </ul>
             </div>
             <div id="roles-table" class="body table-responsive">
-                <table class="table table-hover table-striped">
+                <table class="table table-hover table-striped" [busy]="isTableLoading">
                     <thead>
                         <tr>
                             <th>{{ 'Actions' | localize }}</th>
                             <th>{{ 'RoleName' | localize }}</th>
-                            <th>{{ 'DisplayName' | localize }}</th>                
+                            <th>{{ 'DisplayName' | localize }}</th>
                         </tr>
                     </thead>
-                    <tbody> 
+                    <tbody>
                         <tr *ngFor="let role of roles | paginate: { id: 'server', itemsPerPage: pageSize, currentPage: pageNumber, totalItems: totalItems }">
                             <td>
                                 <button mat-icon-button [matMenuTriggerFor]="actionsMenu">

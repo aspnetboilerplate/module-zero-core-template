@@ -52,6 +52,8 @@ import {
     MatTooltipModule,
     MatTreeModule,
 } from '@angular/material';
+import { BlockDirective } from './directives/block.directive';
+import { BusyDirective } from './directives/busy.directive';
 @NgModule({
     imports: [
         CommonModule,
@@ -97,12 +99,16 @@ import {
     declarations: [
         MaterialInput,
         AbpPaginationControlsComponent,
-        LocalizePipe
+        LocalizePipe,
+        BlockDirective,
+        BusyDirective
     ],
     exports: [
         MaterialInput,
         AbpPaginationControlsComponent,
         LocalizePipe,
+        BlockDirective,
+        BusyDirective,
         CdkTableModule,
         CdkTreeModule,
         DragDropModule,
