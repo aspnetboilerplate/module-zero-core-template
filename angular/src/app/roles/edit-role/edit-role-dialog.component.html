@@ -1,0 +1,59 @@
+<form autocomplete="off"
+      #editRoleForm="ngForm"
+      (ngSubmit)="save()">
+    <h1 mat-dialog-title>{{ 'EditRole' | localize }}</h1>
+    <mat-dialog-content>
+        <mat-form-field>
+            <input matInput 
+                   name="Name"
+                   [placeholder]="'Name' | localize"
+                   [(ngModel)]="role.name"
+                   required 
+                   minlength="2"
+                   maxlength="32">
+        </mat-form-field>
+        <mat-form-field>
+            <input matInput
+                   name="DisplayName"
+                   [placeholder]="'DisplayName' | localize"
+                   [(ngModel)]="role.displayName"
+                   required 
+                   minlength="2"
+                   maxlength="32">
+        </mat-form-field>
+        <mat-form-field>
+            <textarea matInput
+                   name="Description"
+                   [placeholder]="'RoleDescription' | localize"
+                   [(ngModel)]="role.description"></textarea>
+        </mat-form-field>
+        <div class="row clearfix">
+            <div class="col-sm-12">
+                <h4>{{ 'Permissions' | localize }}</h4>
+                <ng-template ngFor let-permission [ngForOf]="permissions">
+                    <div class="col-sm-6">
+                        <div class="checkbox-wrapper">
+                            <mat-checkbox name="permission"
+                                          [value]="permission.name"
+                                          [checked]="checkPermission(permission.name)"
+                                          [disabled]="role.isStatic"
+                                          style="padding-bottom: 5px">{{ permission.displayName }}</mat-checkbox>
+                        </div>
+                    </div>
+                </ng-template>
+            </div>
+        </div>
+    </mat-dialog-content>
+    <div mat-dialog-actions 
+         align="end">
+        <button mat-button
+                type="button"
+                [disabled]="saving"
+                (click)="close()">{{ 'Cancel' | localize }}</button>
+        <button mat-flat-button
+                type="submit"
+                flex="15"
+                color="primary"
+                [disabled]="!editRoleForm.form.valid || saving">{{ 'Save' | localize }}</button>
+    </div>
+</form>
