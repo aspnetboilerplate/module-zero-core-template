@@ -1,21 +1,20 @@
-import { Component, Injector } from "@angular/core";
-import { MatDialog } from "@angular/material";
-import { finalize } from "rxjs/operators";
-import { appModuleAnimation } from "@shared/animations/routerTransition";
+import { Component, Injector } from '@angular/core';
+import { MatDialog } from '@angular/material';
+import { finalize } from 'rxjs/operators';
+import { appModuleAnimation } from '@shared/animations/routerTransition';
 import {
   RoleServiceProxy,
   RoleDto,
   PagedResultDtoOfRoleDto
-} from "@shared/service-proxies/service-proxies";
+} from '@shared/service-proxies/service-proxies';
 import {
   PagedListingComponentBase,
   PagedRequestDto
-} from "@shared/paged-listing-component-base";
-import { CreateRoleDialogComponent } from "@app/roles/create-role/create-role-dialog.component";
-import { EditRoleDialogComponent } from "@app/roles/edit-role/edit-role-dialog.component";
+} from '@shared/paged-listing-component-base';
+import { CreateOrEditRoleDialogComponent } from '@app/roles/create-or-edit-role-dialog.component';
 
 @Component({
-  templateUrl: "./roles.component.html",
+  templateUrl: './roles.component.html',
   animations: [appModuleAnimation()]
 })
 export class RolesComponent extends PagedListingComponentBase<RoleDto> {
@@ -49,14 +48,14 @@ export class RolesComponent extends PagedListingComponentBase<RoleDto> {
 
   delete(role: RoleDto): void {
     abp.message.confirm(
-      this.l("RoleDeleteWarningMessage", role.displayName),
+      this.l('RoleDeleteWarningMessage', role.displayName),
       (result: boolean) => {
         if (result) {
           this._rolesService
             .delete(role.id)
             .pipe(
               finalize(() => {
-                abp.notify.success(this.l("SuccessfullyDeleted"));
+                abp.notify.success(this.l('SuccessfullyDeleted'));
                 this.refresh();
               })
             )
@@ -67,19 +66,21 @@ export class RolesComponent extends PagedListingComponentBase<RoleDto> {
   }
 
   createRole(): void {
-    const createRoleDialog = this._dialog.open(CreateRoleDialogComponent);
-    createRoleDialog.afterClosed().subscribe(result => {
-      if (result) {
-        this.refresh();
-      }
-    });
+    this.showCreateOrEditRoleDialog();
   }
 
   editRole(role: RoleDto): void {
-    const editRoleDialog = this._dialog.open(EditRoleDialogComponent, {
-      data: role.id
-    });
-    editRoleDialog.afterClosed().subscribe(result => {
+    this.showCreateOrEditRoleDialog(role.id);
+  }
+
+  showCreateOrEditRoleDialog(id?: number): void {
+    const createOrEditRoleDialog = this._dialog.open(
+      CreateOrEditRoleDialogComponent,
+      {
+        data: id
+      }
+    );
+    createOrEditRoleDialog.afterClosed().subscribe(result => {
       if (result) {
         this.refresh();
       }

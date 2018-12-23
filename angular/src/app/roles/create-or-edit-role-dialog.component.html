@@ -1,7 +1,8 @@
 <form autocomplete="off"
       #editRoleForm="ngForm"
       (ngSubmit)="save()">
-    <h1 mat-dialog-title>{{ 'EditRole' | localize }}</h1>
+    <h1 mat-dialog-title *ngIf="!role.id">{{"CreateNewRole" | localize}}</h1>
+    <h1 mat-dialog-title *ngIf="role.id">{{"EditRole" | localize}}: {{permissionName}}</h1>
     <mat-dialog-content>
         <mat-form-field>
             <input matInput 
@@ -33,11 +34,9 @@
                 <ng-template ngFor let-permission [ngForOf]="permissions">
                     <div class="col-sm-6">
                         <div class="checkbox-wrapper">
-                            <mat-checkbox name="permission"
-                                          [value]="permission.name"
-                                          [checked]="checkPermission(permission.name)"
+                            <mat-checkbox [checked]="isPermissionChecked(permission.name)"
                                           [disabled]="role.isStatic"
-                                          style="padding-bottom: 5px">{{ permission.displayName }}</mat-checkbox>
+                                          (change)="onPermissionsChange(permission, $event)">{{ permission.displayName }}</mat-checkbox>
                         </div>
                     </div>
                 </ng-template>

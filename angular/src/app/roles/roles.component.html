@@ -7,11 +7,11 @@
                 </h2>
                 <ul class="header-dropdown m-r--5">
                     <li>
-                        <button mat-icon-button [matMenuTriggerFor]="headerMenu" style="bottom: 10px;">
+                        <button mat-icon-button [matMenuTriggerFor]="headerMenu" class="header-dropdown-mat-icon-button">
                             <mat-icon>more_vert</mat-icon>
                         </button>
                         <mat-menu #headerMenu="matMenu">
-                          <button mat-menu-item (click)="refresh()">
+                            <button mat-menu-item (click)="refresh()">
                                 <mat-icon>refresh</mat-icon>
                                 <span>{{ 'Refresh' | localize }}</span>
                             </button>
@@ -19,7 +19,7 @@
                     </li>
                 </ul>
             </div>
-            <div id="roles-table" class="body table-responsive">
+            <div class="body table-responsive">
                 <table class="table table-hover table-striped" [busy]="isTableLoading">
                     <thead>
                         <tr>
@@ -35,14 +35,14 @@
                                     <mat-icon>menu</mat-icon>
                                 </button>
                                 <mat-menu #actionsMenu="matMenu">
-                                  <button mat-menu-item (click)="editRole(role)">
-                                      <mat-icon>edit</mat-icon>
-                                      <span>{{ 'Edit' | localize }}</span>
-                                  </button>
-                                  <button mat-menu-item (click)="delete(role)">
-                                    <mat-icon>delete</mat-icon>
-                                    <span>{{ 'Delete' | localize }}</span>
-                                  </button>
+                                    <button mat-menu-item (click)="editRole(role)">
+                                        <mat-icon>edit</mat-icon>
+                                        <span>{{ 'Edit' | localize }}</span>
+                                    </button>
+                                    <button mat-menu-item (click)="delete(role)">
+                                        <mat-icon>delete</mat-icon>
+                                        <span>{{ 'Delete' | localize }}</span>
+                                    </button>
                                 </mat-menu>
                             </td>
                             <td>{{role.name}}</td>
@@ -50,7 +50,7 @@
                         </tr>
                     </tbody>
                 </table>
-                <div class="text-align: center;" *ngIf="totalItems > pageSize">
+                <div class="abp-pagination-controls-wrapper" *ngIf="totalItems > pageSize">
                     <abp-pagination-controls (pageChange)="getDataPage($event)" id="server"></abp-pagination-controls>
                 </div>
                 <button mat-mini-fab color="primary" class="pull-right" (click)="createRole()">
