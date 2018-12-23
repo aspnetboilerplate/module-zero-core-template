@@ -14,6 +14,7 @@ import {
   CreateRoleDto
 } from '@shared/service-proxies/service-proxies';
 import { AppComponentBase } from '@shared/app-component-base';
+import { finalize } from 'rxjs/operators';
 
 @Component({
   templateUrl: 'create-or-edit-role-dialog.component.html',
@@ -36,6 +37,7 @@ export class CreateOrEditRoleDialogComponent extends AppComponentBase
   checkedPermissionsMap: { [key: string]: boolean } = {};
   defaultPermissionCheckedStatus = true;
   permissionName = '';
+  saving = false;
 
   constructor(
     injector: Injector,
@@ -105,6 +107,8 @@ export class CreateOrEditRoleDialogComponent extends AppComponentBase
   }
 
   save(): void {
+    this.saving = true;
+
     const role = new RoleDto();
     role.permissions = this.getCheckedPermissions();
     role.init(this.role);
@@ -112,15 +116,25 @@ export class CreateOrEditRoleDialogComponent extends AppComponentBase
     if (this.isCreateDialog()) {
       const createRole = new CreateRoleDto();
       createRole.init(role);
-      this._roleService.create(createRole).subscribe(() => {
-        this.notify.info(this.l('SavedSuccessfully'));
-        this.close(true);
-      });
+      this._roleService.create(createRole)
+        .pipe(
+          finalize(() => {
+            this.saving = false;
+          })
+        ).subscribe(() => {
+          this.notify.info(this.l('SavedSuccessfully'));
+          this.close(true);
+        });
     } else {
-      this._roleService.update(role).subscribe(() => {
-        this.notify.info(this.l('SavedSuccessfully'));
-        this.close(true);
-      });
+      this._roleService.update(role)
+        .pipe(
+          finalize(() => {
+            this.saving = false;
+          })
+        ).subscribe(() => {
+          this.notify.info(this.l('SavedSuccessfully'));
+          this.close(true);
+        });
     }
   }
 
