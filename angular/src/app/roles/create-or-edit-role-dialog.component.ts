@@ -90,7 +90,7 @@ export class CreateOrEditRoleDialogComponent extends AppComponentBase
     return _.includes(this.grantedPermissionNames, permissionName);
   }
 
-  onPermissionsChange(permission: PermissionDto, $event: MatCheckboxChange) {
+  onPermissionChange(permission: PermissionDto, $event: MatCheckboxChange) {
     this.checkedPermissionsMap[permission.name] = $event.checked;
   }
 
