@@ -11,7 +11,8 @@ import {
   PagedListingComponentBase,
   PagedRequestDto
 } from '@shared/paged-listing-component-base';
-import { CreateOrEditRoleDialogComponent } from '@app/roles/create-or-edit-role-dialog.component';
+import { CreateRoleDialogComponent } from './create-role/create-role-dialog.component';
+import { EditRoleDialogComponent } from './edit-role/edit-role-dialog.component';
 
 @Component({
   templateUrl: './roles.component.html',
@@ -74,12 +75,23 @@ export class RolesComponent extends PagedListingComponentBase<RoleDto> {
   }
 
   showCreateOrEditRoleDialog(id?: number): void {
-    const createOrEditRoleDialog = this._dialog.open(
-      CreateOrEditRoleDialogComponent,
-      {
-        data: id
-      }
-    );
+    let createOrEditRoleDialog;
+    if (id === undefined || id <= 0) {
+      createOrEditRoleDialog = this._dialog.open(
+        CreateRoleDialogComponent,
+        {
+          data: id
+        }
+      );
+    } else {
+      createOrEditRoleDialog = this._dialog.open(
+        EditRoleDialogComponent,
+        {
+          data: id
+        }
+      );
+    }
+
     createOrEditRoleDialog.afterClosed().subscribe(result => {
       if (result) {
         this.refresh();
