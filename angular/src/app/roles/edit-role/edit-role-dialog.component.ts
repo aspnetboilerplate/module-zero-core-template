@@ -34,7 +34,6 @@ export class EditRoleDialogComponent extends AppComponentBase
   grantedPermissionNames: string[] = [];
   checkedPermissionsMap: { [key: string]: boolean } = {};
   defaultPermissionCheckedStatus = true;
-  permissionName = '';
   saving = false;
 
   constructor(
@@ -57,7 +56,6 @@ export class EditRoleDialogComponent extends AppComponentBase
           this.permissions.push(permission);
         });
         this.grantedPermissionNames = result.grantedPermissionNames;
-        this.permissionName = result.role.name;
         this.setInitialPermissionsStatus();
       });
   }
