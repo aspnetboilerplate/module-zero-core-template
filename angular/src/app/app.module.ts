@@ -30,10 +30,8 @@ import { RightSideBarComponent } from '@app/layout/right-sidebar.component';
 import { CreateTenantDialogComponent } from './tenants/create-tenant/create-tenant-dialog.component';
 import { EditTenantDialogComponent } from './tenants/edit-tenant/edit-tenant-dialog.component';
 // roles
-import { RolesComponent } from "@app/roles/roles.component";
-import { CreateRoleDialogComponent } from "@app/roles/create-role/create-role-dialog.component";
-import { EditRoleDialogComponent } from "./roles/edit-role/edit-role-dialog.component";
-
+import { RolesComponent } from '@app/roles/roles.component';
+import { CreateOrEditRoleDialogComponent } from '@app/roles/create-or-edit-role-dialog.component';
 
 @NgModule({
     declarations: [
@@ -54,8 +52,7 @@ import { EditRoleDialogComponent } from "./roles/edit-role/edit-role-dialog.comp
         RightSideBarComponent,
         // roles
         RolesComponent,
-        CreateRoleDialogComponent,
-        EditRoleDialogComponent
+        CreateOrEditRoleDialogComponent
     ],
     imports: [
         CommonModule,
@@ -78,8 +75,7 @@ import { EditRoleDialogComponent } from "./roles/edit-role/edit-role-dialog.comp
 
         // roles
         RolesComponent,
-        CreateRoleDialogComponent,
-        EditRoleDialogComponent
+        CreateOrEditRoleDialogComponent
     ]
 })
 export class AppModule { }
