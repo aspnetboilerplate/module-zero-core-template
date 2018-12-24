@@ -29,7 +29,7 @@
                         </tr>
                     </thead>
                     <tbody>
-                        <tr *ngFor="let role of roles | paginate: { id: "server", itemsPerPage: pageSize, currentPage: pageNumber, totalItems: totalItems }">
+                        <tr *ngFor="let role of roles | paginate: { id: 'server', itemsPerPage: pageSize, currentPage: pageNumber, totalItems: totalItems }">
                             <td>
                                 <button mat-icon-button [matMenuTriggerFor]="actionsMenu">
                                     <mat-icon>menu</mat-icon>
