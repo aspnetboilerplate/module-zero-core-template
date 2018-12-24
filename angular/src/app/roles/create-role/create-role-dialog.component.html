@@ -1,8 +1,7 @@
 <form autocomplete="off"
-      #editRoleForm="ngForm"
+      #createRoleForm="ngForm"
       (ngSubmit)="save()">
-    <h1 mat-dialog-title *ngIf="!role.id">{{"CreateNewRole" | localize}}</h1>
-    <h1 mat-dialog-title *ngIf="role.id">{{"EditRole" | localize}}: {{permissionName}}</h1>
+    <h1 mat-dialog-title>{{ "CreateNewRole" | localize }}</h1>
     <mat-dialog-content>
         <mat-form-field>
             <input matInput 
@@ -30,7 +29,7 @@
         </mat-form-field>
         <div class="row clearfix">
             <div class="col-sm-12">
-                <h4>{{ 'Permissions' | localize }}</h4>
+                <h4>{{ "Permissions" | localize }}</h4>
                 <ng-template ngFor let-permission [ngForOf]="permissions">
                     <div class="col-sm-6">
                         <div class="checkbox-wrapper">
@@ -48,11 +47,11 @@
         <button mat-button
                 type="button"
                 [disabled]="saving"
-                (click)="close()">{{ 'Cancel' | localize }}</button>
+                (click)="close()">{{ "Cancel" | localize }}</button>
         <button mat-flat-button
                 type="submit"
                 flex="15"
                 color="primary"
-                [disabled]="!editRoleForm.form.valid || saving">{{ 'Save' | localize }}</button>
+                [disabled]="!createRoleForm.form.valid || saving">{{ "Save" | localize }}</button>
     </div>
 </form>
