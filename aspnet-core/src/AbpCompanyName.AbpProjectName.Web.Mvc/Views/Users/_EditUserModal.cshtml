@@ -9,8 +9,8 @@
     <form name="UserEditForm" role="form" novalidate class="form-validation">
         <input type="hidden" name="Id" value="@Model.User.Id" />
         <ul class="nav nav-tabs tab-nav-right" role="tablist">
-            <li role="presentation" class="active"><a href="#edit-user-details" data-toggle="tab">User Details</a></li>
-            <li role="presentation"><a href="#edit-user-roles" data-toggle="tab">User Roles</a></li>
+            <li role="presentation" class="active"><a href="#edit-user-details" data-toggle="tab">@L("UserDetails")</a></li>
+            <li role="presentation"><a href="#edit-user-roles" data-toggle="tab">@L("UserRoles")</a></li>
         </ul>
         <div class="tab-content">
             <div role="tabpanel" class="tab-pane animated fadeIn active" id="edit-user-details">

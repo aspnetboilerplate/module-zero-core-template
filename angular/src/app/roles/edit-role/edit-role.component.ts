@@ -1,21 +1,21 @@
-﻿import { Component, ViewChild, Injector, Output, EventEmitter, ElementRef, OnInit } from '@angular/core';
+import { Component, ViewChild, Injector, Output, EventEmitter, ElementRef } from '@angular/core';
 import { ModalDirective } from 'ngx-bootstrap';
-import { RoleServiceProxy, RoleDto, ListResultDtoOfPermissionDto } from '@shared/service-proxies/service-proxies';
+import { RoleServiceProxy, GetRoleForEditOutput, RoleDto } from '@shared/service-proxies/service-proxies';
 import { AppComponentBase } from '@shared/app-component-base';
+import { finalize } from 'rxjs/operators';
 
 @Component({
     selector: 'edit-role-modal',
     templateUrl: './edit-role.component.html'
 })
-export class EditRoleComponent extends AppComponentBase implements OnInit {
+export class EditRoleComponent extends AppComponentBase {
     @ViewChild('editRoleModal') modal: ModalDirective;
     @ViewChild('modalContent') modalContent: ElementRef;
 
     active: boolean = false;
     saving: boolean = false;
 
-    permissions: ListResultDtoOfPermissionDto = null;
-    role: RoleDto = null;
+    model: GetRoleForEditOutput = null;
 
     @Output() modalSave: EventEmitter<any> = new EventEmitter<any>();
     constructor(
@@ -25,21 +25,14 @@ export class EditRoleComponent extends AppComponentBase implements OnInit {
         super(injector);
     }
 
-    ngOnInit(): void {
-        this._roleService.getAllPermissions()
-            .subscribe((permissions: ListResultDtoOfPermissionDto) => {
-                this.permissions = permissions;
-            });
-    }
-
     show(id: number): void {
-        this._roleService.get(id)
-            .finally(() => {
+        this._roleService.getRoleForEdit(id)
+            .pipe(finalize(() => {
                 this.active = true;
                 this.modal.show();
-            })
-            .subscribe((result: RoleDto) => {
-                this.role = result;
+            }))
+            .subscribe((result: GetRoleForEditOutput) => {
+                this.model = result;
             });
     }
 
@@ -48,7 +41,7 @@ export class EditRoleComponent extends AppComponentBase implements OnInit {
     }
 
     checkPermission(permissionName: string): string {
-        if (this.role.permissions.indexOf(permissionName) != -1) {
+        if (this.model.grantedPermissionNames.indexOf(permissionName) != -1) {
             return "checked";
         }
         else {
@@ -57,6 +50,8 @@ export class EditRoleComponent extends AppComponentBase implements OnInit {
     }
 
     save(): void {
+        const role = this.model.role;
+
         var permissions = [];
         $(this.modalContent.nativeElement).find("[name=permission]").each(
             function (index: number, elem: Element) {
@@ -66,10 +61,19 @@ export class EditRoleComponent extends AppComponentBase implements OnInit {
             }
         )
 
-        this.role.permissions = permissions;
         this.saving = true;
-        this._roleService.update(this.role)
-            .finally(() => { this.saving = false; })
+        var input = new RoleDto();
+
+        input.name = role.name;
+        input.displayName = role.displayName;
+        input.description = role.description;
+        input.id = role.id;
+        input.isStatic = role.isStatic;
+        input.permissions = permissions;
+
+
+        this._roleService.update(input)
+            .pipe(finalize(() => { this.saving = false; }))
             .subscribe(() => {
                 this.notify.info(this.l('SavedSuccessfully'));
                 this.close();

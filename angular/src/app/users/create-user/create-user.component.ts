@@ -1,9 +1,8 @@
-﻿import { Component, ViewChild, Injector, Output, EventEmitter, ElementRef, OnInit } from '@angular/core';
+import { Component, ViewChild, Injector, Output, EventEmitter, ElementRef, OnInit } from '@angular/core';
 import { ModalDirective } from 'ngx-bootstrap';
 import { UserServiceProxy, CreateUserDto, RoleDto } from '@shared/service-proxies/service-proxies';
 import { AppComponentBase } from '@shared/app-component-base';
-
-import * as _ from "lodash";
+import { finalize } from 'rxjs/operators';
 
 @Component({
   selector: 'create-user-modal',
@@ -58,7 +57,7 @@ export class CreateUserComponent extends AppComponentBase implements OnInit {
         this.user.roleNames = roles;
         this.saving = true;
         this._userService.create(this.user)
-            .finally(() => { this.saving = false; })
+            .pipe(finalize(() => { this.saving = false; }))
             .subscribe(() => {
                 this.notify.info(this.l('SavedSuccessfully'));
                 this.close();

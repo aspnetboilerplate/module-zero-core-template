@@ -2,7 +2,6 @@
 using System.Threading.Tasks;
 using Abp.Auditing;
 using AbpCompanyName.AbpProjectName.Sessions.Dto;
-using AbpCompanyName.AbpProjectName.SignalR;
 
 namespace AbpCompanyName.AbpProjectName.Sessions
 {
@@ -17,11 +16,7 @@ namespace AbpCompanyName.AbpProjectName.Sessions
                 {
                     Version = AppVersionHelper.Version,
                     ReleaseDate = AppVersionHelper.ReleaseDate,
-                    Features = new Dictionary<string, bool>
-                    {
-                        { "SignalR", SignalRFeature.IsAvailable },
-                        { "SignalR.AspNetCore", SignalRFeature.IsAspNetCore }
-                    }
+                    Features = new Dictionary<string, bool>()
                 }
             };
 

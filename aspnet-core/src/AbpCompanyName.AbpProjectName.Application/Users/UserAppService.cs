@@ -1,13 +1,14 @@
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
-using Microsoft.AspNetCore.Identity;
-using Microsoft.EntityFrameworkCore;
 using Abp.Application.Services;
 using Abp.Application.Services.Dto;
 using Abp.Authorization;
+using Abp.Domain.Entities;
 using Abp.Domain.Repositories;
+using Abp.Extensions;
 using Abp.IdentityFramework;
+using Abp.Linq.Extensions;
 using Abp.Localization;
 using Abp.Runtime.Session;
 using AbpCompanyName.AbpProjectName.Authorization;
@@ -15,11 +16,13 @@ using AbpCompanyName.AbpProjectName.Authorization.Roles;
 using AbpCompanyName.AbpProjectName.Authorization.Users;
 using AbpCompanyName.AbpProjectName.Roles.Dto;
 using AbpCompanyName.AbpProjectName.Users.Dto;
+using Microsoft.AspNetCore.Identity;
+using Microsoft.EntityFrameworkCore;
 
 namespace AbpCompanyName.AbpProjectName.Users
 {
     [AbpAuthorize(PermissionNames.Pages_Users)]
-    public class UserAppService : AsyncCrudAppService<User, UserDto, long, PagedResultRequestDto, CreateUserDto, UserDto>, IUserAppService
+    public class UserAppService : AsyncCrudAppService<User, UserDto, long, PagedUserResultRequestDto, CreateUserDto, UserDto>, IUserAppService
     {
         private readonly UserManager _userManager;
         private readonly RoleManager _roleManager;
@@ -47,10 +50,11 @@ namespace AbpCompanyName.AbpProjectName.Users
             var user = ObjectMapper.Map<User>(input);
 
             user.TenantId = AbpSession.TenantId;
-            user.Password = _passwordHasher.HashPassword(user, input.Password);
             user.IsEmailConfirmed = true;
 
-            CheckErrors(await _userManager.CreateAsync(user));
+            await _userManager.InitializeOptionsAsync(AbpSession.TenantId);
+
+            CheckErrors(await _userManager.CreateAsync(user, input.Password));
 
             if (input.RoleNames != null)
             {
@@ -122,17 +126,29 @@ namespace AbpCompanyName.AbpProjectName.Users
             return userDto;
         }
 
-        protected override IQueryable<User> CreateFilteredQuery(PagedResultRequestDto input)
+        protected override IQueryable<User> CreateFilteredQuery(PagedUserResultRequestDto input)
         {
-            return Repository.GetAllIncluding(x => x.Roles);
+            return Repository.GetAllIncluding(x => x.Roles)
+                .WhereIf(!input.UserName.IsNullOrWhiteSpace(), x => x.UserName.Contains(input.UserName))
+                .WhereIf(!input.Name.IsNullOrWhiteSpace(), x => x.Name.Contains(input.Name))
+                .WhereIf(input.IsActive.HasValue, x => x.IsActive == input.IsActive)
+                .WhereIf(input.From.HasValue, x => x.CreationTime >= input.From.Value.LocalDateTime)
+                .WhereIf(input.To.HasValue, x => x.CreationTime <= input.To.Value.LocalDateTime);
         }
 
         protected override async Task<User> GetEntityByIdAsync(long id)
         {
-            return await Repository.GetAllIncluding(x => x.Roles).FirstOrDefaultAsync(x => x.Id == id);
+            var user = await Repository.GetAllIncluding(x => x.Roles).FirstOrDefaultAsync(x => x.Id == id);
+
+            if (user == null)
+            {
+                throw new EntityNotFoundException(typeof(User), id);
+            }
+
+            return user;
         }
 
-        protected override IQueryable<User> ApplySorting(IQueryable<User> query, PagedResultRequestDto input)
+        protected override IQueryable<User> ApplySorting(IQueryable<User> query, PagedUserResultRequestDto input)
         {
             return query.OrderBy(r => r.UserName);
         }
@@ -143,3 +159,4 @@ namespace AbpCompanyName.AbpProjectName.Users
         }
     }
 }
+

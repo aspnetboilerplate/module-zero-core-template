@@ -1,9 +1,9 @@
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
-using System.Text.RegularExpressions;
 using Abp.Auditing;
 using Abp.Authorization.Users;
 using Abp.Extensions;
+using AbpCompanyName.AbpProjectName.Validation;
 
 namespace AbpCompanyName.AbpProjectName.Web.Models.Account
 {
@@ -37,8 +37,7 @@ namespace AbpCompanyName.AbpProjectName.Web.Models.Account
         {
             if (!UserName.IsNullOrEmpty())
             {
-                var emailRegex = new Regex(@"^\w+([-+.']\w+)*@\w+([-.]\w+)*\.\w+([-.]\w+)*$");
-                if (!UserName.Equals(EmailAddress) && emailRegex.IsMatch(UserName))
+                if (!UserName.Equals(EmailAddress) && ValidationHelper.IsEmail(UserName))
                 {
                     yield return new ValidationResult("Username cannot be an email address unless it's the same as your email address!");
                 }

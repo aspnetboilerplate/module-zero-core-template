@@ -1,4 +1,4 @@
-﻿export class MenuItem {
+export class MenuItem {
     name: string = '';
     permissionName: string = '';
     icon: string = '';
@@ -10,6 +10,11 @@
         this.permissionName = permissionName;
         this.icon = icon;
         this.route = route;
-        this.items = childItems;
+
+        if (childItems) {
+            this.items = childItems;
+        } else {
+            this.items = [];
+        }
     }
 }

@@ -1,5 +1,6 @@
 using System;
 using System.Collections.Generic;
+using System.Data.Common;
 using Abp.Data;
 using Abp.Dependency;
 using Abp.Domain.Repositories;
@@ -15,8 +16,7 @@ namespace AbpCompanyName.AbpProjectName.Migrator
 {
     public class MultiTenantMigrateExecuter : ITransientDependency
     {
-        public Log Log { get; private set; }
-
+        private readonly Log _log;
         private readonly AbpZeroDbMigrator _migrator;
         private readonly IRepository<Tenant> _tenantRepository;
         private readonly IDbPerTenantConnectionStringResolver _connectionStringResolver;
@@ -27,35 +27,35 @@ namespace AbpCompanyName.AbpProjectName.Migrator
             Log log,
             IDbPerTenantConnectionStringResolver connectionStringResolver)
         {
-            Log = log;
+            _log = log;
 
             _migrator = migrator;
             _tenantRepository = tenantRepository;
             _connectionStringResolver = connectionStringResolver;
         }
 
-        public void Run(bool skipConnVerification)
+        public bool Run(bool skipConnVerification)
         {
-            var hostConnStr = _connectionStringResolver.GetNameOrConnectionString(new ConnectionStringResolveArgs(MultiTenancySides.Host));
+            var hostConnStr = CensorConnectionString(_connectionStringResolver.GetNameOrConnectionString(new ConnectionStringResolveArgs(MultiTenancySides.Host)));
             if (hostConnStr.IsNullOrWhiteSpace())
             {
-                Log.Write("Configuration file should contain a connection string named 'Default'");
-                return;
+                _log.Write("Configuration file should contain a connection string named 'Default'");
+                return false;
             }
 
-            Log.Write("Host database: " + ConnectionStringHelper.GetConnectionString(hostConnStr));
+            _log.Write("Host database: " + ConnectionStringHelper.GetConnectionString(hostConnStr));
             if (!skipConnVerification)
             {
-                Log.Write("Continue to migration for this host database and all tenants..? (Y/N): ");
+                _log.Write("Continue to migration for this host database and all tenants..? (Y/N): ");
                 var command = Console.ReadLine();
                 if (!command.IsIn("Y", "y"))
                 {
-                    Log.Write("Migration canceled.");
-                    return;
+                    _log.Write("Migration canceled.");
+                    return false;
                 }
             }
 
-            Log.Write("HOST database migration started...");
+            _log.Write("HOST database migration started...");
 
             try
             {
@@ -63,25 +63,25 @@ namespace AbpCompanyName.AbpProjectName.Migrator
             }
             catch (Exception ex)
             {
-                Log.Write("An error occured during migration of host database:");
-                Log.Write(ex.ToString());
-                Log.Write("Canceled migrations.");
-                return;
+                _log.Write("An error occured during migration of host database:");
+                _log.Write(ex.ToString());
+                _log.Write("Canceled migrations.");
+                return false;
             }
 
-            Log.Write("HOST database migration completed.");
-            Log.Write("--------------------------------------------------------");
+            _log.Write("HOST database migration completed.");
+            _log.Write("--------------------------------------------------------");
 
             var migratedDatabases = new HashSet<string>();
             var tenants = _tenantRepository.GetAllList(t => t.ConnectionString != null && t.ConnectionString != "");
             for (var i = 0; i < tenants.Count; i++)
             {
                 var tenant = tenants[i];
-                Log.Write(string.Format("Tenant database migration started... ({0} / {1})", (i + 1), tenants.Count));
-                Log.Write("Name              : " + tenant.Name);
-                Log.Write("TenancyName       : " + tenant.TenancyName);
-                Log.Write("Tenant Id         : " + tenant.Id);
-                Log.Write("Connection string : " + SimpleStringCipher.Instance.Decrypt(tenant.ConnectionString));
+                _log.Write(string.Format("Tenant database migration started... ({0} / {1})", (i + 1), tenants.Count));
+                _log.Write("Name              : " + tenant.Name);
+                _log.Write("TenancyName       : " + tenant.TenancyName);
+                _log.Write("Tenant Id         : " + tenant.Id);
+                _log.Write("Connection string : " + SimpleStringCipher.Instance.Decrypt(tenant.ConnectionString));
 
                 if (!migratedDatabases.Contains(tenant.ConnectionString))
                 {
@@ -91,23 +91,41 @@ namespace AbpCompanyName.AbpProjectName.Migrator
                     }
                     catch (Exception ex)
                     {
-                        Log.Write("An error occured during migration of tenant database:");
-                        Log.Write(ex.ToString());
-                        Log.Write("Skipped this tenant and will continue for others...");
+                        _log.Write("An error occured during migration of tenant database:");
+                        _log.Write(ex.ToString());
+                        _log.Write("Skipped this tenant and will continue for others...");
                     }
 
                     migratedDatabases.Add(tenant.ConnectionString);
                 }
                 else
                 {
-                    Log.Write("This database has already migrated before (you have more than one tenant in same database). Skipping it....");
+                    _log.Write("This database has already migrated before (you have more than one tenant in same database). Skipping it....");
                 }
 
-                Log.Write(string.Format("Tenant database migration completed. ({0} / {1})", (i + 1), tenants.Count));
-                Log.Write("--------------------------------------------------------");
+                _log.Write(string.Format("Tenant database migration completed. ({0} / {1})", (i + 1), tenants.Count));
+                _log.Write("--------------------------------------------------------");
             }
 
-            Log.Write("All databases have been migrated.");
+            _log.Write("All databases have been migrated.");
+
+            return true;
+        }
+
+        private static string CensorConnectionString(string connectionString)
+        {
+            var builder = new DbConnectionStringBuilder { ConnectionString = connectionString };
+            var keysToMask = new[] { "password", "pwd", "user id", "uid" };
+
+            foreach (var key in keysToMask)
+            {
+                if (builder.ContainsKey(key))
+                {
+                    builder[key] = "*****";
+                }
+            }
+
+            return builder.ToString();
         }
     }
 }

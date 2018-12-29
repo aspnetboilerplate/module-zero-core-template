@@ -1,8 +1,8 @@
-﻿<div class="overlay"></div>
+<div class="overlay"></div>
 
 <top-bar></top-bar>
 
-<section>
+<section (window:resize)="onResize($event)">
     <aside id="leftsidebar" class="sidebar">
         <sidebar-user-area></sidebar-user-area>
         <sidebar-nav></sidebar-nav>

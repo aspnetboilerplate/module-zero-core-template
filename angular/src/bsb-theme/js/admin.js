@@ -99,10 +99,10 @@
             //Set menu height
             _this.setMenuHeight();
             _this.checkStatuForResize(true);
-            $(window).resize(function () {
-                _this.setMenuHeight();
-                _this.checkStatuForResize(false);
-            });
+            //$(window).resize(function () {
+            //    _this.setMenuHeight();
+            //    _this.checkStatuForResize(false);
+            //});
 
             //Set Waves
             Waves.attach('.menu .list a', ['waves-block']);
@@ -463,4 +463,5 @@
         $.AdminBSB.select.activate();
         $.AdminBSB.search.activate();
     }
+
 })();

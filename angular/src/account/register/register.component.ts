@@ -1,9 +1,10 @@
-﻿import { Component, Injector, ElementRef, AfterViewInit, ViewChild } from '@angular/core';
+import { Component, Injector, ElementRef, AfterViewInit, ViewChild } from '@angular/core';
 import { Router } from '@angular/router';
 import { AccountServiceProxy, RegisterInput, RegisterOutput } from '@shared/service-proxies/service-proxies'
 import { AppComponentBase } from '@shared/app-component-base';
 import { LoginService } from '../login/login.service';
 import { accountModuleAnimation } from '@shared/animations/routerTransition';
+import { finalize } from 'rxjs/operators';
 
 @Component({
     templateUrl: './register.component.html',
@@ -37,7 +38,7 @@ export class RegisterComponent extends AppComponentBase implements AfterViewInit
     save(): void {
         this.saving = true;
         this._accountService.register(this.model)
-            .finally(() => { this.saving = false; })
+            .pipe(finalize(() => { this.saving = false; }))
             .subscribe((result:RegisterOutput) => {
                 if (!result.canLogin) {
                     this.notify.success(this.l('SuccessfullyRegistered'));

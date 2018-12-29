@@ -5,6 +5,7 @@ using Abp.AspNetCore.Mvc.Authorization;
 using AbpCompanyName.AbpProjectName.Authorization;
 using AbpCompanyName.AbpProjectName.Controllers;
 using AbpCompanyName.AbpProjectName.Roles;
+using AbpCompanyName.AbpProjectName.Roles.Dto;
 using AbpCompanyName.AbpProjectName.Web.Models.Roles;
 
 namespace AbpCompanyName.AbpProjectName.Web.Controllers
@@ -21,7 +22,7 @@ namespace AbpCompanyName.AbpProjectName.Web.Controllers
 
         public async Task<IActionResult> Index()
         {
-            var roles = (await _roleAppService.GetAll(new PagedAndSortedResultRequestDto())).Items;
+            var roles = (await _roleAppService.GetRolesAsync(new GetRolesInput())).Items;
             var permissions = (await _roleAppService.GetAllPermissions()).Items;
             var model = new RoleListViewModel
             {
@@ -34,13 +35,9 @@ namespace AbpCompanyName.AbpProjectName.Web.Controllers
 
         public async Task<ActionResult> EditRoleModal(int roleId)
         {
-            var role = await _roleAppService.Get(new EntityDto(roleId));
-            var permissions = (await _roleAppService.GetAllPermissions()).Items;
-            var model = new EditRoleModalViewModel
-            {
-                Role = role,
-                Permissions = permissions
-            };
+            var output = await _roleAppService.GetRoleForEdit(new EntityDto(roleId));
+            var model = new EditRoleModalViewModel(output);
+
             return View("_EditRoleModal", model);
         }
     }

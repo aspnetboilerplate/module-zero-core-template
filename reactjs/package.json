@@ -1,0 +1,50 @@
+{
+  "name": "reactjs",
+  "version": "4.3.0",
+  "private": true,
+  "dependencies": {
+    "@aspnet/signalr": "^1.0.0",
+    "@types/classnames": "^2.2.6",
+    "@types/moment": "^2.13.0",
+    "@types/moment-timezone": "^0.5.9",
+    "@types/react-document-title": "^2.0.3",
+    "@types/react-loadable": "^5.4.2",
+    "@types/recharts": "^1.1.1",
+    "abp-web-resources": "^3.8.2",
+    "antd": "^3.10.3",
+    "axios": "^0.18.0",
+    "classnames": "^2.2.6",
+    "famfamfam-flags": "^1.0.0",
+    "lodash": "^4.17.11",
+    "mobx": "^5.5.2",
+    "mobx-react": "^5.3.6",
+    "moment": "^2.22.2",
+    "moment-timezone": "^0.5.23",
+    "query-string": "^6.2.0",
+    "react": "^16.6.0",
+    "react-app-rewired": "^1.6.2",
+    "react-document-title": "^2.0.3",
+    "react-dom": "^16.6.0",
+    "react-loadable": "^5.5.0",
+    "react-router-dom": "^4.3.1",
+    "react-scripts-ts": "3.1.0",
+    "recharts": "^1.4.1"
+  },
+  "scripts": {
+    "start": "react-app-rewired start --scripts-version react-scripts-ts",
+    "build": "react-app-rewired build --scripts-version react-scripts-ts",
+    "test": "react-app-rewired test --env=jsdom --scripts-version react-scripts-ts",
+    "eject": "react-scripts-ts eject"
+  },
+  "devDependencies": {
+    "@types/jest": "^23.3.7",
+    "@types/node": "^10.12.0",
+    "@types/react": "^16.4.18",
+    "@types/react-dom": "^16.0.9",
+    "@types/react-router-dom": "^4.3.1",
+    "copy-webpack-plugin": "^4.5.4",
+    "react-app-rewire-less": "^2.1.3",
+    "ts-import-plugin": "^1.5.5",
+    "typescript": "^3.1.3"
+  }
+}

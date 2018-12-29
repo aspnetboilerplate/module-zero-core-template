@@ -24,6 +24,7 @@ namespace AbpCompanyName.AbpProjectName.Tests
         public AbpProjectNameTestModule(AbpProjectNameEntityFrameworkModule abpProjectNameEntityFrameworkModule)
         {
             abpProjectNameEntityFrameworkModule.SkipDbContextRegistration = true;
+            abpProjectNameEntityFrameworkModule.SkipDbSeed = true;
         }
 
         public override void PreInitialize()

@@ -20,10 +20,10 @@ namespace AbpCompanyName.AbpProjectName.EntityFrameworkCore.Seed.Host
                 new ApplicationLanguage(null, "de", "German", "famfamfam-flags de"),
                 new ApplicationLanguage(null, "it", "Italiano", "famfamfam-flags it"),
                 new ApplicationLanguage(null, "fr", "Français", "famfamfam-flags fr"),
-                new ApplicationLanguage(null, "pt-BR", "Portuguese", "famfamfam-flags br"),
+                new ApplicationLanguage(null, "pt-BR", "Português", "famfamfam-flags br"),
                 new ApplicationLanguage(null, "tr", "Türkçe", "famfamfam-flags tr"),
                 new ApplicationLanguage(null, "ru", "Русский", "famfamfam-flags ru"),
-                new ApplicationLanguage(null, "zh-CN", "简体中文", "famfamfam-flags cn"),
+                new ApplicationLanguage(null, "zh-Hans", "简体中文", "famfamfam-flags cn"),
                 new ApplicationLanguage(null, "es-MX", "Español México", "famfamfam-flags mx"),
                 new ApplicationLanguage(null, "nl", "Nederlands", "famfamfam-flags nl"),
                 new ApplicationLanguage(null, "ja", "日本語", "famfamfam-flags jp")

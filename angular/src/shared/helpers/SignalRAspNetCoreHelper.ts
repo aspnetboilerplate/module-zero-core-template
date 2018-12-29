@@ -11,7 +11,9 @@ export class SignalRAspNetCoreHelper {
             connect: undefined,
             hubs: undefined,
             qs: AppConsts.authorization.encrptedAuthTokenName + "=" + encodeURIComponent(encryptedAuthToken),
-            url: AppConsts.remoteServiceBaseUrl + '/signalr'
+            remoteServiceBaseUrl: AppConsts.remoteServiceBaseUrl,
+            startConnection: undefined,
+            url: '/signalr'
         };
 
         jQuery.getScript(AppConsts.appBaseUrl + '/assets/abp/abp.signalr-client.js');

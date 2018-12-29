@@ -132,6 +132,12 @@
     ]
   },
   {
+    "outputFileName": "wwwroot/view-resources/Views/Roles/Index.min.js",
+    "inputFiles": [
+      "wwwroot/view-resources/Views/Roles/Index.js"
+    ]
+  },
+  {
     "outputFileName": "wwwroot/view-resources/Views/Shared/Components/TenantChange/_ChangeModal.min.js",
     "inputFiles": [
       "wwwroot/view-resources/Views/Shared/Components/TenantChange/_ChangeModal.js"

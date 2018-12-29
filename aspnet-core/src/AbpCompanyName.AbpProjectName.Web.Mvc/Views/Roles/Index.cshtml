@@ -26,7 +26,7 @@
                             <i class="material-icons">more_vert</i>
                         </a>
                         <ul class="dropdown-menu pull-right">
-                            <li><a id="RefreshButton" href="javascript:void(0);" class="waves-effect waves-block"><i class="material-icons">refresh</i>Refresh</a></li>
+                            <li><a id="RefreshButton" href="javascript:void(0);" class="waves-effect waves-block"><i class="material-icons">refresh</i>@L("Refresh")</a></li>
                         </ul>
                     </li>
                 </ul>
@@ -103,7 +103,7 @@
                             <div class="form-group form-float">
                                 <div class="form-line">
                                     <textarea id="role-description" name="Description" class="validate form-control"></textarea>
-                                    <label for="role-description" class="form-label">Role Description</label>
+                                    <label for="role-description" class="form-label">@L("RoleDescription")</label>
                                 </div>
                             </div>
                         </div>
@@ -111,7 +111,7 @@
 
                     <div class="row clearfix">
                         <div class="col-sm-12">
-                            <h4>Permissions</h4>
+                            <h4>@L("Permissions")</h4>
                             @foreach (var permission in Model.Permissions)
                             {
                                 <div class="col-sm-6">

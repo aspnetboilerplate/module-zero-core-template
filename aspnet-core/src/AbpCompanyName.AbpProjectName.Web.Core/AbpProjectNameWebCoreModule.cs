@@ -5,6 +5,7 @@ using Microsoft.Extensions.Configuration;
 using Microsoft.IdentityModel.Tokens;
 using Abp.AspNetCore;
 using Abp.AspNetCore.Configuration;
+using Abp.AspNetCore.SignalR;
 using Abp.Modules;
 using Abp.Reflection.Extensions;
 using Abp.Zero.Configuration;
@@ -12,23 +13,13 @@ using AbpCompanyName.AbpProjectName.Authentication.JwtBearer;
 using AbpCompanyName.AbpProjectName.Configuration;
 using AbpCompanyName.AbpProjectName.EntityFrameworkCore;
 
-#if FEATURE_SIGNALR
-using Abp.Web.SignalR;
-#elif FEATURE_SIGNALR_ASPNETCORE
-using Abp.AspNetCore.SignalR;
-#endif
-
 namespace AbpCompanyName.AbpProjectName
 {
     [DependsOn(
          typeof(AbpProjectNameApplicationModule),
          typeof(AbpProjectNameEntityFrameworkModule),
          typeof(AbpAspNetCoreModule)
-#if FEATURE_SIGNALR 
-        ,typeof(AbpWebSignalRModule)
-#elif FEATURE_SIGNALR_ASPNETCORE
         ,typeof(AbpAspNetCoreSignalRModule)
-#endif
      )]
     public class AbpProjectNameWebCoreModule : AbpModule
     {

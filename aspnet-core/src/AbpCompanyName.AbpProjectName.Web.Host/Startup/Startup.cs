@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Linq;
+using System.Reflection;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Mvc.Cors.Internal;
@@ -11,19 +12,10 @@ using Swashbuckle.AspNetCore.Swagger;
 using Abp.AspNetCore;
 using Abp.Castle.Logging.Log4Net;
 using Abp.Extensions;
-using AbpCompanyName.AbpProjectName.Authentication.JwtBearer;
 using AbpCompanyName.AbpProjectName.Configuration;
 using AbpCompanyName.AbpProjectName.Identity;
 
-#if FEATURE_SIGNALR
-using Microsoft.AspNet.SignalR;
-using Microsoft.Owin.Cors;
-using Owin;
-using Abp.Owin;
-using AbpCompanyName.AbpProjectName.Owin;
-#elif FEATURE_SIGNALR_ASPNETCORE
 using Abp.AspNetCore.SignalR.Hubs;
-#endif
 
 namespace AbpCompanyName.AbpProjectName.Web.Host.Startup
 {
@@ -48,9 +40,7 @@ namespace AbpCompanyName.AbpProjectName.Web.Host.Startup
             IdentityRegistrar.Register(services);
             AuthConfigurer.Configure(services, _appConfiguration);
 
-#if FEATURE_SIGNALR_ASPNETCORE
             services.AddSignalR();
-#endif
 
             // Configure CORS for angular2 UI
             services.AddCors(
@@ -66,6 +56,7 @@ namespace AbpCompanyName.AbpProjectName.Web.Host.Startup
                         )
                         .AllowAnyHeader()
                         .AllowAnyMethod()
+                        .AllowCredentials()
                 )
             );
 
@@ -83,8 +74,6 @@ namespace AbpCompanyName.AbpProjectName.Web.Host.Startup
                     In = "header",
                     Type = "apiKey"
                 });
-                // Assign scope requirements to operations based on AuthorizeAttribute
-                options.OperationFilter<SecurityRequirementsOperationFilter>();
             });
 
             // Configure Abp and Dependency Injection
@@ -106,19 +95,13 @@ namespace AbpCompanyName.AbpProjectName.Web.Host.Startup
 
             app.UseAuthentication();
 
-            app.UseJwtTokenMiddleware();
-
             app.UseAbpRequestLocalization();
 
-#if FEATURE_SIGNALR
-            // Integrate with OWIN
-            app.UseAppBuilder(ConfigureOwinServices);
-#elif FEATURE_SIGNALR_ASPNETCORE
+
             app.UseSignalR(routes =>
             {
                 routes.MapHub<AbpCommonHub>("/signalr");
             });
-#endif
 
             app.UseMvc(routes =>
             {
@@ -136,29 +119,10 @@ namespace AbpCompanyName.AbpProjectName.Web.Host.Startup
             // Enable middleware to serve swagger-ui assets (HTML, JS, CSS etc.)
             app.UseSwaggerUI(options =>
             {
-                options.InjectOnCompleteJavaScript("/swagger/ui/abp.js");
-                options.InjectOnCompleteJavaScript("/swagger/ui/on-complete.js");
-                options.SwaggerEndpoint("/swagger/v1/swagger.json", "AbpProjectName API V1");
+                options.SwaggerEndpoint(_appConfiguration["App:ServerRootAddress"].EnsureEndsWith('/') + "swagger/v1/swagger.json", "AbpProjectName API V1");
+                options.IndexStream = () => Assembly.GetExecutingAssembly()
+                    .GetManifestResourceStream("AbpCompanyName.AbpProjectName.Web.Host.wwwroot.swagger.ui.index.html");
             }); // URL: /swagger
         }
-
-#if FEATURE_SIGNALR
-        private static void ConfigureOwinServices(IAppBuilder app)
-        {
-            app.Properties["host.AppName"] = "AbpProjectName";
-
-            app.UseAbp();
-            
-            app.Map("/signalr", map =>
-            {
-                map.UseCors(CorsOptions.AllowAll);
-                var hubConfiguration = new HubConfiguration
-                {
-                    EnableJSONP = true
-                };
-                map.RunSignalR(hubConfiguration);
-            });
-        }
-#endif
     }
 }

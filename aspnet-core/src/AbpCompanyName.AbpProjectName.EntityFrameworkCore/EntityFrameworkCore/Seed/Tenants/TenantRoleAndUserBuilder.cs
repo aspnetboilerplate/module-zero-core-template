@@ -83,19 +83,6 @@ namespace AbpCompanyName.AbpProjectName.EntityFrameworkCore.Seed.Tenants
                 // Assign Admin role to admin user
                 _context.UserRoles.Add(new UserRole(_tenantId, adminUser.Id, adminRole.Id));
                 _context.SaveChanges();
-
-                // User account of admin user
-                if (_tenantId == 1)
-                {
-                    _context.UserAccounts.Add(new UserAccount
-                    {
-                        TenantId = _tenantId,
-                        UserId = adminUser.Id,
-                        UserName = AbpUserBase.AdminUserName,
-                        EmailAddress = adminUser.EmailAddress
-                    });
-                    _context.SaveChanges();
-                }
             }
         }
     }
