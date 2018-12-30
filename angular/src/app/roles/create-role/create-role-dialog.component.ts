@@ -1,9 +1,8 @@
 import { Component, Injector, OnInit } from '@angular/core';
-import {
-  MatDialogRef,
-  MatCheckboxChange
-} from '@angular/material';
+import { MatDialogRef, MatCheckboxChange } from '@angular/material';
+import { finalize } from 'rxjs/operators';
 import * as _ from 'lodash';
+import { AppComponentBase } from '@shared/app-component-base';
 import {
   RoleServiceProxy,
   RoleDto,
@@ -11,8 +10,6 @@ import {
   PermissionDto,
   CreateRoleDto
 } from '@shared/service-proxies/service-proxies';
-import { AppComponentBase } from '@shared/app-component-base';
-import { finalize } from 'rxjs/operators';
 
 @Component({
   templateUrl: 'create-role-dialog.component.html',
@@ -29,12 +26,12 @@ import { finalize } from 'rxjs/operators';
 })
 export class CreateRoleDialogComponent extends AppComponentBase
   implements OnInit {
+  saving = false;
   role: RoleDto = new RoleDto();
   permissions: PermissionDto[] = [];
   grantedPermissionNames: string[] = [];
   checkedPermissionsMap: { [key: string]: boolean } = {};
   defaultPermissionCheckedStatus = true;
-  saving = false;
 
   constructor(
     injector: Injector,
@@ -55,7 +52,9 @@ export class CreateRoleDialogComponent extends AppComponentBase
 
   setInitialPermissionsStatus(): void {
     _.map(this.permissions, item => {
-      this.checkedPermissionsMap[item.name] = this.defaultPermissionCheckedStatus
+      this.checkedPermissionsMap[item.name] = this.isPermissionChecked(
+        item.name
+      );
     });
   }
 
@@ -71,7 +70,7 @@ export class CreateRoleDialogComponent extends AppComponentBase
 
   getCheckedPermissions(): string[] {
     const permissions: string[] = [];
-    _.forEach(this.checkedPermissionsMap, function (value, key) {
+    _.forEach(this.checkedPermissionsMap, function(value, key) {
       if (value) {
         permissions.push(key);
       }
@@ -82,18 +81,19 @@ export class CreateRoleDialogComponent extends AppComponentBase
   save(): void {
     this.saving = true;
 
-    const role = new RoleDto();
-    role.permissions = this.getCheckedPermissions();
-    role.init(this.role);
+    this.role.permissions = this.getCheckedPermissions();
 
-    const createRole = new CreateRoleDto();
-    createRole.init(role);
-    this._roleService.create(createRole)
+    const role_ = new CreateRoleDto();
+    role_.init(this.role);
+
+    this._roleService
+      .create(role_)
       .pipe(
         finalize(() => {
           this.saving = false;
         })
-      ).subscribe(() => {
+      )
+      .subscribe(() => {
         this.notify.info(this.l('SavedSuccessfully'));
         this.close(true);
       });

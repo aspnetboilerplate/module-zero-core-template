@@ -3,14 +3,14 @@ import { MatDialog } from '@angular/material';
 import { finalize } from 'rxjs/operators';
 import { appModuleAnimation } from '@shared/animations/routerTransition';
 import {
+  PagedListingComponentBase,
+  PagedRequestDto
+} from '@shared/paged-listing-component-base';
+import {
   RoleServiceProxy,
   RoleDto,
   PagedResultDtoOfRoleDto
 } from '@shared/service-proxies/service-proxies';
-import {
-  PagedListingComponentBase,
-  PagedRequestDto
-} from '@shared/paged-listing-component-base';
 import { CreateRoleDialogComponent } from './create-role/create-role-dialog.component';
 import { EditRoleDialogComponent } from './edit-role/edit-role-dialog.component';
 
@@ -77,19 +77,11 @@ export class RolesComponent extends PagedListingComponentBase<RoleDto> {
   showCreateOrEditRoleDialog(id?: number): void {
     let createOrEditRoleDialog;
     if (id === undefined || id <= 0) {
-      createOrEditRoleDialog = this._dialog.open(
-        CreateRoleDialogComponent,
-        {
-          data: id
-        }
-      );
+      createOrEditRoleDialog = this._dialog.open(CreateRoleDialogComponent);
     } else {
-      createOrEditRoleDialog = this._dialog.open(
-        EditRoleDialogComponent,
-        {
-          data: id
-        }
-      );
+      createOrEditRoleDialog = this._dialog.open(EditRoleDialogComponent, {
+        data: id
+      });
     }
 
     createOrEditRoleDialog.afterClosed().subscribe(result => {
