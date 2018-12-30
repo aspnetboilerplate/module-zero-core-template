@@ -1,88 +1,106 @@
-﻿<div class="row clearfix"
-     [@routerTransition]>
-    <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
-        <div class="card main-content">
-            <div class="header">
-                <h2>
-                    {{ "Tenants" | localize }}
-                </h2>
-                <ul class="header-dropdown m-r--5">
-                    <li>
-                        <button mat-icon-button
-                                [matMenuTriggerFor]="headerMenu"
-                                style="bottom: 10px;">
-                            <mat-icon>more_vert</mat-icon>
-                        </button>
-                        <mat-menu #headerMenu="matMenu">
-                            <button mat-menu-item
-                                    (click)="refresh()">
-                                <mat-icon>refresh</mat-icon>
-                                <span>{{ 'Refresh' | localize }}</span>
-                            </button>
-                        </mat-menu>
-                    </li>
-                </ul>
-            </div>
-            <div class="body table-responsive">
-                <table class="table table-hover table-striped"
-                       [busy]="isTableLoading">
-                    <thead>
-                        <tr>
-                            <th>{{ "Actions" | localize }}</th>
-                            <th>{{ "TenancyName" | localize }}</th>
-                            <th>{{ "Name" | localize }}</th>
-                            <th>
-                                <div style="text-align:center">{{ "IsActive" | localize }}</div>
-                            </th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        <tr *ngFor="let tenant of tenants | paginate: { id: 'server', itemsPerPage: pageSize, currentPage: pageNumber, totalItems: totalItems }">
-                            <td>
-                                <button mat-icon-button
-                                        [matMenuTriggerFor]="actionsMenu">
-                                    <mat-icon>menu</mat-icon>
-                                </button>
-                                <mat-menu #actionsMenu="matMenu">
-                                    <button mat-menu-item
-                                            (click)="editTenant(tenant)">
-                                        <mat-icon>edit</mat-icon>
-                                        <span>{{ 'Edit' | localize }}</span>
-                                    </button>
-                                    <button mat-menu-item
-                                            (click)="delete(tenant)">
-                                        <mat-icon>delete</mat-icon>
-                                        <span>{{ 'Delete' | localize }}</span>
-                                    </button>
-                                </mat-menu>
-                            </td>
-                            <td>{{tenant.tenancyName}}</td>
-                            <td>{{tenant.name}}</td>
-                            <td align="center">
-                                <i class="material-icons"
-                                   *ngIf="tenant.isActive"
-                                   style="color:green;">check_box</i>
-                                <i class="material-icons"
-                                   *ngIf="!tenant.isActive"
-                                   style="color:red;">indeterminate_check_box</i>
-                            </td>
-                        </tr>
-                    </tbody>
-                </table>
-
-                <div class="text-align: center;"
-                     *ngIf="totalItems > pageSize">
-                    <abp-pagination-controls (pageChange)="getDataPage($event)"
-                                             id="server"></abp-pagination-controls>
-                </div>
-
-                <button type="button"
-                        data-toggle="modal"
-                        class="btn btn-primary btn-circle waves-effect waves-circle waves-float pull-right"
-                        (click)="createTenant()">
-                    <i class="material-icons">add</i>
+﻿<div class="row clearfix" [@routerTransition]>
+  <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+    <div class="card main-content">
+      <div class="header">
+        <h2>{{ "Tenants" | localize }}</h2>
+        <ul class="header-dropdown m-r--5">
+          <li>
+            <button
+              mat-icon-button
+              [matMenuTriggerFor]="headerMenu"
+              class="header-dropdown-mat-icon-button"
+            >
+              <mat-icon>more_vert</mat-icon>
+            </button>
+            <mat-menu #headerMenu="matMenu">
+              <button mat-menu-item (click)="refresh()">
+                <mat-icon>refresh</mat-icon>
+                <span>{{ "Refresh" | localize }}</span>
+              </button>
+            </mat-menu>
+          </li>
+        </ul>
+      </div>
+      <div class="body table-responsive">
+        <table class="table table-hover table-striped" [busy]="isTableLoading">
+          <thead>
+            <tr>
+              <th>{{ "Actions" | localize }}</th>
+              <th>{{ "TenancyName" | localize }}</th>
+              <th>{{ "Name" | localize }}</th>
+              <th>
+                <div style="text-align:center">{{ "IsActive" | localize }}</div>
+              </th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr
+              *ngFor="
+                let tenant of (tenants
+                  | paginate
+                    : {
+                        id: 'server',
+                        itemsPerPage: pageSize,
+                        currentPage: pageNumber,
+                        totalItems: totalItems
+                      })
+              "
+            >
+              <td>
+                <button mat-icon-button [matMenuTriggerFor]="actionsMenu">
+                  <mat-icon>menu</mat-icon>
                 </button>
-            </div>
+                <mat-menu #actionsMenu="matMenu">
+                  <button mat-menu-item (click)="editTenant(tenant)">
+                    <mat-icon>edit</mat-icon>
+                    <span>{{ "Edit" | localize }}</span>
+                  </button>
+                  <button mat-menu-item (click)="delete(tenant)">
+                    <mat-icon>delete</mat-icon>
+                    <span>{{ "Delete" | localize }}</span>
+                  </button>
+                </mat-menu>
+              </td>
+              <td>{{ tenant.tenancyName }}</td>
+              <td>{{ tenant.name }}</td>
+              <td align="center">
+                <i
+                  class="material-icons"
+                  *ngIf="tenant.isActive"
+                  style="color:green;"
+                >
+                  check_box
+                </i>
+                <i
+                  class="material-icons"
+                  *ngIf="!tenant.isActive"
+                  style="color:red;"
+                >
+                  indeterminate_check_box
+                </i>
+              </td>
+            </tr>
+          </tbody>
+        </table>
+        <div
+          class="abp-pagination-controls-wrapper"
+          *ngIf="totalItems > pageSize"
+        >
+          <abp-pagination-controls
+            (pageChange)="getDataPage($event)"
+            id="server"
+          >
+          </abp-pagination-controls>
         </div>
+        <button
+          mat-mini-fab
+          color="primary"
+          class="pull-right"
+          (click)="createTenant()"
+        >
+          <mat-icon>add</mat-icon>
+        </button>
+      </div>
     </div>
+  </div>
 </div>

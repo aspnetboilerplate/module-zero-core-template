@@ -17,13 +17,14 @@ import { SharedModule } from '@shared/shared.module';
 
 import { HomeComponent } from '@app/home/home.component';
 import { AboutComponent } from '@app/about/about.component';
-import { TenantsComponent } from '@app/tenants/tenants.component';
 import { TopBarComponent } from '@app/layout/topbar.component';
 import { TopBarLanguageSwitchComponent } from '@app/layout/topbar-languageswitch.component';
 import { SideBarUserAreaComponent } from '@app/layout/sidebar-user-area.component';
 import { SideBarNavComponent } from '@app/layout/sidebar-nav.component';
 import { SideBarFooterComponent } from '@app/layout/sidebar-footer.component';
 import { RightSideBarComponent } from '@app/layout/right-sidebar.component';
+// tenants
+import { TenantsComponent } from '@app/tenants/tenants.component';
 import { CreateTenantDialogComponent } from './tenants/create-tenant/create-tenant-dialog.component';
 import { EditTenantDialogComponent } from './tenants/edit-tenant/edit-tenant-dialog.component';
 // roles
@@ -40,15 +41,16 @@ import { EditUserDialogComponent } from '@app/users/edit-user/edit-user-dialog.c
     AppComponent,
     HomeComponent,
     AboutComponent,
-    TenantsComponent,
-    CreateTenantDialogComponent,
-    EditTenantDialogComponent,
     TopBarComponent,
     TopBarLanguageSwitchComponent,
     SideBarUserAreaComponent,
     SideBarNavComponent,
     SideBarFooterComponent,
     RightSideBarComponent,
+    // tenants
+    TenantsComponent,
+    CreateTenantDialogComponent,
+    EditTenantDialogComponent,
     // roles
     RolesComponent,
     CreateRoleDialogComponent,
@@ -72,6 +74,7 @@ import { EditUserDialogComponent } from '@app/users/edit-user/edit-user-dialog.c
   ],
   providers: [],
   entryComponents: [
+    // tenants
     CreateTenantDialogComponent,
     EditTenantDialogComponent,
     // roles
