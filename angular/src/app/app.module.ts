@@ -2,7 +2,7 @@ import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
 import { JsonpModule } from '@angular/http';
-import { HttpClientModule, HttpResponse } from '@angular/common/http';
+import { HttpClientModule } from '@angular/common/http';
 
 import { ModalModule } from 'ngx-bootstrap';
 import { NgxPaginationModule } from 'ngx-pagination';
@@ -17,9 +17,6 @@ import { SharedModule } from '@shared/shared.module';
 
 import { HomeComponent } from '@app/home/home.component';
 import { AboutComponent } from '@app/about/about.component';
-import { UsersComponent } from '@app/users/users.component';
-import { CreateUserComponent } from '@app/users/create-user/create-user.component';
-import { EditUserComponent } from './users/edit-user/edit-user.component';
 import { TenantsComponent } from '@app/tenants/tenants.component';
 import { TopBarComponent } from '@app/layout/topbar.component';
 import { TopBarLanguageSwitchComponent } from '@app/layout/topbar-languageswitch.component';
@@ -33,50 +30,56 @@ import { EditTenantDialogComponent } from './tenants/edit-tenant/edit-tenant-dia
 import { RolesComponent } from '@app/roles/roles.component';
 import { CreateRoleDialogComponent } from './roles/create-role/create-role-dialog.component';
 import { EditRoleDialogComponent } from './roles/edit-role/edit-role-dialog.component';
+// users
+import { UsersComponent } from '@app/users/users.component';
+import { CreateUserDialogComponent } from '@app/users/create-user/create-user-dialog.component';
+import { EditUserDialogComponent } from '@app/users/edit-user/edit-user-dialog.component';
 
 @NgModule({
-    declarations: [
-        AppComponent,
-        HomeComponent,
-        AboutComponent,
-        TenantsComponent,
-        CreateTenantDialogComponent,
-        EditTenantDialogComponent,
-        UsersComponent,
-        CreateUserComponent,
-        EditUserComponent,
-        TopBarComponent,
-        TopBarLanguageSwitchComponent,
-        SideBarUserAreaComponent,
-        SideBarNavComponent,
-        SideBarFooterComponent,
-        RightSideBarComponent,    
-        // roles
-        RolesComponent,
-        CreateRoleDialogComponent,
-        EditRoleDialogComponent
-    ],
-    imports: [
-        CommonModule,
-        FormsModule,
-        HttpClientModule,
-        JsonpModule,
-        ModalModule.forRoot(),
-        AbpModule,
-        AppRoutingModule,
-        ServiceProxyModule,
-        SharedModule,
-        NgxPaginationModule
-    ],
-    providers: [
-
-    ],
-    entryComponents: [
-        CreateTenantDialogComponent,
-        EditTenantDialogComponent,
-        // roles
-        CreateRoleDialogComponent,
-        EditRoleDialogComponent
-    ]
+  declarations: [
+    AppComponent,
+    HomeComponent,
+    AboutComponent,
+    TenantsComponent,
+    CreateTenantDialogComponent,
+    EditTenantDialogComponent,
+    TopBarComponent,
+    TopBarLanguageSwitchComponent,
+    SideBarUserAreaComponent,
+    SideBarNavComponent,
+    SideBarFooterComponent,
+    RightSideBarComponent,
+    // roles
+    RolesComponent,
+    CreateRoleDialogComponent,
+    EditRoleDialogComponent,
+    // users
+    UsersComponent,
+    CreateUserDialogComponent,
+    EditUserDialogComponent
+  ],
+  imports: [
+    CommonModule,
+    FormsModule,
+    HttpClientModule,
+    JsonpModule,
+    ModalModule.forRoot(),
+    AbpModule,
+    AppRoutingModule,
+    ServiceProxyModule,
+    SharedModule,
+    NgxPaginationModule
+  ],
+  providers: [],
+  entryComponents: [
+    CreateTenantDialogComponent,
+    EditTenantDialogComponent,
+    // roles
+    CreateRoleDialogComponent,
+    EditRoleDialogComponent,
+    // users
+    CreateUserDialogComponent,
+    EditUserDialogComponent
+  ]
 })
-export class AppModule { }
+export class AppModule {}

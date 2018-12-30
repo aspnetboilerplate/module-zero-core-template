@@ -54,6 +54,7 @@ import {
 } from '@angular/material';
 import { BlockDirective } from './directives/block.directive';
 import { BusyDirective } from './directives/busy.directive';
+import { EqualValidator } from './directives/equal-validator.directive';
 @NgModule({
     imports: [
         CommonModule,
@@ -101,7 +102,8 @@ import { BusyDirective } from './directives/busy.directive';
         AbpPaginationControlsComponent,
         LocalizePipe,
         BlockDirective,
-        BusyDirective
+        BusyDirective,
+        EqualValidator
     ],
     exports: [
         MaterialInput,
@@ -109,6 +111,7 @@ import { BusyDirective } from './directives/busy.directive';
         LocalizePipe,
         BlockDirective,
         BusyDirective,
+        EqualValidator,
         CdkTableModule,
         CdkTreeModule,
         DragDropModule,
