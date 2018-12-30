@@ -39,7 +39,7 @@ export class CreateUserDialogComponent extends AppComponentBase
   }
 
   ngOnInit(): void {
-    this.user.init({ isActive: true });
+    this.user.isActive = true;
 
     this._userService.getRoles().subscribe(result => {
       this.roles = result.items;
