@@ -4,15 +4,15 @@ import {
   MAT_DIALOG_DATA,
   MatCheckboxChange
 } from '@angular/material';
+import { finalize } from 'rxjs/operators';
 import * as _ from 'lodash';
+import { AppComponentBase } from '@shared/app-component-base';
 import {
   RoleServiceProxy,
   GetRoleForEditOutput,
   RoleDto,
   PermissionDto
 } from '@shared/service-proxies/service-proxies';
-import { AppComponentBase } from '@shared/app-component-base';
-import { finalize } from 'rxjs/operators';
 
 @Component({
   templateUrl: 'edit-role-dialog.component.html',
@@ -29,12 +29,11 @@ import { finalize } from 'rxjs/operators';
 })
 export class EditRoleDialogComponent extends AppComponentBase
   implements OnInit {
+  saving = false;
   role: RoleDto = new RoleDto();
   permissions: PermissionDto[] = [];
   grantedPermissionNames: string[] = [];
   checkedPermissionsMap: { [key: string]: boolean } = {};
-  defaultPermissionCheckedStatus = true;
-  saving = false;
 
   constructor(
     injector: Injector,
@@ -62,7 +61,9 @@ export class EditRoleDialogComponent extends AppComponentBase
 
   setInitialPermissionsStatus(): void {
     _.map(this.permissions, item => {
-      this.checkedPermissionsMap[item.name] = _.includes(this.grantedPermissionNames, item.name);
+      this.checkedPermissionsMap[item.name] = this.isPermissionChecked(
+        item.name
+      );
     });
   }
 
@@ -76,7 +77,7 @@ export class EditRoleDialogComponent extends AppComponentBase
 
   getCheckedPermissions(): string[] {
     const permissions: string[] = [];
-    _.forEach(this.checkedPermissionsMap, function (value, key) {
+    _.forEach(this.checkedPermissionsMap, function(value, key) {
       if (value) {
         permissions.push(key);
       }
@@ -87,16 +88,16 @@ export class EditRoleDialogComponent extends AppComponentBase
   save(): void {
     this.saving = true;
 
-    const role = new RoleDto();
-    role.permissions = this.getCheckedPermissions();
-    role.init(this.role);
+    this.role.permissions = this.getCheckedPermissions();
 
-    this._roleService.update(role)
+    this._roleService
+      .update(this.role)
       .pipe(
         finalize(() => {
           this.saving = false;
         })
-      ).subscribe(() => {
+      )
+      .subscribe(() => {
         this.notify.info(this.l('SavedSuccessfully'));
         this.close(true);
       });
