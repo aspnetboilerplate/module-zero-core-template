@@ -48,10 +48,9 @@
 </template>
 <script lang="ts">
     import { Component, Vue,Inject, Prop,Watch } from 'vue-property-decorator';
-    import Util from '../../../lib/util'
-    import AbpBase from '../../../lib/abpbase'
-    import {FieldType,Filter,CompareType} from '../../../store/entities/filter'
-    import PageRequest from '../../../store/entities/page-request'
+    import Util from '@/lib/util'
+    import AbpBase from '@/lib/abpbase'
+    import PageRequest from '@/store/entities/page-request'
     import CreateUser from './create-user.vue'
     import EditUser from './edit-user.vue'
     class  PageUserRequest extends PageRequest{
