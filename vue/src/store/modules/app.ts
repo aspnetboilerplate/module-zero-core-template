@@ -66,9 +66,10 @@ class AppModule implements Module<AppState,any>{
         updateMenulist (state:AppState) {
             let menuList:Array<any> = [];
             appRouters.forEach((item, index) => {
-                if (item.permission !== undefined) {
+                let itemAny=item as any;
+                if (itemAny.permission !== undefined) {
                     let childrenArr = [];
-                    childrenArr = item.children.filter(child => {
+                    childrenArr = itemAny.children.filter(child => {
                         let childany=child as any;
                         if (childany.permission !== undefined) {
                             if(Util.abp.auth.hasPermission(childany.permission)){
@@ -83,12 +84,12 @@ class AppModule implements Module<AppState,any>{
                         menuList.push(item);
                     }                   
                 } else {
-                    if (item.children.length === 1) {
+                    if (itemAny.children.length === 1) {
                         menuList.push(item);
                     } else {
                         let len = menuList.push(item);
                         let childrenArr = [];
-                        childrenArr = item.children.filter(child => {
+                        childrenArr = itemAny.children.filter(child => {
                             return child;
                         });
                         let handledItem = JSON.parse(JSON.stringify(menuList[len - 1]));
