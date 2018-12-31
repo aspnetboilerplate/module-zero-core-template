@@ -8,7 +8,6 @@ import { AppSessionService } from './session/app-session.service';
 import { AppUrlService } from './nav/app-url.service';
 import { AppAuthService } from './auth/app-auth.service';
 import { AppRouteGuard } from './auth/auth-route-guard';
-import { MaterialInput } from 'shared/directives/material-input.directive';
 import { AbpPaginationControlsComponent } from './pagination/abp-pagination-controls.component';
 import { LocalizePipe } from '@shared/pipes/localize.pipe';
 import { DragDropModule } from '@angular/cdk/drag-drop';
@@ -98,7 +97,6 @@ import { EqualValidator } from './directives/equal-validator.directive';
         MatTreeModule,
     ],
     declarations: [
-        MaterialInput,
         AbpPaginationControlsComponent,
         LocalizePipe,
         BlockDirective,
@@ -106,7 +104,6 @@ import { EqualValidator } from './directives/equal-validator.directive';
         EqualValidator
     ],
     exports: [
-        MaterialInput,
         AbpPaginationControlsComponent,
         LocalizePipe,
         BlockDirective,
