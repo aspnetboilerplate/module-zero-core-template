@@ -25,9 +25,9 @@
         <table class="table table-hover table-striped" [busy]="isTableLoading">
           <thead>
             <tr>
-              <th>{{ "Actions" | localize }}</th>
               <th>{{ "RoleName" | localize }}</th>
               <th>{{ "DisplayName" | localize }}</th>
+              <th>{{ "Actions" | localize }}</th>
             </tr>
           </thead>
           <tbody>
@@ -43,8 +43,10 @@
                       })
               "
             >
+              <td>{{ role.name }}</td>
+              <td>{{ role.displayName }}</td>
               <td>
-                <button mat-icon-button [matMenuTriggerFor]="actionsMenu">
+                <button class="action-button" mat-icon-button [matMenuTriggerFor]="actionsMenu">
                   <mat-icon>menu</mat-icon>
                 </button>
                 <mat-menu #actionsMenu="matMenu">
@@ -58,8 +60,6 @@
                   </button>
                 </mat-menu>
               </td>
-              <td>{{ role.name }}</td>
-              <td>{{ role.displayName }}</td>
             </tr>
           </tbody>
         </table>

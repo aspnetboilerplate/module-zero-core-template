@@ -25,13 +25,13 @@
         <table class="table table-hover table-striped" [busy]="isTableLoading">
           <thead>
             <tr>
-              <th>{{ "Actions" | localize }}</th>
               <th>{{ "UserName" | localize }}</th>
               <th>{{ "FullName" | localize }}</th>
               <th>{{ "EmailAddress" | localize }}</th>
               <th>
                 <div style="text-align:center">{{ "IsActive" | localize }}</div>
               </th>
+              <th>{{ "Actions" | localize }}</th>
             </tr>
           </thead>
           <tbody>
@@ -47,21 +47,6 @@
                       })
               "
             >
-              <td>
-                <button mat-icon-button [matMenuTriggerFor]="actionsMenu">
-                  <mat-icon>menu</mat-icon>
-                </button>
-                <mat-menu #actionsMenu="matMenu">
-                  <button mat-menu-item (click)="editUser(user)">
-                    <mat-icon>edit</mat-icon>
-                    <span>{{ "Edit" | localize }}</span>
-                  </button>
-                  <button mat-menu-item (click)="delete(user)">
-                    <mat-icon>delete</mat-icon>
-                    <span>{{ "Delete" | localize }}</span>
-                  </button>
-                </mat-menu>
-              </td>
               <td>{{ user.userName }}</td>
               <td>{{ user.fullName }}</td>
               <td>{{ user.emailAddress }}</td>
@@ -80,6 +65,21 @@
                 >
                   indeterminate_check_box
                 </i>
+              </td>
+              <td>
+                <button class="action-button" mat-icon-button [matMenuTriggerFor]="actionsMenu">
+                  <mat-icon>menu</mat-icon>
+                </button>
+                <mat-menu #actionsMenu="matMenu">
+                  <button mat-menu-item (click)="editUser(user)">
+                    <mat-icon>edit</mat-icon>
+                    <span>{{ "Edit" | localize }}</span>
+                  </button>
+                  <button mat-menu-item (click)="delete(user)">
+                    <mat-icon>delete</mat-icon>
+                    <span>{{ "Delete" | localize }}</span>
+                  </button>
+                </mat-menu>
               </td>
             </tr>
           </tbody>

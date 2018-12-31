@@ -2,7 +2,7 @@
   <h1 mat-dialog-title>{{ "CreateNewRole" | localize }}</h1>
   <mat-dialog-content style="width:600px;height:300px;">
     <mat-tab-group>
-      <mat-tab [label]="'RoleDetails' | localize">
+      <mat-tab [label]="'Details' | localize">
         <br />
         <div class="row-fluid">
           <div class="col-md-12">
@@ -39,7 +39,7 @@
           </div>
         </div>
       </mat-tab>
-      <mat-tab [label]="'RolePermissions' | localize">
+      <mat-tab [label]="'Permissions' | localize">
         <br />
         <div class="row-fluid">
           <ng-template ngFor let-permission [ngForOf]="permissions">
