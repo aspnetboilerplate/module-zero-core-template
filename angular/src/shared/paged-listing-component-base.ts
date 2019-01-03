@@ -13,7 +13,6 @@ export class EntityDto {
 export class PagedRequestDto {
     skipCount: number;
     maxResultCount: number;
-    keyword: string;
 }
 
 export abstract class PagedListingComponentBase<EntityDto> extends AppComponentBase implements OnInit {
