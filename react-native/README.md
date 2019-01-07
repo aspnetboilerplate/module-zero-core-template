@@ -1,6 +1,6 @@
 # ASP.NET Boilerplate React-Native Template
 
-The React-Native integration for ABP Boilerplate framework. This template is built on React+Mobx+Typescript. SOLID, SoC principles are used.
+The React-Native integration for ABP Boilerplate framework. This template is built on React Native+Mobx+Typescript. SOLID, SoC principles are used.
 
 ![](_screenshots/dashboard.png)
 
@@ -11,14 +11,20 @@ The React-Native integration for ABP Boilerplate framework. This template is bui
 After cloning repository, first install npm packages:
 
 ```sh
-cd reactjs
+cd react-native
 npm install 
 ```
 
-And then start
+Running on Android
 
 ```
-npm start
+react-native run-android
+```
+
+Running on iOS
+
+```
+react-native run-ios
 ```
 
 ## Deployment
@@ -29,10 +35,10 @@ npm build
 
 ## Built With
 
-* [React](https://reactjs.org/) - The JavaScript library for building user interfaces
+* [React Native](https://facebook.github.io/react-native/) - Build native mobile apps using JavaScript and React
 * [Typescript](https://www.typescriptlang.org/) - Used for static typing
 * [Mobx](https://mobx.js.org/) - Simple, scalable state management
-* [AntDesign](https://ant.design/) - A design system with values of Nature and Determinacy for better user experience of enterprise applications
+* [NativeBase](https://nativebase.io/) - Essential cross-platform UI components for React Native
 
 # Architecture
 
