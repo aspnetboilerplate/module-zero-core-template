@@ -9,6 +9,7 @@
   "dependencies": {
     "mobx": "^5.8.0",
     "mobx-react": "^5.4.3",
+    "native-base": "^2.10.0",
     "react": "16.6.3",
     "react-native": "0.57.8"
   },
