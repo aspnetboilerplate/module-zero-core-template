@@ -52,7 +52,7 @@ This framework is designed by utilizing MVC design pattern and layered architect
 
 ![](_screenshots/architecture.jpg)
 
-## Authors of ASP.NET Boilerplate ReactJS Template
+## Authors of ASP.NET Boilerplate React Native Template
 
 * **Rashiduddin Yoldash** - *Initial work* - [ryoldash](https://github.com/ryoldash)
 * **Mehmet Yasir Aktunç** - *Initial work* - [mhmtyasr](https://github.com/mhmtyasr)
