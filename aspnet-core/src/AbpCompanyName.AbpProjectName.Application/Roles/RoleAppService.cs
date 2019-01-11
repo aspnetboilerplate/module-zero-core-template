@@ -1,19 +1,19 @@
 ﻿using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
-using Microsoft.AspNetCore.Identity;
-using Microsoft.EntityFrameworkCore;
 using Abp.Application.Services;
 using Abp.Application.Services.Dto;
 using Abp.Authorization;
 using Abp.Domain.Repositories;
+using Abp.Extensions;
 using Abp.IdentityFramework;
 using Abp.Linq.Extensions;
-using Abp.Extensions;
 using AbpCompanyName.AbpProjectName.Authorization;
 using AbpCompanyName.AbpProjectName.Authorization.Roles;
 using AbpCompanyName.AbpProjectName.Authorization.Users;
 using AbpCompanyName.AbpProjectName.Roles.Dto;
+using Microsoft.AspNetCore.Identity;
+using Microsoft.EntityFrameworkCore;
 
 namespace AbpCompanyName.AbpProjectName.Roles
 {
@@ -109,9 +109,9 @@ namespace AbpCompanyName.AbpProjectName.Roles
         protected override IQueryable<Role> CreateFilteredQuery(PagedRoleResultRequestDto input)
         {
             return Repository.GetAllIncluding(x => x.Permissions)
-                .WhereIf(!input.RoleName.IsNullOrWhiteSpace(), x => x.Name.Contains(input.RoleName))
-                .WhereIf(!input.DisplayName.IsNullOrWhiteSpace(), x => x.DisplayName.Contains(input.DisplayName))
-                .WhereIf(!input.Description.IsNullOrWhiteSpace(), x => x.Description.Contains(input.Description));
+                .WhereIf(!input.Keyword.IsNullOrWhiteSpace(), x => x.Name.Contains(input.Keyword)
+                || x.DisplayName.Contains(input.Keyword)
+                || x.Description.Contains(input.Keyword));
         }
 
         protected override async Task<Role> GetEntityByIdAsync(int id)

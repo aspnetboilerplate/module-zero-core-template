@@ -14,9 +14,13 @@ import {
 import { CreateRoleDialogComponent } from './create-role/create-role-dialog.component';
 import { EditRoleDialogComponent } from './edit-role/edit-role-dialog.component';
 
+class PagedRolesRequestDto extends PagedRequestDto{
+    keyword: string;
+}
+
 @Component({
-  templateUrl: './roles.component.html',
-  animations: [appModuleAnimation()]
+    templateUrl: './roles.component.html',
+    animations: [appModuleAnimation()]
 })
 export class RolesComponent extends PagedListingComponentBase<RoleDto> {
   roles: RoleDto[] = [];
@@ -83,7 +87,7 @@ export class RolesComponent extends PagedListingComponentBase<RoleDto> {
         data: id
       });
     }
-
+    
     createOrEditRoleDialog.afterClosed().subscribe(result => {
       if (result) {
         this.refresh();

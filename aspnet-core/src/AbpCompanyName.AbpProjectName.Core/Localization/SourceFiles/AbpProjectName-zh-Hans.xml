@@ -15,6 +15,10 @@
     <text name="UserNameOrEmail" value="用户名或邮箱地址" />
     <text name="Password" value="密码" />
     <text name="RememberMe" value="记住我" />
+    <text name="ForgetPassword" value="忘记密码"/>
+    <text name="NotSelected" value="未选"/>
+    <text name="ChangeTenant" value="更改租户"/>
+    <text name="LeaveEmptyToSwitchToHost" value="留空以切换到Host"/>
     <text name="LogIn" value="登录" />
     <text name="LoginFailed" value="登录失败!" />
     <text name="AppName" >AbpProjectName</text>

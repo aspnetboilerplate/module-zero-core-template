@@ -14,6 +14,11 @@ import {
 import { CreateTenantDialogComponent } from './create-tenant/create-tenant-dialog.component';
 import { EditTenantDialogComponent } from './edit-tenant/edit-tenant-dialog.component';
 
+class PagedTenantsRequestDto extends PagedRequestDto{
+    keyword: string;
+    isActive: boolean | null;
+}
+
 @Component({
   templateUrl: './tenants.component.html',
   animations: [appModuleAnimation()]
