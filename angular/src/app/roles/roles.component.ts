@@ -1,62 +1,93 @@
-import { Component, Injector, ViewChild } from '@angular/core';
-import { PagedListingComponentBase, PagedRequestDto } from 'shared/paged-listing-component-base';
-import { RoleServiceProxy, RoleDto, PagedResultDtoOfRoleDto } from 'shared/service-proxies/service-proxies';
-import { appModuleAnimation } from '@shared/animations/routerTransition';
-import { CreateRoleComponent } from 'app/roles/create-role/create-role.component';
-import { EditRoleComponent } from 'app/roles/edit-role/edit-role.component';
+import { Component, Injector } from '@angular/core';
+import { MatDialog } from '@angular/material';
 import { finalize } from 'rxjs/operators';
+import { appModuleAnimation } from '@shared/animations/routerTransition';
+import {
+  PagedListingComponentBase,
+  PagedRequestDto
+} from '@shared/paged-listing-component-base';
+import {
+  RoleServiceProxy,
+  RoleDto,
+  PagedResultDtoOfRoleDto
+} from '@shared/service-proxies/service-proxies';
+import { CreateRoleDialogComponent } from './create-role/create-role-dialog.component';
+import { EditRoleDialogComponent } from './edit-role/edit-role-dialog.component';
 
 @Component({
   templateUrl: './roles.component.html',
   animations: [appModuleAnimation()]
 })
 export class RolesComponent extends PagedListingComponentBase<RoleDto> {
+  roles: RoleDto[] = [];
 
-	@ViewChild('createRoleModal') createRoleModal: CreateRoleComponent;
-	@ViewChild('editRoleModal') editRoleModal: EditRoleComponent;
-	
-	roles: RoleDto[] = [];
+  constructor(
+    injector: Injector,
+    private _rolesService: RoleServiceProxy,
+    private _dialog: MatDialog
+  ) {
+    super(injector);
+  }
 
-	constructor(
-		private injector:Injector,
-		private rolesService: RoleServiceProxy
-	) {
-		super(injector);
-	}
-    
-	list(request: PagedRequestDto, pageNumber: number, finishedCallback: Function): void {
-        this.rolesService.getAll(request.skipCount, request.maxResultCount)
-            .pipe(finalize(() => { finishedCallback() }))
-            .subscribe((result: PagedResultDtoOfRoleDto)=>{
-				this.roles = result.items;
-				this.showPaging(result, pageNumber);
-		});
-	}
+  list(
+    request: PagedRequestDto,
+    pageNumber: number,
+    finishedCallback: Function
+  ): void {
+    this._rolesService
+      .getAll(request.skipCount, request.maxResultCount)
+      .pipe(
+        finalize(() => {
+          finishedCallback();
+        })
+      )
+      .subscribe((result: PagedResultDtoOfRoleDto) => {
+        this.roles = result.items;
+        this.showPaging(result, pageNumber);
+      });
+  }
 
-	delete(role: RoleDto): void {
-		abp.message.confirm(
-			"Remove Users from Role and delete Role '"+ role.displayName +"'?",
-			"Permanently delete this Role",
-			(result:boolean) =>{
-				if(result)
-				{
-                    this.rolesService.delete(role.id)
-                        .pipe(finalize(() => {
-                            abp.notify.info("Deleted Role: " + role.displayName);
-                            this.refresh();
-                        }))
-						.subscribe(() => { });
-				}
-			}
-		);
-	}
+  delete(role: RoleDto): void {
+    abp.message.confirm(
+      this.l('RoleDeleteWarningMessage', role.displayName),
+      (result: boolean) => {
+        if (result) {
+          this._rolesService
+            .delete(role.id)
+            .pipe(
+              finalize(() => {
+                abp.notify.success(this.l('SuccessfullyDeleted'));
+                this.refresh();
+              })
+            )
+            .subscribe(() => { });
+        }
+      }
+    );
+  }
 
-	// Show Modals
-	createRole(): void {
-		this.createRoleModal.show();
-	}
+  createRole(): void {
+    this.showCreateOrEditRoleDialog();
+  }
 
-	editRole(role:RoleDto): void {
-		this.editRoleModal.show(role.id);
-	}
+  editRole(role: RoleDto): void {
+    this.showCreateOrEditRoleDialog(role.id);
+  }
+
+  showCreateOrEditRoleDialog(id?: number): void {
+    let createOrEditRoleDialog;
+    if (id === undefined || id <= 0) {
+      createOrEditRoleDialog = this._dialog.open(CreateRoleDialogComponent);
+    } else {
+      createOrEditRoleDialog = this._dialog.open(EditRoleDialogComponent, {
+        data: id
+      });
+    }
+
+    createOrEditRoleDialog.afterClosed().subscribe(result => {
+      if (result) {
+        this.refresh();
+      }
+    });
+  }
 }
