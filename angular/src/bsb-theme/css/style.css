@@ -4608,7 +4608,7 @@ section.content {
 
 /* Tables ====================================== */
 .table tbody tr td, .table tbody tr th {
-  padding: 10px;
+  padding: 18px 10px 0 10px;
   border-top: 1px solid #eee;
   border-bottom: 1px solid #eee; }
 

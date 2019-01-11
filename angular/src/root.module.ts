@@ -1,5 +1,5 @@
-import { BrowserModule } from '@angular/platform-browser';
-import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { BrowserModule, HAMMER_GESTURE_CONFIG } from '@angular/platform-browser';
+import { BrowserAnimationsModule, NoopAnimationsModule } from '@angular/platform-browser/animations';
 import { NgModule, Injector, APP_INITIALIZER, LOCALE_ID } from '@angular/core';
 import { PlatformLocation, registerLocaleData } from '@angular/common';
 
@@ -19,6 +19,8 @@ import { RootComponent } from './root.component';
 import { AppPreBootstrap } from './AppPreBootstrap';
 import { ModalModule } from 'ngx-bootstrap';
 import { HttpClientModule } from '@angular/common/http';
+
+import { GestureConfig } from '@angular/material';
 
 import * as _ from 'lodash';
 
@@ -110,7 +112,8 @@ export function getCurrentLanguage(): string {
         {
             provide: LOCALE_ID,
             useFactory: getCurrentLanguage
-        }
+        },
+        { provide: HAMMER_GESTURE_CONFIG, useClass: GestureConfig },
     ],
     bootstrap: [RootComponent]
 })
