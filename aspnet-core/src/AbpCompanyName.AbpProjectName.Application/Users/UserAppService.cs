@@ -129,8 +129,7 @@ namespace AbpCompanyName.AbpProjectName.Users
         protected override IQueryable<User> CreateFilteredQuery(PagedUserResultRequestDto input)
         {
             return Repository.GetAllIncluding(x => x.Roles)
-                .WhereIf(!input.UserName.IsNullOrWhiteSpace(), x => x.UserName.Contains(input.UserName))
-                .WhereIf(!input.Name.IsNullOrWhiteSpace(), x => x.Name.Contains(input.Name))
+                .WhereIf(!input.Keyword.IsNullOrWhiteSpace(), x => x.UserName.Contains(input.Keyword) || x.Name.Contains(input.Keyword))
                 .WhereIf(input.IsActive.HasValue, x => x.IsActive == input.IsActive)
                 .WhereIf(input.From.HasValue, x => x.CreationTime >= input.From.Value.LocalDateTime)
                 .WhereIf(input.To.HasValue, x => x.CreationTime <= input.To.Value.LocalDateTime);

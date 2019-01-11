@@ -5,6 +5,14 @@ import { PagedListingComponentBase, PagedRequestDto } from 'shared/paged-listing
 import { CreateUserComponent } from 'app/users/create-user/create-user.component';
 import { EditUserComponent } from 'app/users/edit-user/edit-user.component';
 import { finalize } from 'rxjs/operators';
+import { Moment } from 'moment';
+
+class PagedUsersRequestDto extends PagedRequestDto {
+    keyword: string;
+    isActive: boolean|null;
+    from: Moment|null;
+    to: Moment|null;
+}
 
 @Component({
     templateUrl: './users.component.html',
@@ -25,8 +33,8 @@ export class UsersComponent extends PagedListingComponentBase<UserDto> {
         super(injector);
     }
 
-    protected list(request: PagedRequestDto, pageNumber: number, finishedCallback: Function): void {
-        this._userService.getAll(request.skipCount, request.maxResultCount)
+    protected list(request: PagedUsersRequestDto, pageNumber: number, finishedCallback: Function): void {
+        this._userService.getAll(request.keyword, request.isActive, request.from, request.to, request.skipCount, request.maxResultCount)
             .pipe(finalize(() => {
                  finishedCallback()
             }))

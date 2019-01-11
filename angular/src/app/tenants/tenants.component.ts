@@ -7,6 +7,11 @@ import { EditTenantComponent } from 'app/tenants/edit-tenant/edit-tenant.compone
 import { CreateTenantComponent } from 'app/tenants/create-tenant/create-tenant.component';
 import { finalize } from 'rxjs/operators';
 
+class PagedTenantsRequestDto extends PagedRequestDto{
+    keyword: string;
+    isActive: boolean | null;
+}
+
 @Component({
     templateUrl: './tenants.component.html',
     animations: [appModuleAnimation()]
@@ -25,8 +30,8 @@ export class TenantsComponent extends PagedListingComponentBase<TenantDto> {
         super(injector);
     }
 
-    list(request:PagedRequestDto, pageNumber:number, finishedCallback: Function): void {
-        this._tenantService.getAll(request.skipCount, request.maxResultCount)
+    list(request:PagedTenantsRequestDto, pageNumber:number, finishedCallback: Function): void {
+        this._tenantService.getAll(request.keyword, request.isActive, request.skipCount, request.maxResultCount)
             .pipe(finalize(() => { finishedCallback() }))
             .subscribe((result:PagedResultDtoOfTenantDto)=>{
 				this.tenants = result.items;

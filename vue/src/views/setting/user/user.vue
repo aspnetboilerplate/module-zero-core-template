@@ -5,13 +5,8 @@
                 <Form ref="queryForm" :label-width="80" label-position="left" inline>
                     <Row :gutter="16">
                         <Col span="6">
-                            <FormItem :label="L('UserName')+':'" style="width:100%">
-                                <Input v-model="pagerequest.userName"></Input>
-                            </FormItem>
-                        </Col>
-                        <Col span="6">
-                            <FormItem :label="L('Name')+':'" style="width:100%">
-                                <Input v-model="pagerequest.name"></Input>
+                            <FormItem :label="L('Keyword')+':'" style="width:100%">
+                                <Input v-model="pagerequest.keyword" :placeholder="L('UserName')+'/'+L('Name')"></Input>
                             </FormItem>
                         </Col>
                         <Col span="6">
@@ -54,8 +49,7 @@
     import CreateUser from './create-user.vue'
     import EditUser from './edit-user.vue'
     class  PageUserRequest extends PageRequest{
-        userName:string;
-        name:string;
+        keyword:string;
         isActive:boolean=null;//nullable
         from:Date;
         to:Date;
