@@ -5,18 +5,8 @@
                 <Form ref="queryForm" :label-width="90" label-position="left" inline>
                     <Row :gutter="16">
                         <Col span="8">
-                            <FormItem :label="L('RoleName')+':'" style="width:100%">
-                                <Input v-model="pagerequest.roleName"></Input>
-                            </FormItem>
-                        </Col>
-                        <Col span="8">
-                            <FormItem :label="L('DisplayName')+':'" style="width:100%">
-                                <Input v-model="pagerequest.displayName"></Input>
-                            </FormItem>
-                        </Col>
-                        <Col span="8">
-                            <FormItem :label="L('Description')+':'" style="width:100%">
-                                <Input v-model="pagerequest.description"></Input>
+                            <FormItem :label="L('Keyword')+':'" style="width:100%">
+                                <Input v-model="pagerequest.keyword" :placeholder="L('RoleName')+'/'+L('DisplayName')+'/'+L('Description')"></Input>
                             </FormItem>
                         </Col>
                     </Row>
@@ -45,9 +35,7 @@
     import EditRole from './edit-role.vue'
    
     class PageRoleRequest extends PageRequest{
-        roleName:string='';
-        displayName:string='';
-        description:string='';
+        keyword:string='';
     }
     
     @Component({
