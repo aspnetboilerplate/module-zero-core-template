@@ -79,6 +79,10 @@
                     <mat-icon>delete</mat-icon>
                     <span>{{ "Delete" | localize }}</span>
                   </button>
+                  <button mat-menu-item (click)="resetPassword(user)">
+                    <mat-icon>lock</mat-icon>
+                    <span>{{ "Reset Password" | localize }}</span>
+                  </button>
                 </mat-menu>
               </td>
             </tr>

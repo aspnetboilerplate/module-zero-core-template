@@ -1,6 +1,6 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { FormsModule } from '@angular/forms';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { JsonpModule } from '@angular/http';
 import { HttpClientModule } from '@angular/common/http';
 
@@ -35,6 +35,8 @@ import { EditRoleDialogComponent } from './roles/edit-role/edit-role-dialog.comp
 import { UsersComponent } from '@app/users/users.component';
 import { CreateUserDialogComponent } from '@app/users/create-user/create-user-dialog.component';
 import { EditUserDialogComponent } from '@app/users/edit-user/edit-user-dialog.component';
+import { ChangePasswordComponent } from './users/change-password/change-password.component';
+import { ResetPasswordDialogComponent } from './users/reset-password/reset-password.component';
 
 @NgModule({
   declarations: [
@@ -58,11 +60,14 @@ import { EditUserDialogComponent } from '@app/users/edit-user/edit-user-dialog.c
     // users
     UsersComponent,
     CreateUserDialogComponent,
-    EditUserDialogComponent
+    EditUserDialogComponent,
+    ChangePasswordComponent,
+    ResetPasswordDialogComponent
   ],
   imports: [
     CommonModule,
     FormsModule,
+    ReactiveFormsModule,
     HttpClientModule,
     JsonpModule,
     ModalModule.forRoot(),
@@ -82,7 +87,8 @@ import { EditUserDialogComponent } from '@app/users/edit-user/edit-user-dialog.c
     EditRoleDialogComponent,
     // users
     CreateUserDialogComponent,
-    EditUserDialogComponent
+    EditUserDialogComponent,
+    ResetPasswordDialogComponent
   ]
 })
 export class AppModule {}

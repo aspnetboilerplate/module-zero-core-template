@@ -14,6 +14,7 @@ import {
 import { CreateUserDialogComponent } from './create-user/create-user-dialog.component';
 import { EditUserDialogComponent } from './edit-user/edit-user-dialog.component';
 import { Moment } from 'moment';
+import { ResetPasswordDialogComponent } from './reset-password/reset-password.component';
 
 class PagedUsersRequestDto extends PagedRequestDto {
     keyword: string;
@@ -77,7 +78,17 @@ export class UsersComponent extends PagedListingComponentBase<UserDto> {
         this.showCreateOrEditUserDialog(user.id);
     }
 
-    showCreateOrEditUserDialog(id?: number): void {
+    public resetPassword(user: UserDto): void {
+        this.showResetPasswordUserDialog(user.id);
+    }
+
+    private showResetPasswordUserDialog(userId?: number): void {
+        this._dialog.open(ResetPasswordDialogComponent, {
+            data: userId
+        });
+    }
+
+    private showCreateOrEditUserDialog(id?: number): void {
         let createOrEditUserDialog;
         if (id === undefined || id <= 0) {
             createOrEditUserDialog = this._dialog.open(CreateUserDialogComponent);
