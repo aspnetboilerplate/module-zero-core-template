@@ -10,7 +10,7 @@ import { ErrorStateMatcher } from '@angular/material';
 export class FormGroupErrorStateMatcher implements ErrorStateMatcher {
     constructor(private formGroup: FormGroup) { }
 
-    isErrorState(control: FormControl | null, form: FormGroupDirective | NgForm | null): boolean {
+    public isErrorState(control: FormControl | null, form: FormGroupDirective | NgForm | null): boolean {
         return control && control.dirty && control.touched && this.formGroup && this.formGroup.errors && this.formGroup.errors.areEqual;
     }
 }
@@ -20,7 +20,6 @@ export class FormGroupErrorStateMatcher implements ErrorStateMatcher {
     templateUrl: './change-password.component.html'
 })
 export class ChangePasswordComponent extends AppComponentBase implements OnInit {
-    @ViewChild('body') bodyElement: ElementRef;
     public parentFormGroup: FormGroup;
     public passwordsFormGroup: FormGroup;
     public isLoading: boolean;
@@ -43,7 +42,7 @@ export class ChangePasswordComponent extends AppComponentBase implements OnInit 
         super(injector);
     }
 
-    ngOnInit() {
+    public ngOnInit() {
         this.isLoading = true;
 
         this.passwordsFormGroup = new FormGroup({

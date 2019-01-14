@@ -17,6 +17,7 @@
     <text name="UserNameOrEmail" value="User name or email" />
     <text name="Password" value="Password" />
     <text name="ResetPassword" value="Reset Password" />
+    <text name="UpdatePassword" value="Update Password" />
     <text name="RememberMe" value="Remember me" />
     <text name="LogIn" value="Log in" />
     <text name="LoginFailed" value="Login failed!" />

@@ -36,7 +36,6 @@ export class ResetPasswordDialogComponent extends AppComponentBase
   }
 
   public resetPassword(): void {
-      debugger;
     this.isLoading = true;
     this._userService
       .resetPassword(this.resetPasswordDto)
