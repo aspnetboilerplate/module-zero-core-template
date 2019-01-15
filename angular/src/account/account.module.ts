@@ -24,6 +24,8 @@ import { LoginService } from './login/login.service';
 // tenants
 import { TenantChangeComponent } from './tenant/tenant-change.component';
 import { TenantChangeDialogComponent } from './tenant/tenant-change-dialog.component';
+import { ResetPasswordDialogComponent } from './reset-password/reset-password-dialog.component';
+import { ResetPasswordComponent } from './reset-password/reset-password.component';
 
 @NgModule({
     imports: [
@@ -45,13 +47,18 @@ import { TenantChangeDialogComponent } from './tenant/tenant-change-dialog.compo
         // tenant
         TenantChangeComponent,
         TenantChangeDialogComponent,
+        // reset password
+        ResetPasswordComponent,
+        ResetPasswordDialogComponent
     ],
     providers: [
         LoginService
     ],
     entryComponents: [
         // tenant
-        TenantChangeDialogComponent
+        TenantChangeDialogComponent,
+        // reset password
+        ResetPasswordDialogComponent
     ]
 })
 export class AccountModule {

@@ -42,6 +42,15 @@
     <text name="TenantSelection" value="Selección de Empresa" />
     <text name="TenantSelection_Detail" value="Por favor seleccione una de las siguientes empresas." />
     <text name="Logout" value="Cerrar sesión" />
-
+    <text name="RecoverPassword">Recuperar contraseña</text>
+    <text name="PasswordResetEmailSubject">[AbpProjectName] Redefinir contraseña</text>
+    <text name="PasswordResetEmailBody">Clic &lt;a href="{0}/account/reset-password/{2}/{3}/{1}" target="_blank"&gt;aquí&lt;/a&gt; para redefinir su contraseña.</text>
+    <text name="PasswordResetEmailSentSucessfullyTitle">Email enviado!</text>
+    <text name="PasswordResetEmailSentSucessfullyMessage">Revise su bandeja de entrada para restablecer su contraseña.</text>
+    <text name="NewPassword">Nueva contraseña</text>
+    <text name="NewPasswordConfirmation">Escriba de nuevo</text>
+    <text name="TooShort">Demasiado corto</text>
+    <text name="PasswordPatternErrorMessage">La contraseña debe contener 1 carácter en minúscula, 1 mayúscula, y 1 dígito</text>
+    <text name="PasswordMismatch">Las contraseñas no coinciden</text>
   </texts>
 </localizationDictionary>

@@ -46,11 +46,11 @@ export class LoginService {
         this.authenticateResult = authenticateResult;
 
         if (authenticateResult.accessToken) {
-            //Successfully logged in
+            // Successfully logged in
             this.login(authenticateResult.accessToken, authenticateResult.encryptedAccessToken, authenticateResult.expireInSeconds, this.rememberMe);
 
         } else {
-            //Unexpected result!
+            // Unexpected result!
 
             this._logService.warn('Unexpected authenticateResult!');
             this._router.navigate(['account/login']);
@@ -59,7 +59,7 @@ export class LoginService {
 
     private login(accessToken: string, encryptedAccessToken: string, expireInSeconds: number, rememberMe?: boolean): void {
 
-        var tokenExpireDate = rememberMe ? (new Date(new Date().getTime() + 1000 * expireInSeconds)) : undefined;
+        const tokenExpireDate = rememberMe ? (new Date(new Date().getTime() + 1000 * expireInSeconds)) : undefined;
 
         this._tokenService.setToken(
             accessToken,
@@ -73,8 +73,11 @@ export class LoginService {
             abp.appPath
         );
 
-        var initialUrl = UrlHelper.initialUrl;
-        if (initialUrl.indexOf('/login') > 0) {
+        let initialUrl = UrlHelper.initialUrl;
+        // account should be accessed by logged out users only
+        // if it attempts to redirect to account,
+        // override the redirect to home page
+        if (initialUrl.indexOf('/account') > 0) {
             initialUrl = AppConsts.appBaseUrl;
         }
 

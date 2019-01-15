@@ -51,9 +51,9 @@ import {
     MatTooltipModule,
     MatTreeModule,
 } from '@angular/material';
-import { BlockDirective } from './directives/block.directive';
-import { BusyDirective } from './directives/busy.directive';
-import { EqualValidator } from './directives/equal-validator.directive';
+import { BlockDirective } from './_directives/block.directive';
+import { BusyDirective } from './_directives/busy.directive';
+import { EqualValidator } from './_directives/equal-validator.directive';
 @NgModule({
     imports: [
         CommonModule,

@@ -26,10 +26,6 @@ export class AccountComponent extends AppComponentBase implements OnInit {
         this.versionText = this.appSession.application.version + ' [' + this.appSession.application.releaseDate.format('YYYYDDMM') + ']';
     }
 
-    showTenantChange(): boolean {
-        return abp.multiTenancy.isEnabled;
-    }
-
     ngOnInit(): void {
         $('body').attr('class', 'login-page');
     }

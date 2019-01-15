@@ -22,10 +22,6 @@ export class TenantChangeComponent extends AppComponentBase implements OnInit {
     }
   }
 
-  get isMultiTenancyEnabled(): boolean {
-    return abp.multiTenancy.isEnabled;
-  }
-
   showChangeModal(): void {
     this._dialog.open(TenantChangeDialogComponent, {
       width: '500px',

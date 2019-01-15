@@ -1,5 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Linq;
+using System.Threading.Tasks;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.Extensions.Logging;
 using Microsoft.Extensions.Options;
@@ -53,6 +55,33 @@ namespace AbpCompanyName.AbpProjectName.Authorization.Users
                 organizationUnitSettings, 
                 settingManager)
         {
+        }
+
+        public virtual async Task<bool> VerifyPasswordResetCodeAsync(User user, string passwordResetCode)
+        {
+            return user.PasswordResetCode == passwordResetCode;
+        }
+
+        public virtual async Task<IdentityResult> BasicResetPasswordAsync(User user, string passwordResetCode, string newPassword)
+        {
+            ThrowIfDisposed();
+            if (user == null)
+            {
+                throw new ArgumentNullException(nameof(user));
+            }
+
+            // Make sure the token is valid and the stamp matches
+            if (!await VerifyPasswordResetCodeAsync(user, passwordResetCode))
+            {
+                return IdentityResult.Failed(ErrorDescriber.InvalidToken());
+            }
+            var result = await UpdatePasswordHash(user, newPassword, validatePassword: true);
+            if (!result.Succeeded)
+            {
+                return result;
+            }
+            user.SetNewPasswordResetCode();
+            return await UpdateUserAsync(user);
         }
     }
 }

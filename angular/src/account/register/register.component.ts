@@ -12,7 +12,7 @@ import { LoginService } from "../login/login.service";
 
 @Component({
   templateUrl: "./register.component.html",
-  animations: [accountModuleAnimation()], 
+  animations: [accountModuleAnimation()],
   styles: [
     `
       mat-form-field {

@@ -70,8 +70,7 @@
     .btn-primary:active,
     .btn-primary:focus {
         background-color: @color  !important;
-    }
-    // a.dropdown-toggle {
+    } // a.dropdown-toggle {
     //     color: @color !important;
     // }
     .mat-tab-group.mat-primary .mat-ink-bar,
@@ -183,6 +182,24 @@
 
 .theme-black {
     .make-theme(@black)
+}
+
+.mat-dialog-actions {
+    box-sizing: unset;
+}
+
+.form-actions>*:nth-child(n+2) {
+    margin-left: 5px;
+}
+
+// https://github.com/angular/material2/issues/4580#issuecomment-386759677
+mat-form-field .mat-form-field {
+    &-underline {
+        position: static;
+    }
+    &-subscript-wrapper {
+        position: static;
+    }
 }
 
 /* General */

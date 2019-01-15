@@ -91,5 +91,15 @@
     <text name="StartTyping">Start Typing</text>
     <text name="Skins">Skins</text>
     <text name="Settings">Settings</text>
+    <text name="RecoverPassword">Recover password</text>
+    <text name="PasswordResetEmailSubject">[AbpProjectName] Reset your password</text>
+    <text name="PasswordResetEmailBody">Click &lt;a href="{0}/account/reset-password/{2}/{3}/{1}" target="_blank"&gt;here&lt;/a&gt; to reset your password.</text>
+    <text name="PasswordResetEmailSentSucessfullyTitle">Email sent sucessfully!</text>
+    <text name="PasswordResetEmailSentSucessfullyMessage">Check your inbox to reset your password.</text>
+    <text name="NewPassword">New password</text>
+    <text name="NewPasswordConfirmation">New password confirmation</text>
+    <text name="TooShort">Too short</text>
+    <text name="PasswordPatternErrorMessage">Password should contain 1 lowercase character, 1 uppercase, and 1 digit</text>
+    <text name="PasswordMismatch">Password mismatch</text>
   </texts>
 </localizationDictionary>

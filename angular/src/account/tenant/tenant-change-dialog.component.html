@@ -1,19 +1,18 @@
 ﻿<form autocomplete="off"
       #changeTenantForm="ngForm"
       (ngSubmit)="save()">
-    <h1 mat-dialog-title >{{ "ChangeTenant" | localize }}</h1>
+    <h1 mat-dialog-title>{{ "ChangeTenant" | localize }}</h1>
     <mat-dialog-content>
         <mat-form-field>
-            <input 
-                matInput
-                name="tenancyName"
-                [placeholder]="'TenancyName' | localize"
-                [(ngModel)]="tenancyName"
-                maxlength="64"/>
+            <input matInput
+                   name="tenancyName"
+                   [placeholder]="'TenancyName' | localize"
+                   [(ngModel)]="tenancyName"
+                   maxlength="64" />
+            <mat-hint>{{ "LeaveEmptyToSwitchToHost" | localize }}</mat-hint>
         </mat-form-field>
-        <span class="help-block">{{ "LeaveEmptyToSwitchToHost" | localize }}</span>
     </mat-dialog-content>
-    <div mat-dialog-actions 
+    <div mat-dialog-actions
          align="end">
         <button mat-button
                 type="button"

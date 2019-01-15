@@ -3,6 +3,7 @@ import { RouterModule } from '@angular/router';
 import { LoginComponent } from './login/login.component';
 import { RegisterComponent } from './register/register.component';
 import { AccountComponent } from './account.component';
+import { ResetPasswordComponent } from './reset-password/reset-password.component';
 
 @NgModule({
     imports: [
@@ -12,7 +13,11 @@ import { AccountComponent } from './account.component';
                 component: AccountComponent,
                 children: [
                     { path: 'login', component: LoginComponent },
-                    { path: 'register', component: RegisterComponent }
+                    { path: 'register', component: RegisterComponent },
+                    { path: 'reset-password/:user-id/:password-reset-code', component: ResetPasswordComponent },
+                    // tenantId should be the last parameter since it is optional
+                    { path: 'reset-password/:user-id/:password-reset-code/:tenant-id', component: ResetPasswordComponent }
+
                 ]
             }
         ])

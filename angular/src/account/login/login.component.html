@@ -1,77 +1,81 @@
-﻿<div class="card" [@routerTransition]>
-  <div class="body">
-    <form
-      novalidate
-      autocomplete="off"
-      #loginForm="ngForm"
-      (ngSubmit)="login()"
-    >
-      <h4 class="text-center">{{ "LogIn" | localize }}</h4>
-      <div class="row clearfix">
-        <div class="col-xs-12">
-          <div class="input-group">
-            <span class="input-group-addon">
-              <i class="material-icons">person</i>
-            </span>
-            <div>
-              <mat-form-field>
-                <input
-                  matInput
-                  name="userNameOrEmailAddress"
-                  [(ngModel)]="
+﻿<ng-container [@routerTransition]>
+  <div *ngIf="isMultiTenancyEnabled()"
+       class="tenant-change-box">
+    <tenant-change></tenant-change>
+  </div>
+
+  <div class="card">
+    <div class="body">
+      <form novalidate
+            autocomplete="off"
+            #loginForm="ngForm"
+            (ngSubmit)="login()">
+        <h4 class="text-center">{{ "LogIn" | localize }}</h4>
+        <div class="row clearfix">
+          <div class="col-xs-12">
+            <div class="input-group">
+              <span class="input-group-addon">
+                <i class="material-icons">person</i>
+              </span>
+              <div>
+                <mat-form-field>
+                  <input matInput
+                         name="userNameOrEmailAddress"
+                         [(ngModel)]="
                     loginService.authenticateModel.userNameOrEmailAddress
                   "
-                  [placeholder]="'UserNameOrEmail' | localize"
-                  autocomplete="off"
-                  required
-                  maxlength="255"
-                />
-              </mat-form-field>
+                         [placeholder]="'UserNameOrEmail' | localize"
+                         autocomplete="off"
+                         required
+                         maxlength="255" />
+                </mat-form-field>
+              </div>
+            </div>
+            <div class="input-group">
+              <span class="input-group-addon">
+                <i class="material-icons">lock</i>
+              </span>
+              <div>
+                <mat-form-field>
+                  <input matInput
+                         type="password"
+                         name="password"
+                         [(ngModel)]="loginService.authenticateModel.password"
+                         [placeholder]="'Password' | localize"
+                         required
+                         maxlength="32" />
+                </mat-form-field>
+              </div>
             </div>
           </div>
-          <div class="input-group">
-            <span class="input-group-addon">
-              <i class="material-icons">lock</i>
-            </span>
-            <div>
-              <mat-form-field>
-                <input
-                  matInput
-                  type="password"
-                  name="password"
-                  [(ngModel)]="loginService.authenticateModel.password"
-                  [placeholder]="'Password' | localize"
-                  required
-                  maxlength="32"
-                />
-              </mat-form-field>
-            </div>
+        </div>
+        <div class="row">
+          <div class="col-xs-6 p-t-5">
+            <mat-checkbox name="rememberMe"
+                          [(ngModel)]="loginService.rememberMe">
+              {{ "RememberMe" | localize }}
+            </mat-checkbox>
+          </div>
+          <div class="col-xs-6 text-right">
+            <button mat-flat-button
+                    type="submit"
+                    flex="15"
+                    color="accent"
+                    [disabled]="!loginForm.form.valid || submitting">
+              {{ "LogIn" | localize }}
+            </button>
           </div>
         </div>
-      </div>
-      <div class="row">
-        <div class="col-xs-8 p-t-5">
-          <mat-checkbox name="rememberMe" [(ngModel)]="loginService.rememberMe">
-            {{ "RememberMe" | localize }}
-          </mat-checkbox>
+        <div class="row m-t-15 m-b--20"
+             *ngIf="isSelfRegistrationAllowed">
+          <div class="col-xs-6">
+            <a [routerLink]="['../register']">{{ "Register" | localize }}</a>
+          </div>
+          <div class="col-xs-6 text-right">
+            <a (click)="resetPassword()">{{ "RecoverPassword" | localize }}</a>
+          </div>
         </div>
-        <div class="col-xs-4">
-          <button
-            mat-flat-button
-            type="submit"
-            flex="15"
-            color="accent"
-            [disabled]="!loginForm.form.valid || submitting"
-          >
-            {{ "LogIn" | localize }}
-          </button>
-        </div>
-      </div>
-      <div class="row m-t-15 m-b--20" *ngIf="isSelfRegistrationAllowed">
-        <div class="col-xs-12">
-          <a [routerLink]="['../register']">{{ "Register" | localize }}</a>
-        </div>
-      </div>
-    </form>
+      </form>
+    </div>
   </div>
-</div>
+</ng-container>

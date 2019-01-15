@@ -53,4 +53,8 @@ export abstract class AppComponentBase {
     isGranted(permissionName: string): boolean {
         return this.permission.isGranted(permissionName);
     }
+
+    isMultiTenancyEnabled(): boolean {
+        return abp.multiTenancy.isEnabled;
+    }
 }
