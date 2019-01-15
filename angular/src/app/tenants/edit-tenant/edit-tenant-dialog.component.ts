@@ -27,7 +27,7 @@ export class EditTenantDialogComponent extends AppComponentBase
 
   constructor(
     injector: Injector,
-    private _tenantService: TenantServiceProxy,
+    public _tenantService: TenantServiceProxy,
     private _dialogRef: MatDialogRef<EditTenantDialogComponent>,
     @Optional() @Inject(MAT_DIALOG_DATA) private _id: number
   ) {

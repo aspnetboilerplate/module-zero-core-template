@@ -14,7 +14,7 @@ export class LoginComponent extends AppComponentBase {
 
   constructor(
     injector: Injector,
-    private loginService: LoginService,
+    public loginService: LoginService,
     private _sessionService: AbpSessionService
   ) {
     super(injector);

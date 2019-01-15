@@ -32,7 +32,7 @@ export class CreateUserDialogComponent extends AppComponentBase
 
   constructor(
     injector: Injector,
-    private _userService: UserServiceProxy,
+    public _userService: UserServiceProxy,
     private _dialogRef: MatDialogRef<CreateUserDialogComponent>
   ) {
     super(injector);

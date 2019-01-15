@@ -60,7 +60,7 @@
     </mat-tab-group>
   </mat-dialog-content>
   <div mat-dialog-actions align="end">
-    <button mat-button type="button" [disabled]="saving" (click)="close()">
+    <button mat-button type="button" [disabled]="saving" (click)="close(false)">
       {{ "Cancel" | localize }}
     </button>
     <button
