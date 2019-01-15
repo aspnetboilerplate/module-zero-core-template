@@ -27,7 +27,7 @@ export class CreateTenantDialogComponent extends AppComponentBase
 
   constructor(
     injector: Injector,
-    private _tenantService: TenantServiceProxy,
+    public _tenantService: TenantServiceProxy,
     private _dialogRef: MatDialogRef<CreateTenantDialogComponent>
   ) {
     super(injector);
