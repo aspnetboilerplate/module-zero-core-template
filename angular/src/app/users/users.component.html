@@ -5,11 +5,7 @@
         <h2>{{ "Users" | localize }}</h2>
         <ul class="header-dropdown m-r--5">
           <li>
-            <button
-              mat-icon-button
-              [matMenuTriggerFor]="headerMenu"
-              class="header-dropdown-mat-icon-button"
-            >
+            <button mat-icon-button [matMenuTriggerFor]="headerMenu" class="header-dropdown-mat-icon-button">
               <mat-icon>more_vert</mat-icon>
             </button>
             <mat-menu #headerMenu="matMenu">
@@ -22,6 +18,26 @@
         </ul>
       </div>
       <div class="body table-responsive">
+        <!--query start-->
+        <div class="row clearfix">
+          <form>
+            <mat-form-field>
+              <input matInput [placeholder]="l('Keyword')" [(ngModel)]="keyword" name="keyword">
+            </mat-form-field>
+
+            <mat-form-field>
+              <mat-select [placeholder]="l('IsActive')" [(ngModel)]="isActive" name="isActive">
+                <mat-option value="">{{ 'All' | localize }}</mat-option>
+                <mat-option value="true">{{ 'Yes' | localize }}</mat-option>
+                <mat-option value="false">{{ 'No' | localize }}</mat-option>
+              </mat-select>
+            </mat-form-field>
+
+            <button mat-raised-button color="primary" (click)="getDataPage(1)">{{ 'Search' | localize }}</button>
+
+          </form>
+        </div>
+        <!--query end-->
         <table class="table table-hover table-striped" [busy]="isTableLoading">
           <thead>
             <tr>
@@ -35,8 +51,7 @@
             </tr>
           </thead>
           <tbody>
-            <tr
-              *ngFor="
+            <tr *ngFor="
                 let user of (users
                   | paginate
                     : {
@@ -45,24 +60,15 @@
                         currentPage: pageNumber,
                         totalItems: totalItems
                       })
-              "
-            >
+              ">
               <td>{{ user.userName }}</td>
               <td>{{ user.fullName }}</td>
               <td>{{ user.emailAddress }}</td>
               <td align="center">
-                <i
-                  class="material-icons"
-                  *ngIf="user.isActive"
-                  style="color:green;"
-                >
+                <i class="material-icons" *ngIf="user.isActive" style="color:green;">
                   check_box
                 </i>
-                <i
-                  class="material-icons"
-                  *ngIf="!user.isActive"
-                  style="color:red;"
-                >
+                <i class="material-icons" *ngIf="!user.isActive" style="color:red;">
                   indeterminate_check_box
                 </i>
               </td>
@@ -84,22 +90,11 @@
             </tr>
           </tbody>
         </table>
-        <div
-          class="abp-pagination-controls-wrapper"
-          *ngIf="totalItems > pageSize"
-        >
-          <abp-pagination-controls
-            (pageChange)="getDataPage($event)"
-            id="server"
-          >
+        <div class="abp-pagination-controls-wrapper" *ngIf="totalItems > pageSize">
+          <abp-pagination-controls (pageChange)="getDataPage($event)" id="server">
           </abp-pagination-controls>
         </div>
-        <button
-          mat-mini-fab
-          color="primary"
-          class="pull-right"
-          (click)="createUser()"
-        >
+        <button mat-mini-fab color="primary" class="pull-right" (click)="createUser()">
           <mat-icon>add</mat-icon>
         </button>
       </div>

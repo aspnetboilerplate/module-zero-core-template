@@ -5,11 +5,7 @@
         <h2>{{ "Roles" | localize }}</h2>
         <ul class="header-dropdown m-r--5">
           <li>
-            <button
-              mat-icon-button
-              [matMenuTriggerFor]="headerMenu"
-              class="header-dropdown-mat-icon-button"
-            >
+            <button mat-icon-button [matMenuTriggerFor]="headerMenu" class="header-dropdown-mat-icon-button">
               <mat-icon>more_vert</mat-icon>
             </button>
             <mat-menu #headerMenu="matMenu">
@@ -22,6 +18,18 @@
         </ul>
       </div>
       <div class="body table-responsive">
+        <!--query start-->
+        <div class="row clearfix">
+          <form>
+            <mat-form-field>
+              <input matInput [placeholder]="l('Keyword')" [(ngModel)]="keyword" name="keyword">
+            </mat-form-field>
+
+            <button mat-raised-button color="primary" (click)="getDataPage(1)">{{ 'Search' | localize }}</button>
+
+          </form>
+        </div>
+        <!--query end-->
         <table class="table table-hover table-striped" [busy]="isTableLoading">
           <thead>
             <tr>
@@ -31,8 +39,7 @@
             </tr>
           </thead>
           <tbody>
-            <tr
-              *ngFor="
+            <tr *ngFor="
                 let role of (roles
                   | paginate
                     : {
@@ -41,8 +48,7 @@
                         currentPage: pageNumber,
                         totalItems: totalItems
                       })
-              "
-            >
+              ">
               <td>{{ role.name }}</td>
               <td>{{ role.displayName }}</td>
               <td>
@@ -63,22 +69,11 @@
             </tr>
           </tbody>
         </table>
-        <div
-          class="abp-pagination-controls-wrapper"
-          *ngIf="totalItems > pageSize"
-        >
-          <abp-pagination-controls
-            (pageChange)="getDataPage($event)"
-            id="server"
-          >
+        <div class="abp-pagination-controls-wrapper" *ngIf="totalItems > pageSize">
+          <abp-pagination-controls (pageChange)="getDataPage($event)" id="server">
           </abp-pagination-controls>
         </div>
-        <button
-          mat-mini-fab
-          color="primary"
-          class="pull-right"
-          (click)="createRole()"
-        >
+        <button mat-mini-fab color="primary" class="pull-right" (click)="createRole()">
           <mat-icon>add</mat-icon>
         </button>
       </div>
