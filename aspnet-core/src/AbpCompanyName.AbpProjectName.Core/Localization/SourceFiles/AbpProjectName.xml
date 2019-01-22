@@ -52,6 +52,7 @@
     <text name="CurrentTenant">Current tenant</text>
     <text name="NotSelected">Not selected</text>
     <text name="Change">Change</text>
+    <text name="ChangeMyPassword">Change my password</text>
     <text name="ChangeTenant">Change tenant</text>
     <text name="MultiLevelMenu">Multi Level Menu</text>
     <text name="Back">Back</text>
@@ -99,7 +100,8 @@
     <text name="NewPassword">New password</text>
     <text name="NewPasswordConfirmation">New password confirmation</text>
     <text name="TooShort">Too short</text>
-    <text name="PasswordPatternErrorMessage">Password should contain 1 lowercase character, 1 uppercase, and 1 digit</text>
+    <text name="PasswordPatternErrorMessage">Password should contain at least 1 lowercase character, 1 uppercase, 1 digit and 1 special characterd</text>
     <text name="PasswordMismatch">Password mismatch</text>
+    <text name="SendEmail">Send Email</text>
   </texts>
 </localizationDictionary>

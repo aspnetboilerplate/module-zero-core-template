@@ -3,12 +3,10 @@ using System.Linq;
 using System.Net;
 using System.Threading.Tasks;
 using Abp.Configuration;
-using Abp.Domain.Uow;
 using Abp.Net.Mail;
 using Abp.Zero.Configuration;
 using AbpCompanyName.AbpProjectName.Authorization.Accounts.Dto;
 using AbpCompanyName.AbpProjectName.Authorization.Users;
-using Microsoft.EntityFrameworkCore;
 
 namespace AbpCompanyName.AbpProjectName.Authorization.Accounts
 {
@@ -128,7 +126,12 @@ namespace AbpCompanyName.AbpProjectName.Authorization.Accounts
             {
                 var user = await _userManager.GetUserByIdAsync(userId);
 
-                await _userManager.BasicResetPasswordAsync(user, token, newPassword);
+                var result = await _userManager.BasicResetPasswordAsync(user, token, newPassword);
+
+                if (!result.Succeeded)
+                {
+                    throw new Exception(result.Errors.FirstOrDefault()?.ToString());
+                }
             }
         }
     }
