@@ -48,7 +48,7 @@ export class ChangePasswordComponent extends AppComponentBase implements OnInit 
         this.passwordsFormGroup = new FormGroup({
             'newPassword': new FormControl('', [
                 Validators.required,
-                Validators.pattern('(?=^.{8,}$)(?=.*\d)(?=.*[a-z])(?=.*[A-Z])(?!.*\s)[0-9a-zA-Z!@#$%^&*()]*$') ]),
+                Validators.pattern('(?=^.{8,}$)(?=.*\\d)(?=.*[a-z])(?=.*[A-Z])(?!.*\\s)[0-9a-zA-Z!@#$%^&*()]*$') ]),
             'repeatNewPassword': new FormControl('', [ Validators.required ])
         }, ChangePasswordComponent.areEqual);
 
