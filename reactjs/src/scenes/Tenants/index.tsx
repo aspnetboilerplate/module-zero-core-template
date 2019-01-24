@@ -19,11 +19,19 @@ const confirm = Modal.confirm;
 class Tenant extends React.Component<ITenantProps> {
   formRef: any;
 
+    constructor(props: any) {
+        super(props);
+
+        this.getAll = this.getAll.bind(this);
+        this.handleChange = this.handleChange.bind(this);
+    }
+
   state = {
     modalVisible: false,
     maxResultCount: 10,
     skipCount: 0,
     tenantId: 0,
+    filter: ''
   };
 
   async componentDidMount() {
@@ -31,7 +39,7 @@ class Tenant extends React.Component<ITenantProps> {
   }
 
   async getAll() {
-    await this.props.tenantStore.getAll({ maxResultCount: this.state.maxResultCount, skipCount: this.state.skipCount });
+      await this.props.tenantStore.getAll({ maxResultCount: this.state.maxResultCount, skipCount: this.state.skipCount, keyword: this.state.filter });
   }
 
   handleTableChange = (pagination: any) => {
@@ -95,7 +103,12 @@ class Tenant extends React.Component<ITenantProps> {
 
   saveFormRef = (formRef: any) => {
     this.formRef = formRef;
-  };
+    };
+
+    handleChange(event: any) {
+        this.state.filter = event.target.value;
+        this.setState({ value: event.target.value });
+    }
 
   public render() {
     const { tenants } = this.props.tenantStore;
@@ -159,6 +172,15 @@ class Tenant extends React.Component<ITenantProps> {
             xxl={{ span: 1, offset: 21 }}
           >
             <Button type="primary" shape="circle" icon="plus" onClick={() => this.createOrUpdateModalOpen({ id: 0 })} />
+          </Col>
+        </Row>        
+        <Row>
+          <Col sm={{ span: 5, offset: 0 }}>
+                    <input className="ant-input" type="text" placeholder="filter" value={this.state.filter} onChange={this.handleChange.bind(this)} />
+            </Col>
+
+            <Col sm={{ span: 4, offset: 1 }}>
+                 <Button type="primary" icon="search" value="Submit" onClick={this.getAll}>{L('Search')}</Button>
           </Col>
         </Row>
         <Row style={{ marginTop: 20 }}>
