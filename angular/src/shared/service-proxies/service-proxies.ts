@@ -1516,22 +1516,16 @@ export class UserServiceProxy {
     /**
      * @param keyword (optional) 
      * @param isActive (optional) 
-     * @param from (optional) 
-     * @param to (optional) 
      * @param skipCount (optional) 
      * @param maxResultCount (optional) 
      * @return Success
      */
-    getAll(keyword: string | null | undefined, isActive: boolean | null | undefined, from: moment.Moment | null | undefined, to: moment.Moment | null | undefined, skipCount: number | null | undefined, maxResultCount: number | null | undefined): Observable<PagedResultDtoOfUserDto> {
+    getAll(keyword: string | null | undefined, isActive: boolean | null | undefined, skipCount: number | null | undefined, maxResultCount: number | null | undefined): Observable<PagedResultDtoOfUserDto> {
         let url_ = this.baseUrl + "/api/services/app/User/GetAll?";
         if (keyword !== undefined)
             url_ += "Keyword=" + encodeURIComponent("" + keyword) + "&"; 
         if (isActive !== undefined)
             url_ += "IsActive=" + encodeURIComponent("" + isActive) + "&"; 
-        if (from !== undefined)
-            url_ += "From=" + encodeURIComponent(from ? "" + from.toJSON() : "") + "&"; 
-        if (to !== undefined)
-            url_ += "To=" + encodeURIComponent(to ? "" + to.toJSON() : "") + "&"; 
         if (skipCount !== undefined)
             url_ += "SkipCount=" + encodeURIComponent("" + skipCount) + "&"; 
         if (maxResultCount !== undefined)

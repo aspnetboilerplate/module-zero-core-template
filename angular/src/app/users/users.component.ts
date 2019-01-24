@@ -6,13 +6,10 @@ import { PagedListingComponentBase, PagedRequestDto } from 'shared/paged-listing
 import { UserServiceProxy, UserDto, PagedResultDtoOfUserDto } from '@shared/service-proxies/service-proxies';
 import { CreateUserDialogComponent } from './create-user/create-user-dialog.component';
 import { EditUserDialogComponent } from './edit-user/edit-user-dialog.component';
-import { Moment } from 'moment';
 
 class PagedUsersRequestDto extends PagedRequestDto {
     keyword: string;
     isActive: boolean | null;
-    from: Moment | null;
-    to: Moment | null;
 }
 
 @Component({
@@ -30,8 +27,6 @@ export class UsersComponent extends PagedListingComponentBase<UserDto> {
     users: UserDto[] = [];
     keyword = '';
     isActive: boolean | null;
-    from: Moment | null;
-    to: Moment | null;
 
     constructor(
         injector: Injector,
@@ -49,11 +44,9 @@ export class UsersComponent extends PagedListingComponentBase<UserDto> {
 
         request.keyword = this.keyword;
         request.isActive = this.isActive;
-        request.from = this.from;
-        request.to = this.to;
 
         this._userService
-            .getAll(request.keyword, request.isActive, request.from, request.to, request.skipCount, request.maxResultCount)
+            .getAll(request.keyword, request.isActive, request.skipCount, request.maxResultCount)
             .pipe(
                 finalize(() => {
                     finishedCallback();
