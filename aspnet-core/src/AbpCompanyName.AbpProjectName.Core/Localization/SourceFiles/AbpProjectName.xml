@@ -94,5 +94,6 @@
     <text name="StartTyping">Start Typing</text>
     <text name="Skins">Skins</text>
     <text name="Settings">Settings</text>
+    <text name="Filter">Filter</text>
   </texts>
 </localizationDictionary>

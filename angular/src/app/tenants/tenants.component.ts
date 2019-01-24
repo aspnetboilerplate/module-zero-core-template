@@ -21,10 +21,19 @@ class PagedTenantsRequestDto extends PagedRequestDto {
 
 @Component({
     templateUrl: './tenants.component.html',
-    animations: [appModuleAnimation()]
+    animations: [appModuleAnimation()],
+    styles: [
+        `
+          mat-form-field {
+            padding: 10px;
+          }
+        `
+      ]
 })
 export class TenantsComponent extends PagedListingComponentBase<TenantDto> {
     tenants: TenantDto[] = [];
+    keyword = '';
+    isActive: boolean | null;
 
     constructor(
         injector: Injector,
@@ -39,6 +48,10 @@ export class TenantsComponent extends PagedListingComponentBase<TenantDto> {
         pageNumber: number,
         finishedCallback: Function
     ): void {
+
+        request.keyword = this.keyword;
+        request.isActive = this.isActive;
+
         this._tenantService
             .getAll(request.keyword, request.isActive, request.skipCount, request.maxResultCount)
             .pipe(
