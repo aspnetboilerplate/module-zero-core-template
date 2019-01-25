@@ -26,7 +26,6 @@ namespace AbpCompanyName.AbpProjectName.MultiTenancy
         private readonly UserManager _userManager;
         private readonly RoleManager _roleManager;
         private readonly IAbpZeroDbMigrator _abpZeroDbMigrator;
-        private readonly IPasswordHasher<User> _passwordHasher;
 
         public TenantAppService(
             IRepository<Tenant, int> repository,
@@ -34,8 +33,7 @@ namespace AbpCompanyName.AbpProjectName.MultiTenancy
             EditionManager editionManager,
             UserManager userManager,
             RoleManager roleManager,
-            IAbpZeroDbMigrator abpZeroDbMigrator,
-            IPasswordHasher<User> passwordHasher)
+            IAbpZeroDbMigrator abpZeroDbMigrator)
             : base(repository)
         {
             _tenantManager = tenantManager;
@@ -43,7 +41,6 @@ namespace AbpCompanyName.AbpProjectName.MultiTenancy
             _userManager = userManager;
             _roleManager = roleManager;
             _abpZeroDbMigrator = abpZeroDbMigrator;
-            _passwordHasher = passwordHasher;
         }
 
         public override async Task<TenantDto> Create(CreateTenantDto input)
