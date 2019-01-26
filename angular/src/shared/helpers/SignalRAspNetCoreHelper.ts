@@ -4,13 +4,13 @@ import { UtilsService } from '@abp/utils/utils.service';
 export class SignalRAspNetCoreHelper {
     static initSignalR(): void {
 
-        var encryptedAuthToken = new UtilsService().getCookieValue(AppConsts.authorization.encrptedAuthTokenName);
+        let encryptedAuthToken = new UtilsService().getCookieValue(AppConsts.authorization.encrptedAuthTokenName);
 
         abp.signalr = {
             autoConnect: true,
             connect: undefined,
             hubs: undefined,
-            qs: AppConsts.authorization.encrptedAuthTokenName + "=" + encodeURIComponent(encryptedAuthToken),
+            qs: AppConsts.authorization.encrptedAuthTokenName + '=' + encodeURIComponent(encryptedAuthToken),
             remoteServiceBaseUrl: AppConsts.remoteServiceBaseUrl,
             startConnection: undefined,
             url: '/signalr'

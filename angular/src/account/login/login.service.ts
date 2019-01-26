@@ -36,7 +36,7 @@ export class LoginService {
 
         this._tokenAuthService
             .authenticate(this.authenticateModel)
-            .pipe(finalize(() => { finallyCallback() }))
+            .pipe(finalize(() => { finallyCallback(); }))
             .subscribe((result: AuthenticateResultModel) => {
                 this.processAuthenticateResult(result);
             });
@@ -46,11 +46,11 @@ export class LoginService {
         this.authenticateResult = authenticateResult;
 
         if (authenticateResult.accessToken) {
-            //Successfully logged in
+            // Successfully logged in
             this.login(authenticateResult.accessToken, authenticateResult.encryptedAccessToken, authenticateResult.expireInSeconds, this.rememberMe);
 
         } else {
-            //Unexpected result!
+            // Unexpected result!
 
             this._logService.warn('Unexpected authenticateResult!');
             this._router.navigate(['account/login']);
@@ -59,7 +59,7 @@ export class LoginService {
 
     private login(accessToken: string, encryptedAccessToken: string, expireInSeconds: number, rememberMe?: boolean): void {
 
-        var tokenExpireDate = rememberMe ? (new Date(new Date().getTime() + 1000 * expireInSeconds)) : undefined;
+        let tokenExpireDate = rememberMe ? (new Date(new Date().getTime() + 1000 * expireInSeconds)) : undefined;
 
         this._tokenService.setToken(
             accessToken,
@@ -73,7 +73,7 @@ export class LoginService {
             abp.appPath
         );
 
-        var initialUrl = UrlHelper.initialUrl;
+        let initialUrl = UrlHelper.initialUrl;
         if (initialUrl.indexOf('/login') > 0) {
             initialUrl = AppConsts.appBaseUrl;
         }

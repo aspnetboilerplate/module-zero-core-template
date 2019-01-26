@@ -38,6 +38,18 @@ export class UsersComponent extends PagedListingComponentBase<UserDto> {
         super(injector);
     }
 
+    createUser(): void {
+        this.showCreateOrEditUserDialog();
+    }
+
+    editUser(user: UserDto): void {
+        this.showCreateOrEditUserDialog(user.id);
+    }
+
+    public resetPassword(user: UserDto): void {
+        this.showResetPasswordUserDialog(user.id);
+    }
+
     protected list(
         request: PagedUsersRequestDto,
         pageNumber: number,
@@ -72,18 +84,6 @@ export class UsersComponent extends PagedListingComponentBase<UserDto> {
                 }
             }
         );
-    }
-
-    createUser(): void {
-        this.showCreateOrEditUserDialog();
-    }
-
-    editUser(user: UserDto): void {
-        this.showCreateOrEditUserDialog(user.id);
-    }
-
-    public resetPassword(user: UserDto): void {
-        this.showResetPasswordUserDialog(user.id);
     }
 
     private showResetPasswordUserDialog(userId?: number): void {

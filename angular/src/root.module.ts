@@ -31,17 +31,17 @@ export function appInitializerFactory(injector: Injector,
         abp.ui.setBusy();
         return new Promise<boolean>((resolve, reject) => {
             AppConsts.appBaseHref = getBaseHref(platformLocation);
-            let appBaseUrl = getDocumentOrigin() + AppConsts.appBaseHref;
+            const appBaseUrl = getDocumentOrigin() + AppConsts.appBaseHref;
 
             AppPreBootstrap.run(appBaseUrl, () => {
                 abp.event.trigger('abp.dynamicScriptsInitialized');
-                var appSessionService: AppSessionService = injector.get(AppSessionService);
+                const appSessionService: AppSessionService = injector.get(AppSessionService);
                 appSessionService.init().then(
                     (result) => {
                         abp.ui.clearBusy();
 
                         if (shouldLoadLocale()) {
-                            let angularLocale = convertAbpLocaleToAngularLocale(abp.localization.currentLanguage.name);
+                            const angularLocale = convertAbpLocaleToAngularLocale(abp.localization.currentLanguage.name);
                             import(`@angular/common/locales/${angularLocale}.js`)
                                 .then(module => {
                                     registerLocaleData(module.default);
@@ -58,7 +58,7 @@ export function appInitializerFactory(injector: Injector,
                 );
             });
         });
-    }
+    };
 }
 
 export function convertAbpLocaleToAngularLocale(locale: string): string {
@@ -66,7 +66,7 @@ export function convertAbpLocaleToAngularLocale(locale: string): string {
         return locale;
     }
 
-    let localeMapings = _.filter(AppConsts.localeMappings, { from: locale });
+    const localeMapings = _.filter(AppConsts.localeMappings, { from: locale });
     if (localeMapings && localeMapings.length) {
         return localeMapings[0]['to'];
     }
@@ -123,7 +123,7 @@ export class RootModule {
 }
 
 export function getBaseHref(platformLocation: PlatformLocation): string {
-    var baseUrl = platformLocation.getBaseHrefFromDOM();
+    const baseUrl = platformLocation.getBaseHrefFromDOM();
     if (baseUrl) {
         return baseUrl;
     }
@@ -133,7 +133,7 @@ export function getBaseHref(platformLocation: PlatformLocation): string {
 
 function getDocumentOrigin() {
     if (!document.location.origin) {
-        return document.location.protocol + "//" + document.location.hostname + (document.location.port ? ':' + document.location.port : '');
+        return document.location.protocol + '//' + document.location.hostname + (document.location.port ? ':' + document.location.port : '');
     }
 
     return document.location.origin;
