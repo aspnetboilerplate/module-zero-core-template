@@ -1,0 +1,49 @@
+<form autocomplete="off" #editTenantForm="ngForm" (ngSubmit)="save()">
+  <h1 mat-dialog-title>{{ "EditTenant" | localize }}</h1>
+  <mat-dialog-content>
+    <div class="row-fluid">
+      <div class="col-md-12">
+        <mat-form-field>
+          <input
+            matInput
+            name="TenancyName"
+            [placeholder]="'TenancyName' | localize"
+            [(ngModel)]="tenant.tenancyName"
+            required
+            minlength="2"
+            maxlength="64"
+          />
+        </mat-form-field>
+        <mat-form-field>
+          <input
+            matInput
+            name="Name"
+            [placeholder]="'Name' | localize"
+            [(ngModel)]="tenant.name"
+            required
+            maxlength="128"
+          />
+        </mat-form-field>
+        <div class="checkbox-wrapper">
+          <mat-checkbox name="IsActive" [(ngModel)]="tenant.isActive">
+            {{ "IsActive" | localize }}
+          </mat-checkbox>
+        </div>
+      </div>
+    </div>
+  </mat-dialog-content>
+  <div mat-dialog-actions align="end">
+    <button mat-button type="button" [disabled]="saving" (click)="close(false)">
+      {{ "Cancel" | localize }}
+    </button>
+    <button
+      mat-flat-button
+      type="submit"
+      flex="15"
+      color="primary"
+      [disabled]="!editTenantForm.form.valid || saving"
+    >
+      {{ "Save" | localize }}
+    </button>
+  </div>
+</form>

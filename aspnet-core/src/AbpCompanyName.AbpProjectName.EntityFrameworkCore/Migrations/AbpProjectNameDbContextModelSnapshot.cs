@@ -1075,7 +1075,6 @@ namespace AbpCompanyName.AbpProjectName.Migrations
                 {
                     b.HasBaseType("Abp.Application.Features.FeatureSetting");
 
-
                     b.HasIndex("TenantId", "Name");
 
                     b.ToTable("AbpFeatures");

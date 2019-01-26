@@ -5,15 +5,10 @@
                 <Form ref="queryForm" :label-width="100" label-position="left" inline>
                     <Row :gutter="16">
                         <Col span="8">
-                            <FormItem :label="L('TenancyName')+':'" style="width:100%">
-                                <Input v-model="pagerequest.tenancyName"></Input>
+                            <FormItem :label="L('Keyword')+':'" style="width:100%">
+                                <Input v-model="pagerequest.keyword" :placeholder="L('TenancyName')+'/'+L('Name')"></Input>
                             </FormItem>
-                        </Col>
-                        <Col span="8">
-                            <FormItem :label="L('Name')+':'" style="width:100%">
-                                <Input v-model="pagerequest.name"></Input>
-                            </FormItem>
-                        </Col>                        
+                        </Col>                 
                         <Col span="8">
                             <FormItem :label="L('IsActive')+':'" style="width:100%">
                                 <!--Select should not set :value="'All'" it may not trigger on-change when first select 'NoActive'(or 'Actived') then select 'All'-->
@@ -50,9 +45,8 @@
     import EditTenant from './edit-tenant.vue'
     
     class PageTenantRequest extends PageRequest{
-        tenancyName:string=''
-        name:string=''
-        isActive:boolean=null
+        keyword:string='';
+        isActive:boolean=null;
     }
     
     @Component({

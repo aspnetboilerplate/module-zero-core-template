@@ -8,6 +8,9 @@ namespace AbpCompanyName.AbpProjectName.Authorization.Accounts
 {
     public class AccountAppService : AbpProjectNameAppServiceBase, IAccountAppService
     {
+        // from: http://regexlib.com/REDetails.aspx?regexp_id=1923
+        public const string PasswordRegex = "(?=^.{8,}$)(?=.*\\d)(?=.*[a-z])(?=.*[A-Z])(?!.*\\s)[0-9a-zA-Z!@#$%^&*()]*$";
+
         private readonly UserRegistrationManager _userRegistrationManager;
 
         public AccountAppService(

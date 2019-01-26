@@ -1,0 +1,28 @@
+﻿<form autocomplete="off"
+      #changeTenantForm="ngForm"
+      (ngSubmit)="save()">
+    <h1 mat-dialog-title >{{ "ChangeTenant" | localize }}</h1>
+    <mat-dialog-content>
+        <mat-form-field>
+            <input 
+                matInput
+                name="tenancyName"
+                [placeholder]="'TenancyName' | localize"
+                [(ngModel)]="tenancyName"
+                maxlength="64"/>
+        </mat-form-field>
+        <span class="help-block">{{ "LeaveEmptyToSwitchToHost" | localize }}</span>
+    </mat-dialog-content>
+    <div mat-dialog-actions 
+         align="end">
+        <button mat-button
+                type="button"
+                [disabled]="saving"
+                (click)="close()">{{ "Cancel" | localize }}</button>
+        <button mat-flat-button
+                type="submit"
+                flex="15"
+                color="primary"
+                [disabled]="!changeTenantForm.form.valid || saving">{{ "Save" | localize }}</button>
+    </div>
+</form>
