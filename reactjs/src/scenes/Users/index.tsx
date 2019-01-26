@@ -1,4 +1,4 @@
-import { Card, Col, Row, Button, Table, Tag, Dropdown, Menu, Modal } from 'antd';
+import { Card, Col, Row, Button, Table, Tag, Dropdown, Menu, Modal, Input } from 'antd';
 import * as React from 'react';
 import CreateOrUpdateUser from './components/createOrUpdateUser';
 import { EntityDto } from 'src/services/dto/entityDto';
@@ -6,39 +6,42 @@ import { observer, inject } from 'mobx-react';
 import Stores from 'src/stores/storeIdentifier';
 import UserStore from 'src/stores/userStore';
 import { L } from 'src/lib/abpUtility';
+import AppComponentBase from 'src/components/AppComponentBase';
 
 export interface IUserProps {
   userStore: UserStore;
 }
 
+export interface IUserState {
+  modalVisible: boolean;
+  maxResultCount: number;
+  skipCount: number;
+  userId: number;
+  filter: string;
+}
+
 const confirm = Modal.confirm;
+const Search = Input.Search;
 
 @inject(Stores.UserStore)
 @observer
-class User extends React.Component<IUserProps> {
+class User extends AppComponentBase<IUserProps, IUserState> {
   formRef: any;
-
-  constructor(props: any) {
-      super(props);
-
-      this.getAll = this.getAll.bind(this);
-      this.handleChange = this.handleChange.bind(this);
-  }
 
   state = {
     modalVisible: false,
     maxResultCount: 10,
     skipCount: 0,
     userId: 0,
-    filter: ''
+    filter: '',
   };
 
   async componentDidMount() {
     await this.getAll();
   }
 
-    async getAll() {
-        await this.props.userStore.getAll({ maxResultCount: this.state.maxResultCount, skipCount: this.state.skipCount, keyword: this.state.filter});
+  async getAll() {
+    await this.props.userStore.getAll({ maxResultCount: this.state.maxResultCount, skipCount: this.state.skipCount, keyword: this.state.filter });
   }
 
   handleTableChange = (pagination: any) => {
@@ -103,10 +106,9 @@ class User extends React.Component<IUserProps> {
     this.formRef = formRef;
   };
 
-    handleChange(event: any) {
-        this.state.filter = event.target.value;
-        this.setState({ value: event.target.value });
-    }
+  handleSearch = (value: string) => {
+    this.setState({ filter: value }, async () => await this.getAll());
+  };
 
   public render() {
     const { users } = this.props.userStore;
@@ -175,12 +177,8 @@ class User extends React.Component<IUserProps> {
           </Col>
         </Row>
         <Row>
-          <Col sm={{ span: 5, offset: 0 }}>
-                    <input className="ant-input" type="text" placeholder="filter" value={this.state.filter} onChange={this.handleChange.bind(this)} />
-            </Col>
-
-            <Col sm={{ span: 4, offset: 1 }}>
-                 <Button type="primary" icon="search" value="Submit" onClick={this.getAll}>{L('Search')}</Button>
+          <Col sm={{ span: 10, offset: 0 }}>
+            <Search placeholder={this.L('Filter')} onSearch={this.handleSearch} />
           </Col>
         </Row>
         <Row style={{ marginTop: 20 }}>

@@ -1,4 +1,4 @@
-import { Card, Col, Row, Button, Table, Dropdown, Menu, Modal } from 'antd';
+import { Card, Col, Row, Button, Table, Dropdown, Menu, Modal, Input } from 'antd';
 import * as React from 'react';
 import { EntityDto } from 'src/services/dto/entityDto';
 import CreateOrUpdateRole from './components/createOrUpdateRole';
@@ -17,28 +17,24 @@ export interface IRoleState {
   modalVisible: boolean;
   maxResultCount: number;
   skipCount: number;
+  roleId: number;
+  filter: string;
 }
 
 const confirm = Modal.confirm;
+const Search = Input.Search;
 
 @inject(Stores.RoleStore)
 @observer
-class Role extends AppComponentBase<IRoleProps> {
-    formRef: any;
-
-    constructor(props: any) {
-        super(props);
-
-        this.getAll = this.getAll.bind(this);
-        this.handleChange = this.handleChange.bind(this);
-    }
+class Role extends AppComponentBase<IRoleProps, IRoleState> {
+  formRef: any;
 
   state = {
     modalVisible: false,
     maxResultCount: 10,
     skipCount: 0,
     roleId: 0,
-    filter: ''
+    filter: '',
   };
 
   async componentDidMount() {
@@ -46,7 +42,7 @@ class Role extends AppComponentBase<IRoleProps> {
   }
 
   async getAll() {
-      await this.props.roleStore.getAll({ maxResultCount: this.state.maxResultCount, skipCount: this.state.skipCount, keyword: this.state.filter });
+    await this.props.roleStore.getAll({ maxResultCount: this.state.maxResultCount, skipCount: this.state.skipCount, keyword: this.state.filter });
   }
 
   handleTableChange = (pagination: any) => {
@@ -109,12 +105,11 @@ class Role extends AppComponentBase<IRoleProps> {
 
   saveFormRef = (formRef: any) => {
     this.formRef = formRef;
-    };
+  };
 
-    handleChange(event: any) {
-        this.state.filter = event.target.value;
-        this.setState({ value: event.target.value });
-    }
+  handleSearch = (value: string) => {
+    this.setState({ filter: value }, async () => await this.getAll());
+  };
 
   public render() {
     const { allPermissions, roles } = this.props.roleStore;
@@ -172,14 +167,10 @@ class Role extends AppComponentBase<IRoleProps> {
           >
             <Button type="primary" shape="circle" icon="plus" onClick={() => this.createOrUpdateModalOpen({ id: 0 })} />
           </Col>
-        </Row>        
+        </Row>
         <Row>
-          <Col sm={{ span: 5, offset: 0 }}>
-                    <input className="ant-input" type="text" placeholder="filter" value={this.state.filter} onChange={this.handleChange.bind(this)} />
-            </Col>
-
-            <Col sm={{ span: 4, offset: 1 }}>
-                 <Button type="primary" icon="search" value="Submit" onClick={this.getAll}>{L('Search')}</Button>
+          <Col sm={{ span: 10, offset: 0 }}>
+            <Search placeholder={this.L('Filter')} onSearch={this.handleSearch} />
           </Col>
         </Row>
         <Row style={{ marginTop: 20 }}>
