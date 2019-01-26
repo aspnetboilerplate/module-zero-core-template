@@ -2,6 +2,13 @@ import { Component, Injector, ViewEncapsulation, OnInit } from '@angular/core';
 import { AppComponentBase } from '@shared/app-component-base';
 import { ConfigurationServiceProxy, ChangeUiThemeInput } from '@shared/service-proxies/service-proxies';
 
+class UiThemeInfo {
+    constructor(
+        public name: string,
+        public cssClass: string
+    ) { }
+}
+
 @Component({
     templateUrl: './right-sidebar.component.html',
     selector: 'right-sidebar',
@@ -62,9 +69,3 @@ export class RightSideBarComponent extends AppComponentBase implements OnInit {
     }
 }
 
-class UiThemeInfo {
-    constructor(
-        public name: string,
-        public cssClass: string
-    ) { }
-}

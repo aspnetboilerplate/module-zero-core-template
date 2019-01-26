@@ -1,6 +1,12 @@
-import { Injectable } from '@angular/core';
-import { SessionServiceProxy, UserLoginInfoDto, TenantLoginInfoDto, ApplicationInfoDto, GetCurrentLoginInformationsOutput } from '@shared/service-proxies/service-proxies';
 import { AbpMultiTenancyService } from '@abp/multi-tenancy/abp-multi-tenancy.service';
+import { Injectable } from '@angular/core';
+import {
+    ApplicationInfoDto,
+    GetCurrentLoginInformationsOutput,
+    SessionServiceProxy,
+    TenantLoginInfoDto,
+    UserLoginInfoDto
+} from '@shared/service-proxies/service-proxies';
 
 @Injectable()
 export class AppSessionService {

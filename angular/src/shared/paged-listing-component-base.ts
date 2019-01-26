@@ -15,7 +15,7 @@ export class PagedRequestDto {
     maxResultCount: number;
 }
 
-export abstract class PagedListingComponentBase<EntityDto> extends AppComponentBase implements OnInit {
+export abstract class PagedListingComponentBase<TEntityDto> extends AppComponentBase implements OnInit {
 
     public pageSize = 10;
     public pageNumber = 1;
@@ -43,7 +43,7 @@ export abstract class PagedListingComponentBase<EntityDto> extends AppComponentB
     }
 
     public getDataPage(page: number): void {
-        let req = new PagedRequestDto();
+        const req = new PagedRequestDto();
         req.maxResultCount = this.pageSize;
         req.skipCount = (page - 1) * this.pageSize;
 
@@ -54,5 +54,5 @@ export abstract class PagedListingComponentBase<EntityDto> extends AppComponentB
     }
 
     protected abstract list(request: PagedRequestDto, pageNumber: number, finishedCallback: Function): void;
-    protected abstract delete(entity: EntityDto): void;
+    protected abstract delete(entity: TEntityDto): void;
 }

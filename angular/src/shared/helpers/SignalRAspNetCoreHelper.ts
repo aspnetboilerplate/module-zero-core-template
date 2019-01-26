@@ -4,7 +4,7 @@ import { UtilsService } from '@abp/utils/utils.service';
 export class SignalRAspNetCoreHelper {
     static initSignalR(): void {
 
-        let encryptedAuthToken = new UtilsService().getCookieValue(AppConsts.authorization.encrptedAuthTokenName);
+        const encryptedAuthToken = new UtilsService().getCookieValue(AppConsts.authorization.encrptedAuthTokenName);
 
         abp.signalr = {
             autoConnect: true,
