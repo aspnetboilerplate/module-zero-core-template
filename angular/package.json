@@ -9,7 +9,8 @@
     "hmr": "ng serve --host 0.0.0.0 --port 4200 --hmr",
     "test": "ng test",
     "pree2e": "webdriver-manager update --standalone false --gecko false",
-    "e2e": "protractor"
+    "e2e": "protractor",
+    "lint": "tslint --force --project src/tsconfig.json src/**/*.ts -t verbose"
   },
   "private": true,
   "dependencies": {
