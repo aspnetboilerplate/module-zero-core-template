@@ -20,10 +20,6 @@ export class FormGroupErrorStateMatcher implements ErrorStateMatcher {
     templateUrl: './change-password.component.html'
 })
 export class ChangePasswordComponent extends AppComponentBase implements OnInit {
-    public parentFormGroup: FormGroup;
-    public passwordsFormGroup: FormGroup;
-    public isLoading: boolean;
-    public equalMatcher: FormGroupErrorStateMatcher;
 
     private static areEqual(c: AbstractControl): ValidationErrors | null {
         const keys: string[] = Object.keys(c.value);
@@ -33,6 +29,10 @@ export class ChangePasswordComponent extends AppComponentBase implements OnInit 
             }
         }
     }
+    public parentFormGroup: FormGroup;
+    public passwordsFormGroup: FormGroup;
+    public isLoading: boolean;
+    public equalMatcher: FormGroupErrorStateMatcher;
 
     public constructor(
         injector: Injector,

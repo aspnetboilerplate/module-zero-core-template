@@ -5,14 +5,15 @@ import {
     Injectable,
     HostListener,
     Input,
-    SimpleChanges
+    SimpleChanges,
+    OnChanges
 } from '@angular/core';
 
 @Directive({
     selector: '[block]'
 })
 @Injectable()
-export class BlockDirective implements AfterViewInit {
+export class BlockDirective implements AfterViewInit, OnChanges {
     @Input('block') loading: boolean;
     private $element: JQuery;
 

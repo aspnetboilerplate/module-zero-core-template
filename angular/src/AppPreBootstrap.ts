@@ -33,11 +33,11 @@ export class AppPreBootstrap {
     }
 
     private static getCurrentClockProvider(currentProviderName: string): abp.timing.IClockProvider {
-        if (currentProviderName === "unspecifiedClockProvider") {
+        if (currentProviderName === 'unspecifiedClockProvider') {
             return abp.timing.unspecifiedClockProvider;
         }
 
-        if (currentProviderName === "utcClockProvider") {
+        if (currentProviderName === 'utcClockProvider') {
             return abp.timing.utcClockProvider;
         }
 
@@ -50,7 +50,7 @@ export class AppPreBootstrap {
             method: 'GET',
             headers: {
                 Authorization: 'Bearer ' + abp.auth.getToken(),
-                '.AspNetCore.Culture': abp.utils.getCookieValue("Abp.Localization.CultureName"),
+                '.AspNetCore.Culture': abp.utils.getCookieValue('Abp.Localization.CultureName'),
                 'Abp.TenantId': abp.multiTenancy.getTenantIdCookie()
             }
         }).done(result => {
