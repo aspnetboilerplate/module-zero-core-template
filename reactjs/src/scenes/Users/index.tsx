@@ -1,4 +1,4 @@
-import { Card, Col, Row, Button, Table, Tag, Dropdown, Menu, Modal } from 'antd';
+import { Card, Col, Row, Button, Table, Tag, Dropdown, Menu, Modal, Input } from 'antd';
 import * as React from 'react';
 import CreateOrUpdateUser from './components/createOrUpdateUser';
 import { EntityDto } from 'src/services/dto/entityDto';
@@ -6,27 +6,34 @@ import { observer, inject } from 'mobx-react';
 import Stores from 'src/stores/storeIdentifier';
 import UserStore from 'src/stores/userStore';
 import { L } from 'src/lib/abpUtility';
+import AppComponentBase from 'src/components/AppComponentBase';
 
 export interface IUserProps {
   userStore: UserStore;
 }
 
+export interface IUserState {
+  modalVisible: boolean;
+  maxResultCount: number;
+  skipCount: number;
+  userId: number;
+  filter: string;
+}
+
 const confirm = Modal.confirm;
+const Search = Input.Search;
 
 @inject(Stores.UserStore)
 @observer
-class User extends React.Component<IUserProps> {
+class User extends AppComponentBase<IUserProps, IUserState> {
   formRef: any;
-
-  constructor(props: any) {
-    super(props);
-  }
 
   state = {
     modalVisible: false,
     maxResultCount: 10,
     skipCount: 0,
     userId: 0,
+    filter: '',
   };
 
   async componentDidMount() {
@@ -34,7 +41,7 @@ class User extends React.Component<IUserProps> {
   }
 
   async getAll() {
-    await this.props.userStore.getAll({ maxResultCount: this.state.maxResultCount, skipCount: this.state.skipCount });
+    await this.props.userStore.getAll({ maxResultCount: this.state.maxResultCount, skipCount: this.state.skipCount, keyword: this.state.filter });
   }
 
   handleTableChange = (pagination: any) => {
@@ -97,6 +104,10 @@ class User extends React.Component<IUserProps> {
 
   saveFormRef = (formRef: any) => {
     this.formRef = formRef;
+  };
+
+  handleSearch = (value: string) => {
+    this.setState({ filter: value }, async () => await this.getAll());
   };
 
   public render() {
@@ -163,6 +174,11 @@ class User extends React.Component<IUserProps> {
             xxl={{ span: 1, offset: 21 }}
           >
             <Button type="primary" shape="circle" icon="plus" onClick={() => this.createOrUpdateModalOpen({ id: 0 })} />
+          </Col>
+        </Row>
+        <Row>
+          <Col sm={{ span: 10, offset: 0 }}>
+            <Search placeholder={this.L('Filter')} onSearch={this.handleSearch} />
           </Col>
         </Row>
         <Row style={{ marginTop: 20 }}>
