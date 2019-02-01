@@ -1,22 +1,31 @@
-import { Card, Col, Row, Button, Table, Tag, Dropdown, Menu, Modal } from 'antd';
+import { Card, Col, Row, Button, Table, Tag, Dropdown, Menu, Modal, Input } from 'antd';
 import * as React from 'react';
 import { EntityDto } from 'src/services/dto/entityDto';
 import CreateOrUpdateTenant from './components/createOrUpdateTenant';
 import { inject, observer } from 'mobx-react';
-import { __await } from 'tslib';
 import Stores from 'src/stores/storeIdentifier';
 import TenantStore from 'src/stores/tenantStore';
 import { L } from 'src/lib/abpUtility';
+import AppComponentBase from 'src/components/AppComponentBase';
 
 export interface ITenantProps {
   tenantStore: TenantStore;
 }
 
+export interface ITenantState {
+  modalVisible: boolean;
+  maxResultCount: number;
+  skipCount: number;
+  tenantId: number;
+  filter: string;
+}
+
 const confirm = Modal.confirm;
+const Search = Input.Search;
 
 @inject(Stores.TenantStore)
 @observer
-class Tenant extends React.Component<ITenantProps> {
+class Tenant extends AppComponentBase<ITenantProps, ITenantState> {
   formRef: any;
 
   state = {
@@ -24,6 +33,7 @@ class Tenant extends React.Component<ITenantProps> {
     maxResultCount: 10,
     skipCount: 0,
     tenantId: 0,
+    filter: '',
   };
 
   async componentDidMount() {
@@ -31,7 +41,7 @@ class Tenant extends React.Component<ITenantProps> {
   }
 
   async getAll() {
-    await this.props.tenantStore.getAll({ maxResultCount: this.state.maxResultCount, skipCount: this.state.skipCount });
+    await this.props.tenantStore.getAll({ maxResultCount: this.state.maxResultCount, skipCount: this.state.skipCount, keyword: this.state.filter });
   }
 
   handleTableChange = (pagination: any) => {
@@ -97,6 +107,10 @@ class Tenant extends React.Component<ITenantProps> {
     this.formRef = formRef;
   };
 
+  handleSearch = (value: string) => {
+    this.setState({ filter: value }, async () => await this.getAll());
+  };
+
   public render() {
     const { tenants } = this.props.tenantStore;
     const columns = [
@@ -159,6 +173,11 @@ class Tenant extends React.Component<ITenantProps> {
             xxl={{ span: 1, offset: 21 }}
           >
             <Button type="primary" shape="circle" icon="plus" onClick={() => this.createOrUpdateModalOpen({ id: 0 })} />
+          </Col>
+        </Row>
+        <Row>
+          <Col sm={{ span: 10, offset: 0 }}>
+            <Search placeholder={this.L('Filter')} onSearch={this.handleSearch} />
           </Col>
         </Row>
         <Row style={{ marginTop: 20 }}>

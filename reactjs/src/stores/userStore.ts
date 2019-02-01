@@ -7,6 +7,7 @@ import { UpdateUserInput } from 'src/services/user/dto/updateUserInput';
 import { EntityDto } from 'src/services/dto/entityDto';
 import { CreateOrUpdateUserInput } from 'src/services/user/dto/createOrUpdateUserInput';
 import { GetRoles } from 'src/services/user/dto/getRolesOuput';
+import { PagedUserResultRequestDto } from "src/services/user/dto/PagedUserResultRequestDto";
 
 class UserStore {
   @observable users: PagedResultDto<GetUserOutput>;
@@ -62,7 +63,7 @@ class UserStore {
   }
 
   @action
-  async getAll(pagedFilterAndSortedRequest: PagedFilterAndSortedRequest) {
+  async getAll(pagedFilterAndSortedRequest: PagedUserResultRequestDto) {
     let result = await userService.getAll(pagedFilterAndSortedRequest);
     this.users = result;
   }

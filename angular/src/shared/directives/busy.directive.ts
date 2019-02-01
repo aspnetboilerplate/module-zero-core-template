@@ -5,14 +5,15 @@ import {
     Injectable,
     HostListener,
     Input,
-    SimpleChanges
+    SimpleChanges,
+    OnChanges
 } from '@angular/core';
 
 @Directive({
     selector: '[busy]'
 })
 @Injectable()
-export class BusyDirective implements AfterViewInit {
+export class BusyDirective implements AfterViewInit, OnChanges {
     @Input('busy') loading: boolean;
     private $element: JQuery;
 

@@ -160,6 +160,6 @@ export class SharedModule {
                 AppAuthService,
                 AppRouteGuard
             ]
-        }
+        };
     }
 }

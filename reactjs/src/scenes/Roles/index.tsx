@@ -1,4 +1,4 @@
-import { Card, Col, Row, Button, Table, Dropdown, Menu, Modal } from 'antd';
+import { Card, Col, Row, Button, Table, Dropdown, Menu, Modal, Input } from 'antd';
 import * as React from 'react';
 import { EntityDto } from 'src/services/dto/entityDto';
 import CreateOrUpdateRole from './components/createOrUpdateRole';
@@ -17,13 +17,16 @@ export interface IRoleState {
   modalVisible: boolean;
   maxResultCount: number;
   skipCount: number;
+  roleId: number;
+  filter: string;
 }
 
 const confirm = Modal.confirm;
+const Search = Input.Search;
 
 @inject(Stores.RoleStore)
 @observer
-class Role extends AppComponentBase<IRoleProps> {
+class Role extends AppComponentBase<IRoleProps, IRoleState> {
   formRef: any;
 
   state = {
@@ -31,6 +34,7 @@ class Role extends AppComponentBase<IRoleProps> {
     maxResultCount: 10,
     skipCount: 0,
     roleId: 0,
+    filter: '',
   };
 
   async componentDidMount() {
@@ -38,7 +42,7 @@ class Role extends AppComponentBase<IRoleProps> {
   }
 
   async getAll() {
-    await this.props.roleStore.getAll({ maxResultCount: this.state.maxResultCount, skipCount: this.state.skipCount });
+    await this.props.roleStore.getAll({ maxResultCount: this.state.maxResultCount, skipCount: this.state.skipCount, keyword: this.state.filter });
   }
 
   handleTableChange = (pagination: any) => {
@@ -103,6 +107,10 @@ class Role extends AppComponentBase<IRoleProps> {
     this.formRef = formRef;
   };
 
+  handleSearch = (value: string) => {
+    this.setState({ filter: value }, async () => await this.getAll());
+  };
+
   public render() {
     const { allPermissions, roles } = this.props.roleStore;
     const columns = [
@@ -158,6 +166,11 @@ class Role extends AppComponentBase<IRoleProps> {
             xxl={{ span: 1, offset: 21 }}
           >
             <Button type="primary" shape="circle" icon="plus" onClick={() => this.createOrUpdateModalOpen({ id: 0 })} />
+          </Col>
+        </Row>
+        <Row>
+          <Col sm={{ span: 10, offset: 0 }}>
+            <Search placeholder={this.L('Filter')} onSearch={this.handleSearch} />
           </Col>
         </Row>
         <Row style={{ marginTop: 20 }}>

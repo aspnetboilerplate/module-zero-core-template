@@ -20,10 +20,19 @@ class PagedRolesRequestDto extends PagedRequestDto {
 
 @Component({
     templateUrl: './roles.component.html',
-    animations: [appModuleAnimation()]
+    animations: [appModuleAnimation()],
+    styles: [
+        `
+          mat-form-field {
+            padding: 10px;
+          }
+        `
+    ]
 })
 export class RolesComponent extends PagedListingComponentBase<RoleDto> {
     roles: RoleDto[] = [];
+
+    keyword = '';
 
     constructor(
         injector: Injector,
@@ -38,6 +47,9 @@ export class RolesComponent extends PagedListingComponentBase<RoleDto> {
         pageNumber: number,
         finishedCallback: Function
     ): void {
+
+        request.keyword = this.keyword;
+
         this._rolesService
             .getAll(request.keyword, request.skipCount, request.maxResultCount)
             .pipe(
