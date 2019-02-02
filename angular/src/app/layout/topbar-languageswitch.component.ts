@@ -13,7 +13,7 @@ export class TopBarLanguageSwitchComponent extends AppComponentBase implements O
 
   languages: abp.localization.ILanguageInfo[];
   currentLanguage: abp.localization.ILanguageInfo;
-  
+
   constructor(
       injector: Injector,
       private _userService: UserServiceProxy
@@ -34,7 +34,7 @@ export class TopBarLanguageSwitchComponent extends AppComponentBase implements O
           abp.utils.setCookieValue(
               'Abp.Localization.CultureName',
               languageName,
-              new Date(new Date().getTime() + 5 * 365 * 86400000), //5 year
+              new Date(new Date().getTime() + 5 * 365 * 86400000), // 5 year
               abp.appPath
           );
 

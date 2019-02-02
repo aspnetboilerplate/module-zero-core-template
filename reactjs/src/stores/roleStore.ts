@@ -6,6 +6,7 @@ import { EntityDto } from 'src/services/dto/entityDto';
 import { CreateRoleInput } from 'src/services/role/dto/createRoleInput';
 import { UpdateRoleInput } from 'src/services/role/dto/updateRoleInput';
 import { GetAllPermissionsOutput } from 'src/services/role/dto/getAllPermissionsOutput';
+import { PagedRoleResultRequestDto } from 'src/services/role/dto/PagedRoleResultRequestDto';
 import RoleEditModel from 'src/models/Roles/roleEditModel';
 
 class RoleStore {
@@ -75,7 +76,7 @@ class RoleStore {
   }
 
   @action
-  async getAll(pagedFilterAndSortedRequest: PagedFilterAndSortedRequest) {
+  async getAll(pagedFilterAndSortedRequest: PagedRoleResultRequestDto) {
     let result = await roleService.getAll(pagedFilterAndSortedRequest);
     this.roles = result;
   }

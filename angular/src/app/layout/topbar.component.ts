@@ -1,4 +1,4 @@
-﻿import { Component, Injector, ViewEncapsulation } from '@angular/core';
+import { Component, Injector, ViewEncapsulation } from '@angular/core';
 import { AppComponentBase } from '@shared/app-component-base';
 
 @Component({

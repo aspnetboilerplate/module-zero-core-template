@@ -1,4 +1,4 @@
-﻿import { Component, ViewContainerRef, OnInit, ViewEncapsulation, Injector } from '@angular/core';
+import { Component, ViewContainerRef, OnInit, ViewEncapsulation, Injector } from '@angular/core';
 import { LoginService } from './login/login.service';
 import { AppComponentBase } from '@shared/app-component-base';
 
@@ -11,10 +11,10 @@ import { AppComponentBase } from '@shared/app-component-base';
 })
 export class AccountComponent extends AppComponentBase implements OnInit {
 
-    private viewContainerRef: ViewContainerRef;
-
     versionText: string;
     currentYear: number;
+
+    private viewContainerRef: ViewContainerRef;
 
     public constructor(
         injector: Injector,

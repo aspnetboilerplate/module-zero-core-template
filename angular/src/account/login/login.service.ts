@@ -1,14 +1,14 @@
+import { TokenService } from '@abp/auth/token.service';
+import { LogService } from '@abp/log/log.service';
+import { MessageService } from '@abp/message/message.service';
+import { UtilsService } from '@abp/utils/utils.service';
 import { Injectable } from '@angular/core';
 import { Router } from '@angular/router';
-import { TokenAuthServiceProxy, AuthenticateModel, AuthenticateResultModel, ExternalLoginProviderInfoModel, ExternalAuthenticateModel, ExternalAuthenticateResultModel } from '@shared/service-proxies/service-proxies';
-import { UrlHelper } from '@shared/helpers/UrlHelper';
 import { AppConsts } from '@shared/AppConsts';
-
-import { MessageService } from '@abp/message/message.service';
-import { LogService } from '@abp/log/log.service';
-import { TokenService } from '@abp/auth/token.service';
-import { UtilsService } from '@abp/utils/utils.service';
+import { UrlHelper } from '@shared/helpers/UrlHelper';
+import { AuthenticateModel, AuthenticateResultModel, TokenAuthServiceProxy } from '@shared/service-proxies/service-proxies';
 import { finalize } from 'rxjs/operators';
+
 
 @Injectable()
 export class LoginService {
@@ -36,7 +36,7 @@ export class LoginService {
 
         this._tokenAuthService
             .authenticate(this.authenticateModel)
-            .pipe(finalize(() => { finallyCallback() }))
+            .pipe(finalize(() => { finallyCallback(); }))
             .subscribe((result: AuthenticateResultModel) => {
                 this.processAuthenticateResult(result);
             });
@@ -46,11 +46,15 @@ export class LoginService {
         this.authenticateResult = authenticateResult;
 
         if (authenticateResult.accessToken) {
-            //Successfully logged in
-            this.login(authenticateResult.accessToken, authenticateResult.encryptedAccessToken, authenticateResult.expireInSeconds, this.rememberMe);
+            // Successfully logged in
+            this.login(
+                authenticateResult.accessToken,
+                authenticateResult.encryptedAccessToken,
+                authenticateResult.expireInSeconds,
+                this.rememberMe);
 
         } else {
-            //Unexpected result!
+            // Unexpected result!
 
             this._logService.warn('Unexpected authenticateResult!');
             this._router.navigate(['account/login']);
@@ -59,7 +63,7 @@ export class LoginService {
 
     private login(accessToken: string, encryptedAccessToken: string, expireInSeconds: number, rememberMe?: boolean): void {
 
-        var tokenExpireDate = rememberMe ? (new Date(new Date().getTime() + 1000 * expireInSeconds)) : undefined;
+        const tokenExpireDate = rememberMe ? (new Date(new Date().getTime() + 1000 * expireInSeconds)) : undefined;
 
         this._tokenService.setToken(
             accessToken,
@@ -73,7 +77,7 @@ export class LoginService {
             abp.appPath
         );
 
-        var initialUrl = UrlHelper.initialUrl;
+        let initialUrl = UrlHelper.initialUrl;
         if (initialUrl.indexOf('/login') > 0) {
             initialUrl = AppConsts.appBaseUrl;
         }

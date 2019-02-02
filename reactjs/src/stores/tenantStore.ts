@@ -4,6 +4,7 @@ import { PagedResultDto } from 'src/services/dto/pagedResultDto';
 import tenantService from 'src/services/tenant/tenantService';
 import CreateTenantInput from 'src/services/tenant/dto/createTenantInput';
 import UpdateTenantInput from 'src/services/tenant/dto/updateTenantInput';
+import {PagedTenantResultRequestDto} from 'src/services/tenant/dto/PagedTenantResultRequestDto';
 import { EntityDto } from 'src/services/dto/entityDto';
 import TenantModel from 'src/models/Tenants/TenantModel';
 
@@ -49,7 +50,7 @@ class TenantStore {
   }
 
   @action
-  async getAll(pagedFilterAndSortedRequest: PagedFilterAndSortedRequest) {
+  async getAll(pagedFilterAndSortedRequest: PagedTenantResultRequestDto) {
     let result = await tenantService.getAll(pagedFilterAndSortedRequest);
     this.tenants = result;
   }

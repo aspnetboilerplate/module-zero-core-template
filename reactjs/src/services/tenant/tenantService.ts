@@ -7,6 +7,7 @@ import { PagedResultDto } from 'src/services/dto/pagedResultDto';
 import http from '../httpService';
 import UpdateTenantInput from './dto/updateTenantInput';
 import CreateTenantOutput from './dto/createTenantOutput';
+import {PagedTenantResultRequestDto} from './dto/PagedTenantResultRequestDto';
 
 class TenantService {
   public async create(createTenantInput: CreateTenantInput): Promise<CreateTenantOutput> {
@@ -24,7 +25,7 @@ class TenantService {
     return result.data.result;
   }
 
-  public async getAll(pagedFilterAndSortedRequest: PagedFilterAndSortedRequest): Promise<PagedResultDto<GetAllTenantOutput>> {
+  public async getAll(pagedFilterAndSortedRequest: PagedTenantResultRequestDto): Promise<PagedResultDto<GetAllTenantOutput>> {
     let result = await http.get('api/services/app/Tenant/GetAll', { params: pagedFilterAndSortedRequest });
     return result.data.result;
   }
