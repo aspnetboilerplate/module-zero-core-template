@@ -2,10 +2,16 @@ import axios from 'axios';
 import AppConsts from './../lib/appconst';
 import { Modal } from 'antd';
 import { L } from 'src/lib/abpUtility';
+const qs = require('qs');
 
 const http = axios.create({
   baseURL: AppConsts.remoteServiceBaseUrl,
   timeout: 30000,
+  paramsSerializer: function(params) {
+    return qs.stringify(params, {
+      encode: false,
+    });
+  },
 });
 
 http.interceptors.request.use(
