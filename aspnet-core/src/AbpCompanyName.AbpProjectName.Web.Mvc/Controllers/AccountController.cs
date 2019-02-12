@@ -7,6 +7,7 @@ using System.Threading.Tasks;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using Abp;
+using Abp.AspNetCore.Mvc.Authorization;
 using Abp.Authorization;
 using Abp.Authorization.Users;
 using Abp.Configuration;
@@ -435,6 +436,7 @@ namespace AbpCompanyName.AbpProjectName.Web.Controllers
         /// </summary>
         /// <param name="message"></param>
         /// <returns></returns>
+        [AbpMvcAuthorize] 
         public async Task<ActionResult> TestNotification(string message = "")
         {
             if (message.IsNullOrEmpty())
