@@ -1,13 +1,13 @@
 import { action, observable } from 'mobx';
 
-import userService from 'src/services/user/userService';
-import { PagedResultDto } from 'src/services/dto/pagedResultDto';
-import { GetUserOutput } from 'src/services/user/dto/getUserOutput';
-import { UpdateUserInput } from 'src/services/user/dto/updateUserInput';
-import { EntityDto } from 'src/services/dto/entityDto';
-import { CreateOrUpdateUserInput } from 'src/services/user/dto/createOrUpdateUserInput';
-import { GetRoles } from 'src/services/user/dto/getRolesOuput';
-import { PagedUserResultRequestDto } from "src/services/user/dto/PagedUserResultRequestDto";
+import userService from '@app/services/user/userService';
+import { PagedResultDto } from '@app/services/dto/pagedResultDto';
+import { GetUserOutput } from '@app/services/user/dto/getUserOutput';
+import { UpdateUserInput } from '@app/services/user/dto/updateUserInput';
+import { EntityDto } from '@app/services/dto/entityDto';
+import { CreateOrUpdateUserInput } from '@app/services/user/dto/createOrUpdateUserInput';
+import { GetRoles } from '@app/services/user/dto/getRolesOuput';
+import { PagedUserResultRequestDto } from "@app/services/user/dto/PagedUserResultRequestDto";
 
 class UserStore {
   @observable users: PagedResultDto<GetUserOutput>;

@@ -2,12 +2,12 @@ import * as React from 'react';
 import { Layout } from 'antd';
 import './AppLayout.less';
 import { Switch, Redirect } from 'react-router-dom';
-import Header from 'src/components/Header';
-import SiderMenu from 'src/components/SiderMenu';
-import Footer from 'src/components/Footer';
+import Header from '@app/components/Header';
+import SiderMenu from '@app/components/SiderMenu';
+import Footer from '@app/components/Footer';
 import DocumentTitle from 'react-document-title';
-import ProtectedRoute from 'src/components/Router/ProtectedRoute';
-import utils from 'src/utils/utils';
+import ProtectedRoute from '@app/components/Router/ProtectedRoute';
+import utils from '@app/utils/utils';
 import { appRouters } from '../Router/router.config';
 
 const { Content } = Layout;

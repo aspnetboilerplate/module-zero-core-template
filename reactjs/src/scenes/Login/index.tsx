@@ -1,14 +1,14 @@
 import { Form, Col, Input, Icon, Row, Checkbox, Button, Card, Modal } from 'antd';
 import * as React from 'react';
 import { inject, observer } from 'mobx-react';
-import Stores from 'src/stores/storeIdentifier';
-import AuthenticationStore from 'src/stores/authenticationStore';
+import Stores from '@app/stores/storeIdentifier';
+import AuthenticationStore from '@app/stores/authenticationStore';
 import { FormComponentProps } from 'antd/lib/form';
 import { Redirect } from 'react-router-dom';
-import { L } from 'src/lib/abpUtility';
-import SessionStore from 'src/stores/sessionStore';
-import AccountStore from 'src/stores/accountStore';
-import TenantAvailabilityState from 'src/services/account/dto/tenantAvailabilityState';
+import { L } from '@app/lib/abpUtility';
+import SessionStore from '@app/stores/sessionStore';
+import AccountStore from '@app/stores/accountStore';
+import TenantAvailabilityState from '@app/services/account/dto/tenantAvailabilityState';
 import './index.less';
 import rules from './index.validation';
 

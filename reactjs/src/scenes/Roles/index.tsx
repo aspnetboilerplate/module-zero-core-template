@@ -1,12 +1,12 @@
 import { Card, Col, Row, Button, Table, Dropdown, Menu, Modal, Input } from 'antd';
 import * as React from 'react';
-import { EntityDto } from 'src/services/dto/entityDto';
+import { EntityDto } from '@app/services/dto/entityDto';
 import CreateOrUpdateRole from './components/createOrUpdateRole';
 import { observer, inject } from 'mobx-react';
-import AppComponentBase from 'src/components/AppComponentBase';
-import Stores from 'src/stores/storeIdentifier';
-import RoleStore from 'src/stores/roleStore';
-import { L } from 'src/lib/abpUtility';
+import AppComponentBase from '@app/components/AppComponentBase';
+import Stores from '@app/stores/storeIdentifier';
+import RoleStore from '@app/stores/roleStore';
+import { L } from '@app/lib/abpUtility';
 import { FormComponentProps } from 'antd/lib/form';
 
 export interface IRoleProps extends FormComponentProps {

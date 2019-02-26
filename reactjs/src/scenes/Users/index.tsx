@@ -1,12 +1,12 @@
 import { Card, Col, Row, Button, Table, Tag, Dropdown, Menu, Modal, Input } from 'antd';
 import * as React from 'react';
 import CreateOrUpdateUser from './components/createOrUpdateUser';
-import { EntityDto } from 'src/services/dto/entityDto';
+import { EntityDto } from '@app/services/dto/entityDto';
 import { observer, inject } from 'mobx-react';
-import Stores from 'src/stores/storeIdentifier';
-import UserStore from 'src/stores/userStore';
-import { L } from 'src/lib/abpUtility';
-import AppComponentBase from 'src/components/AppComponentBase';
+import Stores from '@app/stores/storeIdentifier';
+import UserStore from '@app/stores/userStore';
+import { L } from '@app/lib/abpUtility';
+import AppComponentBase from '@app/components/AppComponentBase';
 
 export interface IUserProps {
   userStore: UserStore;

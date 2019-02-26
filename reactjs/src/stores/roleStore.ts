@@ -1,13 +1,13 @@
 import { observable, action } from 'mobx';
-import roleService from 'src/services/role/roleService';
-import { GetAllRoleOutput } from 'src/services/role/dto/getAllRoleOutput';
-import { PagedResultDto } from 'src/services/dto/pagedResultDto';
-import { EntityDto } from 'src/services/dto/entityDto';
-import { CreateRoleInput } from 'src/services/role/dto/createRoleInput';
-import { UpdateRoleInput } from 'src/services/role/dto/updateRoleInput';
-import { GetAllPermissionsOutput } from 'src/services/role/dto/getAllPermissionsOutput';
-import { PagedRoleResultRequestDto } from 'src/services/role/dto/PagedRoleResultRequestDto';
-import RoleEditModel from 'src/models/Roles/roleEditModel';
+import roleService from '@app/services/role/roleService';
+import { GetAllRoleOutput } from '@app/services/role/dto/getAllRoleOutput';
+import { PagedResultDto } from '@app/services/dto/pagedResultDto';
+import { EntityDto } from '@app/services/dto/entityDto';
+import { CreateRoleInput } from '@app/services/role/dto/createRoleInput';
+import { UpdateRoleInput } from '@app/services/role/dto/updateRoleInput';
+import { GetAllPermissionsOutput } from '@app/services/role/dto/getAllPermissionsOutput';
+import { PagedRoleResultRequestDto } from '@app/services/role/dto/PagedRoleResultRequestDto';
+import RoleEditModel from '@app/models/Roles/roleEditModel';
 
 class RoleStore {
   @observable roles: PagedResultDto<GetAllRoleOutput>;

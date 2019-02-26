@@ -1,12 +1,12 @@
 import { Card, Col, Row, Button, Table, Tag, Dropdown, Menu, Modal, Input } from 'antd';
 import * as React from 'react';
-import { EntityDto } from 'src/services/dto/entityDto';
+import { EntityDto } from '@app/services/dto/entityDto';
 import CreateOrUpdateTenant from './components/createOrUpdateTenant';
 import { inject, observer } from 'mobx-react';
-import Stores from 'src/stores/storeIdentifier';
-import TenantStore from 'src/stores/tenantStore';
-import { L } from 'src/lib/abpUtility';
-import AppComponentBase from 'src/components/AppComponentBase';
+import Stores from '@app/stores/storeIdentifier';
+import TenantStore from '@app/stores/tenantStore';
+import { L } from '@app/lib/abpUtility';
+import AppComponentBase from '@app/components/AppComponentBase';
 
 export interface ITenantProps {
   tenantStore: TenantStore;

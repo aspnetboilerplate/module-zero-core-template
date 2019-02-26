@@ -1,12 +1,12 @@
 import { observable, action } from 'mobx';
-import { GetAllTenantOutput } from 'src/services/tenant/dto/getAllTenantOutput';
-import { PagedResultDto } from 'src/services/dto/pagedResultDto';
-import tenantService from 'src/services/tenant/tenantService';
-import CreateTenantInput from 'src/services/tenant/dto/createTenantInput';
-import UpdateTenantInput from 'src/services/tenant/dto/updateTenantInput';
-import {PagedTenantResultRequestDto} from 'src/services/tenant/dto/PagedTenantResultRequestDto';
-import { EntityDto } from 'src/services/dto/entityDto';
-import TenantModel from 'src/models/Tenants/TenantModel';
+import { GetAllTenantOutput } from '@app/services/tenant/dto/getAllTenantOutput';
+import { PagedResultDto } from '@app/services/dto/pagedResultDto';
+import tenantService from '@app/services/tenant/tenantService';
+import CreateTenantInput from '@app/services/tenant/dto/createTenantInput';
+import UpdateTenantInput from '@app/services/tenant/dto/updateTenantInput';
+import {PagedTenantResultRequestDto} from '@app/services/tenant/dto/PagedTenantResultRequestDto';
+import { EntityDto } from '@app/services/dto/entityDto';
+import TenantModel from '@app/models/Tenants/TenantModel';
 
 class TenantStore {
   @observable tenants: PagedResultDto<GetAllTenantOutput>;

@@ -3,10 +3,10 @@ import { Menu, Dropdown, Icon } from 'antd';
 import classNames from 'classnames';
 import './index.less';
 import 'famfamfam-flags/dist/sprite/famfamfam-flags.css';
-import UserStore from 'src/stores/userStore';
+import UserStore from '@app/stores/userStore';
 import { inject } from 'mobx-react';
-import Stores from 'src/stores/storeIdentifier';
-import { L } from 'src/lib/abpUtility';
+import Stores from '@app/stores/storeIdentifier';
+import { L } from '@app/lib/abpUtility';
 
 export interface ILanguageSelectProps {
   userStore?: UserStore;

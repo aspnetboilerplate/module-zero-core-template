@@ -1,6 +1,6 @@
 import * as React from 'react';
 import { Route, Redirect } from 'react-router-dom';
-import { isGranted } from 'src/lib/abpUtility';
+import { isGranted } from '@app/lib/abpUtility';
 
 const ProtectedRoute = ({ path, component: Component, permission, render, ...rest }: any) => {
   return (

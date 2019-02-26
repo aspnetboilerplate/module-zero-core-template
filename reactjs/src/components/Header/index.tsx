@@ -3,7 +3,7 @@ import { Col, Icon, Avatar, Menu, Dropdown, Badge, Row } from 'antd';
 import { Link } from 'react-router-dom';
 import LanguageSelect from '../LanguageSelect';
 import './index.less';
-import { L } from 'src/lib/abpUtility';
+import { L } from '@app/lib/abpUtility';
 
 export interface IHeaderProps {
   collapsed?: any;

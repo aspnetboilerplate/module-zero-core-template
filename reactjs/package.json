@@ -2,6 +2,11 @@
   "name": "reactjs",
   "version": "4.3.0",
   "private": true,
+  "jest": {
+    "moduleNameMapper": {
+      "@app/(.*)": "<rootDir>/src/$1"
+    }
+  },
   "dependencies": {
     "@aspnet/signalr": "^1.0.0",
     "@types/classnames": "^2.2.6",

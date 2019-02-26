@@ -1,7 +1,7 @@
 import * as React from 'react';
 import DocumentTitle from 'react-document-title';
 import { Switch, Route, Redirect } from 'react-router-dom';
-import utils from 'src/utils/utils';
+import utils from '@app/utils/utils';
 import { userRouter } from '../Router/router.config';
 import { Col } from 'antd';
 import './UserLayout.less';

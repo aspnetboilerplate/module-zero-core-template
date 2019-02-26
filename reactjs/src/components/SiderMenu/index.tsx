@@ -1,9 +1,9 @@
 import * as React from 'react';
 import { Layout, Menu, Icon, Avatar, Col } from 'antd';
-import AbpLogo from 'src/images/abp-logo-long.png';
+import AbpLogo from '@app/images/abp-logo-long.png';
 import './index.less';
-import { appRouters } from 'src/components/Router/router.config';
-import { L, isGranted } from 'src/lib/abpUtility';
+import { appRouters } from '@app/components/Router/router.config';
+import { L, isGranted } from '@app/lib/abpUtility';
 
 const { Sider } = Layout;
 

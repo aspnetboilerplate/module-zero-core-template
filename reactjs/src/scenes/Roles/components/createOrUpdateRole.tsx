@@ -2,11 +2,11 @@ import * as React from 'react';
 import { Form, Input, Checkbox, Modal, Tabs } from 'antd';
 import FormItem from 'antd/lib/form/FormItem';
 import CheckboxGroup from 'antd/lib/checkbox/Group';
-import { GetAllPermissionsOutput } from 'src/services/role/dto/getAllPermissionsOutput';
-import { L } from 'src/lib/abpUtility';
+import { GetAllPermissionsOutput } from '@app/services/role/dto/getAllPermissionsOutput';
+import { L } from '@app/lib/abpUtility';
 import rules from './createOrUpdateRole.validation';
 import { FormComponentProps } from 'antd/lib/form';
-import RoleStore from 'src/stores/roleStore';
+import RoleStore from '@app/stores/roleStore';
 
 const TabPane = Tabs.TabPane;
 

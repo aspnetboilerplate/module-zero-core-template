@@ -1,7 +1,7 @@
 import axios from 'axios';
 import AppConsts from './../lib/appconst';
 import { Modal } from 'antd';
-import { L } from 'src/lib/abpUtility';
+import { L } from '@app/lib/abpUtility';
 const qs = require('qs');
 
 const http = axios.create({

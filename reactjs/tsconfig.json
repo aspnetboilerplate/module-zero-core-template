@@ -18,7 +18,12 @@
     "suppressImplicitAnyIndexErrors": true,
     "noUnusedLocals": true,
     "emitDecoratorMetadata": true,
-    "experimentalDecorators": true
+    "experimentalDecorators": true,
+    "paths": {
+      "@app/*": [
+        "src/*"
+      ]
+    }
   },
   "exclude": [
     "node_modules",

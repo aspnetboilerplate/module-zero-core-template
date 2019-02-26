@@ -1,6 +1,6 @@
 import { observable, action } from 'mobx';
-import IsTenantAvaibleOutput from 'src/services/account/dto/isTenantAvailableOutput';
-import accountService from 'src/services/account/accountService';
+import IsTenantAvaibleOutput from '@app/services/account/dto/isTenantAvailableOutput';
+import accountService from '@app/services/account/accountService';
 
 class AccountStore {
   @observable tenant: IsTenantAvaibleOutput = new IsTenantAvaibleOutput();

@@ -7,8 +7,8 @@ import { Provider } from 'mobx-react';
 import { BrowserRouter } from 'react-router-dom';
 import initializeStores from './stores/storeInitializer';
 import * as moment from 'moment';
-import abpUserConfigurationService from 'src/services/abpUserConfigurationService';
-import Utils from 'src/utils/utils';
+import abpUserConfigurationService from '@app/services/abpUserConfigurationService';
+import Utils from '@app/utils/utils';
 
 Utils.setLocalization();
 

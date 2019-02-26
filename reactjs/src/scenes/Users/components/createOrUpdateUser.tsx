@@ -2,8 +2,8 @@ import * as React from 'react';
 import { Form, Input, Checkbox, Modal, Tabs } from 'antd';
 import FormItem from 'antd/lib/form/FormItem';
 import CheckboxGroup from 'antd/lib/checkbox/Group';
-import { GetRoles } from 'src/services/user/dto/getRolesOuput';
-import { L } from 'src/lib/abpUtility';
+import { GetRoles } from '@app/services/user/dto/getRolesOuput';
+import { L } from '@app/lib/abpUtility';
 import { FormComponentProps } from 'antd/lib/form';
 import rules from './createOrUpdateUser.validation';
 

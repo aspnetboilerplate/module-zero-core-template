@@ -1,5 +1,5 @@
-import { L } from 'src/lib/abpUtility';
-import { routers } from 'src/components/Router/router.config';
+import { L } from '@app/lib/abpUtility';
+import { routers } from '@app/components/Router/router.config';
 
 class Utils {
   loadScript(url: string) {

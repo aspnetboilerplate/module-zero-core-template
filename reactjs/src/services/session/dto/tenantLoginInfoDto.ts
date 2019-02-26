@@ -1,4 +1,4 @@
-import { EntityDto } from 'src/services/dto/entityDto';
+import { EntityDto } from '@app/services/dto/entityDto';
 
 export default class TenantLoginInfoDto extends EntityDto {
   tenancyName: string;
