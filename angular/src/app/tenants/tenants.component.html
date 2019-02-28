@@ -24,22 +24,27 @@
       <div class="body table-responsive">
          <!--query start-->
          <div class="row clearfix">
-            <form>
-              <mat-form-field>
-                <input matInput [placeholder]="l('Filter')" [(ngModel)]="keyword" name="keyword">
-              </mat-form-field>
-  
-              <mat-form-field>
-                <mat-select [placeholder]="l('IsActive')" [(ngModel)]="isActive" name="isActive">
-                  <mat-option value="">{{ 'All' | localize }}</mat-option>
-                  <mat-option value="true">{{ 'Yes' | localize }}</mat-option>
-                  <mat-option value="false">{{ 'No' | localize }}</mat-option>
-                </mat-select>
-              </mat-form-field>
-  
-              <button mat-raised-button color="primary" (click)="getDataPage(1)">{{ 'Search' | localize }}</button>
-  
-            </form>
+             <form>
+                 <div class="row">
+                     <div class="col-md-6">
+                         <mat-form-field>
+                             <input matInput [placeholder]="l('Filter')" [(ngModel)]="keyword" name="keyword">
+                         </mat-form-field>
+                     </div>
+                     <div class="col-md-6">
+                         <mat-form-field>
+                             <mat-select [placeholder]="l('IsActive')" [(ngModel)]="isActive" name="isActive">
+                                 <mat-option value="">{{ 'All' | localize }}</mat-option>
+                                 <mat-option value="true">{{ 'Yes' | localize }}</mat-option>
+                                 <mat-option value="false">{{ 'No' | localize }}</mat-option>
+                             </mat-select>
+                         </mat-form-field>
+                     </div>
+                     <div class="col-md-12 text-right p-r-25">
+                         <button mat-raised-button color="primary" (click)="getDataPage(1)">{{ 'Search' | localize }}</button>
+                     </div>
+                 </div>
+             </form>
           </div>
           <!--query end-->
         <table class="table table-hover table-striped" [busy]="isTableLoading">
