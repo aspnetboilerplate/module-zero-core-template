@@ -1,12 +1,12 @@
 ﻿using System.Linq;
 using System.Threading.Tasks;
-using Microsoft.AspNetCore.Identity;
 using Abp.Application.Services;
 using Abp.Application.Services.Dto;
 using Abp.Authorization;
 using Abp.Domain.Repositories;
 using Abp.Extensions;
 using Abp.IdentityFramework;
+using Abp.Linq.Extensions;
 using Abp.MultiTenancy;
 using Abp.Runtime.Security;
 using AbpCompanyName.AbpProjectName.Authorization;
@@ -14,7 +14,7 @@ using AbpCompanyName.AbpProjectName.Authorization.Roles;
 using AbpCompanyName.AbpProjectName.Authorization.Users;
 using AbpCompanyName.AbpProjectName.Editions;
 using AbpCompanyName.AbpProjectName.MultiTenancy.Dto;
-using Abp.Linq.Extensions;
+using Microsoft.AspNetCore.Identity;
 
 namespace AbpCompanyName.AbpProjectName.MultiTenancy
 {
@@ -26,7 +26,6 @@ namespace AbpCompanyName.AbpProjectName.MultiTenancy
         private readonly UserManager _userManager;
         private readonly RoleManager _roleManager;
         private readonly IAbpZeroDbMigrator _abpZeroDbMigrator;
-        private readonly IPasswordHasher<User> _passwordHasher;
 
         public TenantAppService(
             IRepository<Tenant, int> repository,
@@ -34,8 +33,7 @@ namespace AbpCompanyName.AbpProjectName.MultiTenancy
             EditionManager editionManager,
             UserManager userManager,
             RoleManager roleManager,
-            IAbpZeroDbMigrator abpZeroDbMigrator,
-            IPasswordHasher<User> passwordHasher)
+            IAbpZeroDbMigrator abpZeroDbMigrator)
             : base(repository)
         {
             _tenantManager = tenantManager;
@@ -43,7 +41,6 @@ namespace AbpCompanyName.AbpProjectName.MultiTenancy
             _userManager = userManager;
             _roleManager = roleManager;
             _abpZeroDbMigrator = abpZeroDbMigrator;
-            _passwordHasher = passwordHasher;
         }
 
         public override async Task<TenantDto> Create(CreateTenantDto input)
@@ -97,8 +94,7 @@ namespace AbpCompanyName.AbpProjectName.MultiTenancy
         protected override IQueryable<Tenant> CreateFilteredQuery(PagedTenantResultRequestDto input)
         {
             return Repository.GetAll()
-                .WhereIf(!input.TenancyName.IsNullOrWhiteSpace(), x => x.TenancyName.Contains(input.TenancyName))
-                .WhereIf(!input.Name.IsNullOrWhiteSpace(), x => x.Name.Contains(input.Name))
+                .WhereIf(!input.Keyword.IsNullOrWhiteSpace(), x => x.TenancyName.Contains(input.Keyword) || x.Name.Contains(input.Keyword))
                 .WhereIf(input.IsActive.HasValue, x => x.IsActive == input.IsActive);
         }
 

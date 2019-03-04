@@ -15,13 +15,15 @@ import { ServiceProxyModule } from '@shared/service-proxies/service-proxy.module
 import { SharedModule } from '@shared/shared.module';
 
 import { AccountComponent } from './account.component';
-import { TenantChangeComponent } from './tenant/tenant-change.component';
-import { TenantChangeModalComponent } from './tenant/tenant-change-modal.component';
 import { LoginComponent } from './login/login.component';
 import { RegisterComponent } from './register/register.component';
 import { AccountLanguagesComponent } from './layout/account-languages.component';
 
 import { LoginService } from './login/login.service';
+
+// tenants
+import { TenantChangeComponent } from './tenant/tenant-change.component';
+import { TenantChangeDialogComponent } from './tenant/tenant-change-dialog.component';
 
 @NgModule({
     imports: [
@@ -37,14 +39,19 @@ import { LoginService } from './login/login.service';
     ],
     declarations: [
         AccountComponent,
-        TenantChangeComponent,
-        TenantChangeModalComponent,
         LoginComponent,
         RegisterComponent,
-        AccountLanguagesComponent
+        AccountLanguagesComponent,
+        // tenant
+        TenantChangeComponent,
+        TenantChangeDialogComponent,
     ],
     providers: [
         LoginService
+    ],
+    entryComponents: [
+        // tenant
+        TenantChangeDialogComponent
     ]
 })
 export class AccountModule {

@@ -31,6 +31,7 @@
               }
             ],
             "styles": [
+              "node_modules/@angular/material/prebuilt-themes/indigo-pink.css",
               "src/assets/fonts/roboto/roboto.css",
               "node_modules/bootstrap/dist/css/bootstrap.min.css",
               "node_modules/simple-line-icons/css/simple-line-icons.css",

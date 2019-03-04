@@ -1,4 +1,4 @@
-﻿import { Component, OnInit, Injector, ViewEncapsulation } from '@angular/core';
+import { Component, OnInit, Injector, ViewEncapsulation } from '@angular/core';
 import { AppComponentBase } from '@shared/app-component-base';
 import { AppAuthService } from '@shared/auth/app-auth.service';
 
@@ -9,7 +9,7 @@ import { AppAuthService } from '@shared/auth/app-auth.service';
 })
 export class SideBarUserAreaComponent extends AppComponentBase implements OnInit {
 
-    shownLoginName: string = "";
+    shownLoginName = '';
 
     constructor(
         injector: Injector,

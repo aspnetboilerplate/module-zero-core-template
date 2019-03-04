@@ -1,0 +1,124 @@
+<form autocomplete="off" #createUserModal="ngForm" (ngSubmit)="save()">
+  <h1 mat-dialog-title>{{ "CreateNewUser" | localize }}</h1>
+  <mat-dialog-content style="width:800px;height:300px;">
+    <mat-tab-group>
+      <mat-tab [label]="'UserDetails' | localize">
+        <br />
+        <div class="row-fluid">
+          <div class="col-md-6">
+            <mat-form-field>
+              <input
+                matInput
+                name="UserName"
+                [placeholder]="'UserName' | localize"
+                [(ngModel)]="user.userName"
+                required
+                minlength="2"
+                maxlength="32"
+              />
+            </mat-form-field>
+            <mat-form-field>
+              <input
+                matInput
+                name="Name"
+                [placeholder]="'Name' | localize"
+                [(ngModel)]="user.name"
+                required
+                maxlength="32"
+              />
+            </mat-form-field>
+            <mat-form-field>
+              <input
+                matInput
+                #password="ngModel"
+                [placeholder]="'Password' | localize"
+                [(ngModel)]="user.password"
+                type="password"
+                name="password"
+                id="password"
+                validateEqual="confirmPassword"
+                reverse="true"
+                required
+                maxlength="32"
+              />
+            </mat-form-field>
+            <div class="checkbox-wrapper">
+              <mat-checkbox name="IsActive" [(ngModel)]="user.isActive">
+                {{ "IsActive" | localize }}
+              </mat-checkbox>
+            </div>
+          </div>
+          <div class="col-md-6">
+            <mat-form-field>
+              <input
+                matInput
+                name="EmailAddress"
+                [placeholder]="'EmailAddress' | localize"
+                [(ngModel)]="user.emailAddress"
+                type="email"
+                required
+                maxlength="256"
+                pattern="^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{1,})+$"
+              />
+            </mat-form-field>
+            <mat-form-field>
+              <input
+                matInput
+                name="Surname"
+                [placeholder]="'Surname' | localize"
+                [(ngModel)]="user.surname"
+                required
+                maxlength="32"
+              />
+            </mat-form-field>
+            <mat-form-field>
+              <input
+                matInput
+                [placeholder]="'ConfirmPassword' | localize"
+                ngModel
+                type="password"
+                name="confirmPassword"
+                id="confirmPassword"
+                validateEqual="password"
+                reverse="false"
+                required
+                maxlength="32"
+              />
+            </mat-form-field>
+          </div>
+        </div>
+      </mat-tab>
+      <mat-tab [label]="'UserRoles' | localize">
+        <br />
+        <div class="row-fluid">
+          <ng-template ngFor let-role [ngForOf]="roles">
+            <div class="col-sm-6">
+              <div class="checkbox-wrapper">
+                <mat-checkbox
+                  [checked]="isRoleChecked(role.normalizedName)"
+                  (change)="onRoleChange(role, $event)"
+                >
+                  {{ role.name }}
+                </mat-checkbox>
+              </div>
+            </div>
+          </ng-template>
+        </div>
+      </mat-tab>
+    </mat-tab-group>
+  </mat-dialog-content>
+  <div mat-dialog-actions align="end">
+    <button mat-button type="button" [disabled]="saving" (click)="close(false)">
+      {{ "Cancel" | localize }}
+    </button>
+    <button
+      mat-flat-button
+      type="submit"
+      flex="15"
+      color="primary"
+      [disabled]="!createUserModal.form.valid || saving"
+    >
+      {{ "Save" | localize }}
+    </button>
+  </div>
+</form>

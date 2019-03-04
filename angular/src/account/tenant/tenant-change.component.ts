@@ -1,39 +1,38 @@
-﻿import { Component, OnInit, Injector, ViewChild } from '@angular/core';
-import { AccountServiceProxy } from '@shared/service-proxies/service-proxies' 
-import { TenantChangeModalComponent } from './tenant-change-modal.component'
+﻿import { Component, OnInit, Injector } from '@angular/core';
+import { MatDialog } from '@angular/material';
 import { AppComponentBase } from '@shared/app-component-base';
+import { TenantChangeDialogComponent } from './tenant-change-dialog.component';
 
 @Component({
-    selector: 'tenant-change',
-    templateUrl: './tenant-change.component.html'
+  selector: 'tenant-change',
+  templateUrl: './tenant-change.component.html'
 })
 export class TenantChangeComponent extends AppComponentBase implements OnInit {
-    
-    @ViewChild('tenantChangeModal') tenantChangeModal: TenantChangeModalComponent;
+  tenancyName = '';
+  name = '';
 
-    tenancyName: string;
-    name: string;
+  constructor(injector: Injector, private _dialog: MatDialog) {
+    super(injector);
+  }
 
-    constructor(
-        injector: Injector,
-        private _accountService: AccountServiceProxy
-        ) { 
-        super(injector);
+  ngOnInit() {
+    if (this.appSession.tenant) {
+      this.tenancyName = this.appSession.tenant.tenancyName;
+      this.name = this.appSession.tenant.name;
     }
+  }
 
-    ngOnInit() {
-        
-        if (this.appSession.tenant) {
-            this.tenancyName = this.appSession.tenant.tenancyName;
-            this.name = this.appSession.tenant.name;
-        }
-    }
+  get isMultiTenancyEnabled(): boolean {
+    return abp.multiTenancy.isEnabled;
+  }
 
-    get isMultiTenancyEnabled(): boolean {        
-        return abp.multiTenancy.isEnabled;
-    }
-
-    showChangeModal(): void{
-        this.tenantChangeModal.show(this.tenancyName);
-    }
+  showChangeModal(): void {
+    this._dialog.open(TenantChangeDialogComponent, {
+      width: '500px',
+      height: '240px',
+      position: {
+        top: '50px'
+      }
+    });
+  }
 }

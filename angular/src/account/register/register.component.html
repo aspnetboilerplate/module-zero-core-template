@@ -1,48 +1,70 @@
 ﻿<div class="card" [@routerTransition]>
-    <div #cardBody class="body">
-        <form #registerForm="ngForm" method="post" novalidate (ngSubmit)="save()">
-            <h4 class="text-center">{{ "Register" | localize }}</h4>
-
-            <div class="form-group form-float">
-                <div class="form-line">
-                    <input materialInput class="form-control" autoFocus type="text" [(ngModel)]="model.name" name="Name" required maxlength="32" />
-                    <label class="form-label">{{ 'Name' | localize }}</label>
-                </div>
-            </div>
-
-            <div class="form-group form-float">
-                <div class="form-line">
-                    <input materialInput class="form-control" type="text" [(ngModel)]="model.surname" name="Surname" required maxlength="32" />
-                    <label class="form-label">{{ 'Surname' | localize }}</label>
-                </div>
-            </div>
-
-            <div class="form-group form-float">
-                <div class="form-line">
-                    <input materialInput class="form-control" type="email" [(ngModel)]="model.emailAddress" name="EmailAddress" required maxlength="255" pattern="^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{1,})+$" />
-                    <label class="form-label">{{ 'EmailAddress' | localize }}</label>
-                </div>
-            </div>
-
-            <div class="form-group form-float">
-                <div class="form-line">
-                    <input materialInput class="form-control" type="text" autocomplete="off" [(ngModel)]="model.userName" name="UserName" required maxlength="32" />
-                    <label class="form-label">{{ 'UserName' | localize }}</label>
-                </div>
-            </div>
-
-            <div class="form-group form-float">
-                <div class="form-line">
-                    <input materialInput class="form-control" type="password" [(ngModel)]="model.password" name="Password" required maxlength="32" />
-                    <label class="form-label">{{ 'Password' | localize }}</label>
-                </div>
-            </div>
-
-            <div class="form-actions">
-                <button [disabled]="saving" [routerLink]="['../login']" type="button" class="btn btn-default">{{ "Back" | localize }}</button>
-                <button type="submit" class="btn btn-success" [disabled]="!registerForm.form.valid">{{ "Submit" | localize }}</button>
-            </div>
-
-        </form>
-    </div>
+  <div class="body">
+    <form novalidate 
+          #registerForm="ngForm" 
+          (ngSubmit)="save()">
+      <h4 class="text-center">{{ "Register" | localize }}</h4>
+      <div class="form-group form-float">
+          <mat-form-field>
+              <input matInput
+                 name="Name"
+                 [(ngModel)]="model.name"
+                 [placeholder]="'Name' | localize"
+                 required
+                 maxlength="32" />
+          </mat-form-field>
+          <mat-form-field>
+              <input matInput
+                  name="Surname"
+                  [(ngModel)]="model.surname"
+                  [placeholder]="'Surname' | localize"
+                  required
+                  maxlength="32"/>
+          </mat-form-field>
+          <mat-form-field>
+              <input matInput
+                   type="email"
+                   name="EmailAddress"
+                   [(ngModel)]="model.emailAddress"
+                   [placeholder]="'EmailAddress' | localize"         
+                   required
+                   maxlength="255"
+                   pattern="^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{1,})+$"/>
+          </mat-form-field>
+          <mat-form-field>
+              <input matInput
+                   name="UserName"
+                   [(ngModel)]="model.userName"
+                   [placeholder]="'UserName' | localize"         
+                   required
+                   maxlength="32"/>
+          </mat-form-field>
+          <mat-form-field>
+             <input matInput
+                    name="Password"
+                    [(ngModel)]="model.password"
+                    [placeholder]="'Password' | localize"
+                    type="password"         
+                    required
+                    maxlength="32"/>
+          </mat-form-field>
+      </div>
+      <div class="form-actions text-center">
+            <button mat-button 
+                    type="button"
+                    [disabled]="saving"
+                    [routerLink]="['../login']">
+                    {{ "Back" | localize }}
+            </button>
+            <span>&nbsp;</span>
+            <button mat-flat-button
+                    type="submit"
+                    flex="15"
+                    color="primary"
+                    [disabled]="!registerForm.form.valid || saving">
+                    {{ "Submit" | localize }}
+            </button>    
+      </div>
+    </form>
+  </div>
 </div>

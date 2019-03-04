@@ -15,7 +15,7 @@ namespace AbpCompanyName.AbpProjectName.Migrations
         {
 #pragma warning disable 612, 618
             modelBuilder
-                .HasAnnotation("ProductVersion", "2.1.4-rtm-31024")
+                .HasAnnotation("ProductVersion", "2.2.1-servicing-10028")
                 .HasAnnotation("Relational:MaxIdentifierLength", 128)
                 .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
@@ -117,6 +117,8 @@ namespace AbpCompanyName.AbpProjectName.Migrations
                     b.Property<string>("Parameters")
                         .HasMaxLength(1024);
 
+                    b.Property<string>("ReturnValue");
+
                     b.Property<string>("ServiceName")
                         .HasMaxLength(256);
 
@@ -211,8 +213,6 @@ namespace AbpCompanyName.AbpProjectName.Migrations
                         .HasMaxLength(256);
 
                     b.Property<bool>("IsDeleted");
-
-                    b.Property<DateTime?>("LastLoginTime");
 
                     b.Property<DateTime?>("LastModificationTime");
 
@@ -850,6 +850,33 @@ namespace AbpCompanyName.AbpProjectName.Migrations
                     b.ToTable("AbpOrganizationUnits");
                 });
 
+            modelBuilder.Entity("Abp.Organizations.OrganizationUnitRole", b =>
+                {
+                    b.Property<long>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+
+                    b.Property<DateTime>("CreationTime");
+
+                    b.Property<long?>("CreatorUserId");
+
+                    b.Property<bool>("IsDeleted");
+
+                    b.Property<long>("OrganizationUnitId");
+
+                    b.Property<int>("RoleId");
+
+                    b.Property<int?>("TenantId");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("TenantId", "OrganizationUnitId");
+
+                    b.HasIndex("TenantId", "RoleId");
+
+                    b.ToTable("AbpOrganizationUnitRoles");
+                });
+
             modelBuilder.Entity("AbpCompanyName.AbpProjectName.Authorization.Roles.Role", b =>
                 {
                     b.Property<int>("Id")
@@ -949,8 +976,6 @@ namespace AbpCompanyName.AbpProjectName.Migrations
                     b.Property<bool>("IsPhoneNumberConfirmed");
 
                     b.Property<bool>("IsTwoFactorEnabled");
-
-                    b.Property<DateTime?>("LastLoginTime");
 
                     b.Property<DateTime?>("LastModificationTime");
 
@@ -1074,7 +1099,6 @@ namespace AbpCompanyName.AbpProjectName.Migrations
             modelBuilder.Entity("Abp.MultiTenancy.TenantFeatureSetting", b =>
                 {
                     b.HasBaseType("Abp.Application.Features.FeatureSetting");
-
 
                     b.HasIndex("TenantId", "Name");
 

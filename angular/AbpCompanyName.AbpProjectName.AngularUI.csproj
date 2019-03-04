@@ -14,7 +14,7 @@
 
   <ItemGroup>
     <Compile Remove="dist" />
-    <None Include="App.config" />
+    <None Include="app.config" />
     <None Update="wwwroot\**\*;web.config">
       <CopyToPublishDirectory>PreserveNewest</CopyToPublishDirectory>
     </None>

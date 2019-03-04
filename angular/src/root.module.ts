@@ -1,5 +1,5 @@
-import { BrowserModule } from '@angular/platform-browser';
-import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { BrowserModule, HAMMER_GESTURE_CONFIG } from '@angular/platform-browser';
+import { BrowserAnimationsModule, NoopAnimationsModule } from '@angular/platform-browser/animations';
 import { NgModule, Injector, APP_INITIALIZER, LOCALE_ID } from '@angular/core';
 import { PlatformLocation, registerLocaleData } from '@angular/common';
 
@@ -20,6 +20,8 @@ import { AppPreBootstrap } from './AppPreBootstrap';
 import { ModalModule } from 'ngx-bootstrap';
 import { HttpClientModule } from '@angular/common/http';
 
+import { GestureConfig } from '@angular/material';
+
 import * as _ from 'lodash';
 
 export function appInitializerFactory(injector: Injector,
@@ -29,17 +31,17 @@ export function appInitializerFactory(injector: Injector,
         abp.ui.setBusy();
         return new Promise<boolean>((resolve, reject) => {
             AppConsts.appBaseHref = getBaseHref(platformLocation);
-            let appBaseUrl = getDocumentOrigin() + AppConsts.appBaseHref;
+            const appBaseUrl = getDocumentOrigin() + AppConsts.appBaseHref;
 
             AppPreBootstrap.run(appBaseUrl, () => {
                 abp.event.trigger('abp.dynamicScriptsInitialized');
-                var appSessionService: AppSessionService = injector.get(AppSessionService);
+                const appSessionService: AppSessionService = injector.get(AppSessionService);
                 appSessionService.init().then(
                     (result) => {
                         abp.ui.clearBusy();
 
                         if (shouldLoadLocale()) {
-                            let angularLocale = convertAbpLocaleToAngularLocale(abp.localization.currentLanguage.name);
+                            const angularLocale = convertAbpLocaleToAngularLocale(abp.localization.currentLanguage.name);
                             import(`@angular/common/locales/${angularLocale}.js`)
                                 .then(module => {
                                     registerLocaleData(module.default);
@@ -56,7 +58,7 @@ export function appInitializerFactory(injector: Injector,
                 );
             });
         });
-    }
+    };
 }
 
 export function convertAbpLocaleToAngularLocale(locale: string): string {
@@ -64,7 +66,7 @@ export function convertAbpLocaleToAngularLocale(locale: string): string {
         return locale;
     }
 
-    let localeMapings = _.filter(AppConsts.localeMappings, { from: locale });
+    const localeMapings = _.filter(AppConsts.localeMappings, { from: locale });
     if (localeMapings && localeMapings.length) {
         return localeMapings[0]['to'];
     }
@@ -110,7 +112,8 @@ export function getCurrentLanguage(): string {
         {
             provide: LOCALE_ID,
             useFactory: getCurrentLanguage
-        }
+        },
+        { provide: HAMMER_GESTURE_CONFIG, useClass: GestureConfig },
     ],
     bootstrap: [RootComponent]
 })
@@ -120,7 +123,7 @@ export class RootModule {
 }
 
 export function getBaseHref(platformLocation: PlatformLocation): string {
-    var baseUrl = platformLocation.getBaseHrefFromDOM();
+    const baseUrl = platformLocation.getBaseHrefFromDOM();
     if (baseUrl) {
         return baseUrl;
     }
@@ -130,7 +133,8 @@ export function getBaseHref(platformLocation: PlatformLocation): string {
 
 function getDocumentOrigin() {
     if (!document.location.origin) {
-        return document.location.protocol + "//" + document.location.hostname + (document.location.port ? ':' + document.location.port : '');
+        const port = document.location.port ? ':' + document.location.port : '';
+        return document.location.protocol + '//' + document.location.hostname + port;
     }
 
     return document.location.origin;

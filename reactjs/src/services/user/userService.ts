@@ -5,6 +5,7 @@ import http from '../httpService';
 import { GetAllUserOutput } from './dto/getAllUserOutput';
 import { PagedResultDto } from 'src/services/dto/pagedResultDto';
 import { CreateOrUpdateUserInput } from './dto/createOrUpdateUserInput';
+import { PagedUserResultRequestDto } from "./dto/PagedUserResultRequestDto";
 
 class UserService {
   public async create(createUserInput: CreateOrUpdateUserInput) {
@@ -37,7 +38,7 @@ class UserService {
     return result.data.result;
   }
 
-  public async getAll(pagedFilterAndSortedRequest: PagedFilterAndSortedRequest): Promise<PagedResultDto<GetAllUserOutput>> {
+    public async getAll(pagedFilterAndSortedRequest: PagedUserResultRequestDto): Promise<PagedResultDto<GetAllUserOutput>> {
     let result = await http.get('api/services/app/User/GetAll', { params: pagedFilterAndSortedRequest });
     return result.data.result;
   }
