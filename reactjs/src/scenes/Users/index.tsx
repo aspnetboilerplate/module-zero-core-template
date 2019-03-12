@@ -115,7 +115,7 @@ class User extends AppComponentBase<IUserProps, IUserState> {
     const columns = [
       { title: L('UserName'), dataIndex: 'userName', key: 'userName', width: 150, render: (text: string) => <div>{text}</div> },
       { title: L('FullName'), dataIndex: 'name', key: 'name', width: 150, render: (text: string) => <div>{text}</div> },
-      { title: L('EmailAddress'), dataIndex: 'surname', key: 'surname', width: 150, render: (text: string) => <div>{text}</div> },
+      { title: L('EmailAddress'), dataIndex: 'emailAddress', key: 'emailAddress', width: 150, render: (text: string) => <div>{text}</div> },
       {
         title: L('IsActive'),
         dataIndex: 'isActive',
