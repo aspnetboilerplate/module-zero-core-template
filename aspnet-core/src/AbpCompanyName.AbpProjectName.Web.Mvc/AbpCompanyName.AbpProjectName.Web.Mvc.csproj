@@ -47,9 +47,9 @@
     <PackageReference Include="Microsoft.Extensions.Options.ConfigurationExtensions" Version="2.2.0" />
     <PackageReference Include="Microsoft.VisualStudio.Web.BrowserLink" Version="2.2.0" />
     <PackageReference Include="Microsoft.AspNetCore.Mvc" Version="2.2.0" />
-    <PackageReference Include="Abp.HangFire" Version="4.3.0" />
-    <PackageReference Include="Abp.RedisCache" Version="4.3.0" />
-    <PackageReference Include="Abp.Castle.Log4Net" Version="4.3.0" />
+    <PackageReference Include="Abp.HangFire" Version="4.4.0" />
+    <PackageReference Include="Abp.RedisCache" Version="4.4.0" />
+    <PackageReference Include="Abp.Castle.Log4Net" Version="4.4.0" />
     <PackageReference Include="Microsoft.AspNetCore.Mvc.Razor.ViewCompilation" Version="2.2.0" PrivateAssets="All" />
   </ItemGroup>
 
