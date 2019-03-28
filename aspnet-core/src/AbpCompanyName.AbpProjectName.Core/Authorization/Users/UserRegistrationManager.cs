@@ -78,7 +78,7 @@ namespace AbpCompanyName.AbpProjectName.Authorization.Users
             }
         }
 
-        public async Task<Tenant> GetActiveTenantAsync()
+        private async Task<Tenant> GetActiveTenantAsync()
         {
             if (!AbpSession.TenantId.HasValue)
             {

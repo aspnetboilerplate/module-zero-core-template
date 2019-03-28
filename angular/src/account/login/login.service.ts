@@ -74,9 +74,7 @@ export class LoginService {
         );
 
         let initialUrl = UrlHelper.initialUrl;
-        // account should be accessed by logged out users only
-        // if it attempts to redirect to account,
-        // override the redirect to home page
+
         if (initialUrl.indexOf('/account') > 0) {
             initialUrl = AppConsts.appBaseUrl;
         }

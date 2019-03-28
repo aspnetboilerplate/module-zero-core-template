@@ -15,7 +15,6 @@ import { ResetPasswordComponent } from './reset-password/reset-password.componen
                     { path: 'login', component: LoginComponent },
                     { path: 'register', component: RegisterComponent },
                     { path: 'reset-password/:user-id/:password-reset-code', component: ResetPasswordComponent },
-                    // tenantId should be the last parameter since it is optional
                     { path: 'reset-password/:user-id/:password-reset-code/:tenant-id', component: ResetPasswordComponent }
 
                 ]

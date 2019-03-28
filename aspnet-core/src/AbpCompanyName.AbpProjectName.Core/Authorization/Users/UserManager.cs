@@ -64,13 +64,11 @@ namespace AbpCompanyName.AbpProjectName.Authorization.Users
 
         public virtual async Task<IdentityResult> BasicResetPasswordAsync(User user, string passwordResetCode, string newPassword)
         {
-            ThrowIfDisposed();
             if (user == null)
             {
                 throw new ArgumentNullException(nameof(user));
             }
 
-            // Make sure the token is valid and the stamp matches
             if (!await VerifyPasswordResetCodeAsync(user, passwordResetCode))
             {
                 return IdentityResult.Failed(ErrorDescriber.InvalidToken());
