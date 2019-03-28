@@ -33,7 +33,9 @@ export class LoginService {
 
     authenticate(finallyCallback?: () => void): void {
         finallyCallback = finallyCallback || (() => { });
-
+        
+        this.authenticateModel.rememberClient = this.rememberMe;
+        
         this._tokenAuthService
             .authenticate(this.authenticateModel)
             .pipe(finalize(() => { finallyCallback(); }))
