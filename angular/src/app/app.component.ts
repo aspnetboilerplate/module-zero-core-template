@@ -44,7 +44,7 @@ export class AppComponent extends AppComponentBase implements OnInit, AfterViewI
     onResize(event) {
         // exported from $.AdminBSB.activateAll
         $.AdminBSB.leftSideBar.setMenuHeight();
-        $.AdminBSB.leftSideBar.checkStatuForResize(false);
+        $.AdminBSB.leftSideBar.checkStatusForResize(false);
 
         // exported from $.AdminBSB.activateDemo
         $.AdminBSB.demo.setSkinListHeightAndScroll();

@@ -1,0 +1,168 @@
+@import '~@angular/material/theming';
+
+@include mat-core();
+
+
+// default theme - used at login page
+$primary: mat-palette($mat-indigo);
+$accent: mat-palette($mat-pink, A200, A100, A400);
+$warn: mat-palette($mat-red);
+
+$theme: mat-light-theme($primary, $accent, $warn);
+
+@include angular-material-theme($theme);
+
+// to understand custom themes, read: https://material.angular.io/guide/theming
+
+// bsb-color -> BSB color used on theme
+// primary, accent, warn palettes -> primary, accent, warn palettes used by material
+@mixin make-theme($name,
+$bsb-color,
+$primary-palette: mat-palette($mat-indigo),
+$accent-palette: mat-palette($mat-pink, A200, A100, A400),
+$warn-palette: mat-palette($mat-red)) {
+
+  // mat-palette defaults: ($base-palette, $default: 500, $lighter: 100, $darker: 700)
+
+  $theme: mat-light-theme($primary-palette, $accent-palette, $warn-palette);
+
+  .theme-#{$name} {
+
+    // angular/material theming
+    @include angular-material-theme($theme);
+
+    // AdminBSB theming
+    // extracted and generalized from bsb-theme/themes/theme-*.css
+
+    .navbar {
+      background-color: $bsb-color;
+    }
+
+    .navbar-brand {
+      color: #fff;
+    }
+
+    .navbar-brand:hover {
+      color: #fff;
+    }
+
+    .navbar-brand:active {
+      color: #fff;
+    }
+
+    .navbar-brand:focus {
+      color: #fff;
+    }
+
+    .nav>li>a {
+      color: #fff;
+    }
+
+    .nav>li>a:hover {
+      background-color: transparent;
+    }
+
+    .nav>li>a:focus {
+      background-color: transparent;
+    }
+
+    .nav .open>a {
+      background-color: transparent;
+    }
+
+    .nav .open>a:hover {
+      background-color: transparent;
+    }
+
+    .nav .open>a:focus {
+      background-color: transparent;
+    }
+
+    .bars {
+      color: #fff;
+    }
+
+    .sidebar .menu .list li.active {
+      background-color: transparent;
+    }
+
+    .sidebar .menu .list li.active> :first-child i,
+    .sidebar .menu .list li.active> :first-child span {
+      color: $bsb-color;
+    }
+
+    .sidebar .menu .list .toggled {
+      background-color: transparent;
+    }
+
+    .sidebar .menu .list .ml-menu {
+      background-color: transparent;
+    }
+
+    .sidebar .legal {
+      background-color: #fff;
+    }
+
+    .sidebar .legal .copyright a {
+      color: $bsb-color !important;
+    }
+
+    // custom theming
+
+    .nav-tabs>li>a:before {
+      border-bottom-color: $bsb-color;
+    }
+  }
+}
+
+$mat-black: (50: #9e9e9e,
+100: #757575,
+200: #616161,
+300: #424242,
+400: #212121,
+500: #000000,
+600: #000000,
+700: #000000,
+800: #000000,
+900: #000000,
+A100: #ffffff,
+A200: #eeeeee,
+A400: #bdbdbd,
+A700: #616161,
+contrast: (50: $dark-primary-text,
+100: $dark-primary-text,
+200: $dark-primary-text,
+300: $dark-primary-text,
+400: $dark-primary-text,
+500: $dark-primary-text,
+600: $light-primary-text,
+700: $light-primary-text,
+800: $light-primary-text,
+900: $light-primary-text,
+A100: $dark-primary-text,
+A200: $dark-primary-text,
+A400: $dark-primary-text,
+A700: $light-primary-text,
+));
+
+@include make-theme('red', map-get($mat-red, 500));
+@include make-theme('pink', map-get($mat-pink, 500));
+@include make-theme('purple', map-get($mat-purple, 500));
+@include make-theme('deep-purple', map-get($mat-deep-purple, 500));
+@include make-theme('indigo', map-get($mat-indigo, 500));
+@include make-theme('blue', map-get($mat-blue, 500));
+@include make-theme('light-blue', map-get($mat-light-blue, 500));
+@include make-theme('cyan', map-get($mat-cyan, 500));
+@include make-theme('teal', map-get($mat-teal, 500));
+@include make-theme('indigo', map-get($mat-indigo, 500));
+@include make-theme('green', map-get($mat-green, 500));
+@include make-theme('light-green', map-get($mat-light-green, 500));
+@include make-theme('lime', map-get($mat-lime, 500));
+@include make-theme('yellow', map-get($mat-yellow, 500));
+@include make-theme('amber', map-get($mat-amber, 500));
+@include make-theme('orange', map-get($mat-orange, 500));
+@include make-theme('deep-orange', map-get($mat-deep-orange, 500));
+@include make-theme('brown', map-get($mat-brown, 500));
+@include make-theme('grey', map-get($mat-grey, 500));
+@include make-theme('blue-grey', map-get($mat-blue-grey, 500));
+@include make-theme('black', map-get($mat-black, 500));

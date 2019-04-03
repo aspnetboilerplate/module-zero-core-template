@@ -1,85 +1,5 @@
-﻿/* Show Fieldset and Legend ==================== */
-.show-fieldset {
-    margin: 10px;
-    padding: 10px;
-    border: 1px solid silver !important;
-}
-
-.show-legend {
-    padding: 5px !important;
-    width: initial !important;
-    margin: initial !important;
-    border: 0px transparent !important;
-}
-
-/* Ngx Pagination ============================== */
-a{cursor: pointer;
-    text-decoration: none;
-    transition: none 86ms ease-out;
-}
-
-.ngx-pagination {
-  text-align: center;
-  margin-left: 0;
-  margin-bottom: 1rem; }
-  .ngx-pagination::before, .ngx-pagination::after {
-    content: ' ';
-    display: table; }
-  .ngx-pagination::after {
-    clear: both; }
-  .ngx-pagination li {
-    -moz-user-select: none;
-    -webkit-user-select: none;
-    -ms-user-select: none;
-    margin-right: 0.0625rem;
-    border-radius: 0; }
-  .ngx-pagination li {
-    display: inline-block; }
-  .ngx-pagination a,
-  .ngx-pagination button {
-    color: #0a0a0a; 
-    display: block;
-    padding: 0.1875rem 0.625rem;
-    border-radius: 0; }
-    .ngx-pagination a:hover,
-    .ngx-pagination button:hover {
-      background: #e6e6e6; }
-  .ngx-pagination .current {
-    padding: 0.1875rem 0.625rem;
-    background: #2199e8;
-    color: #fefefe;
-    cursor: default; }
-  .ngx-pagination .disabled {
-    padding: 0.1875rem 0.625rem;
-    color: #cacaca;
-    cursor: default; } 
-    .ngx-pagination .disabled:hover {
-      background: transparent; }
-  .ngx-pagination .ellipsis::after {
-    content: '…';
-    padding: 0.1875rem 0.625rem;
-    color: #0a0a0a; }
-
-.ngx-pagination .pagination-previous a::before,
-.ngx-pagination .pagination-previous.disabled::before { 
-  content: '«';
-  display: inline-block;
-  margin-right: 0.5rem; }
-
-.ngx-pagination .pagination-next a::after,
-.ngx-pagination .pagination-next.disabled::after {
-  content: '»';
-  display: inline-block;
-  margin-left: 0.5rem; }
-
-.ngx-pagination .show-for-sr {
-  position: absolute !important;
-  width: 1px;
-  height: 1px;
-  overflow: hidden;
-  clip: rect(0, 0, 0, 0); }
-
-/* Navbar ====================================== */
+﻿/* Navbar ====================================== */
+@import url(materialize.css);
 .navbar {
   font-family: "Roboto", sans-serif;
   -webkit-border-radius: 0;
@@ -96,7 +16,7 @@ a{cursor: pointer;
   left: 0;
   z-index: 12;
   width: 100%; }
-.navbar .navbar-brand {
+  .navbar .navbar-brand {
     white-space: nowrap;
     -ms-text-overflow: ellipsis;
     -o-text-overflow: ellipsis;
@@ -2201,6 +2121,11 @@ a{cursor: pointer;
   margin-right: 5px;
   margin-bottom: 12px; }
 
+.icon-and-text-button-demo button {
+  margin-right: 5px;
+  margin-bottom: 12px;
+  width: 16.66666666666667%; }
+
 .button-demo ul {
   padding-left: 0; }
   .button-demo ul li {
@@ -2573,6 +2498,10 @@ section.content {
     font-size: 20px;
     position: relative;
     top: 3px; }
+  .btn:not(.btn-link):not(.btn-circle) span {
+    position: relative;
+    top: -2px;
+    margin-left: 3px; }
 
 .btn-warning,
 .btn-warning:hover,
@@ -2898,7 +2827,11 @@ section.content {
   min-height: 50px;
   box-shadow: 0 2px 10px rgba(0, 0, 0, 0.2);
   position: relative;
-  margin-bottom: 30px; }
+  margin-bottom: 30px;
+  -webkit-border-radius: 2px;
+  -moz-border-radius: 2px;
+  -ms-border-radius: 2px;
+  border-radius: 2px; }
   .card .card-inside-title {
     margin-top: 25px;
     margin-bottom: 15px;
@@ -4090,6 +4023,51 @@ section.content {
   background: #007d72;
   color: #fff; }
 
+.datepicker.datepicker-dropdown.dropdown-menu {
+  margin-top: 0 !important; }
+
+.datepicker table tr td.active {
+  background-image: -webkit-gradient(linear, 0 0, 0 100%, from(#009688), to(#009688));
+  background-image: -webkit-linear-gradient(to bottom, #009688, #009688);
+  background-image: -o-linear-gradient(to bottom, #009688, #009688);
+  background-image: linear-gradient(to bottom, #009688, #009688);
+  border: none; }
+  .datepicker table tr td.active:hover.active {
+    background-image: -webkit-gradient(linear, 0 0, 0 100%, from(#009688), to(#009688));
+    background-image: -webkit-linear-gradient(to bottom, #009688, #009688);
+    background-image: -o-linear-gradient(to bottom, #009688, #009688);
+    background-image: linear-gradient(to bottom, #009688, #009688);
+    border: none; }
+
+.datepicker table tr td.selected {
+  background-image: -webkit-gradient(linear, 0 0, 0 100%, from(#009688), to(#009688));
+  background-image: -webkit-linear-gradient(to bottom, #009688, #009688);
+  background-image: -o-linear-gradient(to bottom, #009688, #009688);
+  background-image: linear-gradient(to bottom, #009688, #009688);
+  border: none; }
+
+.datepicker table tr td span.active {
+  background-image: -webkit-gradient(linear, 0 0, 0 100%, from(#009688), to(#009688));
+  background-image: -webkit-linear-gradient(to bottom, #009688, #009688);
+  background-image: -o-linear-gradient(to bottom, #009688, #009688);
+  background-image: linear-gradient(to bottom, #009688, #009688);
+  border: none; }
+  .datepicker table tr td span.active:hover.active {
+    background-image: -webkit-gradient(linear, 0 0, 0 100%, from(#009688), to(#009688));
+    background-image: -webkit-linear-gradient(to bottom, #009688, #009688);
+    background-image: -o-linear-gradient(to bottom, #009688, #009688);
+    background-image: linear-gradient(to bottom, #009688, #009688);
+    border: none; }
+
+.datepicker table.table-condensed > tbody > tr > td {
+  padding: 6px 9px; }
+
+.input-daterange .form-control {
+  text-align: left; }
+
+.input-daterange .input-group-addon {
+  padding-right: 10px !important; }
+
 /* Bootstrap Select ============================ */
 .bootstrap-select {
   box-shadow: none !important;
@@ -4608,7 +4586,7 @@ section.content {
 
 /* Tables ====================================== */
 .table tbody tr td, .table tbody tr th {
-  padding: 18px 10px 0 10px;
+  padding: 10px;
   border-top: 1px solid #eee;
   border-bottom: 1px solid #eee; }
 
@@ -7905,6 +7883,133 @@ fieldset[disabled] .form-control {
   .five-zero-zero .five-zero-zero-container .button-place {
     margin-top: 32px; }
 
+/* Profile Page ================================ */
+.profile-card .profile-header {
+  background-color: #ad1455;
+  padding: 42px 0; }
+
+.profile-card .profile-body .image-area {
+  text-align: center;
+  margin-top: -64px; }
+  .profile-card .profile-body .image-area img {
+    border: 2px solid #ad1455;
+    padding: 2px;
+    margin: 2px;
+    -webkit-border-radius: 50%;
+    -moz-border-radius: 50%;
+    -ms-border-radius: 50%;
+    border-radius: 50%; }
+
+.profile-card .profile-body .content-area {
+  text-align: center;
+  border-bottom: 1px solid #ddd;
+  padding-bottom: 15px; }
+  .profile-card .profile-body .content-area p {
+    margin-bottom: 0; }
+    .profile-card .profile-body .content-area p:last-child {
+      font-weight: 600;
+      color: #ad1455;
+      margin-top: 5px; }
+
+.profile-card .profile-footer {
+  padding: 15px; }
+  .profile-card .profile-footer ul {
+    margin: 0;
+    padding: 0;
+    list-style: none; }
+    .profile-card .profile-footer ul li {
+      border-bottom: 1px solid #eee;
+      padding: 10px 0; }
+      .profile-card .profile-footer ul li:last-child {
+        border-bottom: none;
+        margin-bottom: 15px; }
+      .profile-card .profile-footer ul li span:first-child {
+        font-weight: bold; }
+      .profile-card .profile-footer ul li span:last-child {
+        float: right; }
+
+.card-about-me .body ul {
+  margin: 0;
+  padding: 0;
+  list-style: none; }
+  .card-about-me .body ul li {
+    border-bottom: 1px solid #eee;
+    margin-bottom: 10px;
+    padding-bottom: 15px; }
+    .card-about-me .body ul li:last-child {
+      border: none;
+      margin-bottom: 0;
+      padding-bottom: 0; }
+    .card-about-me .body ul li .title {
+      font-weight: bold;
+      color: #666; }
+      .card-about-me .body ul li .title i {
+        margin-right: 2px;
+        position: relative;
+        top: 7px; }
+    .card-about-me .body ul li .content {
+      margin-top: 10px;
+      color: #999;
+      font-size: 13px; }
+
+.panel-post {
+  -webkit-border-radius: 0;
+  -moz-border-radius: 0;
+  -ms-border-radius: 0;
+  border-radius: 0; }
+  .panel-post .panel-heading {
+    background-color: #fff;
+    -webkit-border-radius: 0;
+    -moz-border-radius: 0;
+    -ms-border-radius: 0;
+    border-radius: 0; }
+    .panel-post .panel-heading .media {
+      margin-bottom: 0; }
+      .panel-post .panel-heading .media a img {
+        width: 42px;
+        -webkit-border-radius: 50%;
+        -moz-border-radius: 50%;
+        -ms-border-radius: 50%;
+        border-radius: 50%; }
+      .panel-post .panel-heading .media .media-body {
+        padding-top: 5px; }
+        .panel-post .panel-heading .media .media-body h4 {
+          font-size: 14px; }
+          .panel-post .panel-heading .media .media-body h4 a {
+            color: #666; }
+  .panel-post .panel-body {
+    padding: 0; }
+    .panel-post .panel-body .post .post-heading {
+      padding: 12px 15px; }
+      .panel-post .panel-body .post .post-heading p {
+        margin-bottom: 0; }
+  .panel-post .panel-footer {
+    background-color: #fff;
+    border: none; }
+    .panel-post .panel-footer ul {
+      margin: 0;
+      padding: 0;
+      list-style: none; }
+      .panel-post .panel-footer ul li {
+        display: inline-block;
+        margin-right: 12px; }
+        .panel-post .panel-footer ul li:last-child {
+          float: right;
+          margin-right: 0; }
+        .panel-post .panel-footer ul li a {
+          color: #777;
+          text-decoration: none; }
+          .panel-post .panel-footer ul li a i {
+            font-size: 16px;
+            position: relative;
+            top: 4px;
+            margin-right: 2px; }
+          .panel-post .panel-footer ul li a span {
+            font-size: 13px; }
+    .panel-post .panel-footer .form-group {
+      margin-bottom: 5px;
+      margin-top: 20px; }
+
 /* Maps ======================================== */
 /* Google Maps */
 .gmap {
@@ -8106,4 +8211,3 @@ html.ie11 .dropdown-menu ul.menu li a {
 
 html.ie11 .bs-searchbox .form-control {
   width: 90%; }
-
