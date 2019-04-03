@@ -91,7 +91,18 @@ namespace AbpCompanyName.AbpProjectName.Web.Host.Startup
 
             app.UseCors(_defaultCorsPolicyName); // Enable CORS!
 
-            app.UseStaticFiles();
+            app.UseStaticFiles(new StaticFileOptions
+            {
+                OnPrepareResponse = context =>
+                {
+                    if (context.File.Name == "index.html")
+                    {
+                        context.Context.Response.Headers.Add("Cache-Control", "no-cache, no-store, must-revalidate");
+                        context.Context.Response.Headers.Add("Expires", "-1");
+                        context.Context.Response.Headers.Add("Pragma", "no-cache");                      
+                    }
+                }
+            });
 
             app.UseAuthentication();
 
