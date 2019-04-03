@@ -71,7 +71,7 @@ var abp = abp || {};
                 if (xhrTenancyName.readyState === XMLHttpRequest.DONE && xhrTenancyName.status === 200) {
                     var responseJSON = JSON.parse(xhrTenancyName.responseText);
                     var result = responseJSON.result;
-                    if (result.state === 1) { // Tenant exists and active.
+                    if (result.state === 1 || result.state === "Available") { // Tenant exists and active.
                         loginUserInternal(result.tenantId, callback); // Login for tenant    
                     } else {
                         alert('There is no such tenant or tenant is not active !');
