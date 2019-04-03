@@ -1,17 +1,17 @@
-import { Component, Injector } from '@angular/core';
-import { Router } from '@angular/router';
-import { finalize } from 'rxjs/operators';
-import { AppComponentBase } from '@shared/app-component-base';
-import { accountModuleAnimation } from '@shared/animations/routerTransition';
+import { Component, Injector } from "@angular/core";
+import { Router } from "@angular/router";
+import { finalize } from "rxjs/operators";
+import { AppComponentBase } from "@shared/app-component-base";
+import { accountModuleAnimation } from "@shared/animations/routerTransition";
 import {
   AccountServiceProxy,
   RegisterInput,
   RegisterOutput
-} from '@shared/service-proxies/service-proxies';
-import { LoginService } from '../login/login.service';
+} from "@shared/service-proxies/service-proxies";
+import { LoginService } from "../login/login.service";
 
 @Component({
-  templateUrl: './register.component.html',
+  templateUrl: "./register.component.html",
   animations: [accountModuleAnimation()],
   styles: [
     `
@@ -38,7 +38,7 @@ export class RegisterComponent extends AppComponentBase {
   }
 
   back(): void {
-    this._router.navigate(['/login']);
+    this._router.navigate(["/login"]);
   }
 
   save(): void {
@@ -52,8 +52,8 @@ export class RegisterComponent extends AppComponentBase {
       )
       .subscribe((result: RegisterOutput) => {
         if (!result.canLogin) {
-          this.notify.success(this.l('SuccessfullyRegistered'));
-          this._router.navigate(['/login']);
+          this.notify.success(this.l("SuccessfullyRegistered"));
+          this._router.navigate(["/login"]);
           return;
         }
 

@@ -1,21 +1,21 @@
-import { Component, Injector, Inject, OnInit, Optional } from '@angular/core';
+import { Component, Injector, Inject, OnInit, Optional } from "@angular/core";
 import {
   MatDialogRef,
   MAT_DIALOG_DATA,
   MatCheckboxChange
-} from '@angular/material';
-import { finalize } from 'rxjs/operators';
-import * as _ from 'lodash';
-import { AppComponentBase } from '@shared/app-component-base';
+} from "@angular/material";
+import { finalize } from "rxjs/operators";
+import * as _ from "lodash";
+import { AppComponentBase } from "@shared/app-component-base";
 import {
   RoleServiceProxy,
   GetRoleForEditOutput,
   RoleDto,
   PermissionDto
-} from '@shared/service-proxies/service-proxies';
+} from "@shared/service-proxies/service-proxies";
 
 @Component({
-  templateUrl: 'edit-role-dialog.component.html',
+  templateUrl: "edit-role-dialog.component.html",
   styles: [
     `
       mat-form-field {
@@ -98,7 +98,7 @@ export class EditRoleDialogComponent extends AppComponentBase
         })
       )
       .subscribe(() => {
-        this.notify.info(this.l('SavedSuccessfully'));
+        this.notify.info(this.l("SavedSuccessfully"));
         this.close(true);
       });
   }

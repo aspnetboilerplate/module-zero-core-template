@@ -1,14 +1,14 @@
-import { Component, Injector, OnInit, Inject, Optional } from '@angular/core';
-import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material';
-import { finalize } from 'rxjs/operators';
-import { AppComponentBase } from '@shared/app-component-base';
+import { Component, Injector, OnInit, Inject, Optional } from "@angular/core";
+import { MatDialogRef, MAT_DIALOG_DATA } from "@angular/material";
+import { finalize } from "rxjs/operators";
+import { AppComponentBase } from "@shared/app-component-base";
 import {
   TenantServiceProxy,
   TenantDto
-} from '@shared/service-proxies/service-proxies';
+} from "@shared/service-proxies/service-proxies";
 
 @Component({
-  templateUrl: 'edit-tenant-dialog.component.html',
+  templateUrl: "edit-tenant-dialog.component.html",
   styles: [
     `
       mat-form-field {
@@ -51,7 +51,7 @@ export class EditTenantDialogComponent extends AppComponentBase
         })
       )
       .subscribe(() => {
-        this.notify.info(this.l('SavedSuccessfully'));
+        this.notify.info(this.l("SavedSuccessfully"));
         this.close(true);
       });
   }

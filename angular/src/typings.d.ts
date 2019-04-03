@@ -19,13 +19,13 @@ declare var Layout: any; // Related to Metronic
 declare var Push: any;
 
 interface JQuery {
-    countTo(...any): any;
+  countTo(...any): any;
 }
 
 interface JQuery {
-    sparkline(...any): any;
+  sparkline(...any): any;
 }
 
 interface JQueryStatic {
-    AdminBSB: any;
+  AdminBSB: any;
 }

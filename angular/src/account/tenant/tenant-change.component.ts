@@ -1,15 +1,15 @@
-﻿import { Component, OnInit, Injector } from '@angular/core';
-import { MatDialog } from '@angular/material';
-import { AppComponentBase } from '@shared/app-component-base';
-import { TenantChangeDialogComponent } from './tenant-change-dialog.component';
+﻿import { Component, OnInit, Injector } from "@angular/core";
+import { MatDialog } from "@angular/material";
+import { AppComponentBase } from "@shared/app-component-base";
+import { TenantChangeDialogComponent } from "./tenant-change-dialog.component";
 
 @Component({
-  selector: 'tenant-change',
-  templateUrl: './tenant-change.component.html'
+  selector: "tenant-change",
+  templateUrl: "./tenant-change.component.html"
 })
 export class TenantChangeComponent extends AppComponentBase implements OnInit {
-  tenancyName = '';
-  name = '';
+  tenancyName = "";
+  name = "";
 
   constructor(injector: Injector, private _dialog: MatDialog) {
     super(injector);
@@ -28,10 +28,10 @@ export class TenantChangeComponent extends AppComponentBase implements OnInit {
 
   showChangeModal(): void {
     this._dialog.open(TenantChangeDialogComponent, {
-      width: '500px',
-      height: '240px',
+      width: "500px",
+      height: "240px",
       position: {
-        top: '50px'
+        top: "50px"
       }
     });
   }

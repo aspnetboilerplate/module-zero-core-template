@@ -1,15 +1,15 @@
-import { Component, OnInit, Optional, Injector, Inject } from '@angular/core';
-import { MAT_DIALOG_DATA, MatDialogRef } from '@angular/material';
-import { AppComponentBase } from '@shared/app-component-base';
-import { finalize } from 'rxjs/operators';
+import { Component, OnInit, Optional, Injector, Inject } from "@angular/core";
+import { MAT_DIALOG_DATA, MatDialogRef } from "@angular/material";
+import { AppComponentBase } from "@shared/app-component-base";
+import { finalize } from "rxjs/operators";
 import {
   UserServiceProxy,
   ResetPasswordDto
-} from '@shared/service-proxies/service-proxies';
+} from "@shared/service-proxies/service-proxies";
 
 @Component({
-  selector: 'app-reset-password',
-  templateUrl: './reset-password.component.html'
+  selector: "app-reset-password",
+  templateUrl: "./reset-password.component.html"
 })
 export class ResetPasswordDialogComponent extends AppComponentBase
   implements OnInit {
@@ -45,7 +45,7 @@ export class ResetPasswordDialogComponent extends AppComponentBase
         })
       )
       .subscribe(() => {
-        this.notify.info('Password Reset');
+        this.notify.info("Password Reset");
         this.close(true);
       });
   }

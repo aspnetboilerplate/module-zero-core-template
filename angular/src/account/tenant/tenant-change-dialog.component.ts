@@ -1,16 +1,16 @@
-import { Component, Injector } from '@angular/core';
-import { MatDialogRef } from '@angular/material';
-import { finalize } from 'rxjs/operators';
-import { AppComponentBase } from '@shared/app-component-base';
-import { AccountServiceProxy } from '@shared/service-proxies/service-proxies';
-import { AppTenantAvailabilityState } from '@shared/AppEnums';
+import { Component, Injector } from "@angular/core";
+import { MatDialogRef } from "@angular/material";
+import { finalize } from "rxjs/operators";
+import { AppComponentBase } from "@shared/app-component-base";
+import { AccountServiceProxy } from "@shared/service-proxies/service-proxies";
+import { AppTenantAvailabilityState } from "@shared/AppEnums";
 import {
   IsTenantAvailableInput,
   IsTenantAvailableOutput
-} from '@shared/service-proxies/service-proxies';
+} from "@shared/service-proxies/service-proxies";
 
 @Component({
-  templateUrl: './tenant-change-dialog.component.html',
+  templateUrl: "./tenant-change-dialog.component.html",
   styles: [
     `
       mat-form-field {
@@ -21,7 +21,7 @@ import {
 })
 export class TenantChangeDialogComponent extends AppComponentBase {
   saving = false;
-  tenancyName = '';
+  tenancyName = "";
 
   constructor(
     injector: Injector,
@@ -58,11 +58,11 @@ export class TenantChangeDialogComponent extends AppComponentBase {
             location.reload();
             return;
           case AppTenantAvailabilityState.InActive:
-            this.message.warn(this.l('TenantIsNotActive', this.tenancyName));
+            this.message.warn(this.l("TenantIsNotActive", this.tenancyName));
             break;
           case AppTenantAvailabilityState.NotFound:
             this.message.warn(
-              this.l('ThereIsNoTenantDefinedWithName{0}', this.tenancyName)
+              this.l("ThereIsNoTenantDefinedWithName{0}", this.tenancyName)
             );
             break;
         }

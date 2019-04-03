@@ -1,16 +1,16 @@
-import { Component, Injector, OnInit } from '@angular/core';
-import { MatDialogRef, MatCheckboxChange } from '@angular/material';
-import { finalize } from 'rxjs/operators';
-import * as _ from 'lodash';
-import { AppComponentBase } from '@shared/app-component-base';
+import { Component, Injector, OnInit } from "@angular/core";
+import { MatDialogRef, MatCheckboxChange } from "@angular/material";
+import { finalize } from "rxjs/operators";
+import * as _ from "lodash";
+import { AppComponentBase } from "@shared/app-component-base";
 import {
   UserServiceProxy,
   CreateUserDto,
   RoleDto
-} from '@shared/service-proxies/service-proxies';
+} from "@shared/service-proxies/service-proxies";
 
 @Component({
-  templateUrl: './create-user-dialog.component.html',
+  templateUrl: "./create-user-dialog.component.html",
   styles: [
     `
       mat-form-field {
@@ -88,7 +88,7 @@ export class CreateUserDialogComponent extends AppComponentBase
         })
       )
       .subscribe(() => {
-        this.notify.info(this.l('SavedSuccessfully'));
+        this.notify.info(this.l("SavedSuccessfully"));
         this.close(true);
       });
   }

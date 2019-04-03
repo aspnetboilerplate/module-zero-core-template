@@ -1,53 +1,57 @@
-import { Component, ViewContainerRef, Injector, OnInit, AfterViewInit, ChangeDetectorRef } from '@angular/core';
-import { AppComponentBase } from '@shared/app-component-base';
+import {
+  Component,
+  ViewContainerRef,
+  Injector,
+  OnInit,
+  AfterViewInit,
+  ChangeDetectorRef
+} from "@angular/core";
+import { AppComponentBase } from "@shared/app-component-base";
 
-import { SignalRAspNetCoreHelper } from '@shared/helpers/SignalRAspNetCoreHelper';
+import { SignalRAspNetCoreHelper } from "@shared/helpers/SignalRAspNetCoreHelper";
 
 @Component({
-    templateUrl: './app.component.html'
+  templateUrl: "./app.component.html"
 })
-export class AppComponent extends AppComponentBase implements OnInit, AfterViewInit {
+export class AppComponent extends AppComponentBase
+  implements OnInit, AfterViewInit {
+  private viewContainerRef: ViewContainerRef;
 
-    private viewContainerRef: ViewContainerRef;
+  constructor(injector: Injector) {
+    super(injector);
+  }
 
-    constructor(
-        injector: Injector
-    ) {
-        super(injector);
-    }
+  ngOnInit(): void {
+    SignalRAspNetCoreHelper.initSignalR();
 
-    ngOnInit(): void {
+    abp.event.on("abp.notifications.received", userNotification => {
+      abp.notifications.showUiNotifyForUserNotification(userNotification);
 
-        SignalRAspNetCoreHelper.initSignalR();
+      // Desktop notification
+      Push.create("AbpZeroTemplate", {
+        body: userNotification.notification.data.message,
+        icon: abp.appPath + "assets/app-logo-small.png",
+        timeout: 6000,
+        onClick: function() {
+          window.focus();
+          this.close();
+        }
+      });
+    });
+  }
 
-        abp.event.on('abp.notifications.received', userNotification => {
-            abp.notifications.showUiNotifyForUserNotification(userNotification);
+  ngAfterViewInit(): void {
+    $.AdminBSB.activateAll();
+    $.AdminBSB.activateDemo();
+  }
 
-            // Desktop notification
-            Push.create('AbpZeroTemplate', {
-                body: userNotification.notification.data.message,
-                icon: abp.appPath + 'assets/app-logo-small.png',
-                timeout: 6000,
-                onClick: function () {
-                    window.focus();
-                    this.close();
-                }
-            });
-        });
-    }
+  onResize(event) {
+    // exported from $.AdminBSB.activateAll
+    $.AdminBSB.leftSideBar.setMenuHeight();
+    $.AdminBSB.leftSideBar.checkStatuForResize(false);
 
-    ngAfterViewInit(): void {
-        $.AdminBSB.activateAll();
-        $.AdminBSB.activateDemo();
-    }
-
-    onResize(event) {
-        // exported from $.AdminBSB.activateAll
-        $.AdminBSB.leftSideBar.setMenuHeight();
-        $.AdminBSB.leftSideBar.checkStatuForResize(false);
-
-        // exported from $.AdminBSB.activateDemo
-        $.AdminBSB.demo.setSkinListHeightAndScroll();
-        $.AdminBSB.demo.setSettingListHeightAndScroll();
-    }
+    // exported from $.AdminBSB.activateDemo
+    $.AdminBSB.demo.setSkinListHeightAndScroll();
+    $.AdminBSB.demo.setSettingListHeightAndScroll();
+  }
 }

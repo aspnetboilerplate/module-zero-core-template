@@ -1,14 +1,14 @@
-import { Component, Injector, OnInit } from '@angular/core';
-import { MatDialogRef } from '@angular/material';
-import { finalize } from 'rxjs/operators';
-import { AppComponentBase } from '@shared/app-component-base';
+import { Component, Injector, OnInit } from "@angular/core";
+import { MatDialogRef } from "@angular/material";
+import { finalize } from "rxjs/operators";
+import { AppComponentBase } from "@shared/app-component-base";
 import {
   CreateTenantDto,
   TenantServiceProxy
-} from '@shared/service-proxies/service-proxies';
+} from "@shared/service-proxies/service-proxies";
 
 @Component({
-  templateUrl: 'create-tenant-dialog.component.html',
+  templateUrl: "create-tenant-dialog.component.html",
   styles: [
     `
       mat-form-field {
@@ -48,7 +48,7 @@ export class CreateTenantDialogComponent extends AppComponentBase
         })
       )
       .subscribe(() => {
-        this.notify.info(this.l('SavedSuccessfully'));
+        this.notify.info(this.l("SavedSuccessfully"));
         this.close(true);
       });
   }
