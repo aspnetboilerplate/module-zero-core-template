@@ -91,5 +91,11 @@
     <text name="StartTyping">Comece a escrever</text>
     <text name="Skins">Temas</text>
     <text name="Settings">Configurações</text>
+    <text name="Filter">Filtro</text>
+    <text name="Filters">Filtros</text>
+    <text name="Load">Carregar</text>
+    <text name="Search">Pesquisar</text>
+    <text name="Result">Resultado</text>
+    <text name="All">Tudo</text>
   </texts>
 </localizationDictionary>
