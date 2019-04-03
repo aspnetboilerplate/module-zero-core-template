@@ -3,6 +3,7 @@ import { AppComponentBase } from '@shared/app-component-base';
 import { UserServiceProxy, ChangeUserLanguageDto } from '@shared/service-proxies/service-proxies';
 
 import * as _ from 'lodash';
+import { DateAdapter } from '@angular/material';
 
 @Component({
   templateUrl: './topbar-languageswitch.component.html',
@@ -16,7 +17,8 @@ export class TopBarLanguageSwitchComponent extends AppComponentBase implements O
 
   constructor(
       injector: Injector,
-      private _userService: UserServiceProxy
+      private _userService: UserServiceProxy,
+      private _dateAdapter: DateAdapter<any>
   ) {
     super(injector);
   }
@@ -24,6 +26,7 @@ export class TopBarLanguageSwitchComponent extends AppComponentBase implements O
   ngOnInit() {
     this.languages = _.filter(this.localization.languages, l => !l.isDisabled);
     this.currentLanguage = this.localization.currentLanguage;
+    this._dateAdapter.setLocale(this.currentLanguage.name);
   }
 
   changeLanguage(languageName: string): void {
@@ -37,7 +40,6 @@ export class TopBarLanguageSwitchComponent extends AppComponentBase implements O
               new Date(new Date().getTime() + 5 * 365 * 86400000), // 5 year
               abp.appPath
           );
-
           window.location.reload();
       });
   }
