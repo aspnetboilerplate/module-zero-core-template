@@ -3,6 +3,7 @@ using Microsoft.Extensions.Configuration;
 using Abp.Modules;
 using Abp.Reflection.Extensions;
 using AbpCompanyName.AbpProjectName.Configuration;
+using Abp.Configuration.Startup;
 
 namespace AbpCompanyName.AbpProjectName.Web.Host.Startup
 {
@@ -17,6 +18,13 @@ namespace AbpCompanyName.AbpProjectName.Web.Host.Startup
         {
             _env = env;
             _appConfiguration = env.GetAppConfiguration();
+        }
+
+        public override void PreInitialize()
+        {
+#if DEBUG
+            Configuration.Modules.AbpWebCommon().SendAllExceptionsToClients = true;
+#endif
         }
 
         public override void Initialize()

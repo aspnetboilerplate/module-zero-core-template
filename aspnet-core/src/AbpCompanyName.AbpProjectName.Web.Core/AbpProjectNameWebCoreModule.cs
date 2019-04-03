@@ -12,6 +12,7 @@ using Abp.Zero.Configuration;
 using AbpCompanyName.AbpProjectName.Authentication.JwtBearer;
 using AbpCompanyName.AbpProjectName.Configuration;
 using AbpCompanyName.AbpProjectName.EntityFrameworkCore;
+using Abp.Configuration.Startup;
 
 namespace AbpCompanyName.AbpProjectName
 {
@@ -47,6 +48,10 @@ namespace AbpCompanyName.AbpProjectName
                  );
 
             ConfigureTokenAuth();
+
+#if DEBUG
+            Configuration.Modules.AbpWebCommon().SendAllExceptionsToClients = true;
+#endif
         }
 
         private void ConfigureTokenAuth()
