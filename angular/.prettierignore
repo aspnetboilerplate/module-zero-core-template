@@ -1,0 +1,6 @@
+src/shared/service-proxies/service-proxies.ts
+src/bsb-theme/
+src/**/.gitkeep
+src/**/*.woff2
+src/**/*.png
+src/**/*.ico

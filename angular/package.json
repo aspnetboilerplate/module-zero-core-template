@@ -10,7 +10,8 @@
     "test": "ng test",
     "pree2e": "webdriver-manager update --standalone false --gecko false",
     "e2e": "protractor",
-    "lint": "tslint --force --project src/tsconfig.json src/**/*.ts -t verbose"
+    "lint": "tslint --force --project src/tsconfig.json src/**/*.ts -t verbose",
+    "prettier": "prettier --write ./src/**/*"
   },
   "private": true,
   "dependencies": {
@@ -87,9 +88,11 @@
     "karma-jasmine": "^2.0.1",
     "karma-jasmine-html-reporter": "^1.4.0",
     "nswag": "^12.0.7",
+    "prettier": "^1.16.4",
     "protractor": "^5.1.1",
     "ts-node": "^7.0.1",
     "tslint": "^5.7.0",
+    "tslint-config-prettier": "^1.18.0",
     "typescript": "3.1.6",
     "webpack-bundle-analyzer": "^3.0.3"
   }
