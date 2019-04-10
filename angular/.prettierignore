@@ -4,3 +4,6 @@ src/**/.gitkeep
 src/**/*.woff2
 src/**/*.png
 src/**/*.ico
+src/**/*.svg
+src/**/*.xml
+src/**/*.min.js
