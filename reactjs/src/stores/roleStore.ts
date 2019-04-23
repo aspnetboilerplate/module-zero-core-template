@@ -27,7 +27,6 @@ class RoleStore {
         name: '',
         displayName: '',
         description: '',
-        isStatic: false,
         id: 0,
       },
       permissions: [{ name: '', displayName: '', description: '' }],

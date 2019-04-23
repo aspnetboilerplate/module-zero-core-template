@@ -1,8 +1,8 @@
 export interface GetRoleAsyncOutputItem {
   name: string;
   displayName: string;
-  isStatic: boolean;
   isDefault: boolean;
+  isStatic: boolean;
   creationTime: Date;
   id: number;
 }

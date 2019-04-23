@@ -69,7 +69,7 @@ class Role extends AppComponentBase<IRoleProps, IRoleState> {
 
     this.formRef.props.form.setFieldsValue({
       ...this.props.roleStore.roleEdit.role,
-      permissions: this.props.roleStore.roleEdit.grantedPermissionNames,
+      grantedPermissions: this.props.roleStore.roleEdit.grantedPermissionNames,
     });
   }
 

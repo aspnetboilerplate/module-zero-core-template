@@ -20,7 +20,7 @@
                         </FormItem>
                       </TabPane>
                     <TabPane :label="L('RolePermission')" name="permission">
-                        <CheckboxGroup v-model="role.permissions">
+                        <CheckboxGroup v-model="role.grantedPermissions">
                             <Checkbox :label="permission.name" v-for="permission in permissions" :key="permission.name"><span>{{permission.displayName}}</span></Checkbox>
                         </CheckboxGroup>
                     </TabPane>
@@ -48,8 +48,8 @@
         save(){
             (this.$refs.roleForm as any).validate(async (valid:boolean)=>{
                 if(valid){
-                    if(!this.role.permissions){
-                        this.role.permissions=[];
+                    if(!this.role.grantedPermissions){
+                        this.role.grantedPermissions=[];
                     }
                     await this.$store.dispatch({
                         type:'role/create',

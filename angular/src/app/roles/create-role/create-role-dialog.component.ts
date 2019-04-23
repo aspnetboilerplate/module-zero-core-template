@@ -81,7 +81,7 @@ export class CreateRoleDialogComponent extends AppComponentBase
   save(): void {
     this.saving = true;
 
-    this.role.permissions = this.getCheckedPermissions();
+    this.role.grantedPermissions = this.getCheckedPermissions();
 
     const role_ = new CreateRoleDto();
     role_.init(this.role);

@@ -11,12 +11,12 @@
         }
 
         var role = _$form.serializeFormToObject(); //serializeFormToObject is defined in main.js
-        role.permissions = [];
+        role.grantedPermissions = [];
         var _$permissionCheckboxes = $("input[name='permission']:checked:visible");
         if (_$permissionCheckboxes) {
             for (var permissionIndex = 0; permissionIndex < _$permissionCheckboxes.length; permissionIndex++) {
                 var _$permissionCheckbox = $(_$permissionCheckboxes[permissionIndex]);
-                role.permissions.push(_$permissionCheckbox.val());
+                role.grantedPermissions.push(_$permissionCheckbox.val());
             }
         }
         
