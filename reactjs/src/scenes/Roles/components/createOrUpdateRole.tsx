@@ -1,5 +1,5 @@
 import * as React from 'react';
-import { Form, Input, Checkbox, Modal, Tabs } from 'antd';
+import { Form, Input, Modal, Tabs } from 'antd';
 import FormItem from 'antd/lib/form/FormItem';
 import CheckboxGroup from 'antd/lib/checkbox/Group';
 import { GetAllPermissionsOutput } from 'src/services/role/dto/getAllPermissionsOutput';
@@ -89,15 +89,12 @@ class CreateOrUpdateRole extends React.Component<ICreateOrUpdateRoleProps> {
               {getFieldDecorator('displayName', { rules: rules.displayName })(<Input />)}
             </FormItem>
             <FormItem label={L('Description')} {...formItemLayout}>
-              {getFieldDecorator('description', { rules: rules.description })(<Input />)}
-            </FormItem>
-            <FormItem label={L('IsStatic')} {...tailFormItemLayout}>
-              {getFieldDecorator('isStatic', { rules: rules.isStatic, valuePropName: 'checked' })(<Checkbox />)}
+              {getFieldDecorator('description')(<Input />)}
             </FormItem>
           </TabPane>
           <TabPane tab={L('RolePermission')} key={'permission'}>
             <FormItem {...tailFormItemLayout}>
-              {getFieldDecorator('permissions', { valuePropName: 'value' })(<CheckboxGroup options={options} />)}
+              {getFieldDecorator('grantedPermissions', { valuePropName: 'value' })(<CheckboxGroup options={options} />)}
             </FormItem>
           </TabPane>
         </Tabs>

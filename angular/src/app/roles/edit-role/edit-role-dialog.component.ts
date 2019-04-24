@@ -88,7 +88,7 @@ export class EditRoleDialogComponent extends AppComponentBase
   save(): void {
     this.saving = true;
 
-    this.role.permissions = this.getCheckedPermissions();
+    this.role.grantedPermissions = this.getCheckedPermissions();
 
     this._roleService
       .update(this.role)

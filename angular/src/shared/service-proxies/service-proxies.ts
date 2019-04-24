@@ -1933,8 +1933,7 @@ export class CreateRoleDto implements ICreateRoleDto {
     displayName: string;
     normalizedName: string | undefined;
     description: string | undefined;
-    isStatic: boolean | undefined;
-    permissions: string[] | undefined;
+    grantedPermissions: string[] | undefined;
 
     constructor(data?: ICreateRoleDto) {
         if (data) {
@@ -1951,11 +1950,10 @@ export class CreateRoleDto implements ICreateRoleDto {
             this.displayName = data["displayName"];
             this.normalizedName = data["normalizedName"];
             this.description = data["description"];
-            this.isStatic = data["isStatic"];
-            if (data["permissions"] && data["permissions"].constructor === Array) {
-                this.permissions = [];
-                for (let item of data["permissions"])
-                    this.permissions.push(item);
+            if (data["grantedPermissions"] && data["grantedPermissions"].constructor === Array) {
+                this.grantedPermissions = [];
+                for (let item of data["grantedPermissions"])
+                    this.grantedPermissions.push(item);
             }
         }
     }
@@ -1973,11 +1971,10 @@ export class CreateRoleDto implements ICreateRoleDto {
         data["displayName"] = this.displayName;
         data["normalizedName"] = this.normalizedName;
         data["description"] = this.description;
-        data["isStatic"] = this.isStatic;
-        if (this.permissions && this.permissions.constructor === Array) {
-            data["permissions"] = [];
-            for (let item of this.permissions)
-                data["permissions"].push(item);
+        if (this.grantedPermissions && this.grantedPermissions.constructor === Array) {
+            data["grantedPermissions"] = [];
+            for (let item of this.grantedPermissions)
+                data["grantedPermissions"].push(item);
         }
         return data; 
     }
@@ -1995,8 +1992,7 @@ export interface ICreateRoleDto {
     displayName: string;
     normalizedName: string | undefined;
     description: string | undefined;
-    isStatic: boolean | undefined;
-    permissions: string[] | undefined;
+    grantedPermissions: string[] | undefined;
 }
 
 export class RoleDto implements IRoleDto {
@@ -2004,8 +2000,7 @@ export class RoleDto implements IRoleDto {
     displayName: string;
     normalizedName: string | undefined;
     description: string | undefined;
-    isStatic: boolean | undefined;
-    permissions: string[] | undefined;
+    grantedPermissions: string[] | undefined;
     id: number | undefined;
 
     constructor(data?: IRoleDto) {
@@ -2023,11 +2018,10 @@ export class RoleDto implements IRoleDto {
             this.displayName = data["displayName"];
             this.normalizedName = data["normalizedName"];
             this.description = data["description"];
-            this.isStatic = data["isStatic"];
-            if (data["permissions"] && data["permissions"].constructor === Array) {
-                this.permissions = [];
-                for (let item of data["permissions"])
-                    this.permissions.push(item);
+            if (data["grantedPermissions"] && data["grantedPermissions"].constructor === Array) {
+                this.grantedPermissions = [];
+                for (let item of data["grantedPermissions"])
+                    this.grantedPermissions.push(item);
             }
             this.id = data["id"];
         }
@@ -2046,11 +2040,10 @@ export class RoleDto implements IRoleDto {
         data["displayName"] = this.displayName;
         data["normalizedName"] = this.normalizedName;
         data["description"] = this.description;
-        data["isStatic"] = this.isStatic;
-        if (this.permissions && this.permissions.constructor === Array) {
-            data["permissions"] = [];
-            for (let item of this.permissions)
-                data["permissions"].push(item);
+        if (this.grantedPermissions && this.grantedPermissions.constructor === Array) {
+            data["grantedPermissions"] = [];
+            for (let item of this.grantedPermissions)
+                data["grantedPermissions"].push(item);
         }
         data["id"] = this.id;
         return data; 
@@ -2069,8 +2062,7 @@ export interface IRoleDto {
     displayName: string;
     normalizedName: string | undefined;
     description: string | undefined;
-    isStatic: boolean | undefined;
-    permissions: string[] | undefined;
+    grantedPermissions: string[] | undefined;
     id: number | undefined;
 }
 
