@@ -25,7 +25,7 @@ dotnet publish --output (Join-Path $outputFolder "Host")
 
 Set-Location $ngFolder
 & yarn
-& ng build -prod
+& ng build --prod
 Copy-Item (Join-Path $ngFolder "dist") (Join-Path $outputFolder "ng") -Recurse
 Copy-Item (Join-Path $ngFolder "Dockerfile") (Join-Path $outputFolder "ng")
 
