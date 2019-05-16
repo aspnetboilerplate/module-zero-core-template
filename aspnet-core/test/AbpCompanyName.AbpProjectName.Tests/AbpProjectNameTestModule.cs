@@ -11,12 +11,14 @@ using Abp.Zero.Configuration;
 using Abp.Zero.EntityFrameworkCore;
 using AbpCompanyName.AbpProjectName.EntityFrameworkCore;
 using AbpCompanyName.AbpProjectName.Tests.DependencyInjection;
+using BoundedContext.Infrastructure;
 
 namespace AbpCompanyName.AbpProjectName.Tests
 {
     [DependsOn(
         typeof(AbpProjectNameApplicationModule),
         typeof(AbpProjectNameEntityFrameworkModule),
+        typeof(BoundedContextInfrastructureModule),
         typeof(AbpTestBaseModule)
         )]
     public class AbpProjectNameTestModule : AbpModule

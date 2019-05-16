@@ -1,0 +1,17 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <TargetFramework>netcoreapp2.2</TargetFramework>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\BoundedContext.Domain\BoundedContext.Domain.csproj" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Reference Include="Abp">
+      <HintPath>C:\Users\e.adel\.nuget\packages\abp\4.5.0\lib\netstandard2.0\Abp.dll</HintPath>
+    </Reference>
+  </ItemGroup>
+
+</Project>
