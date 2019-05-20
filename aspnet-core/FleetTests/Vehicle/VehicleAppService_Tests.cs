@@ -2,7 +2,6 @@
 using System.Linq.Dynamic.Core;
 using System.Threading.Tasks;
 using Abp.EntityHistory;
-using AbpCompanyName.AbpProjectName.Tests;
 using BoundedContext.Application;
 using BoundedContext.Application.Dtos;
 using Castle.MicroKernel.Registration;
@@ -90,18 +89,13 @@ namespace FleetTests.Vehicle
                 context.Vehicles.ShouldNotBeNull();
                 context.Vehicles.Count().ShouldBe(1);
             });
-
+            // needs to make sure there's entity history saved for all updated properties !
             Predicate<EntityChangeSet> predicate = s =>
             {
                 s.EntityChanges.Count.ShouldBe(1);
                 return true;
             };
              await _entityHistoryStore.Received().SaveAsync(Arg.Is<EntityChangeSet>(s => predicate(s)));
-
-             UsingDbContext((context) =>
-             {
-                 context.EntityChanges.Count(f => f.TenantId == tenantId).ShouldBe(0);
-             });
         }
 
     }
