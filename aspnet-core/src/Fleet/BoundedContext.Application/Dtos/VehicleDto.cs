@@ -1,8 +1,9 @@
 ﻿using System.ComponentModel.DataAnnotations;
+using Abp.Application.Services.Dto;
 
 namespace BoundedContext.Application.Dtos
 {
-    public class VehicleDto
+    public class VehicleDto :AuditedEntityDto<int?>
     {
         public VehicleDto()
         {

@@ -10,8 +10,7 @@ namespace BoundedContext.Infrastructure
         public void Configure(EntityTypeBuilder<Vehicle> builder)
         {
             builder.ToTable("Vehicles", "Fleet");
-            builder.Property(c => c.Id).ForSqlServerUseSequenceHiLo("VehiclesSeq", "Fleet");
-
+            
             //Value Objects Mapping
             builder.OwnsOne(v => v.VehicleManufacturingInfo, vmi =>
             {

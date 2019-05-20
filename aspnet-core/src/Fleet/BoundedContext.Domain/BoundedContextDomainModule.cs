@@ -1,7 +1,7 @@
 ﻿using Abp.Modules;
 using Abp.Reflection.Extensions;
 
-namespace BoundedContext.Infrastructure
+namespace BoundedContext.Domain
 {
     public class BoundedContextDomainModule : AbpModule
     {

@@ -1,7 +1,9 @@
-﻿using Abp.Modules;
+﻿using Abp.AutoMapper;
+using Abp.Modules;
 using Abp.Reflection.Extensions;
+using BoundedContext.Domain;
 
-namespace BoundedContext.Infrastructure
+namespace BoundedContext.Application
 {
     [DependsOn(
         typeof(BoundedContextDomainModule)

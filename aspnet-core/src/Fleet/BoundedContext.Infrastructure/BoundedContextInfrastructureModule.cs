@@ -1,6 +1,8 @@
 ﻿using Abp.EntityFrameworkCore.Configuration;
 using Abp.Modules;
 using Abp.Reflection.Extensions;
+using Abp.Zero.EntityFrameworkCore;
+using BoundedContext.Application;
 
 namespace BoundedContext.Infrastructure
 {
@@ -8,6 +10,7 @@ namespace BoundedContext.Infrastructure
     public class BoundedContextInfrastructureModule : AbpModule
     {
         public bool SkipDbContextRegistration { get; set; }
+        public bool SkipDbSeed { get; set; }
 
         public override void PreInitialize()
         {

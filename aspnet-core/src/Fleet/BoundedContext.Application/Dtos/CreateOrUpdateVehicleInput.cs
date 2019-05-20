@@ -5,7 +5,7 @@ using System.Text;
 
 namespace BoundedContext.Application.Dtos
 {
-    class CreateOrUpdateVehicleInput
+    public class CreateOrUpdateVehicleInput
     {
         [Required]
         public VehicleDto Vehicle { get; set; }

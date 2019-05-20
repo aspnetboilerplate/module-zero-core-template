@@ -61,7 +61,7 @@ namespace AbpCompanyName.AbpProjectName.Tests
         {
             UsingDbContext(AbpSession.TenantId, action);
         }
-
+        
         protected Task UsingDbContextAsync(Func<AbpProjectNameDbContext, Task> action)
         {
             return UsingDbContextAsync(AbpSession.TenantId, action);
@@ -88,7 +88,7 @@ namespace AbpCompanyName.AbpProjectName.Tests
                 }
             }
         }
-
+       
         protected async Task UsingDbContextAsync(int? tenantId, Func<AbpProjectNameDbContext, Task> action)
         {
             using (UsingTenantId(tenantId))

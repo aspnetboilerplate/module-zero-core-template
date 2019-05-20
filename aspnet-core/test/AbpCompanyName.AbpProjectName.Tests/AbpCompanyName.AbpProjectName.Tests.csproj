@@ -15,7 +15,6 @@
   <ItemGroup>
     <ProjectReference Include="..\..\src\AbpCompanyName.AbpProjectName.Application\AbpCompanyName.AbpProjectName.Application.csproj" />
     <ProjectReference Include="..\..\src\AbpCompanyName.AbpProjectName.EntityFrameworkCore\AbpCompanyName.AbpProjectName.EntityFrameworkCore.csproj" />
-    <ProjectReference Include="..\..\src\Fleet\BoundedContext.Infrastructure\BoundedContext.Infrastructure.csproj" />
   </ItemGroup>
 
   <ItemGroup>

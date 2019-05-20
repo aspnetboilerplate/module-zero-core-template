@@ -9,19 +9,15 @@ namespace BoundedContext.Application.Dtos
         {
             
         }
-        public VehicleLicenseInfoDto(long licenseTypeId, long usageTypeId, string plateNo, string number,
-            DateTime? expiryDate, BaseAttachmentDto attachment)
+        public VehicleLicenseInfoDto(long licenseTypeId, long usageTypeId, string plateNo, string number,DateTime? expiryDate)
         {
             LicenseTypeId = licenseTypeId;
             UsageTypeId = usageTypeId;
             ExpiryDate = expiryDate;
             PlateNo = plateNo;
-            Attachment = attachment;
             Number = number;
         }
-
-        public BaseAttachmentDto Attachment { get; set; }
-
+        
         public DateTime? ExpiryDate { get; set; }
         
         public string Number { get; set; }

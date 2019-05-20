@@ -1,13 +1,13 @@
 ﻿using System;
-using Microsoft.EntityFrameworkCore;
-using Microsoft.Extensions.DependencyInjection;
+using Abp.Dependency;
+using AbpCompanyName.AbpProjectName.Identity;
+using BoundedContext.Infrastructure;
 using Castle.MicroKernel.Registration;
 using Castle.Windsor.MsDependencyInjection;
-using Abp.Dependency;
-using AbpCompanyName.AbpProjectName.EntityFrameworkCore;
-using AbpCompanyName.AbpProjectName.Identity;
+using Microsoft.EntityFrameworkCore;
+using Microsoft.Extensions.DependencyInjection;
 
-namespace AbpCompanyName.AbpProjectName.Tests.DependencyInjection
+namespace FleetTests.DependencyInjection
 {
     public static class ServiceCollectionRegistrar
     {
@@ -23,18 +23,16 @@ namespace AbpCompanyName.AbpProjectName.Tests.DependencyInjection
 
             var databaseName = Guid.NewGuid().ToString();
 
-            var builder = new DbContextOptionsBuilder<AbpProjectNameDbContext>();
+            var builder = new DbContextOptionsBuilder<FleetDbContext>();
             builder.UseInMemoryDatabase(databaseName).UseApplicationServiceProvider(serviceProvider);
 
-
+            
             iocManager.IocContainer.Register(
                 Component
-                    .For<DbContextOptions<AbpProjectNameDbContext>>()
+                    .For<DbContextOptions<FleetDbContext>>()
                     .Instance(builder.Options)
                     .LifestyleSingleton()
             );
-
-
         }
     }
 }

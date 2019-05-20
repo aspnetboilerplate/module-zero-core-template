@@ -5,6 +5,10 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <PackageReference Include="Abp.AutoMapper" Version="4.5.0" />
+  </ItemGroup>
+
+  <ItemGroup>
     <ProjectReference Include="..\BoundedContext.Domain\BoundedContext.Domain.csproj" />
   </ItemGroup>
 

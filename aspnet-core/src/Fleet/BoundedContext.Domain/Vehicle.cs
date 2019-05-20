@@ -1,11 +1,14 @@
 ﻿using System;
 using System.Threading.Tasks;
+using Abp.Auditing;
 using Abp.Domain.Entities;
 using Abp.Domain.Entities.Auditing;
 using BoundedContext.Domain.ValueObjects;
 
 namespace BoundedContext.Domain
 {
+
+    [Audited]
     public class Vehicle : FullAuditedAggregateRoot, IMustHaveTenant
     {
         private Vehicle()
@@ -23,7 +26,6 @@ namespace BoundedContext.Domain
         public VehicleSpecs Specs { get; private set; }
         public DateTime? OutOfServiceDate { get; private set; }
         public DateTime? ExtensionDate { get; private set; }
-        public int TenantId { get; set; }
 
         public static async Task<Vehicle> CreateVehicle(int branchId, int fuel, int? odometer,
                                                         VehicleManufacturingInfo manufacturingInfo, VehiclePurchaseInfo purchaseInfo,
@@ -35,6 +37,7 @@ namespace BoundedContext.Domain
             vehicle.SetSpecs(vehicleSpex);
             vehicle.SetPurchaseInfo(purchaseInfo);
             vehicle.MarkVehicleAsReady();
+            vehicle.Odometer = odometer;
             return vehicle;
         }
 
@@ -85,5 +88,7 @@ namespace BoundedContext.Domain
         {
             Status = vehicleStatus;
         }
+
+        public int TenantId { get; set; }
     }
 }

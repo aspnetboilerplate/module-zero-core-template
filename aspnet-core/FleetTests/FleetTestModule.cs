@@ -7,26 +7,23 @@ using Abp.Modules;
 using Abp.Configuration.Startup;
 using Abp.Net.Mail;
 using Abp.TestBase;
-using Abp.Zero;
 using Abp.Zero.Configuration;
 using Abp.Zero.EntityFrameworkCore;
-using AbpCompanyName.AbpProjectName.EntityFrameworkCore;
-using AbpCompanyName.AbpProjectName.Tests.DependencyInjection;
+using BoundedContext.Infrastructure;
+using FleetTests.DependencyInjection;
 
 namespace AbpCompanyName.AbpProjectName.Tests
 {
     [DependsOn(
-        typeof(AbpProjectNameApplicationModule),
-        typeof(AbpProjectNameEntityFrameworkModule),
-        typeof(AbpTestBaseModule)
-        //typeof(AbpZeroCommonModule)
+        typeof(BoundedContextInfrastructureModule),
+        typeof(AbpProjectNameTestModule), typeof(AbpTestBaseModule)
         )]
-    public class AbpProjectNameTestModule : AbpModule
+    public class FleetTestModule : AbpModule
     {
-        public AbpProjectNameTestModule(AbpProjectNameEntityFrameworkModule abpProjectNameEntityFrameworkModule)
+        public FleetTestModule(BoundedContextInfrastructureModule infrastructureModule)
         {
-            abpProjectNameEntityFrameworkModule.SkipDbContextRegistration = true;
-            //abpProjectNameEntityFrameworkModule.SkipDbSeed = true;
+            infrastructureModule.SkipDbContextRegistration = true;
+            infrastructureModule.SkipDbSeed = true;
         }
 
         public override void PreInitialize()
@@ -40,9 +37,10 @@ namespace AbpCompanyName.AbpProjectName.Tests
             Configuration.BackgroundJobs.IsJobExecutionEnabled = false;
 
             // Use database for language management
-            Configuration.Modules.Zero().LanguageManagement.EnableDbLocalization();
+            //Configuration.Modules.Zero().LanguageManagement.EnableDbLocalization();
 
-            RegisterFakeService<AbpZeroDbMigrator<AbpProjectNameDbContext>>();
+            RegisterFakeService<AbpZeroDbMigrator<FleetDbContext>>();
+
 
             Configuration.ReplaceService<IEmailSender, NullEmailSender>(DependencyLifeStyle.Transient);
         }
