@@ -1,0 +1,39 @@
+{
+  "name": "famfamfam-flags",
+  "version": "1.0.0",
+  "homepage": "https://github.com/legacy-icons/famfamfam-flags",
+  "description": "FamFamFam Flags icon pack",
+  "keywords": [
+    "icon",
+    "flag",
+    "img",
+    "famfamfam",
+    "png",
+    "gif"
+  ],
+  "license": "MIT",
+  "authors": [
+    "t1st3 <contact@tiste.org> (http://www.tiste.org/)"
+  ],
+  "main": [
+    "./dist"
+  ],
+  "ignore": [
+    "bower_components",
+    ".bowerrc",
+    "node_modules",
+    "package.json",
+    "composer.json",
+    "composer.lock",
+    ".git",
+    ".gitignore",
+    ".gitattributes",
+    "gulpfile.js",
+    ".editorconfig",
+    ".travis.yml",
+    ".npmignore",
+    "src",
+    "nuget"
+  ],
+  "dependencies": {}
+}

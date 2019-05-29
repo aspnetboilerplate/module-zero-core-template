@@ -1,0 +1,32 @@
+{
+  "name": "abp-web-resources",
+  "version": "3.5.0",
+  "description": "ASP.NET Boilerplate web resources",
+  "main": "Abp/Framework/scripts/abp.js",
+  "dependencies": {},
+  "devDependencies": {
+    "del": "^2.2.0",
+    "gulp": "^3.9.0",
+    "gulp-shell": "^0.5.2",
+    "xml2js": "^0.4.16"
+  },
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/aspnetboilerplate/bower-abp-resources.git"
+  },
+  "keywords": [
+    "asp.net",
+    "boilerplate",
+    "web",
+    "resources"
+  ],
+  "author": "Halil İbrahim Kalkan",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/aspnetboilerplate/bower-abp-resources/issues"
+  },
+  "homepage": "http://www.aspnetboilerplate.com/"
+}

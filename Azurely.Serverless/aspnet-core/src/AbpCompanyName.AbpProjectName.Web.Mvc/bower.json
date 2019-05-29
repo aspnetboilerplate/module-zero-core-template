@@ -1,0 +1,33 @@
+{
+  "name": "asp.net",
+  "private": true,
+  "dependencies": {
+    "bootstrap": "3.3.7",
+    "jquery": "3.1.1",
+    "toastr": "^2.1.2",
+    "famfamfam-flags": "^1.0.0",
+    "font-awesome": "^4.7.0",
+    "json2": "*",
+    "moment": "^2.14.1",
+    "moment-timezone": "^0.5.5",
+    "jquery-validation": "^1.15.0",
+    "blockUI": "jquery.blockUI#*",
+    "spin.js": "^2.3.2",
+    "signalr": "^2.2.1",
+    "push.js": "v0.0.12",
+    "Waves": "waves#^0.7.5",
+    "animate.css": "^3.5.2",
+    "bootstrap-select": "^1.12.2",
+    "jquery-slimscroll": "^1.3.8",
+    "jquery-countTo": "^1.2.0",
+    "raphael": "^2.2.7",
+    "morris.js": "morrisjs#^0.5.1",
+    "chart.js": "chartjs#^2.6.0",
+    "jquery-sparkline": "^2.1.3",
+    "Flot": "jquery-flot#^0.8.3",
+    "abp-web-resources": "^3.5.0"
+  },
+  "resolutions": {
+    "jquery": ">=1.6.3"
+  }
+}

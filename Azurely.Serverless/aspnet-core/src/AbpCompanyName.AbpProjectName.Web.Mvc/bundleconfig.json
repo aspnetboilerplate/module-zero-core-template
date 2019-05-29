@@ -1,0 +1,152 @@
+[
+  {
+    "outputFileName": "wwwroot/view-resources/Views/_Bundles/account-layout.min.css",
+    "inputFiles": [
+      "wwwroot/fonts/roboto/roboto.css",
+      "wwwroot/fonts/material-icons/materialicons.css",
+      "wwwroot/lib/bootstrap/dist/css/bootstrap.css",
+      "wwwroot/lib/toastr/toastr.css",
+      "wwwroot/lib/famfamfam-flags/dist/sprite/famfamfam-flags.css",
+      "wwwroot/lib/font-awesome/css/font-awesome.css",
+      "wwwroot/lib/Waves/dist/waves.css",
+      "wwwroot/lib/animate.css/animate.css",
+      "wwwroot/css/materialize.css",
+      "wwwroot/css/style.css",
+      "wwwroot/view-resources/Views/Account/_Layout.css"
+    ]
+  },
+  {
+    "outputFileName": "wwwroot/view-resources/Views/_Bundles/account-layout.min.js",
+    "inputFiles": [
+      "wwwroot/lib/json2/json2.js",
+      "wwwroot/lib/jquery/dist/jquery.js",
+      "wwwroot/lib/bootstrap/dist/js/bootstrap.js",
+      "wwwroot/lib/moment/min/moment-with-locales.js",
+      "wwwroot/lib/jquery-validation/dist/jquery.validate.js",
+      "wwwroot/lib/blockUI/jquery.blockUI.js",
+      "wwwroot/lib/toastr/toastr.js",
+      "wwwroot/lib/sweetalert/dist/sweetalert.min.js",
+      "wwwroot/lib/spin.js/spin.js",
+      "wwwroot/lib/spin.js/jquery.spin.js",
+      "wwwroot/lib/Waves/dist/waves.js",
+      "wwwroot/lib/abp-web-resources/Abp/Framework/scripts/abp.js",
+      "wwwroot/lib/abp-web-resources/Abp/Framework/scripts/libs/abp.jquery.js",
+      "wwwroot/lib/abp-web-resources/Abp/Framework/scripts/libs/abp.toastr.js",
+      "wwwroot/lib/abp-web-resources/Abp/Framework/scripts/libs/abp.blockUI.js",
+      "wwwroot/lib/abp-web-resources/Abp/Framework/scripts/libs/abp.spin.js",
+      "wwwroot/lib/abp-web-resources/Abp/Framework/scripts/libs/abp.sweet-alert.js",
+      "wwwroot/js/admin.js",
+      "wwwroot/js/main.js"
+    ]
+  },
+  {
+    "outputFileName": "wwwroot/view-resources/Views/_Bundles/shared-layout.min.css",
+    "inputFiles": [
+      "wwwroot/fonts/roboto/roboto.css",
+      "wwwroot/fonts/material-icons/materialicons.css",
+      "wwwroot/lib/bootstrap/dist/css/bootstrap.css",
+      "wwwroot/lib/bootstrap-select/dist/css/bootstrap-select.css",
+      "wwwroot/lib/toastr/toastr.css",
+      "wwwroot/lib/famfamfam-flags/dist/sprite/famfamfam-flags.css",
+      "wwwroot/lib/font-awesome/css/font-awesome.css",
+      "wwwroot/lib/Waves/dist/waves.css",
+      "wwwroot/lib/animate.css/animate.css",
+      "wwwroot/css/materialize.css",
+      "wwwroot/css/style.css",
+      "wwwroot/css/themes/all-themes.css",
+      "wwwroot/view-resources/Views/Shared/_Layout.css"
+    ]
+  },
+  {
+    "outputFileName": "wwwroot/view-resources/Views/_Bundles/shared-layout.min.js",
+    "inputFiles": [
+      "wwwroot/lib/json2/json2.js",
+      "wwwroot/lib/jquery/dist/jquery.js",
+      "wwwroot/lib/bootstrap/dist/js/bootstrap.js",
+      "wwwroot/lib/moment/min/moment-with-locales.js",
+      "wwwroot/lib/jquery-validation/dist/jquery.validate.js",
+      "wwwroot/lib/blockUI/jquery.blockUI.js",
+      "wwwroot/lib/toastr/toastr.js",
+      "wwwroot/lib/sweetalert/dist/sweetalert.min.js",
+      "wwwroot/lib/spin.js/spin.js",
+      "wwwroot/lib/spin.js/jquery.spin.js",
+      "wwwroot/lib/bootstrap-select/dist/js/bootstrap-select.js",
+      "wwwroot/lib/jquery-slimscroll/jquery.slimscroll.js",
+      "wwwroot/lib/Waves/dist/waves.js",
+      "wwwroot/lib/push.js/push.js",
+      "wwwroot/lib/abp-web-resources/Abp/Framework/scripts/abp.js",
+      "wwwroot/lib/abp-web-resources/Abp/Framework/scripts/libs/abp.jquery.js",
+      "wwwroot/lib/abp-web-resources/Abp/Framework/scripts/libs/abp.toastr.js",
+      "wwwroot/lib/abp-web-resources/Abp/Framework/scripts/libs/abp.blockUI.js",
+      "wwwroot/lib/abp-web-resources/Abp/Framework/scripts/libs/abp.spin.js",
+      "wwwroot/lib/abp-web-resources/Abp/Framework/scripts/libs/abp.sweet-alert.js",
+      "wwwroot/js/admin.js",
+      "wwwroot/js/main.js",
+      "wwwroot/view-resources/Views/Shared/_Layout.js"
+    ]
+  },
+  {
+    "outputFileName": "wwwroot/view-resources/Views/_Bundles/home-index.min.js",
+    "inputFiles": [
+      "wwwroot/lib/jquery-countTo/jquery.countTo.js",
+      "wwwroot/lib/raphael/raphael.js",
+      "wwwroot/lib/morris.js/morris.js",
+      "wwwroot/lib/chart.js/dist/Chart.bundle.js",
+      "wwwroot/lib/Flot/jquery.flot.js",
+      "wwwroot/lib/Flot/jquery.flot.resize.js",
+      "wwwroot/lib/Flot/jquery.flot.pie.js",
+      "wwwroot/lib/Flot/jquery.flot.categories.js",
+      "wwwroot/lib/Flot/jquery.flot.time.js",
+      "wwwroot/lib/jquery-sparkline/dist/jquery.sparkline.js",
+      "wwwroot/view-resources/Views/Home/Index.js"
+    ]
+  },
+  {
+    "outputFileName": "wwwroot/view-resources/Views/Account/Login.min.css",
+    "inputFiles": [
+      "wwwroot/view-resources/Views/Account/Login.css"
+    ]
+  },
+  {
+    "outputFileName": "wwwroot/view-resources/Views/Account/Login.min.js",
+    "inputFiles": [
+      "wwwroot/view-resources/Views/Account/Login.js"
+    ]
+  },
+  {
+    "outputFileName": "wwwroot/view-resources/Views/Account/Register.min.js",
+    "inputFiles": [
+      "wwwroot/view-resources/Views/Account/Register.js"
+    ]
+  },
+  {
+    "outputFileName": "wwwroot/view-resources/Views/Users/Index.min.js",
+    "inputFiles": [
+      "wwwroot/view-resources/Views/Users/Index.js"
+    ]
+  },
+  {
+    "outputFileName": "wwwroot/view-resources/Views/Tenants/Index.min.js",
+    "inputFiles": [
+      "wwwroot/view-resources/Views/Tenants/Index.js"
+    ]
+  },
+  {
+    "outputFileName": "wwwroot/view-resources/Views/Roles/Index.min.js",
+    "inputFiles": [
+      "wwwroot/view-resources/Views/Roles/Index.js"
+    ]
+  },
+  {
+    "outputFileName": "wwwroot/view-resources/Views/Shared/Components/TenantChange/_ChangeModal.min.js",
+    "inputFiles": [
+      "wwwroot/view-resources/Views/Shared/Components/TenantChange/_ChangeModal.js"
+    ]
+  },
+  {
+    "outputFileName": "wwwroot/view-resources/Views/Shared/Components/TenantChange/Default.min.js",
+    "inputFiles": [
+      "wwwroot/view-resources/Views/Shared/Components/TenantChange/Default.js"
+    ]
+  }
+]

@@ -2,14 +2,14 @@
 $OutputEncoding = [Text.UTF8Encoding]::UTF8
 
 # company name placeholder 
-$oldCompanyName="AbpCompanyName"
+$oldCompanyName="Azurely"
 # your company name
-$newCompanyName="YourCompanyName"
+$newCompanyName="CompanyName"
 
 # project name placeholder
-$oldProjectName="AbpProjectName"
+$oldProjectName="Serverless"
 # your project name
-$newProjectName="YourProjectName"
+$newProjectName="ProjectName"
 
 # file type
 $fileType="FileInfo"
