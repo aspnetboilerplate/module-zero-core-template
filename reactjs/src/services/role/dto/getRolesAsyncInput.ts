@@ -1,3 +1,0 @@
-interface GetRoleAsyncInput {
-  permission: string;
-}
