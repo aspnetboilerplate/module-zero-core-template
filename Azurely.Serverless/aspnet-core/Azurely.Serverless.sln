@@ -23,7 +23,7 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Azurely.Serverless.Web.Mvc"
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Azurely.Serverless.EntityFrameworkCore", "src\Azurely.Serverless.EntityFrameworkCore\Azurely.Serverless.EntityFrameworkCore.csproj", "{E0580562-F8F2-4EBB-B07A-ABFC6F2C314F}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Azurely.Serverless", "..\..\angular\Azurely.Serverless.csproj", "{F5E97594-98A1-491C-8A0B-6E88CE5FEAC5}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Azurely.Serverless.Angular", "..\..\angular\Azurely.Serverless.Angular.csproj", "{F5E97594-98A1-491C-8A0B-6E88CE5FEAC5}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
