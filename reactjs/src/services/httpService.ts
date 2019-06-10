@@ -1,8 +1,11 @@
-import axios from 'axios';
 import AppConsts from './../lib/appconst';
+import { L } from '../lib/abpUtility';
 import { Modal } from 'antd';
-import { L } from 'src/lib/abpUtility';
+import axios from 'axios';
+
 const qs = require('qs');
+
+declare var abp: any;
 
 const http = axios.create({
   baseURL: AppConsts.remoteServiceBaseUrl,

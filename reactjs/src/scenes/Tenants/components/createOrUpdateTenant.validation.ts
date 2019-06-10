@@ -1,4 +1,4 @@
-import { L } from 'src/lib/abpUtility';
+import { L } from '../../../lib/abpUtility';
 
 const rules = {
   tenancyName: [{ required: true, message: L('ThisFieldIsRequired') }],

@@ -1,12 +1,14 @@
-import { Card, Col, Row, Button, Table, Tag, Dropdown, Menu, Modal, Input } from 'antd';
 import * as React from 'react';
+
+import { Button, Card, Col, Dropdown, Input, Menu, Modal, Row, Table, Tag } from 'antd';
+import { inject, observer } from 'mobx-react';
+
+import AppComponentBase from '../../components/AppComponentBase';
 import CreateOrUpdateUser from './components/createOrUpdateUser';
-import { EntityDto } from 'src/services/dto/entityDto';
-import { observer, inject } from 'mobx-react';
-import Stores from 'src/stores/storeIdentifier';
-import UserStore from 'src/stores/userStore';
-import { L } from 'src/lib/abpUtility';
-import AppComponentBase from 'src/components/AppComponentBase';
+import { EntityDto } from '../../services/dto/entityDto';
+import { L } from '../../lib/abpUtility';
+import Stores from '../../stores/storeIdentifier';
+import UserStore from '../../stores/userStore';
 
 export interface IUserProps {
   userStore: UserStore;
@@ -55,7 +57,7 @@ class User extends AppComponentBase<IUserProps, IUserState> {
   };
 
   async createOrUpdateModalOpen(entityDto: EntityDto) {
-    if (entityDto.id == 0) {
+    if (entityDto.id === 0) {
       await this.props.userStore.createUser();
       await this.props.userStore.getRoles();
     } else {
@@ -89,7 +91,7 @@ class User extends AppComponentBase<IUserProps, IUserState> {
       if (err) {
         return;
       } else {
-        if (this.state.userId == 0) {
+        if (this.state.userId === 0) {
           await this.props.userStore.create(values);
         } else {
           await this.props.userStore.update({ id: this.state.userId, ...values });
@@ -121,7 +123,7 @@ class User extends AppComponentBase<IUserProps, IUserState> {
         dataIndex: 'isActive',
         key: 'isActive',
         width: 150,
-        render: (text: boolean) => (text == true ? <Tag color="#2db7f5">{L('Yes')}</Tag> : <Tag color="red">{L('No')}</Tag>),
+        render: (text: boolean) => (text === true ? <Tag color="#2db7f5">{L('Yes')}</Tag> : <Tag color="red">{L('No')}</Tag>),
       },
       {
         title: L('Actions'),
@@ -132,12 +134,8 @@ class User extends AppComponentBase<IUserProps, IUserState> {
               trigger={['click']}
               overlay={
                 <Menu>
-                  <Menu.Item>
-                    <a onClick={() => this.createOrUpdateModalOpen({ id: item.id })}> {L('Edit')}</a>
-                  </Menu.Item>
-                  <Menu.Item>
-                    <a onClick={() => this.delete({ id: item.id })}>{L('Delete')}</a>
-                  </Menu.Item>
+                  <Menu.Item onClick={() => this.createOrUpdateModalOpen({ id: item.id })}>{L('Edit')}</Menu.Item>
+                  <Menu.Item onClick={() => this.delete({ id: item.id })}>{L('Delete')}</Menu.Item>
                 </Menu>
               }
               placement="bottomLeft"
@@ -191,13 +189,13 @@ class User extends AppComponentBase<IUserProps, IUserState> {
             xxl={{ span: 24, offset: 0 }}
           >
             <Table
-              rowKey={record => record.id}
+              rowKey={record => record.id.toString()}
               size={'default'}
               bordered={true}
               columns={columns}
-              pagination={{ pageSize: 10, total: users == undefined ? 0 : users.totalCount, defaultCurrent: 1 }}
-              loading={users == undefined ? true : false}
-              dataSource={users == undefined ? [] : users.items}
+              pagination={{ pageSize: 10, total: users === undefined ? 0 : users.totalCount, defaultCurrent: 1 }}
+              loading={users === undefined ? true : false}
+              dataSource={users === undefined ? [] : users.items}
               onChange={this.handleTableChange}
             />
           </Col>
@@ -210,7 +208,7 @@ class User extends AppComponentBase<IUserProps, IUserState> {
               modalVisible: false,
             })
           }
-          modalType={this.state.userId == 0 ? 'edit' : 'create'}
+          modalType={this.state.userId === 0 ? 'edit' : 'create'}
           onCreate={this.handleCreate}
           roles={this.props.userStore.roles}
         />

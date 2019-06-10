@@ -1,9 +1,12 @@
-import * as React from 'react';
-import { Col, Icon, Avatar, Menu, Dropdown, Badge, Row } from 'antd';
-import { Link } from 'react-router-dom';
-import LanguageSelect from '../LanguageSelect';
 import './index.less';
-import { L } from 'src/lib/abpUtility';
+
+import * as React from 'react';
+
+import { Avatar, Badge, Col, Dropdown, Icon, Menu, Row } from 'antd';
+
+import { L } from '../../lib/abpUtility';
+import LanguageSelect from '../LanguageSelect';
+import { Link } from 'react-router-dom';
 
 export interface IHeaderProps {
   collapsed?: any;
