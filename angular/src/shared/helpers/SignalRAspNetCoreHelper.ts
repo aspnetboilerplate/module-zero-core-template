@@ -16,6 +16,8 @@ export class SignalRAspNetCoreHelper {
             url: '/signalr'
         };
 
-        jQuery.getScript(AppConsts.appBaseUrl + '/assets/abp/abp.signalr-client.js');
+        const script = document.createElement('script');
+        script.src = AppConsts.appBaseUrl + '/assets/abp/abp.signalr-client.js';
+        document.head.appendChild(script);
     }
 }
