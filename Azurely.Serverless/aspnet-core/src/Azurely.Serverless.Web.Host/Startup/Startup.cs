@@ -136,32 +136,42 @@ namespace Azurely.Serverless.Web.Host.Startup
                 bool _IsApplicationInsightsEnabled = Convert.ToBoolean(_appConfiguration.GetSection("AppSettings").GetSection("IsApplicationInsightsEnabled").Value);
                 if (!_IsApplicationInsightsEnabled)
                 {
-                    RollingFileAppender appender = new RollingFileAppender();
-                    appender.Name = "RollingFileAppender";
-                    appender.File = String.Format(@"Logs/Log4Net.log");
-                    appender.AppendToFile = true;
-                    appender.RollingStyle = RollingFileAppender.RollingMode.Date;
-                    appender.MaxSizeRollBackups = 10;
-                    appender.MaximumFileSize = "1000MB";
-                    PatternLayout layout = new PatternLayout();
-                    layout.ConversionPattern = "%newline %date %-5level %logger – %message – %property %newline";
-                    layout.ActivateOptions();
-                    appender.Layout = layout;
-                    appender.ActivateOptions();
-                    _root.AddAppender(appender);
+                    AddRollingFileAppender(_root);
                 }
                 else
                 {
-                    TelemetryConfiguration.Active.InstrumentationKey = _appConfiguration.GetSection("AppSettings").GetSection("ApplicationInsightsInstrumentationKey").Value.ToString();
-                    Microsoft.ApplicationInsights.Log4NetAppender.ApplicationInsightsAppender _appender = new Microsoft.ApplicationInsights.Log4NetAppender.ApplicationInsightsAppender();
-                    PatternLayout layout = new PatternLayout();
-                    layout.ConversionPattern = "WEBHOST:%newline %date %-5level %logger – %message – %property %newline";
-                    layout.ActivateOptions();
-                    _appender.Layout = layout;
-                    _appender.ActivateOptions();
-                    _root.AddAppender(_appender);
+                    AddApplicationInsightsAppender(_root);
                 }
             }
+        }
+
+        private void AddApplicationInsightsAppender(log4net.Repository.Hierarchy.Logger root)
+        {
+            TelemetryConfiguration.Active.InstrumentationKey = _appConfiguration.GetSection("AppSettings").GetSection("ApplicationInsightsInstrumentationKey").Value.ToString();
+            Microsoft.ApplicationInsights.Log4NetAppender.ApplicationInsightsAppender _appender = new Microsoft.ApplicationInsights.Log4NetAppender.ApplicationInsightsAppender();
+            PatternLayout layout = new PatternLayout();
+            layout.ConversionPattern = "ASPNETCORE:%newline %date %-5level %logger – %message – %property %newline";
+            layout.ActivateOptions();
+            _appender.Layout = layout;
+            _appender.ActivateOptions();
+            root.AddAppender(_appender);
+        }
+
+        private void AddRollingFileAppender(log4net.Repository.Hierarchy.Logger root)
+        {
+            RollingFileAppender appender = new RollingFileAppender();
+            appender.Name = "RollingFileAppender";
+            appender.File = String.Format(@"Logs/Log4Net.log");
+            appender.AppendToFile = true;
+            appender.RollingStyle = RollingFileAppender.RollingMode.Date;
+            appender.MaxSizeRollBackups = 10;
+            appender.MaximumFileSize = "1000MB";
+            PatternLayout layout = new PatternLayout();
+            layout.ConversionPattern = "%newline %date %-5level %logger – %message – %property %newline";
+            layout.ActivateOptions();
+            appender.Layout = layout;
+            appender.ActivateOptions();
+            root.AddAppender(appender);
         }
     }
 }

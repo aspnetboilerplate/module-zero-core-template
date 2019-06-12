@@ -2,6 +2,7 @@
 using Microsoft.Extensions.Configuration;
 using Abp.Extensions;
 using Abp.Reflection.Extensions;
+using System.IO;
 
 namespace Azurely.Serverless.Configuration
 {
@@ -42,6 +43,16 @@ namespace Azurely.Serverless.Configuration
             }
 
             return builder.Build();
+        }
+
+        public static string GetAppSettingsValue(string AppSettingsKey)
+        {
+            var configurationBuilder = new ConfigurationBuilder();
+            configurationBuilder.AddJsonFile(Path.Combine(Directory.GetCurrentDirectory(), $"appsettings.json"), false)
+                .AddJsonFile(Path.Combine(Directory.GetCurrentDirectory(), $"appsettings.{System.Environment.GetEnvironmentVariable("ASPNETCORE_ENVIRONMENT")}.json"), false);
+            var root = configurationBuilder.Build();
+            string AppSettingsValue = root.GetSection("AppSettings").GetSection(AppSettingsKey).Value.ToString();
+            return AppSettingsValue;
         }
     }
 }
