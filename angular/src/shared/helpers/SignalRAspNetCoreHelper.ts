@@ -2,8 +2,7 @@ import { AppConsts } from '@shared/AppConsts';
 import { UtilsService } from '@abp/utils/utils.service';
 
 export class SignalRAspNetCoreHelper {
-    static initSignalR(): void {
-
+    static initSignalR(callback?: () => void): void {
         const encryptedAuthToken = new UtilsService().getCookieValue(AppConsts.authorization.encrptedAuthTokenName);
 
         abp.signalr = {
@@ -16,6 +15,13 @@ export class SignalRAspNetCoreHelper {
             url: '/signalr'
         };
 
-        jQuery.getScript(AppConsts.appBaseUrl + '/assets/abp/abp.signalr-client.js');
+        const script = document.createElement('script');
+        if (callback) {
+            script.onload = () => {
+                callback();
+            };
+        }
+        script.src = AppConsts.appBaseUrl + '/assets/abp/abp.signalr-client.js';
+        document.head.appendChild(script);
     }
 }
