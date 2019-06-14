@@ -1,12 +1,14 @@
 import * as React from 'react';
+
 import { Form, Input, Modal, Tabs } from 'antd';
-import FormItem from 'antd/lib/form/FormItem';
+
 import CheckboxGroup from 'antd/lib/checkbox/Group';
-import { GetAllPermissionsOutput } from 'src/services/role/dto/getAllPermissionsOutput';
-import { L } from 'src/lib/abpUtility';
-import rules from './createOrUpdateRole.validation';
 import { FormComponentProps } from 'antd/lib/form';
-import RoleStore from 'src/stores/roleStore';
+import FormItem from 'antd/lib/form/FormItem';
+import { GetAllPermissionsOutput } from '../../../services/role/dto/getAllPermissionsOutput';
+import { L } from '../../../lib/abpUtility';
+import RoleStore from '../../../stores/roleStore';
+import rules from './createOrUpdateRole.validation';
 
 const TabPane = Tabs.TabPane;
 
@@ -103,4 +105,4 @@ class CreateOrUpdateRole extends React.Component<ICreateOrUpdateRoleProps> {
   }
 }
 
-export default Form.create()(CreateOrUpdateRole);
+export default Form.create<ICreateOrUpdateRoleProps>()(CreateOrUpdateRole);

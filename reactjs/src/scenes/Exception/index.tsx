@@ -1,16 +1,15 @@
-import error404 from 'src/images/404.png';
-import error401 from 'src/images/401.png';
-import error500 from 'src/images/500.png';
-import { Link } from 'react-router-dom';
 import './index.less';
+
 import * as React from 'react';
-import { Row, Col, Avatar, Button } from 'antd';
+
+import { Avatar, Button, Col, Row } from 'antd';
+
+import { Link } from 'react-router-dom';
+import error401 from '../../images/401.png';
+import error404 from '../../images/404.png';
+import error500 from '../../images/500.png';
 
 class Exception extends React.Component<any, any> {
-  constructor(props: any) {
-    super(props);
-  }
-
   public render() {
     const exception = [
       { errorCode: '404', errorImg: error404, errorDescription: 'Sorry, the page you visited does not exist' },

@@ -1,8 +1,8 @@
 class RoleModel {
-  name: string;
-  displayName: string;
+  name!: string;
+  displayName!: string;
   description?: any;
-  id: number;
+  id!: number;
 }
 
 export default RoleModel;

@@ -1,12 +1,14 @@
-import { Card, Col, Row, Button, Table, Tag, Dropdown, Menu, Modal, Input } from 'antd';
 import * as React from 'react';
-import { EntityDto } from 'src/services/dto/entityDto';
-import CreateOrUpdateTenant from './components/createOrUpdateTenant';
+
+import { Button, Card, Col, Dropdown, Input, Menu, Modal, Row, Table, Tag } from 'antd';
 import { inject, observer } from 'mobx-react';
-import Stores from 'src/stores/storeIdentifier';
-import TenantStore from 'src/stores/tenantStore';
-import { L } from 'src/lib/abpUtility';
-import AppComponentBase from 'src/components/AppComponentBase';
+
+import AppComponentBase from '../../components/AppComponentBase';
+import CreateOrUpdateTenant from './components/createOrUpdateTenant';
+import { EntityDto } from '../../services/dto/entityDto';
+import { L } from '../../lib/abpUtility';
+import Stores from '../../stores/storeIdentifier';
+import TenantStore from '../../stores/tenantStore';
 
 export interface ITenantProps {
   tenantStore: TenantStore;
@@ -90,7 +92,7 @@ class Tenant extends AppComponentBase<ITenantProps, ITenantState> {
       if (err) {
         return;
       } else {
-        if (this.state.tenantId == 0) {
+        if (this.state.tenantId === 0) {
           await this.props.tenantStore.create(values);
         } else {
           await this.props.tenantStore.update({ id: this.state.tenantId, ...values });
@@ -121,7 +123,7 @@ class Tenant extends AppComponentBase<ITenantProps, ITenantState> {
         dataIndex: 'isActive',
         key: 'isActive',
         width: 150,
-        render: (text: boolean) => (text == true ? <Tag color="#2db7f5">{L('Yes')}</Tag> : <Tag color="red">{L('No')}</Tag>),
+        render: (text: boolean) => (text === true ? <Tag color="#2db7f5">{L('Yes')}</Tag> : <Tag color="red">{L('No')}</Tag>),
       },
       {
         title: L('Actions'),
@@ -132,12 +134,8 @@ class Tenant extends AppComponentBase<ITenantProps, ITenantState> {
               trigger={['click']}
               overlay={
                 <Menu>
-                  <Menu.Item>
-                    <a onClick={() => this.createOrUpdateModalOpen({ id: item.id })}>{L('Edit')}</a>
-                  </Menu.Item>
-                  <Menu.Item>
-                    <a onClick={() => this.delete({ id: item.id })}>{L('Delete')}</a>
-                  </Menu.Item>
+                  <Menu.Item onClick={() => this.createOrUpdateModalOpen({ id: item.id })}>{L('Edit')}</Menu.Item>
+                  <Menu.Item onClick={() => this.delete({ id: item.id })}>{L('Delete')}</Menu.Item>
                 </Menu>
               }
               placement="bottomLeft"
@@ -193,10 +191,10 @@ class Tenant extends AppComponentBase<ITenantProps, ITenantState> {
               rowKey="id"
               size={'default'}
               bordered={true}
-              pagination={{ pageSize: this.state.maxResultCount, total: tenants == undefined ? 0 : tenants.totalCount, defaultCurrent: 1 }}
+              pagination={{ pageSize: this.state.maxResultCount, total: tenants === undefined ? 0 : tenants.totalCount, defaultCurrent: 1 }}
               columns={columns}
-              loading={tenants == undefined ? true : false}
-              dataSource={tenants == undefined ? [] : tenants.items}
+              loading={tenants === undefined ? true : false}
+              dataSource={tenants === undefined ? [] : tenants.items}
               onChange={this.handleTableChange}
             />
           </Col>
@@ -209,7 +207,7 @@ class Tenant extends AppComponentBase<ITenantProps, ITenantState> {
               modalVisible: false,
             })
           }
-          modalType={this.state.tenantId == 0 ? 'edit' : 'create'}
+          modalType={this.state.tenantId === 0 ? 'edit' : 'create'}
           onCreate={this.handleCreate}
         />
       </Card>

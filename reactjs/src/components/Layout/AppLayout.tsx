@@ -1,14 +1,17 @@
-import * as React from 'react';
-import { Layout } from 'antd';
 import './AppLayout.less';
-import { Switch, Redirect } from 'react-router-dom';
-import Header from 'src/components/Header';
-import SiderMenu from 'src/components/SiderMenu';
-import Footer from 'src/components/Footer';
+
+import * as React from 'react';
+
+import { Redirect, Switch } from 'react-router-dom';
+
 import DocumentTitle from 'react-document-title';
-import ProtectedRoute from 'src/components/Router/ProtectedRoute';
-import utils from 'src/utils/utils';
+import Footer from '../../components/Footer';
+import Header from '../../components/Header';
+import { Layout } from 'antd';
+import ProtectedRoute from '../../components/Router/ProtectedRoute';
+import SiderMenu from '../../components/SiderMenu';
 import { appRouters } from '../Router/router.config';
+import utils from '../../utils/utils';
 
 const { Content } = Layout;
 

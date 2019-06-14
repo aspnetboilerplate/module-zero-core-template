@@ -1,9 +1,12 @@
-import * as React from 'react';
-import { Layout, Menu, Icon, Avatar, Col } from 'antd';
-import AbpLogo from 'src/images/abp-logo-long.png';
 import './index.less';
-import { appRouters } from 'src/components/Router/router.config';
-import { L, isGranted } from 'src/lib/abpUtility';
+
+import * as React from 'react';
+
+import { Avatar, Col, Icon, Layout, Menu } from 'antd';
+import { L, isGranted } from '../../lib/abpUtility';
+
+import AbpLogo from '../../images/abp-logo-long.png';
+import { appRouters } from '../../components/Router/router.config';
 
 const { Sider } = Layout;
 

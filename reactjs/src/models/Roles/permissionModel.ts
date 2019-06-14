@@ -1,6 +1,6 @@
 class PermissionModel {
-  name: string;
-  displayName: string;
+  name!: string;
+  displayName!: string;
   description?: any;
 }
 
