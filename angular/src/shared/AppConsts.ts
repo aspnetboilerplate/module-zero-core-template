@@ -15,6 +15,6 @@ export class AppConsts {
     };
 
     static readonly authorization = {
-        encrptedAuthTokenName: 'enc_auth_token'
+        encryptedAuthTokenName: 'enc_auth_token'
     };
 }

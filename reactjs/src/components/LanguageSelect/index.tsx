@@ -1,12 +1,17 @@
-import * as React from 'react';
-import { Menu, Dropdown, Icon } from 'antd';
-import classNames from 'classnames';
 import './index.less';
 import 'famfamfam-flags/dist/sprite/famfamfam-flags.css';
-import UserStore from 'src/stores/userStore';
+
+import * as React from 'react';
+
+import { Dropdown, Icon, Menu } from 'antd';
+
+import { L } from '../../lib/abpUtility';
+import Stores from '../../stores/storeIdentifier';
+import UserStore from '../../stores/userStore';
+import classNames from 'classnames';
 import { inject } from 'mobx-react';
-import Stores from 'src/stores/storeIdentifier';
-import { L } from 'src/lib/abpUtility';
+
+declare var abp: any;
 
 export interface ILanguageSelectProps {
   userStore?: UserStore;
@@ -15,7 +20,7 @@ export interface ILanguageSelectProps {
 @inject(Stores.UserStore)
 class LanguageSelect extends React.Component<ILanguageSelectProps> {
   get languages() {
-    return abp.localization.languages.filter(val => {
+    return abp.localization.languages.filter((val: any) => {
       return !val.isDisabled;
     });
   }
@@ -30,7 +35,7 @@ class LanguageSelect extends React.Component<ILanguageSelectProps> {
       abp.appPath
     );
 
-    location.reload();
+    window.location.reload();
   }
 
   get currentLanguage() {
@@ -41,10 +46,8 @@ class LanguageSelect extends React.Component<ILanguageSelectProps> {
     const langMenu = (
       <Menu className={'menu'} selectedKeys={[this.currentLanguage.name]}>
         {this.languages.map((item: any) => (
-          <Menu.Item key={item.name}>
-            <a onClick={() => this.changeLanguage(item.name)}>
-              <i className={item.icon} /> {item.displayName}
-            </a>
+          <Menu.Item key={item.name} onClick={() => this.changeLanguage(item.name)}>
+            <i className={item.icon} /> {item.displayName}
           </Menu.Item>
         ))}
       </Menu>

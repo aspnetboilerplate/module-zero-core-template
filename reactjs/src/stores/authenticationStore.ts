@@ -1,7 +1,10 @@
 import { action, observable } from 'mobx';
-import tokenAuthService from 'src/services/tokenAuth/tokenAuthService';
+
 import AppConsts from './../lib/appconst';
-import LoginModel from 'src/models/Login/loginModel';
+import LoginModel from '../models/Login/loginModel';
+import tokenAuthService from '../services/tokenAuth/tokenAuthService';
+
+declare var abp: any;
 
 class AuthenticationStore {
   @observable loginModel: LoginModel = new LoginModel();

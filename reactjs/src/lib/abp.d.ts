@@ -15,6 +15,7 @@
     }
 
     let isEnabled: boolean;
+    let ignoreFeatureCheckForHostUsers: boolean;
 
     let tenantIdCookieName: string;
 

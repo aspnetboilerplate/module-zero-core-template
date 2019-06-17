@@ -1,16 +1,18 @@
-import { observable, action } from 'mobx';
-import roleService from 'src/services/role/roleService';
-import { GetAllRoleOutput } from 'src/services/role/dto/getAllRoleOutput';
-import { PagedResultDto } from 'src/services/dto/pagedResultDto';
-import { EntityDto } from 'src/services/dto/entityDto';
-import { CreateRoleInput } from 'src/services/role/dto/createRoleInput';
-import { UpdateRoleInput } from 'src/services/role/dto/updateRoleInput';
-import { GetAllPermissionsOutput } from 'src/services/role/dto/getAllPermissionsOutput';
-import { PagedRoleResultRequestDto } from 'src/services/role/dto/PagedRoleResultRequestDto';
-import RoleEditModel from 'src/models/Roles/roleEditModel';
+import { action, observable } from 'mobx';
+
+import { CreateRoleInput } from '../services/role/dto/createRoleInput';
+import { EntityDto } from '../services/dto/entityDto';
+import { GetAllPermissionsOutput } from '../services/role/dto/getAllPermissionsOutput';
+import { GetAllRoleOutput } from '../services/role/dto/getAllRoleOutput';
+import { GetRoleAsyncInput } from '../services/role/dto/getRolesAsyncInput';
+import { PagedResultDto } from '../services/dto/pagedResultDto';
+import { PagedRoleResultRequestDto } from '../services/role/dto/PagedRoleResultRequestDto';
+import RoleEditModel from '../models/Roles/roleEditModel';
+import { UpdateRoleInput } from '../services/role/dto/updateRoleInput';
+import roleService from '../services/role/roleService';
 
 class RoleStore {
-  @observable roles: PagedResultDto<GetAllRoleOutput>;
+  @observable roles!: PagedResultDto<GetAllRoleOutput>;
   @observable roleEdit: RoleEditModel = new RoleEditModel();
   @observable allPermissions: GetAllPermissionsOutput[] = [];
 
@@ -42,7 +44,7 @@ class RoleStore {
   async update(updateRoleInput: UpdateRoleInput) {
     await roleService.update(updateRoleInput);
     this.roles.items
-      .filter((x: GetAllRoleOutput) => x.id == updateRoleInput.id)
+      .filter((x: GetAllRoleOutput) => x.id === updateRoleInput.id)
       .map((x: GetAllRoleOutput) => {
         return (x = updateRoleInput);
       });
@@ -51,7 +53,7 @@ class RoleStore {
   @action
   async delete(entityDto: EntityDto) {
     await roleService.delete(entityDto);
-    this.roles.items = this.roles.items.filter((x: GetAllRoleOutput) => x.id != entityDto.id);
+    this.roles.items = this.roles.items.filter((x: GetAllRoleOutput) => x.id !== entityDto.id);
   }
 
   @action

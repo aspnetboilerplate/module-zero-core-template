@@ -1,13 +1,15 @@
-import { Card, Col, Row, Button, Table, Dropdown, Menu, Modal, Input } from 'antd';
 import * as React from 'react';
-import { EntityDto } from 'src/services/dto/entityDto';
+
+import { Button, Card, Col, Dropdown, Input, Menu, Modal, Row, Table } from 'antd';
+import { inject, observer } from 'mobx-react';
+
+import AppComponentBase from '../../components/AppComponentBase';
 import CreateOrUpdateRole from './components/createOrUpdateRole';
-import { observer, inject } from 'mobx-react';
-import AppComponentBase from 'src/components/AppComponentBase';
-import Stores from 'src/stores/storeIdentifier';
-import RoleStore from 'src/stores/roleStore';
-import { L } from 'src/lib/abpUtility';
+import { EntityDto } from '../../services/dto/entityDto';
 import { FormComponentProps } from 'antd/lib/form';
+import { L } from '../../lib/abpUtility';
+import RoleStore from '../../stores/roleStore';
+import Stores from '../../stores/storeIdentifier';
 
 export interface IRoleProps extends FormComponentProps {
   roleStore: RoleStore;
@@ -56,7 +58,7 @@ class Role extends AppComponentBase<IRoleProps, IRoleState> {
   };
 
   async createOrUpdateModalOpen(entityDto: EntityDto) {
-    if (entityDto.id == 0) {
+    if (entityDto.id === 0) {
       this.props.roleStore.createRole();
       await this.props.roleStore.getAllPermissions();
     } else {
@@ -90,7 +92,7 @@ class Role extends AppComponentBase<IRoleProps, IRoleState> {
       if (err) {
         return;
       } else {
-        if (this.state.roleId == 0) {
+        if (this.state.roleId === 0) {
           await this.props.roleStore.create(values);
         } else {
           await this.props.roleStore.update({ id: this.state.roleId, ...values });
@@ -125,12 +127,8 @@ class Role extends AppComponentBase<IRoleProps, IRoleState> {
               trigger={['click']}
               overlay={
                 <Menu>
-                  <Menu.Item>
-                    <a onClick={() => this.createOrUpdateModalOpen({ id: item.id })}>{L('Edit')}</a>
-                  </Menu.Item>
-                  <Menu.Item>
-                    <a onClick={() => this.delete({ id: item.id })}>{L('Delete')}</a>
-                  </Menu.Item>
+                  <Menu.Item onClick={() => this.createOrUpdateModalOpen({ id: item.id })}>{L('Edit')}</Menu.Item>
+                  <Menu.Item onClick={() => this.delete({ id: item.id })}>{L('Delete')}</Menu.Item>
                 </Menu>
               }
               placement="bottomLeft"
@@ -186,10 +184,10 @@ class Role extends AppComponentBase<IRoleProps, IRoleState> {
               rowKey="id"
               size={'default'}
               bordered={true}
-              pagination={{ pageSize: this.state.maxResultCount, total: roles == undefined ? 0 : roles.totalCount, defaultCurrent: 1 }}
+              pagination={{ pageSize: this.state.maxResultCount, total: roles === undefined ? 0 : roles.totalCount, defaultCurrent: 1 }}
               columns={columns}
-              loading={roles == undefined ? true : false}
-              dataSource={roles == undefined ? [] : roles.items}
+              loading={roles === undefined ? true : false}
+              dataSource={roles === undefined ? [] : roles.items}
               onChange={this.handleTableChange}
             />
           </Col>
@@ -203,7 +201,7 @@ class Role extends AppComponentBase<IRoleProps, IRoleState> {
               modalVisible: false,
             })
           }
-          modalType={this.state.roleId == 0 ? 'edit' : 'create'}
+          modalType={this.state.roleId === 0 ? 'edit' : 'create'}
           onOk={this.handleCreate}
           permissions={allPermissions}
           roleStore={this.props.roleStore}

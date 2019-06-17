@@ -1,11 +1,11 @@
 import { observable } from 'mobx';
 
 class LoginModel {
-  tenancyName: string;
-  userNameOrEmailAddress: string;
-  password: string;
-  @observable rememberMe: boolean;
-  @observable showModal: boolean;
+  tenancyName!: string;
+  userNameOrEmailAddress!: string;
+  password!: string;
+  @observable rememberMe!: boolean;
+  @observable showModal!: boolean;
 
   toggleRememberMe = () => {
     this.rememberMe = !this.rememberMe;
