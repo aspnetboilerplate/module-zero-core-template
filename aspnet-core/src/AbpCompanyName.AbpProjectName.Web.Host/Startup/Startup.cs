@@ -16,6 +16,7 @@ using AbpCompanyName.AbpProjectName.Configuration;
 using AbpCompanyName.AbpProjectName.Identity;
 
 using Abp.AspNetCore.SignalR.Hubs;
+using Microsoft.AspNetCore.Mvc;
 
 namespace AbpCompanyName.AbpProjectName.Web.Host.Startup
 {
@@ -35,7 +36,7 @@ namespace AbpCompanyName.AbpProjectName.Web.Host.Startup
             // MVC
             services.AddMvc(
                 options => options.Filters.Add(new CorsAuthorizationFilterFactory(_defaultCorsPolicyName))
-            );
+            ).SetCompatibilityVersion(CompatibilityVersion.Version_2_2);
 
             IdentityRegistrar.Register(services);
             AuthConfigurer.Configure(services, _appConfiguration);
