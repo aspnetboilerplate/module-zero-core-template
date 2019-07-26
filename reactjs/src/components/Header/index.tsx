@@ -8,6 +8,8 @@ import { L } from '../../lib/abpUtility';
 import LanguageSelect from '../LanguageSelect';
 import { Link } from 'react-router-dom';
 
+import profilePicture from '../../images/user.png';
+
 export interface IHeaderProps {
   collapsed?: any;
   toggle?: any;
@@ -35,7 +37,7 @@ export class Header extends React.Component<IHeaderProps> {
           <LanguageSelect /> {'   '}
           <Dropdown overlay={userDropdownMenu} trigger={['click']}>
             <Badge style={{}} count={3}>
-              <Avatar style={{}} size={24} alt={'profile'} src="https://sametkabay.com/images/smtkby/smtkby240.png" />
+              <Avatar style={{height:24, width:24}} shape="circle" alt={'profile'} src={profilePicture} />
             </Badge>
           </Dropdown>
         </Col>
