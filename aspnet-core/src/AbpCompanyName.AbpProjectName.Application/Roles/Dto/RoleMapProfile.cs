@@ -20,6 +20,10 @@ namespace AbpCompanyName.AbpProjectName.Roles.Dto
 
             CreateMap<Role, RoleDto>().ForMember(x => x.GrantedPermissions,
                 opt => opt.MapFrom(x => x.Permissions.Where(p => p.IsGranted)));
+
+            CreateMap<Role, RoleListDto>();
+            CreateMap<Role, RoleEditDto>();
+            CreateMap<Permission, FlatPermissionDto>();
         }
     }
 }
