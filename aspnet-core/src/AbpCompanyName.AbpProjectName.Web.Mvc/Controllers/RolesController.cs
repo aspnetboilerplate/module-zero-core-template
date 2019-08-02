@@ -36,7 +36,7 @@ namespace AbpCompanyName.AbpProjectName.Web.Controllers
         public async Task<ActionResult> EditRoleModal(int roleId)
         {
             var output = await _roleAppService.GetRoleForEdit(new EntityDto(roleId));
-            var model = new EditRoleModalViewModel(output);
+            var model = ObjectMapper.Map<EditRoleModalViewModel>(output);
 
             return View("_EditRoleModal", model);
         }
