@@ -23,7 +23,7 @@
 			var roleId = $(this).attr("data-role-id");
 
 			e.preventDefault();
-			$.ajax({
+			abp.ajax({
 				url: abp.appPath + 'Roles/EditRoleModal?roleId=' + roleId,
 				type: 'POST',
 				contentType: 'application/html',
