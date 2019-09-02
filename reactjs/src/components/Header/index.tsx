@@ -33,7 +33,7 @@ export class Header extends React.Component<IHeaderProps> {
         <Col style={{ textAlign: 'left' }} span={12}>
           <Icon className="trigger" type={this.props.collapsed ? 'menu-unfold' : 'menu-fold'} onClick={this.props.toggle} />
         </Col>
-        <Col style={{ margin: '0px 15px 0px 15px', marginLeft: 10, textAlign: 'right' }}>
+        <Col style={{ padding: '0px 15px 0px 15px', textAlign: 'right' }} span={12}>
           <LanguageSelect /> {'   '}
           <Dropdown overlay={userDropdownMenu} trigger={['click']}>
             <Badge style={{}} count={3}>
