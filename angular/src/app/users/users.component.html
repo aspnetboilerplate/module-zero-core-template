@@ -70,10 +70,10 @@
                             <td>{{ user.fullName }}</td>
                             <td>{{ user.emailAddress }}</td>
                             <td align="center">
-                                <i class="material-icons" *ngIf="user.isActive" style="color:green;">
+                                <i class="material-icons check_box" *ngIf="user.isActive">
                                     check_box
                                 </i>
-                                <i class="material-icons" *ngIf="!user.isActive" style="color:red;">
+                                <i class="material-icons indeterminate_check_box" *ngIf="!user.isActive">
                                     indeterminate_check_box
                                 </i>
                             </td>

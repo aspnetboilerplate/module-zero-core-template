@@ -3493,6 +3493,13 @@ section.content {
     border-radius: 0 !important;
     padding: 5px 20px !important; }
 
+/* material-icons check_box ==================== */
+i.material-icons.check_box {
+  color: green; }
+
+i.material-icons.indeterminate_check_box {
+  color: red; }
+
 /* Checkbox & Radio ============================ */
 [type="checkbox"] + label {
   padding-left: 26px;
