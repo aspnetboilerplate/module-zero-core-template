@@ -75,16 +75,14 @@
               <td>{{ tenant.name }}</td>
               <td align="center">
                 <i
-                  class="material-icons"
+                  class="material-icons check_box"
                   *ngIf="tenant.isActive"
-                  style="color:green;"
                 >
                   check_box
                 </i>
                 <i
-                  class="material-icons"
+                  class="material-icons indeterminate_check_box"
                   *ngIf="!tenant.isActive"
-                  style="color:red;"
                 >
                   indeterminate_check_box
                 </i>
