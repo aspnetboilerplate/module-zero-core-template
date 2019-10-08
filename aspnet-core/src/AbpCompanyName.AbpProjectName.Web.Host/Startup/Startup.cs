@@ -3,19 +3,16 @@ using System.Linq;
 using System.Reflection;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
-//TODO:3.0 using Microsoft.AspNetCore.Mvc.Cors.Internal;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Logging;
 using Castle.Facilities.Logging;
-using Swashbuckle.AspNetCore.Swagger;
 using Abp.AspNetCore;
 using Abp.AspNetCore.Mvc.Antiforgery;
 using Abp.Castle.Logging.Log4Net;
 using Abp.Extensions;
 using AbpCompanyName.AbpProjectName.Configuration;
 using AbpCompanyName.AbpProjectName.Identity;
-
 using Abp.AspNetCore.SignalR.Hubs;
 using Abp.Dependency;
 using Abp.Json;
@@ -41,7 +38,6 @@ namespace AbpCompanyName.AbpProjectName.Web.Host.Startup
             services.AddControllersWithViews(
                 options =>
                 {
-                    //TODO:3.0 options.Filters.Add(new CorsAuthorizationFilterFactory(_defaultCorsPolicyName))
                     options.Filters.Add(new AbpAutoValidateAntiforgeryTokenAttribute());
                 }
             ).AddNewtonsoftJson(options =>
