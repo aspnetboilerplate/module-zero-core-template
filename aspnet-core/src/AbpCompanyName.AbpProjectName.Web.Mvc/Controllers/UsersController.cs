@@ -22,7 +22,7 @@ namespace AbpCompanyName.AbpProjectName.Web.Controllers
 
         public async Task<ActionResult> Index()
         {
-            var users = (await _userAppService.GetAll(new PagedUserResultRequestDto {MaxResultCount = int.MaxValue})).Items; // Paging not implemented yet
+            var users = (await _userAppService.GetAllAsync(new PagedUserResultRequestDto {MaxResultCount = int.MaxValue})).Items; // Paging not implemented yet
             var roles = (await _userAppService.GetRoles()).Items;
             var model = new UserListViewModel
             {
@@ -34,7 +34,7 @@ namespace AbpCompanyName.AbpProjectName.Web.Controllers
 
         public async Task<ActionResult> EditUserModal(long userId)
         {
-            var user = await _userAppService.Get(new EntityDto<long>(userId));
+            var user = await _userAppService.GetAsync(new EntityDto<long>(userId));
             var roles = (await _userAppService.GetRoles()).Items;
             var model = new EditUserModalViewModel
             {

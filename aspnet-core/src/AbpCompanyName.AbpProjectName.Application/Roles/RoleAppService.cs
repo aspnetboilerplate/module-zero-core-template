@@ -30,7 +30,7 @@ namespace AbpCompanyName.AbpProjectName.Roles
             _userManager = userManager;
         }
 
-        public override async Task<RoleDto> Create(CreateRoleDto input)
+        public override async Task<RoleDto> CreateAsync(CreateRoleDto input)
         {
             CheckCreatePermission();
 
@@ -62,7 +62,7 @@ namespace AbpCompanyName.AbpProjectName.Roles
             return new ListResultDto<RoleListDto>(ObjectMapper.Map<List<RoleListDto>>(roles));
         }
 
-        public override async Task<RoleDto> Update(RoleDto input)
+        public override async Task<RoleDto> UpdateAsync(RoleDto input)
         {
             CheckUpdatePermission();
 
@@ -82,7 +82,7 @@ namespace AbpCompanyName.AbpProjectName.Roles
             return MapToEntityDto(role);
         }
 
-        public override async Task Delete(EntityDto<int> input)
+        public override async Task DeleteAsync(EntityDto<int> input)
         {
             CheckDeletePermission();
 

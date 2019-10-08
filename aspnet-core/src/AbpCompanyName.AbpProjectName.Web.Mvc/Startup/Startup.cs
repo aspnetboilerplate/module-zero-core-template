@@ -7,12 +7,16 @@ using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Logging;
 using Castle.Facilities.Logging;
 using Abp.AspNetCore;
+using Abp.AspNetCore.Mvc.Antiforgery;
 using Abp.Castle.Logging.Log4Net;
 using AbpCompanyName.AbpProjectName.Authentication.JwtBearer;
 using AbpCompanyName.AbpProjectName.Configuration;
 using AbpCompanyName.AbpProjectName.Identity;
 using AbpCompanyName.AbpProjectName.Web.Resources;
 using Abp.AspNetCore.SignalR.Hubs;
+using Abp.Dependency;
+using Abp.Json;
+using Newtonsoft.Json.Serialization;
 
 
 namespace AbpCompanyName.AbpProjectName.Web.Startup
@@ -29,9 +33,19 @@ namespace AbpCompanyName.AbpProjectName.Web.Startup
         public IServiceProvider ConfigureServices(IServiceCollection services)
         {
             // MVC
-            services.AddMvc(
-                options => options.Filters.Add(new AutoValidateAntiforgeryTokenAttribute())
-            );
+            services.AddControllersWithViews(
+                options =>
+                {
+                    options.Filters.Add(new AutoValidateAntiforgeryTokenAttribute());
+                    options.Filters.Add(new AbpAutoValidateAntiforgeryTokenAttribute());
+                }
+            ).AddNewtonsoftJson(options =>
+            {
+                options.SerializerSettings.ContractResolver = new AbpMvcContractResolver(IocManager.Instance)
+                {
+                    NamingStrategy = new CamelCaseNamingStrategy()
+                };
+            });
 
             IdentityRegistrar.Register(services);
             AuthConfigurer.Configure(services, _appConfiguration);
@@ -64,24 +78,20 @@ namespace AbpCompanyName.AbpProjectName.Web.Startup
 
             app.UseStaticFiles();
 
+            app.UseRouting();
+
             app.UseAuthentication();
+
+            app.UseAuthorization();
 
             app.UseJwtTokenMiddleware();
 
-            app.UseSignalR(routes =>
-            {
-                routes.MapHub<AbpCommonHub>("/signalr");
-            });
 
-            app.UseMvc(routes =>
+            app.UseEndpoints(endpoints =>
             {
-                routes.MapRoute(
-                    name: "defaultWithArea",
-                    template: "{area}/{controller=Home}/{action=Index}/{id?}");
-
-                routes.MapRoute(
-                    name: "default",
-                    template: "{controller=Home}/{action=Index}/{id?}");
+                endpoints.MapHub<AbpCommonHub>("/signalr");
+                endpoints.MapControllerRoute("default", "{controller=Home}/{action=Index}/{id?}");
+                endpoints.MapControllerRoute("defaultWithArea", "{area}/{controller=Home}/{action=Index}/{id?}");
             });
         }
     }

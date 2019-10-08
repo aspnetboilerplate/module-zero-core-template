@@ -5,19 +5,18 @@ using Abp.Authorization;
 using AbpCompanyName.AbpProjectName.Authorization.Roles;
 using AbpCompanyName.AbpProjectName.Authorization.Users;
 using AbpCompanyName.AbpProjectName.MultiTenancy;
+using Microsoft.Extensions.Logging;
 
 namespace AbpCompanyName.AbpProjectName.Identity
 {
     public class SecurityStampValidator : AbpSecurityStampValidator<Tenant, Role, User>
     {
         public SecurityStampValidator(
-            IOptions<SecurityStampValidatorOptions> options, 
+            IOptions<SecurityStampValidatorOptions> options,
             SignInManager signInManager,
-            ISystemClock systemClock) 
-            : base(
-                  options, 
-                  signInManager, 
-                  systemClock)
+            ISystemClock systemClock,
+            ILoggerFactory loggerFactory) 
+            : base(options, signInManager, systemClock, loggerFactory)
         {
         }
     }
