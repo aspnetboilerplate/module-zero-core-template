@@ -47,6 +47,11 @@ namespace AbpCompanyName.AbpProjectName.Web.Startup
                 };
             });
 
+            services.AddAuthentication(options =>
+            {
+                options.DefaultScheme = "Cookies";
+            }).AddCookie();
+
             IdentityRegistrar.Register(services);
             AuthConfigurer.Configure(services, _appConfiguration);
 
