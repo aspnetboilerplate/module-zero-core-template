@@ -16,6 +16,7 @@ using AbpCompanyName.AbpProjectName.Web.Resources;
 using Abp.AspNetCore.SignalR.Hubs;
 using Abp.Dependency;
 using Abp.Json;
+using Microsoft.AspNetCore.Authentication.Cookies;
 using Newtonsoft.Json.Serialization;
 
 
@@ -46,6 +47,9 @@ namespace AbpCompanyName.AbpProjectName.Web.Startup
                     NamingStrategy = new CamelCaseNamingStrategy()
                 };
             });
+
+            services.AddAuthentication(CookieAuthenticationDefaults.AuthenticationScheme)
+                .AddCookie();
 
             IdentityRegistrar.Register(services);
             AuthConfigurer.Configure(services, _appConfiguration);
@@ -81,11 +85,9 @@ namespace AbpCompanyName.AbpProjectName.Web.Startup
             app.UseRouting();
 
             app.UseAuthentication();
-
             app.UseAuthorization();
 
             app.UseJwtTokenMiddleware();
-
 
             app.UseEndpoints(endpoints =>
             {
