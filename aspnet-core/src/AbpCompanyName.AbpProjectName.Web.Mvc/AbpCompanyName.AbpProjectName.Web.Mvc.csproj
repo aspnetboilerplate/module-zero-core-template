@@ -50,9 +50,9 @@
     <PackageReference Include="Microsoft.AspNetCore.Authentication.Twitter" Version="3.0.0" />
     <PackageReference Include="Microsoft.Extensions.Logging" Version="3.0.0" />
     <PackageReference Include="Microsoft.Extensions.Options.ConfigurationExtensions" Version="3.0.0" />
-    <PackageReference Include="Abp.HangFire" Version="5.0.0-preview1" />
-    <PackageReference Include="Abp.RedisCache" Version="5.0.0-preview1" />
-    <PackageReference Include="Abp.Castle.Log4Net" Version="5.0.0-preview1" />
+    <PackageReference Include="Abp.HangFire" Version="5.0.0" />
+    <PackageReference Include="Abp.RedisCache" Version="5.0.0" />
+    <PackageReference Include="Abp.Castle.Log4Net" Version="5.0.0" />
     <PackageReference Include="Microsoft.CodeAnalysis.Common" Version="3.4.0-beta1-final" />
     <PackageReference Include="Microsoft.AspNetCore.Mvc.NewtonsoftJson" Version="3.0.0" />
   </ItemGroup>
