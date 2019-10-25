@@ -1,27 +1,27 @@
 using System;
-using Castle.MicroKernel.Registration;
-using NSubstitute;
 using Abp.AutoMapper;
+using Abp.Configuration.Startup;
 using Abp.Dependency;
 using Abp.Modules;
-using Abp.Configuration.Startup;
 using Abp.Net.Mail;
 using Abp.TestBase;
 using Abp.Zero.Configuration;
 using Abp.Zero.EntityFrameworkCore;
 using AbpCompanyName.AbpProjectName.EntityFrameworkCore;
-using AbpCompanyName.AbpProjectName.Tests.DependencyInjection;
+using AbpCompanyName.AbpProjectName.Tests.IntegrationTests.DependencyInjection;
+using Castle.MicroKernel.Registration;
+using NSubstitute;
 
-namespace AbpCompanyName.AbpProjectName.Tests
+namespace AbpCompanyName.AbpProjectName.Tests.IntegrationTests
 {
     [DependsOn(
         typeof(AbpProjectNameApplicationModule),
         typeof(AbpProjectNameEntityFrameworkModule),
         typeof(AbpTestBaseModule)
         )]
-    public class AbpProjectNameTestModule : AbpModule
+    public class AbpProjectNameIntegrationTestModule : AbpModule
     {
-        public AbpProjectNameTestModule(AbpProjectNameEntityFrameworkModule abpProjectNameEntityFrameworkModule)
+        public AbpProjectNameIntegrationTestModule(AbpProjectNameEntityFrameworkModule abpProjectNameEntityFrameworkModule)
         {
             abpProjectNameEntityFrameworkModule.SkipDbContextRegistration = true;
             abpProjectNameEntityFrameworkModule.SkipDbSeed = true;

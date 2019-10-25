@@ -1,11 +1,11 @@
 ﻿using System.Threading.Tasks;
+using AbpCompanyName.AbpProjectName.Sessions;
 using Shouldly;
 using Xunit;
-using AbpCompanyName.AbpProjectName.Sessions;
 
-namespace AbpCompanyName.AbpProjectName.Tests.Sessions
+namespace AbpCompanyName.AbpProjectName.Tests.IntegrationTests.Sessions
 {
-    public class SessionAppService_Tests : AbpProjectNameTestBase
+    public class SessionAppService_Tests : AbpProjectNameIntegrationTestBase
     {
         private readonly ISessionAppService _sessionAppService;
 
