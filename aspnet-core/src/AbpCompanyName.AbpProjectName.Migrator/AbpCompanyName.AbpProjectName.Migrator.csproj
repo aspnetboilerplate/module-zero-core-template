@@ -25,11 +25,6 @@
     <PackageReference Include="Abp.Castle.Log4Net" Version="5.0.0" />
   </ItemGroup>
 
-  <ItemGroup Condition=" '$(TargetFramework)' == 'net461' ">
-    <Reference Include="System" />
-    <Reference Include="Microsoft.CSharp" />
-  </ItemGroup>
-
   <ItemGroup>
     <ProjectReference Include="..\AbpCompanyName.AbpProjectName.Core\AbpCompanyName.AbpProjectName.Core.csproj" />
     <ProjectReference Include="..\AbpCompanyName.AbpProjectName.EntityFrameworkCore\AbpCompanyName.AbpProjectName.EntityFrameworkCore.csproj" />

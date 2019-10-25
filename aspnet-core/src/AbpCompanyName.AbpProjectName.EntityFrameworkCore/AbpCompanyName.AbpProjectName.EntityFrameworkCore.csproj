@@ -34,9 +34,5 @@
   <ItemGroup>
     <ProjectReference Include="..\AbpCompanyName.AbpProjectName.Core\AbpCompanyName.AbpProjectName.Core.csproj" />
   </ItemGroup>
-
-  <ItemGroup Condition=" '$(TargetFramework)' == 'net461' ">
-    <Reference Include="System.Transactions" />
-  </ItemGroup>
   
 </Project>
