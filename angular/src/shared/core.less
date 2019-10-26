@@ -7,7 +7,6 @@
 @light-blue: #03A9F4;
 @cyan: #00BCD4;
 @teal: #009688;
-@indigo: #3F51B5;
 @green: #4CAF50;
 @light-green: #8BC34A;
 @lime: #CDDC39;
@@ -82,7 +81,7 @@
     .mat-flat-button.mat-primary:not([disabled]),
     .mat-mini-fab.mat-primary:not([disabled]),
     .mat-raised-button.mat-primary:not([disabled]) {
-        background-color: @color;
+        background-color: @color !important;
     }
     .mat-form-field-invalid .mat-input-element,
     .mat-warn .mat-input-element {
@@ -135,10 +134,6 @@
 
 .theme-teal {
     .make-theme(@teal)
-}
-
-.theme-indigo {
-    .make-theme(@indigo)
 }
 
 .theme-green {
@@ -249,4 +244,8 @@ topbar-languageswitch {
 // force all material design form fields to be 100% wide
 .mat-form-field {
     display: block !important;
+}
+
+.table-responsive{
+    overflow: hidden;
 }

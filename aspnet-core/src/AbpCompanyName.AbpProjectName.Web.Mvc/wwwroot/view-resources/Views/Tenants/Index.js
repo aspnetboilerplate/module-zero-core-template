@@ -22,10 +22,10 @@
             var tenantId = $(this).attr("data-tenant-id");
 
             e.preventDefault();
-            $.ajax({
+            abp.ajax({
                 url: abp.appPath + 'Tenants/EditTenantModal?tenantId=' + tenantId,
                 type: 'POST',
-                contentType: 'application/html',
+                dataType: 'html',
                 success: function (content) {
                     $('#TenantEditModal div.modal-content').html(content);
                 },

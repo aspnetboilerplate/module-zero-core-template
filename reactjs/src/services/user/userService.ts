@@ -15,7 +15,7 @@ class UserService {
 
   public async update(updateUserInput: UpdateUserInput) {
     let result = await http.put('api/services/app/User/Update', updateUserInput);
-    return result.data;
+    return result.data.result;
   }
 
   public async delete(entityDto: EntityDto) {

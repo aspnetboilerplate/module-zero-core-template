@@ -4,14 +4,16 @@ using AbpCompanyName.AbpProjectName.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 namespace AbpCompanyName.AbpProjectName.Migrations
 {
     [DbContext(typeof(AbpProjectNameDbContext))]
-    partial class AbpProjectNameDbContextModelSnapshot : ModelSnapshot
+    [Migration("20190703062215_Upgraded_To_Abp_4_7_0")]
+    partial class Upgraded_To_Abp_4_7_0
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -621,7 +623,7 @@ namespace AbpCompanyName.AbpProjectName.Migrations
 
                     b.Property<string>("Name")
                         .IsRequired()
-                        .HasMaxLength(128);
+                        .HasMaxLength(10);
 
                     b.Property<int?>("TenantId");
 
@@ -648,7 +650,7 @@ namespace AbpCompanyName.AbpProjectName.Migrations
 
                     b.Property<string>("LanguageName")
                         .IsRequired()
-                        .HasMaxLength(128);
+                        .HasMaxLength(10);
 
                     b.Property<DateTime?>("LastModificationTime");
 
