@@ -11,10 +11,13 @@ export class SideBarNavComponent extends AppComponentBase {
 
     menuItems: MenuItem[] = [
         new MenuItem(this.l('HomePage'), '', 'home', '/app/home'),
+        
+        new MenuItem('Access Control', 'Auto', 'security', '', [
+            new MenuItem(this.l('Tenants'), 'Pages.Tenants', 'business', '/app/tenants'),
+            new MenuItem(this.l('Users'), 'Pages.Users', 'people', '/app/users'), 
+            new MenuItem(this.l('Roles'), 'Pages.Roles', 'perm_identity', '/app/roles')
+        ]),
 
-        new MenuItem(this.l('Tenants'), 'Pages.Tenants', 'business', '/app/tenants'),
-        new MenuItem(this.l('Users'), 'Pages.Users', 'people', '/app/users'),
-        new MenuItem(this.l('Roles'), 'Pages.Roles', 'local_offer', '/app/roles'),
         new MenuItem(this.l('About'), '', 'info', '/app/about'),
 
         new MenuItem(this.l('MultiLevelMenu'), '', 'menu', '', [
@@ -41,11 +44,19 @@ export class SideBarNavComponent extends AppComponentBase {
         super(injector);
     }
 
-    showMenuItem(menuItem): boolean {
-        if (menuItem.permissionName) {
-            return this.permission.isGranted(menuItem.permissionName);
+    showMenuItem(menuItem: MenuItem): boolean {
+        if (!menuItem) {
+            return false;
         }
 
-        return true;
+        if (menuItem.permissionName === 'Auto'  && menuItem.items && menuItem.items.length > 0) {
+            return menuItem.items.some(child => {
+                return this.showMenuItem(child);
+            });
+        }
+
+        return menuItem.permissionName ?
+            this.permission.isGranted(menuItem.permissionName) :
+            true;
     }
 }
