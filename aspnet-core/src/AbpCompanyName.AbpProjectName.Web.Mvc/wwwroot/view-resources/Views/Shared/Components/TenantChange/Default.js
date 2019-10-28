@@ -5,7 +5,7 @@
             abp.ajax({
                 url: abp.appPath + 'Account/TenantChangeModal',
                 type: 'POST',
-                contentType: 'application/html',
+                dataType: 'html',
                 success: function (content) {
                     $('#TenantChangeModal div.modal-content').html(content);
                 },

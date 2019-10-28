@@ -41,6 +41,7 @@ module.exports = {
               },
               {
                 from: 'node_modules/abp-web-resources/Abp/Framework/scripts/libs/abp.signalr-client.js',
+                to:'dist/abp.signalr-client.js'
               },
               {
                 from: 'src/lib/abp.js',
