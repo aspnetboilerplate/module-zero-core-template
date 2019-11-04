@@ -1,4 +1,4 @@
-﻿<Project Sdk="Microsoft.NET.Sdk.Web">
+<Project Sdk="Microsoft.NET.Sdk.Web">
 
   <PropertyGroup>
     <AssemblyName>AbpCompanyName.AbpProjectName.Web.Mvc</AssemblyName>
@@ -7,7 +7,6 @@
     <UserSecretsId>AbpCompanyName-AbpProjectName-56C2EF2F-ABD6-4EFC-AAF2-2E81C34E8FB1</UserSecretsId>
     <RootNamespace>AbpCompanyName.AbpProjectName.Web</RootNamespace>
     <TargetFramework>netcoreapp3.0</TargetFramework>
-    <AspNetCoreHostingModel>InProcess</AspNetCoreHostingModel>
     <AssetTargetFallback>$(AssetTargetFallback);portable-net45+win8+wp8+wpa81;</AssetTargetFallback>
     <AutoGenerateBindingRedirects>true</AutoGenerateBindingRedirects>
     <GenerateBindingRedirectsOutputType>true</GenerateBindingRedirectsOutputType>
@@ -15,7 +14,6 @@
     <PreserveCompilationContext>true</PreserveCompilationContext>
     <MvcRazorExcludeRefAssembliesFromPublish>false</MvcRazorExcludeRefAssembliesFromPublish>
     <PreserveCompilationReferences>true</PreserveCompilationReferences>
-    
   </PropertyGroup>
 
   <ItemGroup>
@@ -34,10 +32,6 @@
 
   <ItemGroup>
     <ProjectReference Include="..\AbpCompanyName.AbpProjectName.Web.Core\AbpCompanyName.AbpProjectName.Web.Core.csproj" />
-  </ItemGroup>
-
-  <ItemGroup>
-    <FrameworkReference Include="Microsoft.AspNetCore.App" />
   </ItemGroup>
 
   <ItemGroup>

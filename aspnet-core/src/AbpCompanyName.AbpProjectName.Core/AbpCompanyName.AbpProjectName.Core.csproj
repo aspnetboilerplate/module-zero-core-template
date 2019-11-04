@@ -18,10 +18,6 @@
   </ItemGroup>
 
   <ItemGroup>
-    <FrameworkReference Include="Microsoft.AspNetCore.App" />
-  </ItemGroup>
-
-  <ItemGroup>
     <PackageReference Include="Abp.AutoMapper" Version="5.0.0" />
     <PackageReference Include="Abp.ZeroCore.EntityFrameworkCore" Version="5.0.0" />
     <PackageReference Include="Castle.Windsor.MsDependencyInjection" Version="3.3.1" />

@@ -16,7 +16,7 @@ using AbpCompanyName.AbpProjectName.Web.Resources;
 using Abp.AspNetCore.SignalR.Hubs;
 using Abp.Dependency;
 using Abp.Json;
-using Microsoft.AspNetCore.Authentication.Cookies;
+using Microsoft.Extensions.Hosting;
 using Newtonsoft.Json.Serialization;
 
 
@@ -26,7 +26,7 @@ namespace AbpCompanyName.AbpProjectName.Web.Startup
     {
         private readonly IConfigurationRoot _appConfiguration;
 
-        public Startup(IHostingEnvironment env)
+        public Startup(IWebHostEnvironment env)
         {
             _appConfiguration = env.GetAppConfiguration();
         }
@@ -48,9 +48,6 @@ namespace AbpCompanyName.AbpProjectName.Web.Startup
                 };
             });
 
-            services.AddAuthentication(CookieAuthenticationDefaults.AuthenticationScheme)
-                .AddCookie();
-
             IdentityRegistrar.Register(services);
             AuthConfigurer.Configure(services, _appConfiguration);
 
@@ -67,7 +64,7 @@ namespace AbpCompanyName.AbpProjectName.Web.Startup
             );
         }
 
-        public void Configure(IApplicationBuilder app, IHostingEnvironment env, ILoggerFactory loggerFactory)
+        public void Configure(IApplicationBuilder app, IWebHostEnvironment env, ILoggerFactory loggerFactory)
         {
             app.UseAbp(); // Initializes ABP framework.
 

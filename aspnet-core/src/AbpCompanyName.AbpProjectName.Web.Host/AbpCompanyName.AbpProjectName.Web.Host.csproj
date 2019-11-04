@@ -1,4 +1,4 @@
-﻿<Project Sdk="Microsoft.NET.Sdk.Web">
+<Project Sdk="Microsoft.NET.Sdk.Web">
 
   <PropertyGroup>
     <TargetFramework>netcoreapp3.0</TargetFramework>
@@ -8,8 +8,6 @@
     <OutputType>Exe</OutputType>
     <PackageId>AbpCompanyName.AbpProjectName.Web.Host</PackageId>
     <UserSecretsId>AbpCompanyName-AbpProjectName-56C2EF2F-ABD6-4EFC-AAF2-2E81C34E8FB1</UserSecretsId>
-
-    <AspNetCoreHostingModel>InProcess</AspNetCoreHostingModel>
     <AutoGenerateBindingRedirects>true</AutoGenerateBindingRedirects>
     <GenerateBindingRedirectsOutputType>true</GenerateBindingRedirectsOutputType>
     <LangVersion>7.2</LangVersion>
@@ -31,10 +29,6 @@
     <None Update="wwwroot\**\*">
       <CopyToPublishDirectory>PreserveNewest</CopyToPublishDirectory>
     </None>
-  </ItemGroup>
-
-  <ItemGroup>
-    <FrameworkReference Include="Microsoft.AspNetCore.App" />
   </ItemGroup>
 
   <ItemGroup>
