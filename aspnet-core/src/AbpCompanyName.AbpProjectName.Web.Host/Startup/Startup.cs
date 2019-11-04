@@ -3,20 +3,21 @@ using System.Linq;
 using System.Reflection;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
-using Microsoft.AspNetCore.Mvc.Cors.Internal;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Logging;
 using Castle.Facilities.Logging;
-using Swashbuckle.AspNetCore.Swagger;
 using Abp.AspNetCore;
+using Abp.AspNetCore.Mvc.Antiforgery;
 using Abp.Castle.Logging.Log4Net;
 using Abp.Extensions;
 using AbpCompanyName.AbpProjectName.Configuration;
 using AbpCompanyName.AbpProjectName.Identity;
-
 using Abp.AspNetCore.SignalR.Hubs;
-using Microsoft.AspNetCore.Mvc;
+using Abp.Dependency;
+using Abp.Json;
+using Microsoft.OpenApi.Models;
+using Newtonsoft.Json.Serialization;
 
 namespace AbpCompanyName.AbpProjectName.Web.Host.Startup
 {
@@ -33,10 +34,21 @@ namespace AbpCompanyName.AbpProjectName.Web.Host.Startup
 
         public IServiceProvider ConfigureServices(IServiceCollection services)
         {
-            // MVC
-            services.AddMvc(
-                options => options.Filters.Add(new CorsAuthorizationFilterFactory(_defaultCorsPolicyName))
-            ).SetCompatibilityVersion(CompatibilityVersion.Version_2_2);
+            //MVC
+            services.AddControllersWithViews(
+                options =>
+                {
+                    options.Filters.Add(new AbpAutoValidateAntiforgeryTokenAttribute());
+                }
+            ).AddNewtonsoftJson(options =>
+            {
+                options.SerializerSettings.ContractResolver = new AbpMvcContractResolver(IocManager.Instance)
+                {
+                    NamingStrategy = new CamelCaseNamingStrategy()
+                };
+            });
+
+
 
             IdentityRegistrar.Register(services);
             AuthConfigurer.Configure(services, _appConfiguration);
@@ -64,16 +76,16 @@ namespace AbpCompanyName.AbpProjectName.Web.Host.Startup
             // Swagger - Enable this line and the related lines in Configure method to enable swagger UI
             services.AddSwaggerGen(options =>
             {
-                options.SwaggerDoc("v1", new Info { Title = "AbpProjectName API", Version = "v1" });
+                options.SwaggerDoc("v1", new OpenApiInfo() { Title = "AbpProjectName API", Version = "v1" });
                 options.DocInclusionPredicate((docName, description) => true);
 
                 // Define the BearerAuth scheme that's in use
-                options.AddSecurityDefinition("bearerAuth", new ApiKeyScheme()
+                options.AddSecurityDefinition("bearerAuth", new OpenApiSecurityScheme()
                 {
                     Description = "JWT Authorization header using the Bearer scheme. Example: \"Authorization: Bearer {token}\"",
                     Name = "Authorization",
-                    In = "header",
-                    Type = "apiKey"
+                    In = ParameterLocation.Header,
+                    Type = SecuritySchemeType.ApiKey
                 });
             });
 
@@ -86,7 +98,7 @@ namespace AbpCompanyName.AbpProjectName.Web.Host.Startup
             );
         }
 
-        public void Configure(IApplicationBuilder app, IHostingEnvironment env, ILoggerFactory loggerFactory)
+        public void Configure(IApplicationBuilder app,  ILoggerFactory loggerFactory)
         {
             app.UseAbp(options => { options.UseAbpRequestLocalization = false; }); // Initializes ABP framework.
 
@@ -94,25 +106,20 @@ namespace AbpCompanyName.AbpProjectName.Web.Host.Startup
 
             app.UseStaticFiles();
 
+            app.UseRouting();
+
             app.UseAuthentication();
 
             app.UseAbpRequestLocalization();
 
-            app.UseSignalR(routes =>
+          
+            app.UseEndpoints(endpoints =>
             {
-                routes.MapHub<AbpCommonHub>("/signalr");
+                endpoints.MapHub<AbpCommonHub>("/signalr");
+                endpoints.MapControllerRoute("default", "{controller=Home}/{action=Index}/{id?}");
+                endpoints.MapControllerRoute("defaultWithArea", "{area}/{controller=Home}/{action=Index}/{id?}");
             });
 
-            app.UseMvc(routes =>
-            {
-                routes.MapRoute(
-                    name: "defaultWithArea",
-                    template: "{area}/{controller=Home}/{action=Index}/{id?}");
-
-                routes.MapRoute(
-                    name: "default",
-                    template: "{controller=Home}/{action=Index}/{id?}");
-            });
 
             // Enable middleware to serve generated Swagger as a JSON endpoint
             app.UseSwagger();

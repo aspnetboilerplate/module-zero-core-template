@@ -3,7 +3,7 @@ import { MatDialog } from '@angular/material';
 import { finalize } from 'rxjs/operators';
 import { appModuleAnimation } from '@shared/animations/routerTransition';
 import { PagedListingComponentBase, PagedRequestDto } from 'shared/paged-listing-component-base';
-import { UserServiceProxy, UserDto, PagedResultDtoOfUserDto } from '@shared/service-proxies/service-proxies';
+import { UserServiceProxy, UserDto, UserDtoPagedResultDto } from '@shared/service-proxies/service-proxies';
 import { CreateUserDialogComponent } from './create-user/create-user-dialog.component';
 import { EditUserDialogComponent } from './edit-user/edit-user-dialog.component';
 import { Moment } from 'moment';
@@ -23,7 +23,7 @@ class PagedUsersRequestDto extends PagedRequestDto {
             padding: 10px;
           }
         `
-      ]
+    ]
 })
 export class UsersComponent extends PagedListingComponentBase<UserDto> {
     users: UserDto[] = [];
@@ -66,7 +66,7 @@ export class UsersComponent extends PagedListingComponentBase<UserDto> {
                     finishedCallback();
                 })
             )
-            .subscribe((result: PagedResultDtoOfUserDto) => {
+            .subscribe((result: UserDtoPagedResultDto) => {
                 this.users = result.items;
                 this.showPaging(result, pageNumber);
             });
