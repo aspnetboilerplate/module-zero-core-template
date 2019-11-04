@@ -85,9 +85,10 @@ namespace AbpCompanyName.AbpProjectName.Web.Startup
             app.UseRouting();
 
             app.UseAuthentication();
-            app.UseAuthorization();
-
+            
             app.UseJwtTokenMiddleware();
+            
+            app.UseAuthorization();            
 
             app.UseEndpoints(endpoints =>
             {
