@@ -4,6 +4,7 @@ using Abp;
 using Abp.Extensions;
 using Abp.Notifications;
 using Abp.Timing;
+using Abp.Web.Security.AntiForgery;
 using AbpCompanyName.AbpProjectName.Controllers;
 
 namespace AbpCompanyName.AbpProjectName.Web.Host.Controllers
@@ -12,13 +13,17 @@ namespace AbpCompanyName.AbpProjectName.Web.Host.Controllers
     {
         private readonly INotificationPublisher _notificationPublisher;
 
-        public HomeController(INotificationPublisher notificationPublisher)
+        private readonly IAbpAntiForgeryManager _abpAntiForgeryManager;
+
+        public HomeController(INotificationPublisher notificationPublisher, IAbpAntiForgeryManager abpAntiForgeryManager)
         {
             _notificationPublisher = notificationPublisher;
+            _abpAntiForgeryManager = abpAntiForgeryManager;
         }
 
         public IActionResult Index()
         {
+            _abpAntiForgeryManager.SetCookie(HttpContext);
             return Redirect("/swagger");
         }
 
