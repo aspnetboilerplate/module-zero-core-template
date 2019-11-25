@@ -17,18 +17,18 @@ namespace AbpCompanyName.AbpProjectName.EntityFrameworkCore.Seed.Host
             var tenantId = AbpProjectNameConsts.MultiTenancyEnabled ? null : (int?)MultiTenancyConsts.DefaultTenantId;
             return new List<ApplicationLanguage>
             {
-                new ApplicationLanguage(tenantId, "en", "English", "famfamfam-flags gb"),
-                new ApplicationLanguage(tenantId, "ar", "العربية", "famfamfam-flags sa"),
-                new ApplicationLanguage(tenantId, "de", "German", "famfamfam-flags de"),
-                new ApplicationLanguage(tenantId, "it", "Italiano", "famfamfam-flags it"),
-                new ApplicationLanguage(tenantId, "fr", "Français", "famfamfam-flags fr"),
-                new ApplicationLanguage(tenantId, "pt-BR", "Português", "famfamfam-flags br"),
-                new ApplicationLanguage(tenantId, "tr", "Türkçe", "famfamfam-flags tr"),
-                new ApplicationLanguage(tenantId, "ru", "Русский", "famfamfam-flags ru"),
-                new ApplicationLanguage(tenantId, "zh-Hans", "简体中文", "famfamfam-flags cn"),
-                new ApplicationLanguage(tenantId, "es-MX", "Español México", "famfamfam-flags mx"),
-                new ApplicationLanguage(tenantId, "nl", "Nederlands", "famfamfam-flags nl"),
-                new ApplicationLanguage(tenantId, "ja", "日本語", "famfamfam-flags jp")
+                new ApplicationLanguage(tenantId, "en", "English", "flag-icon flag-icon-us"),
+                new ApplicationLanguage(tenantId, "ar", "العربية", "flag-icon flag-icon-sa"),
+                new ApplicationLanguage(tenantId, "de", "German", "flag-icon flag-icon-de"),
+                new ApplicationLanguage(tenantId, "it", "Italiano", "flag-icon flag-icon-it"),
+                new ApplicationLanguage(tenantId, "fr", "Français", "flag-icon flag-icon-fr"),
+                new ApplicationLanguage(tenantId, "pt-BR", "Português", "flag-icon flag-icon-br"),
+                new ApplicationLanguage(tenantId, "tr", "Türkçe", "flag-icon flag-icon-tr"),
+                new ApplicationLanguage(tenantId, "ru", "Русский", "flag-icon flag-icon-ru"),
+                new ApplicationLanguage(tenantId, "zh-Hans", "简体中文", "flag-icon flag-icon-cn"),
+                new ApplicationLanguage(tenantId, "es-MX", "Español México", "flag-icon flag-icon-mx"),
+                new ApplicationLanguage(tenantId, "nl", "Nederlands", "flag-icon flag-icon-nl"),
+                new ApplicationLanguage(tenantId, "ja", "日本語", "flag-icon flag-icon-jp")
             };
         }
 

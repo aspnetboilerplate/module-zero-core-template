@@ -1,0 +1,84 @@
+﻿@using AbpCompanyName.AbpProjectName.Web.Models.Common.Modals
+@using AbpCompanyName.AbpProjectName.Web.Models.Users
+@using Abp.Authorization.Users
+@model UserListViewModel
+@{
+    Layout = null;
+}
+<div class="modal fade" id="UserCreateModal" data-backdrop="static">
+    <div class="modal-dialog modal-lg">
+        <div class="modal-content">
+            @await Html.PartialAsync("~/Views/Shared/Modals/_ModalHeader.cshtml", new ModalHeaderViewModel(L("CreateNewUser")))
+            <form class="form-horizontal">
+                <div class="modal-body">
+                    <ul class="nav nav-tabs" role="tablist">
+                        <li class="nav-item">
+                            <a class="nav-link active" data-toggle="tab" role="tab" href="#user-details">@L("UserDetails")</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" data-toggle="tab" role="tab" href="#user-roles">@L("UserRoles")</a>
+                        </li>
+                    </ul>
+                    <div class="tab-content mt-4">
+                        <div class="tab-pane container active" id="user-details">
+                            <div class="form-group row required">
+                                <label class="col-md-3 col-form-label">@L("UserName")</label>
+                                <div class="col-md-9">
+                                    <input class="form-control" name="UserName" required maxlength="@AbpUserBase.MaxUserNameLength" minlength="2">
+                                </div>
+                            </div>
+                            <div class="form-group row required">
+                                <label class="col-md-3 col-form-label">@L("Name")</label>
+                                <div class="col-md-9">
+                                    <input class="form-control" name="Name" required maxlength="@AbpUserBase.MaxNameLength">
+                                </div>
+                            </div>
+                            <div class="form-group row required">
+                                <label class="col-md-3 col-form-label">@L("Surname")</label>
+                                <div class="col-md-9">
+                                    <input class="form-control" name="Surname" required maxlength="@AbpUserBase.MaxSurnameLength">
+                                </div>
+                            </div>
+                            <div class="form-group row required">
+                                <label class="col-md-3 col-form-label">@L("EmailAddress")</label>
+                                <div class="col-md-9">
+                                    <input type="email" class="form-control" name="EmailAddress" required maxlength="@AbpUserBase.MaxEmailAddressLength">
+                                </div>
+                            </div>
+                            <div class="form-group row required">
+                                <label class="col-md-3 col-form-label">@L("Password")</label>
+                                <div class="col-md-9">
+                                    <input type="password" class="form-control" name="Password" id="Password" required maxlength="@AbpUserBase.MaxPlainPasswordLength">
+                                </div>
+                            </div>
+                            <div class="form-group row required">
+                                <label class="col-md-3 col-form-label">@L("ConfirmPassword")</label>
+                                <div class="col-md-9">
+                                    <input type="password" class="form-control" name="ConfirmPassword" id="ConfirmPassword" required maxlength="@AbpUserBase.MaxPlainPasswordLength">
+                                </div>
+                            </div>
+                            <div class="form-group row">
+                                <label class="col-md-3 col-form-label">@L("IsActive")</label>
+                                <div class="col-md-9">
+                                    <input type="checkbox" name="IsActive" value="true" checked>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="tab-pane container" id="user-roles">
+                            <div class="row">
+                                @foreach (var role in Model.Roles)
+                                {
+                                    <div class="col-md-6">
+                                        <input type="checkbox" name="role" id="role-@role.Id" value="@role.NormalizedName" title="@role.Description" />
+                                        <label for="role-@role.Id" title="@role.DisplayName">@role.Name</label>
+                                    </div>
+                                }
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                @await Html.PartialAsync("~/Views/Shared/Modals/_ModalFooterWithSaveAndCancel.cshtml")
+            </form>
+        </div>
+    </div>
+</div>

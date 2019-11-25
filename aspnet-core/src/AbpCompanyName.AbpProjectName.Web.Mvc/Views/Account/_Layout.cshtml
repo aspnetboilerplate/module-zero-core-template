@@ -5,121 +5,99 @@
 @using AbpCompanyName.AbpProjectName.Web.Resources
 @inject AbpCompanyName.AbpProjectName.Timing.AppTimes AppTimes
 @inject IAbpAntiForgeryManager AbpAntiForgeryManager
-@inject IMultiTenancyConfig MultiTenancyConfig
 @inject IWebResourceManager WebResourceManager
+@inject ILanguageManager LanguageManager
+@inject IMultiTenancyConfig MultiTenancyConfig
 @{
     Layout = null;
     AbpAntiForgeryManager.SetCookie(Context);
+
+    var pageTitle = !string.IsNullOrWhiteSpace(ViewBag.Title) ? ViewBag.Title + " / " : "";
+    pageTitle += "AbpProjectName";
 }
 <!DOCTYPE html>
-<html lang="en">
+<html lang="@LanguageManager.CurrentLanguage.Name">
 <head>
     <meta charset="utf-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no" name="viewport">
-    <meta name="description" content="">
-    <meta name="author" content="">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta http-equiv="x-ua-compatible" content="ie=edge">
 
-    <link rel="shortcut icon" href="~/favicon.ico">
+    <title>@pageTitle</title>
 
-    <title>AbpProjectName</title>
+    <link rel="shortcut icon" href="~/img/favicon.ico">
+    <link href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,400i,700" rel="stylesheet">
+    <link href="~/libs/font-awesome/css/all.min.css" rel="stylesheet" />
+    <link href="~/libs/flag-icon/css/flag-icon.min.css" rel="stylesheet" />
+    <link href="~/libs/icheck-bootstrap/icheck-bootstrap.min.css" rel="stylesheet" />
+    <link href="~/libs/toastr/toastr.min.css" rel="stylesheet" />
+    <link href="~/libs/admin-lte/dist/css/adminlte.min.css" rel="stylesheet" />
+    <link href="~/css/main.css" rel="stylesheet" />
+    <link href="~/css/style.css" rel="stylesheet" />
 
-    <environment names="Development">
-        <link href="~/fonts/roboto/roboto.css" rel="stylesheet" asp-append-version="true" />
-        <link href="~/fonts/material-icons/materialicons.css" rel="stylesheet" asp-append-version="true" />
-        <link href="~/lib/bootstrap/dist/css/bootstrap.css" rel="stylesheet" asp-append-version="true" />
-        <link href="~/lib/toastr/toastr.css" rel="stylesheet" asp-append-version="true" />
-        <link href="~/lib/famfamfam-flags/dist/sprite/famfamfam-flags.css" rel="stylesheet" asp-append-version="true" />
-        <link href="~/lib/font-awesome/css/font-awesome.css" rel="stylesheet" asp-append-version="true" />
-        <link href="~/lib/Waves/dist/waves.css" rel="stylesheet" asp-append-version="true" />
-        <link href="~/lib/animate.css/animate.css" rel="stylesheet" asp-append-version="true" />
-        <link href="~/css/materialize.css" rel="stylesheet" asp-append-version="true" />
-        <link href="~/css/style.css" rel="stylesheet" asp-append-version="true" />
-        <link href="~/view-resources/Views/Account/_Layout.css" rel="stylesheet" asp-append-version="true" />
-    </environment>
-
-    <environment names="Staging,Production">
-        <link rel="stylesheet" href="~/view-resources/Views/_Bundles/account-layout.min.css" asp-append-version="true" />
-    </environment>
-
-    <!-- View specific styles -->
     @RenderSection("styles", required: false)
-
-    <script type="text/javascript">
-        // This is used to get the application's root path from javascript. It's useful if you're running application in a virtual directory under IIS.
-        var abp = abp || {};
-        abp.appPath = '@ApplicationPath';
-    </script>
-
 </head>
-<body class="login-page">
-
+<body class="hold-transition login-page">
     <div class="login-box">
-        <div class="logo">
-            <a href="javascript:void(0);">AbpProjectName</a>
+        <div class="login-logo">
+            <a href="/"><b>AbpProjectName</b></a>
         </div>
-
-        @if (MultiTenancyConfig.IsEnabled)
-        {
-            <div class="tenant-change-box">
-                <vc:tenant-change></vc:tenant-change>
+        <div class="card">
+            @if (MultiTenancyConfig.IsEnabled)
+            {
+                <div class="card-header">
+                    <vc:tenant-change></vc:tenant-change>
+                </div>
+            }
+            <div class="card-body login-card-body">
+                @RenderBody()
             </div>
-        }
-
-        @RenderBody()
-
-        <vc:account-languages></vc:account-languages>
-
+            <div class="card-footer">
+                <vc:account-languages></vc:account-languages>
+            </div>
+        </div>
         <div class="row">
-            <div class="col-xs-12 text-center" style="color: #e9e9e9">
+            <div class="col-md-12 text-center">
                 <small>&copy; @DateTime.Now.Year AbpProjectName. <b>Version </b> @AppVersionHelper.Version [@AppVersionHelper.ReleaseDate.ToString("yyyyMMdd")]</small>
             </div>
         </div>
-
     </div>
-    <environment names="Development">
-        <script src="~/lib/json2/json2.js" asp-append-version="true"></script>
-        <script src="~/lib/jquery/dist/jquery.js" asp-append-version="true"></script>
-        <script src="~/lib/bootstrap/dist/js/bootstrap.js" asp-append-version="true"></script>
-        <script src="~/lib/moment/min/moment-with-locales.js" asp-append-version="true"></script>
-        <script src="~/lib/jquery-validation/dist/jquery.validate.js" asp-append-version="true"></script>
-        <script src="~/lib/blockUI/jquery.blockUI.js" asp-append-version="true"></script>
-        <script src="~/lib/toastr/toastr.js" asp-append-version="true"></script>
-        <script src="~/lib/sweetalert/dist/sweetalert.min.js" asp-append-version="true"></script>
-        <script src="~/lib/spin.js/spin.js" asp-append-version="true"></script>
-        <script src="~/lib/spin.js/jquery.spin.js" asp-append-version="true"></script>
-        <script src="~/lib/Waves/dist/waves.js" asp-append-version="true"></script>
-        <script src="~/lib/abp-web-resources/Abp/Framework/scripts/abp.js" asp-append-version="true"></script>
-        <script src="~/lib/abp-web-resources/Abp/Framework/scripts/libs/abp.jquery.js" asp-append-version="true"></script>
-        <script src="~/lib/abp-web-resources/Abp/Framework/scripts/libs/abp.toastr.js" asp-append-version="true"></script>
-        <script src="~/lib/abp-web-resources/Abp/Framework/scripts/libs/abp.blockUI.js" asp-append-version="true"></script>
-        <script src="~/lib/abp-web-resources/Abp/Framework/scripts/libs/abp.spin.js" asp-append-version="true"></script>
-        <script src="~/lib/abp-web-resources/Abp/Framework/scripts/libs/abp.sweet-alert.js" asp-append-version="true"></script>
-        <script src="~/js/admin.js" asp-append-version="true"></script>
-        <script src="~/js/main.js" asp-append-version="true"></script>
-
-        @if (CultureInfo.CurrentUICulture.Name != "en")
+    <script src="~/libs/jquery/jquery.min.js"></script>
+    <script src="~/libs/bootstrap/js/bootstrap.bundle.min.js"></script>
+    <script src="~/libs/admin-lte/dist/js/adminlte.min.js"></script>
+    <script src="~/libs/jquery-validate/jquery.validate.min.js"></script>
+    @if (CultureInfo.CurrentUICulture.Name != "en")
     {
-        <script src="~/lib/jquery-validation/src/localization/messages_@Html.Raw(CultureInfo.CurrentUICulture.Name.Replace("-", "_") + ".js")" asp-append-version="true"></script>
-}
-    </environment>
+        <script src="~/libs/jquery-validate/localization/messages_@Html.Raw(CultureInfo.CurrentUICulture.Name.Replace(" -", "_" ) + ".js" )" asp-append-version="true"></script>
+    }
+    <script src="~/libs/jquery-validate/jquery.validate.unobtrusive.min.js"></script>
+    <script src="~/libs/toastr/toastr.min.js"></script>
+    <script src="~/libs/block-ui/jquery.blockUI.min.js"></script>
+    <script src="~/libs/spin/spin.min.js"></script>
+    <script src="~/libs-ext/spin/jquery.spin.js"></script>
+    <script src="~/libs/sweetalert/sweetalert.min.js"></script>
+    <script src="~/libs/moment/moment-with-locales.min.js"></script>
+    <script type="text/javascript">
+        // Localizing momentjs
+        moment.locale('@CultureInfo.CurrentUICulture.Name');
 
-    <environment names="Staging,Production">
-        <script src="~/view-resources/Views/_Bundles/account-layout.min.js" asp-append-version="true"></script>
-    </environment>
-
-    <script>
-    // Localizing momentjs
-    moment.locale('@CultureInfo.CurrentUICulture.Name');
+        // This is used to get the application's root path from javascript.
+        // It's useful if you're running application in a virtual directory under IIS.
+        var abp = abp || {};
+        abp.appPath = '@ApplicationPath';
     </script>
-
+    <script src="~/libs/abp-web-resources/Abp/Framework/scripts/abp.js" asp-append-version="true"></script>
+    <script src="~/libs/abp-web-resources/Abp/Framework/scripts/libs/abp.jquery.js" asp-append-version="true"></script>
+    <script src="~/libs/abp-web-resources/Abp/Framework/scripts/libs/abp.toastr.js" asp-append-version="true"></script>
+    <script src="~/libs/abp-web-resources/Abp/Framework/scripts/libs/abp.blockUI.js" asp-append-version="true"></script>
+    <script src="~/libs/abp-web-resources/Abp/Framework/scripts/libs/abp.spin.js" asp-append-version="true"></script>
+    <script src="~/libs/abp-web-resources/Abp/Framework/scripts/libs/abp.sweet-alert.js" asp-append-version="true"></script>
     <!-- Dynamic scripts of ABP system (They are created on runtime and can not be bundled) -->
     <script src="~/AbpServiceProxies/GetAll?v=@(AppTimes.StartupTime.Ticks)" type="text/javascript"></script>
     <script src="~/AbpScripts/GetScripts?v=@(AppTimes.StartupTime.Ticks)" type="text/javascript"></script>
+    <script src="~/js/main.js"></script>
+    <script src="~/js/script.js"></script>
 
     @WebResourceManager.RenderScripts()
-
-    <!-- View specific scripts -->
     @RenderSection("scripts", required: false)
 </body>
 </html>

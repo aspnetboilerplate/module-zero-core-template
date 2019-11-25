@@ -1,20 +1,11 @@
 ﻿@using AbpCompanyName.AbpProjectName.Web.Views.Shared.Components.SideBarUserArea
 @model SideBarUserAreaViewModel
-@if (Model.LoginInformations != null && Model.LoginInformations.User != null)
-{
-    <div class="user-info">
-        <div class="image">
-            <img src="~/images/user.png" width="48" height="48" alt="User" />
-        </div>
-        <div class="info-container">
-            <div class="name" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">@Html.Raw(Model.GetShownLoginName())</div>
-            <div class="email">@Model.LoginInformations.User.EmailAddress</div>
-            <div class="btn-group user-helper-dropdown">
-                <i class="material-icons" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true">keyboard_arrow_down</i>
-                <ul class="dropdown-menu pull-right">
-                    <li><a href="@Url.Action("Logout", "Account", new { area= string.Empty })"><i class="material-icons">input</i>@L("Logout")</a></li>
-                </ul>
-            </div>
-        </div>
+
+<div class="user-panel mt-3 pb-3 mb-3 d-flex">
+    <div class="image">
+        <img src="~/libs/admin-lte/dist/img/avatar5.png" class="img-circle elevation-2" alt="User Image">
     </div>
-}
+    <div class="info">
+        <a href="#" class="d-block">@Html.Raw(Model.GetShownLoginName())</a>
+    </div>
+</div>

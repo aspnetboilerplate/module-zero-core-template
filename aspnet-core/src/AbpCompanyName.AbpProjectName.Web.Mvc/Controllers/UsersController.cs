@@ -6,7 +6,6 @@ using AbpCompanyName.AbpProjectName.Authorization;
 using AbpCompanyName.AbpProjectName.Controllers;
 using AbpCompanyName.AbpProjectName.Users;
 using AbpCompanyName.AbpProjectName.Web.Models.Users;
-using AbpCompanyName.AbpProjectName.Users.Dto;
 
 namespace AbpCompanyName.AbpProjectName.Web.Controllers
 {
@@ -22,17 +21,15 @@ namespace AbpCompanyName.AbpProjectName.Web.Controllers
 
         public async Task<ActionResult> Index()
         {
-            var users = (await _userAppService.GetAllAsync(new PagedUserResultRequestDto {MaxResultCount = int.MaxValue})).Items; // Paging not implemented yet
             var roles = (await _userAppService.GetRoles()).Items;
             var model = new UserListViewModel
             {
-                Users = users,
                 Roles = roles
             };
             return View(model);
         }
 
-        public async Task<ActionResult> EditUserModal(long userId)
+        public async Task<ActionResult> EditModal(long userId)
         {
             var user = await _userAppService.GetAsync(new EntityDto<long>(userId));
             var roles = (await _userAppService.GetRoles()).Items;
@@ -41,7 +38,7 @@ namespace AbpCompanyName.AbpProjectName.Web.Controllers
                 User = user,
                 Roles = roles
             };
-            return View("_EditUserModal", model);
+            return PartialView("_EditModal", model);
         }
     }
 }

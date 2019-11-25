@@ -1,6 +1,5 @@
 ﻿(function ($) {
     var _accountService = abp.services.app.account;
-
     var _$form = $('form[name=TenantChangeForm]');
 
     function switchToSelectedTenant () {
@@ -49,8 +48,6 @@
             switchToSelectedTenant();
         }
     });
-
-    $.AdminBSB.input.activate(_$form);
 
     $('#TenantChangeModal').on('shown.bs.modal', function () {
         _$form.find('input[type=text]:first').focus();

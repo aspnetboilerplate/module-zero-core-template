@@ -7,18 +7,17 @@
 }
 @await Html.PartialAsync("~/Views/Shared/Modals/_ModalHeader.cshtml", new ModalHeaderViewModel(L("ChangeTenant")))
 
-<div class="modal-body">
-    <form name="TenantChangeForm" role="form" novalidate class="form-validation">
-        <div class="form-group form-float">
-            <div class="form-line">
-                <input class="form-control" type="text" name="TenancyName" maxlength="@AbpTenantBase.MaxTenancyNameLength.ToString()" value="@Model.TenancyName">
-                <label class="form-label">@L("TenancyName")</label>
+<form name="TenantChangeForm" role="form" novalidate class="form-horizontal form-validation">
+    <div class="modal-body">
+        <div class="form-group row">
+            <label class="col-md-3 col-form-label">@L("TenancyName")</label>
+            <div class="col-md-9">
+                <input name="TenancyName" class="form-control" type="text" maxlength="@AbpTenantBase.MaxTenancyNameLength.ToString()" value="@Model.TenancyName">
             </div>
         </div>
-        <span class="help-block">@L("LeaveEmptyToSwitchToHost")</span>
-    </form>
-</div>
-
-@await Html.PartialAsync("~/Views/Shared/Modals/_ModalFooterWithSaveAndCancel.cshtml")
+        <span><i class="fa fa-info-circle"></i> @L("LeaveEmptyToSwitchToHost")</span>
+    </div>
+    @await Html.PartialAsync("~/Views/Shared/Modals/_ModalFooterWithSaveAndCancel.cshtml")
+</form>
 
 <script src="~/view-resources/Views/Shared/Components/TenantChange/_ChangeModal.js" asp-append-version="true"></script>

@@ -1,77 +1,180 @@
-﻿(function () {
-    $(function () {
+﻿(function ($) {
+    var _tenantService = abp.services.app.tenant,
+        l = abp.localization.getSource('AbpProjectName'),
+        _$modal = $('#TenantCreateModal'),
+        _$form = _$modal.find('form'),
+        _$table = $('#TenantsTable');
 
-        var _tenantService = abp.services.app.tenant;
-        var _$modal = $('#TenantCreateModal');
-        var _$form = _$modal.find('form');
+    var _$tenantsTable = _$table.DataTable({
+        paging: true,
+        serverSide: true,
+        ajax: function (data, callback, settings) {
+            var filter = $('#TenantsSearchForm').serializeFormToObject(true);
+            filter.maxResultCount = data.length;
+            filter.skipCount = data.start;
 
-        _$form.validate();
-
-        $('#RefreshButton').click(function () {
-            refreshTenantList();
-        });
-
-        $('.delete-tenant').click(function () {
-            var tenantId = $(this).attr("data-tenant-id");
-            var tenancyName = $(this).attr('data-tenancy-name');
-
-            deleteTenant(tenantId, tenancyName);
-        });
-
-        $('.edit-tenant').click(function (e) {
-            var tenantId = $(this).attr("data-tenant-id");
-
-            e.preventDefault();
-            abp.ajax({
-                url: abp.appPath + 'Tenants/EditTenantModal?tenantId=' + tenantId,
-                type: 'POST',
-                dataType: 'html',
-                success: function (content) {
-                    $('#TenantEditModal div.modal-content').html(content);
-                },
-                error: function (e) { }
+            abp.ui.setBusy(_$table);
+            _tenantService.getAll(filter).done(function (result) {
+                callback({
+                    recordsTotal: result.totalCount,
+                    recordsFiltered: result.totalCount,
+                    data: result.items
+                });
+            }).done(() => {
+                abp.ui.clearBusy(_$table);
             });
-        });
-
-        _$form.find('button[type="submit"]').click(function (e) {
-            e.preventDefault();
-
-            if (!_$form.valid()) {
-                return;
+        },
+        buttons: [
+            {
+                name: 'refresh',
+                text: '<i class="fas fa-redo-alt"></i>',
+                action: () => _$tenantsTable.draw(false)
             }
+        ],
+        responsive: {
+            details: {
+                type: 'column'
+            }
+        },
+        columnDefs: [
+            {
+                targets: 0,
+                className: 'control',
+                defaultContent: '',
+            },
+            {
+                targets: 1,
+                data: null,
+                sortable: false,
+                autoWidth: false,
+                defaultContent: '',
+                render: (data, type, row, meta) => {
+                    return [
+                        '<div class="btn-group">',
+                        `   <button type="button" class="btn bg-secondary edit-tenant" data-tenant-id="${row.id}" data-toggle="modal" data-target="#TenantEditModal">`,
+                        `       <i class="fas fa-pencil-alt"></i> ${l('Edit')}`,
+                        '   </button>',
+                        '   <button type="button" class="btn bg-secondary dropdown-toggle dropdown-icon" data-toggle="dropdown">',
+                        '   </button>',
+                        '   <div class="dropdown-menu" role="menu">',
+                        `     <a href="#" class="dropdown-item delete-tenant" data-tenant-id="${row.id}" data-tenancy-name="${row.tenancyName}">`,
+                        `         <i class="fas fa-trash"></i> ${l('Delete')}`,
+                        '     </a>',
+                        '   </div>',
+                        '</div>'
+                    ].join('');
+                }
+            },
+            {
+                targets: 2,
+                data: 'tenancyName',
+                sortable: false
+            },
+            {
+                targets: 3,
+                data: 'name',
+                sortable: false
+            },
+            {
+                targets: 4,
+                data: 'isActive',
+                sortable: false,
+                render: data => `<input type="checkbox" disabled ${data ? 'checked' : ''}>`
+            }
+        ]
+    });
 
-            var tenant = _$form.serializeFormToObject(); //serializeFormToObject is defined in main.js
+    _$form.find('.save-button').click(function (e) {
+        e.preventDefault();
 
-            abp.ui.setBusy(_$modal);
-            _tenantService.create(tenant).done(function () {
+        if (!_$form.valid()) {
+            return;
+        }
+
+        var tenant = _$form.serializeFormToObject();
+
+        abp.ui.setBusy(_$modal);
+
+        _tenantService
+            .create(tenant)
+            .done(function () {
                 _$modal.modal('hide');
-                location.reload(true); //reload page to see new tenant!
-            }).always(function () {
+                _$form[0].reset();
+                abp.notify.info(l('SavedSuccessfully'));
+                _$tenantsTable.ajax.reload();
+            })
+            .always(function () {
                 abp.ui.clearBusy(_$modal);
             });
+    });
+
+    $(document).on('click', '.delete-tenant', function () {
+        var tenantId = $(this).attr('data-tenant-id');
+        var tenancyName = $(this).attr('data-tenancy-name');
+
+        deleteTenant(tenantId, tenancyName);
+    });
+
+    $(document).on('click', '.edit-tenant', function (e) {
+        var tenantId = $(this).attr('data-tenant-id');
+
+        abp.ajax({
+            url: abp.appPath + 'Tenants/EditModal?tenantId=' + tenantId,
+            type: 'POST',
+            dataType: 'html',
+            success: function (content) {
+                $('#TenantEditModal div.modal-content').html(content);
+            },
+            error: function (e) { }
         });
+    });
 
-        _$modal.on('shown.bs.modal', function () {
-            _$modal.find('input:not([type=hidden]):first').focus();
-        });
+    abp.event.on('tenant.edited', (data) => {
+        _$tenantsTable.ajax.reload();
+    });
 
-        function refreshTenantList() {
-            location.reload(true); //reload page to see new tenant!
-        }
-
-        function deleteTenant(tenantId, tenancyName) {
-            abp.message.confirm(
-                abp.utils.formatString(abp.localization.localize('AreYouSureWantToDelete', 'AbpProjectName'), tenancyName),
-                function (isConfirmed) {
-                    if (isConfirmed) {
-                        _tenantService.delete({
+    function deleteTenant(tenantId, tenancyName) {
+        abp.message.confirm(
+            abp.utils.formatString(
+                l('AreYouSureWantToDelete'),
+                tenancyName
+            ),
+            null,
+            (isConfirmed) => {
+                if (isConfirmed) {
+                    _tenantService
+                        .delete({
                             id: tenantId
-                        }).done(function () {
-                            refreshTenantList();
+                        })
+                        .done(() => {
+                            abp.notify.info(l('SuccessfullyDeleted'));
+                            _$tenantsTable.ajax.reload();
                         });
-                    }
                 }
-            );
+            }
+        );
+    }
+
+    _$modal.on('shown.bs.modal', () => {
+        _$modal.find('input:not([type=hidden]):first').focus();
+    }).on('hidden.bs.modal', () => {
+        _$form.clearForm();
+    });
+
+    $('.btn-search').on('click', (e) => {
+        _$tenantsTable.ajax.reload();
+    });
+
+    $('.btn-clear').on('click', (e) => {
+        $('input[name=Keyword]').val('');
+        $('input[name=IsActive][value=""]').prop('checked', true);
+        _$tenantsTable.ajax.reload();
+    });
+
+    $('.txt-search').on('keypress', (e) => {
+        if (e.which == 13) {
+            _$tenantsTable.ajax.reload();
+            return false;
         }
     });
-})();
+})(jQuery);

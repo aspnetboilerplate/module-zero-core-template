@@ -1,0 +1,19 @@
+﻿@using AbpCompanyName.AbpProjectName.Web.Views.Shared.Components.RightNavbarLanguageSwitch
+@model RightNavbarLanguageSwitchViewModel
+
+<li class="nav-item dropdown">
+    <a href="#" class="nav-link dropdown-toggle" data-toggle="dropdown">
+        <i class="@Model.CurrentLanguage.Icon" title="@Model.CurrentLanguage.DisplayName"></i>
+    </a>
+    <div class="dropdown-menu dropdown-menu-right p-0">
+        @foreach (var language in Model.Languages)
+        {
+            if (language.Name != Model.CurrentLanguage.Name)
+            {
+                <a class="dropdown-item" href="@(ApplicationPath)AbpLocalization/ChangeCulture?cultureName=@(language.Name)&returnUrl=@(Context.Request.Path)">
+                    <i class="mr-2 @language.Icon"></i> @language.DisplayName
+                </a>
+            }
+        }
+    </div>
+</li>

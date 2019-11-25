@@ -1,8 +1,8 @@
 ﻿@using AbpCompanyName.AbpProjectName.Web.Models.Common.Modals
 @model ModalHeaderViewModel
 <div class="modal-header">
-    <button type="button" class="close" data-dismiss="modal" aria-hidden="true"></button>
-    <h4 class="modal-title">
-        <span>@Html.Raw(Model.Title)</span>
-    </h4>
+    <h4 class="modal-title">@Html.Raw(Model.Title)</h4>
+    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+        <span aria-hidden="true">&times;</span>
+    </button>
 </div>

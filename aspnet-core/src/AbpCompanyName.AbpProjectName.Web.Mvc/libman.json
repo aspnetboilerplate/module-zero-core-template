@@ -1,0 +1,168 @@
+{
+  "defaultProvider": "cdnjs",
+  "version": "1.0",
+  "libraries": [
+    {
+      "library": "abp-web-resources@4.1.0",
+      "provider": "jsdelivr",
+      "destination": "wwwroot/libs/abp-web-resources"
+    },
+    {
+      "library": "admin-lte@3.0.0",
+      "provider": "jsdelivr",
+      "destination": "wwwroot/libs/admin-lte",
+      "files": [
+        "dist/js/adminlte.js",
+        "dist/js/adminlte.js.map",
+        "dist/js/adminlte.min.js",
+        "dist/js/adminlte.min.js.map",
+        "dist/js/demo.js",
+        "dist/js/demo.min.js",
+        "dist/css/adminlte.css",
+        "dist/css/adminlte.css.map",
+        "dist/css/adminlte.min.css",
+        "dist/css/adminlte.min.css.map",
+        "dist/img/AdminLTELogo.png",
+        "dist/img/avatar.png",
+        "dist/img/avatar2.png",
+        "dist/img/avatar3.png",
+        "dist/img/avatar04.png",
+        "dist/img/avatar5.png",
+        "dist/img/boxed-bg.jpg",
+        "dist/img/boxed-bg.png",
+        "dist/img/icons.png"
+      ]
+    },
+    {
+      "library": "twitter-bootstrap@4.3.1",
+      "destination": "wwwroot/libs/bootstrap"
+    },
+    {
+      "library": "jquery@3.4.1",
+      "destination": "wwwroot/libs/jquery",
+      "files": [
+        "jquery.js",
+        "jquery.min.js",
+        "jquery.min.map"
+      ]
+    },
+    {
+      "library": "jquery-validate@1.19.1",
+      "destination": "wwwroot/libs/jquery-validate"
+    },
+    {
+      "library": "jquery-validation-unobtrusive@3.2.11",
+      "destination": "wwwroot/libs/jquery-validate"
+    },
+    {
+      "library": "font-awesome@5.11.2",
+      "destination": "wwwroot/libs/font-awesome"
+    },
+    {
+      "library": "icheck-bootstrap@3.0.1",
+      "provider": "jsdelivr",
+      "destination": "wwwroot/libs/icheck-bootstrap",
+      "files": [
+        "icheck-bootstrap.css",
+        "icheck-bootstrap.min.css"
+      ]
+    },
+    {
+      "library": "datatables@1.10.19",
+      "destination": "wwwroot/libs/datatables",
+      "files": [
+        "css/dataTables.bootstrap4.css",
+        "css/dataTables.bootstrap4.min.css",
+        "images/sort_asc.png",
+        "images/sort_asc_disabled.png",
+        "images/sort_both.png",
+        "images/sort_desc.png",
+        "images/sort_desc_disabled.png",
+        "js/jquery.dataTables.js",
+        "js/jquery.dataTables.min.js",
+        "js/dataTables.bootstrap4.js",
+        "js/dataTables.bootstrap4.min.js"
+      ]
+    },
+    {
+      "library": "datatables.net-buttons@1.6.1",
+      "provider": "jsdelivr",
+      "destination": "wwwroot/libs/datatables",
+      "files": [
+        "js/dataTables.buttons.js",
+        "js/dataTables.buttons.min.js"
+      ]
+    },
+    {
+      "library": "datatables.net-responsive@2.2.3",
+      "provider": "jsdelivr",
+      "destination": "wwwroot/libs/datatables",
+      "files": [
+        "js/dataTables.responsive.js",
+        "js/dataTables.responsive.min.js"
+      ]
+    },
+    {
+      "library": "datatables.net-responsive-bs4@2.2.3",
+      "provider": "jsdelivr",
+      "destination": "wwwroot/libs/datatables",
+      "files": [
+        "css/responsive.bootstrap4.css",
+        "css/responsive.bootstrap4.min.css",
+        "js/responsive.bootstrap4.js",
+        "js/responsive.bootstrap4.min.js"
+      ]
+    },
+    {
+      "library": "datatables.net-buttons-bs4@1.6.1",
+      "provider": "jsdelivr",
+      "destination": "wwwroot/libs/datatables",
+      "files": [
+        "css/buttons.bootstrap4.css",
+        "css/buttons.bootstrap4.min.css",
+        "js/buttons.bootstrap4.js",
+        "js/buttons.bootstrap4.min.js"
+      ]
+    },
+    {
+      "library": "jquery.blockUI@2.70",
+      "destination": "wwwroot/libs/block-ui"
+    },
+    {
+      "library": "sweetalert@2.1.2",
+      "destination": "wwwroot/libs/sweetalert"
+    },
+    {
+      "library": "spin.js@2.3.2",
+      "destination": "wwwroot/libs/spin"
+    },
+    {
+      "library": "toastr.js@2.1.4",
+      "destination": "wwwroot/libs/toastr"
+    },
+    {
+      "library": "moment.js@2.24.0",
+      "destination": "wwwroot/libs/moment"
+    },
+    {
+      "library": "signalr.js@2.4.0",
+      "destination": "wwwroot/libs/signalr"
+    },
+    {
+      "library": "aspnet-signalr@1.0.0",
+      "destination": "wwwroot/libs/signalr"
+    },
+    {
+      "library": "flag-icon-css@3.4.3",
+      "destination": "wwwroot/libs/flag-icon"
+    },
+    {
+      "library": "Chart.js@2.8.0",
+      "destination": "wwwroot/libs/chartjs",
+      "files": [
+        "Chart.min.css",
+        "Chart.min.js"
+      ]
+    }
+  ]
+}
