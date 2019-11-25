@@ -109,7 +109,6 @@ namespace AbpCompanyName.AbpProjectName.MultiTenancy
         public override async Task DeleteAsync(EntityDto<int> input)
         {
             CheckDeletePermission();
-            var foo = DeletePermissionName;
 
             var tenant = await _tenantManager.GetByIdAsync(input.Id);
             await _tenantManager.DeleteAsync(tenant);
