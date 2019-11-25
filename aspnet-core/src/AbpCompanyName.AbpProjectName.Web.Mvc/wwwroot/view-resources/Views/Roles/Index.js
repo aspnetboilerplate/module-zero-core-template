@@ -27,6 +27,7 @@
 				url: abp.appPath + 'Roles/EditRoleModal?roleId=' + roleId,
 				type: 'POST',
 				contentType: 'application/html',
+                dataType: 'html',
 				success: function (content) {
 					$('#RoleEditModal div.modal-content').html(content);
 				},
