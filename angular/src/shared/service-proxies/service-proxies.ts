@@ -220,7 +220,7 @@ export class RoleServiceProxy {
      * @return Success
      */
     create(input: CreateRoleDto | null | undefined): Observable<RoleDto> {
-        let url_ = this.baseUrl + "/api/services/app/Role/Create";
+        let url_ = this.baseUrl + "/api/services/app/Role/CreateAsync";
         url_ = url_.replace(/[?&]$/, "");
 
         const content_ = JSON.stringify(input);
@@ -330,7 +330,7 @@ export class RoleServiceProxy {
      * @return Success
      */
     update(input: RoleDto | null | undefined): Observable<RoleDto> {
-        let url_ = this.baseUrl + "/api/services/app/Role/Update";
+        let url_ = this.baseUrl + "/api/services/app/Role/UpdateAsync";
         url_ = url_.replace(/[?&]$/, "");
 
         const content_ = JSON.stringify(input);
@@ -386,7 +386,7 @@ export class RoleServiceProxy {
      * @return Success
      */
     delete(id: number | null | undefined): Observable<void> {
-        let url_ = this.baseUrl + "/api/services/app/Role/Delete?";
+        let url_ = this.baseUrl + "/api/services/app/Role/DeleteAsync?";
         if (id !== undefined)
             url_ += "Id=" + encodeURIComponent("" + id) + "&"; 
         url_ = url_.replace(/[?&]$/, "");
@@ -541,7 +541,7 @@ export class RoleServiceProxy {
      * @return Success
      */
     get(id: number | null | undefined): Observable<RoleDto> {
-        let url_ = this.baseUrl + "/api/services/app/Role/Get?";
+        let url_ = this.baseUrl + "/api/services/app/Role/GetAsync?";
         if (id !== undefined)
             url_ += "Id=" + encodeURIComponent("" + id) + "&"; 
         url_ = url_.replace(/[?&]$/, "");
@@ -597,7 +597,7 @@ export class RoleServiceProxy {
      * @return Success
      */
     getAll(keyword: string | null | undefined, skipCount: number | null | undefined, maxResultCount: number | null | undefined): Observable<PagedResultDtoOfRoleDto> {
-        let url_ = this.baseUrl + "/api/services/app/Role/GetAll?";
+        let url_ = this.baseUrl + "/api/services/app/Role/GetAllAsync?";
         if (keyword !== undefined)
             url_ += "Keyword=" + encodeURIComponent("" + keyword) + "&"; 
         if (skipCount !== undefined)
@@ -730,7 +730,7 @@ export class TenantServiceProxy {
      * @return Success
      */
     create(input: CreateTenantDto | null | undefined): Observable<TenantDto> {
-        let url_ = this.baseUrl + "/api/services/app/Tenant/Create";
+        let url_ = this.baseUrl + "/api/services/app/Tenant/CreateAsync";
         url_ = url_.replace(/[?&]$/, "");
 
         const content_ = JSON.stringify(input);
@@ -786,7 +786,7 @@ export class TenantServiceProxy {
      * @return Success
      */
     delete(id: number | null | undefined): Observable<void> {
-        let url_ = this.baseUrl + "/api/services/app/Tenant/Delete?";
+        let url_ = this.baseUrl + "/api/services/app/Tenant/DeleteAsync?";
         if (id !== undefined)
             url_ += "Id=" + encodeURIComponent("" + id) + "&"; 
         url_ = url_.replace(/[?&]$/, "");
@@ -836,7 +836,7 @@ export class TenantServiceProxy {
      * @return Success
      */
     get(id: number | null | undefined): Observable<TenantDto> {
-        let url_ = this.baseUrl + "/api/services/app/Tenant/Get?";
+        let url_ = this.baseUrl + "/api/services/app/Tenant/GetAsync?";
         if (id !== undefined)
             url_ += "Id=" + encodeURIComponent("" + id) + "&"; 
         url_ = url_.replace(/[?&]$/, "");
@@ -893,7 +893,7 @@ export class TenantServiceProxy {
      * @return Success
      */
     getAll(keyword: string | null | undefined, isActive: boolean | null | undefined, skipCount: number | null | undefined, maxResultCount: number | null | undefined): Observable<PagedResultDtoOfTenantDto> {
-        let url_ = this.baseUrl + "/api/services/app/Tenant/GetAll?";
+        let url_ = this.baseUrl + "/api/services/app/Tenant/GetAllAsync?";
         if (keyword !== undefined)
             url_ += "Keyword=" + encodeURIComponent("" + keyword) + "&"; 
         if (isActive !== undefined)
@@ -953,7 +953,7 @@ export class TenantServiceProxy {
      * @return Success
      */
     update(input: TenantDto | null | undefined): Observable<TenantDto> {
-        let url_ = this.baseUrl + "/api/services/app/Tenant/Update";
+        let url_ = this.baseUrl + "/api/services/app/Tenant/UpdateAsync";
         url_ = url_.replace(/[?&]$/, "");
 
         const content_ = JSON.stringify(input);
@@ -1200,7 +1200,7 @@ export class UserServiceProxy {
      * @return Success
      */
     create(input: CreateUserDto | null | undefined): Observable<UserDto> {
-        let url_ = this.baseUrl + "/api/services/app/User/Create";
+        let url_ = this.baseUrl + "/api/services/app/User/CreateAsync";
         url_ = url_.replace(/[?&]$/, "");
 
         const content_ = JSON.stringify(input);
@@ -1256,7 +1256,7 @@ export class UserServiceProxy {
      * @return Success
      */
     update(input: UserDto | null | undefined): Observable<UserDto> {
-        let url_ = this.baseUrl + "/api/services/app/User/Update";
+        let url_ = this.baseUrl + "/api/services/app/User/UpdateAsync";
         url_ = url_.replace(/[?&]$/, "");
 
         const content_ = JSON.stringify(input);
@@ -1312,7 +1312,7 @@ export class UserServiceProxy {
      * @return Success
      */
     delete(id: number | null | undefined): Observable<void> {
-        let url_ = this.baseUrl + "/api/services/app/User/Delete?";
+        let url_ = this.baseUrl + "/api/services/app/User/DeleteAsync?";
         if (id !== undefined)
             url_ += "Id=" + encodeURIComponent("" + id) + "&"; 
         url_ = url_.replace(/[?&]$/, "");
@@ -1577,7 +1577,7 @@ export class UserServiceProxy {
      * @return Success
      */
     get(id: number | null | undefined): Observable<UserDto> {
-        let url_ = this.baseUrl + "/api/services/app/User/Get?";
+        let url_ = this.baseUrl + "/api/services/app/User/GetAsync?";
         if (id !== undefined)
             url_ += "Id=" + encodeURIComponent("" + id) + "&"; 
         url_ = url_.replace(/[?&]$/, "");
@@ -1634,7 +1634,7 @@ export class UserServiceProxy {
      * @return Success
      */
     getAll(keyword: string | null | undefined, isActive: boolean | null | undefined, skipCount: number | null | undefined, maxResultCount: number | null | undefined): Observable<PagedResultDtoOfUserDto> {
-        let url_ = this.baseUrl + "/api/services/app/User/GetAll?";
+        let url_ = this.baseUrl + "/api/services/app/User/GetAllAsync?";
         if (keyword !== undefined)
             url_ += "Keyword=" + encodeURIComponent("" + keyword) + "&"; 
         if (isActive !== undefined)
