@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Linq;
 using System.Reflection;
+using System.Text.RegularExpressions;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.Extensions.Configuration;
@@ -16,6 +17,7 @@ using AbpCompanyName.AbpProjectName.Identity;
 using Abp.AspNetCore.SignalR.Hubs;
 using Abp.Dependency;
 using Abp.Json;
+using Abp.Web.Security.AntiForgery;
 using Microsoft.OpenApi.Models;
 using Newtonsoft.Json.Serialization;
 
@@ -120,7 +122,20 @@ namespace AbpCompanyName.AbpProjectName.Web.Host.Startup
                 endpoints.MapControllerRoute("defaultWithArea", "{area}/{controller=Home}/{action=Index}/{id?}");
             });
 
+            // Swagger anti forgery
+            app.Use(async (context, next) =>
+            {
+                const string swaggerRoutePrefix = "swagger";
 
+                if (context.Request.Method == "GET" &&
+                    context.Request.Path.HasValue &&
+                    context.Request.Path.Value.StartsWith(swaggerRoutePrefix.EnsureStartsWith('/')))
+                {
+                    context.RequestServices.GetRequiredService<IAbpAntiForgeryManager>().SetCookie(context);
+                }
+
+                await next.Invoke();
+            });
             // Enable middleware to serve generated Swagger as a JSON endpoint
             app.UseSwagger();
             // Enable middleware to serve swagger-ui assets (HTML, JS, CSS etc.)
