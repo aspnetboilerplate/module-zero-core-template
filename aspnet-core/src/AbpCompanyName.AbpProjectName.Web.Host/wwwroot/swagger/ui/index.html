@@ -109,19 +109,14 @@
                                             lineHeight: "normal"
                                         },
                                         onClick: function () {
-                                            var authorizeButton = document.getElementById('authorize');
                                             if (abp.auth.getToken()) {
                                                 abp.swagger.logout();
-                                                authorizeButton.innerText = getAuthorizeButtonText();
-                                                authorizeButton.className = 'btn ' + getAuthorizeButtonCssClass();
+                                                location.reload();
                                             } else {
                                                 abp.swagger.openAuthDialog(function () {
-                                                    authorizeButton.innerText = getAuthorizeButtonText();
-                                                    authorizeButton.className = 'btn ' + getAuthorizeButtonCssClass();
-                                                    abp.swagger.closeAuthDialog();
+                                                    location.reload();
                                                 });
                                             }
-                                            location.reload();
                                         }
                                     }, getAuthorizeButtonText());
                             }
