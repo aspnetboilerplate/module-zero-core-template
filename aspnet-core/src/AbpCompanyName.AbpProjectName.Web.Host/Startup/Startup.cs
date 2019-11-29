@@ -1,7 +1,6 @@
 ﻿using System;
 using System.Linq;
 using System.Reflection;
-using System.Text.RegularExpressions;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.Extensions.Configuration;
@@ -17,7 +16,6 @@ using AbpCompanyName.AbpProjectName.Identity;
 using Abp.AspNetCore.SignalR.Hubs;
 using Abp.Dependency;
 using Abp.Json;
-using Abp.Web.Security.AntiForgery;
 using Microsoft.OpenApi.Models;
 using Newtonsoft.Json.Serialization;
 
