@@ -121,21 +121,7 @@ namespace AbpCompanyName.AbpProjectName.Web.Host.Startup
                 endpoints.MapControllerRoute("default", "{controller=Home}/{action=Index}/{id?}");
                 endpoints.MapControllerRoute("defaultWithArea", "{area}/{controller=Home}/{action=Index}/{id?}");
             });
-
-            // Swagger anti forgery
-            app.Use(async (context, next) =>
-            {
-                const string swaggerRoutePrefix = "swagger";
-
-                if (context.Request.Method == "GET" &&
-                    context.Request.Path.HasValue &&
-                    context.Request.Path.Value.StartsWith(swaggerRoutePrefix.EnsureStartsWith('/')))
-                {
-                    context.RequestServices.GetRequiredService<IAbpAntiForgeryManager>().SetCookie(context);
-                }
-
-                await next.Invoke();
-            });
+          
             // Enable middleware to serve generated Swagger as a JSON endpoint
             app.UseSwagger();
             // Enable middleware to serve swagger-ui assets (HTML, JS, CSS etc.)
