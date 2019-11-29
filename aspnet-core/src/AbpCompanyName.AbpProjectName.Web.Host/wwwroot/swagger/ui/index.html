@@ -72,11 +72,9 @@
     <script src="ui/abp.swagger.js"></script>
 
     <script>
-        window.onload = function () {
-            if (!abp.security.antiForgery.getToken()) {
-                fetch("/AntiForgery/SetCookie");
-            }
-
+        window.onload = function () {            
+            fetch("/AntiForgery/SetCookie");
+            
             var configObject = JSON.parse('%(ConfigObject)');
 
             // Apply mandatory parameters
