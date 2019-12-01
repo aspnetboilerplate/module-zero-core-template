@@ -24,7 +24,8 @@
     "resolveJsonModule": true,
     "noEmit": true,
     "allowJs": true,
-    "isolatedModules": true
+    "isolatedModules": true,
+    "downlevelIteration": true
   },
   "exclude": ["node_modules", "build", "scripts", "acceptance-tests", "webpack", "jest", "src/setupTests.ts"],
   "include": ["src"]

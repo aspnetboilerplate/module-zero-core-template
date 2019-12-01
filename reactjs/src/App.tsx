@@ -14,7 +14,7 @@ export interface IAppProps {
 
 @inject(Stores.SessionStore)
 class App extends React.Component<IAppProps> {
-  async componentWillMount() {
+  async componentDidMount() {
     await this.props.sessionStore!.getCurrentLoginInformations();
 
     if (!!this.props.sessionStore!.currentLogin.user && this.props.sessionStore!.currentLogin.application.features['SignalR']) {
