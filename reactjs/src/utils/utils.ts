@@ -1,3 +1,5 @@
+import * as abpTypings from '../lib/abp';
+
 import { L } from '../lib/abpUtility';
 import { routers } from '../components/Router/router.config';
 
@@ -83,7 +85,7 @@ class Utils {
     }
   }
 
-  getCurrentClockProvider(currentProviderName: string): abp.timing.IClockProvider {
+  getCurrentClockProvider(currentProviderName: string): abpTypings.timing.IClockProvider {
     if (currentProviderName === 'unspecifiedClockProvider') {
       return abp.timing.unspecifiedClockProvider;
     }
