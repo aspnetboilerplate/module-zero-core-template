@@ -9,10 +9,10 @@ namespace AbpCompanyName.AbpProjectName.Web.Startup
     [DependsOn(typeof(AbpProjectNameWebCoreModule))]
     public class AbpProjectNameWebMvcModule : AbpModule
     {
-        private readonly IHostingEnvironment _env;
+        private readonly IWebHostEnvironment _env;
         private readonly IConfigurationRoot _appConfiguration;
 
-        public AbpProjectNameWebMvcModule(IHostingEnvironment env)
+        public AbpProjectNameWebMvcModule(IWebHostEnvironment env)
         {
             _env = env;
             _appConfiguration = env.GetAppConfiguration();

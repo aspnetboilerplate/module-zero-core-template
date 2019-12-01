@@ -23,10 +23,10 @@ namespace AbpCompanyName.AbpProjectName
      )]
     public class AbpProjectNameWebCoreModule : AbpModule
     {
-        private readonly IHostingEnvironment _env;
+        private readonly IWebHostEnvironment _env;
         private readonly IConfigurationRoot _appConfiguration;
 
-        public AbpProjectNameWebCoreModule(IHostingEnvironment env)
+        public AbpProjectNameWebCoreModule(IWebHostEnvironment env)
         {
             _env = env;
             _appConfiguration = env.GetAppConfiguration();

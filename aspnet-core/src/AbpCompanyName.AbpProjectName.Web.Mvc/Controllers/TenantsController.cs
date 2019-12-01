@@ -21,13 +21,13 @@ namespace AbpCompanyName.AbpProjectName.Web.Controllers
 
         public async Task<ActionResult> Index()
         {
-            var output = await _tenantAppService.GetAll(new PagedTenantResultRequestDto { MaxResultCount = int.MaxValue }); // Paging not implemented yet
+            var output = await _tenantAppService.GetAllAsync(new PagedTenantResultRequestDto { MaxResultCount = int.MaxValue }); // Paging not implemented yet
             return View(output);
         }
 
         public async Task<ActionResult> EditTenantModal(int tenantId)
         {
-            var tenantDto = await _tenantAppService.Get(new EntityDto(tenantId));
+            var tenantDto = await _tenantAppService.GetAsync(new EntityDto(tenantId));
             return View("_EditTenantModal", tenantDto);
         }
     }

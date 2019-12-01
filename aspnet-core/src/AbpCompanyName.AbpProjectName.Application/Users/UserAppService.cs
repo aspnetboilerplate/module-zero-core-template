@@ -52,7 +52,7 @@ namespace AbpCompanyName.AbpProjectName.Users
             _logInManager = logInManager;
         }
 
-        public override async Task<UserDto> Create(CreateUserDto input)
+        public override async Task<UserDto> CreateAsync(CreateUserDto input)
         {
             CheckCreatePermission();
 
@@ -67,7 +67,7 @@ namespace AbpCompanyName.AbpProjectName.Users
 
             if (input.RoleNames != null)
             {
-                CheckErrors(await _userManager.SetRoles(user, input.RoleNames));
+                CheckErrors(await _userManager.SetRolesAsync(user, input.RoleNames));
             }
 
             CurrentUnitOfWork.SaveChanges();
@@ -75,7 +75,7 @@ namespace AbpCompanyName.AbpProjectName.Users
             return MapToEntityDto(user);
         }
 
-        public override async Task<UserDto> Update(UserDto input)
+        public override async Task<UserDto> UpdateAsync(UserDto input)
         {
             CheckUpdatePermission();
 
@@ -87,13 +87,13 @@ namespace AbpCompanyName.AbpProjectName.Users
 
             if (input.RoleNames != null)
             {
-                CheckErrors(await _userManager.SetRoles(user, input.RoleNames));
+                CheckErrors(await _userManager.SetRolesAsync(user, input.RoleNames));
             }
 
-            return await Get(input);
+            return await GetAsync(input);
         }
 
-        public override async Task Delete(EntityDto<long> input)
+        public override async Task DeleteAsync(EntityDto<long> input)
         {
             var user = await _userManager.GetUserByIdAsync(input.Id);
             await _userManager.DeleteAsync(user);
@@ -129,9 +129,13 @@ namespace AbpCompanyName.AbpProjectName.Users
 
         protected override UserDto MapToEntityDto(User user)
         {
-            var roles = _roleManager.Roles.Where(r => user.Roles.Any(ur => ur.RoleId == r.Id)).Select(r => r.NormalizedName);
+            var roleIds = user.Roles.Select(x => x.RoleId).ToArray();
+
+            var roles = _roleManager.Roles.Where(r => roleIds.Contains(r.Id)).Select(r => r.NormalizedName);
+
             var userDto = base.MapToEntityDto(user);
             userDto.RoleNames = roles.ToArray();
+
             return userDto;
         }
 

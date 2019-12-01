@@ -88,8 +88,22 @@
     <text name="On">Ligado</text>
     <text name="Off">Desligado</text>
     <text name="AreYouSureWantToDelete">Tem certeza que deseja excluir {0}?</text>
+    <text name="SuccessfullyDeleted">Excluído com sucesso</text>
     <text name="StartTyping">Comece a escrever</text>
     <text name="Skins">Temas</text>
     <text name="Settings">Configurações</text>
+    <text name="Search">Procurar</text>
+    <text name="UpdatePassword">Alterar Senha</text>
+    <text name="ResetPassword">Resetar Senha</text>
+    <text name="Filter">Filtrar</text>
+    <text name="All">Todos</text>
+    <text name="CurrentPassword">Senha Atual</text>
+    <text name="NewPassword">Nova Senha</text>
+    <text name="ConfirmNewPassword">Confirme a Nova Senha</text>
+    <text name="PasswordsDoNotMatch">As senhas são diferentes</text>
+    <text name="PasswordsMustBeAtLeast8CharactersContainLowercaseUppercaseNumber">As senhas precisam ter no mínimo 8 caracteres, contendo pelo menos uma letra minúscula, uma maiúscula e um número</text>
+    <text name="UserDeleteWarningMessage">O usuário {0} será excluído.</text>
+    <text name="RoleDeleteWarningMessage">A função {0} será excluída e desassociada de todos os usuários pertencentes a ela.</text>
+    <text name="TenantDeleteWarningMessage">O Tenant {0} será excluído.</text>
   </texts>
 </localizationDictionary>

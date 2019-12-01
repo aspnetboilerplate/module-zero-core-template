@@ -26,6 +26,13 @@ var abp = abp || {};
         return true;
     }
 
+    function addAntiForgeryTokenToXhr(xhr) {
+        var antiForgeryToken = abp.security.antiForgery.getToken();
+        if (antiForgeryToken) {
+            xhr.setRequestHeader(abp.security.antiForgery.tokenHeaderName, antiForgeryToken);
+        }
+    }
+
     function loginUserInternal(tenantId, callback) {
         var usernameOrEmailAddress = document.getElementById('userName').value;
         if (!usernameOrEmailAddress) {
@@ -58,6 +65,7 @@ var abp = abp || {};
         xhr.open('POST', '/api/TokenAuth/Authenticate', true);
         xhr.setRequestHeader('Abp.TenantId', tenantId);
         xhr.setRequestHeader('Content-type', 'application/json');
+        addAntiForgeryTokenToXhr(xhr);
         xhr.send("{" + "usernameOrEmailAddress:'" + usernameOrEmailAddress + "'," + "password:'" + password + "'}");
     };
 
@@ -81,6 +89,7 @@ var abp = abp || {};
 
             xhrTenancyName.open('POST', '/api/services/app/Account/IsTenantAvailable', true);
             xhrTenancyName.setRequestHeader('Content-type', 'application/json');
+            addAntiForgeryTokenToXhr(xhrTenancyName);
             xhrTenancyName.send("{" + "tenancyName:'" + tenancyName + "'}");
         } else {
             loginUserInternal(null, callback); // Login for host

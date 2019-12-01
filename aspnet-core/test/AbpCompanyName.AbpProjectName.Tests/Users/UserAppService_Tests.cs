@@ -21,7 +21,7 @@ namespace AbpCompanyName.AbpProjectName.Tests.Users
         public async Task GetUsers_Test()
         {
             // Act
-            var output = await _userAppService.GetAll(new PagedUserResultRequestDto{MaxResultCount=20, SkipCount=0} );
+            var output = await _userAppService.GetAllAsync(new PagedUserResultRequestDto{MaxResultCount=20, SkipCount=0} );
 
             // Assert
             output.Items.Count.ShouldBeGreaterThan(0);
@@ -31,7 +31,7 @@ namespace AbpCompanyName.AbpProjectName.Tests.Users
         public async Task CreateUser_Test()
         {
             // Act
-            await _userAppService.Create(
+            await _userAppService.CreateAsync(
                 new CreateUserDto
                 {
                     EmailAddress = "john@volosoft.com",
