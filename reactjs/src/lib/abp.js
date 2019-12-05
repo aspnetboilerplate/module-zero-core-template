@@ -103,10 +103,10 @@
     };
 
     abp.localization.isCurrentCulture = function (name) {
-        return abp.localization.currentCulture &&
-            abp.localization.currentCulture.name &&
-            abp.localization.currentCulture.name.indexOf(name) == 0;
-    };
+        return abp.localization.currentCulture
+          && abp.localization.currentCulture.name
+          && abp.localization.currentCulture.name.indexOf(name) == 0;
+      };
 
     abp.localization.defaultSourceName = undefined;
     abp.localization.abpWeb = abp.localization.getSource('AbpWeb');
@@ -136,8 +136,9 @@
     };
 
     abp.auth.isGranted = function (permissionName) {
-        return abp.auth.allPermissions[permissionName] != undefined && abp.auth.grantedPermissions[permissionName] != undefined;
-    };
+        return abp.auth.allPermissions[permissionName] != undefined &&
+          abp.auth.grantedPermissions[permissionName] != undefined;
+      };
 
     abp.auth.isAnyGranted = function () {
         if (!arguments || arguments.length <= 0) {
@@ -277,12 +278,14 @@
         return userNotification.notification.data.message || userNotification.notification.data.properties.Message;
     };
 
-    abp.notifications.messageFormatters['Abp.Notifications.LocalizableMessageNotificationData'] = function (userNotification) {
-        var message = userNotification.notification.data.message || userNotification.notification.data.properties.Message;
-        var localizedMessage = abp.localization.localize(
-            message.name,
-            message.sourceName
-        );
+    abp.notifications.messageFormatters['Abp.Notifications.LocalizableMessageNotificationData'] =
+    function (userNotification) {
+      var message = userNotification.notification.data.message ||
+        userNotification.notification.data.properties.Message;
+      var localizedMessage = abp.localization.localize(
+        message.name,
+        message.sourceName
+      );
 
         if (userNotification.notification.data.properties) {
             var properties = Object.keys(userNotification.notification.data.properties);
@@ -398,32 +401,28 @@
 
     };
 
-    abp.message.info = function (message, title) {
+    abp.message.info = function (message, title, options) {
         abp.log.warn('abp.message.info is not implemented!');
-        return showMessage(message, title);
+        return showMessage(message, title, options);
     };
 
-    abp.message.success = function (message, title) {
+    abp.message.success = function (message, title, options) {
         abp.log.warn('abp.message.success is not implemented!');
-        return showMessage(message, title);
+        return showMessage(message, title, options);
     };
 
-    abp.message.warn = function (message, title) {
+    abp.message.warn = function (message, title, options) {
         abp.log.warn('abp.message.warn is not implemented!');
-        return showMessage(message, title);
+        return showMessage(message, title, options);
     };
 
-    abp.message.error = function (message, title) {
+    abp.message.error = function (message, title, options) {
         abp.log.warn('abp.message.error is not implemented!');
-        return showMessage(message, title);
+        return showMessage(message, title, options);
     };
 
-    abp.message.confirm = function (message, titleOrCallback, callback) {
+    abp.message.confirm = function (message, title, callback, options) {
         abp.log.warn('abp.message.confirm is not implemented!');
-
-        if (titleOrCallback && !(typeof titleOrCallback == 'string')) {
-            callback = titleOrCallback;
-        }
 
         var result = confirm(message);
         callback && callback(result);
@@ -610,6 +609,10 @@
         return str.substr(0, maxLength - postfix.length) + postfix;
     };
 
+    abp.utils.isFunction = function (obj) {
+        return !!(obj && obj.constructor && obj.call && obj.apply);
+    };
+
     /**
      * parameterInfos should be an array of { name, value } objects
      * where name is query string parameter name and value is it's value.
@@ -763,7 +766,7 @@
         }
 
         var now = function () {
-            return new Date();
+            return toUtc(new Date());
         };
 
         var normalize = function (date) {
