@@ -52,7 +52,7 @@
     <script src="~/libs/jquery-validate/jquery.validate.min.js"></script>
     @if (CultureInfo.CurrentUICulture.Name != "en")
     {
-        <script src="~/libs/jquery-validate/localization/messages_@Html.Raw(CultureInfo.CurrentUICulture.Name.Replace(" -", "_" ) + ".js" )" asp-append-version="true"></script>
+        <script src="~/libs/jquery-validate/localization/messages_@Html.Raw(CultureInfo.CurrentUICulture.Name.Replace("-", "_" ) + ".js" )" asp-append-version="true"></script>
     }
     <script src="~/libs/jquery-validate/jquery.validate.unobtrusive.min.js"></script>
     <script src="~/libs/block-ui/jquery.blockUI.min.js"></script>
