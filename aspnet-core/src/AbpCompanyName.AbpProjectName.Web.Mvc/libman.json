@@ -5,12 +5,12 @@
     {
       "library": "abp-web-resources@4.1.0",
       "provider": "jsdelivr",
-      "destination": "wwwroot/libs/abp-web-resources"
+      "destination": "wwwroot/lib/abp-web-resources"
     },
     {
       "library": "admin-lte@3.0.0",
       "provider": "jsdelivr",
-      "destination": "wwwroot/libs/admin-lte",
+      "destination": "wwwroot/lib/admin-lte",
       "files": [
         "dist/js/adminlte.js",
         "dist/js/adminlte.js.map",
@@ -35,11 +35,11 @@
     },
     {
       "library": "twitter-bootstrap@4.3.1",
-      "destination": "wwwroot/libs/bootstrap"
+      "destination": "wwwroot/lib/bootstrap"
     },
     {
       "library": "jquery@3.4.1",
-      "destination": "wwwroot/libs/jquery",
+      "destination": "wwwroot/lib/jquery",
       "files": [
         "jquery.js",
         "jquery.min.js",
@@ -48,20 +48,20 @@
     },
     {
       "library": "jquery-validate@1.19.1",
-      "destination": "wwwroot/libs/jquery-validate"
+      "destination": "wwwroot/lib/jquery-validate"
     },
     {
       "library": "jquery-validation-unobtrusive@3.2.11",
-      "destination": "wwwroot/libs/jquery-validate"
+      "destination": "wwwroot/lib/jquery-validate"
     },
     {
       "library": "font-awesome@5.11.2",
-      "destination": "wwwroot/libs/font-awesome"
+      "destination": "wwwroot/lib/font-awesome"
     },
     {
       "library": "icheck-bootstrap@3.0.1",
       "provider": "jsdelivr",
-      "destination": "wwwroot/libs/icheck-bootstrap",
+      "destination": "wwwroot/lib/icheck-bootstrap",
       "files": [
         "icheck-bootstrap.css",
         "icheck-bootstrap.min.css"
@@ -69,7 +69,7 @@
     },
     {
       "library": "datatables@1.10.19",
-      "destination": "wwwroot/libs/datatables",
+      "destination": "wwwroot/lib/datatables",
       "files": [
         "css/dataTables.bootstrap4.css",
         "css/dataTables.bootstrap4.min.css",
@@ -87,7 +87,7 @@
     {
       "library": "datatables.net-buttons@1.6.1",
       "provider": "jsdelivr",
-      "destination": "wwwroot/libs/datatables",
+      "destination": "wwwroot/lib/datatables",
       "files": [
         "js/dataTables.buttons.js",
         "js/dataTables.buttons.min.js"
@@ -96,7 +96,7 @@
     {
       "library": "datatables.net-responsive@2.2.3",
       "provider": "jsdelivr",
-      "destination": "wwwroot/libs/datatables",
+      "destination": "wwwroot/lib/datatables",
       "files": [
         "js/dataTables.responsive.js",
         "js/dataTables.responsive.min.js"
@@ -105,7 +105,7 @@
     {
       "library": "datatables.net-responsive-bs4@2.2.3",
       "provider": "jsdelivr",
-      "destination": "wwwroot/libs/datatables",
+      "destination": "wwwroot/lib/datatables",
       "files": [
         "css/responsive.bootstrap4.css",
         "css/responsive.bootstrap4.min.css",
@@ -116,7 +116,7 @@
     {
       "library": "datatables.net-buttons-bs4@1.6.1",
       "provider": "jsdelivr",
-      "destination": "wwwroot/libs/datatables",
+      "destination": "wwwroot/lib/datatables",
       "files": [
         "css/buttons.bootstrap4.css",
         "css/buttons.bootstrap4.min.css",
@@ -126,43 +126,35 @@
     },
     {
       "library": "jquery.blockUI@2.70",
-      "destination": "wwwroot/libs/block-ui"
+      "destination": "wwwroot/lib/block-ui"
     },
     {
       "library": "sweetalert@2.1.2",
-      "destination": "wwwroot/libs/sweetalert"
+      "destination": "wwwroot/lib/sweetalert"
     },
     {
       "library": "spin.js@2.3.2",
-      "destination": "wwwroot/libs/spin"
+      "destination": "wwwroot/lib/spin"
     },
     {
       "library": "toastr.js@2.1.4",
-      "destination": "wwwroot/libs/toastr"
+      "destination": "wwwroot/lib/toastr"
     },
     {
       "library": "moment.js@2.24.0",
-      "destination": "wwwroot/libs/moment"
+      "destination": "wwwroot/lib/moment"
     },
     {
       "library": "signalr.js@2.4.0",
-      "destination": "wwwroot/libs/signalr"
+      "destination": "wwwroot/lib/signalr"
     },
     {
       "library": "aspnet-signalr@1.0.0",
-      "destination": "wwwroot/libs/signalr"
+      "destination": "wwwroot/lib/signalr"
     },
     {
       "library": "flag-icon-css@3.4.3",
-      "destination": "wwwroot/libs/flag-icon"
-    },
-    {
-      "library": "Chart.js@2.8.0",
-      "destination": "wwwroot/libs/chartjs",
-      "files": [
-        "Chart.min.css",
-        "Chart.min.js"
-      ]
+      "destination": "wwwroot/lib/flag-icon"
     }
   ]
 }
