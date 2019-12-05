@@ -155,14 +155,6 @@
     {
       "library": "flag-icon-css@3.4.3",
       "destination": "wwwroot/libs/flag-icon"
-    },
-    {
-      "library": "Chart.js@2.8.0",
-      "destination": "wwwroot/libs/chartjs",
-      "files": [
-        "Chart.min.css",
-        "Chart.min.js"
-      ]
     }
   ]
 }
