@@ -26,11 +26,11 @@
 
     <link rel="shortcut icon" href="~/img/favicon.ico">
     <link href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,400i,700" rel="stylesheet">
-    <link href="~/lib/font-awesome/css/all.min.css" rel="stylesheet" />
-    <link href="~/lib/flag-icon/css/flag-icon.min.css" rel="stylesheet" />
-    <link href="~/lib/icheck-bootstrap/icheck-bootstrap.min.css" rel="stylesheet" />
-    <link href="~/lib/toastr/toastr.min.css" rel="stylesheet" />
-    <link href="~/lib/admin-lte/dist/css/adminlte.min.css" rel="stylesheet" />
+    <link href="~/libs/font-awesome/css/all.min.css" rel="stylesheet" />
+    <link href="~/libs/flag-icon/css/flag-icon.min.css" rel="stylesheet" />
+    <link href="~/libs/icheck-bootstrap/icheck-bootstrap.min.css" rel="stylesheet" />
+    <link href="~/libs/toastr/toastr.min.css" rel="stylesheet" />
+    <link href="~/libs/admin-lte/dist/css/adminlte.min.css" rel="stylesheet" />
     <link href="~/css/main.css" rel="stylesheet" />
     <link href="~/css/style.css" rel="stylesheet" />
 
@@ -61,21 +61,21 @@
             </div>
         </div>
     </div>
-    <script src="~/lib/jquery/jquery.min.js"></script>
-    <script src="~/lib/bootstrap/js/bootstrap.bundle.min.js"></script>
-    <script src="~/lib/admin-lte/dist/js/adminlte.min.js"></script>
-    <script src="~/lib/jquery-validate/jquery.validate.min.js"></script>
+    <script src="~/libs/jquery/jquery.min.js"></script>
+    <script src="~/libs/bootstrap/js/bootstrap.bundle.min.js"></script>
+    <script src="~/libs/admin-lte/dist/js/adminlte.min.js"></script>
+    <script src="~/libs/jquery-validate/jquery.validate.min.js"></script>
     @if (CultureInfo.CurrentUICulture.Name != "en")
     {
-        <script src="~/lib/jquery-validate/localization/messages_@Html.Raw(CultureInfo.CurrentUICulture.Name.Replace("-", "_" ) + ".js" )" asp-append-version="true"></script>
+        <script src="~/libs/jquery-validate/localization/messages_@Html.Raw(CultureInfo.CurrentUICulture.Name.Replace("-", "_" ) + ".js" )" asp-append-version="true"></script>
     }
-    <script src="~/lib/jquery-validate/jquery.validate.unobtrusive.min.js"></script>
-    <script src="~/lib/toastr/toastr.min.js"></script>
-    <script src="~/lib/block-ui/jquery.blockUI.min.js"></script>
-    <script src="~/lib/spin/spin.min.js"></script>
-    <script src="~/lib-ext/spin/jquery.spin.js"></script>
-    <script src="~/lib/sweetalert/sweetalert.min.js"></script>
-    <script src="~/lib/moment/moment-with-locales.min.js"></script>
+    <script src="~/libs/jquery-validate/jquery.validate.unobtrusive.min.js"></script>
+    <script src="~/libs/toastr/toastr.min.js"></script>
+    <script src="~/libs/block-ui/jquery.blockUI.min.js"></script>
+    <script src="~/libs/spin/spin.min.js"></script>
+    <script src="~/libs-ext/spin/jquery.spin.js"></script>
+    <script src="~/libs/sweetalert/sweetalert.min.js"></script>
+    <script src="~/libs/moment/moment-with-locales.min.js"></script>
     <script type="text/javascript">
         // Localizing momentjs
         moment.locale('@CultureInfo.CurrentUICulture.Name');
@@ -85,12 +85,12 @@
         var abp = abp || {};
         abp.appPath = '@ApplicationPath';
     </script>
-    <script src="~/lib/abp-web-resources/Abp/Framework/scripts/abp.js" asp-append-version="true"></script>
-    <script src="~/lib/abp-web-resources/Abp/Framework/scripts/libs/abp.jquery.js" asp-append-version="true"></script>
-    <script src="~/lib/abp-web-resources/Abp/Framework/scripts/libs/abp.toastr.js" asp-append-version="true"></script>
-    <script src="~/lib/abp-web-resources/Abp/Framework/scripts/libs/abp.blockUI.js" asp-append-version="true"></script>
-    <script src="~/lib/abp-web-resources/Abp/Framework/scripts/libs/abp.spin.js" asp-append-version="true"></script>
-    <script src="~/lib/abp-web-resources/Abp/Framework/scripts/libs/abp.sweet-alert.js" asp-append-version="true"></script>
+    <script src="~/libs/abp-web-resources/Abp/Framework/scripts/abp.js" asp-append-version="true"></script>
+    <script src="~/libs/abp-web-resources/Abp/Framework/scripts/libs/abp.jquery.js" asp-append-version="true"></script>
+    <script src="~/libs/abp-web-resources/Abp/Framework/scripts/libs/abp.toastr.js" asp-append-version="true"></script>
+    <script src="~/libs/abp-web-resources/Abp/Framework/scripts/libs/abp.blockUI.js" asp-append-version="true"></script>
+    <script src="~/libs/abp-web-resources/Abp/Framework/scripts/libs/abp.spin.js" asp-append-version="true"></script>
+    <script src="~/libs/abp-web-resources/Abp/Framework/scripts/libs/abp.sweet-alert.js" asp-append-version="true"></script>
     <!-- Dynamic scripts of ABP system (They are created on runtime and can not be bundled) -->
     <script src="~/AbpServiceProxies/GetAll?v=@(AppTimes.StartupTime.Ticks)" type="text/javascript"></script>
     <script src="~/AbpScripts/GetScripts?v=@(AppTimes.StartupTime.Ticks)" type="text/javascript"></script>
