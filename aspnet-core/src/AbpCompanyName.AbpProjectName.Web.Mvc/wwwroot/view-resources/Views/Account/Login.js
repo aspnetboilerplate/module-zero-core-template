@@ -11,7 +11,7 @@
         }
 
         abp.ui.setBusy(
-            $('#LoginArea'),
+            $('body'),
 
             abp.ajax({
                 contentType: 'application/x-www-form-urlencoded',
