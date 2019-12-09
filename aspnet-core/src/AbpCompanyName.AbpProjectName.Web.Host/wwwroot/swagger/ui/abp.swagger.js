@@ -66,7 +66,11 @@ var abp = abp || {};
         xhr.setRequestHeader('Abp.TenantId', tenantId);
         xhr.setRequestHeader('Content-type', 'application/json');
         addAntiForgeryTokenToXhr(xhr);
-        xhr.send("{" + "usernameOrEmailAddress:'" + usernameOrEmailAddress + "'," + "password:'" + password + "'}");
+        xhr.send(
+            JSON.stringify(
+                { usernameOrEmailAddress: usernameOrEmailAddress, password: password }
+            )
+        );
     };
 
     abp.swagger.login = function (callback) {
@@ -90,7 +94,9 @@ var abp = abp || {};
             xhrTenancyName.open('POST', '/api/services/app/Account/IsTenantAvailable', true);
             xhrTenancyName.setRequestHeader('Content-type', 'application/json');
             addAntiForgeryTokenToXhr(xhrTenancyName);
-            xhrTenancyName.send("{" + "tenancyName:'" + tenancyName + "'}");
+            xhrTenancyName.send(
+                JSON.stringify({ tenancyName: tenancyName })
+            );
         } else {
             loginUserInternal(null, callback); // Login for host
         }
