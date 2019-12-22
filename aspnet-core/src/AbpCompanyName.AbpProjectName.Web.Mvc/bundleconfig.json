@@ -1,11 +1,96 @@
 [
-  //{
-  //  "outputFileName": "wwwroot/view-resources/Views/_Bundles/bundle1.min.js",
-  //  "inputFiles": [
-  //    "wwwroot/lib/file1.js",
-  //    "wwwroot/lib/file2.js",
-  //  ]
-  //},
+  {
+    "outputFileName": "wwwroot/view-resources/Views/_Bundles/account-layout.min.css",
+    "inputFiles": [
+      "wwwroot/libs/font-awesome/css/all.css",
+      "wwwroot/libs/flag-icon/css/flag-icon.css",
+      "wwwroot/libs/icheck-bootstrap/icheck-bootstrap.css",
+      "wwwroot/libs/toastr/toastr.css",
+      "wwwroot/libs/animate.css/animate.css",
+      "wwwroot/libs/admin-lte/dist/css/adminlte.css",
+      "wwwroot/css/style.css",
+      "wwwroot/view-resources/Views/Account/_Layout.css"
+    ]
+  },
+  {
+    "outputFileName": "wwwroot/view-resources/Views/_Bundles/account-layout.min.js",
+    "inputFiles": [
+      "wwwroot/libs/jquery/jquery.js",
+      "wwwroot/libs/bootstrap/js/bootstrap.bundle.js",
+      "wwwroot/libs/admin-lte/dist/js/adminlte.js",
+      "wwwroot/libs/jquery-validate/jquery.validate.js",
+      "wwwroot/libs/jquery-validate/jquery.validate.unobtrusive.js",
+      "wwwroot/libs/toastr/toastr.min.js",
+      "wwwroot/libs/block-ui/jquery.blockUI.js",
+      "wwwroot/libs/spin/spin.js",
+      "wwwroot/libs-ext/spin/jquery.spin.js",
+      "wwwroot/libs/sweetalert/sweetalert.min.js",
+      "wwwroot/libs/moment/moment-with-locales.js",
+      "wwwroot/libs/abp-web-resources/Abp/Framework/scripts/abp.js",
+      "wwwroot/libs/abp-web-resources/Abp/Framework/scripts/libs/abp.jquery.js",
+      "wwwroot/libs/abp-web-resources/Abp/Framework/scripts/libs/abp.toastr.js",
+      "wwwroot/libs/abp-web-resources/Abp/Framework/scripts/libs/abp.blockUI.js",
+      "wwwroot/libs/abp-web-resources/Abp/Framework/scripts/libs/abp.spin.js",
+      "wwwroot/libs/abp-web-resources/Abp/Framework/scripts/libs/abp.sweet-alert.js",
+      "wwwroot/js/main.js"
+    ]
+  },
+  {
+    "outputFileName": "wwwroot/view-resources/Views/_Bundles/shared-layout.min.css",
+    "inputFiles": [
+      "wwwroot/libs/font-awesome/css/all.min.css",
+      "wwwroot/libs/flag-icon/css/flag-icon.min.css",
+      "wwwroot/libs/bootstrap-select/css/bootstrap-select.css",
+      "wwwroot/libs/animate.css/animate.css",
+      "wwwroot/libs/icheck-bootstrap/icheck-bootstrap.css",
+      "wwwroot/libs/toastr/toastr.css",
+      "wwwroot/libs/admin-lte/dist/css/adminlte.min.css",
+      "wwwroot/libs/datatables/css/dataTables.bootstrap4.min.css",
+      "wwwroot/libs/datatables/css/responsive.bootstrap4.min.css",
+      "wwwroot/libs/datatables/css/buttons.bootstrap4.min.css",
+      "wwwroot/css/style.css",
+      "wwwroot/view-resources/Views/Shared/_Layout.css"
+    ]
+  },
+  {
+    "outputFileName": "wwwroot/view-resources/Views/_Bundles/shared-layout.min.js",
+    "inputFiles": [
+      "wwwroot/libs/jquery/jquery.js",
+      "wwwroot/libs/bootstrap/js/bootstrap.bundle.js",
+      "wwwroot/libs/admin-lte/dist/js/adminlte.js",
+      "wwwroot/libs/jquery-validate/jquery.validate.js",
+      "wwwroot/libs/jquery-validate/jquery.validate.unobtrusive.js",
+      "wwwroot/libs/block-ui/jquery.blockUI.js",
+      "wwwroot/libs/spin/spin.js",
+      "wwwroot/libs-ext/spin/jquery.spin.js",
+      "wwwroot/libs/sweetalert/sweetalert.min.js",
+      "wwwroot/libs/toastr/toastr.min.js",
+      "wwwroot/libs/bootstrap-select/js/bootstrap-select.js",
+      "wwwroot/libs/push.js/push.js",
+      "wwwroot/libs/moment/moment-with-locales.js",
+      "wwwroot/libs/abp-web-resources/Abp/Framework/scripts/abp.js",
+      "wwwroot/libs/abp-web-resources/Abp/Framework/scripts/libs/abp.jquery.js",
+      "wwwroot/libs/abp-web-resources/Abp/Framework/scripts/libs/abp.toastr.js",
+      "wwwroot/libs/abp-web-resources/Abp/Framework/scripts/libs/abp.blockUI.js",
+      "wwwroot/libs/abp-web-resources/Abp/Framework/scripts/libs/abp.spin.js",
+      "wwwroot/libs/abp-web-resources/Abp/Framework/scripts/libs/abp.sweet-alert.js",
+      "wwwroot/libs/datatables/js/jquery.dataTables.min.js",
+      "wwwroot/libs/datatables/js/dataTables.bootstrap4.min.js",
+      "wwwroot/libs/datatables/js/dataTables.responsive.min.js",
+      "wwwroot/libs/datatables/js/responsive.bootstrap4.min.js",
+      "wwwroot/libs/datatables/js/dataTables.buttons.js",
+      "wwwroot/libs/datatables/js/buttons.bootstrap4.js",
+      "wwwroot/js/main.js",
+      "wwwroot/view-resources/Views/Shared/_Layout.js"
+    ]
+  },
+  {
+    "outputFileName": "wwwroot/view-resources/Views/_Bundles/home-index.min.js",
+    "inputFiles": [
+      "wwwroot/libs/chartjs/dist/Chart.js",
+      "wwwroot/view-resources/Views/Home/Index.js"
+    ]
+  },
   {
     "outputFileName": "wwwroot/view-resources/Views/Tenants/Index.min.js",
     "inputFiles": [

@@ -44,6 +44,27 @@
             },
             {
                 targets: 1,
+                data: 'userName',
+                sortable: false
+            },
+            {
+                targets: 2,
+                data: 'fullName',
+                sortable: false
+            },
+            {
+                targets: 3,
+                data: 'emailAddress',
+                sortable: false
+            },
+            {
+                targets: 4,
+                data: 'isActive',
+                sortable: false,
+                render: data => `<input type="checkbox" disabled ${data ? 'checked' : ''}>`
+            },
+            {
+                targets: 5,
                 data: null,
                 sortable: false,
                 autoWidth: false,
@@ -64,27 +85,6 @@
                         '</div>'
                     ].join('');
                 }
-            },
-            {
-                targets: 2,
-                data: 'userName',
-                sortable: false
-            },
-            {
-                targets: 3,
-                data: 'fullName',
-                sortable: false
-            },
-            {
-                targets: 4,
-                data: 'emailAddress',
-                sortable: false
-            },
-            {
-                targets: 5,
-                data: 'isActive',
-                sortable: false,
-                render: data => `<input type="checkbox" disabled ${data ? 'checked' : ''}>`
             }
         ]
     });

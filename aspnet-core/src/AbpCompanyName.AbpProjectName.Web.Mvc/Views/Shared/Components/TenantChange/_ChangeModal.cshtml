@@ -7,12 +7,12 @@
 }
 @await Html.PartialAsync("~/Views/Shared/Modals/_ModalHeader.cshtml", new ModalHeaderViewModel(L("ChangeTenant")))
 
-<form name="TenantChangeForm" role="form" novalidate class="form-horizontal form-validation">
+<form name="TenantChangeForm" role="form" novalidate class="form-horizontal">
     <div class="modal-body">
         <div class="form-group row">
-            <label class="col-md-3 col-form-label">@L("TenancyName")</label>
+            <label class="col-md-3 col-form-label" for="TenancyName">@L("TenancyName")</label>
             <div class="col-md-9">
-                <input name="TenancyName" class="form-control" type="text" maxlength="@AbpTenantBase.MaxTenancyNameLength.ToString()" value="@Model.TenancyName">
+                <input id="TenancyName" name="TenancyName" class="form-control" type="text" maxlength="@AbpTenantBase.MaxTenancyNameLength.ToString()" value="@Model.TenancyName">
             </div>
         </div>
         <span><i class="fa fa-info-circle"></i> @L("LeaveEmptyToSwitchToHost")</span>

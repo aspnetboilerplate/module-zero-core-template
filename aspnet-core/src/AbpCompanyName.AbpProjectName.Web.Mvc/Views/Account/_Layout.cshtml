@@ -26,13 +26,21 @@
 
     <link rel="shortcut icon" href="~/img/favicon.ico">
     <link href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,400i,700" rel="stylesheet">
-    <link href="~/libs/font-awesome/css/all.min.css" rel="stylesheet" />
-    <link href="~/libs/flag-icon/css/flag-icon.min.css" rel="stylesheet" />
-    <link href="~/libs/icheck-bootstrap/icheck-bootstrap.min.css" rel="stylesheet" />
-    <link href="~/libs/toastr/toastr.min.css" rel="stylesheet" />
-    <link href="~/libs/admin-lte/dist/css/adminlte.min.css" rel="stylesheet" />
-    <link href="~/css/main.css" rel="stylesheet" />
-    <link href="~/css/style.css" rel="stylesheet" />
+
+    <environment names="Development">
+        <link href="~/libs/font-awesome/css/all.css" rel="stylesheet" asp-append-version="true" />
+        <link href="~/libs/flag-icon/css/flag-icon.css" rel="stylesheet" asp-append-version="true" />
+        <link href="~/libs/icheck-bootstrap/icheck-bootstrap.css" rel="stylesheet" asp-append-version="true" />
+        <link href="~/libs/toastr/toastr.css" rel="stylesheet" asp-append-version="true" />
+        <link href="~/libs/animate.css/animate.css" rel="stylesheet" asp-append-version="true" />
+        <link href="~/libs/admin-lte/dist/css/adminlte.css" rel="stylesheet" asp-append-version="true" />
+        <link href="~/css/style.css" rel="stylesheet" asp-append-version="true" />
+        <link href="~/view-resources/Views/Account/_Layout.css" rel="stylesheet" asp-append-version="true" />
+    </environment>
+
+    <environment names="Staging,Production">
+        <link rel="stylesheet" href="~/view-resources/Views/_Bundles/account-layout.min.css" asp-append-version="true" />
+    </environment>
 
     @RenderSection("styles", required: false)
 </head>
@@ -61,41 +69,50 @@
             </div>
         </div>
     </div>
-    <script src="~/libs/jquery/jquery.min.js"></script>
-    <script src="~/libs/bootstrap/js/bootstrap.bundle.min.js"></script>
-    <script src="~/libs/admin-lte/dist/js/adminlte.min.js"></script>
-    <script src="~/libs/jquery-validate/jquery.validate.min.js"></script>
-    @if (CultureInfo.CurrentUICulture.Name != "en")
-    {
-        <script src="~/libs/jquery-validate/localization/messages_@Html.Raw(CultureInfo.CurrentUICulture.Name.Replace("-", "_" ) + ".js" )" asp-append-version="true"></script>
-    }
-    <script src="~/libs/jquery-validate/jquery.validate.unobtrusive.min.js"></script>
-    <script src="~/libs/toastr/toastr.min.js"></script>
-    <script src="~/libs/block-ui/jquery.blockUI.min.js"></script>
-    <script src="~/libs/spin/spin.min.js"></script>
-    <script src="~/libs-ext/spin/jquery.spin.js"></script>
-    <script src="~/libs/sweetalert/sweetalert.min.js"></script>
-    <script src="~/libs/moment/moment-with-locales.min.js"></script>
     <script type="text/javascript">
-        // Localizing momentjs
-        moment.locale('@CultureInfo.CurrentUICulture.Name');
-
         // This is used to get the application's root path from javascript.
         // It's useful if you're running application in a virtual directory under IIS.
         var abp = abp || {};
         abp.appPath = '@ApplicationPath';
     </script>
-    <script src="~/libs/abp-web-resources/Abp/Framework/scripts/abp.js" asp-append-version="true"></script>
-    <script src="~/libs/abp-web-resources/Abp/Framework/scripts/libs/abp.jquery.js" asp-append-version="true"></script>
-    <script src="~/libs/abp-web-resources/Abp/Framework/scripts/libs/abp.toastr.js" asp-append-version="true"></script>
-    <script src="~/libs/abp-web-resources/Abp/Framework/scripts/libs/abp.blockUI.js" asp-append-version="true"></script>
-    <script src="~/libs/abp-web-resources/Abp/Framework/scripts/libs/abp.spin.js" asp-append-version="true"></script>
-    <script src="~/libs/abp-web-resources/Abp/Framework/scripts/libs/abp.sweet-alert.js" asp-append-version="true"></script>
+    <environment names="Development">
+        <script src="~/libs/jquery/jquery.js" asp-append-version="true"></script>
+        <script src="~/libs/bootstrap/js/bootstrap.bundle.js" asp-append-version="true"></script>
+        <script src="~/libs/admin-lte/dist/js/adminlte.js" asp-append-version="true"></script>
+        <script src="~/libs/jquery-validate/jquery.validate.js" asp-append-version="true"></script>
+        <script src="~/libs/jquery-validate/jquery.validate.unobtrusive.js" asp-append-version="true"></script>
+        <script src="~/libs/toastr/toastr.min.js" asp-append-version="true"></script>
+        <script src="~/libs/block-ui/jquery.blockUI.js" asp-append-version="true"></script>
+        <script src="~/libs/spin/spin.js" asp-append-version="true"></script>
+        <script src="~/libs-ext/spin/jquery.spin.js" asp-append-version="true"></script>
+        <script src="~/libs/sweetalert/sweetalert.min.js" asp-append-version="true"></script>
+        <script src="~/libs/moment/moment-with-locales.js" asp-append-version="true"></script>
+        <script src="~/libs/abp-web-resources/Abp/Framework/scripts/abp.js" asp-append-version="true"></script>
+        <script src="~/libs/abp-web-resources/Abp/Framework/scripts/libs/abp.jquery.js" asp-append-version="true"></script>
+        <script src="~/libs/abp-web-resources/Abp/Framework/scripts/libs/abp.toastr.js" asp-append-version="true"></script>
+        <script src="~/libs/abp-web-resources/Abp/Framework/scripts/libs/abp.blockUI.js" asp-append-version="true"></script>
+        <script src="~/libs/abp-web-resources/Abp/Framework/scripts/libs/abp.spin.js" asp-append-version="true"></script>
+        <script src="~/libs/abp-web-resources/Abp/Framework/scripts/libs/abp.sweet-alert.js" asp-append-version="true"></script>
+        <script src="~/js/main.js" asp-append-version="true"></script>
+    </environment>
+
+    <environment names="Staging,Production">
+        <script src="~/view-resources/Views/_Bundles/account-layout.min.js" asp-append-version="true"></script>
+    </environment>
+    
+    @if (CultureInfo.CurrentUICulture.Name != "en")
+    {
+        <script src="~/libs/jquery-validate/localization/messages_@Html.Raw(CultureInfo.CurrentUICulture.Name.Replace("-", "_") + ".js")" asp-append-version="true"></script>
+    }
+
+    <script type="text/javascript">
+        // Localizing momentjs
+        moment.locale('@CultureInfo.CurrentUICulture.Name');
+    </script>
+
     <!-- Dynamic scripts of ABP system (They are created on runtime and can not be bundled) -->
     <script src="~/AbpServiceProxies/GetAll?v=@(AppTimes.StartupTime.Ticks)" type="text/javascript"></script>
     <script src="~/AbpScripts/GetScripts?v=@(AppTimes.StartupTime.Ticks)" type="text/javascript"></script>
-    <script src="~/js/main.js"></script>
-    <script src="~/js/script.js"></script>
 
     @WebResourceManager.RenderScripts()
     @RenderSection("scripts", required: false)

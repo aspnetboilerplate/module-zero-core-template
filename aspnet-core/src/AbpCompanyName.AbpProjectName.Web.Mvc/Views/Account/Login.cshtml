@@ -4,7 +4,7 @@
     ViewBag.Title = L("LogIn");
 }
 @section scripts
-    {
+{
     <environment names="Development">
         <script src="~/view-resources/Views/Account/Login.js" asp-append-version="true"></script>
     </environment>
@@ -13,12 +13,12 @@
         <script src="~/view-resources/Views/Account/Login.min.js" asp-append-version="true"></script>
     </environment>
 }
-<p class="login-box-msg">@L("LogIn")</p>
+<h4 class="text-center">@L("LogIn")</h4>
 <form id="LoginForm" asp-action="Login" method="post">
     <input type="hidden" name="returnUrl" value="@Model.ReturnUrl" />
     <input type="hidden" name="returnUrlHash" />
     <div class="input-group mb-3">
-        <input name="usernameOrEmailAddress" class="form-control" placeholder="@L("UserNameOrEmail")" required autofocus maxlength="@AbpUserBase.MaxEmailAddressLength">
+        <input type="text" name="usernameOrEmailAddress" class="form-control" placeholder="@L("UserNameOrEmail")" required autofocus maxlength="@AbpUserBase.MaxEmailAddressLength">
         <div class="input-group-append">
             <div class="input-group-text">
                 <span class="fas fa-user"></span>
@@ -43,7 +43,7 @@
             </div>
         </div>
         <div class="col-4">
-            <button type="submit" id="LoginButton" class="btn btn-primary btn-block">@L("LogIn")</button>
+            <button type="submit" id="LoginButton" class="btn btn-primary btn-block btn-flat">@L("LogIn")</button>
         </div>
     </div>
 </form>
@@ -59,6 +59,10 @@
 <p class="mb-0">
     @if (Model.IsSelfRegistrationAllowed)
     {
-        <a asp-action="Register" class="text-center"><i class="fa fa-plus-circle"></i> @L("Register")</a>
+        <div class="row">
+            <div class="col-12">
+                <a asp-action="Register" class="text-center"><i class="fa fa-plus-circle"></i> @L("Register")</a>
+            </div>
+        </div>
     }
 </p>

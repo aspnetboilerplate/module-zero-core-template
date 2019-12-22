@@ -44,6 +44,22 @@
             },
             {
                 targets: 1,
+                data: 'tenancyName',
+                sortable: false
+            },
+            {
+                targets: 2,
+                data: 'name',
+                sortable: false
+            },
+            {
+                targets: 3,
+                data: 'isActive',
+                sortable: false,
+                render: data => `<input type="checkbox" disabled ${data ? 'checked' : ''}>`
+            },
+            {
+                targets: 4,
                 data: null,
                 sortable: false,
                 autoWidth: false,
@@ -64,22 +80,6 @@
                         '</div>'
                     ].join('');
                 }
-            },
-            {
-                targets: 2,
-                data: 'tenancyName',
-                sortable: false
-            },
-            {
-                targets: 3,
-                data: 'name',
-                sortable: false
-            },
-            {
-                targets: 4,
-                data: 'isActive',
-                sortable: false,
-                render: data => `<input type="checkbox" disabled ${data ? 'checked' : ''}>`
             }
         ]
     });

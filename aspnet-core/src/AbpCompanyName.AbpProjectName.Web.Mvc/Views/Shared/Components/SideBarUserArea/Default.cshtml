@@ -6,6 +6,6 @@
         <img src="~/libs/admin-lte/dist/img/avatar5.png" class="img-circle elevation-2" alt="User Image">
     </div>
     <div class="info">
-        <a href="#" class="d-block">@Html.Raw(Model.GetShownLoginName())</a>
+        <a class="d-block" asp-controller="Account" asp-action="Profile">@Html.Raw(Model.GetShownLoginName())</a>
     </div>
 </div>

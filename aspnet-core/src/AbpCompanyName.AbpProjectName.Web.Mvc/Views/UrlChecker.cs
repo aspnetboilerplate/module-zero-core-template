@@ -1,4 +1,4 @@
-using System.Text.RegularExpressions;
+﻿using System.Text.RegularExpressions;
 
 namespace AbpCompanyName.AbpProjectName.Web.Views
 {
@@ -12,7 +12,7 @@ namespace AbpCompanyName.AbpProjectName.Web.Views
             {
                 return true;
             }
-            
+
             if (UrlWithProtocolRegex.IsMatch(url))
             {
                 return true;
