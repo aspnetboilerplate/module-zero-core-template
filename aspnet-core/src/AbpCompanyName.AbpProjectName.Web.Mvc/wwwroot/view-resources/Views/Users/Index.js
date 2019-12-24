@@ -50,7 +50,7 @@
             var user = _$form.serializeFormToObject(); //serializeFormToObject is defined in main.js
             user.roleNames = [];
             var _$roleCheckboxes = $("input[name='role']:checked");
-            if (_$roleCheckboxes) {
+            if (_$roleCheckboxes.length) {
                 for (var roleIndex = 0; roleIndex < _$roleCheckboxes.length; roleIndex++) {
                     var _$roleCheckbox = $(_$roleCheckboxes[roleIndex]);
                     user.roleNames.push(_$roleCheckbox.val());
