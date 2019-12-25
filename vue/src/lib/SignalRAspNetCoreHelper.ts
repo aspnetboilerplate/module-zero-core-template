@@ -1,15 +1,15 @@
 import AppConsts from './appconst'
 import Util from './util'
-class SignalRAspNetCoreHelper{
-    initSignalR(){
+class SignalRAspNetCoreHelper {
+    initSignalR() {
         var encryptedAuthToken = Util.abp.utils.getCookieValue(AppConsts.authorization.encrptedAuthTokenName);
-
+        let remoteServerUrl = AppConsts.remoteServiceBaseUrl;
         Util.abp.signalr = {
             autoConnect: true,
             connect: undefined,
             hubs: undefined,
             qs: AppConsts.authorization.encrptedAuthTokenName + "=" + encodeURIComponent(encryptedAuthToken),
-            url: AppConsts.remoteServiceBaseUrl + '/signalr'
+            remoteServiceBaseUrl: remoteServerUrl.endsWith('/') ? remoteServerUrl.slice(0, -1) : remoteServerUrl
         };
 
         Util.loadScript(AppConsts.appBaseUrl + '/dist/abp.signalr-client.js');
