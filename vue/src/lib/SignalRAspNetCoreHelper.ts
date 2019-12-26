@@ -3,6 +3,7 @@ import Util from './util'
 class SignalRAspNetCoreHelper {
     initSignalR() {
         var encryptedAuthToken = Util.abp.utils.getCookieValue(AppConsts.authorization.encrptedAuthTokenName);
+        
         Util.abp.signalr = {
             autoConnect: true,
             connect: undefined,
