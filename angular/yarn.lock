@@ -1250,9 +1250,10 @@ abp-ng2-module@^4.0.0:
   resolved "https://registry.yarnpkg.com/abp-ng2-module/-/abp-ng2-module-4.0.0.tgz#de1d952ce91847dc58ac2929654fee2a6c7a4525"
   integrity sha512-k/KjkAWrNz2Cg2c5IQtEKdKDQA3LGW7nncJneeUz+Hl0KrV+sOi9c2LnaOL0Q7q0hCfUPhO9GkEUrQGpF7c5gQ==
 
-abp-web-resources@^3.8.2:
-  version "3.8.2"
-  resolved "https://registry.yarnpkg.com/abp-web-resources/-/abp-web-resources-3.8.2.tgz#b7768eb0757cff0266fd3c4e789af81e15c9dc96"
+abp-web-resources@^3.8.4:
+  version "3.8.5"
+  resolved "https://registry.yarnpkg.com/abp-web-resources/-/abp-web-resources-3.8.5.tgz#841bc7e8ab27530d1f2a2514156ee16c4b9c658e"
+  integrity sha512-bALG7Cpt+tHWmBVZZq6gk3PVVejvRB7R0M6RctEg4ESoFCoagvY5gMsj3icHOawErblHimRtjsaDzv4dyWpGgw==
 
 accepts@~1.3.4, accepts@~1.3.5:
   version "1.3.5"
@@ -6590,12 +6591,6 @@ rxjs@6.4.0:
   dependencies:
     tslib "^1.9.0"
 
-rxjs@^6.2.0:
-  version "6.2.1"
-  resolved "https://registry.yarnpkg.com/rxjs/-/rxjs-6.2.1.tgz#246cebec189a6cbc143a3ef9f62d6f4c91813ca1"
-  dependencies:
-    tslib "^1.9.0"
-
 rxjs@^6.4.0:
   version "6.5.2"
   resolved "https://registry.yarnpkg.com/rxjs/-/rxjs-6.5.2.tgz#2e35ce815cd46d84d02a209fb4e5921e051dbec7"
@@ -8256,7 +8251,7 @@ yn@^3.0.0:
   resolved "https://registry.yarnpkg.com/yn/-/yn-3.1.1.tgz#1e87401a09d767c1d5eab26a6e4c185182d2eb50"
   integrity sha512-Ux4ygGWsu2c7isFWe8Yu1YluJmqVhxqK2cLXNQA5AcC3QfbGNpM7fu0Y8b/z16pXLnFxZYvWhd3fhBY9DLmC6Q==
 
-zone.js@~0.10.2:
-  version "0.10.2"
-  resolved "https://registry.yarnpkg.com/zone.js/-/zone.js-0.10.2.tgz#67ca084b3116fc33fc40435e0d5ea40a207e392e"
-  integrity sha512-UAYfiuvxLN4oyuqhJwd21Uxb4CNawrq6fPS/05Su5L4G+1TN+HVDJMUHNMobVQDFJRir2cLAODXwluaOKB7HFg==
+zone.js@~0.9.1:
+  version "0.9.1"
+  resolved "https://registry.yarnpkg.com/zone.js/-/zone.js-0.9.1.tgz#e37c6e5c54c13fae4de26b5ffe8d8e9212da6d9b"
+  integrity sha512-GkPiJL8jifSrKReKaTZ5jkhrMEgXbXYC+IPo1iquBjayRa0q86w3Dipjn8b415jpitMExe9lV8iTsv8tk3DGag==
