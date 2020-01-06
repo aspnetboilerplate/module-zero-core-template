@@ -17,7 +17,7 @@ namespace AbpCompanyName.AbpProjectName.EntityFrameworkCore.Seed.Host
             var tenantId = AbpProjectNameConsts.MultiTenancyEnabled ? null : (int?)MultiTenancyConsts.DefaultTenantId;
             return new List<ApplicationLanguage>
             {
-                new ApplicationLanguage(tenantId, "en", "English", "flag-icon flag-icon-us"),
+                new ApplicationLanguage(tenantId, "en", "English", "flag-icon flag-icon-gb"),
                 new ApplicationLanguage(tenantId, "ar", "العربية", "flag-icon flag-icon-sa"),
                 new ApplicationLanguage(tenantId, "de", "German", "flag-icon flag-icon-de"),
                 new ApplicationLanguage(tenantId, "it", "Italiano", "flag-icon flag-icon-it"),

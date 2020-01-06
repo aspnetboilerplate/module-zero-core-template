@@ -2,30 +2,34 @@
 @model Abp.Web.Mvc.Models.ErrorViewModel
 <section class="content">
     <div class="container-fluid">
-        <div class="panel panel-warning">
-            <div class="panel-heading">
-                <h3 class="panel-title">@Model.ErrorInfo.Message</h3>
-            </div>
-            <div class="panel-body">
-                <p>
-                    @(!string.IsNullOrEmpty(Model.ErrorInfo.Details) ? Model.ErrorInfo.Details : Model.ErrorInfo.Message)
-                </p>
-                @* Show validation errors *@
-                @if (!Model.ErrorInfo.ValidationErrors.IsNullOrEmpty())
-                {
-                    <ul>
-                        @foreach (var validationError in Model.ErrorInfo.ValidationErrors)
+        <div class="row">
+            <div class="col-lg-12">
+                <div class="panel panel-warning">
+                    <div class="panel-heading">
+                        <h3 class="panel-title">@Model.ErrorInfo.Message</h3>
+                    </div>
+                    <div class="panel-body">
+                        <p>
+                            @(!string.IsNullOrEmpty(Model.ErrorInfo.Details) ? Model.ErrorInfo.Details : Model.ErrorInfo.Message)
+                        </p>
+                        @* Show validation errors *@
+                        @if (!Model.ErrorInfo.ValidationErrors.IsNullOrEmpty())
                         {
-                            <li>
-                                @validationError.Message
-                                @if (validationError.Members != null && validationError.Members.Any())
+                            <ul>
+                                @foreach (var validationError in Model.ErrorInfo.ValidationErrors)
                                 {
-                                    <text>(@string.Join(", ", validationError.Members))</text>
+                                    <li>
+                                        @validationError.Message
+                                        @if (validationError.Members != null && validationError.Members.Any())
+                                        {
+                                            <text>(@string.Join(", ", validationError.Members))</text>
+                                        }
+                                    </li>
                                 }
-                            </li>
+                            </ul>
                         }
-                    </ul>
-                }
+                    </div>
+                </div>
             </div>
         </div>
     </div>

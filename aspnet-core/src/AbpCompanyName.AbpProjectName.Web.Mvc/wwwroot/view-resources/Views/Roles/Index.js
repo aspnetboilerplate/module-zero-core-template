@@ -44,6 +44,16 @@
             },
             {
                 targets: 1,
+                data: 'name',
+                sortable: false
+            },
+            {
+                targets: 2,
+                data: 'displayName',
+                sortable: false
+            },
+            {
+                targets: 3,
                 data: null,
                 sortable: false,
                 autoWidth: false,
@@ -64,16 +74,6 @@
                         '</div>'
                     ].join('');
                 }
-            },
-            {
-                targets: 2,
-                data: 'name',
-                sortable: false
-            },
-            {
-                targets: 3,
-                data: 'displayName',
-                sortable: false
             }
         ]
     });

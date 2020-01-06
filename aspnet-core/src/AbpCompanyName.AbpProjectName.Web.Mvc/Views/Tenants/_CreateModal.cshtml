@@ -5,22 +5,22 @@
 @{
     Layout = null;
 }
-<div class="modal fade" id="TenantCreateModal" data-backdrop="static">
-    <div class="modal-dialog modal-lg">
+<div class="modal fade" id="TenantCreateModal" tabindex="-1" role="dialog" aria-labelledby="TenantCreateModalLabel" data-backdrop="static">
+    <div class="modal-dialog modal-lg" role="document">
         <div class="modal-content">
             @await Html.PartialAsync("~/Views/Shared/Modals/_ModalHeader.cshtml", new ModalHeaderViewModel(L("CreateNewTenant")))
-            <form class="form-horizontal">
+            <form name="tenantCreateForm" role="form" class="form-horizontal">
                 <div class="modal-body">
                     <div class="form-group row required">
                         <label class="col-md-3 col-form-label">@L("TenancyName")</label>
                         <div class="col-md-9">
-                            <input name="TenancyName" class="form-control" required maxlength="@AbpTenantBase.MaxTenancyNameLength" minlength="2">
+                            <input type="text" name="TenancyName" class="form-control" required maxlength="@AbpTenantBase.MaxTenancyNameLength" minlength="2">
                         </div>
                     </div>
                     <div class="form-group row required">
                         <label class="col-md-3 col-form-label">@L("Name")</label>
                         <div class="col-md-9">
-                            <input name="Name" class="form-control" required maxlength="@Tenant.MaxNameLength">
+                            <input type="text" name="Name" class="form-control" required maxlength="@Tenant.MaxNameLength">
                         </div>
                     </div>
                     <div class="form-group row required">
@@ -32,13 +32,13 @@
                     <div class="form-group row">
                         <label class="col-md-3 col-form-label">@L("DatabaseConnectionString") (@L("Optional"))</label>
                         <div class="col-md-9">
-                            <input name="ConnectionString" class="form-control" maxlength="@AbpTenantBase.MaxConnectionStringLength">
+                            <input type="text" name="ConnectionString" class="form-control" maxlength="@AbpTenantBase.MaxConnectionStringLength">
                         </div>
                     </div>
                     <div class="form-group row">
-                        <label class="col-md-3 col-form-label">@L("IsActive")</label>
+                        <label class="col-md-3 col-form-label" for="CreateTenantIsActive">@L("IsActive")</label>
                         <div class="col-md-9">
-                            <input type="checkbox" name="IsActive" value="true" checked />
+                            <input id="CreateTenantIsActive" type="checkbox" name="IsActive" value="true" checked />
                         </div>
                     </div>
                     <div class="form-group row">

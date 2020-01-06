@@ -2,8 +2,9 @@
 @model RightNavbarLanguageSwitchViewModel
 
 <li class="nav-item dropdown">
-    <a href="#" class="nav-link dropdown-toggle" data-toggle="dropdown">
+    <a href="javascript:void(0);" class="nav-link" data-toggle="dropdown" role="button">
         <i class="@Model.CurrentLanguage.Icon" title="@Model.CurrentLanguage.DisplayName"></i>
+        <span class="d-none d-md-inline-block">@Model.CurrentLanguage.DisplayName</span>
     </a>
     <div class="dropdown-menu dropdown-menu-right p-0">
         @foreach (var language in Model.Languages)

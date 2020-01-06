@@ -149,12 +149,52 @@
       "destination": "wwwroot/libs/signalr"
     },
     {
-      "library": "aspnet-signalr@1.0.0",
-      "destination": "wwwroot/libs/signalr"
+      "library": "@aspnet/signalr@1.0.0",
+      "provider": "jsdelivr",
+      "destination": "wwwroot/libs/signalr",
+      "files": [
+        "dist/browser/signalr.js",
+        "dist/browser/signalr.js.map"
+      ]
     },
     {
       "library": "flag-icon-css@3.4.3",
       "destination": "wwwroot/libs/flag-icon"
+    },
+    {
+      "library": "chart.js@2.9.3",
+      "provider": "jsdelivr",
+      "destination": "wwwroot/libs/chartjs",
+      "files": [
+        "dist/Chart.css",
+        "dist/Chart.js"
+      ]
+    },
+    {
+      "library": "animate.css@3.7.0",
+      "destination": "wwwroot/libs/animate.css"
+    },
+    {
+      "library": "bootstrap-select@1.13.9",
+      "destination": "wwwroot/libs/bootstrap-select",
+      "files": [
+        "css/bootstrap-select.css",
+        "css/bootstrap-select.css.map",
+        "js/bootstrap-select.js",
+        "js/bootstrap-select.js.map"
+      ]
+    },
+    {
+      "library": "jquery-countto@1.2.0",
+      "destination": "wwwroot/libs/jquery-countto"
+    },
+    {
+      "library": "moment-timezone@0.5.23",
+      "destination": "wwwroot/libs/moment-timezone"
+    },
+    {
+      "library": "push.js@1.0.9",
+      "destination": "wwwroot/libs/push.js"
     }
   ]
 }

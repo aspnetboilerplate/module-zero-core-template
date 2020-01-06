@@ -10,7 +10,7 @@ namespace AbpCompanyName.AbpProjectName.Web.Views.Shared.Components.SideBarUserA
 
         public string GetShownLoginName()
         {
-            var userName = "<span id=\"HeaderCurrentUserName\">" + LoginInformations.User.UserName + "</span>";
+            var userName = LoginInformations.User.UserName;
 
             if (!IsMultiTenancyEnabled)
             {

@@ -5,26 +5,26 @@
     Layout = null;
 }
 @await Html.PartialAsync("~/Views/Shared/Modals/_ModalHeader.cshtml", new ModalHeaderViewModel(L("EditRole")))
-<form class="form-horizontal">
+<form name="RoleEditForm" role="form" class="form-horizontal">
     <input type="hidden" name="Id" value="@Model.Role.Id" />
     <input type="hidden" name="IsStatic" value="@(Model.Role.IsStatic.ToString())" />
     <div class="modal-body">
         <div class="form-group row required">
-            <label class="col-md-3 col-form-label">@L("RoleName")</label>
+            <label class="col-md-3 col-form-label" for="rolename">@L("RoleName")</label>
             <div class="col-md-9">
-                <input class="form-control" name="Name" value="@Model.Role.Name" @(Model.Role.IsStatic ? "disabled" : "") required maxlength="32" minlength="2">
+                <input id="rolename" class="form-control" type="text" name="Name" value="@Model.Role.Name" @(Model.Role.IsStatic ? "disabled" : "") required maxlength="32" minlength="2">
             </div>
         </div>
         <div class="form-group row required">
-            <label class="col-md-3 col-form-label">@L("DisplayName")</label>
+            <label class="col-md-3 col-form-label" for="displayname">@L("DisplayName")</label>
             <div class="col-md-9">
-                <input class="form-control" name="DisplayName" value="@Model.Role.DisplayName" required maxlength="32" minlength="2">
+                <input id="displayname" type="text" class="form-control" name="DisplayName" value="@Model.Role.DisplayName" required maxlength="32" minlength="2">
             </div>
         </div>
         <div class="form-group row">
-            <label class="col-md-3 col-form-label">@L("RoleDescription")</label>
+            <label class="col-md-3 col-form-label" for="role-description">@L("RoleDescription")</label>
             <div class="col-md-9">
-                <textarea class="form-control" name="Description" value="@Model.Role.Description">@Model.Role.Description</textarea>
+                <textarea id="role-description" class="form-control" name="Description">@Model.Role.Description</textarea>
             </div>
         </div>
         <div class="form-group row">

@@ -1,12 +1,12 @@
-﻿@using AbpCompanyName.AbpProjectName.Web.Models.Common.Modals
+﻿@using Abp.Authorization.Users
+@using AbpCompanyName.AbpProjectName.Web.Models.Common.Modals
 @using AbpCompanyName.AbpProjectName.Web.Models.Users
-@using Abp.Authorization.Users
 @model EditUserModalViewModel
 @{
     Layout = null;
 }
 @await Html.PartialAsync("~/Views/Shared/Modals/_ModalHeader.cshtml", new ModalHeaderViewModel(L("EditUser")))
-<form class="form-horizontal">
+<form name="UserEditForm" role="form" class="form-horizontal">
     <input type="hidden" name="Id" value="@Model.User.Id" />
     <div class="modal-body">
         <ul class="nav nav-tabs" role="tablist">
@@ -18,39 +18,39 @@
             </li>
         </ul>
         <div class="tab-content mt-4">
-            <div class="tab-pane container active" id="edit-user-details">
+            <div role="tabpanel" class="tab-pane container animated fadeIn active" id="edit-user-details">
                 <div class="form-group row required">
-                    <label class="col-md-3 col-form-label">@L("UserName")</label>
+                    <label class="col-md-3 col-form-label" for="username">@L("UserName")</label>
                     <div class="col-md-9">
-                        <input class="form-control" name="UserName" value="@Model.User.UserName" required maxlength="@AbpUserBase.MaxUserNameLength" minlength="2">
+                        <input id="username" type="text" class="form-control" name="UserName" value="@Model.User.UserName" required maxlength="@AbpUserBase.MaxUserNameLength" minlength="2">
                     </div>
                 </div>
                 <div class="form-group row required">
-                    <label class="col-md-3 col-form-label">@L("Name")</label>
+                    <label class="col-md-3 col-form-label" for="name">@L("Name")</label>
                     <div class="col-md-9">
-                        <input class="form-control" name="Name" value="@Model.User.Name" required maxlength="@AbpUserBase.MaxNameLength">
+                        <input id="name" type="text" class="form-control" name="Name" value="@Model.User.Name" required maxlength="@AbpUserBase.MaxNameLength">
                     </div>
                 </div>
                 <div class="form-group row required">
-                    <label class="col-md-3 col-form-label">@L("Surname")</label>
+                    <label class="col-md-3 col-form-label" for="surname">@L("Surname")</label>
                     <div class="col-md-9">
-                        <input class="form-control" name="Surname" value="@Model.User.Surname" required maxlength="@AbpUserBase.MaxSurnameLength">
+                        <input id="surname" type="text" class="form-control" name="Surname" value="@Model.User.Surname" required maxlength="@AbpUserBase.MaxSurnameLength">
                     </div>
                 </div>
                 <div class="form-group row required">
-                    <label class="col-md-3 col-form-label">@L("EmailAddress")</label>
+                    <label class="col-md-3 col-form-label" for="email">@L("EmailAddress")</label>
                     <div class="col-md-9">
-                        <input type="email" class="form-control" name="EmailAddress" value="@Model.User.EmailAddress" required maxlength="@AbpUserBase.MaxEmailAddressLength">
+                        <input id="email" type="email" class="form-control" name="EmailAddress" value="@Model.User.EmailAddress" required maxlength="@AbpUserBase.MaxEmailAddressLength">
                     </div>
                 </div>
                 <div class="form-group row">
-                    <label class="col-md-3 col-form-label">@L("IsActive")</label>
+                    <label class="col-md-3 col-form-label" for="IsActive">@L("IsActive")</label>
                     <div class="col-md-9">
-                        <input type="checkbox" name="IsActive" value="true" @(Model.User.IsActive ? "checked" : "") />
+                        <input id="IsActive" type="checkbox" name="IsActive" value="true" @(Model.User.IsActive ? "checked" : "") />
                     </div>
                 </div>
             </div>
-            <div class="tab-pane container" id="edit-user-roles">
+            <div role="tabpanel" class="tab-pane container animated fadeIn" id="edit-user-roles">
                 <div class="row">
                     @foreach (var role in Model.Roles)
                     {

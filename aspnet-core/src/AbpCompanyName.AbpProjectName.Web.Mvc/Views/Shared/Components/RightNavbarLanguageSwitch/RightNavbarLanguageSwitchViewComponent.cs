@@ -1,6 +1,6 @@
 ﻿using System.Linq;
-using Microsoft.AspNetCore.Mvc;
 using Abp.Localization;
+using Microsoft.AspNetCore.Mvc;
 
 namespace AbpCompanyName.AbpProjectName.Web.Views.Shared.Components.RightNavbarLanguageSwitch
 {
