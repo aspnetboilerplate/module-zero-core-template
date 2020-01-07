@@ -66,6 +66,7 @@ export class RolesComponent extends PagedListingComponentBase<RoleDto> {
     delete(role: RoleDto): void {
         abp.message.confirm(
             this.l('RoleDeleteWarningMessage', role.displayName),
+            undefined,
             (result: boolean) => {
                 if (result) {
                     this._rolesService

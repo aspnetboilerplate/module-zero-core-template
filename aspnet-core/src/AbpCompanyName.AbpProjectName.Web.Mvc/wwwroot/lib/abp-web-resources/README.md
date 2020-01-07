@@ -1,3 +1,7 @@
+# Important
+
+Issues of this repository are tracked on https://github.com/aspnetboilerplate/aspnetboilerplate. Please create your issues on https://github.com/aspnetboilerplate/aspnetboilerplate/issues.
+
 # bower-abp-resources
 Bower package for ASP.NET Boilerplate web script and style resources.
 
