@@ -33,7 +33,7 @@
     "@types/moment": "^2.13.0",
     "@types/moment-timezone": "^0.5.12",
     "@types/toastr": "^2.1.33",
-    "abp-ng2-module": "^4.0.0",
+    "abp-ng2-module": "^5.1.1",
     "abp-web-resources": "^5.1.1",
     "animate.css": "^3.5.2",
     "block-ui": "^2.70.1",
