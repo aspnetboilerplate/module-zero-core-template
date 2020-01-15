@@ -59,7 +59,7 @@ export const appRouters: any = [
   },
   {
     path: '/tenants',
-    permission: 'Pages.Tenants',
+    permission: 'Pages.TenantsXX',
     title: 'Tenants',
     name: 'tenant',
     icon: 'appstore',
@@ -85,7 +85,7 @@ export const appRouters: any = [
     component: LoadableComponent(() => import('../../components/Logout')),
   },
   {
-    path: '/exception',
+    path: '/exception?:type',
     permission: '',
     title: 'exception',
     name: 'exception',
