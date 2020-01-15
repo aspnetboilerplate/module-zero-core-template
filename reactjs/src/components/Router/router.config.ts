@@ -59,7 +59,7 @@ export const appRouters: any = [
   },
   {
     path: '/tenants',
-    permission: 'Pages.TenantsXX',
+    permission: 'Pages.Tenants',
     title: 'Tenants',
     name: 'tenant',
     icon: 'appstore',
