@@ -21,9 +21,9 @@ class Exception extends React.Component<any, any> {
       { errorCode: '500', errorImg: error500, errorDescription: 'Sorry, the server is reporting an error' },
     ];
 
-    let params = new URLSearchParams(this.props.location.search);
-    const test = params.get('type');
-    let error = exception.find(x => x.errorCode === test);
+    let params = new URLSearchParams(this.props.match.params.type);
+    const type = params.get('type');
+    let error = exception.find(x => x.errorCode === type);
 
     if (error == null) {
       error = exception[0];
