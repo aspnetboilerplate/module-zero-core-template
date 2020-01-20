@@ -1,4 +1,4 @@
-﻿(function (define) {
+(function (define) {
   define(['toastr', 'abp-web-resources'], function (toastr, abp) {
     return (function () {
 
