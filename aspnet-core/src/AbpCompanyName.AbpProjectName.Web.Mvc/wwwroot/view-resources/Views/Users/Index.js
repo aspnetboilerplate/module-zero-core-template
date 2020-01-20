@@ -77,6 +77,7 @@
         function deleteUser(userId, userName) {
             abp.message.confirm(
                 abp.utils.formatString(abp.localization.localize('AreYouSureWantToDelete', 'AbpProjectName'), userName),
+                undefined,
                 function (isConfirmed) {
                     if (isConfirmed) {
                         _userService.delete({

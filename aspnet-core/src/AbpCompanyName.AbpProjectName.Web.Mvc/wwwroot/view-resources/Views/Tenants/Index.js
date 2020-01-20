@@ -62,6 +62,7 @@
         function deleteTenant(tenantId, tenancyName) {
             abp.message.confirm(
                 abp.utils.formatString(abp.localization.localize('AreYouSureWantToDelete', 'AbpProjectName'), tenancyName),
+                undefined,
                 function (isConfirmed) {
                     if (isConfirmed) {
                         _tenantService.delete({

@@ -70,7 +70,8 @@
 
 		function deleteRole(roleId, roleName) {
 			abp.message.confirm(
-                abp.utils.formatString(abp.localization.localize('AreYouSureWantToDelete', 'AbpProjectName'), roleName),
+				abp.utils.formatString(abp.localization.localize('AreYouSureWantToDelete', 'AbpProjectName'), roleName),
+				undefined,
 				function (isConfirmed) {
 					if (isConfirmed) {
 						_roleService.delete({
