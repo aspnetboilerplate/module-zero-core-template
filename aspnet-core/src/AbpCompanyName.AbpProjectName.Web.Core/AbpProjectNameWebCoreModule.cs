@@ -12,6 +12,7 @@ using Abp.Zero.Configuration;
 using AbpCompanyName.AbpProjectName.Authentication.JwtBearer;
 using AbpCompanyName.AbpProjectName.Configuration;
 using AbpCompanyName.AbpProjectName.EntityFrameworkCore;
+using Microsoft.AspNetCore.Mvc.ApplicationParts;
 
 namespace AbpCompanyName.AbpProjectName
 {
@@ -23,10 +24,10 @@ namespace AbpCompanyName.AbpProjectName
      )]
     public class AbpProjectNameWebCoreModule : AbpModule
     {
-        private readonly IHostingEnvironment _env;
+        private readonly IWebHostEnvironment _env;
         private readonly IConfigurationRoot _appConfiguration;
 
-        public AbpProjectNameWebCoreModule(IHostingEnvironment env)
+        public AbpProjectNameWebCoreModule(IWebHostEnvironment env)
         {
             _env = env;
             _appConfiguration = env.GetAppConfiguration();
@@ -64,6 +65,12 @@ namespace AbpCompanyName.AbpProjectName
         public override void Initialize()
         {
             IocManager.RegisterAssemblyByConvention(typeof(AbpProjectNameWebCoreModule).GetAssembly());
+        }
+
+        public override void PostInitialize()
+        {
+            IocManager.Resolve<ApplicationPartManager>()
+                .AddApplicationPartsIfNotAddedBefore(typeof(AbpProjectNameWebCoreModule).Assembly);
         }
     }
 }

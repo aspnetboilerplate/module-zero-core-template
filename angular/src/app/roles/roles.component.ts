@@ -9,7 +9,7 @@ import {
 import {
     RoleServiceProxy,
     RoleDto,
-    PagedResultDtoOfRoleDto
+    RoleDtoPagedResultDto
 } from '@shared/service-proxies/service-proxies';
 import { CreateRoleDialogComponent } from './create-role/create-role-dialog.component';
 import { EditRoleDialogComponent } from './edit-role/edit-role-dialog.component';
@@ -57,7 +57,7 @@ export class RolesComponent extends PagedListingComponentBase<RoleDto> {
                     finishedCallback();
                 })
             )
-            .subscribe((result: PagedResultDtoOfRoleDto) => {
+            .subscribe((result: RoleDtoPagedResultDto) => {
                 this.roles = result.items;
                 this.showPaging(result, pageNumber);
             });
@@ -66,6 +66,7 @@ export class RolesComponent extends PagedListingComponentBase<RoleDto> {
     delete(role: RoleDto): void {
         abp.message.confirm(
             this.l('RoleDeleteWarningMessage', role.displayName),
+            undefined,
             (result: boolean) => {
                 if (result) {
                     this._rolesService

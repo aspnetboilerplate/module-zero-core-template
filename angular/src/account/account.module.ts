@@ -1,7 +1,7 @@
 import { CommonModule } from '@angular/common';
 import { NgModule } from '@angular/core';
 import { FormsModule } from '@angular/forms';
-import { JsonpModule } from '@angular/http';
+import { HttpClientJsonpModule } from '@angular/common/http';
 import { HttpClientModule } from '@angular/common/http';
 
 import { ModalModule } from 'ngx-bootstrap';
@@ -30,7 +30,7 @@ import { TenantChangeDialogComponent } from './tenant/tenant-change-dialog.compo
         CommonModule,
         FormsModule,
         HttpClientModule,
-        JsonpModule,
+        HttpClientJsonpModule,
         AbpModule,
         SharedModule,
         ServiceProxyModule,

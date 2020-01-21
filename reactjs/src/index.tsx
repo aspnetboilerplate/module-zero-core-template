@@ -1,14 +1,18 @@
+import './index.css';
+
 import * as React from 'react';
 import * as ReactDOM from 'react-dom';
-import './index.css';
-import registerServiceWorker from './registerServiceWorker';
-import App from './App';
-import { Provider } from 'mobx-react';
-import { BrowserRouter } from 'react-router-dom';
-import initializeStores from './stores/storeInitializer';
 import * as moment from 'moment';
-import abpUserConfigurationService from 'src/services/abpUserConfigurationService';
-import Utils from 'src/utils/utils';
+
+import App from './App';
+import { BrowserRouter } from 'react-router-dom';
+import { Provider } from 'mobx-react';
+import Utils from './utils/utils';
+import abpUserConfigurationService from './services/abpUserConfigurationService';
+import initializeStores from './stores/storeInitializer';
+import registerServiceWorker from './registerServiceWorker';
+
+declare var abp: any;
 
 Utils.setLocalization();
 

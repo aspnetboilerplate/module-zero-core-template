@@ -1,5 +1,9 @@
-import { L } from 'src/lib/abpUtility';
-import { routers } from 'src/components/Router/router.config';
+import * as abpTypings from '../lib/abp';
+
+import { L } from '../lib/abpUtility';
+import { routers } from '../components/Router/router.config';
+
+declare var abp: any;
 
 class Utils {
   loadScript(url: string) {
@@ -63,7 +67,7 @@ class Utils {
   getPageTitle = (pathname: string) => {
     const route = routers.filter(route => route.path === pathname);
     const localizedAppName = L('AppName');
-    if (!route || route.length == 0) {
+    if (!route || route.length === 0) {
       return localizedAppName;
     }
 
@@ -81,7 +85,7 @@ class Utils {
     }
   }
 
-  getCurrentClockProvider(currentProviderName: string): abp.timing.IClockProvider {
+  getCurrentClockProvider(currentProviderName: string): abpTypings.timing.IClockProvider {
     if (currentProviderName === 'unspecifiedClockProvider') {
       return abp.timing.unspecifiedClockProvider;
     }

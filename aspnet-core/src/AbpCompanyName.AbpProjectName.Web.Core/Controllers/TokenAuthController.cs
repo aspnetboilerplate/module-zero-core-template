@@ -63,7 +63,7 @@ namespace AbpCompanyName.AbpProjectName.Controllers
             return new AuthenticateResultModel
             {
                 AccessToken = accessToken,
-                EncryptedAccessToken = GetEncrpyedAccessToken(accessToken),
+                EncryptedAccessToken = GetEncryptedAccessToken(accessToken),
                 ExpireInSeconds = (int)_configuration.Expiration.TotalSeconds,
                 UserId = loginResult.User.Id
             };
@@ -90,7 +90,7 @@ namespace AbpCompanyName.AbpProjectName.Controllers
                         return new ExternalAuthenticateResultModel
                         {
                             AccessToken = accessToken,
-                            EncryptedAccessToken = GetEncrpyedAccessToken(accessToken),
+                            EncryptedAccessToken = GetEncryptedAccessToken(accessToken),
                             ExpireInSeconds = (int)_configuration.Expiration.TotalSeconds
                         };
                     }
@@ -225,7 +225,7 @@ namespace AbpCompanyName.AbpProjectName.Controllers
             return claims;
         }
 
-        private string GetEncrpyedAccessToken(string accessToken)
+        private string GetEncryptedAccessToken(string accessToken)
         {
             return SimpleStringCipher.Instance.Encrypt(accessToken, AppConsts.DefaultPassPhrase);
         }

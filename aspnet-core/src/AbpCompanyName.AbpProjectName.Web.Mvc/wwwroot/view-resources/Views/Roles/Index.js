@@ -23,10 +23,10 @@
 			var roleId = $(this).attr("data-role-id");
 
 			e.preventDefault();
-			$.ajax({
+			abp.ajax({
 				url: abp.appPath + 'Roles/EditRoleModal?roleId=' + roleId,
 				type: 'POST',
-				contentType: 'application/html',
+				dataType: 'html',
 				success: function (content) {
 					$('#RoleEditModal div.modal-content').html(content);
 				},
@@ -42,12 +42,12 @@
 			}
 
 			var role = _$form.serializeFormToObject(); //serializeFormToObject is defined in main.js
-			role.permissions = [];
+            role.grantedPermissions = [];
 			var _$permissionCheckboxes = $("input[name='permission']:checked");
 			if (_$permissionCheckboxes) {
 				for (var permissionIndex = 0; permissionIndex < _$permissionCheckboxes.length; permissionIndex++) {
 					var _$permissionCheckbox = $(_$permissionCheckboxes[permissionIndex]);
-					role.permissions.push(_$permissionCheckbox.val());
+                    role.grantedPermissions.push(_$permissionCheckbox.val());
 				}
 			}
 
@@ -70,7 +70,8 @@
 
 		function deleteRole(roleId, roleName) {
 			abp.message.confirm(
-                abp.utils.formatString(abp.localization.localize('AreYouSureWantToDelete', 'AbpProjectName'), roleName),
+				abp.utils.formatString(abp.localization.localize('AreYouSureWantToDelete', 'AbpProjectName'), roleName),
+				undefined,
 				function (isConfirmed) {
 					if (isConfirmed) {
 						_roleService.delete({

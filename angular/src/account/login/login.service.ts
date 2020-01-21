@@ -71,7 +71,7 @@ export class LoginService {
         );
 
         this._utilsService.setCookieValue(
-            AppConsts.authorization.encrptedAuthTokenName,
+            AppConsts.authorization.encryptedAuthTokenName,
             encryptedAccessToken,
             tokenExpireDate,
             abp.appPath

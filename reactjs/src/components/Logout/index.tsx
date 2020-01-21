@@ -1,7 +1,8 @@
 import * as React from 'react';
-import AuthenticationStore from 'src/stores/authenticationStore';
+
+import AuthenticationStore from '../../stores/authenticationStore';
+import Stores from '../../stores/storeIdentifier';
 import { inject } from 'mobx-react';
-import Stores from 'src/stores/storeIdentifier';
 
 export interface ILogoutProps {
   authenticationStore?: AuthenticationStore;

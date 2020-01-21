@@ -1,13 +1,13 @@
 import CreateTenantInput from './dto/createTenantInput';
-import GetTenantOutput from './dto/getTenantOutput';
-import { GetAllTenantOutput } from './dto/getAllTenantOutput';
-import UpdateTenantOutput from './dto/updateTenantOutput';
-import { EntityDto } from 'src/services/dto/entityDto';
-import { PagedResultDto } from 'src/services/dto/pagedResultDto';
-import http from '../httpService';
-import UpdateTenantInput from './dto/updateTenantInput';
 import CreateTenantOutput from './dto/createTenantOutput';
+import { EntityDto } from '../../services/dto/entityDto';
+import { GetAllTenantOutput } from './dto/getAllTenantOutput';
+import GetTenantOutput from './dto/getTenantOutput';
+import { PagedResultDto } from '../../services/dto/pagedResultDto';
 import {PagedTenantResultRequestDto} from './dto/PagedTenantResultRequestDto';
+import UpdateTenantInput from './dto/updateTenantInput';
+import UpdateTenantOutput from './dto/updateTenantOutput';
+import http from '../httpService';
 
 class TenantService {
   public async create(createTenantInput: CreateTenantInput): Promise<CreateTenantOutput> {

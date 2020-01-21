@@ -1,17 +1,17 @@
 import { action, observable } from 'mobx';
 
-import userService from 'src/services/user/userService';
-import { PagedResultDto } from 'src/services/dto/pagedResultDto';
-import { GetUserOutput } from 'src/services/user/dto/getUserOutput';
-import { UpdateUserInput } from 'src/services/user/dto/updateUserInput';
-import { EntityDto } from 'src/services/dto/entityDto';
-import { CreateOrUpdateUserInput } from 'src/services/user/dto/createOrUpdateUserInput';
-import { GetRoles } from 'src/services/user/dto/getRolesOuput';
-import { PagedUserResultRequestDto } from "src/services/user/dto/PagedUserResultRequestDto";
+import { CreateOrUpdateUserInput } from '../services/user/dto/createOrUpdateUserInput';
+import { EntityDto } from '../services/dto/entityDto';
+import { GetRoles } from '../services/user/dto/getRolesOuput';
+import { GetUserOutput } from '../services/user/dto/getUserOutput';
+import { PagedResultDto } from '../services/dto/pagedResultDto';
+import { PagedUserResultRequestDto } from '../services/user/dto/PagedUserResultRequestDto';
+import { UpdateUserInput } from '../services/user/dto/updateUserInput';
+import userService from '../services/user/userService';
 
 class UserStore {
-  @observable users: PagedResultDto<GetUserOutput>;
-  @observable editUser: CreateOrUpdateUserInput;
+  @observable users!: PagedResultDto<GetUserOutput>;
+  @observable editUser!: CreateOrUpdateUserInput;
   @observable roles: GetRoles[] = [];
 
   @action
@@ -24,7 +24,7 @@ class UserStore {
   async update(updateUserInput: UpdateUserInput) {
     let result = await userService.update(updateUserInput);
     this.users.items = this.users.items.map((x: GetUserOutput) => {
-      if (x.id == updateUserInput.id) x = result;
+      if (x.id === updateUserInput.id) x = result;
       return x;
     });
   }
@@ -32,7 +32,7 @@ class UserStore {
   @action
   async delete(entityDto: EntityDto) {
     await userService.delete(entityDto);
-    this.users.items = this.users.items.filter((x: GetUserOutput) => x.id != entityDto.id);
+    this.users.items = this.users.items.filter((x: GetUserOutput) => x.id !== entityDto.id);
   }
 
   @action

@@ -64,7 +64,7 @@
     <text name="CreateNewRole">Yeni rol oluştur</text>
     <text name="RoleName">Rol adı</text>
     <text name="Actions">İşlemler</text>
-	<text name="CouldNotCompleteLoginOperation">Giriş işlemi başarısız! Lütfen daha sonra tekrar deneyiniz.</text>
+    <text name="CouldNotCompleteLoginOperation">Giriş işlemi başarısız! Lütfen daha sonra tekrar deneyiniz.</text>
     <text name="CouldNotValidateExternalUser">Harici kullanıcı doğrulanamadı!</text>
     <text name="EditRole">Rolü düzenle</text>
     <text name="EditTenant">Müşteri düzenle</text>
@@ -73,15 +73,18 @@
     <text name="UnknownTenantId{0}">Müşteri id aktif değil: {0}</text>
     <text name="ThisFieldIsRequired">Bu alan zorunludur.</text>
     <text name="PleaseWait">Lütfen bekleyin...</text>
-    <text name="Administration">Yönetim</text>  
+    <text name="Administration">Yönetim</text>
     <text name="ClearAll">Hepsini temizle</text>
     <text name="ClearOthers">Diğerlerini temizle</text>
     <text name="LabelOptions">Etikent seçenekleri</text>
-	<text name="Permissions">Yetkiler</text>
-	<text name="RoleDescription">Rol tanımı</text>
-	<text name="Refresh">Yenile</text>
-	<text name="Create">Oluştur</text>
-	<text name="UserDetails">Kullanıcı detayları</text>
-	<text name="UserRoles">Kullanıcı rolleri</text>		
+    <text name="Permissions">Yetkiler</text>
+    <text name="RoleDescription">Rol tanımı</text>
+    <text name="Refresh">Yenile</text>
+    <text name="Create">Oluştur</text>
+    <text name="UserDetails">Kullanıcı detayları</text>
+    <text name="UserRoles">Kullanıcı rolleri</text>
+    <text name="UserDeleteWarningMessage">{0} kullanıcısı silinecektir.</text>
+    <text name="RoleDeleteWarningMessage">{0} rolü silinecek ve atanmış kullanıcılardan kaldırılacaktır.</text>
+    <text name="TenantDeleteWarningMessage">{0} müşterisi silinecektir.</text>
   </texts>
 </localizationDictionary>

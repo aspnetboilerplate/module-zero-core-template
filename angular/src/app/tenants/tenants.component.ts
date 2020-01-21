@@ -9,8 +9,7 @@ import {
 import {
     TenantServiceProxy,
     TenantDto,
-    PagedResultDtoOfTenantDto
-} from '@shared/service-proxies/service-proxies';
+    TenantDtoPagedResultDto} from '@shared/service-proxies/service-proxies';
 import { CreateTenantDialogComponent } from './create-tenant/create-tenant-dialog.component';
 import { EditTenantDialogComponent } from './edit-tenant/edit-tenant-dialog.component';
 
@@ -59,7 +58,7 @@ export class TenantsComponent extends PagedListingComponentBase<TenantDto> {
                     finishedCallback();
                 })
             )
-            .subscribe((result: PagedResultDtoOfTenantDto) => {
+            .subscribe((result: TenantDtoPagedResultDto) => {
                 this.tenants = result.items;
                 this.showPaging(result, pageNumber);
             });
@@ -68,6 +67,7 @@ export class TenantsComponent extends PagedListingComponentBase<TenantDto> {
     delete(tenant: TenantDto): void {
         abp.message.confirm(
             this.l('TenantDeleteWarningMessage', tenant.name),
+            undefined,
             (result: boolean) => {
                 if (result) {
                     this._tenantService

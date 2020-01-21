@@ -1,10 +1,12 @@
-import * as React from 'react';
 import './App.css';
-import { inject } from 'mobx-react';
-import SignalRAspNetCoreHelper from 'src/lib/signalRAspNetCoreHelper';
+
+import * as React from 'react';
+
+import Router from './components/Router';
 import SessionStore from './stores/sessionStore';
+import SignalRAspNetCoreHelper from './lib/signalRAspNetCoreHelper';
 import Stores from './stores/storeIdentifier';
-import Router from 'src/components/Router';
+import { inject } from 'mobx-react';
 
 export interface IAppProps {
   sessionStore?: SessionStore;
@@ -12,7 +14,7 @@ export interface IAppProps {
 
 @inject(Stores.SessionStore)
 class App extends React.Component<IAppProps> {
-  async componentWillMount() {
+  async componentDidMount() {
     await this.props.sessionStore!.getCurrentLoginInformations();
 
     if (!!this.props.sessionStore!.currentLogin.user && this.props.sessionStore!.currentLogin.application.features['SignalR']) {

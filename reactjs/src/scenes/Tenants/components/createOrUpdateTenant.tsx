@@ -1,8 +1,10 @@
 import * as React from 'react';
-import { Form, Input, Checkbox, Col, Modal } from 'antd';
-import FormItem from 'antd/lib/form/FormItem';
-import { L } from 'src/lib/abpUtility';
+
+import { Checkbox, Col, Form, Input, Modal } from 'antd';
+
 import { FormComponentProps } from 'antd/lib/form';
+import FormItem from 'antd/lib/form/FormItem';
+import { L } from '../../../lib/abpUtility';
 import rules from './createOrUpdateTenant.validation';
 
 export interface ICreateOrUpdateTenantProps extends FormComponentProps {
@@ -64,12 +66,12 @@ class CreateOrUpdateTenant extends React.Component<ICreateOrUpdateTenantProps> {
           <FormItem label={L('Name')} {...formItemLayout}>
             {getFieldDecorator('name', { rules: rules.name })(<Input />)}
           </FormItem>
-          {this.props.modalType == 'edit' ? (
+          {this.props.modalType === 'edit' ? (
             <FormItem label={L('AdminEmailAddress')} {...formItemLayout}>
               {getFieldDecorator('adminEmailAddress', { rules: rules.adminEmailAddress })(<Input />)}
             </FormItem>
           ) : null}
-          {this.props.modalType == 'edit' ? (
+          {this.props.modalType === 'edit' ? (
             <FormItem label={L('DatabaseConnectionString')} {...formItemLayout}>
               {getFieldDecorator('connectionString')(<Input />)}
             </FormItem>
@@ -84,4 +86,4 @@ class CreateOrUpdateTenant extends React.Component<ICreateOrUpdateTenantProps> {
   }
 }
 
-export default Form.create()(CreateOrUpdateTenant);
+export default Form.create<ICreateOrUpdateTenantProps>()(CreateOrUpdateTenant);

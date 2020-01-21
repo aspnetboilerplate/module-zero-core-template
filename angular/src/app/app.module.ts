@@ -1,7 +1,7 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
-import { JsonpModule } from '@angular/http';
+import { HttpClientJsonpModule } from '@angular/common/http';
 import { HttpClientModule } from '@angular/common/http';
 
 import { ModalModule } from 'ngx-bootstrap';
@@ -69,7 +69,7 @@ import { ResetPasswordDialogComponent } from './users/reset-password/reset-passw
     FormsModule,
     ReactiveFormsModule,
     HttpClientModule,
-    JsonpModule,
+    HttpClientJsonpModule,
     ModalModule.forRoot(),
     AbpModule,
     AppRoutingModule,

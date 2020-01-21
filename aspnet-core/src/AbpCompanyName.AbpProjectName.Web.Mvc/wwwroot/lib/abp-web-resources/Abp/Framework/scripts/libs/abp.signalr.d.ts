@@ -1,4 +1,4 @@
-﻿declare namespace abp {
+declare namespace abp {
 
     namespace signalr {
 
