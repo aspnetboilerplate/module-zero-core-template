@@ -1,4 +1,4 @@
-﻿(function (define) {
+(function (define) {
   define(['jquery', 'abp-web-resources'], function ($, abp) {
     return (function () {
 

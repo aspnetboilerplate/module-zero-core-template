@@ -1,4 +1,4 @@
-﻿(function (abp, angular) {
+(function (abp, angular) {
 
     if (!angular) {
         return;

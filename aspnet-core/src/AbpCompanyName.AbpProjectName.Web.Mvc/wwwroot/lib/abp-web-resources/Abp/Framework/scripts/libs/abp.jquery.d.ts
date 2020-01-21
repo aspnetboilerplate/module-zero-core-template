@@ -1,4 +1,4 @@
-﻿declare namespace abp {
+declare namespace abp {
 
     //TODO: Gets JQuery.AjaxOptions and returns JQuery.Promise
 
