@@ -1,18 +1,16 @@
-import sessionService from "src/services/session/sessionService";
 import { action, observable } from 'mobx';
-import { GetCurrentLoginInformations } from 'src/services/session/dto/getCurrentLoginInformations';
 
-class RoleStores {
-     @observable
-     currentLoginInformations:GetCurrentLoginInformations;
+import { GetCurrentLoginInformations } from '../services/session/dto/getCurrentLoginInformations';
+import sessionService from '../services/session/sessionService';
 
+class SessionStore {
+  @observable currentLogin: GetCurrentLoginInformations = new GetCurrentLoginInformations();
 
-    @action async getCurrentLoginInformations(){
-     var result=await sessionService.getCurrentLoginInformations();
-     console.log(result);
-     this.currentLoginInformations=result;
+  @action
+  async getCurrentLoginInformations() {
+    let result = await sessionService.getCurrentLoginInformations();
+    this.currentLogin = result;
   }
-
 }
 
-export default new RoleStores();
+export default SessionStore;

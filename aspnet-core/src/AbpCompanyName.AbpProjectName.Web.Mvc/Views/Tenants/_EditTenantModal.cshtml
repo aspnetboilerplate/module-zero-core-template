@@ -5,7 +5,7 @@
 @{
     Layout = null;
 }
-@Html.Partial("~/Views/Shared/Modals/_ModalHeader.cshtml", new ModalHeaderViewModel(L("EditTenant")))
+@await Html.PartialAsync("~/Views/Shared/Modals/_ModalHeader.cshtml", new ModalHeaderViewModel(L("EditTenant")))
 
 <div class="modal-body">
     <form name="TenantEditForm" role="form" novalidate class="form-validation">
@@ -31,6 +31,6 @@
     </form>
 </div>
 
-@Html.Partial("~/Views/Shared/Modals/_ModalFooterWithSaveAndCancel.cshtml")
+@await Html.PartialAsync("~/Views/Shared/Modals/_ModalFooterWithSaveAndCancel.cshtml")
 
 <script src="~/view-resources/Views/Tenants/_EditTenantModal.js" asp-append-version="true"></script>

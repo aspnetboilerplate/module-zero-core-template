@@ -1,5 +1,11 @@
-import axios from 'axios';
 import AppConsts from './../lib/appconst';
+import { L } from '../lib/abpUtility';
+import { Modal } from 'antd';
+import axios from 'axios';
+
+const qs = require('qs');
+
+declare var abp: any;
 
 
 var  result  = JSON.parse(window.localStorage.getItem("abp.AuthToken")!)
@@ -8,9 +14,11 @@ var  result  = JSON.parse(window.localStorage.getItem("abp.AuthToken")!)
 const http = axios.create({
   baseURL: AppConsts.remoteServiceBaseUrl,
   timeout: 30000,
-  headers:{
-    Authorization: 'Bearer ' + result.accessToken 
-  }
+  paramsSerializer: function(params) {
+    return qs.stringify(params, {
+      encode: false,
+    });
+  },
 });
 
 http.interceptors.request.use(
@@ -28,37 +36,28 @@ http.interceptors.request.use(
     return Promise.reject(error);
   }
 );
-// TODO: Below code will be modified when react-toastify is added
-// let vm = new Vue({});
+
 http.interceptors.response.use(
-  respon => {
-    return respon;
+  response => {
+    return response;
   },
   error => {
     if (!!error.response && !!error.response.data.error && !!error.response.data.error.message && error.response.data.error.details) {
-      // TODO: Below code will be modified when react-toastify is added
-      // vm.$Modal.error({
-      //   title: error.response.data.error.message,
-      //   content: error.response.data.error.details
-      // });
-
-      console.log(`title:${error.response.data.error.message} content:$`);
+      Modal.error({
+        title: error.response.data.error.message,
+        content: error.response.data.error.details,
+      });
     } else if (!!error.response && !!error.response.data.error && !!error.response.data.error.message) {
-      // TODO: Below code will be modified when react-toastify is added
-      // vm.$Modal.error({
-      //   title: window.abp.localization.localize("LoginFailed"),
-      //   content: error.response.data.error.message
-      // });
-      console.log(`title: Login Failed content:$`);
+      Modal.error({
+        title: L('LoginFailed'),
+        content: error.response.data.error.message,
+      });
     } else if (!error.response) {
-      // TODO: Below code will be modified when react-toastify is added
-      // vm.$Modal.error(window.abp.localization.localize("UnknownError"));
-      console.log(`title:unkknown error content:$`);
+      Modal.error({ content: L('UnknownError') });
     }
-    setTimeout(() => {
-      // TODO: Below code will be modified when react-toastify is added
-      // vm.$Message.destroy();
-    }, 1000);
+
+    setTimeout(() => {}, 1000);
+
     return Promise.reject(error);
   }
 );

@@ -1,12 +1,12 @@
-using System.Linq;
+﻿using System.Linq;
 using System.Threading.Tasks;
-using Microsoft.AspNetCore.Identity;
 using Abp.Application.Services;
 using Abp.Application.Services.Dto;
 using Abp.Authorization;
 using Abp.Domain.Repositories;
 using Abp.Extensions;
 using Abp.IdentityFramework;
+using Abp.Linq.Extensions;
 using Abp.MultiTenancy;
 using Abp.Runtime.Security;
 using AbpCompanyName.AbpProjectName.Authorization;
@@ -14,38 +14,36 @@ using AbpCompanyName.AbpProjectName.Authorization.Roles;
 using AbpCompanyName.AbpProjectName.Authorization.Users;
 using AbpCompanyName.AbpProjectName.Editions;
 using AbpCompanyName.AbpProjectName.MultiTenancy.Dto;
+using Microsoft.AspNetCore.Identity;
 
 namespace AbpCompanyName.AbpProjectName.MultiTenancy
 {
     [AbpAuthorize(PermissionNames.Pages_Tenants)]
-    public class TenantAppService : AsyncCrudAppService<Tenant, TenantDto, int, PagedResultRequestDto, CreateTenantDto, TenantDto>, ITenantAppService
+    public class TenantAppService : AsyncCrudAppService<Tenant, TenantDto, int, PagedTenantResultRequestDto, CreateTenantDto, TenantDto>, ITenantAppService
     {
         private readonly TenantManager _tenantManager;
         private readonly EditionManager _editionManager;
         private readonly UserManager _userManager;
         private readonly RoleManager _roleManager;
         private readonly IAbpZeroDbMigrator _abpZeroDbMigrator;
-        private readonly IPasswordHasher<User> _passwordHasher;
 
         public TenantAppService(
-            IRepository<Tenant, int> repository, 
-            TenantManager tenantManager, 
+            IRepository<Tenant, int> repository,
+            TenantManager tenantManager,
             EditionManager editionManager,
-            UserManager userManager,            
-            RoleManager roleManager, 
-            IAbpZeroDbMigrator abpZeroDbMigrator, 
-            IPasswordHasher<User> passwordHasher) 
+            UserManager userManager,
+            RoleManager roleManager,
+            IAbpZeroDbMigrator abpZeroDbMigrator)
             : base(repository)
         {
-            _tenantManager = tenantManager; 
+            _tenantManager = tenantManager;
             _editionManager = editionManager;
             _userManager = userManager;
             _roleManager = roleManager;
             _abpZeroDbMigrator = abpZeroDbMigrator;
-            _passwordHasher = passwordHasher;
         }
-        
-        public override async Task<TenantDto> Create(CreateTenantDto input)
+
+        public override async Task<TenantDto> CreateAsync(CreateTenantDto input)
         {
             CheckCreatePermission();
 
@@ -93,6 +91,13 @@ namespace AbpCompanyName.AbpProjectName.MultiTenancy
             return MapToEntityDto(tenant);
         }
 
+        protected override IQueryable<Tenant> CreateFilteredQuery(PagedTenantResultRequestDto input)
+        {
+            return Repository.GetAll()
+                .WhereIf(!input.Keyword.IsNullOrWhiteSpace(), x => x.TenancyName.Contains(input.Keyword) || x.Name.Contains(input.Keyword))
+                .WhereIf(input.IsActive.HasValue, x => x.IsActive == input.IsActive);
+        }
+
         protected override void MapToEntity(TenantDto updateInput, Tenant entity)
         {
             // Manually mapped since TenantDto contains non-editable properties too.
@@ -101,7 +106,7 @@ namespace AbpCompanyName.AbpProjectName.MultiTenancy
             entity.IsActive = updateInput.IsActive;
         }
 
-        public override async Task Delete(EntityDto<int> input)
+        public override async Task DeleteAsync(EntityDto<int> input)
         {
             CheckDeletePermission();
 
@@ -115,3 +120,4 @@ namespace AbpCompanyName.AbpProjectName.MultiTenancy
         }
     }
 }
+

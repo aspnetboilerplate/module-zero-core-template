@@ -1,8 +1,16 @@
+import './index.less';
+
 import * as React from 'react';
-import { Col, Icon, Layout, Avatar, Menu, Dropdown, Badge } from 'antd';
+
+import { Avatar, Badge, Col, Dropdown, Icon, Menu, Row } from 'antd';
+
+import { L } from '../../lib/abpUtility';
+import LanguageSelect from '../LanguageSelect';
 import { Link } from 'react-router-dom';
 
-export interface LayoutHeaderProps {
+import profilePicture from '../../images/user.png';
+
+export interface IHeaderProps {
   collapsed?: any;
   toggle?: any;
 }
@@ -10,51 +18,32 @@ export interface LayoutHeaderProps {
 const userDropdownMenu = (
   <Menu>
     <Menu.Item key="2">
-      <Icon type="logout" />
-      <span> <Link to="/login">Logout</Link></span>
+      <Link to="/logout">
+        <Icon type="logout" />
+        <span> {L('Logout')}</span>
+      </Link>
     </Menu.Item>
   </Menu>
 );
 
-const languageMenu = (
-  <Menu>
-    <Menu.Item key="1">
-      <span>English</span>
-    </Menu.Item>
-    <Menu.Item key="2">
-      <span>Deutsch</span>
-    </Menu.Item>
-    <Menu.Item key="3">
-      <span>Türkçe</span>
-    </Menu.Item>
-  </Menu>
-);
-
-export class LayoutHeader extends React.Component<LayoutHeaderProps> {
+export class Header extends React.Component<IHeaderProps> {
   render() {
     return (
-      <Layout.Header style={{ background: '#fff', minHeight: 83, padding: 0 }}>
+      <Row className={'header-container'}>
         <Col style={{ textAlign: 'left' }} span={12}>
-          <Icon
-            style={{ marginTop: 10, marginRight: 10, textAlign: 'left' }}
-            className="trigger"
-            type={this.props.collapsed ? 'menu-unfold' : 'menu-fold'}
-            onClick={this.props.toggle}
-          />
+          <Icon className="trigger" type={this.props.collapsed ? 'menu-unfold' : 'menu-fold'} onClick={this.props.toggle} />
         </Col>
-        <Col style={{ margin: 15, marginLeft: 10, textAlign: 'right' }}>
-          <Dropdown overlay={languageMenu} trigger={['click']}>
-            <Icon style={{ margin: 20 }} type="global" />
-          </Dropdown>
+        <Col style={{ padding: '0px 15px 0px 15px', textAlign: 'right' }} span={12}>
+          <LanguageSelect /> {'   '}
           <Dropdown overlay={userDropdownMenu} trigger={['click']}>
-            <Badge style={{ margin: 10 }} count={3}>
-              <Avatar style={{ margin: 10 }} size={48} alt={'profile'} src="https://sametkabay.com/images/smtkby/smtkby240.png" />
+            <Badge style={{}} count={3}>
+              <Avatar style={{height:24, width:24}} shape="circle" alt={'profile'} src={profilePicture} />
             </Badge>
           </Dropdown>
         </Col>
-      </Layout.Header>
+      </Row>
     );
   }
 }
 
-export default LayoutHeader;
+export default Header;

@@ -5,18 +5,14 @@
                 <Form ref="queryForm" :label-width="100" label-position="left" inline>
                     <Row :gutter="16">
                         <Col span="8">
-                            <FormItem :label="L('TenancyName')+':'" style="width:100%">
-                                <Input v-model="filters[1].Value"></Input>
+                            <FormItem :label="L('Keyword')+':'" style="width:100%">
+                                <Input v-model="pagerequest.keyword" :placeholder="L('TenancyName')+'/'+L('Name')"></Input>
                             </FormItem>
-                        </Col>
-                        <Col span="8">
-                            <FormItem :label="L('TenantName')+':'" style="width:100%">
-                                <Input v-model="filters[0].Value"></Input>
-                            </FormItem>
-                        </Col>                        
+                        </Col>                 
                         <Col span="8">
                             <FormItem :label="L('IsActive')+':'" style="width:100%">
-                                <Select :value="'All'" :placeholder="L('Select')" @on-change="isActiveChange">
+                                <!--Select should not set :value="'All'" it may not trigger on-change when first select 'NoActive'(or 'Actived') then select 'All'-->
+                                <Select :placeholder="L('Select')" @on-change="isActiveChange">
                                     <Option value="All">{{L('All')}}</Option>
                                     <Option value="Actived">{{L('Actived')}}</Option>
                                     <Option value="NoActive">{{L('NoActive')}}</Option>
@@ -42,12 +38,17 @@
 </template>
 <script lang="ts">
     import { Component, Vue,Inject, Prop,Watch } from 'vue-property-decorator';
-    import Util from '../../../lib/util'
-    import AbpBase from '../../../lib/abpbase'
-    import {FieldType,Filter,CompareType} from '../../../store/entities/filter'
-    import PageRequest from '../../../store/entities/page-request'
+    import Util from '@/lib/util'
+    import AbpBase from '@/lib/abpbase'
+    import PageRequest from '@/store/entities/page-request'
     import CreateTenant from './create-tenant.vue'
     import EditTenant from './edit-tenant.vue'
+    
+    class PageTenantRequest extends PageRequest{
+        keyword:string='';
+        isActive:boolean=null;
+    }
+    
     @Component({
         components:{CreateTenant,EditTenant}
     })
@@ -55,11 +56,9 @@
         edit(){
             this.editModalShow=true;
         }
-        filters:Filter[]=[
-            {Type:FieldType.String,Value:'',FieldName:'Name',CompareType:CompareType.Contains},
-            {Type:FieldType.String,Value:'',FieldName:'TenancyName',CompareType:CompareType.Contains},
-            {Type:FieldType.Boolean,Value:null,FieldName:'IsActive',CompareType:CompareType.Equal}
-        ]
+       
+        pagerequest:PageTenantRequest=new PageTenantRequest();
+        
         createModalShow:boolean=false;
         editModalShow:boolean=false;
         get list(){
@@ -73,11 +72,11 @@
         }
         isActiveChange(val:string){
             if(val==='Actived'){
-                this.filters[2].Value=true;
+                this.pagerequest.isActive=true;
             }else if(val==='NoActive'){
-                this.filters[2].Value=false;
+                this.pagerequest.isActive=false;
             }else{
-                this.filters[2].Value=null;
+                this.pagerequest.isActive=null;
             }
         }
         pageChange(page:number){
@@ -89,14 +88,13 @@
             this.getpage();
         }
         async getpage(){
-            let where= Util.buildFilters(this.filters);
-            let pagerequest=new PageRequest();
-            pagerequest.maxResultCount=this.pageSize;
-            pagerequest.skipCount=(this.currentPage-1)*this.pageSize;
-            pagerequest.where=where;
+            
+            this.pagerequest.maxResultCount=this.pageSize;
+            this.pagerequest.skipCount=(this.currentPage-1)*this.pageSize;
+            
             await this.$store.dispatch({
                 type:'tenant/getAll',
-                data:pagerequest
+                data:this.pagerequest
             })
         }
         get pageSize(){
@@ -112,7 +110,7 @@
             title:this.L('TenancyName'),
             key:'tenancyName'
         },{
-            title:this.L('TenantName'),
+            title:this.L('Name'),
             key:'name'
         },{
             title:this.L('IsActive'),

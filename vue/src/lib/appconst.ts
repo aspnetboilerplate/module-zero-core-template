@@ -4,12 +4,12 @@ const AppConsts= {
         defaultAdminUserName: 'admin'
     },
     localization:{
-        defaultLocalizationSourceName: 'FengCloud'
+        defaultLocalizationSourceName: 'AbpProjectName'
     },
     authorization:{
         encrptedAuthTokenName: 'enc_auth_token'
     },
     appBaseUrl: "http://localhost:8080",
-    remoteServiceBaseUrl:url
+    remoteServiceBaseUrl: url.endsWith('/') ? url.slice(0, -1) : url
 }
 export default AppConsts

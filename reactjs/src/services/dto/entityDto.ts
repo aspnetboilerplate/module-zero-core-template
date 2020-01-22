@@ -1,3 +1,3 @@
-export interface EntityDto<T = number> {
-  id: T;
+export class EntityDto<T = number> {
+  id!: T;
 }

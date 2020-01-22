@@ -8,6 +8,7 @@ import * as moment from 'moment';
 
 import 'moment/min/locales.min';
 import 'moment-timezone';
+import 'hammerjs';
 
 if (environment.production) {
     enableProdMode();
@@ -23,11 +24,11 @@ const bootstrap = () => {
 
 if (environment.hmr) {
     if (module['hot']) {
-        hmrBootstrap(module, bootstrap); //HMR enabled bootstrap
+        hmrBootstrap(module, bootstrap); // HMR enabled bootstrap
     } else {
         console.error('HMR is not enabled for webpack-dev-server!');
         console.log('Are you using the --hmr flag for ng serve?');
     }
 } else {
-    bootstrap(); //Regular bootstrap
+    bootstrap(); // Regular bootstrap
 }

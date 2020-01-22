@@ -1,11 +1,17 @@
 import { GetCurrentLoginInformations } from './dto/getCurrentLoginInformations';
 import http from '../httpService';
 
+declare var abp: any;
+
 class SessionService {
   public async getCurrentLoginInformations(): Promise<GetCurrentLoginInformations> {
-    var result = await http.get('api/services/app/Session/GetCurrentLoginInformations');
-    console.log(result);
-    return result.data;
+    let result = await http.get('api/services/app/Session/GetCurrentLoginInformations', {
+      headers: {
+        'Abp.TenantId': abp.multiTenancy.getTenantIdCookie(),
+      },
+    });
+
+    return result.data.result;
   }
 }
 

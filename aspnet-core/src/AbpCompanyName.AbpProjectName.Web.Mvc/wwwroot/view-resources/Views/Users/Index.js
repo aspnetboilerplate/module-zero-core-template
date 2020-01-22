@@ -29,10 +29,10 @@
             var userId = $(this).attr("data-user-id");
 
             e.preventDefault();
-            $.ajax({
+            abp.ajax({
                 url: abp.appPath + 'Users/EditUserModal?userId=' + userId,
                 type: 'POST',
-                contentType: 'application/html',
+                dataType: 'html',
                 success: function (content) {
                     $('#UserEditModal div.modal-content').html(content);
                 },
@@ -65,7 +65,7 @@
                 abp.ui.clearBusy(_$modal);
             });
         });
-        
+
         _$modal.on('shown.bs.modal', function () {
             _$modal.find('input:not([type=hidden]):first').focus();
         });
@@ -77,6 +77,7 @@
         function deleteUser(userId, userName) {
             abp.message.confirm(
                 abp.utils.formatString(abp.localization.localize('AreYouSureWantToDelete', 'AbpProjectName'), userName),
+                undefined,
                 function (isConfirmed) {
                     if (isConfirmed) {
                         _userService.delete({

@@ -5,18 +5,14 @@
                 <Form ref="queryForm" :label-width="80" label-position="left" inline>
                     <Row :gutter="16">
                         <Col span="6">
-                            <FormItem :label="L('UserName')+':'" style="width:100%">
-                                <Input v-model="filters[0].Value"></Input>
-                            </FormItem>
-                        </Col>
-                        <Col span="6">
-                            <FormItem :label="L('Name')+':'" style="width:100%">
-                                <Input v-model="filters[1].Value"></Input>
+                            <FormItem :label="L('Keyword')+':'" style="width:100%">
+                                <Input v-model="pagerequest.keyword" :placeholder="L('UserName')+'/'+L('Name')"></Input>
                             </FormItem>
                         </Col>
                         <Col span="6">
                             <FormItem :label="L('IsActive')+':'" style="width:100%">
-                                <Select :value="'All'" :placeholder="L('Select')" @on-change="isActiveChange">
+                                <!--Select should not set :value="'All'" it may not trigger on-change when first select 'NoActive'(or 'Actived') then select 'All'-->
+                                <Select :placeholder="L('Select')" @on-change="isActiveChange">
                                     <Option value="All">{{L('All')}}</Option>
                                     <Option value="Actived">{{L('Actived')}}</Option>
                                     <Option value="NoActive">{{L('NoActive')}}</Option>
@@ -25,7 +21,7 @@
                         </Col>
                         <Col span="6">
                             <FormItem :label="L('CreationTime')+':'" style="width:100%">
-                                <DatePicker  v-model="filters[2].Value" type="datetimerange" format="yyyy-MM-dd" style="width:100%" placement="bottom-end" :placeholder="L('SelectDate')"></DatePicker>
+                                <DatePicker  v-model="creationTime" type="datetimerange" format="yyyy-MM-dd" style="width:100%" placement="bottom-end" :placeholder="L('SelectDate')"></DatePicker>
                             </FormItem>
                         </Col>
                     </Row>
@@ -47,12 +43,18 @@
 </template>
 <script lang="ts">
     import { Component, Vue,Inject, Prop,Watch } from 'vue-property-decorator';
-    import Util from '../../../lib/util'
-    import AbpBase from '../../../lib/abpbase'
-    import {FieldType,Filter,CompareType} from '../../../store/entities/filter'
-    import PageRequest from '../../../store/entities/page-request'
+    import Util from '@/lib/util'
+    import AbpBase from '@/lib/abpbase'
+    import PageRequest from '@/store/entities/page-request'
     import CreateUser from './create-user.vue'
     import EditUser from './edit-user.vue'
+    class  PageUserRequest extends PageRequest{
+        keyword:string;
+        isActive:boolean=null;//nullable
+        from:Date;
+        to:Date;
+    }
+
     @Component({
         components:{CreateUser,EditUser}
     })
@@ -60,12 +62,10 @@
         edit(){
             this.editModalShow=true;
         }
-        filters:Filter[]=[
-            {Type:FieldType.String,Value:'',FieldName:'UserName',CompareType:CompareType.Contains},
-            {Type:FieldType.String,Value:'',FieldName:'Name',CompareType:CompareType.Contains},
-            {Type:FieldType.DataRange,Value:'',FieldName:'CreationTime',CompareType:CompareType.Contains},
-            {Type:FieldType.Boolean,Value:null,FieldName:'IsActive',CompareType:CompareType.Equal}
-        ]
+        //filters
+        pagerequest:PageUserRequest=new PageUserRequest();
+        creationTime:Date[]=[];
+
         createModalShow:boolean=false;
         editModalShow:boolean=false;
         get list(){
@@ -78,12 +78,13 @@
             this.createModalShow=true;
         }
         isActiveChange(val:string){
+            console.log(val);
             if(val==='Actived'){
-                this.filters[3].Value=true;
+                this.pagerequest.isActive=true;
             }else if(val==='NoActive'){
-                this.filters[3].Value=false;
+                this.pagerequest.isActive=false;
             }else{
-                this.filters[3].Value=null;
+                this.pagerequest.isActive=null;
             }
         }
         pageChange(page:number){
@@ -95,14 +96,21 @@
             this.getpage();
         }
         async getpage(){
-            let where= Util.buildFilters(this.filters);
-            let pagerequest=new PageRequest();
-            pagerequest.maxResultCount=this.pageSize;
-            pagerequest.skipCount=(this.currentPage-1)*this.pageSize;
-            pagerequest.where=where;
+          
+            this.pagerequest.maxResultCount=this.pageSize;
+            this.pagerequest.skipCount=(this.currentPage-1)*this.pageSize;
+            //filters
+            
+            if (this.creationTime.length>0) {
+                this.pagerequest.from=this.creationTime[0];
+            }
+            if (this.creationTime.length>1) {
+                this.pagerequest.to=this.creationTime[1];
+            }
+
             await this.$store.dispatch({
                 type:'user/getAll',
-                data:pagerequest
+                data:this.pagerequest
             })
         }
         get pageSize(){

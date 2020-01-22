@@ -1,31 +1,41 @@
+import './index.css';
+
 import * as React from 'react';
 import * as ReactDOM from 'react-dom';
-import './index.css';
-import appInitializer from './appInitializer';
-import registerServiceWorker from './registerServiceWorker';
+import * as moment from 'moment';
+
 import App from './App';
-import AuthenticationStores from './stores/tokenAuthStore';
+import { BrowserRouter } from 'react-router-dom';
 import { Provider } from 'mobx-react';
-import { HashRouter } from 'react-router-dom';
-import RoleStores from './stores/roleStore';
-import TenantStores from './stores/tenantStore';
-import UserStores from './stores/userStore';
+import Utils from './utils/utils';
+import abpUserConfigurationService from './services/abpUserConfigurationService';
+import initializeStores from './stores/storeInitializer';
+import registerServiceWorker from './registerServiceWorker';
 
-appInitializer();
+declare var abp: any;
 
-const stores = {
-  AuthenticationStores,
-  RoleStores,
-  TenantStores,
-  UserStores,
-};
+Utils.setLocalization();
 
-ReactDOM.render(
-  <Provider {...stores}>
-    <HashRouter>
-      <App />
-    </HashRouter>
-  </Provider>,
-  document.getElementById('root') as HTMLElement
-);
-registerServiceWorker();
+abpUserConfigurationService.getAll().then(data => {
+  Utils.extend(true, abp, data.data.result);
+  abp.clock.provider = Utils.getCurrentClockProvider(data.data.result.clock.provider);
+
+  moment.locale(abp.localization.currentLanguage.name);
+
+  if (abp.clock.provider.supportsMultipleTimezone) {
+    moment.tz.setDefault(abp.timing.timeZoneInfo.iana.timeZoneId);
+  }
+
+  const stores = initializeStores();
+
+  ReactDOM.render(
+    <Provider {...stores}>
+      <BrowserRouter>
+        <App />
+      </BrowserRouter>
+    </Provider>,
+    document.getElementById('root') as HTMLElement
+  );
+
+  registerServiceWorker();
+});

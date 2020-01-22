@@ -1,24 +1,9 @@
+import ApplicationInfoDto from './applicationInfoDto';
+import TenantLoginInfoDto from './tenantLoginInfoDto';
+import UserLoginInfoDto from './userLoginInfoDto';
 
-    export interface Features {
-    }
-
-    export interface Application {
-        version: string;
-        releaseDate: Date;
-        features: Features;
-    }
-
-    export interface User {
-        name: string;
-        surname: string;
-        userName: string;
-        emailAddress: string;
-        id: number;
-    }
-
-    export interface GetCurrentLoginInformations {
-        application: Application;
-        user: User;
-        tenant?: any;
-    }
-
+export class GetCurrentLoginInformations {
+  application!: ApplicationInfoDto;
+  user!: UserLoginInfoDto;
+  tenant!: TenantLoginInfoDto;
+}

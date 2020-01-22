@@ -1,3 +1,10 @@
+import * as abpTypings from '../lib/abp';
+
+import { L } from '../lib/abpUtility';
+import { routers } from '../components/Router/router.config';
+
+declare var abp: any;
+
 class Utils {
   loadScript(url: string) {
     var script = document.createElement('script');
@@ -12,7 +19,6 @@ class Utils {
       src,
       srcType,
       copy,
-      //   copyType,
       copyIsArray,
       clone,
       target = args[0] || {},
@@ -54,7 +60,41 @@ class Utils {
         }
       }
     }
+
     return target;
+  }
+
+  getPageTitle = (pathname: string) => {
+    const route = routers.filter(route => route.path === pathname);
+    const localizedAppName = L('AppName');
+    if (!route || route.length === 0) {
+      return localizedAppName;
+    }
+
+    return L(route[0].title) + ' | ' + localizedAppName;
+  };
+
+  getRoute = (path: string): any => {
+    return routers.filter(route => route.path === path)[0];
+  };
+
+  setLocalization() {
+    if (!abp.utils.getCookieValue('Abp.Localization.CultureName')) {
+      let language = navigator.language;
+      abp.utils.setCookieValue('Abp.Localization.CultureName', language, new Date(new Date().getTime() + 5 * 365 * 86400000), abp.appPath);
+    }
+  }
+
+  getCurrentClockProvider(currentProviderName: string): abpTypings.timing.IClockProvider {
+    if (currentProviderName === 'unspecifiedClockProvider') {
+      return abp.timing.unspecifiedClockProvider;
+    }
+
+    if (currentProviderName === 'utcClockProvider') {
+      return abp.timing.utcClockProvider;
+    }
+
+    return abp.timing.localClockProvider;
   }
 }
 

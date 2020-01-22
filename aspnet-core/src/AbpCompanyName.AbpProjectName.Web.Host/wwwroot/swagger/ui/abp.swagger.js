@@ -26,6 +26,13 @@ var abp = abp || {};
         return true;
     }
 
+    function addAntiForgeryTokenToXhr(xhr) {
+        var antiForgeryToken = abp.security.antiForgery.getToken();
+        if (antiForgeryToken) {
+            xhr.setRequestHeader(abp.security.antiForgery.tokenHeaderName, antiForgeryToken);
+        }
+    }
+
     function loginUserInternal(tenantId, callback) {
         var usernameOrEmailAddress = document.getElementById('userName').value;
         if (!usernameOrEmailAddress) {
@@ -58,7 +65,12 @@ var abp = abp || {};
         xhr.open('POST', '/api/TokenAuth/Authenticate', true);
         xhr.setRequestHeader('Abp.TenantId', tenantId);
         xhr.setRequestHeader('Content-type', 'application/json');
-        xhr.send("{" + "usernameOrEmailAddress:'" + usernameOrEmailAddress + "'," + "password:'" + password + "'}");
+        addAntiForgeryTokenToXhr(xhr);
+        xhr.send(
+            JSON.stringify(
+                { usernameOrEmailAddress: usernameOrEmailAddress, password: password }
+            )
+        );
     };
 
     abp.swagger.login = function (callback) {
@@ -81,7 +93,10 @@ var abp = abp || {};
 
             xhrTenancyName.open('POST', '/api/services/app/Account/IsTenantAvailable', true);
             xhrTenancyName.setRequestHeader('Content-type', 'application/json');
-            xhrTenancyName.send("{" + "tenancyName:'" + tenancyName + "'}");
+            addAntiForgeryTokenToXhr(xhrTenancyName);
+            xhrTenancyName.send(
+                JSON.stringify({ tenancyName: tenancyName })
+            );
         } else {
             loginUserInternal(null, callback); // Login for host
         }

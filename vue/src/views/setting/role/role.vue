@@ -5,18 +5,8 @@
                 <Form ref="queryForm" :label-width="90" label-position="left" inline>
                     <Row :gutter="16">
                         <Col span="8">
-                            <FormItem :label="L('RoleName')+':'" style="width:100%">
-                                <Input v-model="filters[0].Value"></Input>
-                            </FormItem>
-                        </Col>
-                        <Col span="8">
-                            <FormItem :label="L('DisplayName')+':'" style="width:100%">
-                                <Input v-model="filters[1].Value"></Input>
-                            </FormItem>
-                        </Col>
-                        <Col span="8">
-                            <FormItem :label="L('Description')+':'" style="width:100%">
-                                <Input v-model="filters[2].Value"></Input>
+                            <FormItem :label="L('Keyword')+':'" style="width:100%">
+                                <Input v-model="pagerequest.keyword" :placeholder="L('RoleName')+'/'+L('DisplayName')+'/'+L('Description')"></Input>
                             </FormItem>
                         </Col>
                     </Row>
@@ -38,12 +28,16 @@
 </template>
 <script lang="ts">
     import { Component, Vue,Inject, Prop,Watch } from 'vue-property-decorator';
-    import Util from '../../../lib/util'
-    import AbpBase from '../../../lib/abpbase'
-    import {FieldType,Filter,CompareType} from '../../../store/entities/filter'
-    import PageRequest from '../../../store/entities/page-request'
+    import Util from '@/lib/util'
+    import AbpBase from '@/lib/abpbase'
+    import PageRequest from '@/store/entities/page-request'
     import CreateRole from './create-role.vue'
     import EditRole from './edit-role.vue'
+   
+    class PageRoleRequest extends PageRequest{
+        keyword:string='';
+    }
+    
     @Component({
         components:{CreateRole,EditRole}
     })
@@ -51,11 +45,9 @@
         edit(){
             this.editModalShow=true;
         }
-        filters:Filter[]=[
-            {Type:FieldType.String,Value:'',FieldName:'Name',CompareType:CompareType.Contains},
-            {Type:FieldType.String,Value:'',FieldName:'DisplayName',CompareType:CompareType.Contains},
-            {Type:FieldType.DataRange,Value:'',FieldName:'Description',CompareType:CompareType.Contains}
-        ]
+
+        pagerequest:PageRoleRequest=new PageRoleRequest();
+
         createModalShow:boolean=false;
         editModalShow:boolean=false;
         get list(){
@@ -76,14 +68,13 @@
             this.getpage();
         }
         async getpage(){
-            let where= Util.buildFilters(this.filters);
-            let pagerequest=new PageRequest();
-            pagerequest.maxResultCount=this.pageSize;
-            pagerequest.skipCount=(this.currentPage-1)*this.pageSize;
-            pagerequest.where=where;
+            
+            this.pagerequest.maxResultCount=this.pageSize;
+            this.pagerequest.skipCount=(this.currentPage-1)*this.pageSize;
+            
             await this.$store.dispatch({
                 type:'role/getAll',
-                data:pagerequest
+                data:this.pagerequest
             })
         }
         get pageSize(){
@@ -107,7 +98,7 @@
         },{
             title:this.L('IsStatic'),
             render:(h:any,params:any)=>{
-                return h('span',params.row.isStatic?'是':'否')
+                return h('span',params.row.isStatic?this.L('Yes'):this.L('No'))
             }
         },{
             title:this.L('Actions'),

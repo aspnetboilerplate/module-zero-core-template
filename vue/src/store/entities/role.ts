@@ -5,6 +5,5 @@ export default class Role extends Entity<number>{
     displayName:string;
     normalizedName:string;
     description:string;
-    isStatic:boolean;
-    permissions:string[]
+    grantedPermissions:string[]
 }

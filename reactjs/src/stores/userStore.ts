@@ -1,60 +1,50 @@
-import {  action, observable } from 'mobx';
+import { action, observable } from 'mobx';
 
-import userService from 'src/services/user/userService';
-import { PagedResultDto } from 'src/services/dto/pagedResultDto';
-import { GetUserOutput } from 'src/services/user/dto/getUserOutput';
-import { UpdateUserInput } from 'src/services/user/dto/updateUserInput';
-import { EntityDto } from 'src/services/dto/entityDto';
-import { CreateOrUpdateUserInput } from 'src/services/user/dto/createOrUpdateUserInput';
-import { GetRoles } from 'src/services/user/dto/getRolesOuput';
+import { CreateOrUpdateUserInput } from '../services/user/dto/createOrUpdateUserInput';
+import { EntityDto } from '../services/dto/entityDto';
+import { GetRoles } from '../services/user/dto/getRolesOuput';
+import { GetUserOutput } from '../services/user/dto/getUserOutput';
+import { PagedResultDto } from '../services/dto/pagedResultDto';
+import { PagedUserResultRequestDto } from '../services/user/dto/PagedUserResultRequestDto';
+import { UpdateUserInput } from '../services/user/dto/updateUserInput';
+import userService from '../services/user/userService';
 
-class UserStores {
-  @observable
-  users: PagedResultDto<GetUserOutput>;
-  @observable
-  editUser: CreateOrUpdateUserInput;
-  @observable
-  roles: GetRoles[]=[];
+class UserStore {
+  @observable users!: PagedResultDto<GetUserOutput>;
+  @observable editUser!: CreateOrUpdateUserInput;
+  @observable roles: GetRoles[] = [];
 
   @action
   async create(createUserInput: CreateOrUpdateUserInput) {
-    debugger;
-    var result = await userService.create(createUserInput);
-    console.log(result);
+    let result = await userService.create(createUserInput);
     this.users.items.push(result);
   }
 
   @action
   async update(updateUserInput: UpdateUserInput) {
-    debugger;
-    var result = await userService.update(updateUserInput);
-    console.log(result);
+    let result = await userService.update(updateUserInput);
     this.users.items = this.users.items.map((x: GetUserOutput) => {
-      if (x.id == updateUserInput.id) x = result;
+      if (x.id === updateUserInput.id) x = result;
       return x;
     });
   }
 
   @action
   async delete(entityDto: EntityDto) {
-    var result = await userService.delete(entityDto);
-    console.log(result);
-
-    this.users.items = this.users.items.filter((x: GetUserOutput) => x.id != entityDto.id);
+    await userService.delete(entityDto);
+    this.users.items = this.users.items.filter((x: GetUserOutput) => x.id !== entityDto.id);
   }
 
   @action
   async getRoles() {
-    var result = await userService.getRoles();
-    console.log(result);
+    let result = await userService.getRoles();
     this.roles = result;
   }
 
   @action
   async get(entityDto: EntityDto) {
-    var result = await userService.get(entityDto);
-    console.log(result);
-    this.editUser=result;
+    let result = await userService.get(entityDto);
+    this.editUser = result;
   }
 
   @action
@@ -69,14 +59,18 @@ class UserStores {
       password: '',
       id: 0,
     };
-    this.roles=[];
+    this.roles = [];
   }
+
   @action
-  async getAll(pagedFilterAndSortedRequest: PagedFilterAndSortedRequest) {
-    var result = await userService.getAll(pagedFilterAndSortedRequest);
-    console.log(result);
+  async getAll(pagedFilterAndSortedRequest: PagedUserResultRequestDto) {
+    let result = await userService.getAll(pagedFilterAndSortedRequest);
     this.users = result;
+  }
+
+  async changeLanguage(languageName: string) {
+    await userService.changeLanguage({ languageName: languageName });
   }
 }
 
-export default new UserStores();
+export default UserStore;

@@ -3,7 +3,7 @@
   <texts>
     <text name="HomePage" value="Home page" />
     <text name="About" value="About" />
-    <text name="WellcomeMessage" value="Welcome to AbpProjectName!" />
+    <text name="WelcomeMessage" value="Welcome to AbpProjectName!" />
     <text name="FormIsNotValidMessage" value="Form is not valid. Please check and fix errors." />
     <text name="TenantNameCanNotBeEmpty" value="Tenant name can not be empty" />
     <text name="InvalidUserNameOrPassword" value="Invalid user name or password" />
@@ -16,6 +16,8 @@
     <text name="TenancyName" value="Tenancy name" />
     <text name="UserNameOrEmail" value="User name or email" />
     <text name="Password" value="Password" />
+    <text name="ResetPassword" value="Reset Password" />
+    <text name="UpdatePassword" value="Update Password" />
     <text name="RememberMe" value="Remember me" />
     <text name="LogIn" value="Log in" />
     <text name="LoginFailed" value="Login failed!" />
@@ -28,6 +30,7 @@
     <text name="SavedSuccessfully" value="Saved successfully" />
     <text name="CreateNewTenant" value="Create new tenant" />
     <text name="AdminEmailAddress" value="Admin email address" />
+    <text name="AdminPassword" value="Admin password" />
     <text name="Save" value="Save" />
     <text name="Cancel" value="Cancel" />
     <text name="TenantName_Regex_Description" value="Tenant name must be at least 2 chars, starts with a letter and continue with letter, number, dash or underscore." />
@@ -88,8 +91,18 @@
     <text name="On">On</text>
     <text name="Off">Off</text>
     <text name="AreYouSureWantToDelete">Are you sure want to delete {0}?</text>
+    <text name="SuccessfullyDeleted">Successfully deleted</text>
     <text name="StartTyping">Start Typing</text>
     <text name="Skins">Skins</text>
     <text name="Settings">Settings</text>
+    <text name="Filter">Filter</text>
+    <text name="CurrentPassword">Current Password</text>
+    <text name="NewPassword">New Password</text>
+    <text name="ConfirmNewPassword">Confirm New Password</text>
+    <text name="PasswordsDoNotMatch">Passwords do not match</text>
+    <text name="PasswordsMustBeAtLeast8CharactersContainLowercaseUppercaseNumber">Passwords must be at least 8 characters, contain a lowercase, uppercase, and number</text>
+    <text name="UserDeleteWarningMessage">User {0} will be deleted.</text>
+    <text name="RoleDeleteWarningMessage">Role {0} will be deleted and unassigned from all assigned users.</text>
+    <text name="TenantDeleteWarningMessage">Tenant {0} will be deleted.</text>
   </texts>
 </localizationDictionary>

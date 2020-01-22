@@ -1,132 +1,137 @@
-import { Card, Col, Row, Button, Table, Tag, Dropdown, Menu } from 'antd';
-import 'antd/dist/antd.css';
-import *as React from 'react';
+import * as React from 'react';
+
+import { Button, Card, Col, Dropdown, Input, Menu, Modal, Row, Table, Tag } from 'antd';
+import { inject, observer } from 'mobx-react';
+
+import AppComponentBase from '../../components/AppComponentBase';
 import CreateOrUpdateUser from './components/createOrUpdateUser';
-import { EntityDto } from 'src/services/dto/entityDto';
-import { observer, inject } from 'mobx-react';
+import { EntityDto } from '../../services/dto/entityDto';
+import { L } from '../../lib/abpUtility';
+import Stores from '../../stores/storeIdentifier';
+import UserStore from '../../stores/userStore';
 
+export interface IUserProps {
+  userStore: UserStore;
+}
 
+export interface IUserState {
+  modalVisible: boolean;
+  maxResultCount: number;
+  skipCount: number;
+  userId: number;
+  filter: string;
+}
 
+const confirm = Modal.confirm;
+const Search = Input.Search;
 
-@inject("UserStores")
+@inject(Stores.UserStore)
 @observer
-class Team extends React.Component<any> {
+class User extends AppComponentBase<IUserProps, IUserState> {
   formRef: any;
-  constructor(props: any) {
-    super(props);
-   
-  }
- state = {
-  modalVisible: false,
-  maxResultCount: 10,
-  skipCount: 0,
-  userId:0
 
-};
-  async componentWillMount(){
-  await this.getAll();
-  } 
+  state = {
+    modalVisible: false,
+    maxResultCount: 10,
+    skipCount: 0,
+    userId: 0,
+    filter: '',
+  };
 
-  async getAll(){
-    await this.props.UserStores.getAll({maxResultCount:this.state.maxResultCount,skipCount:this.state.skipCount});
+  async componentDidMount() {
+    await this.getAll();
   }
+
+  async getAll() {
+    await this.props.userStore.getAll({ maxResultCount: this.state.maxResultCount, skipCount: this.state.skipCount, keyword: this.state.filter });
+  }
+
   handleTableChange = (pagination: any) => {
     this.setState({ skipCount: (pagination.current - 1) * this.state.maxResultCount! }, async () => await this.getAll());
   };
+
   Modal = () => {
     this.setState({
-      modalVisible: !this.state.modalVisible
+      modalVisible: !this.state.modalVisible,
     });
   };
-  setPermissions() {
-    this.props.UserStores.updateUserPermissions();
-    this.Modal();
-  }
+
   async createOrUpdateModalOpen(entityDto: EntityDto) {
-    
-    if (entityDto.id == 0) {
-      await this.props.UserStores.createUser();
-      await this.props.UserStores.getRoles();
+    if (entityDto.id === 0) {
+      await this.props.userStore.createUser();
+      await this.props.userStore.getRoles();
+    } else {
+      await this.props.userStore.get(entityDto);
+      await this.props.userStore.getRoles();
     }
-    else {
-      await this.props.UserStores.get(entityDto);
-      await this.props.UserStores.getRoles();
-    }
+
     this.setState({ userId: entityDto.id });
     this.Modal();
-    
-    debugger;
-    this.formRef.props.form.setFieldsValue({ ...this.props.UserStores.editUser, roleNames: this.props.UserStores.editUser.roleNames });
-    
+
+    this.formRef.props.form.setFieldsValue({ ...this.props.userStore.editUser, roleNames: this.props.userStore.editUser.roleNames });
   }
 
   
   delete(input: EntityDto) {
-    this.props.UserStores.delete(input);
+    const self = this;
+    confirm({
+      title: 'Do you Want to delete these items?',
+      onOk() {
+        self.props.userStore.delete(input);
+      },
+      onCancel() {
+        console.log('Cancel');
+      },
+    });
   }
   handleCreate= ()=> {
    
     debugger;
     const form = this.formRef.props.form;
 
+  handleCreate = () => {
+    const form = this.formRef.props.form;
+
     form.validateFields(async (err: any, values: any) => {
-      debugger;
       if (err) {
         return;
-      }
-      else {
-        if (this.state.userId == 0) {
-          await this.props.UserStores.create(values);
-        }
-        else {
-          await this.props.UserStores.update({ id: this.state.userId, ...values });
+      } else {
+        if (this.state.userId === 0) {
+          await this.props.userStore.create(values);
+        } else {
+          await this.props.userStore.update({ id: this.state.userId, ...values });
         }
       }
+
       await this.getAll();
       this.setState({ modalVisible: false });
       form.resetFields();
     });
-  }
+  };
 
   saveFormRef = (formRef: any) => {
     this.formRef = formRef;
-  }
-  public render() {
+  };
 
-    const { users } = this.props.UserStores;
+  handleSearch = (value: string) => {
+    this.setState({ filter: value }, async () => await this.getAll());
+  };
+
+  public render() {
+    const { users } = this.props.userStore;
     const columns = [
-     
+      { title: L('UserName'), dataIndex: 'userName', key: 'userName', width: 150, render: (text: string) => <div>{text}</div> },
+      { title: L('FullName'), dataIndex: 'name', key: 'name', width: 150, render: (text: string) => <div>{text}</div> },
+      { title: L('EmailAddress'), dataIndex: 'emailAddress', key: 'emailAddress', width: 150, render: (text: string) => <div>{text}</div> },
       {
-        title: 'User Name',
-        dataIndex: 'userName',
-        key: 'userName',
-        width: 150,
-        render: (text: string) => <div>{text}</div>,
-      },
-      {
-        title: 'Full Name',
-        dataIndex: 'name',
-        key: 'name',
-        width: 150,
-        render: (text: string) => <div>{text}</div>,
-      },
-      {
-        title: 'Email Adress',
-        dataIndex: 'surname',
-        key: 'surname',
-        width: 150,
-        render: (text: string) => <div>{text}</div>,
-      },
-      {
-        title: 'Active',
+        title: L('IsActive'),
         dataIndex: 'isActive',
         key: 'isActive',
         width: 150,
-        render: (text: boolean) =>
-          text == true ? <Tag color="#2db7f5">Yes</Tag> : <Tag color="red">No</Tag>,
+        render: (text: boolean) => (text === true ? <Tag color="#2db7f5">{L('Yes')}</Tag> : <Tag color="red">{L('No')}</Tag>),
       },
       {
-        title: 'Actions',
+        title: L('Actions'),
         width: 150,
         render: (text: string, item: any) => (
           <div>
@@ -134,50 +139,80 @@ class Team extends React.Component<any> {
               trigger={['click']}
               overlay={
                 <Menu>
-                  <Menu.Item>
-                    <a onClick={() => this.createOrUpdateModalOpen({ id: item.id })}>Düzenle</a>
-                  </Menu.Item>
-                  <Menu.Item>
-                    <a onClick={() => this.delete({ id: item.id })}>Sil</a>
-                  </Menu.Item>
+                  <Menu.Item onClick={() => this.createOrUpdateModalOpen({ id: item.id })}>{L('Edit')}</Menu.Item>
+                  <Menu.Item onClick={() => this.delete({ id: item.id })}>{L('Delete')}</Menu.Item>
                 </Menu>
               }
               placement="bottomLeft"
             >
               <Button type="primary" icon="setting">
-                işlemler
+                {L('Actions')}
               </Button>
             </Dropdown>
           </div>
         ),
-      }
+      },
     ];
-    return <Card>
+
+    return (
+      <Card>
         <Row>
-          <Col xs={{ span: 4, offset: 0 }} sm={{ span: 4, offset: 0 }} md={{ span: 4, offset: 0 }} lg={{ span: 2, offset: 0 }} xl={{ span: 2, offset: 0 }} xxl={{ span: 2, offset: 0 }}>
+          <Col
+            xs={{ span: 4, offset: 0 }}
+            sm={{ span: 4, offset: 0 }}
+            md={{ span: 4, offset: 0 }}
+            lg={{ span: 2, offset: 0 }}
+            xl={{ span: 2, offset: 0 }}
+            xxl={{ span: 2, offset: 0 }}
+          >
             {' '}
-            <h2>Users</h2>
+            <h2>{L('Users')}</h2>
           </Col>
           <Col xs={{ span: 14, offset: 0 }} sm={{ span: 15, offset: 0 }} md={{ span: 15, offset: 0 }} lg={{ span: 1, offset: 21 }} xl={{ span: 1, offset: 21 }} xxl={{ span: 1, offset: 21 }}>
             <Button type="primary" shape="circle" icon="plus" onClick={() => this.createOrUpdateModalOpen({ id: 0 })} />
           </Col>
         </Row>
-        <Row style={{ marginTop: 20 }}>
-          <Col xs={{ span: 24, offset: 0 }} sm={{ span: 24, offset: 0 }} md={{ span: 24, offset: 0 }} lg={{ span: 24, offset: 0 }} xl={{ span: 24, offset: 0 }} xxl={{ span: 24, offset: 0 }}>
-            <Table size={'default'} bordered={true} columns={columns} pagination={{ pageSize: 10, total: users == undefined ? 0 : users.totalCount, defaultCurrent: 1 }} loading={users == undefined ? true : false} dataSource={users == undefined ? [] : users.items} onChange={this.handleTableChange} />
+        <Row>
+          <Col sm={{ span: 10, offset: 0 }}>
+            <Search placeholder={this.L('Filter')} onSearch={this.handleSearch} />
           </Col>
         </Row>
-        <CreateOrUpdateUser 
-        wrappedComponentRef={this.saveFormRef} 
-        visible={this.state.modalVisible} 
-        onCancel={() => this.setState({
+        <Row style={{ marginTop: 20 }}>
+          <Col
+            xs={{ span: 24, offset: 0 }}
+            sm={{ span: 24, offset: 0 }}
+            md={{ span: 24, offset: 0 }}
+            lg={{ span: 24, offset: 0 }}
+            xl={{ span: 24, offset: 0 }}
+            xxl={{ span: 24, offset: 0 }}
+          >
+            <Table
+              rowKey={record => record.id.toString()}
+              size={'default'}
+              bordered={true}
+              columns={columns}
+              pagination={{ pageSize: 10, total: users === undefined ? 0 : users.totalCount, defaultCurrent: 1 }}
+              loading={users === undefined ? true : false}
+              dataSource={users === undefined ? [] : users.items}
+              onChange={this.handleTableChange}
+            />
+          </Col>
+        </Row>
+        <CreateOrUpdateUser
+          wrappedComponentRef={this.saveFormRef}
+          visible={this.state.modalVisible}
+          onCancel={() =>
+            this.setState({
               modalVisible: false,
-            })} 
-            modalType={this.state.userId == 0 ? 'edit' : 'create'} 
-        onCreate={this.handleCreate}
-        roles={this.props.UserStores.roles} />
-      </Card>;
+            })
+          }
+          modalType={this.state.userId === 0 ? 'edit' : 'create'}
+          onCreate={this.handleCreate}
+          roles={this.props.userStore.roles}
+        />
+      </Card>
+    );
   }
 }
 
-export default Team;
+export default User;

@@ -7,6 +7,7 @@ using System.Threading.Tasks;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using Abp;
+using Abp.AspNetCore.Mvc.Authorization;
 using Abp.Authorization;
 using Abp.Authorization.Users;
 using Abp.Configuration;
@@ -15,6 +16,7 @@ using Abp.Domain.Uow;
 using Abp.Extensions;
 using Abp.MultiTenancy;
 using Abp.Notifications;
+using Abp.Runtime.Session;
 using Abp.Threading;
 using Abp.Timing;
 using Abp.UI;
@@ -113,7 +115,6 @@ namespace AbpCompanyName.AbpProjectName.Web.Controllers
             return RedirectToAction("Login");
         }
 
-
         private async Task<AbpLoginResult<Tenant, User>> GetLoginResultAsync(string usernameOrEmailAddress, string password, string tenancyName)
         {
             var loginResult = await _logInManager.LoginAsync(usernameOrEmailAddress, password, tenancyName);
@@ -194,7 +195,7 @@ namespace AbpCompanyName.AbpProjectName.Web.Controllers
                 if (model.IsExternalLogin)
                 {
                     Debug.Assert(externalLoginInfo != null);
-                    
+
                     if (string.Equals(externalLoginInfo.Principal.FindFirstValue(ClaimTypes.Email), model.EmailAddress, StringComparison.OrdinalIgnoreCase))
                     {
                         user.IsEmailConfirmed = true;
@@ -289,7 +290,7 @@ namespace AbpCompanyName.AbpProjectName.Web.Controllers
         public virtual async Task<ActionResult> ExternalLoginCallback(string returnUrl, string remoteError = null)
         {
             returnUrl = NormalizeReturnUrl(returnUrl);
-            
+
             if (remoteError != null)
             {
                 Logger.Error("Remote Error in ExternalLoginCallback: " + remoteError);
@@ -435,6 +436,7 @@ namespace AbpCompanyName.AbpProjectName.Web.Controllers
         /// </summary>
         /// <param name="message"></param>
         /// <returns></returns>
+        [AbpMvcAuthorize]
         public async Task<ActionResult> TestNotification(string message = "")
         {
             if (message.IsNullOrEmpty())

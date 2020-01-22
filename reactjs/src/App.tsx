@@ -1,24 +1,32 @@
-import * as React from 'react';
 import './App.css';
-import { withRouter, Switch, Route } from 'react-router-dom';
-import Layout from './scenes/Layout';
 
-import Login from './scenes/Login';
-class App extends React.Component {
-  componentDidMount() {}
+import * as React from 'react';
+
+import Router from './components/Router';
+import SessionStore from './stores/sessionStore';
+import SignalRAspNetCoreHelper from './lib/signalRAspNetCoreHelper';
+import Stores from './stores/storeIdentifier';
+import { inject } from 'mobx-react';
+
+export interface IAppProps {
+  sessionStore?: SessionStore;
+}
+
+@inject(Stores.SessionStore)
+class App extends React.Component<IAppProps> {
+  async componentDidMount() {
+    await this.props.sessionStore!.getCurrentLoginInformations();
+
+    if (!!this.props.sessionStore!.currentLogin.user && this.props.sessionStore!.currentLogin.application.features['SignalR']) {
+      if (this.props.sessionStore!.currentLogin.application.features['SignalR.AspNetCore']) {
+        SignalRAspNetCoreHelper.initSignalR();
+      }
+    }
+  }
+
   public render() {
-    return (
-      <Switch>
-        <Route path="/dashboard" component={Layout} />
-        <Route path="/users" component={Layout} />
-        <Route path="/tenants" component={Layout} />
-        <Route path="/roles" component={Layout} />
-        <Route path="/about" component={Layout} />
-        <Route path="/login" component={Login} />
-        <Route path="/" component={Login} />
-      </Switch>
-    );
+    return <Router />;
   }
 }
 
-export default withRouter<any>(App);
+export default App;

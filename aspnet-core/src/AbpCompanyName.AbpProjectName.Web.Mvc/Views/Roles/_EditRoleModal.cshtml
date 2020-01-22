@@ -3,7 +3,7 @@
 @{
     Layout = null;
 }
-@Html.Partial("~/Views/Shared/Modals/_ModalHeader.cshtml", new ModalHeaderViewModel(L("EditRole")))
+@await Html.PartialAsync("~/Views/Shared/Modals/_ModalHeader.cshtml", new ModalHeaderViewModel(L("EditRole")))
 
 <div class="modal-body">
     <form name="RoleEditForm" role="form" novalidate class="form-validation">
@@ -58,6 +58,6 @@
     </form>
 </div>
 
-@Html.Partial("~/Views/Shared/Modals/_ModalFooterWithSaveAndCancel.cshtml")
+@await Html.PartialAsync("~/Views/Shared/Modals/_ModalFooterWithSaveAndCancel.cshtml")
 
 <script src="~/view-resources/Views/Roles/_EditRoleModal.js" asp-append-version="true"></script>
