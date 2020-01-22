@@ -1,9 +1,8 @@
 class RoleModel {
-  name: string;
-  displayName: string;
+  name!: string;
+  displayName!: string;
   description?: any;
-  isStatic: boolean;
-  id: number;
+  id!: number;
 }
 
 export default RoleModel;

@@ -2,7 +2,6 @@ export interface Role {
   name: string;
   displayName: string;
   description?: any;
-  isStatic: boolean;
   id: number;
 }
 

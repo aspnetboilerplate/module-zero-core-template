@@ -3,7 +3,6 @@ export interface GetRoles {
   displayName: string;
   normalizedName: string;
   description: string;
-  isStatic: boolean;
-  permissions: string[];
+  grantedPermissions: string[];
   id: number;
 }

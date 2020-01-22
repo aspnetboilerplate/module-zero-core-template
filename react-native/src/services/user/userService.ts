@@ -1,10 +1,11 @@
-import { UpdateUserInput } from './dto/updateUserInput';
 import { ChangeLanguagaInput } from './dto/changeLanguageInput';
-import { EntityDto } from 'src/services/dto/entityDto';
-import http from '../httpService';
-import { GetAllUserOutput } from './dto/getAllUserOutput';
-import { PagedResultDto } from 'src/services/dto/pagedResultDto';
 import { CreateOrUpdateUserInput } from './dto/createOrUpdateUserInput';
+import { EntityDto } from '../../services/dto/entityDto';
+import { GetAllUserOutput } from './dto/getAllUserOutput';
+import { PagedResultDto } from '../../services/dto/pagedResultDto';
+import { PagedUserResultRequestDto } from "./dto/PagedUserResultRequestDto";
+import { UpdateUserInput } from './dto/updateUserInput';
+import http from '../httpService';
 
 class UserService {
   public async create(createUserInput: CreateOrUpdateUserInput) {
@@ -14,7 +15,7 @@ class UserService {
 
   public async update(updateUserInput: UpdateUserInput) {
     let result = await http.put('api/services/app/User/Update', updateUserInput);
-    return result.data;
+    return result.data.result;
   }
 
   public async delete(entityDto: EntityDto) {
@@ -37,7 +38,7 @@ class UserService {
     return result.data.result;
   }
 
-  public async getAll(pagedFilterAndSortedRequest: PagedFilterAndSortedRequest): Promise<PagedResultDto<GetAllUserOutput>> {
+    public async getAll(pagedFilterAndSortedRequest: PagedUserResultRequestDto): Promise<PagedResultDto<GetAllUserOutput>> {
     let result = await http.get('api/services/app/User/GetAll', { params: pagedFilterAndSortedRequest });
     return result.data.result;
   }
