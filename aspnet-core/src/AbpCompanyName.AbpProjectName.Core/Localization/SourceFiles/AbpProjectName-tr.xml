@@ -86,5 +86,6 @@
     <text name="UserDeleteWarningMessage">{0} kullanıcısı silinecektir.</text>
     <text name="RoleDeleteWarningMessage">{0} rolü silinecek ve atanmış kullanıcılardan kaldırılacaktır.</text>
     <text name="TenantDeleteWarningMessage">{0} müşterisi silinecektir.</text>
+    <text name="SearchWithThreeDot">Ara...</text>
   </texts>
 </localizationDictionary>

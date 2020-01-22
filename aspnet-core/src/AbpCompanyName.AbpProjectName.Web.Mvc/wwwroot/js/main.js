@@ -2,18 +2,6 @@
     //Notification handler
     abp.event.on('abp.notifications.received', function (userNotification) {
         abp.notifications.showUiNotifyForUserNotification(userNotification);
-
-        // TODO migrate to admin-lte below commented lines
-        //Desktop notification
-        //Push.create("AbpProjectName", {
-        //    body: userNotification.notification.data.message,
-        //    icon: abp.appPath + 'images/app-logo-small.png',
-        //    timeout: 6000,
-        //    onClick: function () {
-        //        window.focus();
-        //        this.close();
-        //    }
-        //});
     });
 
     //serializeFormToObject plugin for jQuery
@@ -131,13 +119,4 @@
         });
         $this[0].reset();
     };
-
-    //$(document).on('shown.bs.modal', '.modal', function () {
-    //    var $form = $(this).find('form');
-
-    //    if ($form && $form.length > 0) {
-    //        var $firstEl = $($form[0]).find('input[type=text]:first');
-    //        $firstEl.focus();
-    //    }
-    //});
 })(jQuery);
