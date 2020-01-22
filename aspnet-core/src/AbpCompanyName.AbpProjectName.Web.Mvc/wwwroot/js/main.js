@@ -2,6 +2,17 @@
     //Notification handler
     abp.event.on('abp.notifications.received', function (userNotification) {
         abp.notifications.showUiNotifyForUserNotification(userNotification);
+
+        //Desktop notification
+        Push.create("AbpProjectName", {
+            body: userNotification.notification.data.message,
+            icon: abp.appPath + 'img/logo.png',
+            timeout: 6000,
+            onClick: function () {
+                window.focus();
+                this.close();
+            }
+        });
     });
 
     //serializeFormToObject plugin for jQuery

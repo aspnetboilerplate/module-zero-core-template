@@ -40,7 +40,6 @@
     "inputFiles": [
       "wwwroot/libs/font-awesome/css/all.min.css",
       "wwwroot/libs/flag-icon/css/flag-icon.min.css",
-      "wwwroot/libs/bootstrap-select/css/bootstrap-select.css",
       "wwwroot/libs/animate.css/animate.css",
       "wwwroot/libs/icheck-bootstrap/icheck-bootstrap.css",
       "wwwroot/libs/toastr/toastr.css",
@@ -65,7 +64,6 @@
       "wwwroot/libs-ext/spin/jquery.spin.js",
       "wwwroot/libs/sweetalert/sweetalert.min.js",
       "wwwroot/libs/toastr/toastr.min.js",
-      "wwwroot/libs/bootstrap-select/js/bootstrap-select.js",
       "wwwroot/libs/push.js/push.js",
       "wwwroot/libs/moment/moment-with-locales.js",
       "wwwroot/libs/abp-web-resources/Abp/Framework/scripts/abp.js",

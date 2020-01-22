@@ -2,13 +2,66 @@
   "defaultProvider": "cdnjs",
   "version": "1.0",
   "libraries": [
+    //core libs start
+    {
+      "library": "jquery@3.4.1",
+      "destination": "wwwroot/libs/jquery",
+      "files": [
+        "jquery.js",
+        "jquery.min.js",
+        "jquery.min.map"
+      ]
+    },
+    //core libs end
+
+    //abp libs start
     {
       "library": "abp-web-resources@4.1.0",
       "provider": "jsdelivr",
       "destination": "wwwroot/libs/abp-web-resources"
     },
     {
-      "library": "admin-lte@3.0.0",
+      "library": "jquery.blockUI@2.70",
+      "destination": "wwwroot/libs/block-ui"
+    },
+    {
+      "library": "sweetalert@2.1.2",
+      "destination": "wwwroot/libs/sweetalert"
+    },
+    {
+      "library": "spin.js@2.3.2",
+      "destination": "wwwroot/libs/spin"
+    },
+    {
+      "library": "toastr.js@2.1.4",
+      "destination": "wwwroot/libs/toastr"
+    },
+    {
+      "library": "moment.js@2.24.0",
+      "destination": "wwwroot/libs/moment"
+    },
+    {
+      "library": "moment-timezone@0.5.23",
+      "destination": "wwwroot/libs/moment-timezone"
+    },
+    {
+      "library": "signalr.js@2.4.0",
+      "destination": "wwwroot/libs/signalr"
+    },
+    {
+      "library": "@aspnet/signalr@1.0.0",
+      "provider": "jsdelivr",
+      "destination": "wwwroot/libs/signalr",
+      "files": [
+        "dist/browser/signalr.js",
+        "dist/browser/signalr.js.map"
+      ]
+    },
+    //abp libs end
+
+    //admin-lte libs start
+    {
+      "library": "admin-lte@3.0.2",
       "provider": "jsdelivr",
       "destination": "wwwroot/libs/admin-lte",
       "files": [
@@ -34,29 +87,25 @@
       ]
     },
     {
-      "library": "twitter-bootstrap@4.3.1",
-      "destination": "wwwroot/libs/bootstrap"
-    },
-    {
-      "library": "jquery@3.4.1",
-      "destination": "wwwroot/libs/jquery",
+      "library": "bootstrap@4.3.1",
+      "provider": "jsdelivr",
+      "destination": "wwwroot/libs/bootstrap",
       "files": [
-        "jquery.js",
-        "jquery.min.js",
-        "jquery.min.map"
+        "dist/js/bootstrap.bundle.js",
+        "dist/js/bootstrap.bundle.min.js",
+        "dist/js/bootstrap.bundle.js.map",
+        "dist/js/bootstrap.bundle.min.js.map"
       ]
     },
     {
-      "library": "jquery-validate@1.19.1",
-      "destination": "wwwroot/libs/jquery-validate"
-    },
-    {
-      "library": "jquery-validation-unobtrusive@3.2.11",
-      "destination": "wwwroot/libs/jquery-validate"
-    },
-    {
-      "library": "font-awesome@5.11.2",
+      "library": "@fortawesome/fontawesome-free@5.11.2",
+      "provider": "jsdelivr",
       "destination": "wwwroot/libs/font-awesome"
+    },
+    {
+      "library": "flag-icon-css@3.4.5",
+      "provider": "jsdelivr",
+      "destination": "wwwroot/libs/flag-icon"
     },
     {
       "library": "icheck-bootstrap@3.0.1",
@@ -68,29 +117,23 @@
       ]
     },
     {
-      "library": "datatables@1.10.19",
+      "library": "datatables.net@1.10.20",
+      "provider": "jsdelivr",
+      "destination": "wwwroot/libs/datatables",
+      "files": [
+        "js/jquery.dataTables.js",
+        "js/jquery.dataTables.min.js"
+      ]
+    },
+    {
+      "library": "datatables.net-bs4@1.10.20",
+      "provider": "jsdelivr",
       "destination": "wwwroot/libs/datatables",
       "files": [
         "css/dataTables.bootstrap4.css",
         "css/dataTables.bootstrap4.min.css",
-        "images/sort_asc.png",
-        "images/sort_asc_disabled.png",
-        "images/sort_both.png",
-        "images/sort_desc.png",
-        "images/sort_desc_disabled.png",
-        "js/jquery.dataTables.js",
-        "js/jquery.dataTables.min.js",
         "js/dataTables.bootstrap4.js",
         "js/dataTables.bootstrap4.min.js"
-      ]
-    },
-    {
-      "library": "datatables.net-buttons@1.6.1",
-      "provider": "jsdelivr",
-      "destination": "wwwroot/libs/datatables",
-      "files": [
-        "js/dataTables.buttons.js",
-        "js/dataTables.buttons.min.js"
       ]
     },
     {
@@ -114,6 +157,15 @@
       ]
     },
     {
+      "library": "datatables.net-buttons@1.6.1",
+      "provider": "jsdelivr",
+      "destination": "wwwroot/libs/datatables",
+      "files": [
+        "js/dataTables.buttons.js",
+        "js/dataTables.buttons.min.js"
+      ]
+    },
+    {
       "library": "datatables.net-buttons-bs4@1.6.1",
       "provider": "jsdelivr",
       "destination": "wwwroot/libs/datatables",
@@ -125,43 +177,6 @@
       ]
     },
     {
-      "library": "jquery.blockUI@2.70",
-      "destination": "wwwroot/libs/block-ui"
-    },
-    {
-      "library": "sweetalert@2.1.2",
-      "destination": "wwwroot/libs/sweetalert"
-    },
-    {
-      "library": "spin.js@2.3.2",
-      "destination": "wwwroot/libs/spin"
-    },
-    {
-      "library": "toastr.js@2.1.4",
-      "destination": "wwwroot/libs/toastr"
-    },
-    {
-      "library": "moment.js@2.24.0",
-      "destination": "wwwroot/libs/moment"
-    },
-    {
-      "library": "signalr.js@2.4.0",
-      "destination": "wwwroot/libs/signalr"
-    },
-    {
-      "library": "@aspnet/signalr@1.0.0",
-      "provider": "jsdelivr",
-      "destination": "wwwroot/libs/signalr",
-      "files": [
-        "dist/browser/signalr.js",
-        "dist/browser/signalr.js.map"
-      ]
-    },
-    {
-      "library": "flag-icon-css@3.4.3",
-      "destination": "wwwroot/libs/flag-icon"
-    },
-    {
       "library": "chart.js@2.9.3",
       "provider": "jsdelivr",
       "destination": "wwwroot/libs/chartjs",
@@ -170,31 +185,25 @@
         "dist/Chart.js"
       ]
     },
+    //admin-lte libs end
+
+    //other libs start
+    {
+      "library": "jquery-validate@1.19.1",
+      "destination": "wwwroot/libs/jquery-validate"
+    },
+    {
+      "library": "jquery-validation-unobtrusive@3.2.11",
+      "destination": "wwwroot/libs/jquery-validate"
+    },
     {
       "library": "animate.css@3.7.0",
       "destination": "wwwroot/libs/animate.css"
     },
     {
-      "library": "bootstrap-select@1.13.9",
-      "destination": "wwwroot/libs/bootstrap-select",
-      "files": [
-        "css/bootstrap-select.css",
-        "css/bootstrap-select.css.map",
-        "js/bootstrap-select.js",
-        "js/bootstrap-select.js.map"
-      ]
-    },
-    {
-      "library": "jquery-countto@1.2.0",
-      "destination": "wwwroot/libs/jquery-countto"
-    },
-    {
-      "library": "moment-timezone@0.5.23",
-      "destination": "wwwroot/libs/moment-timezone"
-    },
-    {
       "library": "push.js@1.0.9",
       "destination": "wwwroot/libs/push.js"
     }
+    //other libs end
   ]
 }
