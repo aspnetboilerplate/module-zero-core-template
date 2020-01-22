@@ -13,17 +13,13 @@ namespace AbpCompanyName.AbpProjectName.Web.Host.Controllers
     {
         private readonly INotificationPublisher _notificationPublisher;
 
-        private readonly IAbpAntiForgeryManager _abpAntiForgeryManager;
-
-        public HomeController(INotificationPublisher notificationPublisher, IAbpAntiForgeryManager abpAntiForgeryManager)
+        public HomeController(INotificationPublisher notificationPublisher)
         {
             _notificationPublisher = notificationPublisher;
-            _abpAntiForgeryManager = abpAntiForgeryManager;
         }
 
         public IActionResult Index()
         {
-            _abpAntiForgeryManager.SetCookie(HttpContext);
             return Redirect("/swagger");
         }
 

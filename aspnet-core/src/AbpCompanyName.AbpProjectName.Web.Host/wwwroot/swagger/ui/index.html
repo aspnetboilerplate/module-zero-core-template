@@ -70,8 +70,21 @@
     <script src="swagger-ui-standalone-preset.js"></script>
     <script src="ui/abp.js"></script>
     <script src="ui/abp.swagger.js"></script>
+
     <script>
         window.onload = function () {
+            var authToken = abp.auth.getToken();
+            if (authToken) {
+                fetch("/AntiForgery/SetCookie",
+                    {
+                        headers: {
+                            "Authorization": 'Bearer ' + authToken
+                        }
+                    });
+            } else {
+                fetch("/AntiForgery/SetCookie");
+            }
+
             var configObject = JSON.parse('%(ConfigObject)');
 
             // Apply mandatory parameters
@@ -109,16 +122,12 @@
                                             lineHeight: "normal"
                                         },
                                         onClick: function () {
-                                            var authorizeButton = document.getElementById('authorize');
                                             if (abp.auth.getToken()) {
                                                 abp.swagger.logout();
-                                                authorizeButton.innerText = getAuthorizeButtonText();
-                                                authorizeButton.className = 'btn ' + getAuthorizeButtonCssClass();
+                                                location.reload();
                                             } else {
                                                 abp.swagger.openAuthDialog(function () {
-                                                    authorizeButton.innerText = getAuthorizeButtonText();
-                                                    authorizeButton.className = 'btn ' + getAuthorizeButtonCssClass();
-                                                    abp.swagger.closeAuthDialog();
+                                                    location.reload();
                                                 });
                                             }
                                         }

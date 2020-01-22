@@ -85,7 +85,7 @@ export const appRouters: any = [
     component: LoadableComponent(() => import('../../components/Logout')),
   },
   {
-    path: '/exception',
+    path: '/exception?:type',
     permission: '',
     title: 'exception',
     name: 'exception',
