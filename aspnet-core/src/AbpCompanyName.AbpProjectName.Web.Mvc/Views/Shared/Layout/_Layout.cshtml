@@ -101,7 +101,22 @@
 
     @if (CultureInfo.CurrentUICulture.Name != "en")
     {
-        <script src="~/libs/jquery-validate/localization/messages_@Html.Raw(CultureInfo.CurrentUICulture.Name.Replace("-", "_") + ".js")" asp-append-version="true"></script>
+        var normalizedCurrentUICultureName = CultureInfo.CurrentUICulture.Name.Replace("-", "_");
+        var localizationFileNameWithExtension = "messages_";
+        switch (normalizedCurrentUICultureName)
+        {
+            case "zh_Hans":
+                localizationFileNameWithExtension += "zh";
+                break;
+            case "es_MX":
+                localizationFileNameWithExtension += "es";
+                break;
+            default:
+                localizationFileNameWithExtension += normalizedCurrentUICultureName;
+                break;
+        }
+        localizationFileNameWithExtension += ".min.js";
+        <script src="~/libs/jquery-validate/localization/@localizationFileNameWithExtension" asp-append-version="true"></script>
     }
 
     <script type="text/javascript">
