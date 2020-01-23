@@ -103,11 +103,6 @@
       "destination": "wwwroot/libs/font-awesome"
     },
     {
-      "library": "flag-icon-css@3.4.5",
-      "provider": "jsdelivr",
-      "destination": "wwwroot/libs/flag-icon"
-    },
-    {
       "library": "icheck-bootstrap@3.0.1",
       "provider": "jsdelivr",
       "destination": "wwwroot/libs/icheck-bootstrap",

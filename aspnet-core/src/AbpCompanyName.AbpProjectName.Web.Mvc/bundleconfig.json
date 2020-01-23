@@ -3,7 +3,7 @@
     "outputFileName": "wwwroot/view-resources/Views/_Bundles/account-layout.min.css",
     "inputFiles": [
       "wwwroot/libs/font-awesome/css/all.css",
-      "wwwroot/libs/flag-icon/css/flag-icon.css",
+      "wwwroot/libs-ext/famfamfam-flags/dist/sprite/famfamfam-flags.css",
       "wwwroot/libs/icheck-bootstrap/icheck-bootstrap.css",
       "wwwroot/libs/toastr/toastr.css",
       "wwwroot/libs/animate.css/animate.css",
@@ -39,7 +39,7 @@
     "outputFileName": "wwwroot/view-resources/Views/_Bundles/shared-layout.min.css",
     "inputFiles": [
       "wwwroot/libs/font-awesome/css/all.min.css",
-      "wwwroot/libs/flag-icon/css/flag-icon.min.css",
+      "wwwroot/libs-ext/famfamfam-flags/dist/sprite/famfamfam-flags.min.css",
       "wwwroot/libs/animate.css/animate.css",
       "wwwroot/libs/icheck-bootstrap/icheck-bootstrap.css",
       "wwwroot/libs/toastr/toastr.css",
