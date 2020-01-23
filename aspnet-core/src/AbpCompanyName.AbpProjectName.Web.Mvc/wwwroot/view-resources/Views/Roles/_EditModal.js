@@ -25,7 +25,7 @@
             abp.notify.info(l('SavedSuccessfully'));
             abp.event.trigger('role.edited', role);
         }).always(function () {
-            abp.ui.clearBusy(_$modal);
+            abp.ui.clearBusy(_$form);
         });
     }
 

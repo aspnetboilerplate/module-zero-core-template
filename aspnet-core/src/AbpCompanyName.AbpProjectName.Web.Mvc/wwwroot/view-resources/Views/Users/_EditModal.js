@@ -25,7 +25,7 @@
             abp.notify.info(l('SavedSuccessfully'));
             abp.event.trigger('user.edited', user);
         }).always(function () {
-            abp.ui.clearBusy(_$modal);
+            abp.ui.clearBusy(_$form);
         });
     }
 

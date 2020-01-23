@@ -20,7 +20,7 @@
                     recordsFiltered: result.totalCount,
                     data: result.items
                 });
-            }).done(() => {
+            }).always(function () {
                 abp.ui.clearBusy(_$table);
             });
         },
