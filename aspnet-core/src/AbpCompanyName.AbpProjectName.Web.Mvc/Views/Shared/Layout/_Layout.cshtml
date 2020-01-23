@@ -3,7 +3,6 @@
 @using Abp.Web.Mvc.Alerts
 @using Abp.Web.Security.AntiForgery
 @using AbpCompanyName.AbpProjectName.Web.Resources
-@using AbpCompanyName.AbpProjectName.Web.Views.Shared.Components.ControlSidebar
 @inject AbpCompanyName.AbpProjectName.Timing.AppTimes AppTimes
 @inject IAbpAntiForgeryManager AbpAntiForgeryManager
 @inject IMultiTenancyConfig MultiTenancyConfig
@@ -56,7 +55,6 @@
             @await Html.PartialAsync("_Layout.Alerts.cshtml")
             @RenderBody()
         </div>
-        @await Component.InvokeAsync(typeof(ControlSidebarViewComponent))
         @await Html.PartialAsync("_Footer.cshtml")
     </div>
     <script type="text/javascript">
