@@ -105,23 +105,16 @@ namespace AbpCompanyName.AbpProjectName.Web.Startup
                             )
                         ).AddItem(
                             new MenuItemDefinition(
-                                "AspNetZeroDescription",
-                                new FixedLocalizableString("Description"),
-                                url: "https://aspnetzero.com/?ref=abptmpl#description",
-                                icon: "far fa-dot-circle"
-                            )
-                        ).AddItem(
-                            new MenuItemDefinition(
                                 "AspNetZeroFeatures",
                                 new FixedLocalizableString("Features"),
-                                url: "https://aspnetzero.com/?ref=abptmpl#features",
+                                url: "https://aspnetzero.com/Features?ref=abptmpl",
                                 icon: "far fa-dot-circle"
                             )
                         ).AddItem(
                             new MenuItemDefinition(
                                 "AspNetZeroPricing",
                                 new FixedLocalizableString("Pricing"),
-                                url: "https://aspnetzero.com/?ref=abptmpl#pricing",
+                                url: "https://aspnetzero.com/Pricing?ref=abptmpl#pricing",
                                 icon: "far fa-dot-circle"
                             )
                         ).AddItem(
