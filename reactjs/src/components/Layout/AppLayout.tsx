@@ -2,7 +2,7 @@ import './AppLayout.less';
 
 import * as React from 'react';
 
-import { Redirect, Switch } from 'react-router-dom';
+import { Redirect, Switch, Route } from 'react-router-dom';
 
 import DocumentTitle from 'react-document-title';
 import Footer from '../../components/Footer';
@@ -12,6 +12,7 @@ import ProtectedRoute from '../../components/Router/ProtectedRoute';
 import SiderMenu from '../../components/SiderMenu';
 import { appRouters } from '../Router/router.config';
 import utils from '../../utils/utils';
+import NotFoundRoute from '../Router/NotFoundRoute';
 
 const { Content } = Layout;
 
@@ -48,13 +49,18 @@ class AppLayout extends React.Component<any> {
           </Layout.Header>
           <Content style={{ margin: 16 }}>
             <Switch>
+              {this.props.location.pathname === '/' && <Redirect from="/" to="/dashboard" />}
               {appRouters
                 .filter((item: any) => !item.isLayout)
                 .map((route: any, index: any) => (
-                  <ProtectedRoute key={index} path={route.path} component={route.component} permission={route.permission} />
+                  <Route
+                    exact
+                    key={index}
+                    path={route.path}
+                    render={props => <ProtectedRoute component={route.component} permission={route.permission} />}
+                  />
                 ))}
-
-              <Redirect from="/" to="/dashboard" />
+              {pathname !== '/' && <NotFoundRoute />}
             </Switch>
           </Content>
           <Layout.Footer style={{ textAlign: 'center' }}>
