@@ -78,7 +78,7 @@
                         '   <button type="button" class="btn bg-secondary dropdown-toggle dropdown-icon" data-toggle="dropdown">',
                         '   </button>',
                         '   <div class="dropdown-menu" role="menu">',
-                        `     <a href="#" class="dropdown-item delete-user" data-user-id="${row.id}" data-user-name="${row.name}">`,
+                        `     <a href="javascript:;" class="dropdown-item delete-user" data-user-id="${row.id}" data-user-name="${row.name}">`,
                         `         <i class="fas fa-trash"></i> ${l('Delete')}`,
                         '     </a>',
                         '   </div>',

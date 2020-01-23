@@ -73,7 +73,7 @@
                         '   <button type="button" class="btn bg-secondary dropdown-toggle dropdown-icon" data-toggle="dropdown">',
                         '   </button>',
                         '   <div class="dropdown-menu" role="menu">',
-                        `     <a href="#" class="dropdown-item delete-tenant" data-tenant-id="${row.id}" data-tenancy-name="${row.tenancyName}">`,
+                        `     <a href="javascript:;" class="dropdown-item delete-tenant" data-tenant-id="${row.id}" data-tenancy-name="${row.tenancyName}">`,
                         `         <i class="fas fa-trash"></i> ${l('Delete')}`,
                         '     </a>',
                         '   </div>',
