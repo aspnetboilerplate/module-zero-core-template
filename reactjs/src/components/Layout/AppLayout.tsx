@@ -49,7 +49,7 @@ class AppLayout extends React.Component<any> {
           </Layout.Header>
           <Content style={{ margin: 16 }}>
             <Switch>
-              {this.props.location.pathname === '/' && <Redirect from="/" to="/dashboard" />}
+              {pathname === '/' && <Redirect from="/" to="/dashboard" />}
               {appRouters
                 .filter((item: any) => !item.isLayout)
                 .map((route: any, index: any) => (
