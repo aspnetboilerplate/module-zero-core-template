@@ -1,3 +1,3 @@
-interface GetRoleAsyncInput {
+export interface GetRoleAsyncInput {
   permission: string;
 }

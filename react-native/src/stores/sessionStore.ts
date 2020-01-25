@@ -1,6 +1,7 @@
-import sessionService from 'src/services/session/sessionService';
 import { action, observable } from 'mobx';
-import { GetCurrentLoginInformations } from 'src/services/session/dto/getCurrentLoginInformations';
+
+import { GetCurrentLoginInformations } from '../services/session/dto/getCurrentLoginInformations';
+import sessionService from '../services/session/sessionService';
 
 class SessionStore {
   @observable currentLogin: GetCurrentLoginInformations = new GetCurrentLoginInformations();

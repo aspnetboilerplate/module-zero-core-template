@@ -1,34 +1,7 @@
 {
-  "compilerOptions": {
-    "baseUrl": ".",
-    "emitDecoratorMetadata": true,
-    "experimentalDecorators": true,
-    "target": "es5",
-    "module": "esnext",
-    "moduleResolution": "node",
-    "jsx": "react",
-    "outDir": "artifacts",
-    "rootDir": "src",
-    "allowSyntheticDefaultImports": true,
-    "noImplicitAny": true,
-    "preserveConstEnums": true,
-    "allowJs": false,
-    "sourceMap": true,
-    "noImplicitReturns": true,
-    "noImplicitThis": true,
-    "noUnusedParameters": true,
-    "noUnusedLocals": true,
-    "importHelpers": false,
-    "strictNullChecks": true,
-    "suppressImplicitAnyIndexErrors": true,
-    "forceConsistentCasingInFileNames": true,
-    "lib": ["es6", "dom"],
-  },
-  "exclude": [
-    "android",
-    "App.tsx",
-    "ios",
-    "build",
-    "node_modules"
-  ]
-}
+    "compilerOptions": {
+      "experimentalDecorators": true,
+      "jsx": "react",
+      "esModuleInterop": true
+    }
+  }
