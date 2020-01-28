@@ -52,7 +52,7 @@
         @await Html.PartialAsync("_Header.cshtml")
         @await Html.PartialAsync("_SideBar.cshtml")
         <div class="content-wrapper">
-            @await Html.PartialAsync("_Layout.Alerts.cshtml")
+            @await Html.PartialAsync("_Alerts.cshtml")
             @RenderBody()
         </div>
         @await Html.PartialAsync("_Footer.cshtml")
@@ -90,7 +90,6 @@
         <script src="~/libs/datatables/js/buttons.bootstrap4.js" asp-append-version="true"></script>
         <script src="~/js/abp.dataTable.js" asp-append-version="true"></script>
         <script src="~/js/main.js" asp-append-version="true"></script>
-        <script src="~/view-resources/Views/Shared/_Layout.js" asp-append-version="true"></script>
     </environment>
 
     <environment names="Staging,Production">

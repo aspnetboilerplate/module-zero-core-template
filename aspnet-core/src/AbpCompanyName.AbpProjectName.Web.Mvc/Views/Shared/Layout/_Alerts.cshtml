@@ -1,0 +1,45 @@
+﻿@using Abp.Web.Mvc.Alerts
+
+@inject IAlertManager AlertManager
+
+@if (AlertManager.Alerts.Any())
+{
+    <div class="container-fluid">
+        @foreach (var alert in AlertManager.Alerts)
+        {
+            var alertClass = "alert-";
+            var iconClass = "fa-";
+            switch (alert.Type)
+            {
+                case AlertType.Success:
+                    alertClass += "success";
+                    iconClass += "check";
+                    break;
+                case AlertType.Danger:
+                    alertClass += "danger";
+                    iconClass += "ban";
+                    break;
+                case AlertType.Warning:
+                    alertClass += "warning";
+                    iconClass += "exclamation-triangle";
+                    break;
+                case AlertType.Info:
+                    alertClass += "info";
+                    iconClass += "info";
+                    break;
+            }
+
+            <div class="alert @alertClass @(alert.Dismissible ? "alert-dismisable" : "") mt-3 mr-1 ml-1">
+                @if (alert.Dismissible)
+                {
+                    <button type="button" class="close" data-dismiss="alert" aria-hidden="true">×</button>
+                }
+                <h5>
+                    <i class="icon fas @iconClass"></i>
+                    @alert.Title
+                </h5>
+                @alert.Text
+            </div>
+        }
+    </div>
+}
