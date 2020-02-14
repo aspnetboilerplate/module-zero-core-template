@@ -60,18 +60,12 @@
                 defaultContent: '',
                 render: (data, type, row, meta) => {
                     return [
-                        '<div class="btn-group">',
-                        `   <button type="button" class="btn bg-secondary edit-role" data-role-id="${row.id}" data-toggle="modal" data-target="#RoleEditModal">`,
+                        `   <button type="button" class="btn btn-sm bg-secondary edit-role" data-role-id="${row.id}" data-toggle="modal" data-target="#RoleEditModal">`,
                         `       <i class="fas fa-pencil-alt"></i> ${l('Edit')}`,
                         '   </button>',
-                        '   <button type="button" class="btn bg-secondary dropdown-toggle dropdown-icon" data-toggle="dropdown">',
+                        `   <button type="button" class="btn btn-sm bg-danger edit-user delete-role" data-role-id="${row.id}" data-role-name="${row.name}">`,
+                        `       <i class="fas fa-trash"></i> ${l('Delete')}`,
                         '   </button>',
-                        '   <div class="dropdown-menu" role="menu">',
-                        `     <a href="javascript:;" class="dropdown-item delete-role" data-role-id="${row.id}" data-role-name="${row.name}">`,
-                        `         <i class="fas fa-trash"></i> ${l('Delete')}`,
-                        '     </a>',
-                        '   </div>',
-                        '</div>'
                     ].join('');
                 }
             }

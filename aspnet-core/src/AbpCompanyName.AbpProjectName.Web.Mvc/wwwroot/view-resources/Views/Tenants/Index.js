@@ -66,18 +66,12 @@
                 defaultContent: '',
                 render: (data, type, row, meta) => {
                     return [
-                        '<div class="btn-group">',
-                        `   <button type="button" class="btn bg-secondary edit-tenant" data-tenant-id="${row.id}" data-toggle="modal" data-target="#TenantEditModal">`,
+                        `   <button type="button" class="btn btn-sm bg-secondary edit-tenant" data-tenant-id="${row.id}" data-toggle="modal" data-target="#TenantEditModal">`,
                         `       <i class="fas fa-pencil-alt"></i> ${l('Edit')}`,
                         '   </button>',
-                        '   <button type="button" class="btn bg-secondary dropdown-toggle dropdown-icon" data-toggle="dropdown">',
-                        '   </button>',
-                        '   <div class="dropdown-menu" role="menu">',
-                        `     <a href="javascript:;" class="dropdown-item delete-tenant" data-tenant-id="${row.id}" data-tenancy-name="${row.tenancyName}">`,
-                        `         <i class="fas fa-trash"></i> ${l('Delete')}`,
-                        '     </a>',
-                        '   </div>',
-                        '</div>'
+                        `   <button type="button" class="btn btn-sm bg-danger edit-user delete-tenant" data-tenant-id="${row.id}" data-tenancy-name="${row.name}">`,
+                        `       <i class="fas fa-trash"></i> ${l('Delete')}`,
+                        '   </button>'
                     ].join('');
                 }
             }
