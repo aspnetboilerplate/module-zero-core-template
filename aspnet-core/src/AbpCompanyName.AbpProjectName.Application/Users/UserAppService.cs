@@ -222,7 +222,6 @@ namespace AbpCompanyName.AbpProjectName.Users
 
             return true;
         }
-
     }
 }
 

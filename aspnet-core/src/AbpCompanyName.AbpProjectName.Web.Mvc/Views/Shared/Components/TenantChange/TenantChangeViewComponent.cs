@@ -1,8 +1,7 @@
 ﻿using System.Threading.Tasks;
-using Microsoft.AspNetCore.Mvc;
-using Abp.AutoMapper;
 using Abp.ObjectMapping;
 using AbpCompanyName.AbpProjectName.Sessions;
+using Microsoft.AspNetCore.Mvc;
 
 namespace AbpCompanyName.AbpProjectName.Web.Views.Shared.Components.TenantChange
 {
@@ -11,8 +10,7 @@ namespace AbpCompanyName.AbpProjectName.Web.Views.Shared.Components.TenantChange
         private readonly ISessionAppService _sessionAppService;
         private readonly IObjectMapper _objectMapper;
 
-        public TenantChangeViewComponent(ISessionAppService sessionAppService, 
-            IObjectMapper objectMapper)
+        public TenantChangeViewComponent(ISessionAppService sessionAppService, IObjectMapper objectMapper)
         {
             _sessionAppService = sessionAppService;
             _objectMapper = objectMapper;

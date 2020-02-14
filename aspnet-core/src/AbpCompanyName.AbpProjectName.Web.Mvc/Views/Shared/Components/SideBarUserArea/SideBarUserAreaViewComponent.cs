@@ -1,7 +1,7 @@
 ﻿using System.Threading.Tasks;
-using Microsoft.AspNetCore.Mvc;
 using Abp.Configuration.Startup;
 using AbpCompanyName.AbpProjectName.Sessions;
+using Microsoft.AspNetCore.Mvc;
 
 namespace AbpCompanyName.AbpProjectName.Web.Views.Shared.Components.SideBarUserArea
 {
@@ -10,7 +10,8 @@ namespace AbpCompanyName.AbpProjectName.Web.Views.Shared.Components.SideBarUserA
         private readonly ISessionAppService _sessionAppService;
         private readonly IMultiTenancyConfig _multiTenancyConfig;
 
-        public SideBarUserAreaViewComponent(ISessionAppService sessionAppService,
+        public SideBarUserAreaViewComponent(
+            ISessionAppService sessionAppService,
             IMultiTenancyConfig multiTenancyConfig)
         {
             _sessionAppService = sessionAppService;

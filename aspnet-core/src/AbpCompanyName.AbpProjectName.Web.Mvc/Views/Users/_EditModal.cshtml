@@ -1,0 +1,69 @@
+﻿@using Abp.Authorization.Users
+@using AbpCompanyName.AbpProjectName.Web.Models.Common.Modals
+@using AbpCompanyName.AbpProjectName.Web.Models.Users
+@model EditUserModalViewModel
+@{
+    Layout = null;
+}
+@await Html.PartialAsync("~/Views/Shared/Modals/_ModalHeader.cshtml", new ModalHeaderViewModel(L("EditUser")))
+<form name="UserEditForm" role="form" class="form-horizontal">
+    <input type="hidden" name="Id" value="@Model.User.Id" />
+    <div class="modal-body">
+        <ul class="nav nav-tabs" role="tablist">
+            <li class="nav-item">
+                <a class="nav-link active" data-toggle="tab" role="tab" href="#edit-user-details">@L("UserDetails")</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" data-toggle="tab" role="tab" href="#edit-user-roles">@L("UserRoles")</a>
+            </li>
+        </ul>
+        <div class="tab-content mt-4">
+            <div role="tabpanel" class="tab-pane container animated fadeIn active" id="edit-user-details">
+                <div class="form-group row required">
+                    <label class="col-md-3 col-form-label" for="username">@L("UserName")</label>
+                    <div class="col-md-9">
+                        <input id="username" type="text" class="form-control" name="UserName" value="@Model.User.UserName" required maxlength="@AbpUserBase.MaxUserNameLength" minlength="2">
+                    </div>
+                </div>
+                <div class="form-group row required">
+                    <label class="col-md-3 col-form-label" for="name">@L("Name")</label>
+                    <div class="col-md-9">
+                        <input id="name" type="text" class="form-control" name="Name" value="@Model.User.Name" required maxlength="@AbpUserBase.MaxNameLength">
+                    </div>
+                </div>
+                <div class="form-group row required">
+                    <label class="col-md-3 col-form-label" for="surname">@L("Surname")</label>
+                    <div class="col-md-9">
+                        <input id="surname" type="text" class="form-control" name="Surname" value="@Model.User.Surname" required maxlength="@AbpUserBase.MaxSurnameLength">
+                    </div>
+                </div>
+                <div class="form-group row required">
+                    <label class="col-md-3 col-form-label" for="email">@L("EmailAddress")</label>
+                    <div class="col-md-9">
+                        <input id="email" type="email" class="form-control" name="EmailAddress" value="@Model.User.EmailAddress" required maxlength="@AbpUserBase.MaxEmailAddressLength">
+                    </div>
+                </div>
+                <div class="form-group row">
+                    <label class="col-md-3 col-form-label" for="IsActive">@L("IsActive")</label>
+                    <div class="col-md-9">
+                        <input id="IsActive" type="checkbox" name="IsActive" value="true" @(Model.User.IsActive ? "checked" : "") />
+                    </div>
+                </div>
+            </div>
+            <div role="tabpanel" class="tab-pane container animated fadeIn" id="edit-user-roles">
+                <div class="row">
+                    @foreach (var role in Model.Roles)
+                    {
+                        <div class="col-md-6">
+                            <input type="checkbox" name="role" value="@role.NormalizedName" title="@role.Description" class="filled-in" id="@($"role{role.Id}")" @(Model.UserIsInRole(role) ? "checked" : "") />
+                            <label for="@($"role{role.Id}")" title="@role.DisplayName">@role.Name</label>
+                        </div>
+                    }
+                </div>
+            </div>
+        </div>
+    </div>
+    @await Html.PartialAsync("~/Views/Shared/Modals/_ModalFooterWithSaveAndCancel.cshtml")
+</form>
+
+<script src="~/view-resources/Views/Users/_EditModal.js" asp-append-version="true"></script>

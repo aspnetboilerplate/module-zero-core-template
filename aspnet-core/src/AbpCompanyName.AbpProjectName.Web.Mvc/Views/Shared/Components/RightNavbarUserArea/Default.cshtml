@@ -1,0 +1,12 @@
+﻿@model AbpCompanyName.AbpProjectName.Web.Views.Shared.Components.RightNavbarUserArea.RightNavbarUserAreaViewModel
+<li class="nav-item dropdown nav-user-menu">
+    <a href="javascript:void(0);" class="nav-link" data-toggle="dropdown" role="button">
+        <img class="user-image img-circle elevation-2" src="~/libs/admin-lte/dist/img/avatar5.png" alt="User Image">
+    </a>
+    <div class="dropdown-menu dropdown-menu-right">
+        <a class="dropdown-item" asp-controller="Account" asp-action="Logout">
+            <i class="fas fa-sign-out-alt"></i> @L("Logout")
+        </a>
+    </div>
+</li>
+

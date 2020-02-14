@@ -1,0 +1,6 @@
+﻿@using AbpCompanyName.AbpProjectName.Web.Views.Shared.Components.RightNavbarLanguageSwitch
+@using AbpCompanyName.AbpProjectName.Web.Views.Shared.Components.RightNavbarUserArea
+<ul class="navbar-nav ml-auto">
+    @await Component.InvokeAsync(typeof(RightNavbarLanguageSwitchViewComponent))
+    @await Component.InvokeAsync(typeof(RightNavbarUserAreaViewComponent))
+</ul>

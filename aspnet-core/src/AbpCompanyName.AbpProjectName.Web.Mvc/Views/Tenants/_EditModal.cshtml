@@ -1,0 +1,33 @@
+﻿@using AbpCompanyName.AbpProjectName.MultiTenancy.Dto
+@using AbpCompanyName.AbpProjectName.Web.Models.Common.Modals
+@model TenantDto
+@{
+    Layout = null;
+}
+@await Html.PartialAsync("~/Views/Shared/Modals/_ModalHeader.cshtml", new ModalHeaderViewModel(L("EditTenant")))
+<form name="TenantEditForm" role="form" class="form-horizontal">
+    <input type="hidden" name="Id" value="@Model.Id" />
+    <div class="modal-body">
+        <div class="form-group row required">
+            <label class="col-md-3 col-form-label" for="tenancy-name">@L("TenancyName")</label>
+            <div class="col-md-9">
+                <input id="tenancy-name" type="text" class="form-control" name="TenancyName" value="@Model.TenancyName" required maxlength="64" minlength="2">
+            </div>
+        </div>
+        <div class="form-group row required">
+            <label class="col-md-3 col-form-label" for="name">@L("Name")</label>
+            <div class="col-md-9">
+                <input id="name" type="text" class="form-control" name="Name" value="@Model.Name" required maxlength="128">
+            </div>
+        </div>
+        <div class="form-group row">
+            <label class="col-md-3 col-form-label" for="isactive">@L("IsActive")</label>
+            <div class="col-md-9">
+                <input id="isactive" type="checkbox" name="IsActive" value="true" @(Model.IsActive ? "checked" : "") />
+            </div>
+        </div>
+    </div>
+    @await Html.PartialAsync("~/Views/Shared/Modals/_ModalFooterWithSaveAndCancel.cshtml")
+</form>
+
+<script src="~/view-resources/Views/Tenants/_EditModal.js" asp-append-version="true"></script>

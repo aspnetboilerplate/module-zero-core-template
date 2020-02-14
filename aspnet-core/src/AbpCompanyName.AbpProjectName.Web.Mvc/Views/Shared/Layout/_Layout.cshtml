@@ -1,0 +1,134 @@
+﻿@using System.Globalization
+@using Abp.Configuration.Startup
+@using Abp.Web.Mvc.Alerts
+@using Abp.Web.Security.AntiForgery
+@using AbpCompanyName.AbpProjectName.Web.Resources
+@inject AbpCompanyName.AbpProjectName.Timing.AppTimes AppTimes
+@inject IAbpAntiForgeryManager AbpAntiForgeryManager
+@inject IMultiTenancyConfig MultiTenancyConfig
+@inject IWebResourceManager WebResourceManager
+@inject IAlertManager AlertManager
+@inject ILanguageManager LanguageManager
+@{
+    AbpAntiForgeryManager.SetCookie(Context);
+
+    var pageTitle = !string.IsNullOrWhiteSpace(ViewBag.Title) ? ViewBag.Title + " / " : "";
+    pageTitle += "AbpProjectName";
+}
+<!DOCTYPE html>
+<html lang="@LanguageManager.CurrentLanguage.Name">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta http-equiv="x-ua-compatible" content="ie=edge">
+
+    <title>@pageTitle</title>
+
+    <link rel="shortcut icon" href="~/img/favicon.ico">
+    <link href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,400i,700" rel="stylesheet">
+
+    <environment names="Development">
+        <link href="~/libs/font-awesome/css/all.min.css" rel="stylesheet" asp-append-version="true" />
+        <link href="~/libs-ext/famfamfam-flags/dist/sprite/famfamfam-flags.min.css" rel="stylesheet" asp-append-version="true" />
+        <link href="~/libs/animate.css/animate.css" rel="stylesheet" asp-append-version="true" />
+        <link href="~/libs/icheck-bootstrap/icheck-bootstrap.css" rel="stylesheet" asp-append-version="true" />
+        <link href="~/libs/toastr/toastr.css" rel="stylesheet" asp-append-version="true" />
+        <link href="~/libs/admin-lte/dist/css/adminlte.min.css" rel="stylesheet" asp-append-version="true" />
+        <link href="~/libs/datatables/css/dataTables.bootstrap4.min.css" rel="stylesheet" asp-append-version="true" />
+        <link href="~/libs/datatables/css/responsive.bootstrap4.min.css" rel="stylesheet" asp-append-version="true" />
+        <link href="~/libs/datatables/css/buttons.bootstrap4.min.css" rel="stylesheet" asp-append-version="true" />
+        <link href="~/css/style.css" rel="stylesheet" asp-append-version="true" />
+        <link href="~/view-resources/Views/Shared/_Layout.css" rel="stylesheet" asp-append-version="true" />
+    </environment>
+
+    <environment names="Staging,Production">
+        <link href="~/view-resources/Views/_Bundles/shared-layout.min.css" rel="stylesheet" asp-append-version="true" />
+    </environment>
+
+    @RenderSection("styles", required: false)
+</head>
+<body class="hold-transition sidebar-mini">
+    <div class="wrapper">
+        @await Html.PartialAsync("_Header.cshtml")
+        @await Html.PartialAsync("_SideBar.cshtml")
+        <div class="content-wrapper">
+            @await Html.PartialAsync("_Alerts.cshtml")
+            @RenderBody()
+        </div>
+        @await Html.PartialAsync("_Footer.cshtml")
+    </div>
+    <script type="text/javascript">
+        // This is used to get the application's root path from javascript.
+        // It's useful if you're running application in a virtual directory under IIS.
+        var abp = abp || {};
+        abp.appPath = '@ApplicationPath';
+    </script>
+    <environment names="Development">
+        <script src="~/libs/jquery/jquery.js" asp-append-version="true"></script>
+        <script src="~/libs/bootstrap/dist/js/bootstrap.bundle.js" asp-append-version="true"></script>
+        <script src="~/libs/admin-lte/dist/js/adminlte.js" asp-append-version="true"></script>
+        <script src="~/libs/jquery-validate/jquery.validate.js" asp-append-version="true"></script>
+        <script src="~/libs/jquery-validate/jquery.validate.unobtrusive.js" asp-append-version="true"></script>
+        <script src="~/libs/block-ui/jquery.blockUI.js" asp-append-version="true"></script>
+        <script src="~/libs/spin/spin.js" asp-append-version="true"></script>
+        <script src="~/libs-ext/spin/jquery.spin.js" asp-append-version="true"></script>
+        <script src="~/libs/sweetalert/sweetalert.min.js" asp-append-version="true"></script>
+        <script src="~/libs/toastr/toastr.min.js" asp-append-version="true"></script>
+        <script src="~/libs/push.js/push.js" asp-append-version="true"></script>
+        <script src="~/libs/moment/moment-with-locales.js" asp-append-version="true"></script>
+        <script src="~/libs/abp-web-resources/Abp/Framework/scripts/abp.js" asp-append-version="true"></script>
+        <script src="~/libs/abp-web-resources/Abp/Framework/scripts/libs/abp.jquery.js" asp-append-version="true"></script>
+        <script src="~/libs/abp-web-resources/Abp/Framework/scripts/libs/abp.toastr.js" asp-append-version="true"></script>
+        <script src="~/libs/abp-web-resources/Abp/Framework/scripts/libs/abp.blockUI.js" asp-append-version="true"></script>
+        <script src="~/libs/abp-web-resources/Abp/Framework/scripts/libs/abp.spin.js" asp-append-version="true"></script>
+        <script src="~/libs/abp-web-resources/Abp/Framework/scripts/libs/abp.sweet-alert.js" asp-append-version="true"></script>
+        <script src="~/libs/datatables/js/jquery.dataTables.min.js" asp-append-version="true"></script>
+        <script src="~/libs/datatables/js/dataTables.bootstrap4.min.js" asp-append-version="true"></script>
+        <script src="~/libs/datatables/js/dataTables.responsive.min.js" asp-append-version="true"></script>
+        <script src="~/libs/datatables/js/responsive.bootstrap4.min.js" asp-append-version="true"></script>
+        <script src="~/libs/datatables/js/dataTables.buttons.js" asp-append-version="true"></script>
+        <script src="~/libs/datatables/js/buttons.bootstrap4.js" asp-append-version="true"></script>
+        <script src="~/js/abp.dataTable.js" asp-append-version="true"></script>
+        <script src="~/js/main.js" asp-append-version="true"></script>
+    </environment>
+
+    <environment names="Staging,Production">
+        <script src="~/view-resources/Views/_Bundles/shared-layout.min.js" asp-append-version="true"></script>
+    </environment>
+
+    @if (CultureInfo.CurrentUICulture.Name != "en")
+    {
+        var normalizedCurrentUICultureName = CultureInfo.CurrentUICulture.Name.Replace("-", "_");
+        var localizationFileNameWithExtension = "messages_";
+        switch (normalizedCurrentUICultureName)
+        {
+            case "zh_Hans":
+                localizationFileNameWithExtension += "zh";
+                break;
+            case "es_MX":
+                localizationFileNameWithExtension += "es";
+                break;
+            default:
+                localizationFileNameWithExtension += normalizedCurrentUICultureName;
+                break;
+        }
+        localizationFileNameWithExtension += ".min.js";
+        <script src="~/libs/jquery-validate/localization/@localizationFileNameWithExtension" asp-append-version="true"></script>
+    }
+
+    <script type="text/javascript">
+        // Localizing momentjs
+        moment.locale('@CultureInfo.CurrentUICulture.Name');
+    </script>
+
+    <!-- Dynamic scripts of ABP system (They are created on runtime and can not be bundled) -->
+    <script src="~/AbpServiceProxies/GetAll?v=@(AppTimes.StartupTime.Ticks)" type="text/javascript"></script>
+    <script src="~/AbpScripts/GetScripts?v=@(AppTimes.StartupTime.Ticks)" type="text/javascript"></script>
+
+    <script src="~/libs/signalr/dist/browser/signalr.js" asp-append-version="true"></script>
+    <script src="~/libs/abp-web-resources/Abp/Framework/scripts/libs/abp.signalr-client.js" asp-append-version="true"></script>
+
+    @WebResourceManager.RenderScripts()
+    @RenderSection("scripts", required: false)
+</body>
+</html>

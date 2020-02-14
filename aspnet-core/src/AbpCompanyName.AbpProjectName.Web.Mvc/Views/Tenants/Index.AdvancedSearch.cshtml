@@ -1,0 +1,55 @@
+﻿<div class="abp-advanced-search">
+    <form id="TenantsSearchForm" class="form-horizontal">
+        <div class="input-group">
+            <div class="input-group-prepend">
+                <button type="button" class="btn bg-blue btn-search">
+                    <span class="fas fa-search" aria-hidden="true"></span>
+                </button>
+            </div>
+            <input type="text" name="Keyword" class="form-control txt-search" />
+            <div class="dropdown input-group-append">
+                <button type="button"
+                        class="btn btn-default dropdown-toggle"
+                        data-toggle="dropdown"
+                        aria-expanded="false">
+                    <i class="fas fa-filter"></i>
+                </button>
+                <div class="dropdown-menu  dropdown-menu-right dd-menu" role="menu" style="padding: 0">
+                    <div class="card" style="margin-bottom: 0">
+                        <div class="card-body">
+                            <div class="form-group row">
+                                <label class="col-md-3 col-form-label">@L("IsActive")</label>
+                                <div class="col-md-10">
+                                    <div class="form-group clearfix">
+                                        <div class="icheck-primary d-inline mr-3">
+                                            <input type="radio" id="IsActive_All" name="IsActive" value="" checked>
+                                            <label for="IsActive_All">
+                                                All
+                                            </label>
+                                        </div>
+                                        <div class="icheck-primary d-inline mr-3">
+                                            <input type="radio" id="IsActive_Active" name="IsActive" value="true">
+                                            <label for="IsActive_Active">
+                                                Active
+                                            </label>
+                                        </div>
+                                        <div class="icheck-primary d-inline mr-3">
+                                            <input type="radio" id="IsActive_Passive" name="IsActive" value="false">
+                                            <label for="IsActive_Passive">
+                                                Passive
+                                            </label>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="card-footer">
+                            <button type="button" class="btn btn-default btn-clear"><i class="fas fa-backspace"></i></button>
+                            <button type="button" class="btn bg-blue float-right btn-search"><i class="fas fa-search"></i></button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </form>
+</div>

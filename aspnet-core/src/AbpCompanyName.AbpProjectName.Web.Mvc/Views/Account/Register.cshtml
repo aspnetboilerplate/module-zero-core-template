@@ -1,19 +1,10 @@
 ﻿@using Abp.Authorization.Users
 @model AbpCompanyName.AbpProjectName.Web.Models.Account.RegisterViewModel
 @{
-    ViewBag.DisableTopBar = true;
+    ViewBag.Title = L("Register");
 }
-@section Styles
+@section scripts
 {
-    <environment names="Development">
-        <link rel="stylesheet" href="~/view-resources/Views/Account/Login.css" asp-append-version="true" />
-    </environment>
-
-    <environment names="Staging,Production">
-        <link rel="stylesheet" href="~/view-resources/Views/Account/Login.min.css" asp-append-version="true" />
-    </environment>
-}
-@section Scripts{
     <environment names="Development">
         <script src="~/view-resources/Views/Account/Register.js" asp-append-version="true"></script>
     </environment>
@@ -22,62 +13,73 @@
         <script src="~/view-resources/Views/Account/Register.min.js" asp-append-version="true"></script>
     </environment>
 }
-<div class="card">
-    <div class="body">
-        <form id="RegisterForm" asp-action="Register" method="post">
-            <h4 class="text-center">@L("Register")</h4>
-
-            @if (@ViewBag.ErrorMessage != null)
-            {
-                <div class="alert alert-danger">
-                    <i class="fa fa-warning"></i> @ViewBag.ErrorMessage
-                </div>
-            }
-
-            <input type="hidden" name="IsExternalLogin" value="@Model.IsExternalLogin.ToString()" />
-            <input type="hidden" name="ExternalLoginAuthSchema" value="@Model.ExternalLoginAuthSchema" />
-
-            <div class="form-group form-float">
-                <div class="form-line">
-                    <input type="text" class="form-control" name="Name" value="@Model.Name" required maxlength="@AbpUserBase.MaxNameLength">
-                    <label class="form-label">@L("Name")</label>
-                </div>
+<h4 class="text-center">@L("Register")</h4>
+<form id="RegisterForm" asp-action="Register" method="post">
+    @if (ViewBag.ErrorMessage != null)
+    {
+        <div class="alert alert-danger">
+            <i class="fas fa-warning"></i> @ViewBag.ErrorMessage
+        </div>
+    }
+    <input type="hidden" name="IsExternalLogin" value="@Model.IsExternalLogin.ToString()" />
+    <input type="hidden" name="ExternalLoginAuthSchema" value="@Model.ExternalLoginAuthSchema" />
+    <div class="input-group mb-3">
+        <input type="text" name="Name" class="form-control" placeholder="@L("Name")" value="@Model.Name" required maxlength="@AbpUserBase.MaxNameLength">
+        <div class="input-group-append">
+            <div class="input-group-text">
+                <span class="fas fa-arrow-left"></span>
             </div>
-
-            <div class="form-group form-float">
-                <div class="form-line">
-                    <input type="text" class="form-control" name="Surname" value="@Model.Surname" required maxlength="@AbpUserBase.MaxSurnameLength">
-                    <label class="form-label">@L("Surname")</label>
-                </div>
-            </div>
-
-            <div class="form-group form-float">
-                <div class="form-line">
-                    <input type="email" class="form-control" name="EmailAddress" value="@Model.EmailAddress" required maxlength="@AbpUserBase.MaxEmailAddressLength">
-                    <label class="form-label">@L("EmailAddress")</label>
-                </div>
-            </div>
-
-            <div class="form-group form-float">
-                <div class="form-line">
-                    <input type="text" class="form-control" name="UserName" value="@Model.UserName" required maxlength="@AbpUserBase.MaxUserNameLength">
-                    <label class="form-label">@L("UserName")</label>
-                </div>
-            </div>
-
-            <div class="form-group form-float">
-                <div class="form-line">
-                    <input type="password" class="form-control" name="Password" required maxlength="@AbpUserBase.MaxPlainPasswordLength">
-                    <label class="form-label">@L("Password")</label>
-                </div>
-            </div>
-            
-            <div class="row">
-                <div class="col-xs-12">
-                    <a asp-action="Login" class="btn btn-default waves-effect" >@L("Back")</a>
-                    <button id="RegisterButton" class="btn bg-pink waves-effect" type="submit">@L("Register")</button>
-                </div>
-            </div>
-        </form>
+        </div>
     </div>
-</div>
+    <div class="input-group mb-3">
+        <input type="text" name="Surname" class="form-control" placeholder="@L("Surname")" value="@Model.Surname" required maxlength="@AbpUserBase.MaxSurnameLength">
+        <div class="input-group-append">
+            <div class="input-group-text">
+                <span class="fas fa-arrow-left"></span>
+            </div>
+        </div>
+    </div>
+    <div class="input-group mb-3">
+        <input type="email" name="EmailAddress" class="form-control" placeholder="@L("EmailAddress")" value="@Model.EmailAddress" required maxlength="@AbpUserBase.MaxEmailAddressLength">
+        <div class="input-group-append">
+            <div class="input-group-text">
+                <span class="fas fa-envelope"></span>
+            </div>
+        </div>
+    </div>
+    <div class="input-group mb-3">
+        <input type="text" name="UserName" class="form-control" placeholder="@L("UserName")" value="@Model.UserName" required maxlength="@AbpUserBase.MaxUserNameLength">
+        <div class="input-group-append">
+            <div class="input-group-text">
+                <span class="fas fa-user"></span>
+            </div>
+        </div>
+    </div>
+    <div class="input-group mb-3">
+        <input type="password" name="Password" class="form-control" placeholder="@L("Password")" required maxlength="@AbpUserBase.MaxPlainPasswordLength">
+        <div class="input-group-append">
+            <div class="input-group-text">
+                <span class="fas fa-lock"></span>
+            </div>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-8">
+            <a asp-action="Login" class="btn btn-default btn-flat"><i class="fa fa-arrow-circle-left"></i> @L("Back")</a>
+        </div>
+        <div class="col-4">
+            <button type="submit" id="RegisterButton" class="btn btn-primary btn-flat float-right">@L("Register")</button>
+        </div>
+    </div>
+</form>
+@*<div class="social-auth-links text-center">
+        <p>- OR -</p>
+        <a href="javascript:;" class="btn btn-block btn-primary">
+            <i class="fab fa-facebook mr-2"></i>
+            Sign up using Facebook
+        </a>
+        <a href="javascript:;" class="btn btn-block btn-danger">
+            <i class="fab fa-google-plus mr-2"></i>
+            Sign up using Google+
+        </a>
+    </div>*@

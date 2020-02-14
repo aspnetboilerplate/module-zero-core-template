@@ -3,11 +3,13 @@
 @model LanguageSelectionViewModel
 @if (Model.Languages.Count > 1)
 {
-    <div class="language-switch-area">
-        @foreach (var languageInfo in Model.Languages)
+    <div class="text-center">
+        @foreach (var language in Model.Languages)
         {
-            <a href="~/AbpLocalization/ChangeCulture?cultureName=@(languageInfo.Name)&returnUrl=@(UrlEncoder.Default.Encode(Context.Request.Path + Context.Request.QueryString))">
-                <span class="language-icon @(languageInfo == Model.CurrentLanguage ? "language-icon-current" : "")" title="@languageInfo.DisplayName"><i class="@languageInfo.Icon"></i></span>
+            <a href="~/AbpLocalization/ChangeCulture?cultureName=@(language.Name)&returnUrl=@(UrlEncoder.Default.Encode(Context.Request.Path + Context.Request.QueryString))">
+                <span class="@(language.Name == Model.CurrentLanguage.Name ? "current-language-icon" : "")" title="@language.DisplayName">
+                    <i class="@language.Icon"></i>
+                </span>
             </a>
         }
     </div>

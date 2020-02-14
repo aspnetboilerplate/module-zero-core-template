@@ -35,18 +35,20 @@ namespace AbpCompanyName.AbpProjectName.Web.Startup
         {
             // MVC
             services.AddControllersWithViews(
-                options =>
+                    options =>
+                    {
+                        options.Filters.Add(new AutoValidateAntiforgeryTokenAttribute());
+                        options.Filters.Add(new AbpAutoValidateAntiforgeryTokenAttribute());
+                    }
+                )
+                .AddRazorRuntimeCompilation()
+                .AddNewtonsoftJson(options =>
                 {
-                    options.Filters.Add(new AutoValidateAntiforgeryTokenAttribute());
-                    options.Filters.Add(new AbpAutoValidateAntiforgeryTokenAttribute());
-                }
-            ).AddNewtonsoftJson(options =>
-            {
-                options.SerializerSettings.ContractResolver = new AbpMvcContractResolver(IocManager.Instance)
-                {
-                    NamingStrategy = new CamelCaseNamingStrategy()
-                };
-            });
+                    options.SerializerSettings.ContractResolver = new AbpMvcContractResolver(IocManager.Instance)
+                    {
+                        NamingStrategy = new CamelCaseNamingStrategy()
+                    };
+                });
 
             IdentityRegistrar.Register(services);
             AuthConfigurer.Configure(services, _appConfiguration);
@@ -82,10 +84,10 @@ namespace AbpCompanyName.AbpProjectName.Web.Startup
             app.UseRouting();
 
             app.UseAuthentication();
-            
+
             app.UseJwtTokenMiddleware();
-            
-            app.UseAuthorization();            
+
+            app.UseAuthorization();
 
             app.UseEndpoints(endpoints =>
             {

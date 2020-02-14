@@ -42,6 +42,6 @@
     <text name="TenantSelection" value="Selección de Empresa" />
     <text name="TenantSelection_Detail" value="Por favor seleccione una de las siguientes empresas." />
     <text name="Logout" value="Cerrar sesión" />
-
+    <text name="SearchWithThreeDot">Buscar...</text>
   </texts>
 </localizationDictionary>

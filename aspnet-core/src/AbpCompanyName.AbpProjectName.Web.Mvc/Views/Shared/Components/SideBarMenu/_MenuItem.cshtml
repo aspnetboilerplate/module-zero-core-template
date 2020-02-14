@@ -1,0 +1,85 @@
+﻿@using AbpCompanyName.AbpProjectName.Web.Views
+@using Abp.Application.Navigation
+@model Abp.Application.Navigation.UserMenuItem
+@inject ILanguageManager LanguageManager
+@{
+    var isActive = IsActiveMenuItem(Model, ViewBag.CurrentPageName);
+    var subMenus = Model.Items.Where(x => x.IsVisible).ToList();
+    var hasSubMenus = subMenus.Any();
+}
+@functions {
+    static bool IsActiveMenuItem(UserMenuItem menuItem, string pageName)
+    {
+        if (string.IsNullOrWhiteSpace(pageName))
+            return false;
+
+        return pageName.Equals(menuItem.Name, StringComparison.InvariantCultureIgnoreCase)
+            || menuItem.Items.Any(cn => IsActiveMenuItem(cn, pageName));
+    }
+
+    string CalculateMenuUrl(string url)
+    {
+        if (string.IsNullOrEmpty(url))
+            return ApplicationPath;
+
+        if (UrlChecker.IsRooted(url))
+            return url;
+
+        return ApplicationPath + url;
+    }
+}
+@if (!hasSubMenus)
+{
+    var linkUrl = CalculateMenuUrl(Model.Url);
+    var linkClasses = $"nav-link {(isActive ? "active" : null)}";
+    var linkTarget = !string.IsNullOrEmpty(Model.Target) ? Html.Raw($" target=\"{Model.Target}\"") : null;
+
+    <li class="nav-item">
+        <a href="@linkUrl" class="@linkClasses" @linkTarget>
+            @if (!string.IsNullOrEmpty(Model.Icon))
+            {
+                <text>
+                    <i class="nav-icon @Url.Content(Model.Icon)"></i>
+                </text>
+            }
+            <p>@Model.DisplayName</p>
+        </a>
+    </li>
+}
+else
+{
+    var navitemClasses = $"nav-item {(hasSubMenus ? "has-treeview" : "")} {(isActive ? "menu-open" : "")}";
+    navitemClasses = !string.IsNullOrEmpty(navitemClasses?.Trim()) ? navitemClasses : null;
+    var linkClasses = $"nav-link {(isActive ? "active" : null)}";
+
+    <li class="@navitemClasses">
+        <a href="javascript:;" class="@linkClasses">
+            @if (!string.IsNullOrEmpty(Model.Icon))
+            {
+                <text>
+                    <i class="nav-icon @Url.Content(Model.Icon)"></i>
+                </text>
+            }
+            <p>
+                @Model.DisplayName
+                @if (LanguageManager.CurrentLanguage.IsRightToLeft)
+                {
+                    <i class="fas fa-angle-right right"></i>
+                }
+                else
+                {
+                    <i class="fas fa-angle-left right"></i>
+                }
+            </p>
+        </a>
+        @if (hasSubMenus)
+        {
+            <ul class="nav nav-treeview">
+                @foreach (var subMenu in subMenus)
+                {
+                    @await Html.PartialAsync("Components/SideBarMenu/_MenuItem", subMenu)
+                }
+            </ul>
+        }
+    </li>
+}
