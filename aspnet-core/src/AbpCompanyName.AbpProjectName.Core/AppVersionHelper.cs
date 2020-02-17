@@ -19,9 +19,8 @@ namespace AbpCompanyName.AbpProjectName
         /// Gets release (last build) date of the application.
         /// It's shown in the web page.
         /// </summary>
-        public static DateTime ReleaseDate
-        {
-            get { return new FileInfo(typeof(AppVersionHelper).GetAssembly().Location).LastWriteTime; }
-        }
+        public static DateTime ReleaseDate => LzyReleaseDate.Value;
+
+        private static readonly Lazy<DateTime> LzyReleaseDate = new Lazy<DateTime>(() => new FileInfo(typeof(AppVersionHelper).GetAssembly().Location).LastWriteTime);
     }
 }
