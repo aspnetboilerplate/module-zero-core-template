@@ -19,18 +19,8 @@ namespace AbpCompanyName.AbpProjectName
         /// Gets release (last build) date of the application.
         /// It's shown in the web page.
         /// </summary>
-        public static DateTime ReleaseDate
-        {
-            get
-            {
-                if (_cachedReleaseDate.HasValue)
-                    return _cachedReleaseDate.Value;
+        public static DateTime ReleaseDate => LzyReleaseDate.Value;
 
-                _cachedReleaseDate = new FileInfo(typeof(AppVersionHelper).GetAssembly().Location).LastWriteTime;
-
-                return _cachedReleaseDate.Value;
-            }
-        }
-        private static DateTime? _cachedReleaseDate;
+        private static readonly Lazy<DateTime> LzyReleaseDate = new Lazy<DateTime>(() => new FileInfo(typeof(AppVersionHelper).GetAssembly().Location).LastWriteTime);
     }
 }
