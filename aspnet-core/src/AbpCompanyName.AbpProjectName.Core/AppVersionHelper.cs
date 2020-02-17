@@ -21,7 +21,16 @@ namespace AbpCompanyName.AbpProjectName
         /// </summary>
         public static DateTime ReleaseDate
         {
-            get { return new FileInfo(typeof(AppVersionHelper).GetAssembly().Location).LastWriteTime; }
+            get
+            {
+                if (_cachedReleaseDate.HasValue)
+                    return _cachedReleaseDate.Value;
+
+                _cachedReleaseDate = new FileInfo(typeof(AppVersionHelper).GetAssembly().Location).LastWriteTime;
+
+                return _cachedReleaseDate.Value;
+            }
         }
+        private static DateTime? _cachedReleaseDate;
     }
 }
