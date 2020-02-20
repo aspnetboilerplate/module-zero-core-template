@@ -47,15 +47,8 @@
         });
     }
 
-    _$form.find(".save-button").click(function (e) {
+    _$form.submit(function (e) {
         e.preventDefault();
         save();
-    });
-
-    _$form.find('input').on('keypress', function (e) {
-        if (e.which === 13) {
-            e.preventDefault();
-            save();
-        }
     });
 })(jQuery);
