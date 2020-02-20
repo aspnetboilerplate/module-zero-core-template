@@ -1,4 +1,5 @@
 ﻿using Abp.Application.Navigation;
+using Abp.Authorization;
 using Abp.Localization;
 using AbpCompanyName.AbpProjectName.Authorization;
 
@@ -26,7 +27,7 @@ namespace AbpCompanyName.AbpProjectName.Web.Startup
                         L("Tenants"),
                         url: "Tenants",
                         icon: "fas fa-building",
-                        requiredPermissionName: PermissionNames.Pages_Tenants
+                        permissionDependency: new SimplePermissionDependency(PermissionNames.Pages_Tenants)
                     )
                 ).AddItem(
                     new MenuItemDefinition(
@@ -34,7 +35,7 @@ namespace AbpCompanyName.AbpProjectName.Web.Startup
                         L("Users"),
                         url: "Users",
                         icon: "fas fa-users",
-                        requiredPermissionName: PermissionNames.Pages_Users
+                        permissionDependency: new SimplePermissionDependency(PermissionNames.Pages_Users)
                     )
                 ).AddItem(
                     new MenuItemDefinition(
@@ -42,8 +43,8 @@ namespace AbpCompanyName.AbpProjectName.Web.Startup
                         L("Roles"),
                         url: "Roles",
                         icon: "fas fa-theater-masks",
-                        requiredPermissionName: PermissionNames.Pages_Roles
-                    )
+                        permissionDependency: new SimplePermissionDependency(PermissionNames.Pages_Roles)
+                            )
                 )
                 .AddItem(
                     new MenuItemDefinition(
