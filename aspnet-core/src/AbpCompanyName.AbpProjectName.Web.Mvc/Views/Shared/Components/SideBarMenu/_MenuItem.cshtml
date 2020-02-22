@@ -1,10 +1,11 @@
 ﻿@using AbpCompanyName.AbpProjectName.Web.Views
+@using AbpCompanyName.AbpProjectName.Web.Views.Shared.Components.SideBarMenu
 @using Abp.Application.Navigation
 @model Abp.Application.Navigation.UserMenuItem
 @inject ILanguageManager LanguageManager
 @{
     var isActive = IsActiveMenuItem(Model, ViewBag.CurrentPageName);
-    var subMenus = Model.Items.Where(x => x.IsVisible).ToList();
+    var subMenus = Model.Items.Where(x => x.IsVisible).OrderByCustom().ToList();
     var hasSubMenus = subMenus.Any();
 }
 @functions {
