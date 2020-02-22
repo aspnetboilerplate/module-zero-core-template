@@ -1,9 +1,13 @@
 ﻿@using AbpCompanyName.AbpProjectName.Web.Views.Shared.Components.SideBarMenu
 @model SideBarMenuViewModel
+@{ 
+    var orderedMenuItems = Model.MainMenu.Items.Where(x => x.IsVisible).OrderByCustom().ToList();
+}
+
 <nav class="mt-2">
     <ul class="nav nav-pills nav-sidebar flex-column nav-flat" data-widget="treeview" role="menu" data-accordion="false">
         @{
-            foreach (var item in Model.MainMenu.Items.Where(x => x.IsVisible))
+            foreach (var item in orderedMenuItems)
             {
                 @await Html.PartialAsync("Components/SideBarMenu/_MenuItem", item)
             }
