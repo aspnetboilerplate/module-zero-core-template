@@ -101,7 +101,7 @@
 
         var user = _$form.serializeFormToObject();
         user.roleNames = [];
-        var _$roleCheckboxes = $("input[name='role']:checked");
+        var _$roleCheckboxes = _$form[0].querySelectorAll("input[name='role']:checked");
         if (_$roleCheckboxes) {
             for (var roleIndex = 0; roleIndex < _$roleCheckboxes.length; roleIndex++) {
                 var _$roleCheckbox = $(_$roleCheckboxes[roleIndex]);
