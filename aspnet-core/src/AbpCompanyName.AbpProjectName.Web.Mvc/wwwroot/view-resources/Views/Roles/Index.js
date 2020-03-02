@@ -81,7 +81,7 @@
 
         var role = _$form.serializeFormToObject();
         role.grantedPermissions = [];
-        var _$permissionCheckboxes = $("input[name='permission']:checked");
+        var _$permissionCheckboxes = _$form[0].querySelectorAll("input[name='permission']:checked");
         if (_$permissionCheckboxes) {
             for (var permissionIndex = 0; permissionIndex < _$permissionCheckboxes.length; permissionIndex++) {
                 var _$permissionCheckbox = $(_$permissionCheckboxes[permissionIndex]);
