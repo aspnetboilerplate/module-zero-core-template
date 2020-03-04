@@ -102,6 +102,12 @@
     ]
   },
   {
+    "outputFileName": "wwwroot/view-resources/Views/Users/ChangePassword.min.js",
+    "inputFiles": [
+      "wwwroot/view-resources/Views/Users/ChangePassword.js"
+    ]
+  },
+  {
     "outputFileName": "wwwroot/view-resources/Views/Roles/Index.min.js",
     "inputFiles": [
       "wwwroot/view-resources/Views/Roles/Index.js"

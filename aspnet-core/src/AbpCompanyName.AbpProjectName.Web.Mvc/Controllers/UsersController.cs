@@ -40,5 +40,10 @@ namespace AbpCompanyName.AbpProjectName.Web.Controllers
             };
             return PartialView("_EditModal", model);
         }
+
+        public ActionResult ChangePassword()
+        {
+            return View();
+        }
     }
 }
