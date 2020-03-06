@@ -45,6 +45,14 @@ namespace AbpCompanyName.AbpProjectName.Web.Startup
                         icon: "fas fa-theater-masks",
                         permissionDependency: new SimplePermissionDependency(PermissionNames.Pages_Roles)
                             )
+                ).AddItem(
+                    new MenuItemDefinition(
+                        PageNames.AuditLogs,
+                        L("AuditLogs"),
+                        url: "AuditLogs",
+                        icon: "fas fa-history",
+                        permissionDependency: new SimplePermissionDependency(PermissionNames.Pages_AuditLogs)
+                            )
                 )
                 .AddItem(
                     new MenuItemDefinition(

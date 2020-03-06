@@ -97,7 +97,17 @@
     <text name="DeleteTenantConfirm">确认删除该租户？</text>
     <text name="EditTenant">编辑租户</text>
     <text name="SearchWithThreeDot">搜索...</text>
-    
+
+    <text name="AuditLogs">审计日志</text>
+    <text name="ExecutionTime">执行时间</text>
+    <text name="UserName">用户名</text>
+    <text name="ServiceName">服务名称</text>
+    <text name="MethodName">方法名称</text>
+    <text name="ExecutionDuration">持续时间</text>
+    <text name="ClientIpAddress">客户端IP地址</text>
+    <text name="ClientName">客户端名称</text>
+    <text name="BrowserInfo">浏览器信息</text>
+
   </texts>
 </localizationDictionary>
 

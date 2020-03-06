@@ -105,5 +105,14 @@
     <text name="RoleDeleteWarningMessage">Role {0} will be deleted and unassigned from all assigned users.</text>
     <text name="TenantDeleteWarningMessage">Tenant {0} will be deleted.</text>
     <text name="SearchWithThreeDot">Search...</text>
+    <text name="AuditLogs">Audit Logs</text>
+    <text name="ExecutionTime">Execution Time</text>
+    <text name="UserName">User Name</text>
+    <text name="ServiceName">Service Name</text>
+    <text name="MethodName">Method Name</text>
+    <text name="ExecutionDuration">Execution Duration</text>
+    <text name="ClientIpAddress">Client Ip Address</text>
+    <text name="ClientName">Client Name</text>
+    <text name="BrowserInfo">Browser Info</text>
   </texts>
 </localizationDictionary>
