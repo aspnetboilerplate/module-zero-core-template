@@ -1,0 +1,77 @@
+﻿@using System.Globalization
+@inject AbpCompanyName.AbpProjectName.Timing.AppTimes AppTimes
+
+<script type="text/javascript">
+        // This is used to get the application's root path from javascript.
+        // It's useful if you're running application in a virtual directory under IIS.
+        var abp = abp || {};
+        abp.appPath = '@ApplicationPath';
+</script>
+
+<environment names="Development">
+    @*core scripts start*@
+    <script src="~/libs/jquery/jquery.js" asp-append-version="true"></script>
+    @*core scripts end*@
+
+    @*admin-lte scripts start*@
+    <script src="~/libs/bootstrap/dist/js/bootstrap.bundle.js" asp-append-version="true"></script>
+    <script src="~/libs/admin-lte/dist/js/adminlte.js" asp-append-version="true"></script>
+    @*admin-lte scripts end*@
+
+    @*abp scripts start*@
+    <script src="~/libs/block-ui/jquery.blockUI.js" asp-append-version="true"></script>
+    <script src="~/libs/spin/spin.js" asp-append-version="true"></script>
+    <script src="~/libs-ext/spin/jquery.spin.js" asp-append-version="true"></script>
+    <script src="~/libs/sweetalert/sweetalert.min.js" asp-append-version="true"></script>
+    <script src="~/libs/toastr/toastr.min.js" asp-append-version="true"></script>
+    <script src="~/libs/moment/moment-with-locales.js" asp-append-version="true"></script>
+    <script src="~/libs/abp-web-resources/Abp/Framework/scripts/abp.js" asp-append-version="true"></script>
+    <script src="~/libs/abp-web-resources/Abp/Framework/scripts/libs/abp.jquery.js" asp-append-version="true"></script>
+    <script src="~/libs/abp-web-resources/Abp/Framework/scripts/libs/abp.toastr.js" asp-append-version="true"></script>
+    <script src="~/libs/abp-web-resources/Abp/Framework/scripts/libs/abp.blockUI.js" asp-append-version="true"></script>
+    <script src="~/libs/abp-web-resources/Abp/Framework/scripts/libs/abp.spin.js" asp-append-version="true"></script>
+    <script src="~/libs/abp-web-resources/Abp/Framework/scripts/libs/abp.sweet-alert.js" asp-append-version="true"></script>
+    @*abp scripts end*@
+
+    @*other scripts start*@
+    <script src="~/libs/jquery-validate/jquery.validate.js" asp-append-version="true"></script>
+    <script src="~/libs/jquery-validate/jquery.validate.unobtrusive.js" asp-append-version="true"></script>
+    @*other scripts end*@
+
+    @*custom scripts start*@
+    <script src="~/js/main.js" asp-append-version="true"></script>
+    @*custom scripts end*@
+</environment>
+
+<environment names="Staging,Production">
+    <script src="~/view-resources/Views/_Bundles/account-layout.min.js" asp-append-version="true"></script>
+</environment>
+
+@if (CultureInfo.CurrentUICulture.Name != "en")
+{
+    var normalizedCurrentUICultureName = CultureInfo.CurrentUICulture.Name.Replace("-", "_");
+    var localizationFileNameWithExtension = "messages_";
+    switch (normalizedCurrentUICultureName)
+    {
+        case "zh_Hans":
+            localizationFileNameWithExtension += "zh";
+            break;
+        case "es_MX":
+            localizationFileNameWithExtension += "es";
+            break;
+        default:
+            localizationFileNameWithExtension += normalizedCurrentUICultureName;
+            break;
+    }
+    localizationFileNameWithExtension += ".min.js";
+    <script src="~/libs/jquery-validate/localization/@localizationFileNameWithExtension" asp-append-version="true"></script>
+}
+
+<script type="text/javascript">
+        // Localizing momentjs
+        moment.locale('@CultureInfo.CurrentUICulture.Name');
+</script>
+
+<!-- Dynamic scripts of ABP system (They are created on runtime and can not be bundled) -->
+<script src="~/AbpServiceProxies/GetAll?v=@(AppTimes.StartupTime.Ticks)" type="text/javascript"></script>
+<script src="~/AbpScripts/GetScripts?v=@(AppTimes.StartupTime.Ticks)" type="text/javascript"></script>
