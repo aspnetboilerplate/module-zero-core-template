@@ -16,7 +16,7 @@
     "outputFileName": "wwwroot/view-resources/Views/_Bundles/account-layout.min.js",
     "inputFiles": [
       "wwwroot/libs/jquery/jquery.js",
-      "wwwroot/libs/bootstrap/js/bootstrap.bundle.js",
+      "wwwroot/libs/bootstrap/dist/js/bootstrap.bundle.js",
       "wwwroot/libs/admin-lte/dist/js/adminlte.js",
       "wwwroot/libs/jquery-validate/jquery.validate.js",
       "wwwroot/libs/jquery-validate/jquery.validate.unobtrusive.js",
@@ -55,7 +55,7 @@
     "outputFileName": "wwwroot/view-resources/Views/_Bundles/shared-layout.min.js",
     "inputFiles": [
       "wwwroot/libs/jquery/jquery.js",
-      "wwwroot/libs/bootstrap/js/bootstrap.bundle.js",
+      "wwwroot/libs/bootstrap/dist/js/bootstrap.bundle.js",
       "wwwroot/libs/admin-lte/dist/js/adminlte.js",
       "wwwroot/libs/jquery-validate/jquery.validate.js",
       "wwwroot/libs/jquery-validate/jquery.validate.unobtrusive.js",
