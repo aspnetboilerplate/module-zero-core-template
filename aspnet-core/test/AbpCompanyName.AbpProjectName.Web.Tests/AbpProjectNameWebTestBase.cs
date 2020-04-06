@@ -7,6 +7,7 @@ using System.Text;
 using System.Threading.Tasks;
 using Abp.AspNetCore.TestBase;
 using Abp.Authorization.Users;
+using Abp.Extensions;
 using Abp.Json;
 using Abp.MultiTenancy;
 using Abp.Web.Models;
@@ -79,11 +80,14 @@ namespace AbpCompanyName.AbpProjectName.Web.Tests
         /// <returns></returns>
         protected async Task AuthenticateAsync(string tenancyName, AuthenticateModel input)
         {
-            var tenant = UsingDbContext(context => context.Tenants.FirstOrDefault(t => t.TenancyName == tenancyName));
-            if (tenant != null)
-            {
-                AbpSession.TenantId = tenant.Id;
-                Client.DefaultRequestHeaders.Add("Abp.TenantId", tenant.Id.ToString());  //Set TenantId
+            if (tenancyName.IsNullOrWhiteSpace())
+            { 
+                var tenant = UsingDbContext(context => context.Tenants.FirstOrDefault(t => t.TenancyName == tenancyName));
+                if (tenant != null)
+                {
+                    AbpSession.TenantId = tenant.Id;
+                    Client.DefaultRequestHeaders.Add("Abp.TenantId", tenant.Id.ToString());  //Set TenantId
+                }
             }
 
             var response = await Client.PostAsync("/api/TokenAuth/Authenticate",
