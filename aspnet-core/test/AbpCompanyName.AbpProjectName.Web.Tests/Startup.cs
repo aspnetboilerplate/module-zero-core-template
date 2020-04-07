@@ -78,11 +78,7 @@ namespace AbpCompanyName.AbpProjectName.Web.Tests
             iocManager.IocContainer
                 .Register(
                     Component.For<DbContextOptions<AbpProjectNameDbContext>>()
-                        .UsingFactoryMethod((kernel, context) =>
-                        {
-                            var qq = 1;
-                            return options;
-                        })
+                        .Instance(options)
                         .LifestyleSingleton()
                 );
         }
