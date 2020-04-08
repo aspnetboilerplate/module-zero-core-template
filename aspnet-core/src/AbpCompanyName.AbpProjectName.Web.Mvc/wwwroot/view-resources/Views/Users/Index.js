@@ -74,7 +74,7 @@
                         `   <button type="button" class="btn btn-sm bg-secondary edit-user" data-user-id="${row.id}" data-toggle="modal" data-target="#UserEditModal">`,
                         `       <i class="fas fa-pencil-alt"></i> ${l('Edit')}`,
                         '   </button>',
-                        `   <button type="button" class="btn btn-sm bg-danger edit-user delete-user" data-user-id="${row.id}" data-user-name="${row.name}">`,
+                        `   <button type="button" class="btn btn-sm bg-danger delete-user" data-user-id="${row.id}" data-user-name="${row.name}">`,
                         `       <i class="fas fa-trash"></i> ${l('Delete')}`,
                         '   </button>'
                     ].join('');
@@ -101,7 +101,7 @@
 
         var user = _$form.serializeFormToObject();
         user.roleNames = [];
-        var _$roleCheckboxes = $("input[name='role']:checked");
+        var _$roleCheckboxes = _$form[0].querySelectorAll("input[name='role']:checked");
         if (_$roleCheckboxes) {
             for (var roleIndex = 0; roleIndex < _$roleCheckboxes.length; roleIndex++) {
                 var _$roleCheckbox = $(_$roleCheckboxes[roleIndex]);
