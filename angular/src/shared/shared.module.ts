@@ -14,6 +14,9 @@ import { DragDropModule } from '@angular/cdk/drag-drop';
 import { ScrollingModule } from '@angular/cdk/scrolling';
 import { CdkTableModule } from '@angular/cdk/table';
 import { CdkTreeModule } from '@angular/cdk/tree';
+
+import { ApbValidationSummaryComponent } from './components/validation/abp-validation.summary.component';
+
 import {
     MatAutocompleteModule,
     MatBadgeModule,
@@ -98,6 +101,7 @@ import { EqualValidator } from './directives/equal-validator.directive';
     ],
     declarations: [
         AbpPaginationControlsComponent,
+        ApbValidationSummaryComponent,
         LocalizePipe,
         BlockDirective,
         BusyDirective,
@@ -105,6 +109,7 @@ import { EqualValidator } from './directives/equal-validator.directive';
     ],
     exports: [
         AbpPaginationControlsComponent,
+        ApbValidationSummaryComponent,
         LocalizePipe,
         BlockDirective,
         BusyDirective,
