@@ -34,6 +34,8 @@
               "node_modules/@angular/material/prebuilt-themes/indigo-pink.css",
               "node_modules/famfamfam-flags/dist/sprite/famfamfam-flags.css",
               "node_modules/toastr/build/toastr.css",
+              "node_modules/@fortawesome/fontawesome-free/css/all.min.css",
+              "node_modules/admin-lte-css-only/css/adminlte.min.css",
               "src/shared/core.less"
             ],
             "scripts": [
@@ -52,7 +54,7 @@
               "node_modules/abp-web-resources/Abp/Framework/scripts/libs/abp.blockUI.js",
               "node_modules/abp-web-resources/Abp/Framework/scripts/libs/abp.spin.js",
               "node_modules/abp-web-resources/Abp/Framework/scripts/libs/abp.sweet-alert.js",
-              "node_modules/abp-web-resources/Abp/Framework/scripts/libs/abp.moment.js",
+              "node_modules/abp-web-resources/Abp/Framework/scripts/libs/abp.moment.js"
             ]
           },
           "configurations": {
@@ -109,6 +111,28 @@
             "main": "src/test.ts",
             "karmaConfig": "./karma.conf.js",
             "polyfills": "src/polyfills.ts",
+            "assets": [
+              "src/assets",
+              "src/favicon.ico",
+              {
+                "glob": "abp.signalr.js",
+                "input": "node_modules/abp-web-resources/Abp/Framework/scripts/libs",
+                "output": "/assets/abp"
+              },
+              {
+                "glob": "abp.signalr-client.js",
+                "input": "node_modules/abp-web-resources/Abp/Framework/scripts/libs",
+                "output": "/assets/abp"
+              }
+            ],
+            "styles": [
+              "node_modules/@angular/material/prebuilt-themes/indigo-pink.css",
+              "node_modules/famfamfam-flags/dist/sprite/famfamfam-flags.css",
+              "node_modules/toastr/build/toastr.css",
+              "node_modules/@fortawesome/fontawesome-free/css/all.min.css",
+              "node_modules/admin-lte-css-only/css/adminlte.min.css",
+              "src/shared/core.less"
+            ],
             "scripts": [
               "node_modules/jquery/dist/jquery.min.js",
               "node_modules/moment/min/moment.min.js",
@@ -125,27 +149,7 @@
               "node_modules/abp-web-resources/Abp/Framework/scripts/libs/abp.blockUI.js",
               "node_modules/abp-web-resources/Abp/Framework/scripts/libs/abp.spin.js",
               "node_modules/abp-web-resources/Abp/Framework/scripts/libs/abp.sweet-alert.js",
-              "node_modules/abp-web-resources/Abp/Framework/scripts/libs/abp.moment.js",
-            ],
-            "styles": [
-              "node_modules/@angular/material/prebuilt-themes/indigo-pink.css",
-              "node_modules/famfamfam-flags/dist/sprite/famfamfam-flags.css",
-              "node_modules/toastr/build/toastr.css",
-              "src/shared/core.less"
-            ],
-            "assets": [
-              "src/assets",
-              "src/favicon.ico",
-              {
-                "glob": "abp.signalr.js",
-                "input": "node_modules/abp-web-resources/Abp/Framework/scripts/libs",
-                "output": "/assets/abp"
-              },
-              {
-                "glob": "abp.signalr-client.js",
-                "input": "node_modules/abp-web-resources/Abp/Framework/scripts/libs",
-                "output": "/assets/abp"
-              }
+              "node_modules/abp-web-resources/Abp/Framework/scripts/libs/abp.moment.js"
             ]
           }
         },
