@@ -36,7 +36,7 @@ export class EqualValidator implements Validator {
     // value not equal
     if (control2 && value !== control2.value && !this.isReverse) {
       return {
-        validateEqual: false
+        validateEqual: true
       };
     }
 
@@ -50,7 +50,7 @@ export class EqualValidator implements Validator {
 
     // value not equal and reverse
     if (control2 && value !== control2.value && this.isReverse) {
-      control2.setErrors({ validateEqual: false });
+      control2.setErrors({ validateEqual: true });
     }
 
     return null;
