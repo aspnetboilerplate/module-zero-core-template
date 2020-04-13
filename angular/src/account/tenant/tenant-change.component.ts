@@ -1,7 +1,7 @@
 ﻿import { Component, OnInit, Injector } from '@angular/core';
-import { MatDialog } from '@angular/material';
 import { AppComponentBase } from '@shared/app-component-base';
 import { TenantChangeDialogComponent } from './tenant-change-dialog.component';
+import { BsModalService } from 'ngx-bootstrap/modal';
 
 @Component({
   selector: 'tenant-change',
@@ -11,7 +11,7 @@ export class TenantChangeComponent extends AppComponentBase implements OnInit {
   tenancyName = '';
   name = '';
 
-  constructor(injector: Injector, private _dialog: MatDialog) {
+  constructor(injector: Injector, private _modalService: BsModalService) {
     super(injector);
   }
 
@@ -27,12 +27,9 @@ export class TenantChangeComponent extends AppComponentBase implements OnInit {
   }
 
   showChangeModal(): void {
-    this._dialog.open(TenantChangeDialogComponent, {
-      width: '500px',
-      height: '240px',
-      position: {
-        top: '50px'
-      }
-    });
+    const modal = this._modalService.show(TenantChangeDialogComponent);
+    if (this.appSession.tenant) {
+      modal.content.tenancyName = this.appSession.tenant.tenancyName;
+    }
   }
 }
