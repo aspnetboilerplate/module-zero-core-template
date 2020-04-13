@@ -18,6 +18,8 @@ import { AccountComponent } from './account.component';
 import { LoginComponent } from './login/login.component';
 import { RegisterComponent } from './register/register.component';
 import { AccountLanguagesComponent } from './layout/account-languages.component';
+import { AccountHeaderComponent } from './layout/account-header.component';
+import { AccountFooterComponent } from './layout/account-footer.component';
 
 import { LoginService } from './login/login.service';
 
@@ -42,6 +44,8 @@ import { TenantChangeDialogComponent } from './tenant/tenant-change-dialog.compo
         LoginComponent,
         RegisterComponent,
         AccountLanguagesComponent,
+        AccountHeaderComponent,
+        AccountFooterComponent,
         // tenant
         TenantChangeComponent,
         TenantChangeDialogComponent,
