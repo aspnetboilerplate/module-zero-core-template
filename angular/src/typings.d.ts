@@ -25,7 +25,3 @@ interface JQuery {
 interface JQuery {
     sparkline(...any): any;
 }
-
-interface JQueryStatic {
-    AdminBSB: any;
-}
