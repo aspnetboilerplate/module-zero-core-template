@@ -16,6 +16,8 @@ import { CdkTableModule } from '@angular/cdk/table';
 import { CdkTreeModule } from '@angular/cdk/tree';
 
 import { ApbValidationSummaryComponent } from './components/validation/abp-validation.summary.component';
+import { AbpModalHeaderComponent } from './components/modal/abp-modal-header.component';
+import { AbpModalFooterComponent } from './components/modal/abp-modal-footer.component';
 
 import {
     MatAutocompleteModule,
@@ -102,6 +104,8 @@ import { EqualValidator } from './directives/equal-validator.directive';
     declarations: [
         AbpPaginationControlsComponent,
         ApbValidationSummaryComponent,
+        AbpModalHeaderComponent,
+        AbpModalFooterComponent,
         LocalizePipe,
         BlockDirective,
         BusyDirective,
@@ -110,6 +114,8 @@ import { EqualValidator } from './directives/equal-validator.directive';
     exports: [
         AbpPaginationControlsComponent,
         ApbValidationSummaryComponent,
+        AbpModalHeaderComponent,
+        AbpModalFooterComponent,
         LocalizePipe,
         BlockDirective,
         BusyDirective,
