@@ -4,17 +4,10 @@
   #changeTenantForm="ngForm"
   (ngSubmit)="save()"
 >
-  <div class="modal-header">
-    <h4 class="modal-title">{{ "ChangeTenant" | localize }}</h4>
-    <button
-      type="button"
-      class="close"
-      aria-label="Close"
-      (click)="bsModalRef.hide()"
-    >
-      <span aria-hidden="true">×</span>
-    </button>
-  </div>
+  <abp-modal-header
+    [title]="'ChangeTenant' | localize"
+    (onCloseClick)="bsModalRef.hide()"
+  ></abp-modal-header>
   <div class="modal-body">
     <div class="form-group row">
       <label class="col-md-3 col-form-label" for="tenancyName">
@@ -36,21 +29,9 @@
       {{ "LeaveEmptyToSwitchToHost" | localize }}
     </span>
   </div>
-  <div class="modal-footer justify-content-between">
-    <button
-      type="button"
-      class="btn btn-default"
-      [disabled]="saving"
-      (click)="bsModalRef.hide()"
-    >
-      {{ "Cancel" | localize }}
-    </button>
-    <button
-      type="submit"
-      class="btn btn-primary"
-      [disabled]="!changeTenantForm.form.valid || saving"
-    >
-      {{ "Save" | localize }}
-    </button>
-  </div>
+  <abp-modal-footer
+    [cancelDisabled]="saving"
+    [saveDisabled]="!changeTenantForm.form.valid || saving"
+    (onCancelClick)="bsModalRef.hide()"
+  ></abp-modal-footer>
 </form>
