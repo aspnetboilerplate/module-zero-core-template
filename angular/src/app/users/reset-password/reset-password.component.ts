@@ -1,11 +1,11 @@
-import { Component, OnInit, Optional, Injector, Inject } from '@angular/core';
-import { MAT_DIALOG_DATA, MatDialogRef } from '@angular/material';
+import { Component, OnInit, Injector } from '@angular/core';
 import { AppComponentBase } from '@shared/app-component-base';
 import { finalize } from 'rxjs/operators';
 import {
   UserServiceProxy,
   ResetPasswordDto
 } from '@shared/service-proxies/service-proxies';
+import { BsModalRef } from 'ngx-bootstrap/modal';
 
 @Component({
   selector: 'app-reset-password',
@@ -15,12 +15,12 @@ export class ResetPasswordDialogComponent extends AppComponentBase
   implements OnInit {
   public isLoading = false;
   public resetPasswordDto: ResetPasswordDto;
+  id: number;
 
   constructor(
     injector: Injector,
     private _userService: UserServiceProxy,
-    private _dialogRef: MatDialogRef<ResetPasswordDialogComponent>,
-    @Optional() @Inject(MAT_DIALOG_DATA) private _userId: number
+    public bsModalRef: BsModalRef
   ) {
     super(injector);
   }
@@ -28,7 +28,7 @@ export class ResetPasswordDialogComponent extends AppComponentBase
   ngOnInit() {
     this.isLoading = true;
     this.resetPasswordDto = new ResetPasswordDto();
-    this.resetPasswordDto.userId = this._userId;
+    this.resetPasswordDto.userId = this.id;
     this.resetPasswordDto.newPassword = Math.random()
       .toString(36)
       .substr(2, 10);
@@ -46,11 +46,7 @@ export class ResetPasswordDialogComponent extends AppComponentBase
       )
       .subscribe(() => {
         this.notify.info('Password Reset');
-        this.close(true);
+        this.bsModalRef.hide();
       });
-  }
-
-  close(result: any): void {
-    this._dialogRef.close(result);
   }
 }
