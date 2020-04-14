@@ -1,85 +1,113 @@
-<div class="row clearfix" [@routerTransition]>
-    <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
-        <div class="card main-content">
-            <div class="header">
-                <h2>{{ "Roles" | localize }}</h2>
-                <ul class="header-dropdown m-r--5">
-                    <li>
-                        <button mat-icon-button [matMenuTriggerFor]="headerMenu" class="header-dropdown-mat-icon-button">
-                            <mat-icon>more_vert</mat-icon>
-                        </button>
-                        <mat-menu #headerMenu="matMenu">
-                            <button mat-menu-item (click)="refresh()">
-                                <mat-icon>refresh</mat-icon>
-                                <span>{{ "Refresh" | localize }}</span>
-                            </button>
-                        </mat-menu>
-                    </li>
-                </ul>
-            </div>
-            <div class="body table-responsive">
-                <!--query start-->
-                <div class="row clearfix">
-                    <form>
-                        <mat-form-field>
-                            <input matInput [placeholder]="l('Filter')" [(ngModel)]="keyword" name="keyword">
-                        </mat-form-field>
-
-                        <div class="row">
-                            <div class="col-md-12 text-right p-r-25">
-                                <button mat-raised-button color="primary" (click)="getDataPage(1)">{{ 'Search' | localize }}</button>
-                            </div>
-                        </div>
-                    </form>
-                </div>
-                <!--query end-->
-                <table class="table table-hover table-striped" [busy]="isTableLoading">
-                    <thead>
-                        <tr>
-                            <th>{{ "RoleName" | localize }}</th>
-                            <th>{{ "DisplayName" | localize }}</th>
-                            <th>{{ "Actions" | localize }}</th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        <tr *ngFor="
-                let role of (roles
-                  | paginate
-                    : {
-                        id: 'server',
-                        itemsPerPage: pageSize,
-                        currentPage: pageNumber,
-                        totalItems: totalItems
-                      })
-              ">
-                            <td>{{ role.name }}</td>
-                            <td>{{ role.displayName }}</td>
-                            <td>
-                                <button class="action-button" mat-icon-button [matMenuTriggerFor]="actionsMenu">
-                                    <mat-icon>menu</mat-icon>
-                                </button>
-                                <mat-menu #actionsMenu="matMenu">
-                                    <button mat-menu-item (click)="editRole(role)">
-                                        <mat-icon>edit</mat-icon>
-                                        <span>{{ "Edit" | localize }}</span>
-                                    </button>
-                                    <button mat-menu-item (click)="delete(role)">
-                                        <mat-icon>delete</mat-icon>
-                                        <span>{{ "Delete" | localize }}</span>
-                                    </button>
-                                </mat-menu>
-                            </td>
-                        </tr>
-                    </tbody>
-                </table>
-                <div class="abp-pagination-controls-wrapper" *ngIf="totalItems > pageSize">
-                    <abp-pagination-controls (pageChange)="getDataPage($event)" id="server">
-                    </abp-pagination-controls>
-                </div>
-                <button mat-mini-fab color="primary" class="pull-right" (click)="createRole()">
-                    <mat-icon>add</mat-icon>
-                </button>
-            </div>
+<div [@routerTransition]>
+  <section class="content-header">
+    <div class="container-fluid">
+      <div class="row">
+        <div class="col-6">
+          <h1>{{ "Roles" | localize }}</h1>
         </div>
+        <div class="col-6 text-right">
+          <a href="javascript:;" class="btn bg-blue" (click)="createRole()">
+            <i class="fa fa-plus-square"></i>
+            {{ "Create" | localize }}
+          </a>
+        </div>
+      </div>
     </div>
+  </section>
+  <section class="content px-2">
+    <div class="container-fluid">
+      <div class="card">
+        <div class="card-header">
+          <div class="input-group">
+            <div class="input-group-prepend">
+              <button
+                type="button"
+                class="btn bg-blue"
+                (click)="getDataPage(1)"
+              >
+                <i class="fas fa-search"></i>
+              </button>
+            </div>
+            <input
+              type="text"
+              class="form-control"
+              name="keyword"
+              [placeholder]="'SearchWithThreeDot' | localize"
+              [(ngModel)]="keyword"
+              (keyup.enter)="getDataPage(1)"
+            />
+          </div>
+        </div>
+        <div class="card-body table-responsive p-0">
+          <table class="table table-hover text-nowrap" [busy]="isTableLoading">
+            <thead class="bg-light">
+              <tr>
+                <th>{{ "RoleName" | localize }}</th>
+                <th>{{ "DisplayName" | localize }}</th>
+                <th style="width: 200px;">{{ "Actions" | localize }}</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr
+                *ngFor="
+                  let role of roles
+                    | paginate
+                      : {
+                          id: 'server',
+                          itemsPerPage: pageSize,
+                          currentPage: pageNumber,
+                          totalItems: totalItems
+                        }
+                "
+              >
+                <td>{{ role.name }}</td>
+                <td>{{ role.displayName }}</td>
+                <td>
+                  <button
+                    type="button"
+                    class="btn btn-sm bg-secondary"
+                    (click)="editRole(role)"
+                  >
+                    <i class="fas fa-pencil-alt"></i>
+                    {{ "Edit" | localize }}
+                  </button>
+                  <button
+                    type="button"
+                    class="btn btn-sm bg-danger mx-2"
+                    (click)="delete(role)"
+                  >
+                    <i class="fas fa-trash"></i>
+                    {{ "Delete" | localize }}
+                  </button>
+                </td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+        <div class="card-footer bg-light border-top">
+          <div class="row">
+            <div class="col-sm-4 col-12 text-sm-left text-center">
+              <button class="btn btn-secondary" (click)="refresh()">
+                <i class="fas fa-redo-alt"></i>
+              </button>
+            </div>
+            <div class="col-sm-4 col-12 text-center">
+              <p class="mb-0 my-2">
+                {{ "Total Items" | localize }}: {{ totalItems }}
+              </p>
+            </div>
+            <div class="col-sm-4 col-12">
+              <div class="float-sm-right m-auto">
+                <abp-pagination-controls
+                  id="server"
+                  (pageChange)="getDataPage($event)"
+                >
+                </abp-pagination-controls>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
 </div>

@@ -7,6 +7,7 @@ import { HttpClientModule } from '@angular/common/http';
 import { ModalModule } from 'ngx-bootstrap/modal';
 import { BsDropdownModule } from 'ngx-bootstrap/dropdown';
 import { CollapseModule } from 'ngx-bootstrap/collapse';
+import { TabsModule } from 'ngx-bootstrap/tabs';
 import { NgxPaginationModule } from 'ngx-pagination';
 
 import { AppRoutingModule } from './app-routing.module';
@@ -83,6 +84,7 @@ import { SidebarMenuComponent } from './layout/sidebar-menu.component';
     ModalModule.forChild(),
     BsDropdownModule,
     CollapseModule,
+    TabsModule,
     AbpModule,
     AppRoutingModule,
     ServiceProxyModule,

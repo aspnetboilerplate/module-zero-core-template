@@ -1,66 +1,58 @@
-import { Component, Injector, Inject, OnInit, Optional } from '@angular/core';
 import {
-  MatDialogRef,
-  MAT_DIALOG_DATA,
-  MatCheckboxChange
-} from '@angular/material';
+  Component,
+  Injector,
+  OnInit,
+  EventEmitter,
+  Output,
+} from '@angular/core';
 import { finalize } from 'rxjs/operators';
+import { BsModalRef } from 'ngx-bootstrap/modal';
 import * as _ from 'lodash';
 import { AppComponentBase } from '@shared/app-component-base';
 import {
   RoleServiceProxy,
   GetRoleForEditOutput,
   RoleDto,
-  PermissionDto
+  PermissionDto,
+  RoleEditDto,
+  FlatPermissionDto
 } from '@shared/service-proxies/service-proxies';
 
 @Component({
-  templateUrl: 'edit-role-dialog.component.html',
-  styles: [
-    `
-      mat-form-field {
-        width: 100%;
-      }
-      mat-checkbox {
-        padding-bottom: 5px;
-      }
-    `
-  ]
+  templateUrl: 'edit-role-dialog.component.html'
 })
 export class EditRoleDialogComponent extends AppComponentBase
   implements OnInit {
   saving = false;
-  role: RoleDto = new RoleDto();
-  permissions: PermissionDto[] = [];
-  grantedPermissionNames: string[] = [];
+  id: number;
+  role = new RoleEditDto();
+  permissions: FlatPermissionDto[];
+  grantedPermissionNames: string[];
   checkedPermissionsMap: { [key: string]: boolean } = {};
+
+  @Output() onSave = new EventEmitter<any>();
 
   constructor(
     injector: Injector,
     private _roleService: RoleServiceProxy,
-    private _dialogRef: MatDialogRef<EditRoleDialogComponent>,
-    @Optional() @Inject(MAT_DIALOG_DATA) private _id: number
+    public bsModalRef: BsModalRef
   ) {
     super(injector);
   }
 
   ngOnInit(): void {
     this._roleService
-      .getRoleForEdit(this._id)
+      .getRoleForEdit(this.id)
       .subscribe((result: GetRoleForEditOutput) => {
-        this.role.init(result.role);
-        _.map(result.permissions, item => {
-          const permission = new PermissionDto();
-          permission.init(item);
-          this.permissions.push(permission);
-        });
+        this.role = result.role;
+        this.permissions = result.permissions;
         this.grantedPermissionNames = result.grantedPermissionNames;
         this.setInitialPermissionsStatus();
       });
   }
 
   setInitialPermissionsStatus(): void {
-    _.map(this.permissions, item => {
+    _.map(this.permissions, (item) => {
       this.checkedPermissionsMap[item.name] = this.isPermissionChecked(
         item.name
       );
@@ -71,13 +63,13 @@ export class EditRoleDialogComponent extends AppComponentBase
     return _.includes(this.grantedPermissionNames, permissionName);
   }
 
-  onPermissionChange(permission: PermissionDto, $event: MatCheckboxChange) {
-    this.checkedPermissionsMap[permission.name] = $event.checked;
+  onPermissionChange(permission: PermissionDto, $event) {
+    this.checkedPermissionsMap[permission.name] = $event.target.checked;
   }
 
   getCheckedPermissions(): string[] {
     const permissions: string[] = [];
-    _.forEach(this.checkedPermissionsMap, function(value, key) {
+    _.forEach(this.checkedPermissionsMap, function (value, key) {
       if (value) {
         permissions.push(key);
       }
@@ -88,10 +80,12 @@ export class EditRoleDialogComponent extends AppComponentBase
   save(): void {
     this.saving = true;
 
-    this.role.grantedPermissions = this.getCheckedPermissions();
+    const role = new RoleDto();
+    role.init(this.role);
+    role.grantedPermissions = this.getCheckedPermissions();
 
     this._roleService
-      .update(this.role)
+      .update(role)
       .pipe(
         finalize(() => {
           this.saving = false;
@@ -99,11 +93,8 @@ export class EditRoleDialogComponent extends AppComponentBase
       )
       .subscribe(() => {
         this.notify.info(this.l('SavedSuccessfully'));
-        this.close(true);
+        this.bsModalRef.hide();
+        this.onSave.emit();
       });
-  }
-
-  close(result: any): void {
-    this._dialogRef.close(result);
   }
 }
