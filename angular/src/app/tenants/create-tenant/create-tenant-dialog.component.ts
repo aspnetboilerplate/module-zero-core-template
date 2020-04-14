@@ -1,6 +1,12 @@
-import { Component, Injector, OnInit } from '@angular/core';
-import { MatDialogRef } from '@angular/material';
+import {
+  Component,
+  Injector,
+  OnInit,
+  Output,
+  EventEmitter
+} from '@angular/core';
 import { finalize } from 'rxjs/operators';
+import { BsModalRef } from 'ngx-bootstrap/modal';
 import { AppComponentBase } from '@shared/app-component-base';
 import {
   CreateTenantDto,
@@ -8,27 +14,19 @@ import {
 } from '@shared/service-proxies/service-proxies';
 
 @Component({
-  templateUrl: 'create-tenant-dialog.component.html',
-  styles: [
-    `
-      mat-form-field {
-        width: 100%;
-      }
-      mat-checkbox {
-        padding-bottom: 5px;
-      }
-    `
-  ]
+  templateUrl: 'create-tenant-dialog.component.html'
 })
 export class CreateTenantDialogComponent extends AppComponentBase
   implements OnInit {
   saving = false;
   tenant: CreateTenantDto = new CreateTenantDto();
 
+  @Output() onSave = new EventEmitter<any>();
+
   constructor(
     injector: Injector,
     public _tenantService: TenantServiceProxy,
-    private _dialogRef: MatDialogRef<CreateTenantDialogComponent>
+    public bsModalRef: BsModalRef
   ) {
     super(injector);
   }
@@ -49,11 +47,8 @@ export class CreateTenantDialogComponent extends AppComponentBase
       )
       .subscribe(() => {
         this.notify.info(this.l('SavedSuccessfully'));
-        this.close(true);
+        this.bsModalRef.hide();
+        this.onSave.emit();
       });
-  }
-
-  close(result: any): void {
-    this._dialogRef.close(result);
   }
 }
