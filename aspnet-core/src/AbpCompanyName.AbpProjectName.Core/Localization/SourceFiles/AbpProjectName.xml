@@ -105,5 +105,10 @@
     <text name="RoleDeleteWarningMessage">Role {0} will be deleted and unassigned from all assigned users.</text>
     <text name="TenantDeleteWarningMessage">Tenant {0} will be deleted.</text>
     <text name="SearchWithThreeDot">Search...</text>
+    <text name="PleaseEnterAtLeastNCharacter">Please enter at least {0} characters</text>
+    <text name="PleaseEnterNoMoreThanNCharacter">Please enter no more than {0} characters</text>
+    <text name="InvalidEmailAddress">Invalid email address</text>
+    <text name="InvalidPattern">Invalid</text>
+    <text name="PairsDoNotMatch">Do not match</text>
   </texts>
 </localizationDictionary>
