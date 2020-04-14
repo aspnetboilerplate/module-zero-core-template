@@ -5,6 +5,7 @@ import { HttpClientJsonpModule } from '@angular/common/http';
 import { HttpClientModule } from '@angular/common/http';
 
 import { ModalModule } from 'ngx-bootstrap/modal';
+import { BsDropdownModule } from 'ngx-bootstrap/dropdown';
 import { NgxPaginationModule } from 'ngx-pagination';
 
 import { AppRoutingModule } from './app-routing.module';
@@ -37,6 +38,12 @@ import { CreateUserDialogComponent } from '@app/users/create-user/create-user-di
 import { EditUserDialogComponent } from '@app/users/edit-user/edit-user-dialog.component';
 import { ChangePasswordComponent } from './users/change-password/change-password.component';
 import { ResetPasswordDialogComponent } from './users/reset-password/reset-password.component';
+// layout
+import { HeaderComponent } from './layout/header.component';
+import { HeaderLeftNavbarComponent } from './layout/header-left-navbar.component';
+import { HeaderLanguageMenuComponent } from './layout/header-language-menu.component';
+import { HeaderUserMenuComponent } from './layout/header-user-menu.component';
+import { FooterComponent } from './layout/footer.component';
 
 @NgModule({
   declarations: [
@@ -62,7 +69,13 @@ import { ResetPasswordDialogComponent } from './users/reset-password/reset-passw
     CreateUserDialogComponent,
     EditUserDialogComponent,
     ChangePasswordComponent,
-    ResetPasswordDialogComponent
+    ResetPasswordDialogComponent,
+    // layout
+    HeaderComponent,
+    HeaderLeftNavbarComponent,
+    HeaderLanguageMenuComponent,
+    HeaderUserMenuComponent,
+    FooterComponent,
   ],
   imports: [
     CommonModule,
@@ -71,11 +84,12 @@ import { ResetPasswordDialogComponent } from './users/reset-password/reset-passw
     HttpClientModule,
     HttpClientJsonpModule,
     ModalModule.forChild(),
+    BsDropdownModule,
     AbpModule,
     AppRoutingModule,
     ServiceProxyModule,
     SharedModule,
-    NgxPaginationModule
+    NgxPaginationModule,
   ],
   providers: [],
   entryComponents: [
@@ -88,7 +102,7 @@ import { ResetPasswordDialogComponent } from './users/reset-password/reset-passw
     // users
     CreateUserDialogComponent,
     EditUserDialogComponent,
-    ResetPasswordDialogComponent
-  ]
+    ResetPasswordDialogComponent,
+  ],
 })
 export class AppModule {}
