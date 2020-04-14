@@ -18,11 +18,8 @@ import { SharedModule } from '@shared/shared.module';
 
 import { HomeComponent } from '@app/home/home.component';
 import { AboutComponent } from '@app/about/about.component';
-import { TopBarComponent } from '@app/layout/topbar.component';
-import { TopBarLanguageSwitchComponent } from '@app/layout/topbar-languageswitch.component';
 import { SideBarUserAreaComponent } from '@app/layout/sidebar-user-area.component';
 import { SideBarNavComponent } from '@app/layout/sidebar-nav.component';
-import { SideBarFooterComponent } from '@app/layout/sidebar-footer.component';
 import { RightSideBarComponent } from '@app/layout/right-sidebar.component';
 // tenants
 import { TenantsComponent } from '@app/tenants/tenants.component';
@@ -50,11 +47,8 @@ import { FooterComponent } from './layout/footer.component';
     AppComponent,
     HomeComponent,
     AboutComponent,
-    TopBarComponent,
-    TopBarLanguageSwitchComponent,
     SideBarUserAreaComponent,
     SideBarNavComponent,
-    SideBarFooterComponent,
     RightSideBarComponent,
     // tenants
     TenantsComponent,
