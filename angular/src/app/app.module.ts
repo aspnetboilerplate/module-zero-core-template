@@ -19,9 +19,6 @@ import { SharedModule } from '@shared/shared.module';
 
 import { HomeComponent } from '@app/home/home.component';
 import { AboutComponent } from '@app/about/about.component';
-import { SideBarUserAreaComponent } from '@app/layout/sidebar-user-area.component';
-import { SideBarNavComponent } from '@app/layout/sidebar-nav.component';
-import { RightSideBarComponent } from '@app/layout/right-sidebar.component';
 // tenants
 import { TenantsComponent } from '@app/tenants/tenants.component';
 import { CreateTenantDialogComponent } from './tenants/create-tenant/create-tenant-dialog.component';
@@ -52,9 +49,6 @@ import { SidebarMenuComponent } from './layout/sidebar-menu.component';
     AppComponent,
     HomeComponent,
     AboutComponent,
-    SideBarUserAreaComponent,
-    SideBarNavComponent,
-    RightSideBarComponent,
     // tenants
     TenantsComponent,
     CreateTenantDialogComponent,
