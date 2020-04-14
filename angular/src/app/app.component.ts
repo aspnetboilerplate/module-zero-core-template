@@ -1,6 +1,7 @@
 import { Component, Injector, OnInit, Renderer2 } from '@angular/core';
 import { AppComponentBase } from '@shared/app-component-base';
 import { SignalRAspNetCoreHelper } from '@shared/helpers/SignalRAspNetCoreHelper';
+import { LayoutStoreService } from '@shared/layout/layout-store.service';
 
 @Component({
   templateUrl: './app.component.html'
@@ -8,7 +9,11 @@ import { SignalRAspNetCoreHelper } from '@shared/helpers/SignalRAspNetCoreHelper
 export class AppComponent extends AppComponentBase implements OnInit {
   sidebarExpanded: boolean;
 
-  constructor(injector: Injector, private renderer: Renderer2) {
+  constructor(
+    injector: Injector,
+    private renderer: Renderer2,
+    private _layoutStore: LayoutStoreService
+  ) {
     super(injector);
   }
 
@@ -31,5 +36,13 @@ export class AppComponent extends AppComponentBase implements OnInit {
         }
       });
     });
+
+    this._layoutStore.sidebarExpanded.subscribe((value) => {
+      this.sidebarExpanded = value;
+    });
+  }
+
+  toggleSidebar(): void {
+    this._layoutStore.setSidebarExpanded(!this.sidebarExpanded);
   }
 }

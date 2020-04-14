@@ -41,6 +41,9 @@ import { HeaderLeftNavbarComponent } from './layout/header-left-navbar.component
 import { HeaderLanguageMenuComponent } from './layout/header-language-menu.component';
 import { HeaderUserMenuComponent } from './layout/header-user-menu.component';
 import { FooterComponent } from './layout/footer.component';
+import { SidebarComponent } from './layout/sidebar.component';
+import { SidebarLogoComponent } from './layout/sidebar-logo.component';
+import { SidebarUserPanelComponent } from './layout/sidebar-user-panel.component';
 
 @NgModule({
   declarations: [
@@ -70,6 +73,9 @@ import { FooterComponent } from './layout/footer.component';
     HeaderLanguageMenuComponent,
     HeaderUserMenuComponent,
     FooterComponent,
+    SidebarComponent,
+    SidebarLogoComponent,
+    SidebarUserPanelComponent
   ],
   imports: [
     CommonModule,

@@ -18,6 +18,7 @@ import { CdkTreeModule } from '@angular/cdk/tree';
 import { ApbValidationSummaryComponent } from './components/validation/abp-validation.summary.component';
 import { AbpModalHeaderComponent } from './components/modal/abp-modal-header.component';
 import { AbpModalFooterComponent } from './components/modal/abp-modal-footer.component';
+import { LayoutStoreService } from './layout/layout-store.service';
 
 import {
     MatAutocompleteModule,
@@ -59,6 +60,7 @@ import {
 import { BlockDirective } from './directives/block.directive';
 import { BusyDirective } from './directives/busy.directive';
 import { EqualValidator } from './directives/equal-validator.directive';
+
 @NgModule({
     imports: [
         CommonModule,
@@ -169,7 +171,8 @@ export class SharedModule {
                 AppSessionService,
                 AppUrlService,
                 AppAuthService,
-                AppRouteGuard
+                AppRouteGuard,
+                LayoutStoreService
             ]
         };
     }
