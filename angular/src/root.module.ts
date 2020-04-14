@@ -19,6 +19,7 @@ import { RootComponent } from './root.component';
 import { AppPreBootstrap } from './AppPreBootstrap';
 import { ModalModule } from 'ngx-bootstrap/modal';
 import { BsDropdownModule } from 'ngx-bootstrap/dropdown';
+import { CollapseModule } from 'ngx-bootstrap/collapse';
 import { HttpClientModule } from '@angular/common/http';
 
 import { GestureConfig } from '@angular/material';
@@ -99,6 +100,7 @@ export function getCurrentLanguage(): string {
         SharedModule.forRoot(),
         ModalModule.forRoot(),
         BsDropdownModule.forRoot(),
+        CollapseModule.forRoot(),
         AbpModule,
         ServiceProxyModule,
         RootRoutingModule,

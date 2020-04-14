@@ -6,6 +6,7 @@ import { HttpClientModule } from '@angular/common/http';
 
 import { ModalModule } from 'ngx-bootstrap/modal';
 import { BsDropdownModule } from 'ngx-bootstrap/dropdown';
+import { CollapseModule } from 'ngx-bootstrap/collapse';
 import { NgxPaginationModule } from 'ngx-pagination';
 
 import { AppRoutingModule } from './app-routing.module';
@@ -44,6 +45,7 @@ import { FooterComponent } from './layout/footer.component';
 import { SidebarComponent } from './layout/sidebar.component';
 import { SidebarLogoComponent } from './layout/sidebar-logo.component';
 import { SidebarUserPanelComponent } from './layout/sidebar-user-panel.component';
+import { SidebarMenuComponent } from './layout/sidebar-menu.component';
 
 @NgModule({
   declarations: [
@@ -75,7 +77,8 @@ import { SidebarUserPanelComponent } from './layout/sidebar-user-panel.component
     FooterComponent,
     SidebarComponent,
     SidebarLogoComponent,
-    SidebarUserPanelComponent
+    SidebarUserPanelComponent,
+    SidebarMenuComponent
   ],
   imports: [
     CommonModule,
@@ -85,6 +88,7 @@ import { SidebarUserPanelComponent } from './layout/sidebar-user-panel.component
     HttpClientJsonpModule,
     ModalModule.forChild(),
     BsDropdownModule,
+    CollapseModule,
     AbpModule,
     AppRoutingModule,
     ServiceProxyModule,
