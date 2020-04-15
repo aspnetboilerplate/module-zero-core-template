@@ -36,7 +36,7 @@ export class SidebarMenuComponent extends AppComponentBase implements OnInit {
         const primaryUrlSegmentGroup = this.router.parseUrl(currentUrl).root
           .children[PRIMARY_OUTLET];
         if (primaryUrlSegmentGroup) {
-          this.activeMenuItems('/' + primaryUrlSegmentGroup.toString());
+          this.activateMenuItems('/' + primaryUrlSegmentGroup.toString());
         }
       });
   }
@@ -137,21 +137,21 @@ export class SidebarMenuComponent extends AppComponentBase implements OnInit {
     });
   }
 
-  activeMenuItems(url: string): void {
-    this.deactiveMenuItems(this.menuItems);
+  activateMenuItems(url: string): void {
+    this.deactivateMenuItems(this.menuItems);
     this.activatedMenuItems = [];
     const foundedItems = this.findMenuItemsByUrl(url, this.menuItems);
     foundedItems.forEach((item) => {
-      this.activeMenuItem(item);
+      this.activateMenuItem(item);
     });
   }
 
-  deactiveMenuItems(items: MenuItem[]): void {
+  deactivateMenuItems(items: MenuItem[]): void {
     items.forEach((item: MenuItem) => {
       item.isActive = false;
       item.isCollapsed = true;
       if (item.children) {
-        this.deactiveMenuItems(item.children);
+        this.deactivateMenuItems(item.children);
       }
     });
   }
@@ -171,14 +171,14 @@ export class SidebarMenuComponent extends AppComponentBase implements OnInit {
     return foundedItems;
   }
 
-  activeMenuItem(item: MenuItem): void {
+  activateMenuItem(item: MenuItem): void {
     item.isActive = true;
     if (item.children) {
       item.isCollapsed = false;
     }
     this.activatedMenuItems.push(item);
     if (item.parentId) {
-      this.activeMenuItem(this.nestedMenuItemsMap[item.parentId]);
+      this.activateMenuItem(this.nestedMenuItemsMap[item.parentId]);
     }
   }
 
