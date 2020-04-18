@@ -16,7 +16,7 @@ import { MenuItem } from '@shared/layout/menu-item';
 })
 export class SidebarMenuComponent extends AppComponentBase implements OnInit {
   menuItems: MenuItem[];
-  nestedMenuItemsMap: { [key: number]: MenuItem } = {};
+  menuItemsMap: { [key: number]: MenuItem } = {};
   activatedMenuItems: MenuItem[] = [];
   routerEvents: BehaviorSubject<RouterEvent> = new BehaviorSubject(undefined);
   homeRoute = '/app/home';
@@ -129,7 +129,7 @@ export class SidebarMenuComponent extends AppComponentBase implements OnInit {
         item.parentId = parentId;
       }
       if (parentId || item.children) {
-        this.nestedMenuItemsMap[item.id] = item;
+        this.menuItemsMap[item.id] = item;
       }
       if (item.children) {
         this.patchMenuItems(item.children, item.id);
@@ -178,7 +178,7 @@ export class SidebarMenuComponent extends AppComponentBase implements OnInit {
     }
     this.activatedMenuItems.push(item);
     if (item.parentId) {
-      this.activateMenuItem(this.nestedMenuItemsMap[item.parentId]);
+      this.activateMenuItem(this.menuItemsMap[item.parentId]);
     }
   }
 
