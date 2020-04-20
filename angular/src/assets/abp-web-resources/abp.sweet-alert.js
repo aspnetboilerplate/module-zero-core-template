@@ -14,7 +14,7 @@ var abp = abp || {};
 
     options = options || {};
     options.title = title;
-    options.type = type;
+    options.icon = type;
     options.confirmButtonText =
       options.confirmButtonText || abp.localization.abpWeb("Ok");
 
@@ -60,7 +60,7 @@ var abp = abp || {};
 
     options = options || {};
     options.title = title ? title : abp.localization.abpWeb("AreYouSure");
-    options.type = "warning";
+    options.icon = "warning";
 
     options.confirmButtonText =
       options.confirmButtonText || abp.localization.abpWeb("Yes");
