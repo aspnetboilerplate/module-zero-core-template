@@ -39,7 +39,6 @@
               "src/shared/core.less"
             ],
             "scripts": [
-              "node_modules/jquery/dist/jquery.min.js",
               "node_modules/moment/min/moment.min.js",
               "node_modules/@aspnet/signalr/dist/browser/signalr.min.js",
               "node_modules/sweetalert2/dist/sweetalert2.js",
@@ -48,7 +47,6 @@
               "node_modules/abp-web-resources/Abp/Framework/scripts/abp.js",
               "src/assets/abp-web-resources/abp.sweet-alert.js",
               "src/assets/abp-web-resources/abp.freeze-ui.js",
-              "node_modules/abp-web-resources/Abp/Framework/scripts/libs/abp.jquery.js",
               "node_modules/abp-web-resources/Abp/Framework/scripts/libs/abp.moment.js"
             ]
           },
@@ -129,7 +127,6 @@
               "src/shared/core.less"
             ],
             "scripts": [
-              "node_modules/jquery/dist/jquery.min.js",
               "node_modules/moment/min/moment.min.js",
               "node_modules/@aspnet/signalr/dist/browser/signalr.min.js",
               "node_modules/sweetalert2/dist/sweetalert2.js",
@@ -138,7 +135,6 @@
               "node_modules/abp-web-resources/Abp/Framework/scripts/abp.js",
               "src/assets/abp-web-resources/abp.sweet-alert.js",
               "src/assets/abp-web-resources/abp.freeze-ui.js",
-              "node_modules/abp-web-resources/Abp/Framework/scripts/libs/abp.jquery.js",
               "node_modules/abp-web-resources/Abp/Framework/scripts/libs/abp.moment.js"
             ]
           }
