@@ -38,8 +38,7 @@
     "push.js": "1.0.9",
     "rxjs": "^6.4.0",
     "spin.js": "^2.3.2",
-    "sweetalert": "^2.0.8",
-    "toastr": "^2.1.2",
+    "sweetalert2": "^9.10.12",
     "ts-helpers": "^1.1.2",
     "web-animations-js": "^2.3.2",
     "zone.js": "~0.9.1"
