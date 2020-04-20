@@ -7,7 +7,7 @@
           type="text"
           class="form-control"
           name="userNameOrEmailAddress"
-          [(ngModel)]="loginService.authenticateModel.userNameOrEmailAddress"
+          [(ngModel)]="authService.authenticateModel.userNameOrEmailAddress"
           [placeholder]="'UserNameOrEmail' | localize"
           required
           maxlength="256"
@@ -31,7 +31,7 @@
           type="password"
           class="form-control"
           name="password"
-          [(ngModel)]="loginService.authenticateModel.password"
+          [(ngModel)]="authService.authenticateModel.password"
           [placeholder]="'Password' | localize"
           required
           maxlength="32"
@@ -57,7 +57,7 @@
             class="custom-control-input"
             id="rememberMe"
             name="rememberMe"
-            [(ngModel)]="loginService.rememberMe"
+            [(ngModel)]="authService.rememberMe"
           />
           <label for="rememberMe" class="custom-control-label">
             {{ "RememberMe" | localize }}
