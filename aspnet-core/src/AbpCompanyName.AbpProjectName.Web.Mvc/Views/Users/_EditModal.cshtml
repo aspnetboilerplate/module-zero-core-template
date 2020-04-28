@@ -18,7 +18,7 @@
             </li>
         </ul>
         <div class="tab-content mt-4">
-            <div role="tabpanel" class="tab-pane container animated fadeIn active" id="edit-user-details">
+            <div role="tabpanel" class="tab-pane container active" id="edit-user-details">
                 <div class="form-group row required">
                     <label class="col-md-3 col-form-label" for="username">@L("UserName")</label>
                     <div class="col-md-9">
@@ -50,7 +50,7 @@
                     </div>
                 </div>
             </div>
-            <div role="tabpanel" class="tab-pane container animated fadeIn" id="edit-user-roles">
+            <div role="tabpanel" class="tab-pane container" id="edit-user-roles">
                 <div class="row">
                     @foreach (var role in Model.Roles)
                     {

@@ -192,10 +192,6 @@
       "destination": "wwwroot/libs/jquery-validate"
     },
     {
-      "library": "animate.css@3.7.0",
-      "destination": "wwwroot/libs/animate.css"
-    },
-    {
       "library": "push.js@1.0.9",
       "destination": "wwwroot/libs/push.js"
     }

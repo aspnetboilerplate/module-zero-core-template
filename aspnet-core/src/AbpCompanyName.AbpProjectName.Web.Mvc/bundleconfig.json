@@ -6,7 +6,6 @@
       "wwwroot/libs-ext/famfamfam-flags/dist/sprite/famfamfam-flags.css",
       "wwwroot/libs/icheck-bootstrap/icheck-bootstrap.css",
       "wwwroot/libs/toastr/toastr.css",
-      "wwwroot/libs/animate.css/animate.css",
       "wwwroot/libs/admin-lte/dist/css/adminlte.css",
       "wwwroot/css/style.css",
       "wwwroot/view-resources/Views/Account/_Layout.css"
@@ -40,7 +39,6 @@
     "inputFiles": [
       "wwwroot/libs/font-awesome/css/all.min.css",
       "wwwroot/libs-ext/famfamfam-flags/dist/sprite/famfamfam-flags.min.css",
-      "wwwroot/libs/animate.css/animate.css",
       "wwwroot/libs/icheck-bootstrap/icheck-bootstrap.css",
       "wwwroot/libs/toastr/toastr.css",
       "wwwroot/libs/admin-lte/dist/css/adminlte.min.css",
