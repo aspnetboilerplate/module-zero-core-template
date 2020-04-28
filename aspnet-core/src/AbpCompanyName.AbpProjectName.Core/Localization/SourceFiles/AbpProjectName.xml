@@ -114,5 +114,7 @@
     <text name="TotalRecordsCount">Total: {0}</text>
     <text name="Search">Search</text>
     <text name="Clear">Clear</text>
+    <text name="ResetPasswordStepOneInfo">1. Enter your administrator password</text>
+    <text name="ResetPasswordStepTwoInfo">2. Copy this random password so you can send it to the user</text>
   </texts>
 </localizationDictionary>

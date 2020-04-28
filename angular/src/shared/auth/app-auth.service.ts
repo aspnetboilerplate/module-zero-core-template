@@ -3,12 +3,16 @@ import { AppConsts } from '@shared/AppConsts';
 
 @Injectable()
 export class AppAuthService {
-
-    logout(reload?: boolean): void {
-        abp.auth.clearToken();
-		abp.utils.setCookieValue(AppConsts.authorization.encryptedAuthTokenName, undefined, undefined, abp.appPath);
-        if (reload !== false) {
-            location.href = AppConsts.appBaseUrl;
-        }
+  logout(reload?: boolean): void {
+    abp.auth.clearToken();
+    abp.utils.setCookieValue(
+      AppConsts.authorization.encryptedAuthTokenName,
+      undefined,
+      undefined,
+      abp.appPath
+    );
+    if (reload !== false) {
+      location.href = AppConsts.appBaseUrl;
     }
+  }
 }
