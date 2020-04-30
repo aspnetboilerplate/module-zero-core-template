@@ -45,7 +45,7 @@
     "flot": "^0.8.0-alpha",
     "font-awesome": "^4.7.0",
     "hammerjs": "^2.0.8",
-    "jquery": "^3.1.1",
+    "jquery": "^3.5.0",
     "jquery-countto": "^1.2.0",
     "jquery-migrate": "^3.0.0",
     "jquery-slimscroll": "^1.3.8",
