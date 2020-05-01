@@ -138,9 +138,10 @@ namespace AbpCompanyName.AbpProjectName.Web.Host.Startup
                 endpoints.MapControllerRoute("default", "{controller=Home}/{action=Index}/{id?}");
                 endpoints.MapControllerRoute("defaultWithArea", "{area}/{controller=Home}/{action=Index}/{id?}");
             });
-          
+
             // Enable middleware to serve generated Swagger as a JSON endpoint
-            app.UseSwagger();
+            app.UseSwagger(c => { c.RouteTemplate = "swagger/{documentName}/swagger.json"; });
+
             // Enable middleware to serve swagger-ui assets (HTML, JS, CSS etc.)
             app.UseSwaggerUI(options =>
             {
