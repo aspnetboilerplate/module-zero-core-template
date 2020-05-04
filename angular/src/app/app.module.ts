@@ -4,7 +4,10 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { HttpClientJsonpModule } from '@angular/common/http';
 import { HttpClientModule } from '@angular/common/http';
 
-import { ModalModule } from 'ngx-bootstrap';
+import { ModalModule } from 'ngx-bootstrap/modal';
+import { BsDropdownModule } from 'ngx-bootstrap/dropdown';
+import { CollapseModule } from 'ngx-bootstrap/collapse';
+import { TabsModule } from 'ngx-bootstrap/tabs';
 import { NgxPaginationModule } from 'ngx-pagination';
 
 import { AppRoutingModule } from './app-routing.module';
@@ -17,12 +20,6 @@ import { SharedModule } from '@shared/shared.module';
 
 import { HomeComponent } from '@app/home/home.component';
 import { AboutComponent } from '@app/about/about.component';
-import { TopBarComponent } from '@app/layout/topbar.component';
-import { TopBarLanguageSwitchComponent } from '@app/layout/topbar-languageswitch.component';
-import { SideBarUserAreaComponent } from '@app/layout/sidebar-user-area.component';
-import { SideBarNavComponent } from '@app/layout/sidebar-nav.component';
-import { SideBarFooterComponent } from '@app/layout/sidebar-footer.component';
-import { RightSideBarComponent } from '@app/layout/right-sidebar.component';
 // tenants
 import { TenantsComponent } from '@app/tenants/tenants.component';
 import { CreateTenantDialogComponent } from './tenants/create-tenant/create-tenant-dialog.component';
@@ -37,18 +34,22 @@ import { CreateUserDialogComponent } from '@app/users/create-user/create-user-di
 import { EditUserDialogComponent } from '@app/users/edit-user/edit-user-dialog.component';
 import { ChangePasswordComponent } from './users/change-password/change-password.component';
 import { ResetPasswordDialogComponent } from './users/reset-password/reset-password.component';
+// layout
+import { HeaderComponent } from './layout/header.component';
+import { HeaderLeftNavbarComponent } from './layout/header-left-navbar.component';
+import { HeaderLanguageMenuComponent } from './layout/header-language-menu.component';
+import { HeaderUserMenuComponent } from './layout/header-user-menu.component';
+import { FooterComponent } from './layout/footer.component';
+import { SidebarComponent } from './layout/sidebar.component';
+import { SidebarLogoComponent } from './layout/sidebar-logo.component';
+import { SidebarUserPanelComponent } from './layout/sidebar-user-panel.component';
+import { SidebarMenuComponent } from './layout/sidebar-menu.component';
 
 @NgModule({
   declarations: [
     AppComponent,
     HomeComponent,
     AboutComponent,
-    TopBarComponent,
-    TopBarLanguageSwitchComponent,
-    SideBarUserAreaComponent,
-    SideBarNavComponent,
-    SideBarFooterComponent,
-    RightSideBarComponent,
     // tenants
     TenantsComponent,
     CreateTenantDialogComponent,
@@ -62,7 +63,17 @@ import { ResetPasswordDialogComponent } from './users/reset-password/reset-passw
     CreateUserDialogComponent,
     EditUserDialogComponent,
     ChangePasswordComponent,
-    ResetPasswordDialogComponent
+    ResetPasswordDialogComponent,
+    // layout
+    HeaderComponent,
+    HeaderLeftNavbarComponent,
+    HeaderLanguageMenuComponent,
+    HeaderUserMenuComponent,
+    FooterComponent,
+    SidebarComponent,
+    SidebarLogoComponent,
+    SidebarUserPanelComponent,
+    SidebarMenuComponent
   ],
   imports: [
     CommonModule,
@@ -70,12 +81,15 @@ import { ResetPasswordDialogComponent } from './users/reset-password/reset-passw
     ReactiveFormsModule,
     HttpClientModule,
     HttpClientJsonpModule,
-    ModalModule.forRoot(),
+    ModalModule.forChild(),
+    BsDropdownModule,
+    CollapseModule,
+    TabsModule,
     AbpModule,
     AppRoutingModule,
     ServiceProxyModule,
     SharedModule,
-    NgxPaginationModule
+    NgxPaginationModule,
   ],
   providers: [],
   entryComponents: [
@@ -88,7 +102,7 @@ import { ResetPasswordDialogComponent } from './users/reset-password/reset-passw
     // users
     CreateUserDialogComponent,
     EditUserDialogComponent,
-    ResetPasswordDialogComponent
-  ]
+    ResetPasswordDialogComponent,
+  ],
 })
 export class AppModule {}

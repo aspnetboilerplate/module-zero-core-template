@@ -1,43 +1,39 @@
-import { Component, Injector, OnInit } from '@angular/core';
-import { MatDialogRef, MatCheckboxChange } from '@angular/material';
+import {
+  Component,
+  Injector,
+  OnInit,
+  EventEmitter,
+  Output,
+} from '@angular/core';
 import { finalize } from 'rxjs/operators';
+import { BsModalRef } from 'ngx-bootstrap/modal';
 import * as _ from 'lodash';
 import { AppComponentBase } from '@shared/app-component-base';
 import {
   RoleServiceProxy,
   RoleDto,
-
   PermissionDto,
   CreateRoleDto,
   PermissionDtoListResultDto
 } from '@shared/service-proxies/service-proxies';
 
 @Component({
-  templateUrl: 'create-role-dialog.component.html',
-  styles: [
-    `
-      mat-form-field {
-        width: 100%;
-      }
-      mat-checkbox {
-        padding-bottom: 5px;
-      }
-    `
-  ]
+  templateUrl: 'create-role-dialog.component.html'
 })
 export class CreateRoleDialogComponent extends AppComponentBase
   implements OnInit {
   saving = false;
-  role: RoleDto = new RoleDto();
+  role = new RoleDto();
   permissions: PermissionDto[] = [];
-  grantedPermissionNames: string[] = [];
   checkedPermissionsMap: { [key: string]: boolean } = {};
   defaultPermissionCheckedStatus = true;
+
+  @Output() onSave = new EventEmitter<any>();
 
   constructor(
     injector: Injector,
     private _roleService: RoleServiceProxy,
-    private _dialogRef: MatDialogRef<CreateRoleDialogComponent>
+    public bsModalRef: BsModalRef
   ) {
     super(injector);
   }
@@ -52,7 +48,7 @@ export class CreateRoleDialogComponent extends AppComponentBase
   }
 
   setInitialPermissionsStatus(): void {
-    _.map(this.permissions, item => {
+    _.map(this.permissions, (item) => {
       this.checkedPermissionsMap[item.name] = this.isPermissionChecked(
         item.name
       );
@@ -65,8 +61,8 @@ export class CreateRoleDialogComponent extends AppComponentBase
     return this.defaultPermissionCheckedStatus;
   }
 
-  onPermissionChange(permission: PermissionDto, $event: MatCheckboxChange) {
-    this.checkedPermissionsMap[permission.name] = $event.checked;
+  onPermissionChange(permission: PermissionDto, $event) {
+    this.checkedPermissionsMap[permission.name] = $event.target.checked;
   }
 
   getCheckedPermissions(): string[] {
@@ -82,13 +78,12 @@ export class CreateRoleDialogComponent extends AppComponentBase
   save(): void {
     this.saving = true;
 
-    this.role.grantedPermissions = this.getCheckedPermissions();
-
-    const role_ = new CreateRoleDto();
-    role_.init(this.role);
+    const role = new CreateRoleDto();
+    role.init(this.role);
+    role.grantedPermissions = this.getCheckedPermissions();
 
     this._roleService
-      .create(role_)
+      .create(role)
       .pipe(
         finalize(() => {
           this.saving = false;
@@ -96,11 +91,8 @@ export class CreateRoleDialogComponent extends AppComponentBase
       )
       .subscribe(() => {
         this.notify.info(this.l('SavedSuccessfully'));
-        this.close(true);
+        this.bsModalRef.hide();
+        this.onSave.emit();
       });
-  }
-
-  close(result: any): void {
-    this._dialogRef.close(result);
   }
 }

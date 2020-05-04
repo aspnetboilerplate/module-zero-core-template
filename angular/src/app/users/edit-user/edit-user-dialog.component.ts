@@ -1,10 +1,12 @@
-import { Component, Injector, Optional, Inject, OnInit } from '@angular/core';
 import {
-  MAT_DIALOG_DATA,
-  MatDialogRef,
-  MatCheckboxChange
-} from '@angular/material';
+  Component,
+  Injector,
+  OnInit,
+  EventEmitter,
+  Output
+} from '@angular/core';
 import { finalize } from 'rxjs/operators';
+import { BsModalRef } from 'ngx-bootstrap/modal';
 import * as _ from 'lodash';
 import { AppComponentBase } from '@shared/app-component-base';
 import {
@@ -14,39 +16,31 @@ import {
 } from '@shared/service-proxies/service-proxies';
 
 @Component({
-  templateUrl: './edit-user-dialog.component.html',
-  styles: [
-    `
-      mat-form-field {
-        width: 100%;
-      }
-      mat-checkbox {
-        padding-bottom: 5px;
-      }
-    `
-  ]
+  templateUrl: './edit-user-dialog.component.html'
 })
 export class EditUserDialogComponent extends AppComponentBase
   implements OnInit {
   saving = false;
-  user: UserDto = new UserDto();
+  user = new UserDto();
   roles: RoleDto[] = [];
   checkedRolesMap: { [key: string]: boolean } = {};
+  id: number;
+
+  @Output() onSave = new EventEmitter<any>();
 
   constructor(
     injector: Injector,
     public _userService: UserServiceProxy,
-    private _dialogRef: MatDialogRef<EditUserDialogComponent>,
-    @Optional() @Inject(MAT_DIALOG_DATA) private _id: number
+    public bsModalRef: BsModalRef
   ) {
     super(injector);
   }
 
   ngOnInit(): void {
-    this._userService.get(this._id).subscribe(result => {
+    this._userService.get(this.id).subscribe((result) => {
       this.user = result;
 
-      this._userService.getRoles().subscribe(result2 => {
+      this._userService.getRoles().subscribe((result2) => {
         this.roles = result2.items;
         this.setInitialRolesStatus();
       });
@@ -54,7 +48,7 @@ export class EditUserDialogComponent extends AppComponentBase
   }
 
   setInitialRolesStatus(): void {
-    _.map(this.roles, item => {
+    _.map(this.roles, (item) => {
       this.checkedRolesMap[item.normalizedName] = this.isRoleChecked(
         item.normalizedName
       );
@@ -65,13 +59,13 @@ export class EditUserDialogComponent extends AppComponentBase
     return _.includes(this.user.roleNames, normalizedName);
   }
 
-  onRoleChange(role: RoleDto, $event: MatCheckboxChange) {
-    this.checkedRolesMap[role.normalizedName] = $event.checked;
+  onRoleChange(role: RoleDto, $event) {
+    this.checkedRolesMap[role.normalizedName] = $event.target.checked;
   }
 
   getCheckedRoles(): string[] {
     const roles: string[] = [];
-    _.forEach(this.checkedRolesMap, function(value, key) {
+    _.forEach(this.checkedRolesMap, function (value, key) {
       if (value) {
         roles.push(key);
       }
@@ -93,11 +87,8 @@ export class EditUserDialogComponent extends AppComponentBase
       )
       .subscribe(() => {
         this.notify.info(this.l('SavedSuccessfully'));
-        this.close(true);
+        this.bsModalRef.hide();
+        this.onSave.emit();
       });
-  }
-
-  close(result: any): void {
-    this._dialogRef.close(result);
   }
 }

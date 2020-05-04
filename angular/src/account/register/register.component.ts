@@ -2,27 +2,17 @@ import { Component, Injector } from '@angular/core';
 import { Router } from '@angular/router';
 import { finalize } from 'rxjs/operators';
 import { AppComponentBase } from '@shared/app-component-base';
-import { accountModuleAnimation } from '@shared/animations/routerTransition';
 import {
   AccountServiceProxy,
   RegisterInput,
   RegisterOutput
 } from '@shared/service-proxies/service-proxies';
+import { accountModuleAnimation } from '@shared/animations/routerTransition';
 import { LoginService } from '../login/login.service';
 
 @Component({
   templateUrl: './register.component.html',
-  animations: [accountModuleAnimation()],
-  styles: [
-    `
-      mat-form-field {
-        width: 100%;
-      }
-      mat-checkbox {
-        padding-bottom: 5px;
-      }
-    `
-  ]
+  animations: [accountModuleAnimation()]
 })
 export class RegisterComponent extends AppComponentBase {
   model: RegisterInput = new RegisterInput();
@@ -35,10 +25,6 @@ export class RegisterComponent extends AppComponentBase {
     private _loginService: LoginService
   ) {
     super(injector);
-  }
-
-  back(): void {
-    this._router.navigate(['/login']);
   }
 
   save(): void {

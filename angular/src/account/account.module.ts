@@ -4,7 +4,7 @@ import { FormsModule } from '@angular/forms';
 import { HttpClientJsonpModule } from '@angular/common/http';
 import { HttpClientModule } from '@angular/common/http';
 
-import { ModalModule } from 'ngx-bootstrap';
+import { ModalModule } from 'ngx-bootstrap/modal';
 
 import { AbpModule } from '@abp/abp.module';
 
@@ -18,6 +18,8 @@ import { AccountComponent } from './account.component';
 import { LoginComponent } from './login/login.component';
 import { RegisterComponent } from './register/register.component';
 import { AccountLanguagesComponent } from './layout/account-languages.component';
+import { AccountHeaderComponent } from './layout/account-header.component';
+import { AccountFooterComponent } from './layout/account-footer.component';
 
 import { LoginService } from './login/login.service';
 
@@ -35,13 +37,15 @@ import { TenantChangeDialogComponent } from './tenant/tenant-change-dialog.compo
         SharedModule,
         ServiceProxyModule,
         AccountRoutingModule,
-        ModalModule.forRoot()
+        ModalModule.forChild()
     ],
     declarations: [
         AccountComponent,
         LoginComponent,
         RegisterComponent,
         AccountLanguagesComponent,
+        AccountHeaderComponent,
+        AccountFooterComponent,
         // tenant
         TenantChangeComponent,
         TenantChangeDialogComponent,

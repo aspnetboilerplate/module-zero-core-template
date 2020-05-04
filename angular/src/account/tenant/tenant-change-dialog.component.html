@@ -1,28 +1,37 @@
-﻿<form autocomplete="off"
-      #changeTenantForm="ngForm"
-      (ngSubmit)="save()">
-    <h1 mat-dialog-title >{{ "ChangeTenant" | localize }}</h1>
-    <mat-dialog-content>
-        <mat-form-field>
-            <input 
-                matInput
-                name="tenancyName"
-                [placeholder]="'TenancyName' | localize"
-                [(ngModel)]="tenancyName"
-                maxlength="64"/>
-        </mat-form-field>
-        <span class="help-block">{{ "LeaveEmptyToSwitchToHost" | localize }}</span>
-    </mat-dialog-content>
-    <div mat-dialog-actions 
-         align="end">
-        <button mat-button
-                type="button"
-                [disabled]="saving"
-                (click)="close()">{{ "Cancel" | localize }}</button>
-        <button mat-flat-button
-                type="submit"
-                flex="15"
-                color="primary"
-                [disabled]="!changeTenantForm.form.valid || saving">{{ "Save" | localize }}</button>
+﻿<form
+  class="form-horizontal"
+  autocomplete="off"
+  #changeTenantForm="ngForm"
+  (ngSubmit)="save()"
+>
+  <abp-modal-header
+    [title]="'ChangeTenant' | localize"
+    (onCloseClick)="bsModalRef.hide()"
+  ></abp-modal-header>
+  <div class="modal-body">
+    <div class="form-group row">
+      <label class="col-md-3 col-form-label" for="tenancyName">
+        {{ "TenancyName" | localize }}
+      </label>
+      <div class="col-md-9">
+        <input
+          type="text"
+          class="form-control"
+          id="tenancyName"
+          name="tenancyName"
+          [(ngModel)]="tenancyName"
+          maxlength="64"
+        />
+      </div>
     </div>
+    <span>
+      <i class="fa fa-info-circle"></i>
+      {{ "LeaveEmptyToSwitchToHost" | localize }}
+    </span>
+  </div>
+  <abp-modal-footer
+    [cancelDisabled]="saving"
+    [saveDisabled]="!changeTenantForm.form.valid || saving"
+    (onCancelClick)="bsModalRef.hide()"
+  ></abp-modal-footer>
 </form>

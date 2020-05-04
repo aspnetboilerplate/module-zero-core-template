@@ -1,15 +1,12 @@
-﻿<div
-  *ngIf="isMultiTenancyEnabled"
-  class="card tenant-change-component"
-  style="margin-bottom: 3px;">
-  <div class="body text-center">
-    <span>
-      {{ "CurrentTenant" | localize }}:
-      <span *ngIf="tenancyName" title="{{ name }}">
-          <strong>{{ tenancyName }}</strong>
-      </span>
-      <span *ngIf="!tenancyName">{{ "NotSelected" | localize }}</span> 
-      (<a href="javascript:;" (click)="showChangeModal()">{{ "Change" | localize }}</a>)
+﻿<div *ngIf="isMultiTenancyEnabled" class="text-center tenant-change-component">
+  <span>
+    {{ "CurrentTenant" | localize }}:
+    <span *ngIf="tenancyName" title="{{ name }}">
+      <strong>{{ tenancyName }}</strong>
     </span>
-  </div>
+    <span *ngIf="!tenancyName">{{ "NotSelected" | localize }}</span>
+    (<a href="javascript:;" (click)="showChangeModal()">
+      {{ "Change" | localize }} </a
+    >)
+  </span>
 </div>

@@ -1,20 +1,25 @@
 export class MenuItem {
-    name = '';
-    permissionName = '';
-    icon = '';
-    route = '';
-    items: MenuItem[];
+  id: number;
+  parentId: number;
+  label: string;
+  route: string;
+  icon: string;
+  permissionName: string;
+  isActive?: boolean;
+  isCollapsed?: boolean;
+  children: MenuItem[];
 
-    constructor(name: string, permissionName: string, icon: string, route: string, childItems: MenuItem[] = null) {
-        this.name = name;
-        this.permissionName = permissionName;
-        this.icon = icon;
-        this.route = route;
-
-        if (childItems) {
-            this.items = childItems;
-        } else {
-            this.items = [];
-        }
-    }
+  constructor(
+    label: string,
+    route: string,
+    icon: string,
+    permissionName: string = null,
+    children: MenuItem[] = null
+  ) {
+    this.label = label;
+    this.route = route;
+    this.icon = icon;
+    this.permissionName = permissionName;
+    this.children = children;
+  }
 }

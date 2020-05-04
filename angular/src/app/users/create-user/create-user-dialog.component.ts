@@ -1,6 +1,12 @@
-import { Component, Injector, OnInit } from '@angular/core';
-import { MatDialogRef, MatCheckboxChange } from '@angular/material';
+import {
+  Component,
+  Injector,
+  OnInit,
+  EventEmitter,
+  Output
+} from '@angular/core';
 import { finalize } from 'rxjs/operators';
+import { BsModalRef } from 'ngx-bootstrap/modal';
 import * as _ from 'lodash';
 import { AppComponentBase } from '@shared/app-component-base';
 import {
@@ -8,32 +14,38 @@ import {
   CreateUserDto,
   RoleDto
 } from '@shared/service-proxies/service-proxies';
+import { AbpValidationError } from '@shared/components/validation/abp-validation.api';
 
 @Component({
-  templateUrl: './create-user-dialog.component.html',
-  styles: [
-    `
-      mat-form-field {
-        width: 100%;
-      }
-      mat-checkbox {
-        padding-bottom: 5px;
-      }
-    `
-  ]
+  templateUrl: './create-user-dialog.component.html'
 })
 export class CreateUserDialogComponent extends AppComponentBase
   implements OnInit {
   saving = false;
-  user: CreateUserDto = new CreateUserDto();
+  user = new CreateUserDto();
   roles: RoleDto[] = [];
   checkedRolesMap: { [key: string]: boolean } = {};
   defaultRoleCheckedStatus = false;
+  passwordValidationErrors: Partial<AbpValidationError>[] = [
+    {
+      name: 'pattern',
+      localizationKey:
+        'PasswordsMustBeAtLeast8CharactersContainLowercaseUppercaseNumber',
+    },
+  ];
+  confirmPasswordValidationErrors: Partial<AbpValidationError>[] = [
+    {
+      name: 'validateEqual',
+      localizationKey: 'PasswordsDoNotMatch',
+    },
+  ];
+
+  @Output() onSave = new EventEmitter<any>();
 
   constructor(
     injector: Injector,
     public _userService: UserServiceProxy,
-    private _dialogRef: MatDialogRef<CreateUserDialogComponent>
+    public bsModalRef: BsModalRef
   ) {
     super(injector);
   }
@@ -41,14 +53,14 @@ export class CreateUserDialogComponent extends AppComponentBase
   ngOnInit(): void {
     this.user.isActive = true;
 
-    this._userService.getRoles().subscribe(result => {
+    this._userService.getRoles().subscribe((result) => {
       this.roles = result.items;
       this.setInitialRolesStatus();
     });
   }
 
   setInitialRolesStatus(): void {
-    _.map(this.roles, item => {
+    _.map(this.roles, (item) => {
       this.checkedRolesMap[item.normalizedName] = this.isRoleChecked(
         item.normalizedName
       );
@@ -61,13 +73,13 @@ export class CreateUserDialogComponent extends AppComponentBase
     return this.defaultRoleCheckedStatus;
   }
 
-  onRoleChange(role: RoleDto, $event: MatCheckboxChange) {
-    this.checkedRolesMap[role.normalizedName] = $event.checked;
+  onRoleChange(role: RoleDto, $event) {
+    this.checkedRolesMap[role.normalizedName] = $event.target.checked;
   }
 
   getCheckedRoles(): string[] {
     const roles: string[] = [];
-    _.forEach(this.checkedRolesMap, function(value, key) {
+    _.forEach(this.checkedRolesMap, function (value, key) {
       if (value) {
         roles.push(key);
       }
@@ -89,11 +101,8 @@ export class CreateUserDialogComponent extends AppComponentBase
       )
       .subscribe(() => {
         this.notify.info(this.l('SavedSuccessfully'));
-        this.close(true);
+        this.bsModalRef.hide();
+        this.onSave.emit();
       });
-  }
-
-  close(result: any): void {
-    this._dialogRef.close(result);
   }
 }

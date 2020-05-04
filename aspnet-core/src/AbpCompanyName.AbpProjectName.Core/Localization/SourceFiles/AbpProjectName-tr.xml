@@ -16,6 +16,8 @@
     <text name="TenancyName" value="Müşteri adı" />
     <text name="UserNameOrEmail" value="Kullanıcı adı ya da e-posta" />
     <text name="Password" value="Şifre" />
+    <text name="ResetPassword" value="Şifreyi yenile" />
+    <text name="UpdatePassword" value="Şifreyi güncelle" />
     <text name="RememberMe" value="Beni hatırla" />
     <text name="LogIn" value="Giriş" />
     <text name="LoginFailed" value="Giriş başarısız!" />
@@ -87,5 +89,17 @@
     <text name="RoleDeleteWarningMessage">{0} rolü silinecek ve atanmış kullanıcılardan kaldırılacaktır.</text>
     <text name="TenantDeleteWarningMessage">{0} müşterisi silinecektir.</text>
     <text name="SearchWithThreeDot">Ara...</text>
+    <text name="PleaseEnterAtLeastNCharacter">Lütfen en az {0} karakter giriniz</text>
+    <text name="PleaseEnterNoMoreThanNCharacter">Lütfen en fazla {0} karakter giriniz</text>
+    <text name="InvalidEmailAddress">Geçersiz e-posta adresi</text>
+    <text name="InvalidPattern">Geçersiz</text>
+    <text name="PairsDoNotMatch">Eşleşmiyor</text>
+    <text name="All">Hepsi</text>
+    <text name="TotalRecordsCount">Toplam: {0}</text>
+    <text name="Search">Bul</text>
+    <text name="Clear">Temizle</text>
+    <text name="CurrentPassword">Mevcut şifreniz</text>
+    <text name="NewPassword">Yeni şifre</text>
+    <text name="ConfirmNewPassword">Yeni şifreyi doğrula</text>
   </texts>
 </localizationDictionary>

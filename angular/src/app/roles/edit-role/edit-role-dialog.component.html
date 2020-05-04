@@ -1,76 +1,104 @@
-<form autocomplete="off" #editRoleForm="ngForm" (ngSubmit)="save()">
-  <h1 mat-dialog-title>{{ "EditRole" | localize }}</h1>
-  <mat-dialog-content style="width:600px;height:300px;">
-    <mat-tab-group>
-      <mat-tab [label]="'Details' | localize">
-        <br />
-        <div class="row-fluid">
-          <div class="col-md-12">
-            <mat-form-field>
-              <input
-                matInput
-                name="Name"
-                [placeholder]="'Name' | localize"
-                [(ngModel)]="role.name"
-                required
-                minlength="2"
-                maxlength="32"
-              />
-            </mat-form-field>
-            <mat-form-field>
-              <input
-                matInput
-                name="DisplayName"
-                [placeholder]="'DisplayName' | localize"
-                [(ngModel)]="role.displayName"
-                required
-                minlength="2"
-                maxlength="32"
-              />
-            </mat-form-field>
-            <mat-form-field>
-              <textarea
-                matInput
-                name="Description"
-                [placeholder]="'RoleDescription' | localize"
-                [(ngModel)]="role.description"
-              ></textarea>
-            </mat-form-field>
+<form
+  class="form-horizontal"
+  autocomplete="off"
+  #editRoleForm="ngForm"
+  (ngSubmit)="save()"
+>
+  <abp-modal-header
+    [title]="'EditRole' | localize"
+    (onCloseClick)="bsModalRef.hide()"
+  ></abp-modal-header>
+  <div class="modal-body">
+    <tabset>
+      <tab [heading]="'Details' | localize" class="pt-3 px-2">
+        <div class="form-group row required">
+          <label class="col-md-3 col-form-label" for="name">
+            {{ "Name" | localize }}
+          </label>
+          <div class="col-md-9">
+            <input
+              type="text"
+              class="form-control"
+              name="name"
+              id="name"
+              required
+              minlength="2"
+              maxlength="32"
+              [(ngModel)]="role.name"
+              #nameModel="ngModel"
+              #nameEl
+            />
+            <abp-validation-summary
+              [control]="nameModel"
+              [controlEl]="nameEl"
+            ></abp-validation-summary>
           </div>
         </div>
-      </mat-tab>
-      <mat-tab [label]="'Permissions' | localize">
-        <br />
-        <div class="row-fluid">
-          <ng-template ngFor let-permission [ngForOf]="permissions">
+        <div class="form-group row required">
+          <label class="col-md-3 col-form-label" for="displayName">
+            {{ "DisplayName" | localize }}
+          </label>
+          <div class="col-md-9">
+            <input
+              type="text"
+              class="form-control"
+              name="displayName"
+              id="displayName"
+              required
+              minlength="2"
+              maxlength="32"
+              [(ngModel)]="role.displayName"
+              #displayNameModel="ngModel"
+              #displayNameEl
+            />
+            <abp-validation-summary
+              [control]="displayNameModel"
+              [controlEl]="displayNameEl"
+            ></abp-validation-summary>
+          </div>
+        </div>
+        <div class="form-group row mb-0">
+          <label class="col-md-3 col-form-label" for="description">
+            {{ "RoleDescription" | localize }}
+          </label>
+          <div class="col-md-9">
+            <textarea
+              type="text"
+              class="form-control"
+              name="description"
+              id="description"
+              [(ngModel)]="role.description"
+            >
+            </textarea>
+          </div>
+        </div>
+      </tab>
+      <tab [heading]="'Permissions' | localize" class="pt-3 px-2">
+        <div class="form-group row mb-0">
+          <ng-container *ngFor="let permission of permissions; let i = index">
             <div class="col-md-6">
-              <div class="checkbox-wrapper">
-                <mat-checkbox
+              <div class="custom-control custom-checkbox">
+                <input
+                  type="checkbox"
+                  class="custom-control-input"
+                  [id]="'permission_' + i"
                   [checked]="isPermissionChecked(permission.name)"
                   [disabled]="role.isStatic"
                   (change)="onPermissionChange(permission, $event)"
-                >
+                />
+                <label class="custom-control-label" [for]="'permission_' + i">
                   {{ permission.displayName }}
-                </mat-checkbox>
+                </label>
               </div>
             </div>
-          </ng-template>
+          </ng-container>
         </div>
-      </mat-tab>
-    </mat-tab-group>
-  </mat-dialog-content>
-  <div mat-dialog-actions align="end">
-    <button mat-button type="button" [disabled]="saving" (click)="close(false)">
-      {{ "Cancel" | localize }}
-    </button>
-    <button
-      mat-flat-button
-      type="submit"
-      flex="15"
-      color="primary"
-      [disabled]="!editRoleForm.form.valid || saving"
-    >
-      {{ "Save" | localize }}
-    </button>
+      </tab>
+    </tabset>
   </div>
+  <abp-modal-footer
+    [cancelDisabled]="saving"
+    [saveDisabled]="!editRoleForm.form.valid || saving"
+    (onCancelClick)="bsModalRef.hide()"
+  ></abp-modal-footer>
 </form>
