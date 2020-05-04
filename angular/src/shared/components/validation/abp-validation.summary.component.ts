@@ -14,22 +14,7 @@ import { AbpValidationError } from './abp-validation.api';
   selector: 'abp-validation-summary',
   templateUrl: './abp-validation.summary.component.html'
 })
-export class AbpValidationSummaryComponent extends AppComponentBase
-  implements OnInit {
-  @Input() control: AbstractControl;
-  @Input() controlEl: ElementRef;
-  @Input() set customValidationErrors(val: AbpValidationError[]) {
-    if (val && val.length > 0) {
-      const defaults = this.defaultValidationErrors.filter(
-        (defaultValidationError) =>
-          !val.find(
-            (customValidationError) =>
-              customValidationError.name === defaultValidationError.name
-          )
-      );
-      this.validationErrors = <AbpValidationError[]>[...defaults, ...val];
-    }
-  }
+export class AbpValidationSummaryComponent extends AppComponentBase implements OnInit {
 
   defaultValidationErrors: Partial<AbpValidationError>[] = [
     { name: 'required', localizationKey: 'ThisFieldIsRequired' },
@@ -58,6 +43,21 @@ export class AbpValidationSummaryComponent extends AppComponentBase
     },
   ];
   validationErrors = <AbpValidationError[]>this.defaultValidationErrors;
+
+  @Input() control: AbstractControl;
+  @Input() controlEl: ElementRef;
+  @Input() set customValidationErrors(val: AbpValidationError[]) {
+    if (val && val.length > 0) {
+      const defaults = this.defaultValidationErrors.filter(
+        (defaultValidationError) =>
+          !val.find(
+            (customValidationError) =>
+              customValidationError.name === defaultValidationError.name
+          )
+      );
+      this.validationErrors = <AbpValidationError[]>[...defaults, ...val];
+    }
+  }
 
   constructor(injector: Injector, public _renderer: Renderer2) {
     super(injector);
