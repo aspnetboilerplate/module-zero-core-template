@@ -15,15 +15,15 @@ export class TenantChangeComponent extends AppComponentBase implements OnInit {
     super(injector);
   }
 
+  get isMultiTenancyEnabled(): boolean {
+    return abp.multiTenancy.isEnabled;
+  }
+
   ngOnInit() {
     if (this.appSession.tenant) {
       this.tenancyName = this.appSession.tenant.tenancyName;
       this.name = this.appSession.tenant.name;
     }
-  }
-
-  get isMultiTenancyEnabled(): boolean {
-    return abp.multiTenancy.isEnabled;
   }
 
   showChangeModal(): void {

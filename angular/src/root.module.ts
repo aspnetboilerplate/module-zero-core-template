@@ -9,8 +9,7 @@ import { CollapseModule } from 'ngx-bootstrap/collapse';
 import { TabsModule } from 'ngx-bootstrap/tabs';
 import * as _ from 'lodash';
 
-import { AbpModule } from '@abp/abp.module';
-import { AbpHttpInterceptor } from '@abp/abpHttpInterceptor';
+import { AbpHttpInterceptor } from 'abp-ng2-module';
 
 import { SharedModule } from '@shared/shared.module';
 import { ServiceProxyModule } from '@shared/service-proxies/service-proxy.module';
@@ -40,7 +39,6 @@ export function getCurrentLanguage(): string {
     BsDropdownModule.forRoot(),
     CollapseModule.forRoot(),
     TabsModule.forRoot(),
-    AbpModule,
     ServiceProxyModule,
     RootRoutingModule,
   ],

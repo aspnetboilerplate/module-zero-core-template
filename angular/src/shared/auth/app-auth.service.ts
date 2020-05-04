@@ -1,9 +1,7 @@
 import { Injectable } from '@angular/core';
 import { Router } from '@angular/router';
 import { finalize } from 'rxjs/operators';
-import { TokenService } from '@abp/auth/token.service';
-import { LogService } from '@abp/log/log.service';
-import { UtilsService } from '@abp/utils/utils.service';
+import { TokenService, LogService, UtilsService } from 'abp-ng2-module';
 import { AppConsts } from '@shared/AppConsts';
 import { UrlHelper } from '@shared/helpers/UrlHelper';
 import {

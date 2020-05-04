@@ -1,6 +1,5 @@
 import { CommonModule } from '@angular/common';
 import { NgModule, ModuleWithProviders } from '@angular/core';
-import { AbpModule } from '@abp/abp.module';
 import { RouterModule } from '@angular/router';
 import { NgxPaginationModule } from 'ngx-pagination';
 
@@ -11,7 +10,7 @@ import { AppRouteGuard } from './auth/auth-route-guard';
 import { LocalizePipe } from '@shared/pipes/localize.pipe';
 
 import { AbpPaginationControlsComponent } from './components/pagination/abp-pagination-controls.component';
-import { ApbValidationSummaryComponent } from './components/validation/abp-validation.summary.component';
+import { AbpValidationSummaryComponent } from './components/validation/abp-validation.summary.component';
 import { AbpModalHeaderComponent } from './components/modal/abp-modal-header.component';
 import { AbpModalFooterComponent } from './components/modal/abp-modal-footer.component';
 import { LayoutStoreService } from './layout/layout-store.service';
@@ -22,13 +21,12 @@ import { EqualValidator } from './directives/equal-validator.directive';
 @NgModule({
     imports: [
         CommonModule,
-        AbpModule,
         RouterModule,
         NgxPaginationModule
     ],
     declarations: [
         AbpPaginationControlsComponent,
-        ApbValidationSummaryComponent,
+        AbpValidationSummaryComponent,
         AbpModalHeaderComponent,
         AbpModalFooterComponent,
         LocalizePipe,
@@ -37,7 +35,7 @@ import { EqualValidator } from './directives/equal-validator.directive';
     ],
     exports: [
         AbpPaginationControlsComponent,
-        ApbValidationSummaryComponent,
+        AbpValidationSummaryComponent,
         AbpModalHeaderComponent,
         AbpModalFooterComponent,
         LocalizePipe,
@@ -46,7 +44,7 @@ import { EqualValidator } from './directives/equal-validator.directive';
     ]
 })
 export class SharedModule {
-    static forRoot(): ModuleWithProviders {
+    static forRoot(): ModuleWithProviders<SharedModule> {
         return {
             ngModule: SharedModule,
             providers: [

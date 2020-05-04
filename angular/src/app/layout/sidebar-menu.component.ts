@@ -93,18 +93,13 @@ export class SidebarMenuComponent extends AppComponentBase implements OnInit {
             'far fa-circle'
           ),
           new MenuItem(
-            'Description',
-            'https://aspnetzero.com/?ref=abptmpl#description',
-            'far fa-circle'
-          ),
-          new MenuItem(
             'Features',
-            'https://aspnetzero.com/?ref=abptmpl#features',
+            'https://aspnetzero.com/Features?ref=abptmpl',
             'far fa-circle'
           ),
           new MenuItem(
             'Pricing',
-            'https://aspnetzero.com/?ref=abptmpl#pricing',
+            'https://aspnetzero.com/Pricing?ref=abptmpl#pricing',
             'far fa-circle'
           ),
           new MenuItem(

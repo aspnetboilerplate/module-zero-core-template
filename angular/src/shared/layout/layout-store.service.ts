@@ -5,11 +5,11 @@ import { LayoutConfig } from './layout-config';
 
 @Injectable()
 export class LayoutStoreService {
-  private configSource: BehaviorSubject<LayoutConfig>;
   public readonly config$: Observable<LayoutConfig>;
   private readonly initialLayoutConfig: LayoutConfig = {
     sidebarExpanded: false
   };
+  private configSource: BehaviorSubject<LayoutConfig>;
 
   constructor() {
     this.configSource = new BehaviorSubject(this.initialLayoutConfig);
