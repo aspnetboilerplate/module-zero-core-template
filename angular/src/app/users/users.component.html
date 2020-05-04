@@ -137,8 +137,8 @@
                 <th>{{ "UserName" | localize }}</th>
                 <th>{{ "FullName" | localize }}</th>
                 <th>{{ "EmailAddress" | localize }}</th>
-                <th style="width: 200px;">{{ "Actions" | localize }}</th>
-                <th>{{ "Actions" | localize }}</th>
+                <th>{{ "IsActive" | localize }}</th>
+                <th style="width: 310px;">{{ "Actions" | localize }}</th>
               </tr>
             </thead>
             <tbody>
@@ -169,45 +169,30 @@
                   </div>
                 </td>
                 <td>
-                  <div class="btn-group" dropdown container="body">
-                    <button
-                      type="button"
-                      class="btn btn-default"
-                      (click)="editUser(user)"
-                    >
-                      <i class="fas fa-pencil-alt"></i>
-                      {{ "Edit" | localize }}
-                    </button>
-                    <button
-                      type="button"
-                      class="btn btn-default"
-                      dropdownToggle
-                    >
-                      <i class="fas fa-ellipsis-h"></i>
-                    </button>
-                    <ul *dropdownMenu class="dropdown-menu">
-                      <li role="menuitem">
-                        <a
-                          class="dropdown-item"
-                          href="javascript:;"
-                          (click)="delete(user)"
-                        >
-                          <i class="fas fa-trash"></i>
-                          {{ "Delete" | localize }}
-                        </a>
-                      </li>
-                      <li role="menuitem">
-                        <a
-                          class="dropdown-item"
-                          href="javascript:;"
-                          (click)="resetPassword(user)"
-                        >
-                          <i class="fas fa-lock"></i>
-                          {{ "ResetPassword" | localize }}
-                        </a>
-                      </li>
-                    </ul>
-                  </div>
+                  <button
+                    type="button"
+                    class="btn btn-sm bg-secondary"
+                    (click)="editUser(user)"
+                  >
+                    <i class="fas fa-pencil-alt"></i>
+                    {{ "Edit" | localize }}
+                  </button>
+                  <button
+                    type="button"
+                    class="btn btn-sm bg-danger mx-2"
+                    (click)="delete(user)"
+                  >
+                    <i class="fas fa-trash"></i>
+                    {{ "Delete" | localize }}
+                  </button>
+                  <button
+                    type="button"
+                    class="btn btn-sm bg-secondary"
+                    (click)="resetPassword(user)"
+                  >
+                    <i class="fas fa-lock"></i>
+                    {{ "ResetPassword" | localize }}
+                  </button>
                 </td>
               </tr>
             </tbody>

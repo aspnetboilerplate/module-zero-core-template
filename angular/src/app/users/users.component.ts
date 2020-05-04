@@ -50,6 +50,12 @@ export class UsersComponent extends PagedListingComponentBase<UserDto> {
     this.showResetPasswordUserDialog(user.id);
   }
 
+  clearFilters(): void {
+    this.keyword = '';
+    this.isActive = undefined;
+    this.getDataPage(1);
+  }
+
   protected list(
     request: PagedUsersRequestDto,
     pageNumber: number,
@@ -124,11 +130,5 @@ export class UsersComponent extends PagedListingComponentBase<UserDto> {
     createOrEditUserDialog.content.onSave.subscribe(() => {
       this.refresh();
     });
-  }
-
-  clearFilters(): void {
-    this.keyword = '';
-    this.isActive = undefined;
-    this.getDataPage(1);
   }
 }
