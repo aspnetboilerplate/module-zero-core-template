@@ -1,6 +1,5 @@
 import { CommonModule } from '@angular/common';
 import { NgModule, ModuleWithProviders } from '@angular/core';
-import { AbpModule } from '@abp/abp.module';
 import { RouterModule } from '@angular/router';
 import { NgxPaginationModule } from 'ngx-pagination';
 
@@ -23,7 +22,6 @@ import { EqualValidator } from './directives/equal-validator.directive';
 @NgModule({
     imports: [
         CommonModule,
-        AbpModule,
         RouterModule,
         NgxPaginationModule
     ],
@@ -49,7 +47,7 @@ import { EqualValidator } from './directives/equal-validator.directive';
     ]
 })
 export class SharedModule {
-    static forRoot(): ModuleWithProviders {
+    static forRoot(): ModuleWithProviders<SharedModule> {
         return {
             ngModule: SharedModule,
             providers: [

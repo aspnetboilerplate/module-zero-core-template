@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { PermissionCheckerService } from '@abp/auth/permission-checker.service';
+import { PermissionCheckerService } from 'abp-ng2-module';
 import { AppSessionService } from '../session/app-session.service';
 
 import {

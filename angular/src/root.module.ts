@@ -3,8 +3,7 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { NgModule, Injector, APP_INITIALIZER, LOCALE_ID } from '@angular/core';
 import { PlatformLocation, registerLocaleData } from '@angular/common';
 
-import { AbpModule } from '@abp/abp.module';
-import { AbpHttpInterceptor } from '@abp/abpHttpInterceptor';
+import { AbpHttpInterceptor } from 'abp-ng2-module';
 import { HTTP_INTERCEPTORS } from '@angular/common/http';
 
 import { SharedModule } from '@shared/shared.module';
@@ -101,7 +100,6 @@ export function getCurrentLanguage(): string {
         BsDropdownModule.forRoot(),
         CollapseModule.forRoot(),
         TabsModule.forRoot(),
-        AbpModule,
         ServiceProxyModule,
         RootRoutingModule,
         HttpClientModule
