@@ -9,7 +9,7 @@ This is a template to create **ASP.NET Core MVC / Angular** based startup projec
 1. [ASP.NET Core MVC & jQuery](https://aspnetboilerplate.com/Pages/Documents/Zero/Startup-Template-Core) (server rendered multi-page application).
 2. [ASP.NET Core & Angular](https://aspnetboilerplate.com/Pages/Documents/Zero/Startup-Template-Angular) (single page application).
  
-User Interface is based on [BSB Admin theme](https://github.com/gurayyarar/AdminBSBMaterialDesign).
+User Interface is based on [AdminLTE theme](https://github.com/ColorlibHQ/AdminLTE).
  
 # Download
 
