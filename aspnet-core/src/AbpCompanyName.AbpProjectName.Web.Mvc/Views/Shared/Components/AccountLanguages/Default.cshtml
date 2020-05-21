@@ -1,17 +1,14 @@
-﻿@using System.Web
+﻿@using System.Text.Encodings.Web
 @using AbpCompanyName.AbpProjectName.Web.Views.Shared.Components.AccountLanguages
 @model LanguageSelectionViewModel
 @if (Model.Languages.Count > 1)
 {
     <div class="text-center">
-        @foreach (var languageInfo in Model.Languages)
+        @foreach (var language in Model.Languages)
         {
-            <a href="@Url.Action("ChangeCulture", "AbpLocalization", new {
-                    cultureName = languageInfo.Name,
-                    returnUrl = HttpUtility.UrlEncode(Context.Request.Path + Context.Request.QueryString)
-                })">
-                <span class="@(languageInfo.Name == Model.CurrentLanguage.Name ? "current-language-icon" : "")" title="@languageInfo.DisplayName">
-                    <i class="@languageInfo.Icon"></i>
+            <a href="~/AbpLocalization/ChangeCulture?cultureName=@(language.Name)&returnUrl=@(UrlEncoder.Default.Encode(Context.Request.Path + Context.Request.QueryString))">
+                <span class="@(language.Name == Model.CurrentLanguage.Name ? "current-language-icon" : "")" title="@language.DisplayName">
+                    <i class="@language.Icon"></i>
                 </span>
             </a>
         }
