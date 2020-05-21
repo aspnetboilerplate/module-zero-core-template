@@ -1,5 +1,4 @@
-﻿@using System.Web
-@using AbpCompanyName.AbpProjectName.Web.Views.Shared.Components.AccountLanguages
+﻿@using AbpCompanyName.AbpProjectName.Web.Views.Shared.Components.AccountLanguages
 @model LanguageSelectionViewModel
 @if (Model.Languages.Count > 1)
 {
@@ -8,7 +7,7 @@
         {
             <a href="@Url.Action("ChangeCulture", "AbpLocalization", new {
                     cultureName = languageInfo.Name,
-                    returnUrl = HttpUtility.UrlEncode(Context.Request.Path + Context.Request.QueryString)
+                    returnUrl = Context.Request.Path + Context.Request.QueryString
                 })">
                 <span class="@(languageInfo.Name == Model.CurrentLanguage.Name ? "current-language-icon" : "")" title="@languageInfo.DisplayName">
                     <i class="@languageInfo.Icon"></i>

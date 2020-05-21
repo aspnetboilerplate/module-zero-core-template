@@ -1,5 +1,4 @@
-﻿@using System.Web
-@using AbpCompanyName.AbpProjectName.Web.Views.Shared.Components.RightNavbarLanguageSwitch
+﻿@using AbpCompanyName.AbpProjectName.Web.Views.Shared.Components.RightNavbarLanguageSwitch
 @model RightNavbarLanguageSwitchViewModel
 
 <li class="nav-item dropdown">
@@ -14,7 +13,7 @@
             {
                 <a class="dropdown-item" href="@Url.Action("ChangeCulture", "AbpLocalization", new {
                                                   cultureName = languageInfo.Name,
-                                                  returnUrl = HttpUtility.UrlEncode(Context.Request.Path + Context.Request.QueryString)
+                                                  returnUrl = Context.Request.Path + Context.Request.QueryString
                                               })">
                     <i class="mr-2 @languageInfo.Icon"></i> @languageInfo.DisplayName
                 </a>
