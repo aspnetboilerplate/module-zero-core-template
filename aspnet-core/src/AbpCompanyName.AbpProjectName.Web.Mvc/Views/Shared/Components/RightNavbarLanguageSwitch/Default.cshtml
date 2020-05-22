@@ -7,12 +7,15 @@
         <span class="d-none d-md-inline-block">@Model.CurrentLanguage.DisplayName</span>
     </a>
     <div class="dropdown-menu dropdown-menu-right p-0">
-        @foreach (var language in Model.Languages)
+        @foreach (var languageInfo in Model.Languages)
         {
-            if (language.Name != Model.CurrentLanguage.Name)
+            if (languageInfo.Name != Model.CurrentLanguage.Name)
             {
-                <a class="dropdown-item" href="@(ApplicationPath)AbpLocalization/ChangeCulture?cultureName=@(language.Name)&returnUrl=@(Context.Request.Path)">
-                    <i class="mr-2 @language.Icon"></i> @language.DisplayName
+                <a class="dropdown-item" href="@Url.Action("ChangeCulture", "AbpLocalization", new {
+                                                  cultureName = languageInfo.Name,
+                                                  returnUrl = Context.Request.Path + Context.Request.QueryString
+                                              })">
+                    <i class="mr-2 @languageInfo.Icon"></i> @languageInfo.DisplayName
                 </a>
             }
         }
