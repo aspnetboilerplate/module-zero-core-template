@@ -6,7 +6,7 @@
     "@aspnet/signalr": "^1.1.4",
     "@craco/craco": "^5.6.2",
     "abp-web-resources": "^5.1.1",
-    "antd": "^3.26.0",
+    "antd": "^4.2.4",
     "axios": "^0.19.0",
     "classnames": "^2.2.6",
     "craco-antd": "^1.14.1",
