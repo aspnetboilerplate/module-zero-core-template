@@ -4,11 +4,12 @@ import { Directive, ElementRef, Input } from '@angular/core';
   selector: '[busy]',
 })
 export class BusyDirective {
+
+  constructor(private _element: ElementRef) { }
+
   @Input() set busy(isBusy: boolean) {
     this.refreshState(isBusy);
   }
-
-  constructor(private _element: ElementRef) {}
 
   refreshState(isBusy: boolean): void {
     if (isBusy === undefined) {

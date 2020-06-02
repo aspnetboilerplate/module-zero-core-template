@@ -15,7 +15,7 @@ export class AppInitializer {
     private _injector: Injector,
     private _platformLocation: PlatformLocation,
     private _httpClient: HttpClient
-  ) {}
+  ) { }
 
   init(): () => Promise<boolean> {
     return () => {
@@ -117,7 +117,7 @@ export class AppInitializer {
     );
     const token = abp.auth.getToken();
 
-    let requestHeaders = {
+    const requestHeaders = {
       'Abp.TenantId': `${abp.multiTenancy.getTenantIdCookie()}`,
       '.AspNetCore.Culture': `c=${cookieLangValue}|uic=${cookieLangValue}`,
     };
@@ -134,7 +134,7 @@ export class AppInitializer {
         }
       )
       .subscribe((response) => {
-        let result = response.result;
+        const result = response.result;
 
         _.merge(abp, result);
 
