@@ -1,4 +1,5 @@
 <form
+  *ngIf="active"
   class="form-horizontal"
   autocomplete="off"
   #editTenantForm="ngForm"
@@ -6,7 +7,7 @@
 >
   <abp-modal-header
     [title]="'EditTenant' | localize"
-    (onCloseClick)="bsModalRef.hide()"
+    (onCloseClick)="close()"
   ></abp-modal-header>
   <div class="modal-body">
     <div class="form-group row required">
@@ -75,6 +76,6 @@
   <abp-modal-footer
     [cancelDisabled]="saving"
     [saveDisabled]="!editTenantForm.form.valid || saving"
-    (onCancelClick)="bsModalRef.hide()"
+    (onCancelClick)="close()"
   ></abp-modal-footer>
 </form>

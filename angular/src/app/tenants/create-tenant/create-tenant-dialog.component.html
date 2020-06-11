@@ -1,4 +1,5 @@
 <form
+  *ngIf="active"
   class="form-horizontal"
   autocomplete="off"
   #createTenantForm="ngForm"
@@ -6,7 +7,7 @@
 >
   <abp-modal-header
     [title]="'CreateNewTenant' | localize"
-    (onCloseClick)="bsModalRef.hide()"
+    (onCloseClick)="close()"
   ></abp-modal-header>
   <div class="modal-body">
     <div class="form-group row required">
@@ -116,6 +117,6 @@
   <abp-modal-footer
     [cancelDisabled]="saving"
     [saveDisabled]="!createTenantForm.form.valid || saving"
-    (onCancelClick)="bsModalRef.hide()"
+    (onCancelClick)="close()"
   ></abp-modal-footer>
 </form>

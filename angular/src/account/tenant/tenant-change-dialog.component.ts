@@ -1,4 +1,4 @@
-import { Component, Injector } from '@angular/core';
+import { Component, Injector, OnInit } from '@angular/core';
 import { finalize } from 'rxjs/operators';
 import { BsModalRef } from 'ngx-bootstrap/modal';
 import { AppComponentBase } from '@shared/app-component-base';
@@ -6,13 +6,15 @@ import { AccountServiceProxy } from '@shared/service-proxies/service-proxies';
 import { AppTenantAvailabilityState } from '@shared/AppEnums';
 import {
   IsTenantAvailableInput,
-  IsTenantAvailableOutput
+  IsTenantAvailableOutput,
 } from '@shared/service-proxies/service-proxies';
 
 @Component({
-  templateUrl: './tenant-change-dialog.component.html'
+  templateUrl: './tenant-change-dialog.component.html',
 })
-export class TenantChangeDialogComponent extends AppComponentBase {
+export class TenantChangeDialogComponent extends AppComponentBase
+  implements OnInit {
+  active = false;
   saving = false;
   tenancyName = '';
 
@@ -24,10 +26,14 @@ export class TenantChangeDialogComponent extends AppComponentBase {
     super(injector);
   }
 
+  ngOnInit(): void {
+    this.active = true;
+  }
+
   save(): void {
     if (!this.tenancyName) {
       abp.multiTenancy.setTenantIdCookie(undefined);
-      this.bsModalRef.hide();
+      this.close();
       location.reload();
       return;
     }
@@ -47,6 +53,7 @@ export class TenantChangeDialogComponent extends AppComponentBase {
         switch (result.state) {
           case AppTenantAvailabilityState.Available:
             abp.multiTenancy.setTenantIdCookie(result.tenantId);
+            this.close();
             location.reload();
             return;
           case AppTenantAvailabilityState.InActive:
@@ -59,5 +66,10 @@ export class TenantChangeDialogComponent extends AppComponentBase {
             break;
         }
       });
+  }
+
+  close(): void {
+    this.active = false;
+    this.bsModalRef.hide();
   }
 }

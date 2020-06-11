@@ -3,16 +3,17 @@ import { AppComponentBase } from '@shared/app-component-base';
 import { finalize } from 'rxjs/operators';
 import {
   UserServiceProxy,
-  ResetPasswordDto
+  ResetPasswordDto,
 } from '@shared/service-proxies/service-proxies';
 import { BsModalRef } from 'ngx-bootstrap/modal';
 
 @Component({
   selector: 'app-reset-password',
-  templateUrl: './reset-password.component.html'
+  templateUrl: './reset-password.component.html',
 })
 export class ResetPasswordDialogComponent extends AppComponentBase
   implements OnInit {
+  active = false;
   public isLoading = false;
   public resetPasswordDto: ResetPasswordDto;
   id: number;
@@ -26,6 +27,7 @@ export class ResetPasswordDialogComponent extends AppComponentBase
   }
 
   ngOnInit() {
+    this.active = true;
     this.isLoading = true;
     this.resetPasswordDto = new ResetPasswordDto();
     this.resetPasswordDto.userId = this.id;
@@ -46,7 +48,12 @@ export class ResetPasswordDialogComponent extends AppComponentBase
       )
       .subscribe(() => {
         this.notify.info('Password Reset');
-        this.bsModalRef.hide();
+        this.close();
       });
+  }
+
+  close(): void {
+    this.active = false;
+    this.bsModalRef.hide();
   }
 }

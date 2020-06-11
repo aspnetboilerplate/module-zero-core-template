@@ -14,14 +14,15 @@ import {
   RoleDto,
   PermissionDto,
   CreateRoleDto,
-  PermissionDtoListResultDto
+  PermissionDtoListResultDto,
 } from '@shared/service-proxies/service-proxies';
 
 @Component({
-  templateUrl: 'create-role-dialog.component.html'
+  templateUrl: 'create-role-dialog.component.html',
 })
 export class CreateRoleDialogComponent extends AppComponentBase
   implements OnInit {
+  active = false;
   saving = false;
   role = new RoleDto();
   permissions: PermissionDto[] = [];
@@ -39,6 +40,8 @@ export class CreateRoleDialogComponent extends AppComponentBase
   }
 
   ngOnInit(): void {
+    this.active = true;
+
     this._roleService
       .getAllPermissions()
       .subscribe((result: PermissionDtoListResultDto) => {
@@ -91,8 +94,13 @@ export class CreateRoleDialogComponent extends AppComponentBase
       )
       .subscribe(() => {
         this.notify.info(this.l('SavedSuccessfully'));
-        this.bsModalRef.hide();
+        this.close();
         this.onSave.emit();
       });
+  }
+
+  close(): void {
+    this.active = false;
+    this.bsModalRef.hide();
   }
 }

@@ -15,14 +15,15 @@ import {
   RoleDto,
   PermissionDto,
   RoleEditDto,
-  FlatPermissionDto
+  FlatPermissionDto,
 } from '@shared/service-proxies/service-proxies';
 
 @Component({
-  templateUrl: 'edit-role-dialog.component.html'
+  templateUrl: 'edit-role-dialog.component.html',
 })
 export class EditRoleDialogComponent extends AppComponentBase
   implements OnInit {
+  active = false;
   saving = false;
   id: number;
   role = new RoleEditDto();
@@ -41,6 +42,8 @@ export class EditRoleDialogComponent extends AppComponentBase
   }
 
   ngOnInit(): void {
+    this.active = true;
+
     this._roleService
       .getRoleForEdit(this.id)
       .subscribe((result: GetRoleForEditOutput) => {
@@ -93,8 +96,13 @@ export class EditRoleDialogComponent extends AppComponentBase
       )
       .subscribe(() => {
         this.notify.info(this.l('SavedSuccessfully'));
-        this.bsModalRef.hide();
+        this.close();
         this.onSave.emit();
       });
+  }
+
+  close(): void {
+    this.active = false;
+    this.bsModalRef.hide();
   }
 }

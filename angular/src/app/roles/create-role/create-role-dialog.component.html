@@ -1,4 +1,5 @@
 <form
+  *ngIf="active"
   class="form-horizontal"
   autocomplete="off"
   #createRoleForm="ngForm"
@@ -6,7 +7,7 @@
 >
   <abp-modal-header
     [title]="'CreateNewRole' | localize"
-    (onCloseClick)="bsModalRef.hide()"
+    (onCloseClick)="close()"
   ></abp-modal-header>
   <div class="modal-body">
     <tabset>
@@ -98,6 +99,6 @@
   <abp-modal-footer
     [cancelDisabled]="saving"
     [saveDisabled]="!createRoleForm.form.valid || saving"
-    (onCancelClick)="bsModalRef.hide()"
+    (onCancelClick)="close()"
   ></abp-modal-footer>
 </form>

@@ -3,7 +3,7 @@ import {
   Injector,
   OnInit,
   EventEmitter,
-  Output
+  Output,
 } from '@angular/core';
 import { finalize } from 'rxjs/operators';
 import { BsModalRef } from 'ngx-bootstrap/modal';
@@ -12,15 +12,16 @@ import { AppComponentBase } from '@shared/app-component-base';
 import {
   UserServiceProxy,
   CreateUserDto,
-  RoleDto
+  RoleDto,
 } from '@shared/service-proxies/service-proxies';
 import { AbpValidationError } from '@shared/components/validation/abp-validation.api';
 
 @Component({
-  templateUrl: './create-user-dialog.component.html'
+  templateUrl: './create-user-dialog.component.html',
 })
 export class CreateUserDialogComponent extends AppComponentBase
   implements OnInit {
+  active = false;
   saving = false;
   user = new CreateUserDto();
   roles: RoleDto[] = [];
@@ -51,6 +52,7 @@ export class CreateUserDialogComponent extends AppComponentBase
   }
 
   ngOnInit(): void {
+    this.active = true;
     this.user.isActive = true;
 
     this._userService.getRoles().subscribe((result) => {
@@ -101,8 +103,13 @@ export class CreateUserDialogComponent extends AppComponentBase
       )
       .subscribe(() => {
         this.notify.info(this.l('SavedSuccessfully'));
-        this.bsModalRef.hide();
+        this.close();
         this.onSave.emit();
       });
+  }
+
+  close(): void {
+    this.active = false;
+    this.bsModalRef.hide();
   }
 }

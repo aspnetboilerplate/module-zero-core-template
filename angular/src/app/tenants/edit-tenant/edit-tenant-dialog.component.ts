@@ -3,21 +3,22 @@ import {
   Injector,
   OnInit,
   Output,
-  EventEmitter
+  EventEmitter,
 } from '@angular/core';
 import { finalize } from 'rxjs/operators';
 import { BsModalRef } from 'ngx-bootstrap/modal';
 import { AppComponentBase } from '@shared/app-component-base';
 import {
   TenantServiceProxy,
-  TenantDto
+  TenantDto,
 } from '@shared/service-proxies/service-proxies';
 
 @Component({
-  templateUrl: 'edit-tenant-dialog.component.html'
+  templateUrl: 'edit-tenant-dialog.component.html',
 })
 export class EditTenantDialogComponent extends AppComponentBase
   implements OnInit {
+  active = false;
   saving = false;
   tenant: TenantDto = new TenantDto();
   id: number;
@@ -33,6 +34,8 @@ export class EditTenantDialogComponent extends AppComponentBase
   }
 
   ngOnInit(): void {
+    this.active = true;
+
     this._tenantService.get(this.id).subscribe((result: TenantDto) => {
       this.tenant = result;
     });
@@ -50,8 +53,13 @@ export class EditTenantDialogComponent extends AppComponentBase
       )
       .subscribe(() => {
         this.notify.info(this.l('SavedSuccessfully'));
-        this.bsModalRef.hide();
+        this.close();
         this.onSave.emit();
       });
+  }
+
+  close(): void {
+    this.active = false;
+    this.bsModalRef.hide();
   }
 }

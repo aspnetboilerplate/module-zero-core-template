@@ -3,7 +3,7 @@ import {
   Injector,
   OnInit,
   EventEmitter,
-  Output
+  Output,
 } from '@angular/core';
 import { finalize } from 'rxjs/operators';
 import { BsModalRef } from 'ngx-bootstrap/modal';
@@ -12,14 +12,15 @@ import { AppComponentBase } from '@shared/app-component-base';
 import {
   UserServiceProxy,
   UserDto,
-  RoleDto
+  RoleDto,
 } from '@shared/service-proxies/service-proxies';
 
 @Component({
-  templateUrl: './edit-user-dialog.component.html'
+  templateUrl: './edit-user-dialog.component.html',
 })
 export class EditUserDialogComponent extends AppComponentBase
   implements OnInit {
+  active = false;
   saving = false;
   user = new UserDto();
   roles: RoleDto[] = [];
@@ -37,6 +38,8 @@ export class EditUserDialogComponent extends AppComponentBase
   }
 
   ngOnInit(): void {
+    this.active = true;
+
     this._userService.get(this.id).subscribe((result) => {
       this.user = result;
 
@@ -87,8 +90,13 @@ export class EditUserDialogComponent extends AppComponentBase
       )
       .subscribe(() => {
         this.notify.info(this.l('SavedSuccessfully'));
-        this.bsModalRef.hide();
+        this.close();
         this.onSave.emit();
       });
+  }
+
+  close(): void {
+    this.active = false;
+    this.bsModalRef.hide();
   }
 }
