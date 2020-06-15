@@ -3,39 +3,67 @@
 @{
     Layout = null;
 }
+
 <div class="modal fade" id="RoleCreateModal" tabindex="-1" role="dialog" aria-labelledby="RoleCreateModalLabel" data-backdrop="static">
     <div class="modal-dialog modal-lg" role="document">
         <div class="modal-content">
             @await Html.PartialAsync("~/Views/Shared/Modals/_ModalHeader.cshtml", new ModalHeaderViewModel(L("CreateNewRole")))
             <form name="roleCreateForm" role="form" class="form-horizontal">
                 <div class="modal-body">
-                    <div class="form-group row required">
-                        <label class="col-md-3 col-form-label" for="rolename">@L("RoleName")</label>
-                        <div class="col-md-9">
-                            <input id="rolename" type="text" name="Name" class="form-control" required maxlength="32" minlength="2">
+                    <ul class="nav nav-tabs">
+                        <li class="nav-item">
+                            <a class="nav-link active"
+                               data-toggle="pill"
+                               href="#create-role-details">
+                                @L("Details")
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link"
+                               data-toggle="pill"
+                               href="#create-role-permissions">
+                                @L("Permissions")
+                            </a>
+                        </li>
+                    </ul>
+                    <div class="tab-content">
+                        <div class="tab-pane pt-3 px-2 active" id="create-role-details">
+                            <div class="form-group row required">
+                                <label class="col-md-3 col-form-label" for="rolename">@L("RoleName")</label>
+                                <div class="col-md-9">
+                                    <input id="rolename" type="text" name="Name" class="form-control" required maxlength="32" minlength="2">
+                                </div>
+                            </div>
+                            <div class="form-group row required">
+                                <label class="col-md-3 col-form-label" for="displayname">@L("DisplayName")</label>
+                                <div class="col-md-9">
+                                    <input id="displayname" type="text" name="DisplayName" class="form-control" required maxlength="32" minlength="2">
+                                </div>
+                            </div>
+                            <div class="form-group row mb-0">
+                                <label class="col-md-3 col-form-label" for="role-description">@L("RoleDescription")</label>
+                                <div class="col-md-9">
+                                    <textarea id="role-description" name="Description" class="form-control"></textarea>
+                                </div>
+                            </div>
                         </div>
-                    </div>
-                    <div class="form-group row required">
-                        <label class="col-md-3 col-form-label" for="displayname">@L("DisplayName")</label>
-                        <div class="col-md-9">
-                            <input id="displayname" type="text" name="DisplayName" class="form-control" required maxlength="32" minlength="2">
-                        </div>
-                    </div>
-                    <div class="form-group row">
-                        <label class="col-md-3 col-form-label" for="role-description">@L("RoleDescription")</label>
-                        <div class="col-md-9">
-                            <textarea id="role-description" name="Description" class="form-control"></textarea>
-                        </div>
-                    </div>
-                    <div class="form-group row">
-                        <label class="col-md-3 col-form-label">@L("Permissions")</label>
-                        <div class="col-md-9">
-                            <div class="row">
+                        <div class="tab-pane fade pt-3 px-2" id="create-role-permissions">
+                            <div class="form-group row mb-0">
                                 @foreach (var permission in Model.Permissions)
                                 {
                                     <div class="col-md-6">
-                                        <input type="checkbox" name="permission" value="@permission.Name" id="permission-@permission.Name" checked="checked" />
-                                        <label for="permission-@permission.Name">@permission.DisplayName</label>
+                                        <div class="custom-control custom-checkbox">
+                                            <input
+                                                type="checkbox"
+                                                class="custom-control-input"
+                                                name="permission"
+                                                id="create-@permission.Name"
+                                                value="@permission.Name"
+                                                checked="checked"/>
+                                            <label class="custom-control-label" for="create-@permission.Name">
+                                                @permission.DisplayName
+                                            </label>
+                                        </div>
                                     </div>
                                 }
                             </div>

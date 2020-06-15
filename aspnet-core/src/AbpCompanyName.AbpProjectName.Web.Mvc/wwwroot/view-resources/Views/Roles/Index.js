@@ -39,21 +39,16 @@
         columnDefs: [
             {
                 targets: 0,
-                className: 'control',
-                defaultContent: '',
-            },
-            {
-                targets: 1,
                 data: 'name',
                 sortable: false
             },
             {
-                targets: 2,
+                targets: 1,
                 data: 'displayName',
                 sortable: false
             },
             {
-                targets: 3,
+                targets: 2,
                 data: null,
                 sortable: false,
                 autoWidth: false,
@@ -121,7 +116,8 @@
             success: function (content) {
                 $('#RoleEditModal div.modal-content').html(content);
             },
-            error: function (e) { }
+            error: function (e) {
+            }
         })
     });
 
