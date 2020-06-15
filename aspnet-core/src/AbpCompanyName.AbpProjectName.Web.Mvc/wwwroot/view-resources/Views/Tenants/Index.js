@@ -39,27 +39,22 @@
         columnDefs: [
             {
                 targets: 0,
-                className: 'control',
-                defaultContent: '',
-            },
-            {
-                targets: 1,
                 data: 'tenancyName',
                 sortable: false
             },
             {
-                targets: 2,
+                targets: 1,
                 data: 'name',
                 sortable: false
             },
             {
-                targets: 3,
+                targets: 2,
                 data: 'isActive',
                 sortable: false,
                 render: data => `<input type="checkbox" disabled ${data ? 'checked' : ''}>`
             },
             {
-                targets: 4,
+                targets: 3,
                 data: null,
                 sortable: false,
                 autoWidth: false,

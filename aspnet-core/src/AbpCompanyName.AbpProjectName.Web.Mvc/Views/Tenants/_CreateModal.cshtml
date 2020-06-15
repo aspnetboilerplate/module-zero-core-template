@@ -35,19 +35,24 @@
                             <input type="text" name="ConnectionString" class="form-control" maxlength="@AbpTenantBase.MaxConnectionStringLength">
                         </div>
                     </div>
-                    <div class="form-group row">
-                        <label class="col-md-3 col-form-label" for="CreateTenantIsActive">@L("IsActive")</label>
+                    <div class="form-group row mb-0">
+                        <label class="col-md-3 col-form-label">@L("IsActive")</label>
                         <div class="col-md-9">
-                            <input id="CreateTenantIsActive" type="checkbox" name="IsActive" value="true" checked />
+                            <div class="custom-control custom-checkbox">
+                                <input
+                                    type="checkbox"
+                                    class="custom-control-input"
+                                    name="IsActive"
+                                    id="create-IsActive"
+                                    value="true"
+                                    checked/>
+                                <label class="custom-control-label mt-2" for="create-IsActive"></label>
+                            </div>
                         </div>
                     </div>
-                    <div class="form-group row">
-                        <div class="col-md-3">
-                        </div>
-                        <div class="col-md-9">
-                            <p>@L("DefaultPasswordIs", AbpCompanyName.AbpProjectName.Authorization.Users.User.DefaultPassword)</p>
-                        </div>
-                    </div>
+                    <p class="text-center text-info mb-0">
+                        @L("DefaultPasswordIs", AbpCompanyName.AbpProjectName.Authorization.Users.User.DefaultPassword)
+                    </p>
                 </div>
                 @await Html.PartialAsync("~/Views/Shared/Modals/_ModalFooterWithSaveAndCancel.cshtml")
             </form>

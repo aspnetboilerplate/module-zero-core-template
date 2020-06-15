@@ -22,12 +22,14 @@
 
         //add also disabled items
         $(':disabled[name]', this).each(function () {
-            data.push({ name: this.name, value: $(this).val() });
+            data.push({name: this.name, value: $(this).val()});
         });
 
         //map to object
         var obj = {};
-        data.map(function (x) { obj[x.name] = x.value; });
+        data.map(function (x) {
+            obj[x.name] = x.value;
+        });
 
         if (camelCased && camelCased === true) {
             return convertToCamelCasedObject(obj);
@@ -90,37 +92,49 @@
         return newObj;
     }
 
+    function setAdvSearchTogglerIcon($advSearchBody, $advSearchTogglerIcon) {
+        if ($advSearchBody.length <= 0 || $advSearchTogglerIcon.length <= 0)
+            return false;
+
+        if ($($advSearchBody).is(":hidden")) {
+            $advSearchTogglerIcon.addClass("fa-angle-down")
+            $advSearchTogglerIcon.removeClass("fa-angle-up")
+        } else {
+            $advSearchTogglerIcon.addClass("fa-angle-up")
+            $advSearchTogglerIcon.removeClass("fa-angle-down")
+        }
+    }
+    
     function initAdvSearch() {
         $('.abp-advanced-search').each((i, obj) => {
-            var $advSearch = $(obj);
-            setAdvSearchDropdownMenuWidth($advSearch);
-            setAdvSearchStopingPropagations($advSearch);
+            const $advSearch = $(obj);
+
+            const $advSearchBody = $advSearch.find('.abp-advanced-search-body');
+            if ($advSearchBody.length <= 0)
+                return false;
+
+            $advSearchBody.hide();
+
+            const $advSearchToggler = $advSearch.find('.abp-advanced-search-toggler');
+            if ($advSearchToggler.length <= 0)
+                return false;
+
+            const $advSearchTogglerIcon = $advSearchToggler.find('i');
+            setAdvSearchTogglerIcon($advSearchBody, $advSearchTogglerIcon)
+
+            $advSearchToggler.on("click", () => {
+                if ($($advSearchBody).is(":hidden")) {
+                    $advSearchBody.show();
+                    setAdvSearchTogglerIcon($advSearchBody, $advSearchTogglerIcon)
+                } else {
+                    $advSearchBody.hide();
+                    setAdvSearchTogglerIcon($advSearchBody, $advSearchTogglerIcon)
+                }
+            })
         });
     }
 
     initAdvSearch();
-
-    $(window).resize(() => {
-        clearTimeout(window.resizingFinished);
-        window.resizingFinished = setTimeout(() => {
-            initAdvSearch();
-        }, 500);
-    });
-
-    function setAdvSearchDropdownMenuWidth($advSearch) {
-        var advSearchWidth = 0;
-        $advSearch.each((i, obj) => {
-            advSearchWidth += parseInt($(obj).width(), 10);
-        });
-        $advSearch.find('.dropdown-menu').width(advSearchWidth)
-    }
-
-    function setAdvSearchStopingPropagations($advSearch) {
-        $advSearch.find('.dd-menu, .btn-search, .txt-search')
-            .on('click', (e) => {
-                e.stopPropagation();
-            });
-    }
 
     $.fn.clearForm = function () {
         var $this = $(this);

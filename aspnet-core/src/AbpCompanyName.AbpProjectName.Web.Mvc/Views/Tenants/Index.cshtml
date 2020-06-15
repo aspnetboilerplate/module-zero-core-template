@@ -3,6 +3,7 @@
     ViewBag.Title = L("Tenants");
     ViewBag.CurrentPageName = PageNames.Tenants;
 }
+
 @section scripts
 {
     <environment names="Development">
@@ -13,14 +14,15 @@
         <script src="~/view-resources/Views/Tenants/Index.min.js" asp-append-version="true"></script>
     </environment>
 }
+
 <section class="content-header">
     <div class="container-fluid">
         <div class="row">
-            <div class="col-sm-6">
+            <div class="col-6">
                 <h1>@L("Tenants")</h1>
             </div>
-            <div class="col-sm-6">
-                <a href="javascript:;" data-toggle="modal" data-target="#TenantCreateModal" class="btn bg-blue float-sm-right">
+            <div class="col-6 text-right">
+                <a href="javascript:;" data-toggle="modal" data-target="#TenantCreateModal" class="btn bg-blue">
                     <i class="fa fa-plus-square"></i>
                     @L("Create")
                 </a>
@@ -30,36 +32,23 @@
 </section>
 <section class="content">
     <div class="container-fluid">
-        <div class="row">
-            <div class="col-12">
-                <div class="card">
-                    <div class="card-header">
-                        <div class="row">
-                            <div class="col-md-6">
-                                <!--Use for bulk actions-->
-                            </div>
-                            <div class="col-md-6">
-                                @await Html.PartialAsync("~/Views/Tenants/Index.AdvancedSearch.cshtml")
-                            </div>
-                        </div>
-                    </div>
-                    <div class="card-body">
-                        <div class="table-responsive">
-                            <table id="TenantsTable" class="table table-striped table-bordered">
-                                <thead>
-                                    <tr>
-                                        <th></th>
-                                        <th>@L("TenancyName")</th>
-                                        <th>@L("Name")</th>
-                                        <th>@L("IsActive")</th>
-                                        <th style="width: 150px">@L("Actions")</th>
-                                    </tr>
-                                </thead>
-                                <tbody></tbody>
-                            </table>
-                        </div>
-                    </div>
-                </div>
+        <div class="card">
+            <div class="card-header">
+                @await Html.PartialAsync("~/Views/Tenants/Index.AdvancedSearch.cshtml")
+            </div>
+            <div class="card-body table-responsive p-0">
+                <table id="TenantsTable" class="table table-hover text-nowrap">
+                    <thead class="bg-light">
+                    <tr>
+                        <th>@L("TenancyName")</th>
+                        <th>@L("Name")</th>
+                        <th>@L("IsActive")</th>
+                        <th style="width: 200px;">@L("Actions")</th>
+                    </tr>
+                    </thead>
+                    <tbody>
+                    </tbody>
+                </table>
             </div>
         </div>
     </div>

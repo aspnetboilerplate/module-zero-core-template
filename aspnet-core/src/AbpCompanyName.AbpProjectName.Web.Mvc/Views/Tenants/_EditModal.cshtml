@@ -6,7 +6,7 @@
 }
 @await Html.PartialAsync("~/Views/Shared/Modals/_ModalHeader.cshtml", new ModalHeaderViewModel(L("EditTenant")))
 <form name="TenantEditForm" role="form" class="form-horizontal">
-    <input type="hidden" name="Id" value="@Model.Id" />
+    <input type="hidden" name="Id" value="@Model.Id"/>
     <div class="modal-body">
         <div class="form-group row required">
             <label class="col-md-3 col-form-label" for="tenancy-name">@L("TenancyName")</label>
@@ -20,10 +20,19 @@
                 <input id="name" type="text" class="form-control" name="Name" value="@Model.Name" required maxlength="128">
             </div>
         </div>
-        <div class="form-group row">
-            <label class="col-md-3 col-form-label" for="isactive">@L("IsActive")</label>
+        <div class="form-group row mb-0">
+            <label class="col-md-3 col-form-label">@L("IsActive")</label>
             <div class="col-md-9">
-                <input id="isactive" type="checkbox" name="IsActive" value="true" @(Model.IsActive ? "checked" : "") />
+                <div class="custom-control custom-checkbox">
+                    <input
+                        type="checkbox"
+                        class="custom-control-input"
+                        id="edit-IsActive"
+                        name="IsActive"
+                        value="true"
+                        @(Model.IsActive ? "checked" : "")/>
+                    <label class="custom-control-label mt-2" for="edit-IsActive"></label>
+                </div>
             </div>
         </div>
     </div>
