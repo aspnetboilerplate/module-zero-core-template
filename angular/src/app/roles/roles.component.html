@@ -6,7 +6,11 @@
           <h1>{{ "Roles" | localize }}</h1>
         </div>
         <div class="col-6 text-right">
-          <a href="javascript:;" class="btn bg-blue" (click)="createRole()">
+          <a
+            href="javascript:;"
+            class="btn bg-blue"
+            (click)="createRoleDialog.show()"
+          >
             <i class="fa fa-plus-square"></i>
             {{ "Create" | localize }}
           </a>
@@ -66,7 +70,7 @@
                   <button
                     type="button"
                     class="btn btn-sm bg-secondary"
-                    (click)="editRole(role)"
+                    (click)="editRoleDialog.show(role.id)"
                   >
                     <i class="fas fa-pencil-alt"></i>
                     {{ "Edit" | localize }}
@@ -111,3 +115,9 @@
     </div>
   </section>
 </div>
+
+<create-role-dialog
+  #createRoleDialog
+  (onSave)="getDataPage(1)"
+></create-role-dialog>
+<edit-role-dialog #editRoleDialog (onSave)="getDataPage(1)"></edit-role-dialog>

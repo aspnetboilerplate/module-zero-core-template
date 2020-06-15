@@ -1,12 +1,12 @@
 import {
   Component,
   Injector,
-  OnInit,
   EventEmitter,
   Output,
+  ViewChild,
 } from '@angular/core';
 import { finalize } from 'rxjs/operators';
-import { BsModalRef } from 'ngx-bootstrap/modal';
+import { ModalDirective } from 'ngx-bootstrap/modal';
 import * as _ from 'lodash';
 import { AppComponentBase } from '@shared/app-component-base';
 import {
@@ -19,38 +19,36 @@ import {
 } from '@shared/service-proxies/service-proxies';
 
 @Component({
+  selector: 'edit-role-dialog',
   templateUrl: 'edit-role-dialog.component.html',
 })
-export class EditRoleDialogComponent extends AppComponentBase
-  implements OnInit {
+export class EditRoleDialogComponent extends AppComponentBase {
+  @ViewChild('editRoleModal') modal: ModalDirective;
+
   active = false;
   saving = false;
-  id: number;
-  role = new RoleEditDto();
+  role: RoleEditDto;
   permissions: FlatPermissionDto[];
   grantedPermissionNames: string[];
   checkedPermissionsMap: { [key: string]: boolean } = {};
 
   @Output() onSave = new EventEmitter<any>();
 
-  constructor(
-    injector: Injector,
-    private _roleService: RoleServiceProxy,
-    public bsModalRef: BsModalRef
-  ) {
+  constructor(injector: Injector, private _roleService: RoleServiceProxy) {
     super(injector);
   }
 
-  ngOnInit(): void {
-    this.active = true;
-
+  show(id: number): void {
     this._roleService
-      .getRoleForEdit(this.id)
+      .getRoleForEdit(id)
       .subscribe((result: GetRoleForEditOutput) => {
         this.role = result.role;
         this.permissions = result.permissions;
         this.grantedPermissionNames = result.grantedPermissionNames;
         this.setInitialPermissionsStatus();
+
+        this.active = true;
+        this.modal.show();
       });
   }
 
@@ -103,6 +101,6 @@ export class EditRoleDialogComponent extends AppComponentBase
 
   close(): void {
     this.active = false;
-    this.bsModalRef.hide();
+    this.modal.hide();
   }
 }

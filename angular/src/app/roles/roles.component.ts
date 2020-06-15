@@ -1,15 +1,14 @@
-import { Component, Injector } from '@angular/core';
+import { Component, Injector, ViewChild } from '@angular/core';
 import { finalize } from 'rxjs/operators';
-import { BsModalRef, BsModalService } from 'ngx-bootstrap/modal';
 import { appModuleAnimation } from '@shared/animations/routerTransition';
 import {
   PagedListingComponentBase,
-  PagedRequestDto
+  PagedRequestDto,
 } from '@shared/paged-listing-component-base';
 import {
   RoleServiceProxy,
   RoleDto,
-  RoleDtoPagedResultDto
+  RoleDtoPagedResultDto,
 } from '@shared/service-proxies/service-proxies';
 import { CreateRoleDialogComponent } from './create-role/create-role-dialog.component';
 import { EditRoleDialogComponent } from './edit-role/edit-role-dialog.component';
@@ -20,17 +19,18 @@ class PagedRolesRequestDto extends PagedRequestDto {
 
 @Component({
   templateUrl: './roles.component.html',
-  animations: [appModuleAnimation()]
+  animations: [appModuleAnimation()],
 })
 export class RolesComponent extends PagedListingComponentBase<RoleDto> {
+  @ViewChild('createRoleDialog')
+  createRoleDialog: CreateRoleDialogComponent;
+  @ViewChild('editRoleDialog')
+  editRoleDialog: EditRoleDialogComponent;
+
   roles: RoleDto[] = [];
   keyword = '';
 
-  constructor(
-    injector: Injector,
-    private _rolesService: RoleServiceProxy,
-    private _modalService: BsModalService
-  ) {
+  constructor(injector: Injector, private _rolesService: RoleServiceProxy) {
     super(injector);
   }
 
@@ -72,39 +72,5 @@ export class RolesComponent extends PagedListingComponentBase<RoleDto> {
         }
       }
     );
-  }
-
-  createRole(): void {
-    this.showCreateOrEditRoleDialog();
-  }
-
-  editRole(role: RoleDto): void {
-    this.showCreateOrEditRoleDialog(role.id);
-  }
-
-  showCreateOrEditRoleDialog(id?: number): void {
-    let createOrEditRoleDialog: BsModalRef;
-    if (!id) {
-      createOrEditRoleDialog = this._modalService.show(
-        CreateRoleDialogComponent,
-        {
-          class: 'modal-lg',
-        }
-      );
-    } else {
-      createOrEditRoleDialog = this._modalService.show(
-        EditRoleDialogComponent,
-        {
-          class: 'modal-lg',
-          initialState: {
-            id: id,
-          },
-        }
-      );
-    }
-
-    createOrEditRoleDialog.content.onSave.subscribe(() => {
-      this.refresh();
-    });
   }
 }

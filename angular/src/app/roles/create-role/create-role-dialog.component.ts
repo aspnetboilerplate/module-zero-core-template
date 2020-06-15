@@ -4,9 +4,10 @@ import {
   OnInit,
   EventEmitter,
   Output,
+  ViewChild,
 } from '@angular/core';
 import { finalize } from 'rxjs/operators';
-import { BsModalRef } from 'ngx-bootstrap/modal';
+import { ModalDirective } from 'ngx-bootstrap/modal';
 import * as _ from 'lodash';
 import { AppComponentBase } from '@shared/app-component-base';
 import {
@@ -18,30 +19,34 @@ import {
 } from '@shared/service-proxies/service-proxies';
 
 @Component({
+  selector: 'create-role-dialog',
   templateUrl: 'create-role-dialog.component.html',
 })
 export class CreateRoleDialogComponent extends AppComponentBase
   implements OnInit {
+  @ViewChild('createRoleModal') modal: ModalDirective;
+
   active = false;
   saving = false;
-  role = new RoleDto();
+  role: RoleDto;
   permissions: PermissionDto[] = [];
   checkedPermissionsMap: { [key: string]: boolean } = {};
   defaultPermissionCheckedStatus = true;
 
   @Output() onSave = new EventEmitter<any>();
 
-  constructor(
-    injector: Injector,
-    private _roleService: RoleServiceProxy,
-    public bsModalRef: BsModalRef
-  ) {
+  constructor(injector: Injector, private _roleService: RoleServiceProxy) {
     super(injector);
   }
 
-  ngOnInit(): void {
-    this.active = true;
+  show(): void {
+    this.role = new RoleDto();
 
+    this.active = true;
+    this.modal.show();
+  }
+
+  ngOnInit(): void {
     this._roleService
       .getAllPermissions()
       .subscribe((result: PermissionDtoListResultDto) => {
@@ -52,13 +57,11 @@ export class CreateRoleDialogComponent extends AppComponentBase
 
   setInitialPermissionsStatus(): void {
     _.map(this.permissions, (item) => {
-      this.checkedPermissionsMap[item.name] = this.isPermissionChecked(
-        item.name
-      );
+      this.checkedPermissionsMap[item.name] = this.isPermissionChecked();
     });
   }
 
-  isPermissionChecked(permissionName: string): boolean {
+  isPermissionChecked(): boolean {
     // just return default permission checked status
     // it's better to use a setting
     return this.defaultPermissionCheckedStatus;
@@ -101,6 +104,6 @@ export class CreateRoleDialogComponent extends AppComponentBase
 
   close(): void {
     this.active = false;
-    this.bsModalRef.hide();
+    this.modal.hide();
   }
 }
