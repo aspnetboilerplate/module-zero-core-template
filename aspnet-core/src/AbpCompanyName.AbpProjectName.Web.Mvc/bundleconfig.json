@@ -81,13 +81,6 @@
     ]
   },
   {
-    "outputFileName": "wwwroot/view-resources/Views/_Bundles/home-index.min.js",
-    "inputFiles": [
-      "wwwroot/libs/chartjs/dist/Chart.js",
-      "wwwroot/view-resources/Views/Home/Index.js"
-    ]
-  },
-  {
     "outputFileName": "wwwroot/view-resources/Views/Tenants/Index.min.js",
     "inputFiles": [
       "wwwroot/view-resources/Views/Tenants/Index.js"
