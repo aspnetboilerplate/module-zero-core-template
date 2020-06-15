@@ -4,9 +4,10 @@ import {
   OnInit,
   EventEmitter,
   Output,
+  ViewChild,
 } from '@angular/core';
 import { finalize } from 'rxjs/operators';
-import { BsModalRef } from 'ngx-bootstrap/modal';
+import { ModalDirective } from 'ngx-bootstrap/modal';
 import * as _ from 'lodash';
 import { AppComponentBase } from '@shared/app-component-base';
 import {
@@ -17,13 +18,16 @@ import {
 import { AbpValidationError } from '@shared/components/validation/abp-validation.api';
 
 @Component({
+  selector: 'create-user-dialog',
   templateUrl: './create-user-dialog.component.html',
 })
 export class CreateUserDialogComponent extends AppComponentBase
   implements OnInit {
+  @ViewChild('createUserModal') modal: ModalDirective;
+
   active = false;
   saving = false;
-  user = new CreateUserDto();
+  user: CreateUserDto;
   roles: RoleDto[] = [];
   checkedRolesMap: { [key: string]: boolean } = {};
   defaultRoleCheckedStatus = false;
@@ -43,33 +47,34 @@ export class CreateUserDialogComponent extends AppComponentBase
 
   @Output() onSave = new EventEmitter<any>();
 
-  constructor(
-    injector: Injector,
-    public _userService: UserServiceProxy,
-    public bsModalRef: BsModalRef
-  ) {
+  constructor(injector: Injector, private _userService: UserServiceProxy) {
     super(injector);
   }
 
   ngOnInit(): void {
-    this.active = true;
-    this.user.isActive = true;
-
     this._userService.getRoles().subscribe((result) => {
       this.roles = result.items;
       this.setInitialRolesStatus();
     });
   }
 
+  show(): void {
+    this.user = new CreateUserDto();
+    this.user.isActive = true;
+
+    this.active = true;
+    this.modal.show();
+  }
+
   setInitialRolesStatus(): void {
     _.map(this.roles, (item) => {
       this.checkedRolesMap[item.normalizedName] = this.isRoleChecked(
-        item.normalizedName
+
       );
     });
   }
 
-  isRoleChecked(normalizedName: string): boolean {
+  isRoleChecked(): boolean {
     // just return default role checked status
     // it's better to use a setting
     return this.defaultRoleCheckedStatus;
@@ -110,6 +115,6 @@ export class CreateUserDialogComponent extends AppComponentBase
 
   close(): void {
     this.active = false;
-    this.bsModalRef.hide();
+    this.modal.hide();
   }
 }

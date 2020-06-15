@@ -27,7 +27,7 @@ import { UsersComponent } from '@app/users/users.component';
 import { CreateUserDialogComponent } from '@app/users/create-user/create-user-dialog.component';
 import { EditUserDialogComponent } from '@app/users/edit-user/edit-user-dialog.component';
 import { ChangePasswordComponent } from './users/change-password/change-password.component';
-import { ResetPasswordDialogComponent } from './users/reset-password/reset-password.component';
+import { ResetPasswordDialogComponent } from './users/reset-password/reset-password-dialog.component';
 // layout
 import { HeaderComponent } from './layout/header.component';
 import { HeaderLeftNavbarComponent } from './layout/header-left-navbar.component';

@@ -1,12 +1,12 @@
 import {
   Component,
   Injector,
-  OnInit,
   EventEmitter,
   Output,
+  ViewChild,
 } from '@angular/core';
 import { finalize } from 'rxjs/operators';
-import { BsModalRef } from 'ngx-bootstrap/modal';
+import { ModalDirective } from 'ngx-bootstrap/modal';
 import * as _ from 'lodash';
 import { AppComponentBase } from '@shared/app-component-base';
 import {
@@ -16,36 +16,34 @@ import {
 } from '@shared/service-proxies/service-proxies';
 
 @Component({
+  selector: 'edit-user-dialog',
   templateUrl: './edit-user-dialog.component.html',
 })
-export class EditUserDialogComponent extends AppComponentBase
-  implements OnInit {
+export class EditUserDialogComponent extends AppComponentBase {
+  @ViewChild('editUserModal') modal: ModalDirective;
+
   active = false;
   saving = false;
-  user = new UserDto();
+  user: UserDto;
   roles: RoleDto[] = [];
   checkedRolesMap: { [key: string]: boolean } = {};
-  id: number;
 
   @Output() onSave = new EventEmitter<any>();
 
-  constructor(
-    injector: Injector,
-    public _userService: UserServiceProxy,
-    public bsModalRef: BsModalRef
-  ) {
+  constructor(injector: Injector, private _userService: UserServiceProxy) {
     super(injector);
   }
 
-  ngOnInit(): void {
-    this.active = true;
-
-    this._userService.get(this.id).subscribe((result) => {
+  show(id: number): void {
+    this._userService.get(id).subscribe((result) => {
       this.user = result;
 
       this._userService.getRoles().subscribe((result2) => {
         this.roles = result2.items;
         this.setInitialRolesStatus();
+
+        this.active = true;
+        this.modal.show();
       });
     });
   }
@@ -97,6 +95,6 @@ export class EditUserDialogComponent extends AppComponentBase
 
   close(): void {
     this.active = false;
-    this.bsModalRef.hide();
+    this.modal.hide();
   }
 }

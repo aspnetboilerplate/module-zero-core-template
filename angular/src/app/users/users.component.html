@@ -6,7 +6,11 @@
           <h1>{{ "Users" | localize }}</h1>
         </div>
         <div class="col-6 text-right">
-          <a href="javascript:;" class="btn bg-blue" (click)="createUser()">
+          <a
+            href="javascript:;"
+            class="btn bg-blue"
+            (click)="createUserDialog.show()"
+          >
             <i class="fa fa-plus-square"></i>
             {{ "Create" | localize }}
           </a>
@@ -172,7 +176,7 @@
                   <button
                     type="button"
                     class="btn btn-sm bg-secondary"
-                    (click)="editUser(user)"
+                    (click)="editUserDialog.show(user.id)"
                   >
                     <i class="fas fa-pencil-alt"></i>
                     {{ "Edit" | localize }}
@@ -188,7 +192,7 @@
                   <button
                     type="button"
                     class="btn btn-sm bg-secondary"
-                    (click)="resetPassword(user)"
+                    (click)="resetPasswordDialog.show(user.id)"
                   >
                     <i class="fas fa-lock"></i>
                     {{ "ResetPassword" | localize }}
@@ -225,3 +229,13 @@
     </div>
   </section>
 </div>
+
+<create-user-dialog
+  #createUserDialog
+  (onSave)="getDataPage(1)"
+></create-user-dialog>
+<edit-user-dialog #editUserDialog (onSave)="refresh()"></edit-user-dialog>
+<reset-password-dialog
+  #resetPasswordDialog
+  (onSave)="refresh()"
+></reset-password-dialog>

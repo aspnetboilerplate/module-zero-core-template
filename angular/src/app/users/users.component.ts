@@ -1,19 +1,18 @@
-import { Component, Injector } from '@angular/core';
+import { Component, Injector, ViewChild } from '@angular/core';
 import { finalize } from 'rxjs/operators';
-import { BsModalService, BsModalRef } from 'ngx-bootstrap/modal';
 import { appModuleAnimation } from '@shared/animations/routerTransition';
 import {
   PagedListingComponentBase,
-  PagedRequestDto
+  PagedRequestDto,
 } from 'shared/paged-listing-component-base';
 import {
   UserServiceProxy,
   UserDto,
-  UserDtoPagedResultDto
+  UserDtoPagedResultDto,
 } from '@shared/service-proxies/service-proxies';
 import { CreateUserDialogComponent } from './create-user/create-user-dialog.component';
 import { EditUserDialogComponent } from './edit-user/edit-user-dialog.component';
-import { ResetPasswordDialogComponent } from './reset-password/reset-password.component';
+import { ResetPasswordDialogComponent } from './reset-password/reset-password-dialog.component';
 
 class PagedUsersRequestDto extends PagedRequestDto {
   keyword: string;
@@ -22,32 +21,23 @@ class PagedUsersRequestDto extends PagedRequestDto {
 
 @Component({
   templateUrl: './users.component.html',
-  animations: [appModuleAnimation()]
+  animations: [appModuleAnimation()],
 })
 export class UsersComponent extends PagedListingComponentBase<UserDto> {
+  @ViewChild('createUserDialog')
+  createUserDialog: CreateUserDialogComponent;
+  @ViewChild('editUserDialog')
+  editUserDialog: EditUserDialogComponent;
+  @ViewChild('resetPasswordDialog')
+  resetPasswordDialog: ResetPasswordDialogComponent;
+
   users: UserDto[] = [];
   keyword = '';
   isActive: boolean | null;
   advancedFiltersVisible = false;
 
-  constructor(
-    injector: Injector,
-    private _userService: UserServiceProxy,
-    private _modalService: BsModalService
-  ) {
+  constructor(injector: Injector, private _userService: UserServiceProxy) {
     super(injector);
-  }
-
-  createUser(): void {
-    this.showCreateOrEditUserDialog();
-  }
-
-  editUser(user: UserDto): void {
-    this.showCreateOrEditUserDialog(user.id);
-  }
-
-  public resetPassword(user: UserDto): void {
-    this.showResetPasswordUserDialog(user.id);
   }
 
   clearFilters(): void {
@@ -95,40 +85,5 @@ export class UsersComponent extends PagedListingComponentBase<UserDto> {
         }
       }
     );
-  }
-
-  private showResetPasswordUserDialog(id?: number): void {
-    this._modalService.show(ResetPasswordDialogComponent, {
-      class: 'modal-lg',
-      initialState: {
-        id: id,
-      },
-    });
-  }
-
-  private showCreateOrEditUserDialog(id?: number): void {
-    let createOrEditUserDialog: BsModalRef;
-    if (!id) {
-      createOrEditUserDialog = this._modalService.show(
-        CreateUserDialogComponent,
-        {
-          class: 'modal-lg',
-        }
-      );
-    } else {
-      createOrEditUserDialog = this._modalService.show(
-        EditUserDialogComponent,
-        {
-          class: 'modal-lg',
-          initialState: {
-            id: id,
-          },
-        }
-      );
-    }
-
-    createOrEditUserDialog.content.onSave.subscribe(() => {
-      this.refresh();
-    });
   }
 }
