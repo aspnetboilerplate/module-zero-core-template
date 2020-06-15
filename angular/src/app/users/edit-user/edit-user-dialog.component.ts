@@ -22,13 +22,13 @@ import {
 export class EditUserDialogComponent extends AppComponentBase {
   @ViewChild('editUserModal') modal: ModalDirective;
 
+  @Output() onSave = new EventEmitter<any>();
+
   active = false;
   saving = false;
   user: UserDto;
   roles: RoleDto[] = [];
   checkedRolesMap: { [key: string]: boolean } = {};
-
-  @Output() onSave = new EventEmitter<any>();
 
   constructor(injector: Injector, private _userService: UserServiceProxy) {
     super(injector);

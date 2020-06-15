@@ -20,11 +20,11 @@ import { ModalDirective } from 'ngx-bootstrap/modal';
 export class ResetPasswordDialogComponent extends AppComponentBase {
   @ViewChild('resetPasswordModal') modal: ModalDirective;
 
+  @Output() onSave = new EventEmitter<any>();
+
   active = false;
   saving = false;
   resetPasswordDto: ResetPasswordDto;
-
-  @Output() onSave = new EventEmitter<any>();
 
   constructor(injector: Injector, private _userService: UserServiceProxy) {
     super(injector);

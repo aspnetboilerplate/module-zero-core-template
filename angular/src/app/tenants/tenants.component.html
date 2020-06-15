@@ -224,7 +224,4 @@
   #createTenantDialog
   (onSave)="getDataPage(1)"
 ></create-tenant-dialog>
-<edit-tenant-dialog
-  #editTenantDialog
-  (onSave)="getDataPage(1)"
-></edit-tenant-dialog>
+<edit-tenant-dialog #editTenantDialog (onSave)="refresh()"></edit-tenant-dialog>

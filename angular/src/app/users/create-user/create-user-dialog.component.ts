@@ -25,6 +25,8 @@ export class CreateUserDialogComponent extends AppComponentBase
   implements OnInit {
   @ViewChild('createUserModal') modal: ModalDirective;
 
+  @Output() onSave = new EventEmitter<any>();
+
   active = false;
   saving = false;
   user: CreateUserDto;
@@ -44,8 +46,6 @@ export class CreateUserDialogComponent extends AppComponentBase
       localizationKey: 'PasswordsDoNotMatch',
     },
   ];
-
-  @Output() onSave = new EventEmitter<any>();
 
   constructor(injector: Injector, private _userService: UserServiceProxy) {
     super(injector);
@@ -68,9 +68,7 @@ export class CreateUserDialogComponent extends AppComponentBase
 
   setInitialRolesStatus(): void {
     _.map(this.roles, (item) => {
-      this.checkedRolesMap[item.normalizedName] = this.isRoleChecked(
-
-      );
+      this.checkedRolesMap[item.normalizedName] = this.isRoleChecked();
     });
   }
 

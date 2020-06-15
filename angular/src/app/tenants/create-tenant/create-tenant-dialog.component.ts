@@ -20,11 +20,11 @@ import {
 export class CreateTenantDialogComponent extends AppComponentBase {
   @ViewChild('createTenantModal') modal: ModalDirective;
 
+  @Output() onSave = new EventEmitter<any>();
+
   active = false;
   saving = false;
   tenant: CreateTenantDto;
-
-  @Output() onSave = new EventEmitter<any>();
 
   constructor(injector: Injector, private _tenantService: TenantServiceProxy) {
     super(injector);

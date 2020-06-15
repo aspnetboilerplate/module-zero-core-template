@@ -25,14 +25,14 @@ import {
 export class EditRoleDialogComponent extends AppComponentBase {
   @ViewChild('editRoleModal') modal: ModalDirective;
 
+  @Output() onSave = new EventEmitter<any>();
+
   active = false;
   saving = false;
   role: RoleEditDto;
   permissions: FlatPermissionDto[];
   grantedPermissionNames: string[];
   checkedPermissionsMap: { [key: string]: boolean } = {};
-
-  @Output() onSave = new EventEmitter<any>();
 
   constructor(injector: Injector, private _roleService: RoleServiceProxy) {
     super(injector);

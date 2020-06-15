@@ -26,6 +26,8 @@ export class CreateRoleDialogComponent extends AppComponentBase
   implements OnInit {
   @ViewChild('createRoleModal') modal: ModalDirective;
 
+  @Output() onSave = new EventEmitter<any>();
+
   active = false;
   saving = false;
   role: RoleDto;
@@ -33,17 +35,8 @@ export class CreateRoleDialogComponent extends AppComponentBase
   checkedPermissionsMap: { [key: string]: boolean } = {};
   defaultPermissionCheckedStatus = true;
 
-  @Output() onSave = new EventEmitter<any>();
-
   constructor(injector: Injector, private _roleService: RoleServiceProxy) {
     super(injector);
-  }
-
-  show(): void {
-    this.role = new RoleDto();
-
-    this.active = true;
-    this.modal.show();
   }
 
   ngOnInit(): void {
@@ -53,6 +46,13 @@ export class CreateRoleDialogComponent extends AppComponentBase
         this.permissions = result.items;
         this.setInitialPermissionsStatus();
       });
+  }
+
+  show(): void {
+    this.role = new RoleDto();
+
+    this.active = true;
+    this.modal.show();
   }
 
   setInitialPermissionsStatus(): void {
