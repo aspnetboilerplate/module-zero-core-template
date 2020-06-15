@@ -1,6 +1,6 @@
-import { Component, Injector, OnInit } from '@angular/core';
+import { Component, Injector, ViewChild } from '@angular/core';
 import { finalize } from 'rxjs/operators';
-import { BsModalRef } from 'ngx-bootstrap/modal';
+import { ModalDirective } from 'ngx-bootstrap/modal';
 import { AppComponentBase } from '@shared/app-component-base';
 import { AccountServiceProxy } from '@shared/service-proxies/service-proxies';
 import { AppTenantAvailabilityState } from '@shared/AppEnums';
@@ -10,24 +10,26 @@ import {
 } from '@shared/service-proxies/service-proxies';
 
 @Component({
+  selector: 'tenant-change-dialog',
   templateUrl: './tenant-change-dialog.component.html',
 })
-export class TenantChangeDialogComponent extends AppComponentBase
-  implements OnInit {
+export class TenantChangeDialogComponent extends AppComponentBase {
+  @ViewChild('tenantChangeModal') modal: ModalDirective;
+
   active = false;
   saving = false;
   tenancyName = '';
 
   constructor(
     injector: Injector,
-    private _accountService: AccountServiceProxy,
-    public bsModalRef: BsModalRef
+    private _accountService: AccountServiceProxy
   ) {
     super(injector);
   }
 
-  ngOnInit(): void {
+  show(): void {
     this.active = true;
+    this.modal.show();
   }
 
   save(): void {
@@ -70,6 +72,6 @@ export class TenantChangeDialogComponent extends AppComponentBase
 
   close(): void {
     this.active = false;
-    this.bsModalRef.hide();
+    this.modal.hide();
   }
 }
