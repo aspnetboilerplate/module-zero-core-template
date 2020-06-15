@@ -1,43 +1,41 @@
 import {
   Component,
   Injector,
-  OnInit,
   Output,
   EventEmitter,
+  ViewChild,
 } from '@angular/core';
 import { finalize } from 'rxjs/operators';
-import { BsModalRef } from 'ngx-bootstrap/modal';
+import { ModalDirective } from 'ngx-bootstrap/modal';
 import { AppComponentBase } from '@shared/app-component-base';
 import {
-  TenantServiceProxy,
   TenantDto,
+  TenantServiceProxy,
 } from '@shared/service-proxies/service-proxies';
 
 @Component({
+  selector: 'edit-tenant-dialog',
   templateUrl: 'edit-tenant-dialog.component.html',
 })
-export class EditTenantDialogComponent extends AppComponentBase
-  implements OnInit {
+export class EditTenantDialogComponent extends AppComponentBase {
+  @ViewChild('editTenantModal') modal: ModalDirective;
+
   active = false;
   saving = false;
-  tenant: TenantDto = new TenantDto();
-  id: number;
+  tenant: TenantDto;
 
   @Output() onSave = new EventEmitter<any>();
 
-  constructor(
-    injector: Injector,
-    public _tenantService: TenantServiceProxy,
-    public bsModalRef: BsModalRef
-  ) {
+  constructor(injector: Injector, private _tenantService: TenantServiceProxy) {
     super(injector);
   }
 
-  ngOnInit(): void {
-    this.active = true;
-
-    this._tenantService.get(this.id).subscribe((result: TenantDto) => {
+  show(id: number): void {
+    this._tenantService.get(id).subscribe((result: TenantDto) => {
       this.tenant = result;
+
+      this.active = true;
+      this.modal.show();
     });
   }
 
@@ -60,6 +58,6 @@ export class EditTenantDialogComponent extends AppComponentBase
 
   close(): void {
     this.active = false;
-    this.bsModalRef.hide();
+    this.modal.hide();
   }
 }

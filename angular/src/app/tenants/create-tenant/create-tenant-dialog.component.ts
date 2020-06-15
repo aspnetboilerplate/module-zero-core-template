@@ -1,12 +1,12 @@
 import {
   Component,
   Injector,
-  OnInit,
   Output,
   EventEmitter,
+  ViewChild,
 } from '@angular/core';
 import { finalize } from 'rxjs/operators';
-import { BsModalRef } from 'ngx-bootstrap/modal';
+import { ModalDirective } from 'ngx-bootstrap/modal';
 import { AppComponentBase } from '@shared/app-component-base';
 import {
   CreateTenantDto,
@@ -14,27 +14,28 @@ import {
 } from '@shared/service-proxies/service-proxies';
 
 @Component({
+  selector: 'create-tenant-dialog',
   templateUrl: 'create-tenant-dialog.component.html',
 })
-export class CreateTenantDialogComponent extends AppComponentBase
-  implements OnInit {
+export class CreateTenantDialogComponent extends AppComponentBase {
+  @ViewChild('createTenantModal') modal: ModalDirective;
+
   active = false;
   saving = false;
-  tenant: CreateTenantDto = new CreateTenantDto();
+  tenant: CreateTenantDto;
 
   @Output() onSave = new EventEmitter<any>();
 
-  constructor(
-    injector: Injector,
-    public _tenantService: TenantServiceProxy,
-    public bsModalRef: BsModalRef
-  ) {
+  constructor(injector: Injector, private _tenantService: TenantServiceProxy) {
     super(injector);
   }
 
-  ngOnInit(): void {
-    this.active = true;
+  show(): void {
+    this.tenant = new CreateTenantDto();
     this.tenant.isActive = true;
+
+    this.active = true;
+    this.modal.show();
   }
 
   save(): void {
@@ -56,6 +57,6 @@ export class CreateTenantDialogComponent extends AppComponentBase
 
   close(): void {
     this.active = false;
-    this.bsModalRef.hide();
+    this.modal.hide();
   }
 }

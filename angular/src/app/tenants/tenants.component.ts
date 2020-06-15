@@ -1,6 +1,5 @@
-import { Component, Injector } from '@angular/core';
+import { Component, Injector, ViewChild } from '@angular/core';
 import { finalize } from 'rxjs/operators';
-import { BsModalService, BsModalRef } from 'ngx-bootstrap/modal';
 import { appModuleAnimation } from '@shared/animations/routerTransition';
 import {
   PagedListingComponentBase,
@@ -21,19 +20,20 @@ class PagedTenantsRequestDto extends PagedRequestDto {
 
 @Component({
   templateUrl: './tenants.component.html',
-  animations: [appModuleAnimation()]
+  animations: [appModuleAnimation()],
 })
 export class TenantsComponent extends PagedListingComponentBase<TenantDto> {
+  @ViewChild('createTenantDialog')
+  createTenantDialog: CreateTenantDialogComponent;
+  @ViewChild('editTenantDialog')
+  editTenantDialog: EditTenantDialogComponent;
+
   tenants: TenantDto[] = [];
   keyword = '';
   isActive: boolean | null;
   advancedFiltersVisible = false;
 
-  constructor(
-    injector: Injector,
-    private _tenantService: TenantServiceProxy,
-    private _modalService: BsModalService
-  ) {
+  constructor(injector: Injector, private _tenantService: TenantServiceProxy) {
     super(injector);
   }
 
@@ -81,40 +81,6 @@ export class TenantsComponent extends PagedListingComponentBase<TenantDto> {
         }
       }
     );
-  }
-
-  createTenant(): void {
-    this.showCreateOrEditTenantDialog();
-  }
-
-  editTenant(tenant: TenantDto): void {
-    this.showCreateOrEditTenantDialog(tenant.id);
-  }
-
-  showCreateOrEditTenantDialog(id?: number): void {
-    let createOrEditTenantDialog: BsModalRef;
-    if (!id) {
-      createOrEditTenantDialog = this._modalService.show(
-        CreateTenantDialogComponent,
-        {
-          class: 'modal-lg',
-        }
-      );
-    } else {
-      createOrEditTenantDialog = this._modalService.show(
-        EditTenantDialogComponent,
-        {
-          class: 'modal-lg',
-          initialState: {
-            id: id,
-          },
-        }
-      );
-    }
-
-    createOrEditTenantDialog.content.onSave.subscribe(() => {
-      this.refresh();
-    });
   }
 
   clearFilters(): void {

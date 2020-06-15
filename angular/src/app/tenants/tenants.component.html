@@ -6,7 +6,11 @@
           <h1>{{ "Tenants" | localize }}</h1>
         </div>
         <div class="col-6 text-right">
-          <a href="javascript:;" class="btn bg-blue" (click)="createTenant()">
+          <a
+            href="javascript:;"
+            class="btn bg-blue"
+            (click)="createTenantDialog.show()"
+          >
             <i class="fa fa-plus-square"></i>
             {{ "Create" | localize }}
           </a>
@@ -170,7 +174,7 @@
                   <button
                     type="button"
                     class="btn btn-sm bg-secondary"
-                    (click)="editTenant(tenant)"
+                    (click)="editTenantDialog.show(tenant.id)"
                   >
                     <i class="fas fa-pencil-alt"></i>
                     {{ "Edit" | localize }}
@@ -215,3 +219,12 @@
     </div>
   </section>
 </div>
+
+<create-tenant-dialog
+  #createTenantDialog
+  (onSave)="getDataPage(1)"
+></create-tenant-dialog>
+<edit-tenant-dialog
+  #editTenantDialog
+  (onSave)="getDataPage(1)"
+></edit-tenant-dialog>
