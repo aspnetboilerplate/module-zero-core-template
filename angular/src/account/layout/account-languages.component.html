@@ -1,16 +1,11 @@
-﻿﻿<div class="text-center">
+﻿﻿<div *ngIf="languages?.length > 1" class="text-center">
   <ng-container *ngFor="let language of languages">
     <a
       *ngIf="language.name != currentLanguage.name"
-      href="javascript:void(0);"
+      href="javascript:;"
       (click)="changeLanguage(language.name)"
     >
-      <span
-        title="{{ language.displayName }}"
-        [attr.class.current-language-icon]="
-          language.name != currentLanguage.name
-        "
-      >
+      <span [title]="language.displayName">
         <i class="d-inline-block mx-1 {{ language.icon }}"></i>
       </span>
     </a>

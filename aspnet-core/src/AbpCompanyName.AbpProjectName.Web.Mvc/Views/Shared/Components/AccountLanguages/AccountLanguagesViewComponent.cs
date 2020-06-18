@@ -1,5 +1,4 @@
-﻿using System.Linq;
-using System.Threading.Tasks;
+﻿using System.Threading.Tasks;
 using Abp.Localization;
 using Microsoft.AspNetCore.Mvc;
 
@@ -19,9 +18,7 @@ namespace AbpCompanyName.AbpProjectName.Web.Views.Shared.Components.AccountLangu
             var model = new LanguageSelectionViewModel
             {
                 CurrentLanguage = _languageManager.CurrentLanguage,
-                Languages = _languageManager.GetLanguages().Where(l => !l.IsDisabled).ToList()
-                .Where(l => !l.IsDisabled)
-                .ToList(),
+                Languages = _languageManager.GetActiveLanguages(),
                 CurrentUrl = Request.Path
             };
 

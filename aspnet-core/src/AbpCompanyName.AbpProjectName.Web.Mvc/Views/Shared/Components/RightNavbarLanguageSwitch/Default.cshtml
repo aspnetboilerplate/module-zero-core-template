@@ -2,20 +2,20 @@
 @model RightNavbarLanguageSwitchViewModel
 
 <li class="nav-item dropdown">
-    <a href="javascript:void(0);" class="nav-link" data-toggle="dropdown" role="button">
-        <i class="@Model.CurrentLanguage.Icon" title="@Model.CurrentLanguage.DisplayName"></i>
-        <span class="d-none d-md-inline-block">@Model.CurrentLanguage.DisplayName</span>
+    <a href="javascript:;" class="nav-link" data-toggle="dropdown" role="button">
+        <i class="d-inline-block @Model.CurrentLanguage.Icon"></i>
+        <span class="d-none d-md-inline-block ml-1">
+            @Model.CurrentLanguage.DisplayName
+        </span>
     </a>
     <div class="dropdown-menu dropdown-menu-right p-0">
         @foreach (var languageInfo in Model.Languages)
         {
             if (languageInfo.Name != Model.CurrentLanguage.Name)
             {
-                <a class="dropdown-item" href="@Url.Action("ChangeCulture", "AbpLocalization", new {
-                                                  cultureName = languageInfo.Name,
-                                                  returnUrl = Context.Request.Path + Context.Request.QueryString
-                                              })">
-                    <i class="mr-2 @languageInfo.Icon"></i> @languageInfo.DisplayName
+                <a class="dropdown-item" href="@Url.Action("ChangeCulture", "AbpLocalization", new {cultureName = languageInfo.Name, returnUrl = Context.Request.Path + Context.Request.QueryString})">
+                    <i class="d-inline-block @languageInfo.Icon mr-1"></i>
+                    @languageInfo.DisplayName
                 </a>
             }
         }

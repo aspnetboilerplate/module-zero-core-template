@@ -1,18 +1,19 @@
 ﻿@using AbpCompanyName.AbpProjectName.Web.Views.Shared.Components.AccountLanguages
 @model LanguageSelectionViewModel
+
 @if (Model.Languages.Count > 1)
 {
     <div class="text-center">
-        @foreach (var languageInfo in Model.Languages)
+        @foreach (var language in Model.Languages)
         {
-            <a href="@Url.Action("ChangeCulture", "AbpLocalization", new {
-                    cultureName = languageInfo.Name,
-                    returnUrl = Context.Request.Path + Context.Request.QueryString
-                })">
-                <span class="@(languageInfo.Name == Model.CurrentLanguage.Name ? "current-language-icon" : "")" title="@languageInfo.DisplayName">
-                    <i class="@languageInfo.Icon"></i>
-                </span>
-            </a>
+            @if (language.Name != Model.CurrentLanguage.Name)
+            {
+                <a href="@Url.Action("ChangeCulture", "AbpLocalization", new {cultureName = language.Name, returnUrl = Context.Request.Path + Context.Request.QueryString})">
+                    <span title="@language.DisplayName">
+                        <i class="d-inline-block mx-1 @language.Icon"></i>
+                    </span>
+                </a>
+            }
         }
     </div>
 }
