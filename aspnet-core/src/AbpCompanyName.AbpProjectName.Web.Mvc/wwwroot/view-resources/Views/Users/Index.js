@@ -39,32 +39,27 @@
         columnDefs: [
             {
                 targets: 0,
-                className: 'control',
-                defaultContent: '',
-            },
-            {
-                targets: 1,
                 data: 'userName',
                 sortable: false
             },
             {
-                targets: 2,
+                targets: 1,
                 data: 'fullName',
                 sortable: false
             },
             {
-                targets: 3,
+                targets: 2,
                 data: 'emailAddress',
                 sortable: false
             },
             {
-                targets: 4,
+                targets: 3,
                 data: 'isActive',
                 sortable: false,
                 render: data => `<input type="checkbox" disabled ${data ? 'checked' : ''}>`
             },
             {
-                targets: 5,
+                targets: 4,
                 data: null,
                 sortable: false,
                 autoWidth: false,
@@ -184,5 +179,11 @@
             _$usersTable.ajax.reload();
             return false;
         }
+    });
+
+    $('.btn-clear').on('click', (e) => {
+        $('input[name=Keyword]').val('');
+        $('input[name=IsActive][value=""]').prop('checked', true);
+        _$usersTable.ajax.reload();
     });
 })(jQuery);

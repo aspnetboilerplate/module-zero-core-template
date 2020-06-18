@@ -11,16 +11,24 @@
             @await Html.PartialAsync("~/Views/Shared/Modals/_ModalHeader.cshtml", new ModalHeaderViewModel(L("CreateNewUser")))
             <form name="userCreateForm" role="form" class="form-horizontal">
                 <div class="modal-body">
-                    <ul class="nav nav-tabs" role="tablist">
+                    <ul class="nav nav-tabs">
                         <li class="nav-item">
-                            <a class="nav-link active" data-toggle="tab" role="tab" href="#create-user-details">@L("UserDetails")</a>
+                            <a class="nav-link active"
+                               data-toggle="pill"
+                               href="#create-user-details">
+                                @L("UserDetails")
+                            </a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link" data-toggle="tab" role="tab" href="#create-user-roles">@L("UserRoles")</a>
+                            <a class="nav-link"
+                               data-toggle="pill"
+                               href="#create-user-roles">
+                                @L("UserRoles")
+                            </a>
                         </li>
                     </ul>
-                    <div class="tab-content mt-4">
-                        <div role="tabpanel" class="tab-pane container active" id="create-user-details">
+                    <div class="tab-content">
+                        <div class="tab-pane pt-3 px-2 active" id="create-user-details">
                             <div class="form-group row required">
                                 <label class="col-md-3 col-form-label">@L("UserName")</label>
                                 <div class="col-md-9">
@@ -57,20 +65,38 @@
                                     <input type="password" class="form-control" name="ConfirmPassword" id="ConfirmPassword" required maxlength="@AbpUserBase.MaxPlainPasswordLength">
                                 </div>
                             </div>
-                            <div class="form-group row">
-                                <label class="col-md-3 col-form-label" for="CreateUserIsActive">@L("IsActive")</label>
+                            <div class="form-group row mb-0">
+                                <label class="col-md-3 col-form-label">@L("IsActive")</label>
                                 <div class="col-md-9">
-                                    <input type="checkbox" name="IsActive" value="true" id="CreateUserIsActive" checked />
+                                    <div class="custom-control custom-checkbox">
+                                        <input
+                                            type="checkbox"
+                                            class="custom-control-input"
+                                            name="IsActive"
+                                            id="create-IsActive"
+                                            value="true"
+                                            checked/>
+                                        <label class="custom-control-label mt-2" for="create-IsActive"></label>
+                                    </div>
                                 </div>
                             </div>
                         </div>
-                        <div role="tabpanel" class="tab-pane container" id="create-user-roles">
-                            <div class="row">
+                        <div class="tab-pane fade pt-3 px-2" id="create-user-roles">
+                            <div class="form-group row mb-0">
                                 @foreach (var role in Model.Roles)
                                 {
                                     <div class="col-md-6">
-                                        <input type="checkbox" name="role" id="role-@role.Id" value="@role.NormalizedName" title="@role.Description" />
-                                        <label for="role-@role.Id" title="@role.DisplayName">@role.Name</label>
+                                        <div class="custom-control custom-checkbox">
+                                            <input type="checkbox"
+                                                   class="custom-control-input"
+                                                   name="role"
+                                                   id="create-@role.Id"
+                                                   value="@role.NormalizedName"
+                                                   title="@role.Description" />
+                                            <label class="custom-control-label" for="create-@role.Id" title="@role.DisplayName">
+                                                @role.Name
+                                            </label>
+                                        </div>
                                     </div>
                                 }
                             </div>

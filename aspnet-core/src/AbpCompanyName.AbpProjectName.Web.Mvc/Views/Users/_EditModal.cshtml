@@ -43,20 +43,38 @@
                         <input id="email" type="email" class="form-control" name="EmailAddress" value="@Model.User.EmailAddress" required maxlength="@AbpUserBase.MaxEmailAddressLength">
                     </div>
                 </div>
-                <div class="form-group row">
-                    <label class="col-md-3 col-form-label" for="IsActive">@L("IsActive")</label>
+                <div class="form-group row mb-0">
+                    <label class="col-md-3 col-form-label">@L("IsActive")</label>
                     <div class="col-md-9">
-                        <input id="IsActive" type="checkbox" name="IsActive" value="true" @(Model.User.IsActive ? "checked" : "") />
+                        <div class="custom-control custom-checkbox">
+                            <input type="checkbox"
+                                   class="custom-control-input"
+                                   id="edit-IsActive"
+                                   name="IsActive"
+                                   value="true"
+                                   @(Model.User.IsActive ? "checked" : "") />
+                            <label class="custom-control-label mt-2" for="edit-IsActive"></label>
+                        </div>
                     </div>
                 </div>
             </div>
             <div role="tabpanel" class="tab-pane container" id="edit-user-roles">
-                <div class="row">
+                <div class="form-group row mb-0">
                     @foreach (var role in Model.Roles)
                     {
                         <div class="col-md-6">
-                            <input type="checkbox" name="role" value="@role.NormalizedName" title="@role.Description" class="filled-in" id="@($"role{role.Id}")" @(Model.UserIsInRole(role) ? "checked" : "") />
-                            <label for="@($"role{role.Id}")" title="@role.DisplayName">@role.Name</label>
+                            <div class="custom-control custom-checkbox">
+                                <input type="checkbox"
+                                       class="custom-control-input"
+                                       name="role"
+                                       id="edit-@role.Id"
+                                       value="@role.NormalizedName"
+                                       title="@role.Description"
+                                       @(Model.UserIsInRole(role) ? "checked" : "") />
+                                <label class="custom-control-label" for="edit-@role.Id" title="@role.DisplayName">
+                                    @role.Name
+                                </label>
+                            </div>
                         </div>
                     }
                 </div>
