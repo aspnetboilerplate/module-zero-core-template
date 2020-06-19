@@ -61,7 +61,7 @@
 
     //admin-lte libs start
     {
-      "library": "admin-lte@3.0.2",
+      "library": "admin-lte@3.0.4",
       "provider": "jsdelivr",
       "destination": "wwwroot/libs/admin-lte",
       "files": [
