@@ -80,7 +80,7 @@
           type="email"
           class="form-control"
           name="userName"
-          placeholder=" {{ 'UserName' | localize }}"
+          placeholder="{{ 'UserName' | localize }}"
           required
           maxlength="32"
           [(ngModel)]="model.userName"
@@ -122,7 +122,7 @@
         [controlEl]="passwordEl"
       ></abp-validation-summary>
     </div>
-    <div class="row">
+    <div class="form-group row mb-0">
       <div class="col-8">
         <button
           type="button"

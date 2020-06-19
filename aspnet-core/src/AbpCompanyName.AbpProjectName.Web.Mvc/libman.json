@@ -103,15 +103,6 @@
       "destination": "wwwroot/libs/font-awesome"
     },
     {
-      "library": "icheck-bootstrap@3.0.1",
-      "provider": "jsdelivr",
-      "destination": "wwwroot/libs/icheck-bootstrap",
-      "files": [
-        "icheck-bootstrap.css",
-        "icheck-bootstrap.min.css"
-      ]
-    },
-    {
       "library": "datatables.net@1.10.20",
       "provider": "jsdelivr",
       "destination": "wwwroot/libs/datatables",

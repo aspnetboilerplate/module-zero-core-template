@@ -23,7 +23,7 @@
     <title>@pageTitle</title>
 
     @await Html.PartialAsync("_Styles.cshtml")
-    @RenderSection("styles", required: false)
+    @await RenderSectionAsync("styles", required: false)
 </head>
 <body class="hold-transition login-page">
     <div class="login-box">
@@ -46,12 +46,17 @@
         </div>
         <div class="row">
             <div class="col-md-12 text-center">
-                <small>&copy; @DateTime.Now.Year AbpProjectName. <b>Version </b> @AppVersionHelper.Version [@AppVersionHelper.ReleaseDate.ToString("yyyyMMdd")]</small>
+                <small>
+                    Copyright &copy; @DateTime.Now.Year
+                    <b class="ml-2">@L("Version")</b>
+                    @AppVersionHelper.Version
+                    [@AppVersionHelper.ReleaseDate.ToString("yyyyddMM")]
+                </small>
             </div>
         </div>
     </div>
     @await Html.PartialAsync("_Scripts.cshtml")
-    @RenderSection("scripts", required: false)
+    @await RenderSectionAsync("scripts", required: false)
     @WebResourceManager.RenderScripts()
 </body>
 </html>

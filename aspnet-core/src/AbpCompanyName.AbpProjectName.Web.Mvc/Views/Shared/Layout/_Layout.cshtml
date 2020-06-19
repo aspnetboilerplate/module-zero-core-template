@@ -23,7 +23,7 @@
     <title>@pageTitle</title>
 
     @await Html.PartialAsync("_Styles.cshtml")
-    @RenderSection("styles", required: false)
+    @await RenderSectionAsync("styles", required: false)
 </head>
 <body class="hold-transition sidebar-mini">
     <div class="wrapper">
@@ -37,7 +37,7 @@
     </div>
 
     @await Html.PartialAsync("_Scripts.cshtml")
-    @RenderSection("scripts", required: false)
+    @await RenderSectionAsync("scripts", required: false)
     @WebResourceManager.RenderScripts()
 </body>
 </html>

@@ -13,56 +13,54 @@
         <script src="~/view-resources/Views/Account/Login.min.js" asp-append-version="true"></script>
     </environment>
 }
-<h4 class="text-center">@L("LogIn")</h4>
+<h4 class="text-center mb-3">@L("LogIn")</h4>
 <form id="LoginForm" asp-action="Login" method="post">
     <input type="hidden" name="returnUrl" value="@Model.ReturnUrl" />
     <input type="hidden" name="returnUrlHash" />
-    <div class="input-group mb-3">
-        <input type="text" name="usernameOrEmailAddress" class="form-control" placeholder="@L("UserNameOrEmail")" required autofocus maxlength="@AbpUserBase.MaxEmailAddressLength">
-        <div class="input-group-append">
-            <div class="input-group-text">
-                <span class="fas fa-user"></span>
+    <div class="form-group">
+        <div class="input-group">
+            <input type="text" name="usernameOrEmailAddress" class="form-control" placeholder="@L("UserNameOrEmail")" required autofocus maxlength="@AbpUserBase.MaxEmailAddressLength">
+            <div class="input-group-append">
+                <div class="input-group-text">
+                    <span class="fas fa-user"></span>
+                </div>
             </div>
         </div>
     </div>
-    <div class="input-group mb-3">
-        <input type="password" class="form-control" name="Password" autocomplete="password" placeholder="@L("Password")" required maxlength="@AbpUserBase.MaxPlainPasswordLength">
-        <div class="input-group-append">
-            <div class="input-group-text">
-                <span class="fas fa-lock"></span>
+    <div class="form-group">
+        <div class="input-group mb-3">
+            <input type="password" class="form-control" name="Password" autocomplete="password" placeholder="@L("Password")" required maxlength="@AbpUserBase.MaxPlainPasswordLength">
+            <div class="input-group-append">
+                <div class="input-group-text">
+                    <span class="fas fa-lock"></span>
+                </div>
             </div>
         </div>
     </div>
-    <div class="row">
-        <div class="col-8">
-            <div class="icheck-primary">
-                <input type="checkbox" id="RememberMe" name="RememberMe" value="true">
-                <label for="RememberMe">
+    <div class="form-group row mb-0">
+        <div class="col-md-8">
+            <div class="custom-control custom-checkbox">
+                <input type="checkbox"
+                       class="custom-control-input"
+                       id="RememberMe"
+                       name="RememberMe" />
+                <label for="RememberMe" class="custom-control-label">
                     @L("RememberMe")
                 </label>
             </div>
         </div>
-        <div class="col-4">
-            <button type="submit" id="LoginButton" class="btn btn-primary btn-block btn-flat">@L("LogIn")</button>
+        <div class="col-md-4">
+            <button type="submit"
+                    id="LoginButton"
+                    class="btn btn-primary btn-block">
+                @L("LogIn")
+            </button>
         </div>
     </div>
 </form>
-@*<div class="social-auth-links text-center mb-3">
-        <p>- OR -</p>
-        <a href="javascript:;" class="btn btn-block btn-primary">
-            <i class="fab fa-facebook mr-2"></i> Sign in using Facebook
-        </a>
-        <a href="javascript:;" class="btn btn-block btn-danger">
-            <i class="fab fa-google-plus mr-2"></i> Sign in using Google+
-        </a>
-    </div>*@
-<p class="mb-0">
-    @if (Model.IsSelfRegistrationAllowed)
-    {
-        <div class="row">
-            <div class="col-12">
-                <a asp-action="Register" class="text-center"><i class="fa fa-plus-circle"></i> @L("Register")</a>
-            </div>
-        </div>
-    }
-</p>
+@if (Model.IsSelfRegistrationAllowed)
+{
+    <p class="mb-0 mt-3">
+        <a asp-action="Register" class="text-center"><i class="fa fa-plus-circle"></i> @L("Register")</a>
+    </p>
+}
