@@ -101,5 +101,6 @@
     <text name="CurrentPassword">Mevcut şifreniz</text>
     <text name="NewPassword">Yeni şifre</text>
     <text name="ConfirmNewPassword">Yeni şifreyi doğrula</text>
+    <text name="Details">Detaylar</text>
   </texts>
 </localizationDictionary>

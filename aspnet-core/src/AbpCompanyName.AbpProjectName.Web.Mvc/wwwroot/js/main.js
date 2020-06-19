@@ -97,12 +97,14 @@
             return false;
 
         if ($($advSearchBody).is(":hidden")) {
-            $advSearchTogglerIcon.addClass("fa-angle-down")
-            $advSearchTogglerIcon.removeClass("fa-angle-up")
+            $advSearchTogglerIcon.addClass("fa-angle-down");
+            $advSearchTogglerIcon.removeClass("fa-angle-up");
         } else {
-            $advSearchTogglerIcon.addClass("fa-angle-up")
-            $advSearchTogglerIcon.removeClass("fa-angle-down")
+            $advSearchTogglerIcon.addClass("fa-angle-up");
+            $advSearchTogglerIcon.removeClass("fa-angle-down");
         }
+
+        return true;
     }
     
     function initAdvSearch() {
@@ -120,15 +122,15 @@
                 return false;
 
             const $advSearchTogglerIcon = $advSearchToggler.find('i');
-            setAdvSearchTogglerIcon($advSearchBody, $advSearchTogglerIcon)
+            setAdvSearchTogglerIcon($advSearchBody, $advSearchTogglerIcon);
 
             $advSearchToggler.on("click", () => {
                 if ($($advSearchBody).is(":hidden")) {
                     $advSearchBody.show();
-                    setAdvSearchTogglerIcon($advSearchBody, $advSearchTogglerIcon)
+                    setAdvSearchTogglerIcon($advSearchBody, $advSearchTogglerIcon);
                 } else {
                     $advSearchBody.hide();
-                    setAdvSearchTogglerIcon($advSearchBody, $advSearchTogglerIcon)
+                    setAdvSearchTogglerIcon($advSearchBody, $advSearchTogglerIcon);
                 }
             })
         });

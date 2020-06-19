@@ -14,8 +14,8 @@ import { AbpValidationError } from './abp-validation.api';
   selector: 'abp-validation-summary',
   templateUrl: './abp-validation.summary.component.html'
 })
-export class AbpValidationSummaryComponent extends AppComponentBase implements OnInit {
-
+export class AbpValidationSummaryComponent extends AppComponentBase
+  implements OnInit {
   defaultValidationErrors: Partial<AbpValidationError>[] = [
     { name: 'required', localizationKey: 'ThisFieldIsRequired' },
     {
@@ -68,8 +68,8 @@ export class AbpValidationSummaryComponent extends AppComponentBase implements O
     if (this.controlEl) {
       this.control.valueChanges.subscribe(() => {
         if (
-          this.control.valid &&
-          (this.control.dirty || this.control.touched)
+          this.control.disabled ||
+          (this.control.valid && (this.control.dirty || this.control.touched))
         ) {
           this._renderer.removeClass(this.controlEl, 'is-invalid');
         }

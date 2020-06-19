@@ -1,22 +1,25 @@
 ﻿@media (min-width: 576px) {
-    .nav-user-menu .user-image {
-        float: none;
-        line-height: 10px;
-        margin-top: -8px;
-    }
-}
+  .nav-user-menu .user-image {
+    float: none;
+    line-height: 10px;
+    margin-top: -8px; } }
 
 .nav-user-menu .user-image {
-    border-radius: 50%;
-    float: left;
-    height: 2rem;
-    margin-top: -4px;
-    width: 2rem;
-}
+  border-radius: 50%;
+  float: left;
+  height: 2rem;
+  margin-top: -4px;
+  width: 2rem; }
 
 .form-group.required .col-form-label:after {
-    color: #d00;
-    content: "*";
-    position: absolute;
-    margin-left: 3px;
-}
+  color: #d00;
+  content: "*";
+  position: absolute;
+  margin-left: 3px; }
+
+.card-body .table {
+  margin-top: 0px !important;
+  margin-bottom: 0px !important; }
+  .card-body .table thead th {
+    border-bottom: none !important;
+    border-top: none !important; }

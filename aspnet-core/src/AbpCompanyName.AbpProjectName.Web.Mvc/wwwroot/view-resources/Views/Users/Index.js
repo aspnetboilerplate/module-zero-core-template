@@ -56,7 +56,14 @@
                 targets: 3,
                 data: 'isActive',
                 sortable: false,
-                render: data => `<input type="checkbox" disabled ${data ? 'checked' : ''}>`
+                render: (data) => {
+                    return [
+                        '<div class="custom-control custom-checkbox">',
+                        `<input type="checkbox" class="custom-control-input" disabled ${data ? 'checked' : ''}/>`,
+                        '<label class="custom-control-label"></label>',
+                        '</div>'
+                    ].join('');
+                }
             },
             {
                 targets: 4,
