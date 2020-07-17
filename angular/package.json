@@ -28,7 +28,7 @@
     "admin-lte-css-only": "^3.0.4",
     "core-js": "^3.2.1",
     "famfamfam-flags": "^1.0.0",
-    "lodash": "^4.17.4",
+    "lodash": "^4.17.19",
     "moment": "2.24.0",
     "moment-timezone": "^0.5.28",
     "ngx-bootstrap": "^5.6.1",
