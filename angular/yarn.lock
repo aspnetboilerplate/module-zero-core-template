@@ -1287,15 +1287,15 @@ JSONStream@^1.3.4:
     jsonparse "^1.2.0"
     through ">=2.2.7 <3"
 
-abp-ng2-module@^6.0.0:
-  version "6.0.0"
-  resolved "https://registry.yarnpkg.com/abp-ng2-module/-/abp-ng2-module-6.0.0.tgz#04a5729081156ac717f041d5814a83e675c4cd14"
-  integrity sha512-mstyWX+7icDhCcKjwN6cI1OdJ1fJu2K0K+Mj7NWDbd4Jm8PtCQPIHPHET8G4YAVFWNEAAH+iBdLSLaxbRLgGmg==
+abp-ng2-module@^6.2.0:
+  version "6.2.0"
+  resolved "https://registry.yarnpkg.com/abp-ng2-module/-/abp-ng2-module-6.2.0.tgz#a59415c574ba8d3ac6c203fef8251ffc342f2460"
+  integrity sha512-EvsRlTgkDwF538hwckdQ70iSj+PW0ZpAprbIhUYdRo6ANgMGjujIC1PylHgOtvIDz9VwUUa9gQVG/2rmn5XopQ==
 
-abp-web-resources@^5.1.1:
-  version "5.2.0"
-  resolved "https://registry.yarnpkg.com/abp-web-resources/-/abp-web-resources-5.2.0.tgz#89c17111c6e70b1ecbfb287dfa960e0593511a77"
-  integrity sha512-C/X1Id/JiAsfatBWMae1M5LDG574lJlRJws4bQ51pf8kH8UfzI3Ks+ZHKgVHaoFdT+x/UojtUPWoZp8/oTHyZQ==
+abp-web-resources@^5.3.0:
+  version "5.3.0"
+  resolved "https://registry.yarnpkg.com/abp-web-resources/-/abp-web-resources-5.3.0.tgz#45e7e35e74c0778185dc19668446c1bec919d095"
+  integrity sha512-dvaCcjkXvQp62iLtasGl3VeYjgSM5l7gM1MoqvdjjPiWSAkrZFZk2MeMyQh/Sl0QYggLVKKhNCwB6woZjcAaqw==
 
 accepts@~1.3.4, accepts@~1.3.5, accepts@~1.3.7:
   version "1.3.7"
