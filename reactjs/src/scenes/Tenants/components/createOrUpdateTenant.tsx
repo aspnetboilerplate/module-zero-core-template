@@ -11,7 +11,7 @@ export interface ICreateOrUpdateTenantProps {
   modalType: string;
   onCreate: () => Promise<void>;
   onCancel: () => void;
-  formRef: React.RefObject<FormInstance>
+  formRef: React.RefObject<FormInstance>;
 }
 
 class CreateOrUpdateTenant extends React.Component<ICreateOrUpdateTenantProps> {
@@ -66,7 +66,7 @@ class CreateOrUpdateTenant extends React.Component<ICreateOrUpdateTenantProps> {
             <Input />
           </Form.Item>
           {this.props.modalType === 'edit' ? (
-            <Form.Item label={L('AdminEmailAddress')} name={'adminEmailAddress'} rules={rules.adminEmailAddress} {...formItemLayout}>
+            <Form.Item label={L('AdminEmailAddress')} name={'adminEmailAddress'} rules={rules.adminEmailAddress as []} {...formItemLayout}>
               <Input />
             </Form.Item>
           ) : null}

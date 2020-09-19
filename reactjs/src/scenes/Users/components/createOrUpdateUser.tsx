@@ -106,7 +106,7 @@ class CreateOrUpdateUser extends React.Component<ICreateOrUpdateUserProps> {
               <Form.Item label={L('UserName')} {...formItemLayout} name={'userName'} rules={rules.userName}>
                 <Input />
               </Form.Item>
-              <Form.Item label={L('Email')} {...formItemLayout} name={'emailAddress'} rules={rules.emailAddress}>
+              <Form.Item label={L('Email')} {...formItemLayout} name={'emailAddress'} rules={rules.emailAddress as []}>
                 <Input />
               </Form.Item>
               {this.props.modalType === 'edit' ? (
