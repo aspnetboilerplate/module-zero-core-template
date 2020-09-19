@@ -9,6 +9,8 @@ import { EntityDto } from '../../services/dto/entityDto';
 import { L } from '../../lib/abpUtility';
 import Stores from '../../stores/storeIdentifier';
 import UserStore from '../../stores/userStore';
+import { FormInstance } from 'antd/lib/form';
+import { PlusOutlined, SettingOutlined } from '@ant-design/icons';
 
 export interface IUserProps {
   userStore: UserStore;
@@ -28,7 +30,7 @@ const Search = Input.Search;
 @inject(Stores.UserStore)
 @observer
 class User extends AppComponentBase<IUserProps, IUserState> {
-  formRef: any;
+  formRef = React.createRef<FormInstance>();
 
   state = {
     modalVisible: false,
@@ -68,7 +70,7 @@ class User extends AppComponentBase<IUserProps, IUserState> {
     this.setState({ userId: entityDto.id });
     this.Modal();
 
-    this.formRef.props.form.setFieldsValue({ ...this.props.userStore.editUser, roleNames: this.props.userStore.editUser.roleNames });
+    this.formRef.current?.setFieldsValue({ ...this.props.userStore.editUser });
   }
 
   delete(input: EntityDto) {
@@ -85,27 +87,19 @@ class User extends AppComponentBase<IUserProps, IUserState> {
   }
 
   handleCreate = () => {
-    const form = this.formRef.props.form;
+    const form = this.formRef.current;
 
-    form.validateFields(async (err: any, values: any) => {
-      if (err) {
-        return;
+    form!.validateFields().then(async (values: any) => {
+      if (this.state.userId === 0) {
+        await this.props.userStore.create(values);
       } else {
-        if (this.state.userId === 0) {
-          await this.props.userStore.create(values);
-        } else {
-          await this.props.userStore.update({ id: this.state.userId, ...values });
-        }
+        await this.props.userStore.update({ ...values, id: this.state.userId });
       }
 
       await this.getAll();
       this.setState({ modalVisible: false });
-      form.resetFields();
+      form!.resetFields();
     });
-  };
-
-  saveFormRef = (formRef: any) => {
-    this.formRef = formRef;
   };
 
   handleSearch = (value: string) => {
@@ -140,7 +134,7 @@ class User extends AppComponentBase<IUserProps, IUserState> {
               }
               placement="bottomLeft"
             >
-              <Button type="primary" icon="setting">
+              <Button type="primary" icon={<SettingOutlined />}>
                 {L('Actions')}
               </Button>
             </Dropdown>
@@ -171,7 +165,7 @@ class User extends AppComponentBase<IUserProps, IUserState> {
             xl={{ span: 1, offset: 21 }}
             xxl={{ span: 1, offset: 21 }}
           >
-            <Button type="primary" shape="circle" icon="plus" onClick={() => this.createOrUpdateModalOpen({ id: 0 })} />
+            <Button type="primary" shape="circle" icon={<PlusOutlined />} onClick={() => this.createOrUpdateModalOpen({ id: 0 })} />
           </Col>
         </Row>
         <Row>
@@ -189,8 +183,7 @@ class User extends AppComponentBase<IUserProps, IUserState> {
             xxl={{ span: 24, offset: 0 }}
           >
             <Table
-              rowKey={record => record.id.toString()}
-              size={'default'}
+              rowKey={(record) => record.id.toString()}
               bordered={true}
               columns={columns}
               pagination={{ pageSize: 10, total: users === undefined ? 0 : users.totalCount, defaultCurrent: 1 }}
@@ -201,13 +194,14 @@ class User extends AppComponentBase<IUserProps, IUserState> {
           </Col>
         </Row>
         <CreateOrUpdateUser
-          wrappedComponentRef={this.saveFormRef}
+          formRef={this.formRef}
           visible={this.state.modalVisible}
-          onCancel={() =>
+          onCancel={() => {
             this.setState({
               modalVisible: false,
-            })
-          }
+            });
+            this.formRef.current?.resetFields();
+          }}
           modalType={this.state.userId === 0 ? 'edit' : 'create'}
           onCreate={this.handleCreate}
           roles={this.props.userStore.roles}

@@ -1,6 +1,7 @@
 import * as React from 'react';
 
 import { Button, Card, Col, Dropdown, Input, Menu, Modal, Row, Table, Tag } from 'antd';
+import { FormInstance } from 'antd/lib/form';
 import { inject, observer } from 'mobx-react';
 
 import AppComponentBase from '../../components/AppComponentBase';
@@ -9,6 +10,7 @@ import { EntityDto } from '../../services/dto/entityDto';
 import { L } from '../../lib/abpUtility';
 import Stores from '../../stores/storeIdentifier';
 import TenantStore from '../../stores/tenantStore';
+import { PlusOutlined, SettingOutlined } from '@ant-design/icons';
 
 export interface ITenantProps {
   tenantStore: TenantStore;
@@ -28,7 +30,7 @@ const Search = Input.Search;
 @inject(Stores.TenantStore)
 @observer
 class Tenant extends AppComponentBase<ITenantProps, ITenantState> {
-  formRef: any;
+  formRef = React.createRef<FormInstance>();
 
   state = {
     modalVisible: false,
@@ -67,11 +69,11 @@ class Tenant extends AppComponentBase<ITenantProps, ITenantState> {
     this.Modal();
 
     if (entityDto.id !== 0) {
-      this.formRef.props.form.setFieldsValue({
+      this.formRef.current?.setFieldsValue({
         ...this.props.tenantStore.tenantModel,
       });
     } else {
-      this.formRef.props.form.resetFields();
+      this.formRef.current?.resetFields();
     }
   }
 
@@ -86,27 +88,18 @@ class Tenant extends AppComponentBase<ITenantProps, ITenantState> {
     });
   }
 
-  handleCreate = () => {
-    const form = this.formRef.props.form;
-    form.validateFields(async (err: any, values: any) => {
-      if (err) {
-        return;
+  handleCreate = async () => {
+    this.formRef.current?.validateFields().then(async (values: any) => {
+      if (this.state.tenantId === 0) {
+        await this.props.tenantStore.create(values);
       } else {
-        if (this.state.tenantId === 0) {
-          await this.props.tenantStore.create(values);
-        } else {
-          await this.props.tenantStore.update({ id: this.state.tenantId, ...values });
-        }
+        await this.props.tenantStore.update({ id: this.state.tenantId, ...values });
       }
 
       await this.getAll();
       this.setState({ modalVisible: false });
-      form.resetFields();
+      this.formRef.current?.resetFields();
     });
-  };
-
-  saveFormRef = (formRef: any) => {
-    this.formRef = formRef;
   };
 
   handleSearch = (value: string) => {
@@ -140,7 +133,7 @@ class Tenant extends AppComponentBase<ITenantProps, ITenantState> {
               }
               placement="bottomLeft"
             >
-              <Button type="primary" icon="setting">
+              <Button type="primary" icon={<SettingOutlined />}>
                 {L('Actions')}
               </Button>
             </Dropdown>
@@ -170,7 +163,7 @@ class Tenant extends AppComponentBase<ITenantProps, ITenantState> {
             xl={{ span: 1, offset: 21 }}
             xxl={{ span: 1, offset: 21 }}
           >
-            <Button type="primary" shape="circle" icon="plus" onClick={() => this.createOrUpdateModalOpen({ id: 0 })} />
+            <Button type="primary" shape="circle" icon={<PlusOutlined />} onClick={() => this.createOrUpdateModalOpen({ id: 0 })} />
           </Col>
         </Row>
         <Row>
@@ -189,7 +182,6 @@ class Tenant extends AppComponentBase<ITenantProps, ITenantState> {
           >
             <Table
               rowKey="id"
-              size={'default'}
               bordered={true}
               pagination={{ pageSize: this.state.maxResultCount, total: tenants === undefined ? 0 : tenants.totalCount, defaultCurrent: 1 }}
               columns={columns}
@@ -200,7 +192,7 @@ class Tenant extends AppComponentBase<ITenantProps, ITenantState> {
           </Col>
         </Row>
         <CreateOrUpdateTenant
-          wrappedComponentRef={this.saveFormRef}
+          formRef={this.formRef}
           visible={this.state.modalVisible}
           onCancel={() =>
             this.setState({

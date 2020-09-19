@@ -20,18 +20,20 @@ class UserLayout extends React.Component<any> {
     return (
       <DocumentTitle title={utils.getPageTitle(pathname)}>
         <Col className="container">
-          <div className={'lang'}>
-            <LanguageSelect />
-          </div>
-          <Switch>
-            {userRouter
-              .filter((item: any) => !item.isLayout)
-              .map((item: any, index: number) => (
-                <Route key={index} path={item.path} component={item.component} exact={item.exact} />
-              ))}
+          <div style={{ height: 'calc(100vh - 55px)' }}>
+            <div className={'lang'}>
+              <LanguageSelect />
+            </div>
+            <Switch>
+              {userRouter
+                .filter((item: any) => !item.isLayout)
+                .map((item: any, index: number) => (
+                  <Route key={index} path={item.path} component={item.component} exact={item.exact} />
+                ))}
 
-            <Redirect from="/user" to="/user/login" />
-          </Switch>
+              <Redirect from="/user" to="/user/login" />
+            </Switch>
+          </div>
           <Footer />
         </Col>
       </DocumentTitle>

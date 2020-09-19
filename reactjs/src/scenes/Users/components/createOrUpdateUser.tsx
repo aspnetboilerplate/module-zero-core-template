@@ -1,22 +1,20 @@
 import * as React from 'react';
 
-import { Checkbox, Form, Input, Modal, Tabs } from 'antd';
-
-import CheckboxGroup from 'antd/lib/checkbox/Group';
-import { FormComponentProps } from 'antd/lib/form';
-import FormItem from 'antd/lib/form/FormItem';
+import { Checkbox, Input, Modal, Tabs, Form } from 'antd';
 import { GetRoles } from '../../../services/user/dto/getRolesOuput';
 import { L } from '../../../lib/abpUtility';
 import rules from './createOrUpdateUser.validation';
+import { FormInstance } from 'antd/lib/form';
 
 const TabPane = Tabs.TabPane;
 
-export interface ICreateOrUpdateUserProps extends FormComponentProps {
+export interface ICreateOrUpdateUserProps {
   visible: boolean;
   onCancel: () => void;
   modalType: string;
   onCreate: () => void;
   roles: GetRoles[];
+  formRef: React.RefObject<FormInstance>;
 }
 
 class CreateOrUpdateUser extends React.Component<ICreateOrUpdateUserProps> {
@@ -25,20 +23,26 @@ class CreateOrUpdateUser extends React.Component<ICreateOrUpdateUserProps> {
   };
 
   compareToFirstPassword = (rule: any, value: any, callback: any) => {
-    const form = this.props.form;
-    if (value && value !== form.getFieldValue('password')) {
-      callback('Two passwords that you enter is inconsistent!');
-    } else {
-      callback();
+    const form = this.props.formRef.current;
+    
+    if (value && value !== form!.getFieldValue('password')) {
+      return Promise.reject('Two passwords that you enter is inconsistent!');
     }
+    return Promise.resolve();
   };
 
   validateToNextPassword = (rule: any, value: any, callback: any) => {
-    const form = this.props.form;
-    if (value && this.state.confirmDirty) {
-      form.validateFields(['confirm'], { force: true });
+    const { validateFields, getFieldValue } = this.props.formRef.current!;
+
+    this.setState({
+      confirmDirty: true,
+    });
+
+    if (value && this.state.confirmDirty && getFieldValue('confirm')) {
+      validateFields(['confirm']);
     }
-    callback();
+
+    return Promise.resolve();
   };
 
   render() {
@@ -81,7 +85,6 @@ class CreateOrUpdateUser extends React.Component<ICreateOrUpdateUserProps> {
       },
     };
 
-    const { getFieldDecorator } = this.props.form;
     const { visible, onCancel, onCreate } = this.props;
 
     const options = roles.map((x: GetRoles) => {
@@ -90,25 +93,28 @@ class CreateOrUpdateUser extends React.Component<ICreateOrUpdateUserProps> {
     });
 
     return (
-      <Modal visible={visible} cancelText={L('Cancel')} okText={L('OK')} onCancel={onCancel} onOk={onCreate} title={'User'}>
-        <Tabs defaultActiveKey={'userInfo'} size={'small'} tabBarGutter={64}>
-          <TabPane tab={'User'} key={'user'}>
-            <FormItem label={L('Name')} {...formItemLayout}>
-              {getFieldDecorator('name', { rules: rules.name })(<Input />)}
-            </FormItem>
-            <FormItem label={L('Surname')} {...formItemLayout}>
-              {getFieldDecorator('surname', { rules: rules.surname })(<Input />)}
-            </FormItem>
-            <FormItem label={L('UserName')} {...formItemLayout}>
-              {getFieldDecorator('userName', { rules: rules.userName })(<Input />)}
-            </FormItem>
-            <FormItem label={L('Email')} {...formItemLayout}>
-              {getFieldDecorator('emailAddress', { rules: rules.emailAddress })(<Input />)}
-            </FormItem>
-            {this.props.modalType === 'edit' ? (
-              <FormItem label={L('Password')} {...formItemLayout}>
-                {getFieldDecorator('password', {
-                  rules: [
+      <Modal visible={visible} cancelText={L('Cancel')} okText={L('OK')} onCancel={onCancel} onOk={onCreate} title={'User'} destroyOnClose={true}>
+        <Form ref={this.props.formRef}>
+          <Tabs defaultActiveKey={'userInfo'} size={'small'} tabBarGutter={64}>
+            <TabPane tab={'User'} key={'userInfo'}>
+              <Form.Item label={L('Name')} {...formItemLayout} name={'name'} rules={rules.name}>
+                <Input />
+              </Form.Item>
+              <Form.Item label={L('Surname')} {...formItemLayout} name={'surname'} rules={rules.surname}>
+                <Input />
+              </Form.Item>
+              <Form.Item label={L('UserName')} {...formItemLayout} name={'userName'} rules={rules.userName}>
+                <Input />
+              </Form.Item>
+              <Form.Item label={L('Email')} {...formItemLayout} name={'emailAddress'} rules={rules.emailAddress}>
+                <Input />
+              </Form.Item>
+              {this.props.modalType === 'edit' ? (
+                <Form.Item
+                  label={L('Password')}
+                  {...formItemLayout}
+                  name={'password'}
+                  rules={[
                     {
                       required: true,
                       message: 'Please input your password!',
@@ -116,38 +122,43 @@ class CreateOrUpdateUser extends React.Component<ICreateOrUpdateUserProps> {
                     {
                       validator: this.validateToNextPassword,
                     },
-                  ],
-                })(<Input type="password" />)}
-              </FormItem>
-            ) : null}
-            {this.props.modalType === 'edit' ? (
-              <FormItem label={L('ConfirmPassword')} {...formItemLayout}>
-                {getFieldDecorator('confirm', {
-                  rules: [
+                  ]}
+                >
+                  <Input type="password" />
+                </Form.Item>
+              ) : null}
+              {this.props.modalType === 'edit' ? (
+                <Form.Item
+                  label={L('ConfirmPassword')}
+                  {...formItemLayout}
+                  name={'confirm'}
+                  rules={[
                     {
                       required: true,
-                      message: L('ConfirmPassword'),
+                      message: 'Please input your confirm password!',
                     },
                     {
                       validator: this.compareToFirstPassword,
                     },
-                  ],
-                })(<Input type="password" />)}
-              </FormItem>
-            ) : null}
-            <FormItem label={L('IsActive')} {...tailFormItemLayout}>
-              {getFieldDecorator('isActive', { valuePropName: 'checked' })(<Checkbox>Aktif</Checkbox>)}
-            </FormItem>
-          </TabPane>
-          <TabPane tab={L('Roles')} key={'rol'}>
-            <FormItem {...tailFormItemLayout}>
-              {getFieldDecorator('roleNames', { valuePropName: 'value' })(<CheckboxGroup options={options} />)}
-            </FormItem>
-          </TabPane>
-        </Tabs>
+                  ]}
+                >
+                  <Input type="password" />
+                </Form.Item>
+              ) : null}
+              <Form.Item label={L('IsActive')} {...tailFormItemLayout} name={'isActive'} valuePropName={'checked'}>
+                <Checkbox>Aktif</Checkbox>
+              </Form.Item>
+            </TabPane>
+            <TabPane tab={L('Roles')} key={'rol'} forceRender={true}>
+              <Form.Item {...tailFormItemLayout} name={'roleNames'}>
+                <Checkbox.Group options={options} />
+              </Form.Item>
+            </TabPane>
+          </Tabs>
+        </Form>
       </Modal>
     );
   }
 }
 
-export default Form.create<ICreateOrUpdateUserProps>()(CreateOrUpdateUser);
+export default CreateOrUpdateUser;

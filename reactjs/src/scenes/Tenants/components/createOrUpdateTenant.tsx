@@ -2,16 +2,16 @@ import * as React from 'react';
 
 import { Checkbox, Col, Form, Input, Modal } from 'antd';
 
-import { FormComponentProps } from 'antd/lib/form';
-import FormItem from 'antd/lib/form/FormItem';
+import { FormInstance } from 'antd/lib/form';
 import { L } from '../../../lib/abpUtility';
 import rules from './createOrUpdateTenant.validation';
 
-export interface ICreateOrUpdateTenantProps extends FormComponentProps {
+export interface ICreateOrUpdateTenantProps {
   visible: boolean;
   modalType: string;
-  onCreate: () => void;
+  onCreate: () => Promise<void>;
   onCancel: () => void;
+  formRef: React.RefObject<FormInstance>
 }
 
 class CreateOrUpdateTenant extends React.Component<ICreateOrUpdateTenantProps> {
@@ -54,31 +54,30 @@ class CreateOrUpdateTenant extends React.Component<ICreateOrUpdateTenantProps> {
       },
     };
 
-    const { getFieldDecorator } = this.props.form;
-    const { visible, onCancel, onCreate } = this.props;
+    const { visible, onCancel, onCreate, formRef } = this.props;
 
     return (
       <Modal visible={visible} onCancel={onCancel} onOk={onCreate} title={L('Tenants')} width={550}>
-        <Form>
-          <FormItem label={L('TenancyName')} {...formItemLayout}>
-            {this.props.form.getFieldDecorator('tenancyName', { rules: rules.tenancyName })(<Input />)}
-          </FormItem>
-          <FormItem label={L('Name')} {...formItemLayout}>
-            {getFieldDecorator('name', { rules: rules.name })(<Input />)}
-          </FormItem>
+        <Form ref={formRef}>
+          <Form.Item label={L('TenancyName')} name={'tenancyName'} rules={rules.tenancyName} {...formItemLayout}>
+            <Input />
+          </Form.Item>
+          <Form.Item label={L('Name')} name={'name'} rules={rules.name} {...formItemLayout}>
+            <Input />
+          </Form.Item>
           {this.props.modalType === 'edit' ? (
-            <FormItem label={L('AdminEmailAddress')} {...formItemLayout}>
-              {getFieldDecorator('adminEmailAddress', { rules: rules.adminEmailAddress })(<Input />)}
-            </FormItem>
+            <Form.Item label={L('AdminEmailAddress')} name={'adminEmailAddress'} rules={rules.adminEmailAddress} {...formItemLayout}>
+              <Input />
+            </Form.Item>
           ) : null}
           {this.props.modalType === 'edit' ? (
-            <FormItem label={L('DatabaseConnectionString')} {...formItemLayout}>
-              {getFieldDecorator('connectionString')(<Input />)}
-            </FormItem>
+            <Form.Item label={L('DatabaseConnectionString')} name={'connectionString'} {...formItemLayout}>
+              <Input />
+            </Form.Item>
           ) : null}
-          <FormItem label={L('IsActive')} {...tailFormItemLayout}>
-            {getFieldDecorator('isActive', { valuePropName: 'checked' })(<Checkbox />)}
-          </FormItem>
+          <Form.Item label={L('IsActive')} name={'isActive'} valuePropName={'checked'} {...tailFormItemLayout}>
+            <Checkbox />
+          </Form.Item>
           <Col>{L('Default password is  123qwe')}</Col>
         </Form>
       </Modal>
@@ -86,4 +85,4 @@ class CreateOrUpdateTenant extends React.Component<ICreateOrUpdateTenantProps> {
   }
 }
 
-export default Form.create<ICreateOrUpdateTenantProps>()(CreateOrUpdateTenant);
+export default CreateOrUpdateTenant;
