@@ -7,7 +7,7 @@ import {
 } from '@angular/core';
 import { finalize } from 'rxjs/operators';
 import { BsModalRef } from 'ngx-bootstrap/modal';
-import { forEach, includes, map } from 'lodash-es';
+import { forEach as _forEach, includes as _includes, map as _map } from 'lodash-es';
 import { AppComponentBase } from '@shared/app-component-base';
 import {
   RoleServiceProxy,
@@ -52,7 +52,7 @@ export class EditRoleDialogComponent extends AppComponentBase
   }
 
   setInitialPermissionsStatus(): void {
-    map(this.permissions, (item) => {
+    _map(this.permissions, (item) => {
       this.checkedPermissionsMap[item.name] = this.isPermissionChecked(
         item.name
       );
@@ -60,7 +60,7 @@ export class EditRoleDialogComponent extends AppComponentBase
   }
 
   isPermissionChecked(permissionName: string): boolean {
-    return includes(this.grantedPermissionNames, permissionName);
+    return _includes(this.grantedPermissionNames, permissionName);
   }
 
   onPermissionChange(permission: PermissionDto, $event) {
@@ -69,7 +69,7 @@ export class EditRoleDialogComponent extends AppComponentBase
 
   getCheckedPermissions(): string[] {
     const permissions: string[] = [];
-    forEach(this.checkedPermissionsMap, function (value, key) {
+    _forEach(this.checkedPermissionsMap, function (value, key) {
       if (value) {
         permissions.push(key);
       }
