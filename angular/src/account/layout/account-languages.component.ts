@@ -5,7 +5,7 @@ import {
   ChangeDetectionStrategy
 } from '@angular/core';
 import { AppComponentBase } from '@shared/app-component-base';
-import * as _ from 'lodash';
+import { filter as _filter } from 'lodash-es';
 
 @Component({
   selector: 'account-languages',
@@ -22,7 +22,7 @@ export class AccountLanguagesComponent extends AppComponentBase
   }
 
   ngOnInit() {
-    this.languages = _.filter(
+    this.languages = _filter(
       this.localization.languages,
       (l) => !l.isDisabled
     );
