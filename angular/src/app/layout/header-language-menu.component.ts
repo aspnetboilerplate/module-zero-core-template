@@ -9,7 +9,7 @@ import {
   UserServiceProxy,
   ChangeUserLanguageDto
 } from '@shared/service-proxies/service-proxies';
-import * as _ from 'lodash';
+import { filter as _filter } from 'lodash-es';
 
 @Component({
   selector: 'header-language-menu',
@@ -26,7 +26,7 @@ export class HeaderLanguageMenuComponent extends AppComponentBase
   }
 
   ngOnInit() {
-    this.languages = _.filter(
+    this.languages = _filter(
       this.localization.languages,
       (l) => !l.isDisabled
     );
