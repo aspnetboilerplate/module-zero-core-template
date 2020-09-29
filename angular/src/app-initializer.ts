@@ -2,7 +2,7 @@ import { Injectable, Injector } from '@angular/core';
 import { PlatformLocation, registerLocaleData } from '@angular/common';
 import { HttpClient } from '@angular/common/http';
 import * as moment from 'moment';
-import * as _ from 'lodash';
+import { filter as _filter, merge as _merge } from 'lodash-es';
 import { AppConsts } from '@shared/AppConsts';
 import { AppSessionService } from '@shared/session/app-session.service';
 import { environment } from './environments/environment';
@@ -89,7 +89,7 @@ export class AppInitializer {
       return locale;
     }
 
-    const localeMapings = _.filter(AppConsts.localeMappings, { from: locale });
+    const localeMapings = _filter(AppConsts.localeMappings, { from: locale });
     if (localeMapings && localeMapings.length) {
       return localeMapings[0]['to'];
     }
@@ -136,7 +136,7 @@ export class AppInitializer {
       .subscribe((response) => {
         const result = response.result;
 
-        _.merge(abp, result);
+        _merge(abp, result);
 
         abp.clock.provider = this.getCurrentClockProvider(
           result.clock.provider
