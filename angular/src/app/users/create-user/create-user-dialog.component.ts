@@ -7,7 +7,7 @@ import {
 } from '@angular/core';
 import { finalize } from 'rxjs/operators';
 import { BsModalRef } from 'ngx-bootstrap/modal';
-import * as _ from 'lodash';
+import { forEach as _forEach, map as _map } from 'lodash-es';
 import { AppComponentBase } from '@shared/app-component-base';
 import {
   UserServiceProxy,
@@ -60,7 +60,7 @@ export class CreateUserDialogComponent extends AppComponentBase
   }
 
   setInitialRolesStatus(): void {
-    _.map(this.roles, (item) => {
+    _map(this.roles, (item) => {
       this.checkedRolesMap[item.normalizedName] = this.isRoleChecked(
         item.normalizedName
       );
@@ -79,7 +79,7 @@ export class CreateUserDialogComponent extends AppComponentBase
 
   getCheckedRoles(): string[] {
     const roles: string[] = [];
-    _.forEach(this.checkedRolesMap, function (value, key) {
+    _forEach(this.checkedRolesMap, function (value, key) {
       if (value) {
         roles.push(key);
       }

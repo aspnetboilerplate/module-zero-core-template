@@ -4,18 +4,20 @@ using AbpCompanyName.AbpProjectName.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 namespace AbpCompanyName.AbpProjectName.Migrations
 {
     [DbContext(typeof(AbpProjectNameDbContext))]
-    partial class AbpProjectNameDbContextModelSnapshot : ModelSnapshot
+    [Migration("20200604091046_Upgraded_To_Abp_5_9")]
+    partial class Upgraded_To_Abp_5_9
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
-                .HasAnnotation("ProductVersion", "3.1.5")
+                .HasAnnotation("ProductVersion", "3.1.4")
                 .HasAnnotation("Relational:MaxIdentifierLength", 128)
                 .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
@@ -611,14 +613,66 @@ namespace AbpCompanyName.AbpProjectName.Migrations
                     b.ToTable("AbpSettings");
                 });
 
-            modelBuilder.Entity("Abp.DynamicEntityProperties.DynamicEntityProperty", b =>
+            modelBuilder.Entity("Abp.DynamicEntityParameters.DynamicParameter", b =>
                 {
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("int")
                         .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
-                    b.Property<int>("DynamicPropertyId")
+                    b.Property<string>("InputType")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("ParameterName")
+                        .HasColumnType("nvarchar(450)");
+
+                    b.Property<string>("Permission")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<int?>("TenantId")
+                        .HasColumnType("int");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("ParameterName", "TenantId")
+                        .IsUnique()
+                        .HasFilter("[ParameterName] IS NOT NULL AND [TenantId] IS NOT NULL");
+
+                    b.ToTable("AbpDynamicParameters");
+                });
+
+            modelBuilder.Entity("Abp.DynamicEntityParameters.DynamicParameterValue", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int")
+                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+
+                    b.Property<int>("DynamicParameterId")
+                        .HasColumnType("int");
+
+                    b.Property<int?>("TenantId")
+                        .HasColumnType("int");
+
+                    b.Property<string>("Value")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("DynamicParameterId");
+
+                    b.ToTable("AbpDynamicParameterValues");
+                });
+
+            modelBuilder.Entity("Abp.DynamicEntityParameters.EntityDynamicParameter", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int")
+                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+
+                    b.Property<int>("DynamicParameterId")
                         .HasColumnType("int");
 
                     b.Property<string>("EntityFullName")
@@ -629,23 +683,23 @@ namespace AbpCompanyName.AbpProjectName.Migrations
 
                     b.HasKey("Id");
 
-                    b.HasIndex("DynamicPropertyId");
+                    b.HasIndex("DynamicParameterId");
 
-                    b.HasIndex("EntityFullName", "DynamicPropertyId", "TenantId")
+                    b.HasIndex("EntityFullName", "DynamicParameterId", "TenantId")
                         .IsUnique()
                         .HasFilter("[EntityFullName] IS NOT NULL AND [TenantId] IS NOT NULL");
 
-                    b.ToTable("AbpDynamicEntityProperties");
+                    b.ToTable("AbpEntityDynamicParameters");
                 });
 
-            modelBuilder.Entity("Abp.DynamicEntityProperties.DynamicEntityPropertyValue", b =>
+            modelBuilder.Entity("Abp.DynamicEntityParameters.EntityDynamicParameterValue", b =>
                 {
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("int")
                         .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
-                    b.Property<int>("DynamicEntityPropertyId")
+                    b.Property<int>("EntityDynamicParameterId")
                         .HasColumnType("int");
 
                     b.Property<string>("EntityId")
@@ -660,61 +714,9 @@ namespace AbpCompanyName.AbpProjectName.Migrations
 
                     b.HasKey("Id");
 
-                    b.HasIndex("DynamicEntityPropertyId");
+                    b.HasIndex("EntityDynamicParameterId");
 
-                    b.ToTable("AbpDynamicEntityPropertyValues");
-                });
-
-            modelBuilder.Entity("Abp.DynamicEntityProperties.DynamicProperty", b =>
-                {
-                    b.Property<int>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("int")
-                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
-
-                    b.Property<string>("InputType")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<string>("Permission")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<string>("PropertyName")
-                        .HasColumnType("nvarchar(450)");
-
-                    b.Property<int?>("TenantId")
-                        .HasColumnType("int");
-
-                    b.HasKey("Id");
-
-                    b.HasIndex("PropertyName", "TenantId")
-                        .IsUnique()
-                        .HasFilter("[PropertyName] IS NOT NULL AND [TenantId] IS NOT NULL");
-
-                    b.ToTable("AbpDynamicProperties");
-                });
-
-            modelBuilder.Entity("Abp.DynamicEntityProperties.DynamicPropertyValue", b =>
-                {
-                    b.Property<int>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("int")
-                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
-
-                    b.Property<int>("DynamicPropertyId")
-                        .HasColumnType("int");
-
-                    b.Property<int?>("TenantId")
-                        .HasColumnType("int");
-
-                    b.Property<string>("Value")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
-
-                    b.HasKey("Id");
-
-                    b.HasIndex("DynamicPropertyId");
-
-                    b.ToTable("AbpDynamicPropertyValues");
+                    b.ToTable("AbpEntityDynamicParameterValues");
                 });
 
             modelBuilder.Entity("Abp.EntityHistory.EntityChange", b =>
@@ -1680,29 +1682,29 @@ namespace AbpCompanyName.AbpProjectName.Migrations
                         .HasForeignKey("UserId");
                 });
 
-            modelBuilder.Entity("Abp.DynamicEntityProperties.DynamicEntityProperty", b =>
+            modelBuilder.Entity("Abp.DynamicEntityParameters.DynamicParameterValue", b =>
                 {
-                    b.HasOne("Abp.DynamicEntityProperties.DynamicProperty", "DynamicProperty")
-                        .WithMany()
-                        .HasForeignKey("DynamicPropertyId")
+                    b.HasOne("Abp.DynamicEntityParameters.DynamicParameter", "DynamicParameter")
+                        .WithMany("DynamicParameterValues")
+                        .HasForeignKey("DynamicParameterId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
                 });
 
-            modelBuilder.Entity("Abp.DynamicEntityProperties.DynamicEntityPropertyValue", b =>
+            modelBuilder.Entity("Abp.DynamicEntityParameters.EntityDynamicParameter", b =>
                 {
-                    b.HasOne("Abp.DynamicEntityProperties.DynamicEntityProperty", "DynamicEntityProperty")
+                    b.HasOne("Abp.DynamicEntityParameters.DynamicParameter", "DynamicParameter")
                         .WithMany()
-                        .HasForeignKey("DynamicEntityPropertyId")
+                        .HasForeignKey("DynamicParameterId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
                 });
 
-            modelBuilder.Entity("Abp.DynamicEntityProperties.DynamicPropertyValue", b =>
+            modelBuilder.Entity("Abp.DynamicEntityParameters.EntityDynamicParameterValue", b =>
                 {
-                    b.HasOne("Abp.DynamicEntityProperties.DynamicProperty", "DynamicProperty")
-                        .WithMany("DynamicPropertyValues")
-                        .HasForeignKey("DynamicPropertyId")
+                    b.HasOne("Abp.DynamicEntityParameters.EntityDynamicParameter", "EntityDynamicParameter")
+                        .WithMany()
+                        .HasForeignKey("EntityDynamicParameterId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
                 });

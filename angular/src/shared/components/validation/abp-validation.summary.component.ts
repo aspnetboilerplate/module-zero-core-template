@@ -46,6 +46,11 @@ export class AbpValidationSummaryComponent extends AppComponentBase implements O
 
   @Input() control: AbstractControl;
   @Input() controlEl: ElementRef;
+
+  constructor(injector: Injector, public _renderer: Renderer2) {
+    super(injector);
+  }
+
   @Input() set customValidationErrors(val: AbpValidationError[]) {
     if (val && val.length > 0) {
       const defaults = this.defaultValidationErrors.filter(
@@ -57,10 +62,6 @@ export class AbpValidationSummaryComponent extends AppComponentBase implements O
       );
       this.validationErrors = <AbpValidationError[]>[...defaults, ...val];
     }
-  }
-
-  constructor(injector: Injector, public _renderer: Renderer2) {
-    super(injector);
   }
 
   ngOnInit() {
