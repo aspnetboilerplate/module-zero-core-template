@@ -21,5 +21,10 @@ namespace AbpCompanyName.AbpProjectName.Roles.Dto
         public string Description { get; set; }
 
         public List<string> GrantedPermissions { get; set; }
+
+        public CreateRoleDto()
+        {
+            GrantedPermissions = new List<string>();
+        }
     }
 }

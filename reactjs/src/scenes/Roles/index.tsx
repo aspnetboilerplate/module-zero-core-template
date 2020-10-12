@@ -37,7 +37,7 @@ class Role extends AppComponentBase<IRoleProps, IRoleState> {
     maxResultCount: 10,
     skipCount: 0,
     roleId: 0,
-    filter: '',
+    filter: ''
   };
 
   async componentDidMount() {
@@ -70,10 +70,12 @@ class Role extends AppComponentBase<IRoleProps, IRoleState> {
     this.setState({ roleId: entityDto.id });
     this.Modal();
 
-    this.formRef.current?.setFieldsValue({
-      ...this.props.roleStore.roleEdit.role,
-      grantedPermissions: this.props.roleStore.roleEdit.grantedPermissionNames,
-    });
+    setTimeout(() => {
+      this.formRef.current?.setFieldsValue({
+        ...this.props.roleStore.roleEdit.role,
+        grantedPermissions: this.props.roleStore.roleEdit.grantedPermissionNames,
+      });
+    }, 100);
   }
 
   delete(input: EntityDto) {

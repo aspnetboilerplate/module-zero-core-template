@@ -70,7 +70,9 @@ class User extends AppComponentBase<IUserProps, IUserState> {
     this.setState({ userId: entityDto.id });
     this.Modal();
 
-    this.formRef.current?.setFieldsValue({ ...this.props.userStore.editUser });
+    setTimeout(() => {
+      this.formRef.current?.setFieldsValue({ ...this.props.userStore.editUser });
+    }, 100);
   }
 
   delete(input: EntityDto) {

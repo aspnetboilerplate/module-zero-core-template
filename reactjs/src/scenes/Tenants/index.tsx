@@ -68,13 +68,15 @@ class Tenant extends AppComponentBase<ITenantProps, ITenantState> {
     this.setState({ tenantId: entityDto.id });
     this.Modal();
 
-    if (entityDto.id !== 0) {
-      this.formRef.current?.setFieldsValue({
-        ...this.props.tenantStore.tenantModel,
-      });
-    } else {
-      this.formRef.current?.resetFields();
-    }
+    setTimeout(() => {
+      if (entityDto.id !== 0) {
+        this.formRef.current?.setFieldsValue({
+          ...this.props.tenantStore.tenantModel,
+        });
+      } else {
+        this.formRef.current?.resetFields();
+      }
+    }, 100);
   }
 
   delete(input: EntityDto) {
