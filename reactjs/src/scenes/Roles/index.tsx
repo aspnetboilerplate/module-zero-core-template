@@ -6,12 +6,13 @@ import { inject, observer } from 'mobx-react';
 import AppComponentBase from '../../components/AppComponentBase';
 import CreateOrUpdateRole from './components/createOrUpdateRole';
 import { EntityDto } from '../../services/dto/entityDto';
-import { FormComponentProps } from 'antd/lib/form';
 import { L } from '../../lib/abpUtility';
 import RoleStore from '../../stores/roleStore';
 import Stores from '../../stores/storeIdentifier';
+import { PlusOutlined, SettingOutlined } from '@ant-design/icons';
+import { FormInstance } from 'antd/lib/form';
 
-export interface IRoleProps extends FormComponentProps {
+export interface IRoleProps {
   roleStore: RoleStore;
 }
 
@@ -29,14 +30,14 @@ const Search = Input.Search;
 @inject(Stores.RoleStore)
 @observer
 class Role extends AppComponentBase<IRoleProps, IRoleState> {
-  formRef: any;
+  formRef = React.createRef<FormInstance>();
 
   state = {
     modalVisible: false,
     maxResultCount: 10,
     skipCount: 0,
     roleId: 0,
-    filter: '',
+    filter: ''
   };
 
   async componentDidMount() {
@@ -69,10 +70,12 @@ class Role extends AppComponentBase<IRoleProps, IRoleState> {
     this.setState({ roleId: entityDto.id });
     this.Modal();
 
-    this.formRef.props.form.setFieldsValue({
-      ...this.props.roleStore.roleEdit.role,
-      grantedPermissions: this.props.roleStore.roleEdit.grantedPermissionNames,
-    });
+    setTimeout(() => {
+      this.formRef.current?.setFieldsValue({
+        ...this.props.roleStore.roleEdit.role,
+        grantedPermissions: this.props.roleStore.roleEdit.grantedPermissionNames,
+      });
+    }, 100);
   }
 
   delete(input: EntityDto) {
@@ -87,26 +90,18 @@ class Role extends AppComponentBase<IRoleProps, IRoleState> {
   }
 
   handleCreate = () => {
-    const form = this.formRef.props.form;
-    form.validateFields(async (err: any, values: any) => {
-      if (err) {
-        return;
+    const form = this.formRef.current;
+    form!.validateFields().then(async (values: any) => {
+      if (this.state.roleId === 0) {
+        await this.props.roleStore.create(values);
       } else {
-        if (this.state.roleId === 0) {
-          await this.props.roleStore.create(values);
-        } else {
-          await this.props.roleStore.update({ id: this.state.roleId, ...values });
-        }
+        await this.props.roleStore.update({ id: this.state.roleId, ...values });
       }
 
       await this.getAll();
       this.setState({ modalVisible: false });
-      form.resetFields();
+      form!.resetFields();
     });
-  };
-
-  saveFormRef = (formRef: any) => {
-    this.formRef = formRef;
   };
 
   handleSearch = (value: string) => {
@@ -133,7 +128,7 @@ class Role extends AppComponentBase<IRoleProps, IRoleState> {
               }
               placement="bottomLeft"
             >
-              <Button type="primary" icon="setting">
+              <Button type="primary" icon={<SettingOutlined />}>
                 {L('Actions')}
               </Button>
             </Dropdown>
@@ -163,7 +158,7 @@ class Role extends AppComponentBase<IRoleProps, IRoleState> {
             xl={{ span: 1, offset: 21 }}
             xxl={{ span: 1, offset: 21 }}
           >
-            <Button type="primary" shape="circle" icon="plus" onClick={() => this.createOrUpdateModalOpen({ id: 0 })} />
+            <Button type="primary" shape="circle" icon={<PlusOutlined />} onClick={() => this.createOrUpdateModalOpen({ id: 0 })} />
           </Col>
         </Row>
         <Row>
@@ -182,7 +177,6 @@ class Role extends AppComponentBase<IRoleProps, IRoleState> {
           >
             <Table
               rowKey="id"
-              size={'default'}
               bordered={true}
               pagination={{ pageSize: this.state.maxResultCount, total: roles === undefined ? 0 : roles.totalCount, defaultCurrent: 1 }}
               columns={columns}
@@ -194,7 +188,6 @@ class Role extends AppComponentBase<IRoleProps, IRoleState> {
         </Row>
 
         <CreateOrUpdateRole
-          wrappedComponentRef={this.saveFormRef}
           visible={this.state.modalVisible}
           onCancel={() =>
             this.setState({
@@ -205,6 +198,7 @@ class Role extends AppComponentBase<IRoleProps, IRoleState> {
           onOk={this.handleCreate}
           permissions={allPermissions}
           roleStore={this.props.roleStore}
+          formRef={this.formRef}
         />
       </Card>
     );

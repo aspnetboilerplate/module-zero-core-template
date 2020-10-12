@@ -2,11 +2,12 @@ import './index.less';
 
 import * as React from 'react';
 
-import { Avatar, Col, Icon, Layout, Menu } from 'antd';
+import { Avatar, Col, Layout, Menu } from 'antd';
 import { L, isGranted } from '../../lib/abpUtility';
 
 import AbpLogo from '../../images/abp-logo-long.png';
 import { appRouters } from '../../components/Router/router.config';
+import utils from '../../utils/utils';
 
 const { Sider } = Layout;
 
@@ -19,6 +20,7 @@ export interface ISiderMenuProps {
 
 const SiderMenu = (props: ISiderMenuProps) => {
   const { collapsed, history, onCollapse } = props;
+  const currentRoute = utils.getRoute(history.location.pathname);
   return (
     <Sider trigger={null} className={'sidebar'} width={256} collapsible collapsed={collapsed} onCollapse={onCollapse}>
       {collapsed ? (
@@ -31,7 +33,7 @@ const SiderMenu = (props: ISiderMenuProps) => {
         </Col>
       )}
 
-      <Menu theme="dark" mode="inline">
+      <Menu theme="dark" mode="inline" selectedKeys={[currentRoute ? currentRoute.path : '']}>
         {appRouters
           .filter((item: any) => !item.isLayout && item.showInMenu)
           .map((route: any, index: number) => {
@@ -39,7 +41,7 @@ const SiderMenu = (props: ISiderMenuProps) => {
 
             return (
               <Menu.Item key={route.path} onClick={() => history.push(route.path)}>
-                <Icon type={route.icon} />
+                <route.icon />
                 <span>{L(route.title)}</span>
               </Menu.Item>
             );

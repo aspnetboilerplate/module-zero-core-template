@@ -2,12 +2,13 @@ import './index.less';
 
 import * as React from 'react';
 
-import { Button, Card, Checkbox, Col, Form, Icon, Input, Modal, Row } from 'antd';
+import { Button, Card, Checkbox, Col, Form, Input, Modal, Row } from 'antd';
+import { UserOutlined, LockOutlined } from '@ant-design/icons';
 import { inject, observer } from 'mobx-react';
 
 import AccountStore from '../../stores/accountStore';
 import AuthenticationStore from '../../stores/authenticationStore';
-import { FormComponentProps } from 'antd/lib/form';
+import { FormInstance } from 'antd/lib/form';
 import { L } from '../../lib/abpUtility';
 import { Redirect } from 'react-router-dom';
 import SessionStore from '../../stores/sessionStore';
@@ -18,7 +19,7 @@ import rules from './index.validation';
 const FormItem = Form.Item;
 declare var abp: any;
 
-export interface ILoginProps extends FormComponentProps {
+export interface ILoginProps {
   authenticationStore?: AuthenticationStore;
   sessionStore?: SessionStore;
   accountStore?: AccountStore;
@@ -29,8 +30,9 @@ export interface ILoginProps extends FormComponentProps {
 @inject(Stores.AuthenticationStore, Stores.SessionStore, Stores.AccountStore)
 @observer
 class Login extends React.Component<ILoginProps> {
+  formRef = React.createRef<FormInstance>();
   changeTenant = async () => {
-    let tenancyName = this.props.form.getFieldValue('tenancyName');
+    let tenancyName = this.formRef.current?.getFieldValue('tenancyName');
     const { loginModel } = this.props.authenticationStore!;
 
     if (!tenancyName) {
@@ -57,17 +59,12 @@ class Login extends React.Component<ILoginProps> {
     }
   };
 
-  handleSubmit = async (e: any) => {
-    e.preventDefault();
+  handleSubmit = async (values: any) => {
     const { loginModel } = this.props.authenticationStore!;
-    await this.props.form.validateFields(async (err: any, values: any) => {
-      if (!err) {
-        await this.props.authenticationStore!.login(values);
-        sessionStorage.setItem('rememberMe', loginModel.rememberMe ? '1' : '0');
-        const { state } = this.props.location;
-        window.location = state ? state.from.pathname : '/';
-      }
-    });
+    await this.props.authenticationStore!.login(values);
+    sessionStorage.setItem('rememberMe', loginModel.rememberMe ? '1' : '0');
+    const { state } = this.props.location;
+    window.location = state ? state.from.pathname : '/';
   };
 
   public render() {
@@ -75,101 +72,85 @@ class Login extends React.Component<ILoginProps> {
     if (this.props.authenticationStore!.isAuthenticated) return <Redirect to={from} />;
 
     const { loginModel } = this.props.authenticationStore!;
-    const { getFieldDecorator, getFieldValue } = this.props.form;
     return (
-      <Col className="name">
-        <Form className="" onSubmit={this.handleSubmit}>
-          <Row>
-            <Row style={{ marginTop: 100 }}>
-              <Col span={8} offset={8}>
-                <Card>
-                  <Row>
-                    {!!this.props.sessionStore!.currentLogin.tenant ? (
-                      <Col span={24} offset={0} style={{ textAlign: 'center' }}>
-                        <Button type="link" onClick={loginModel.toggleShowModal}>
-                          {L('CurrentTenant')} : {this.props.sessionStore!.currentLogin.tenant.tenancyName}
-                        </Button>
-                      </Col>
-                    ) : (
-                      <Col span={24} offset={0} style={{ textAlign: 'center' }}>
-                        <Button type="link" onClick={loginModel.toggleShowModal}>
-                          {L('NotSelected')}
-                        </Button>
-                      </Col>
-                    )}
-                  </Row>
-                </Card>
-              </Col>
-            </Row>
-
-            <Row>
-              <Modal
-                visible={loginModel.showModal}
-                onCancel={loginModel.toggleShowModal}
-                onOk={this.changeTenant}
-                title={L('ChangeTenant')}
-                okText={L('OK')}
-                cancelText={L('Cancel')}
-              >
+      <Form className="" onFinish={this.handleSubmit} ref={this.formRef}>
+          <Row style={{ marginTop: 100 }}>
+            <Col span={8} offset={8}>
+              <Card>
                 <Row>
-                  <Col span={8} offset={8}>
-                    <h3>{L('TenancyName')}</h3>
-                  </Col>
-                  <Col>
-                    <FormItem>
-                      {getFieldDecorator('tenancyName', {})(
-                        <Input placeholder={L('TenancyName')} prefix={<Icon type="user" style={{ color: 'rgba(0,0,0,.25)' }} />} size="large" />
-                      )}
-                    </FormItem>
-                    {!getFieldValue('tenancyName') ? <div>{L('LeaveEmptyToSwitchToHost')}</div> : ''}
-                  </Col>
-                </Row>
-              </Modal>
-            </Row>
-            <Row style={{ marginTop: 10 }}>
-              <Col span={8} offset={8}>
-                <Card>
-                  <div style={{ textAlign: 'center' }}>
-                    <h3>{L('WellcomeMessage')}</h3>
-                  </div>
-                  <FormItem>
-                    {getFieldDecorator('userNameOrEmailAddress', { rules: rules.userNameOrEmailAddress })(
-                      <Input placeholder={L('UserNameOrEmail')} prefix={<Icon type="user" style={{ color: 'rgba(0,0,0,.25)' }} />} size="large" />
-                    )}
-                  </FormItem>
-
-                  <FormItem>
-                    {getFieldDecorator('password', { rules: rules.password })(
-                      <Input
-                        placeholder={L('Password')}
-                        prefix={<Icon type="lock" style={{ color: 'rgba(0,0,0,.25)' }} />}
-                        type="password"
-                        size="large"
-                      />
-                    )}
-                  </FormItem>
-                  <Row style={{ margin: '0px 0px 10px 15px ' }}>
-                    <Col span={12} offset={0}>
-                      <Checkbox checked={loginModel.rememberMe} onChange={loginModel.toggleRememberMe} style={{ paddingRight: 8 }} />
-                      {L('RememberMe')}
-                      <br />
-                      <a>{L('ForgotPassword')}</a>
-                    </Col>
-
-                    <Col span={8} offset={4}>
-                      <Button style={{ backgroundColor: '#f5222d', color: 'white' }} htmlType={'submit'} type="danger">
-                        {L('LogIn')}
+                  {!!this.props.sessionStore!.currentLogin.tenant ? (
+                    <Col span={24} offset={0} style={{ textAlign: 'center' }}>
+                      <Button type="link" onClick={loginModel.toggleShowModal}>
+                        {L('CurrentTenant')} : {this.props.sessionStore!.currentLogin.tenant.tenancyName}
                       </Button>
                     </Col>
-                  </Row>
-                </Card>
-              </Col>
-            </Row>
+                  ) : (
+                    <Col span={24} offset={0} style={{ textAlign: 'center' }}>
+                      <Button type="link" onClick={loginModel.toggleShowModal}>
+                        {L('NotSelected')}
+                      </Button>
+                    </Col>
+                  )}
+                </Row>
+              </Card>
+            </Col>
           </Row>
-        </Form>
-      </Col>
+
+          <Row>
+            <Modal
+              visible={loginModel.showModal}
+              onCancel={loginModel.toggleShowModal}
+              onOk={this.changeTenant}
+              title={L('ChangeTenant')}
+              okText={L('OK')}
+              cancelText={L('Cancel')}
+            >
+              <Row>
+                <Col span={8} offset={8}>
+                  <h3>{L('TenancyName')}</h3>
+                </Col>
+                <Col>
+                  <FormItem name={'tenancyName'}>
+                    <Input placeholder={L('TenancyName')} prefix={<UserOutlined style={{ color: 'rgba(0,0,0,.25)' }} />} size="large" />
+                  </FormItem>
+                  {!this.formRef.current?.getFieldValue('tenancyName') ? <div>{L('LeaveEmptyToSwitchToHost')}</div> : ''}
+                </Col>
+              </Row>
+            </Modal>
+          </Row>
+          <Row style={{ marginTop: 10 }}>
+            <Col span={8} offset={8}>
+              <Card>
+                <div style={{ textAlign: 'center' }}>
+                  <h3>{L('WellcomeMessage')}</h3>
+                </div>
+                <FormItem name={'userNameOrEmailAddress'} rules={rules.userNameOrEmailAddress}>
+                  <Input placeholder={L('UserNameOrEmail')} prefix={<UserOutlined style={{ color: 'rgba(0,0,0,.25)' }} />} size="large" />
+                </FormItem>
+
+                <FormItem name={'password'} rules={rules.password}>
+                  <Input placeholder={L('Password')} prefix={<LockOutlined style={{ color: 'rgba(0,0,0,.25)' }} />} type="password" size="large" />
+                </FormItem>
+                <Row style={{ margin: '0px 0px 10px 15px ' }}>
+                  <Col span={12} offset={0}>
+                    <Checkbox checked={loginModel.rememberMe} onChange={loginModel.toggleRememberMe} style={{ paddingRight: 8 }} />
+                    {L('RememberMe')}
+                    <br />
+                    <a>{L('ForgotPassword')}</a>
+                  </Col>
+
+                  <Col span={8} offset={4}>
+                    <Button style={{ backgroundColor: '#f5222d', color: 'white' }} htmlType={'submit'} danger>
+                      {L('LogIn')}
+                    </Button>
+                  </Col>
+                </Row>
+              </Card>
+            </Col>
+          </Row>
+      </Form>
     );
   }
 }
 
-export default Form.create()(Login);
+export default Login;

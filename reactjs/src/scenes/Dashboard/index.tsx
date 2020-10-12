@@ -1,5 +1,6 @@
 import * as React from 'react';
-import { Row, Col, Card, Icon } from 'antd';
+import { Row, Col, Card } from 'antd';
+import { CheckOutlined, QuestionOutlined, MessageOutlined, UserAddOutlined } from '@ant-design/icons';
 import './index.less';
 import TinyLineChartExample from './components/TinyLineChartExample';
 import BarChartExample from './components/BarChartExample';
@@ -45,7 +46,7 @@ export class Dashboard extends React.Component<any> {
           >
             <Card className={'dasboardCard-task'} bodyStyle={{ padding: 10 }} loading={cardLoading} bordered={false}>
               <Col span={8}>
-                <Icon className={'dashboardCardIcon'} type="check" />
+                <CheckOutlined className={'dashboardCardIcon'} />
               </Col>
               <Col span={16}>
                 <p className={'dashboardCardName'}>New Task</p>
@@ -64,7 +65,7 @@ export class Dashboard extends React.Component<any> {
           >
             <Card className={'dasboardCard-ticket'} bodyStyle={{ padding: 10 }} loading={cardLoading} bordered={false}>
               <Col span={8}>
-                <Icon className={'dashboardCardIcon'} type="question" />
+                <QuestionOutlined className={'dashboardCardIcon'} />
               </Col>
               <Col span={16}>
                 <p className={'dashboardCardName'}>New Ticket</p>
@@ -83,7 +84,7 @@ export class Dashboard extends React.Component<any> {
           >
             <Card className={'dasboardCard-comment'} bodyStyle={{ padding: 10 }} loading={cardLoading} bordered={false}>
               <Col span={8}>
-                <Icon className={'dashboardCardIcon'} type="message" />
+                <MessageOutlined className={'dashboardCardIcon'} />
               </Col>
               <Col span={16}>
                 <p className={'dashboardCardName'}>New Comments</p>
@@ -102,7 +103,7 @@ export class Dashboard extends React.Component<any> {
           >
             <Card className={'dasboardCard-visitor'} bodyStyle={{ padding: 10 }} loading={cardLoading} bordered={false}>
               <Col span={8}>
-                <Icon className={'dashboardCardIcon'} type="user-add" />
+                <UserAddOutlined className={'dashboardCardIcon'} />
               </Col>
               <Col span={16}>
                 <p className={'dashboardCardName'}>New Visitors</p>
@@ -113,9 +114,11 @@ export class Dashboard extends React.Component<any> {
         </Row>
 
         <Row>
-          <Card className={'dashboardBox'} title="Visit Statistics" loading={lineChartLoading} bordered={false}>
-            <LineChartExample />
-          </Card>
+          <Col span={24}>
+            <Card className={'dashboardBox'} title="Visit Statistics" loading={lineChartLoading} bordered={false}>
+              <LineChartExample />
+            </Card>
+          </Col>
         </Row>
 
         <Row gutter={16}>
