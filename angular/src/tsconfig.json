@@ -6,7 +6,7 @@
     "experimentalDecorators": true,
     "lib": [ "es6", "dom" ],
     "mapRoot": "./",
-    "module": "esnext",
+    "module": "es2020",
     "skipLibCheck": true,
     "moduleResolution": "node",
     "outDir": "../dist/out-tsc",
