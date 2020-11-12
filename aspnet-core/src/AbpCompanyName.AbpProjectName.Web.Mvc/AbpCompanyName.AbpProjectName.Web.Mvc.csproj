@@ -6,7 +6,7 @@
     <PackageId>AbpCompanyName.AbpProjectName.Web.Mvc</PackageId>
     <UserSecretsId>AbpCompanyName-AbpProjectName-56C2EF2F-ABD6-4EFC-AAF2-2E81C34E8FB1</UserSecretsId>
     <RootNamespace>AbpCompanyName.AbpProjectName.Web</RootNamespace>
-    <TargetFramework>netcoreapp3.1</TargetFramework>
+    <TargetFramework>net5.0</TargetFramework>
     <AssetTargetFallback>$(AssetTargetFallback);portable-net45+win8+wp8+wpa81;</AssetTargetFallback>
     <AutoGenerateBindingRedirects>true</AutoGenerateBindingRedirects>
     <GenerateBindingRedirectsOutputType>true</GenerateBindingRedirectsOutputType>
@@ -36,15 +36,15 @@
 
   <ItemGroup>
     <PackageReference Include="BuildBundlerMinifier" Version="3.2.447" />
-    <PackageReference Include="Microsoft.AspNetCore.Mvc.Razor.RuntimeCompilation" Version="3.1.5" />
-    <PackageReference Include="Microsoft.EntityFrameworkCore.Design" Version="3.1.4">
+    <PackageReference Include="Microsoft.AspNetCore.Mvc.Razor.RuntimeCompilation" Version="5.0.0" />
+    <PackageReference Include="Microsoft.EntityFrameworkCore.Design" Version="5.0.0">
       <PrivateAssets>all</PrivateAssets>
       <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
     </PackageReference>
     <PackageReference Include="PaulMiami.AspNetCore.Mvc.Recaptcha" Version="1.2.2" />
-    <PackageReference Include="Abp.HangFire" Version="5.13.0" />
-    <PackageReference Include="Abp.RedisCache" Version="5.13.0" />
-    <PackageReference Include="Abp.Castle.Log4Net" Version="5.13.0" />
+    <PackageReference Include="Abp.HangFire" Version="6.0.0" />
+    <PackageReference Include="Abp.RedisCache" Version="6.0.0" />
+    <PackageReference Include="Abp.Castle.Log4Net" Version="6.0.0" />
   </ItemGroup>
 
   <ItemGroup>
