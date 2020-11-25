@@ -21,6 +21,7 @@ namespace AbpCompanyName.AbpProjectName.EntityFrameworkCore.Seed.Host
                 new ApplicationLanguage(tenantId, "ar", "العربية", "famfamfam-flags sa"),
                 new ApplicationLanguage(tenantId, "de", "German", "famfamfam-flags de"),
                 new ApplicationLanguage(tenantId, "it", "Italiano", "famfamfam-flags it"),
+                new ApplicationLanguage(tenantId, "fa", "فارسی", "famfamfam-flags ir"),
                 new ApplicationLanguage(tenantId, "fr", "Français", "famfamfam-flags fr"),
                 new ApplicationLanguage(tenantId, "pt-BR", "Português", "famfamfam-flags br"),
                 new ApplicationLanguage(tenantId, "tr", "Türkçe", "famfamfam-flags tr"),
