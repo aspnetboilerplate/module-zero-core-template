@@ -42,9 +42,9 @@
       <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
     </PackageReference>
     <PackageReference Include="PaulMiami.AspNetCore.Mvc.Recaptcha" Version="1.2.2" />
-    <PackageReference Include="Abp.HangFire" Version="6.0.0" />
-    <PackageReference Include="Abp.RedisCache" Version="6.0.0" />
-    <PackageReference Include="Abp.Castle.Log4Net" Version="6.0.0" />
+    <PackageReference Include="Abp.HangFire" Version="6.1.1" />
+    <PackageReference Include="Abp.RedisCache" Version="6.1.1" />
+    <PackageReference Include="Abp.Castle.Log4Net" Version="6.1.1" />
   </ItemGroup>
 
   <ItemGroup>
