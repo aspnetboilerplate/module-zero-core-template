@@ -16,6 +16,7 @@ using AbpCompanyName.AbpProjectName.Identity;
 using Abp.AspNetCore.SignalR.Hubs;
 using Abp.Dependency;
 using Abp.Json;
+using Microsoft.Extensions.Hosting;
 using Microsoft.OpenApi.Models;
 using Newtonsoft.Json.Serialization;
 
@@ -28,9 +29,11 @@ namespace AbpCompanyName.AbpProjectName.Web.Host.Startup
         private const string _apiVersion = "v1";
 
         private readonly IConfigurationRoot _appConfiguration;
+        private readonly IWebHostEnvironment _hostingEnvironment;
 
         public Startup(IWebHostEnvironment env)
         {
+            _hostingEnvironment = env;
             _appConfiguration = env.GetAppConfiguration();
         }
 
@@ -112,7 +115,10 @@ namespace AbpCompanyName.AbpProjectName.Web.Host.Startup
             return services.AddAbp<AbpProjectNameWebHostModule>(
                 // Configure Log4Net logging
                 options => options.IocManager.IocContainer.AddFacility<LoggingFacility>(
-                    f => f.UseAbpLog4Net().WithConfig("log4net.config")
+                    f => f.UseAbpLog4Net().WithConfig(_hostingEnvironment.IsDevelopment()
+                            ? "log4net.config"
+                            : "log4net.Production.config"
+                        )
                 )
             );
         }
