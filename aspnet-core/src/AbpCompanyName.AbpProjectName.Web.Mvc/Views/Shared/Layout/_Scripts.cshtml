@@ -1,5 +1,7 @@
 ﻿@using System.Globalization
+@using Abp.Caching
 @inject AbpCompanyName.AbpProjectName.Timing.AppTimes AppTimes
+@inject IGetScriptsResponsePerUserCache GetScriptsResponsePerUserCache
 
 <script type="text/javascript">
         // This is used to get the application's root path from javascript.
@@ -84,4 +86,4 @@
 
 <!-- Dynamic scripts of ABP system (They are created on runtime and can not be bundled) -->
 <script src="~/AbpServiceProxies/GetAll?v=@(AppTimes.StartupTime.Ticks)" type="text/javascript"></script>
-<script src="~/AbpScripts/GetScripts?v=@(AppTimes.StartupTime.Ticks)" type="text/javascript"></script>
+<script src="~/AbpScripts/GetScripts?v=@(await GetScriptsResponsePerUserCache.GetKey())" type="text/javascript"></script>

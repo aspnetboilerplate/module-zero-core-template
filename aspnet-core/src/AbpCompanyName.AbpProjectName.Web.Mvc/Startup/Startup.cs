@@ -18,7 +18,7 @@ using Abp.Dependency;
 using Abp.Json;
 using Microsoft.Extensions.Hosting;
 using Newtonsoft.Json.Serialization;
-
+using Abp.AspNetCore.Mvc.Caching;
 
 namespace AbpCompanyName.AbpProjectName.Web.Startup
 {
@@ -74,6 +74,8 @@ namespace AbpCompanyName.AbpProjectName.Web.Startup
 
         public void Configure(IApplicationBuilder app, IWebHostEnvironment env, ILoggerFactory loggerFactory)
         {
+            app.UseGetScriptsResponsePerUserCache();
+
             app.UseAbp(); // Initializes ABP framework.
 
             if (env.IsDevelopment())
