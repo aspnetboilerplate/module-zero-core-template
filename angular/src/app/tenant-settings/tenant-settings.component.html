@@ -1,0 +1,37 @@
+<div [@routerTransition]>
+  <section class="content-header">
+    <div class="container-fluid">
+      <div class="row">
+        <div class="col-6">
+          <h1>{{ "TenantSettings" | localize }}</h1>
+        </div>
+        <div class="col-6 text-right">
+
+        </div>
+      </div>
+    </div>
+  </section>
+  <section class="content px-2">
+    <div class="container-fluid">
+      <div class="card">
+        <div class="card-header">
+          <div class="input-group">
+            <div class="input-group-prepend">
+
+            </div>
+
+          </div>
+        </div>
+        <div class="card-body">
+          <div *ngFor="let item of settings" class="form-group">
+            <label>{{item.name}}</label>
+            <input type="text" class="form-control" [(ngModel)]="item.value" placeholder="Enter value">
+          </div>
+        </div>
+        <div class="card-footer bg-light border-top">
+          <button type="button" class="btn btn-block btn-primary" (click)="save()">{{"Save" | localize}}</button>
+        </div>
+      </div>
+    </div>
+  </section>
+</div>
