@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using System.Linq;
 using System.Text.RegularExpressions;
 using System.Threading.Tasks;
@@ -188,23 +189,26 @@ namespace AbpCompanyName.AbpProjectName.Users
 
         public async Task<bool> ChangePassword(ChangePasswordDto input)
         {
-            if (_abpSession.UserId == null)
+            await _userManager.InitializeOptionsAsync(AbpSession.TenantId);
+
+            var user = await _userManager.FindByIdAsync(AbpSession.GetUserId().ToString());
+            if (user == null)
             {
-                throw new UserFriendlyException("Please log in before attemping to change password.");
+                throw new Exception("There is no current user!");
             }
-            long userId = _abpSession.UserId.Value;
-            var user = await _userManager.GetUserByIdAsync(userId);
-            var loginAsync = await _logInManager.LoginAsync(user.UserName, input.CurrentPassword, shouldLockout: false);
-            if (loginAsync.Result != AbpLoginResultType.Success)
+            
+            if (await _userManager.CheckPasswordAsync(user, input.CurrentPassword))
             {
-                throw new UserFriendlyException("Your 'Existing Password' did not match the one on record.  Please try again or contact an administrator for assistance in resetting your password.");
+                CheckErrors(await _userManager.ChangePasswordAsync(user, input.NewPassword));
             }
-            if (!new Regex(AccountAppService.PasswordRegex).IsMatch(input.NewPassword))
+            else
             {
-                throw new UserFriendlyException("Passwords must be at least 8 characters, contain a lowercase, uppercase, and number.");
+                CheckErrors(IdentityResult.Failed(new IdentityError
+                {
+                    Description = "Incorrect password."
+                }));
             }
-            user.Password = _passwordHasher.HashPassword(user, input.NewPassword);
-            CurrentUnitOfWork.SaveChanges();
+
             return true;
         }
 
@@ -212,19 +216,21 @@ namespace AbpCompanyName.AbpProjectName.Users
         {
             if (_abpSession.UserId == null)
             {
-                throw new UserFriendlyException("Please log in before attemping to reset password.");
+                throw new UserFriendlyException("Please log in before attempting to reset password.");
             }
-            long currentUserId = _abpSession.UserId.Value;
-            var currentUser = await _userManager.GetUserByIdAsync(currentUserId);
+            
+            var currentUser = await _userManager.GetUserByIdAsync(_abpSession.GetUserId());
             var loginAsync = await _logInManager.LoginAsync(currentUser.UserName, input.AdminPassword, shouldLockout: false);
             if (loginAsync.Result != AbpLoginResultType.Success)
             {
                 throw new UserFriendlyException("Your 'Admin Password' did not match the one on record.  Please try again.");
             }
+            
             if (currentUser.IsDeleted || !currentUser.IsActive)
             {
                 return false;
             }
+            
             var roles = await _userManager.GetRolesAsync(currentUser);
             if (!roles.Contains(StaticRoleNames.Tenants.Admin))
             {
@@ -235,7 +241,7 @@ namespace AbpCompanyName.AbpProjectName.Users
             if (user != null)
             {
                 user.Password = _passwordHasher.HashPassword(user, input.NewPassword);
-                CurrentUnitOfWork.SaveChanges();
+                await CurrentUnitOfWork.SaveChangesAsync();
             }
 
             return true;
