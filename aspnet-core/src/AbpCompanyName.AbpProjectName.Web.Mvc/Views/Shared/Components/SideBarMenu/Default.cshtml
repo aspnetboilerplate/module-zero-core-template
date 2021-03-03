@@ -1,7 +1,7 @@
 ﻿@using AbpCompanyName.AbpProjectName.Web.Views.Shared.Components.SideBarMenu
 @model SideBarMenuViewModel
 @{ 
-    var orderedMenuItems = Model.MainMenu.Items.Where(x => x.IsVisible).OrderByCustom().ToList();
+    var orderedMenuItems = Model.MainMenu.Items.Where(x => x.IsVisible).ToList();
 }
 
 <nav class="mt-2">
