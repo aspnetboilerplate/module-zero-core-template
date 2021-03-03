@@ -15,6 +15,14 @@ namespace AbpCompanyName.AbpProjectName.Web.Startup
             context.Manager.MainMenu
                 .AddItem(
                     new MenuItemDefinition(
+                        PageNames.About,
+                        L("About"),
+                        url: "About",
+                        icon: "fas fa-info-circle"
+                    )
+                )
+                .AddItem(
+                    new MenuItemDefinition(
                         PageNames.Home,
                         L("HomePage"),
                         url: "",
@@ -44,16 +52,9 @@ namespace AbpCompanyName.AbpProjectName.Web.Startup
                         url: "Roles",
                         icon: "fas fa-theater-masks",
                         permissionDependency: new SimplePermissionDependency(PermissionNames.Pages_Roles)
-                            )
-                )
-                .AddItem(
-                    new MenuItemDefinition(
-                        PageNames.About,
-                        L("About"),
-                        url: "About",
-                        icon: "fas fa-info-circle"
                     )
-                ).AddItem( // Menu items below is just for demonstration!
+                )
+                .AddItem( // Menu items below is just for demonstration!
                     new MenuItemDefinition(
                         "MultiLevelMenu",
                         L("MultiLevelMenu"),
