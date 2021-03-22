@@ -1,5 +1,4 @@
 import { Component, Injector } from '@angular/core';
-import { finalize } from 'rxjs/operators';
 import { BsModalRef } from 'ngx-bootstrap/modal';
 import { AppComponentBase } from '@shared/app-component-base';
 import { AccountServiceProxy } from '@shared/service-proxies/service-proxies';
@@ -36,14 +35,8 @@ export class TenantChangeDialogComponent extends AppComponentBase {
     input.tenancyName = this.tenancyName;
 
     this.saving = true;
-    this._accountService
-      .isTenantAvailable(input)
-      .pipe(
-        finalize(() => {
-          this.saving = false;
-        })
-      )
-      .subscribe((result: IsTenantAvailableOutput) => {
+    this._accountService.isTenantAvailable(input).subscribe(
+      (result: IsTenantAvailableOutput) => {
         switch (result.state) {
           case AppTenantAvailabilityState.Available:
             abp.multiTenancy.setTenantIdCookie(result.tenantId);
@@ -58,6 +51,10 @@ export class TenantChangeDialogComponent extends AppComponentBase {
             );
             break;
         }
-      });
+      },
+      () => {
+        this.saving = false;
+      }
+    );
   }
 }

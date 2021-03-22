@@ -5,7 +5,6 @@ import {
   EventEmitter,
   Output,
 } from '@angular/core';
-import { finalize } from 'rxjs/operators';
 import { BsModalRef } from 'ngx-bootstrap/modal';
 import { forEach as _forEach, includes as _includes, map as _map } from 'lodash-es';
 import { AppComponentBase } from '@shared/app-component-base';
@@ -84,17 +83,15 @@ export class EditRoleDialogComponent extends AppComponentBase
     role.init(this.role);
     role.grantedPermissions = this.getCheckedPermissions();
 
-    this._roleService
-      .update(role)
-      .pipe(
-        finalize(() => {
-          this.saving = false;
-        })
-      )
-      .subscribe(() => {
+    this._roleService.update(role).subscribe(
+      () => {
         this.notify.info(this.l('SavedSuccessfully'));
         this.bsModalRef.hide();
         this.onSave.emit();
-      });
+      },
+      () => {
+        this.saving = false;
+      }
+    );
   }
 }
