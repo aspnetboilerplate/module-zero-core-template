@@ -1,24 +1,22 @@
 import * as React from 'react';
 
-import { Form, Input, Modal, Tabs } from 'antd';
-
-import CheckboxGroup from 'antd/lib/checkbox/Group';
-import { FormComponentProps } from 'antd/lib/form';
-import FormItem from 'antd/lib/form/FormItem';
+import { Input, Modal, Tabs, Form, Checkbox } from 'antd';
 import { GetAllPermissionsOutput } from '../../../services/role/dto/getAllPermissionsOutput';
 import { L } from '../../../lib/abpUtility';
 import RoleStore from '../../../stores/roleStore';
 import rules from './createOrUpdateRole.validation';
+import { FormInstance } from 'antd/lib/form';
 
 const TabPane = Tabs.TabPane;
 
-export interface ICreateOrUpdateRoleProps extends FormComponentProps {
+export interface ICreateOrUpdateRoleProps {
   roleStore: RoleStore;
   visible: boolean;
   onCancel: () => void;
   modalType: string;
   onOk: () => void;
   permissions: GetAllPermissionsOutput[];
+  formRef: React.RefObject<FormInstance>;
 }
 
 class CreateOrUpdateRole extends React.Component<ICreateOrUpdateRoleProps> {
@@ -71,8 +69,6 @@ class CreateOrUpdateRole extends React.Component<ICreateOrUpdateRoleProps> {
       },
     };
 
-    const { getFieldDecorator } = this.props.form;
-
     return (
       <Modal
         visible={this.props.visible}
@@ -81,28 +77,31 @@ class CreateOrUpdateRole extends React.Component<ICreateOrUpdateRoleProps> {
         onCancel={this.props.onCancel}
         title={L('Role')}
         onOk={this.props.onOk}
+        destroyOnClose={true}
       >
-        <Tabs defaultActiveKey={'role'} size={'small'} tabBarGutter={64}>
-          <TabPane tab={L('RoleDetails')} key={'role'}>
-            <FormItem label={L('RoleName')} {...formItemLayout}>
-              {getFieldDecorator('name', { rules: rules.name })(<Input />)}
-            </FormItem>
-            <FormItem label={L('DisplayName')} {...formItemLayout}>
-              {getFieldDecorator('displayName', { rules: rules.displayName })(<Input />)}
-            </FormItem>
-            <FormItem label={L('Description')} {...formItemLayout}>
-              {getFieldDecorator('description')(<Input />)}
-            </FormItem>
-          </TabPane>
-          <TabPane tab={L('RolePermission')} key={'permission'}>
-            <FormItem {...tailFormItemLayout}>
-              {getFieldDecorator('grantedPermissions', { valuePropName: 'value' })(<CheckboxGroup options={options} />)}
-            </FormItem>
-          </TabPane>
-        </Tabs>
+        <Form ref={this.props.formRef}>
+          <Tabs defaultActiveKey={'role'} size={'small'} tabBarGutter={64}>
+            <TabPane tab={L('RoleDetails')} key={'role'}>
+              <Form.Item label={L('RoleName')} name={'name'} rules={rules.name} {...formItemLayout}>
+                <Input />
+              </Form.Item>
+              <Form.Item label={L('DisplayName')} name={'displayName'} rules={rules.displayName} {...formItemLayout}>
+                <Input />
+              </Form.Item>
+              <Form.Item label={L('Description')} name={'description'} {...formItemLayout}>
+                <Input />
+              </Form.Item>
+            </TabPane>
+            <TabPane tab={L('RolePermission')} key={'permission'} forceRender={true}>
+              <Form.Item {...tailFormItemLayout} name={'grantedPermissions'} valuePropName={'value'}>
+                <Checkbox.Group options={options} />
+              </Form.Item>
+            </TabPane>
+          </Tabs>
+        </Form>
       </Modal>
     );
   }
 }
 
-export default Form.create<ICreateOrUpdateRoleProps>()(CreateOrUpdateRole);
+export default CreateOrUpdateRole;

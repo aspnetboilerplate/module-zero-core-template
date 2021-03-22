@@ -3,7 +3,8 @@ import 'famfamfam-flags/dist/sprite/famfamfam-flags.css';
 
 import * as React from 'react';
 
-import { Dropdown, Icon, Menu } from 'antd';
+import { Dropdown, Menu } from 'antd';
+import { GlobalOutlined } from '@ant-design/icons';
 
 import { L } from '../../lib/abpUtility';
 import Stores from '../../stores/storeIdentifier';
@@ -55,7 +56,7 @@ class LanguageSelect extends React.Component<ILanguageSelectProps> {
 
     return (
       <Dropdown overlay={langMenu} placement="bottomRight">
-        <Icon type="global" className={classNames('dropDown', 'className')} title={L('Languages')} />
+        <GlobalOutlined className={classNames('dropDown', 'className')} title={L('Languages')} />
       </Dropdown>
     );
   }

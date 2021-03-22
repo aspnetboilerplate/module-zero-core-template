@@ -57,15 +57,13 @@ class AppLayout extends React.Component<any> {
                     exact
                     key={index}
                     path={route.path}
-                    render={props => <ProtectedRoute component={route.component} permission={route.permission} />}
+                    render={(props) => <ProtectedRoute component={route.component} permission={route.permission} />}
                   />
                 ))}
               {pathname !== '/' && <NotFoundRoute />}
             </Switch>
           </Content>
-          <Layout.Footer style={{ textAlign: 'center' }}>
-            <Footer />
-          </Layout.Footer>
+          <Footer />
         </Layout>
       </Layout>
     );
