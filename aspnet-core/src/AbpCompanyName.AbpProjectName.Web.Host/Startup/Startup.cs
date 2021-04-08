@@ -19,6 +19,7 @@ using Abp.Json;
 using Microsoft.Extensions.Hosting;
 using Microsoft.OpenApi.Models;
 using Newtonsoft.Json.Serialization;
+using System.IO;
 
 namespace AbpCompanyName.AbpProjectName.Web.Host.Startup
 {
@@ -52,8 +53,6 @@ namespace AbpCompanyName.AbpProjectName.Web.Host.Startup
                     NamingStrategy = new CamelCaseNamingStrategy()
                 };
             });
-
-
 
             IdentityRegistrar.Register(services);
             AuthConfigurer.Configure(services, _appConfiguration);
@@ -109,6 +108,23 @@ namespace AbpCompanyName.AbpProjectName.Web.Host.Startup
                     In = ParameterLocation.Header,
                     Type = SecuritySchemeType.ApiKey
                 });
+
+                //add summaries to swagger
+                bool canShowSummaries = _appConfiguration.GetValue<bool>("Swagger:ShowSummariesOnSwagger");
+                if (canShowSummaries)
+                {
+                    var hostXmlFile = $"{Assembly.GetExecutingAssembly().GetName().Name}.xml";
+                    var hostXmlPath = Path.Combine(AppContext.BaseDirectory, hostXmlFile);
+                    options.IncludeXmlComments(hostXmlPath);
+
+                    var applicationXml = $"AbpCompanyName.AbpProjectName.Application.xml";
+                    var applicationXmlPath = Path.Combine(AppContext.BaseDirectory, applicationXml);
+                    options.IncludeXmlComments(applicationXmlPath);
+
+                    var webCoreXmlFile = $"AbpCompanyName.AbpProjectName.Web.Core.xml";
+                    var webCoreXmlPath = Path.Combine(AppContext.BaseDirectory, webCoreXmlFile);
+                    options.IncludeXmlComments(webCoreXmlPath);
+                }
             });
 
             // Configure Abp and Dependency Injection
@@ -123,7 +139,7 @@ namespace AbpCompanyName.AbpProjectName.Web.Host.Startup
             );
         }
 
-        public void Configure(IApplicationBuilder app,  ILoggerFactory loggerFactory)
+        public void Configure(IApplicationBuilder app, ILoggerFactory loggerFactory)
         {
             app.UseAbp(options => { options.UseAbpRequestLocalization = false; }); // Initializes ABP framework.
 
@@ -137,7 +153,7 @@ namespace AbpCompanyName.AbpProjectName.Web.Host.Startup
 
             app.UseAbpRequestLocalization();
 
-          
+
             app.UseEndpoints(endpoints =>
             {
                 endpoints.MapHub<AbpCommonHub>("/signalr");
