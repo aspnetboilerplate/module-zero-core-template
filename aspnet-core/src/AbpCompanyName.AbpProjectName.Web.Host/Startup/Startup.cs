@@ -110,7 +110,7 @@ namespace AbpCompanyName.AbpProjectName.Web.Host.Startup
                 });
 
                 //add summaries to swagger
-                bool canShowSummaries = _appConfiguration.GetValue<bool>("Swagger:ShowSummariesOnSwagger");
+                bool canShowSummaries = _appConfiguration.GetValue<bool>("Swagger:ShowSummaries");
                 if (canShowSummaries)
                 {
                     var hostXmlFile = $"{Assembly.GetExecutingAssembly().GetName().Name}.xml";
