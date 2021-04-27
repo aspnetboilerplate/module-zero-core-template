@@ -25,7 +25,7 @@
     "@fortawesome/fontawesome-free": "^5.13.0",
     "abp-ng2-module": "^6.2.0",
     "abp-web-resources": "^5.3.0",
-    "admin-lte-css-only": "^3.0.4",
+    "admin-lte-css-only": "3.0.5",
     "core-js": "^3.2.1",
     "famfamfam-flags": "^1.0.0",
     "lodash-es": "^4.17.15",

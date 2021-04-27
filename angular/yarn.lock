@@ -1789,10 +1789,10 @@ adm-zip@^0.4.9:
   resolved "https://registry.yarnpkg.com/adm-zip/-/adm-zip-0.4.14.tgz#2cf312bcc9f8875df835b0f6040bd89be0a727a9"
   integrity sha512-/9aQCnQHF+0IiCl0qhXoK7qs//SwYE7zX8lsr/DNk1BRAHYxeLZPL4pguwK29gUEqasYQjqPtEpDRSWEkdHn9g==
 
-admin-lte-css-only@^3.0.4:
-  version "3.0.4"
-  resolved "https://registry.yarnpkg.com/admin-lte-css-only/-/admin-lte-css-only-3.0.4.tgz#5aa5c33930fa35c827cb602533dcd93fbe1cb4ca"
-  integrity sha512-70vZ6coYYKqEs5Qxixl4qtN9ndGEpkgTEpKZi55vHJnBQMG52/nPaTQvd358Akp0pnidGA+M9O4N4HBm1Byqrw==
+admin-lte-css-only@3.0.5:
+  version "3.0.5"
+  resolved "https://registry.yarnpkg.com/admin-lte-css-only/-/admin-lte-css-only-3.0.5.tgz#e9b9a8a8eed169a86e764a068d7495a991f7bf2e"
+  integrity sha512-Z58k4Tli3lH4Jc8Agew9r6cf3s1aT4XoW7OKnSqHsBiD5twlh4jj8dAk29wvrRnwo42leFpVA6w/FPUQTMsZWw==
 
 after@0.8.2:
   version "0.8.2"
