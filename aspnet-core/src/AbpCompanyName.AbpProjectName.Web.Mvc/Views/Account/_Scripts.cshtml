@@ -1,5 +1,8 @@
 ﻿@using System.Globalization
+@using Abp.CachedUniqueKeys
+@using Abp.AspNetCore.Mvc.Caching
 @inject AbpCompanyName.AbpProjectName.Timing.AppTimes AppTimes
+@inject ICachedUniqueKeyPerUser CachedUniqueKeyPerUser
 
 <script type="text/javascript">
         // This is used to get the application's root path from javascript.
@@ -74,4 +77,4 @@
 
 <!-- Dynamic scripts of ABP system (They are created on runtime and can not be bundled) -->
 <script src="~/AbpServiceProxies/GetAll?v=@(AppTimes.StartupTime.Ticks)" type="text/javascript"></script>
-<script src="~/AbpScripts/GetScripts?v=@(AppTimes.StartupTime.Ticks)" type="text/javascript"></script>
+<script src="~/AbpScripts/GetScripts?v=@(await CachedUniqueKeyPerUser.GetKeyAsync(GetScriptsResponsePerUserCache.CacheName))" type="text/javascript"></script>
