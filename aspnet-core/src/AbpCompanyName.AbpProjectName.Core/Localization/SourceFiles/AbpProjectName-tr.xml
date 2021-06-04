@@ -30,6 +30,7 @@
     <text name="SavedSuccessfully" value="Başarıyla kaydedildi" />
     <text name="CreateNewTenant" value="Yeni müşteri oluştur" />
     <text name="AdminEmailAddress" value="Yönetici e-posta adresi" />
+    <text name="AdminPassword" value="Yönetici şifresi" />
     <text name="Save" value="Kaydet" />
     <text name="Cancel" value="İptal" />
     <text name="TenantName_Regex_Description" value="Müşteri adı en az 2 karakter olmalı, bir harfle başlamalı ve harf, rakam, tire ya da alt çizgi ile devam etmelidir." />
@@ -85,6 +86,21 @@
     <text name="Create">Oluştur</text>
     <text name="UserDetails">Kullanıcı detayları</text>
     <text name="UserRoles">Kullanıcı rolleri</text>
+    <text name="ConfirmPassword">Şifreyi doğrula</text>
+    <text name="Version">Versiyon</text>
+    <text name="On">Açık</text>
+    <text name="Off">Kapalı</text>
+    <text name="AreYouSureWantToDelete">{0}'i silmek istediğinizden emin misiniz ?</text>
+    <text name="SuccessfullyDeleted">Başarıyla silindi</text>
+    <text name="StartTyping">Yazmaya başla</text>
+    <text name="Skins">Stiller</text>
+    <text name="Settings">Ayarlar</text>
+    <text name="Filter">Filtre</text>
+    <text name="CurrentPassword">Varolan şifre</text>
+    <text name="NewPassword">Yeni şifre</text>
+    <text name="ConfirmNewPassword">Yeni şifreyi doğrula</text>
+    <text name="PasswordsDoNotMatch">Şifreler uyuşmuyor</text>
+    <text name="PasswordsMustBeAtLeast8CharactersContainLowercaseUppercaseNumber">Şifreler en az 8 karakter olmalı, küçük harf, büyük harf ve sayı içermelidir</text>
     <text name="UserDeleteWarningMessage">{0} kullanıcısı silinecektir.</text>
     <text name="RoleDeleteWarningMessage">{0} rolü silinecek ve atanmış kullanıcılardan kaldırılacaktır.</text>
     <text name="TenantDeleteWarningMessage">{0} müşterisi silinecektir.</text>
@@ -98,8 +114,8 @@
     <text name="TotalRecordsCount">Toplam: {0}</text>
     <text name="Search">Bul</text>
     <text name="Clear">Temizle</text>
-    <text name="CurrentPassword">Mevcut şifreniz</text>
-    <text name="NewPassword">Yeni şifre</text>
-    <text name="ConfirmNewPassword">Yeni şifreyi doğrula</text>
+    <text name="ResetPasswordStepOneInfo">1. Yönetici şifresini girin</text>
+    <text name="ResetPasswordStepTwoInfo">2. Bu şifreyi kaydettikten sonra ilgili kullanıcıya gönderin</text>
+    <text name="UsersActivation">Kullanıcıları aktifleştirme</text>
   </texts>
 </localizationDictionary>
