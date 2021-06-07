@@ -42,10 +42,7 @@ namespace AbpCompanyName.AbpProjectName.Web.Host.Startup
         {
             //MVC
             services.AddControllersWithViews(
-                options =>
-                {
-                    options.Filters.Add(new AbpAutoValidateAntiforgeryTokenAttribute());
-                }
+                options => { options.Filters.Add(new AbpAutoValidateAntiforgeryTokenAttribute()); }
             ).AddNewtonsoftJson(options =>
             {
                 options.SerializerSettings.ContractResolver = new AbpMvcContractResolver(IocManager.Instance)
@@ -78,63 +75,16 @@ namespace AbpCompanyName.AbpProjectName.Web.Host.Startup
             );
 
             // Swagger - Enable this line and the related lines in Configure method to enable swagger UI
-            services.AddSwaggerGen(options =>
-            {
-                options.SwaggerDoc(_apiVersion, new OpenApiInfo
-                {
-                    Version = _apiVersion,
-                    Title = "AbpProjectName API",
-                    Description = "AbpProjectName",
-                    // uncomment if needed TermsOfService = new Uri("https://example.com/terms"),
-                    Contact = new OpenApiContact
-                    {
-                        Name = "AbpProjectName",
-                        Email = string.Empty,
-                        Url = new Uri("https://twitter.com/aspboilerplate"),
-                    },
-                    License = new OpenApiLicense
-                    {
-                        Name = "MIT License",
-                        Url = new Uri("https://github.com/aspnetboilerplate/aspnetboilerplate/blob/dev/LICENSE"),
-                    }
-                });
-                options.DocInclusionPredicate((docName, description) => true);
-
-                // Define the BearerAuth scheme that's in use
-                options.AddSecurityDefinition("bearerAuth", new OpenApiSecurityScheme()
-                {
-                    Description = "JWT Authorization header using the Bearer scheme. Example: \"Authorization: Bearer {token}\"",
-                    Name = "Authorization",
-                    In = ParameterLocation.Header,
-                    Type = SecuritySchemeType.ApiKey
-                });
-
-                //add summaries to swagger
-                bool canShowSummaries = _appConfiguration.GetValue<bool>("Swagger:ShowSummaries");
-                if (canShowSummaries)
-                {
-                    var hostXmlFile = $"{Assembly.GetExecutingAssembly().GetName().Name}.xml";
-                    var hostXmlPath = Path.Combine(AppContext.BaseDirectory, hostXmlFile);
-                    options.IncludeXmlComments(hostXmlPath);
-
-                    var applicationXml = $"AbpCompanyName.AbpProjectName.Application.xml";
-                    var applicationXmlPath = Path.Combine(AppContext.BaseDirectory, applicationXml);
-                    options.IncludeXmlComments(applicationXmlPath);
-
-                    var webCoreXmlFile = $"AbpCompanyName.AbpProjectName.Web.Core.xml";
-                    var webCoreXmlPath = Path.Combine(AppContext.BaseDirectory, webCoreXmlFile);
-                    options.IncludeXmlComments(webCoreXmlPath);
-                }
-            });
+            ConfigureSwagger(services);
 
             // Configure Abp and Dependency Injection
             return services.AddAbp<AbpProjectNameWebHostModule>(
                 // Configure Log4Net logging
                 options => options.IocManager.IocContainer.AddFacility<LoggingFacility>(
                     f => f.UseAbpLog4Net().WithConfig(_hostingEnvironment.IsDevelopment()
-                            ? "log4net.config"
-                            : "log4net.Production.config"
-                        )
+                        ? "log4net.config"
+                        : "log4net.Production.config"
+                    )
                 )
             );
         }
@@ -173,6 +123,59 @@ namespace AbpCompanyName.AbpProjectName.Web.Host.Startup
                     .GetManifestResourceStream("AbpCompanyName.AbpProjectName.Web.Host.wwwroot.swagger.ui.index.html");
                 options.DisplayRequestDuration(); // Controls the display of the request duration (in milliseconds) for "Try it out" requests.  
             }); // URL: /swagger
+        }
+        
+        private void ConfigureSwagger(IServiceCollection services)
+        {
+            services.AddSwaggerGen(options =>
+            {
+                options.SwaggerDoc(_apiVersion, new OpenApiInfo
+                {
+                    Version = _apiVersion,
+                    Title = "AbpProjectName API",
+                    Description = "AbpProjectName",
+                    // uncomment if needed TermsOfService = new Uri("https://example.com/terms"),
+                    Contact = new OpenApiContact
+                    {
+                        Name = "AbpProjectName",
+                        Email = string.Empty,
+                        Url = new Uri("https://twitter.com/aspboilerplate"),
+                    },
+                    License = new OpenApiLicense
+                    {
+                        Name = "MIT License",
+                        Url = new Uri("https://github.com/aspnetboilerplate/aspnetboilerplate/blob/dev/LICENSE"),
+                    }
+                });
+                options.DocInclusionPredicate((docName, description) => true);
+
+                // Define the BearerAuth scheme that's in use
+                options.AddSecurityDefinition("bearerAuth", new OpenApiSecurityScheme()
+                {
+                    Description =
+                        "JWT Authorization header using the Bearer scheme. Example: \"Authorization: Bearer {token}\"",
+                    Name = "Authorization",
+                    In = ParameterLocation.Header,
+                    Type = SecuritySchemeType.ApiKey
+                });
+
+                //add summaries to swagger
+                bool canShowSummaries = _appConfiguration.GetValue<bool>("Swagger:ShowSummaries");
+                if (canShowSummaries)
+                {
+                    var hostXmlFile = $"{Assembly.GetExecutingAssembly().GetName().Name}.xml";
+                    var hostXmlPath = Path.Combine(AppContext.BaseDirectory, hostXmlFile);
+                    options.IncludeXmlComments(hostXmlPath);
+
+                    var applicationXml = $"AbpCompanyName.AbpProjectName.Application.xml";
+                    var applicationXmlPath = Path.Combine(AppContext.BaseDirectory, applicationXml);
+                    options.IncludeXmlComments(applicationXmlPath);
+
+                    var webCoreXmlFile = $"AbpCompanyName.AbpProjectName.Web.Core.xml";
+                    var webCoreXmlPath = Path.Combine(AppContext.BaseDirectory, webCoreXmlFile);
+                    options.IncludeXmlComments(webCoreXmlPath);
+                }
+            });
         }
     }
 }
