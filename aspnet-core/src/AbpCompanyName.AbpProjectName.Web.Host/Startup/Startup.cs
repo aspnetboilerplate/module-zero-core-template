@@ -19,6 +19,7 @@ using Abp.Json;
 using Microsoft.Extensions.Hosting;
 using Microsoft.OpenApi.Models;
 using Newtonsoft.Json.Serialization;
+using System.IO;
 
 namespace AbpCompanyName.AbpProjectName.Web.Host.Startup
 {
@@ -41,10 +42,7 @@ namespace AbpCompanyName.AbpProjectName.Web.Host.Startup
         {
             //MVC
             services.AddControllersWithViews(
-                options =>
-                {
-                    options.Filters.Add(new AbpAutoValidateAntiforgeryTokenAttribute());
-                }
+                options => { options.Filters.Add(new AbpAutoValidateAntiforgeryTokenAttribute()); }
             ).AddNewtonsoftJson(options =>
             {
                 options.SerializerSettings.ContractResolver = new AbpMvcContractResolver(IocManager.Instance)
@@ -52,8 +50,6 @@ namespace AbpCompanyName.AbpProjectName.Web.Host.Startup
                     NamingStrategy = new CamelCaseNamingStrategy()
                 };
             });
-
-
 
             IdentityRegistrar.Register(services);
             AuthConfigurer.Configure(services, _appConfiguration);
@@ -79,6 +75,58 @@ namespace AbpCompanyName.AbpProjectName.Web.Host.Startup
             );
 
             // Swagger - Enable this line and the related lines in Configure method to enable swagger UI
+            ConfigureSwagger(services);
+
+            // Configure Abp and Dependency Injection
+            return services.AddAbp<AbpProjectNameWebHostModule>(
+                // Configure Log4Net logging
+                options => options.IocManager.IocContainer.AddFacility<LoggingFacility>(
+                    f => f.UseAbpLog4Net().WithConfig(_hostingEnvironment.IsDevelopment()
+                        ? "log4net.config"
+                        : "log4net.Production.config"
+                    )
+                )
+            );
+        }
+
+        public void Configure(IApplicationBuilder app, ILoggerFactory loggerFactory)
+        {
+            app.UseAbp(options => { options.UseAbpRequestLocalization = false; }); // Initializes ABP framework.
+
+            app.UseCors(_defaultCorsPolicyName); // Enable CORS!
+
+            app.UseStaticFiles();
+
+            app.UseRouting();
+
+            app.UseAuthentication();
+
+            app.UseAbpRequestLocalization();
+
+
+            app.UseEndpoints(endpoints =>
+            {
+                endpoints.MapHub<AbpCommonHub>("/signalr");
+                endpoints.MapControllerRoute("default", "{controller=Home}/{action=Index}/{id?}");
+                endpoints.MapControllerRoute("defaultWithArea", "{area}/{controller=Home}/{action=Index}/{id?}");
+            });
+
+            // Enable middleware to serve generated Swagger as a JSON endpoint
+            app.UseSwagger(c => { c.RouteTemplate = "swagger/{documentName}/swagger.json"; });
+
+            // Enable middleware to serve swagger-ui assets (HTML, JS, CSS etc.)
+            app.UseSwaggerUI(options =>
+            {
+                // specifying the Swagger JSON endpoint.
+                options.SwaggerEndpoint($"/swagger/{_apiVersion}/swagger.json", $"AbpProjectName API {_apiVersion}");
+                options.IndexStream = () => Assembly.GetExecutingAssembly()
+                    .GetManifestResourceStream("AbpCompanyName.AbpProjectName.Web.Host.wwwroot.swagger.ui.index.html");
+                options.DisplayRequestDuration(); // Controls the display of the request duration (in milliseconds) for "Try it out" requests.  
+            }); // URL: /swagger
+        }
+        
+        private void ConfigureSwagger(IServiceCollection services)
+        {
             services.AddSwaggerGen(options =>
             {
                 options.SwaggerDoc(_apiVersion, new OpenApiInfo
@@ -104,59 +152,30 @@ namespace AbpCompanyName.AbpProjectName.Web.Host.Startup
                 // Define the BearerAuth scheme that's in use
                 options.AddSecurityDefinition("bearerAuth", new OpenApiSecurityScheme()
                 {
-                    Description = "JWT Authorization header using the Bearer scheme. Example: \"Authorization: Bearer {token}\"",
+                    Description =
+                        "JWT Authorization header using the Bearer scheme. Example: \"Authorization: Bearer {token}\"",
                     Name = "Authorization",
                     In = ParameterLocation.Header,
                     Type = SecuritySchemeType.ApiKey
                 });
+
+                //add summaries to swagger
+                bool canShowSummaries = _appConfiguration.GetValue<bool>("Swagger:ShowSummaries");
+                if (canShowSummaries)
+                {
+                    var hostXmlFile = $"{Assembly.GetExecutingAssembly().GetName().Name}.xml";
+                    var hostXmlPath = Path.Combine(AppContext.BaseDirectory, hostXmlFile);
+                    options.IncludeXmlComments(hostXmlPath);
+
+                    var applicationXml = $"AbpCompanyName.AbpProjectName.Application.xml";
+                    var applicationXmlPath = Path.Combine(AppContext.BaseDirectory, applicationXml);
+                    options.IncludeXmlComments(applicationXmlPath);
+
+                    var webCoreXmlFile = $"AbpCompanyName.AbpProjectName.Web.Core.xml";
+                    var webCoreXmlPath = Path.Combine(AppContext.BaseDirectory, webCoreXmlFile);
+                    options.IncludeXmlComments(webCoreXmlPath);
+                }
             });
-
-            // Configure Abp and Dependency Injection
-            return services.AddAbp<AbpProjectNameWebHostModule>(
-                // Configure Log4Net logging
-                options => options.IocManager.IocContainer.AddFacility<LoggingFacility>(
-                    f => f.UseAbpLog4Net().WithConfig(_hostingEnvironment.IsDevelopment()
-                            ? "log4net.config"
-                            : "log4net.Production.config"
-                        )
-                )
-            );
-        }
-
-        public void Configure(IApplicationBuilder app,  ILoggerFactory loggerFactory)
-        {
-            app.UseAbp(options => { options.UseAbpRequestLocalization = false; }); // Initializes ABP framework.
-
-            app.UseCors(_defaultCorsPolicyName); // Enable CORS!
-
-            app.UseStaticFiles();
-
-            app.UseRouting();
-
-            app.UseAuthentication();
-
-            app.UseAbpRequestLocalization();
-
-          
-            app.UseEndpoints(endpoints =>
-            {
-                endpoints.MapHub<AbpCommonHub>("/signalr");
-                endpoints.MapControllerRoute("default", "{controller=Home}/{action=Index}/{id?}");
-                endpoints.MapControllerRoute("defaultWithArea", "{area}/{controller=Home}/{action=Index}/{id?}");
-            });
-
-            // Enable middleware to serve generated Swagger as a JSON endpoint
-            app.UseSwagger(c => { c.RouteTemplate = "swagger/{documentName}/swagger.json"; });
-
-            // Enable middleware to serve swagger-ui assets (HTML, JS, CSS etc.)
-            app.UseSwaggerUI(options =>
-            {
-                // specifying the Swagger JSON endpoint.
-                options.SwaggerEndpoint($"/swagger/{_apiVersion}/swagger.json", $"AbpProjectName API {_apiVersion}");
-                options.IndexStream = () => Assembly.GetExecutingAssembly()
-                    .GetManifestResourceStream("AbpCompanyName.AbpProjectName.Web.Host.wwwroot.swagger.ui.index.html");
-                options.DisplayRequestDuration(); // Controls the display of the request duration (in milliseconds) for "Try it out" requests.  
-            }); // URL: /swagger
         }
     }
 }
