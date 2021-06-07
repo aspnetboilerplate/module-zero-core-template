@@ -31,7 +31,7 @@ Copy-Item (Join-Path $ngFolder "Dockerfile") (Join-Path $outputFolder "ng")
 
 # Change UI configuration
 $ngConfigPath = Join-Path $outputFolder "ng/assets/appconfig.json"
-(Get-Content $ngConfigPath) -replace "21021", "9901" | Set-Content $ngConfigPath
+(Get-Content $ngConfigPath) -replace "44311", "9901" | Set-Content $ngConfigPath
 (Get-Content $ngConfigPath) -replace "4200", "9902" | Set-Content $ngConfigPath
 
 ## CREATE DOCKER IMAGES #######################################################
