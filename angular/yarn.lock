@@ -1392,10 +1392,10 @@
     lodash "^4.17.13"
     to-fast-properties "^2.0.0"
 
-"@fortawesome/fontawesome-free@^5.13.0":
-  version "5.13.0"
-  resolved "https://registry.yarnpkg.com/@fortawesome/fontawesome-free/-/fontawesome-free-5.13.0.tgz#fcb113d1aca4b471b709e8c9c168674fbd6e06d9"
-  integrity sha512-xKOeQEl5O47GPZYIMToj6uuA2syyFlq9EMSl2ui0uytjY9xbe8XS0pexNWmxrdcCyNGyDmLyYw5FtKsalBUeOg==
+"@fortawesome/fontawesome-free@^5.15.3":
+  version "5.15.3"
+  resolved "https://registry.yarnpkg.com/@fortawesome/fontawesome-free/-/fontawesome-free-5.15.3.tgz#c36ffa64a2a239bf948541a97b6ae8d729e09a9a"
+  integrity sha512-rFnSUN/QOtnOAgqFRooTA3H57JLDm0QEG/jPdk+tLQNL/eWd+Aok8g3qCI+Q1xuDPWpGW/i9JySpJVsq8Q0s9w==
 
 "@istanbuljs/schema@^0.1.2":
   version "0.1.2"
@@ -1789,10 +1789,10 @@ adm-zip@^0.4.9:
   resolved "https://registry.yarnpkg.com/adm-zip/-/adm-zip-0.4.14.tgz#2cf312bcc9f8875df835b0f6040bd89be0a727a9"
   integrity sha512-/9aQCnQHF+0IiCl0qhXoK7qs//SwYE7zX8lsr/DNk1BRAHYxeLZPL4pguwK29gUEqasYQjqPtEpDRSWEkdHn9g==
 
-admin-lte-css-only@3.0.5:
-  version "3.0.5"
-  resolved "https://registry.yarnpkg.com/admin-lte-css-only/-/admin-lte-css-only-3.0.5.tgz#e9b9a8a8eed169a86e764a068d7495a991f7bf2e"
-  integrity sha512-Z58k4Tli3lH4Jc8Agew9r6cf3s1aT4XoW7OKnSqHsBiD5twlh4jj8dAk29wvrRnwo42leFpVA6w/FPUQTMsZWw==
+admin-lte-css-only@^3.1.0:
+  version "3.1.0"
+  resolved "https://registry.yarnpkg.com/admin-lte-css-only/-/admin-lte-css-only-3.1.0.tgz#0f3aa486948726250bf75409c0a16e8b818ae1aa"
+  integrity sha512-aQ7V01lFs1VrWRsDhGmB3G9gXCmzEsAal18GS/sRPFqAM/oKnaDe4kdWXyB9BtxDoSIT9/U8VjQ4yxSs2faxQw==
 
 after@0.8.2:
   version "0.8.2"
@@ -8702,10 +8702,10 @@ svgo@^1.0.0:
     unquote "~1.1.1"
     util.promisify "~1.0.0"
 
-sweetalert2@^9.10.12:
-  version "9.14.0"
-  resolved "https://registry.yarnpkg.com/sweetalert2/-/sweetalert2-9.14.0.tgz#2ae59c417745ae9360e47d7745a39be3ecbee1a2"
-  integrity sha512-NXxaR5ZsT9JQ+pEH0lQPa6fzFr7Uqx2VNI3dcPBShwTngQkVLXzEJYB0XjWAx/oBLAIPyHlc/tc3bkojJ2HYzg==
+sweetalert2@^10.15.6:
+  version "10.16.9"
+  resolved "https://registry.yarnpkg.com/sweetalert2/-/sweetalert2-10.16.9.tgz#8ed86f2fa811a136667a48357e204348705be8c9"
+  integrity sha512-oNe+md5tmmS3fGfVHa7gVPlun7Td2oANSacnZCeghnrr3OHBi6UPVPU+GFrymwaDqwQspACilLRmRnM7aTjNPA==
 
 symbol-observable@2.0.3:
   version "2.0.3"
