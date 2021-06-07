@@ -116,9 +116,12 @@ namespace AbpCompanyName.AbpProjectName.Controllers
                             );
                         }
 
+                        var accessToken = CreateAccessToken(CreateJwtClaims(loginResult.Identity));
+                        
                         return new ExternalAuthenticateResultModel
                         {
-                            AccessToken = CreateAccessToken(CreateJwtClaims(loginResult.Identity)),
+                            AccessToken = accessToken,
+                            EncryptedAccessToken = GetEncryptedAccessToken(accessToken),
                             ExpireInSeconds = (int)_configuration.Expiration.TotalSeconds
                         };
                     }
@@ -227,7 +230,7 @@ namespace AbpCompanyName.AbpProjectName.Controllers
 
         private string GetEncryptedAccessToken(string accessToken)
         {
-            return SimpleStringCipher.Instance.Encrypt(accessToken, AppConsts.DefaultPassPhrase);
+            return SimpleStringCipher.Instance.Encrypt(accessToken, AbpProjectNameConsts.DefaultPassPhrase);
         }
     }
 }

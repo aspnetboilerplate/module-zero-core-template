@@ -71,7 +71,7 @@ namespace AbpCompanyName.AbpProjectName.Web.Host.Startup
             }
 
             // Set auth token from cookie
-            context.Token = SimpleStringCipher.Instance.Decrypt(qsAuthToken, AppConsts.DefaultPassPhrase);
+            context.Token = SimpleStringCipher.Instance.Decrypt(qsAuthToken, AbpProjectNameConsts.DefaultPassPhrase);
             return Task.CompletedTask;
         }
     }

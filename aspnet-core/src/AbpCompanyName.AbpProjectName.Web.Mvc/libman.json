@@ -61,7 +61,7 @@
 
     //admin-lte libs start
     {
-      "library": "admin-lte@3.0.2",
+      "library": "admin-lte@3.1.0",
       "provider": "jsdelivr",
       "destination": "wwwroot/libs/admin-lte",
       "files": [
@@ -69,25 +69,15 @@
         "dist/js/adminlte.js.map",
         "dist/js/adminlte.min.js",
         "dist/js/adminlte.min.js.map",
-        "dist/js/demo.js",
-        "dist/js/demo.min.js",
         "dist/css/adminlte.css",
         "dist/css/adminlte.css.map",
         "dist/css/adminlte.min.css",
         "dist/css/adminlte.min.css.map",
-        "dist/img/AdminLTELogo.png",
-        "dist/img/avatar.png",
-        "dist/img/avatar2.png",
-        "dist/img/avatar3.png",
-        "dist/img/avatar04.png",
-        "dist/img/avatar5.png",
-        "dist/img/boxed-bg.jpg",
-        "dist/img/boxed-bg.png",
-        "dist/img/icons.png"
+        "dist/img/avatar5.png"
       ]
     },
     {
-      "library": "bootstrap@4.3.1",
+      "library": "bootstrap@4.6.0",
       "provider": "jsdelivr",
       "destination": "wwwroot/libs/bootstrap",
       "files": [
@@ -98,7 +88,7 @@
       ]
     },
     {
-      "library": "@fortawesome/fontawesome-free@5.11.2",
+      "library": "@fortawesome/fontawesome-free@5.15.3",
       "provider": "jsdelivr",
       "destination": "wwwroot/libs/font-awesome"
     },
@@ -112,7 +102,7 @@
       ]
     },
     {
-      "library": "datatables.net@1.10.20",
+      "library": "datatables.net@1.10.24",
       "provider": "jsdelivr",
       "destination": "wwwroot/libs/datatables",
       "files": [
@@ -121,7 +111,7 @@
       ]
     },
     {
-      "library": "datatables.net-bs4@1.10.20",
+      "library": "datatables.net-bs4@1.10.24",
       "provider": "jsdelivr",
       "destination": "wwwroot/libs/datatables",
       "files": [
@@ -132,7 +122,7 @@
       ]
     },
     {
-      "library": "datatables.net-responsive@2.2.3",
+      "library": "datatables.net-responsive@2.2.7",
       "provider": "jsdelivr",
       "destination": "wwwroot/libs/datatables",
       "files": [
@@ -141,7 +131,7 @@
       ]
     },
     {
-      "library": "datatables.net-responsive-bs4@2.2.3",
+      "library": "datatables.net-responsive-bs4@2.2.7",
       "provider": "jsdelivr",
       "destination": "wwwroot/libs/datatables",
       "files": [
@@ -152,7 +142,7 @@
       ]
     },
     {
-      "library": "datatables.net-buttons@1.6.1",
+      "library": "datatables.net-buttons@1.7.0",
       "provider": "jsdelivr",
       "destination": "wwwroot/libs/datatables",
       "files": [
@@ -161,7 +151,7 @@
       ]
     },
     {
-      "library": "datatables.net-buttons-bs4@1.6.1",
+      "library": "datatables.net-buttons-bs4@1.7.0",
       "provider": "jsdelivr",
       "destination": "wwwroot/libs/datatables",
       "files": [
@@ -172,7 +162,7 @@
       ]
     },
     {
-      "library": "chart.js@2.9.3",
+      "library": "chart.js@2.9.4",
       "provider": "jsdelivr",
       "destination": "wwwroot/libs/chartjs",
       "files": [

@@ -1,13 +1,6 @@
 ﻿@using System.Globalization
 @inject AbpCompanyName.AbpProjectName.Timing.AppTimes AppTimes
 
-<script type="text/javascript">
-        // This is used to get the application's root path from javascript.
-        // It's useful if you're running application in a virtual directory under IIS.
-        var abp = abp || {};
-        abp.appPath = '@ApplicationPath';
-</script>
-
 <environment names="Development">
     @*core scripts start*@
     <script src="~/libs/jquery/jquery.js" asp-append-version="true"></script>
@@ -51,10 +44,23 @@
     <script src="~/js/abp.dataTable.js" asp-append-version="true"></script>
     <script src="~/js/main.js" asp-append-version="true"></script>
     @*custom scripts end*@
+    
+    <script type="text/javascript">
+        // This is used to get the application's root path from javascript.
+        // It's useful if you're running application in a virtual directory under IIS.
+        var abp = abp || {};
+        abp.appPath = '@ApplicationPath';
+    </script>
 </environment>
 
 <environment names="Staging,Production">
     <script src="~/view-resources/Views/_Bundles/shared-layout.min.js" asp-append-version="true"></script>
+    <script type="text/javascript">
+        // This is used to get the application's root path from javascript.
+        // It's useful if you're running application in a virtual directory under IIS.
+        var abp = abp || {};
+        abp.appPath = '@ApplicationPath';
+    </script>
 </environment>
 
 @if (CultureInfo.CurrentUICulture.Name != "en")
