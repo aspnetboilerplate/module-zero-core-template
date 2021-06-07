@@ -8,21 +8,11 @@
     var _$rolesTable = _$table.DataTable({
         paging: true,
         serverSide: true,
-        ajax: function (data, callback, settings) {
-            var filter = $('#RolesSearchForm').serializeFormToObject(true);
-            filter.maxResultCount = data.length;
-            filter.skipCount = data.start;
-
-            abp.ui.setBusy(_$table);
-            _roleService.getAll(filter).done(function (result) {
-                callback({
-                    recordsTotal: result.totalCount,
-                    recordsFiltered: result.totalCount,
-                    data: result.items
-                });
-            }).always(function () {
-                abp.ui.clearBusy(_$table);
-            });
+        listAction: {
+            ajaxFunction: _roleService.getAll,
+            inputFilter: function () {
+                return $('#RolesSearchForm').serializeFormToObject(true);
+            }
         },
         buttons: [
             {
@@ -121,7 +111,8 @@
             success: function (content) {
                 $('#RoleEditModal div.modal-content').html(content);
             },
-            error: function (e) { }
+            error: function (e) {
+            }
         })
     });
 

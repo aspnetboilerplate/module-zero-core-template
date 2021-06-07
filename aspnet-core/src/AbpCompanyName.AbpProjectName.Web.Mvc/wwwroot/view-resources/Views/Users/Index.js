@@ -8,21 +8,11 @@
     var _$usersTable = _$table.DataTable({
         paging: true,
         serverSide: true,
-        ajax: function (data, callback, settings) {
-            var filter = $('#UsersSearchForm').serializeFormToObject(true);
-            filter.maxResultCount = data.length;
-            filter.skipCount = data.start;
-
-            abp.ui.setBusy(_$table);
-            _userService.getAll(filter).done(function (result) {
-                callback({
-                    recordsTotal: result.totalCount,
-                    recordsFiltered: result.totalCount,
-                    data: result.items
-                });
-            }).always(function () {
-                abp.ui.clearBusy(_$table);
-            });
+        listAction: {
+            ajaxFunction: _userService.getAll,
+            inputFilter: function () {
+                return $('#UsersSearchForm').serializeFormToObject(true);
+            }
         },
         buttons: [
             {
@@ -157,7 +147,8 @@
             success: function (content) {
                 $('#UserEditModal div.modal-content').html(content);
             },
-            error: function (e) { }
+            error: function (e) {
+            }
         });
     });
 

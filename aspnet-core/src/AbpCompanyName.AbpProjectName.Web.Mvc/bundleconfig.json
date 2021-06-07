@@ -134,5 +134,17 @@
     "inputFiles": [
       "wwwroot/view-resources/Views/Shared/Components/TenantChange/_ChangeModal.js"
     ]
+  },
+  {
+    "outputFileName": "wwwroot/view-resources/Views/_Bundles/datatables.ajax.min.js",
+    "inputFiles": [
+      "wwwroot/Common/datatables.ajax.js"
+    ]
+  },
+  {
+    "outputFileName": "wwwroot/view-resources/Views/_Bundles/helpers.min.js",
+    "inputFiles": [
+      "wwwroot/Common/helpers.js"
+    ]
   }
 ]

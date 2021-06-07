@@ -8,21 +8,11 @@
     var _$tenantsTable = _$table.DataTable({
         paging: true,
         serverSide: true,
-        ajax: function (data, callback, settings) {
-            var filter = $('#TenantsSearchForm').serializeFormToObject(true);
-            filter.maxResultCount = data.length;
-            filter.skipCount = data.start;
-
-            abp.ui.setBusy(_$table);
-            _tenantService.getAll(filter).done(function (result) {
-                callback({
-                    recordsTotal: result.totalCount,
-                    recordsFiltered: result.totalCount,
-                    data: result.items
-                });
-            }).always(function () {
-                abp.ui.clearBusy(_$table);
-            });
+        listAction: {
+            ajaxFunction: _tenantService.getAll,
+            inputFilter: function () {
+                return $('#TenantsSearchForm').serializeFormToObject(true);
+            }
         },
         buttons: [
             {
@@ -119,7 +109,8 @@
             success: function (content) {
                 $('#TenantEditModal div.modal-content').html(content);
             },
-            error: function (e) { }
+            error: function (e) {
+            }
         });
     });
 
