@@ -6,6 +6,7 @@ using AbpCompanyName.AbpProjectName.Authorization.Roles;
 using AbpCompanyName.AbpProjectName.Authorization.Users;
 using AbpCompanyName.AbpProjectName.MultiTenancy;
 using Microsoft.Extensions.Logging;
+using Abp.Domain.Uow;
 
 namespace AbpCompanyName.AbpProjectName.Identity
 {
@@ -15,8 +16,9 @@ namespace AbpCompanyName.AbpProjectName.Identity
             IOptions<SecurityStampValidatorOptions> options,
             SignInManager signInManager,
             ISystemClock systemClock,
-            ILoggerFactory loggerFactory) 
-            : base(options, signInManager, systemClock, loggerFactory)
+            ILoggerFactory loggerFactory,
+            IUnitOfWorkManager unitOfWorkManager)
+            : base(options, signInManager, systemClock, loggerFactory, unitOfWorkManager)
         {
         }
     }
