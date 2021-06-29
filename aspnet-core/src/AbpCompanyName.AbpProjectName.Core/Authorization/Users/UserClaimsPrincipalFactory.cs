@@ -2,6 +2,7 @@
 using Microsoft.Extensions.Options;
 using Abp.Authorization;
 using AbpCompanyName.AbpProjectName.Authorization.Roles;
+using Abp.Domain.Uow;
 
 namespace AbpCompanyName.AbpProjectName.Authorization.Users
 {
@@ -10,11 +11,13 @@ namespace AbpCompanyName.AbpProjectName.Authorization.Users
         public UserClaimsPrincipalFactory(
             UserManager userManager,
             RoleManager roleManager,
-            IOptions<IdentityOptions> optionsAccessor)
+            IOptions<IdentityOptions> optionsAccessor,
+            IUnitOfWorkManager unitOfWorkManager)
             : base(
                   userManager,
                   roleManager,
-                  optionsAccessor)
+                  optionsAccessor,
+                  unitOfWorkManager)
         {
         }
     }
