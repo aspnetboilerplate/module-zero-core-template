@@ -5,7 +5,6 @@ import {
   EventEmitter,
   Output
 } from '@angular/core';
-import { finalize } from 'rxjs/operators';
 import { BsModalRef } from 'ngx-bootstrap/modal';
 import { forEach as _forEach, map as _map } from 'lodash-es';
 import { AppComponentBase } from '@shared/app-component-base';
@@ -92,17 +91,15 @@ export class CreateUserDialogComponent extends AppComponentBase
 
     this.user.roleNames = this.getCheckedRoles();
 
-    this._userService
-      .create(this.user)
-      .pipe(
-        finalize(() => {
-          this.saving = false;
-        })
-      )
-      .subscribe(() => {
+    this._userService.create(this.user).subscribe(
+      () => {
         this.notify.info(this.l('SavedSuccessfully'));
         this.bsModalRef.hide();
         this.onSave.emit();
-      });
+      },
+      () => {
+        this.saving = false;
+      }
+    );
   }
 }

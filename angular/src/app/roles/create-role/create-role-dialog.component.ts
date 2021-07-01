@@ -5,7 +5,6 @@ import {
   EventEmitter,
   Output,
 } from '@angular/core';
-import { finalize } from 'rxjs/operators';
 import { BsModalRef } from 'ngx-bootstrap/modal';
 import { AppComponentBase } from '@shared/app-component-base';
 import {
@@ -84,15 +83,15 @@ export class CreateRoleDialogComponent extends AppComponentBase
 
     this._roleService
       .create(role)
-      .pipe(
-        finalize(() => {
+      .subscribe(
+        () => {
+          this.notify.info(this.l('SavedSuccessfully'));
+          this.bsModalRef.hide();
+          this.onSave.emit();
+        },
+        () => {
           this.saving = false;
-        })
-      )
-      .subscribe(() => {
-        this.notify.info(this.l('SavedSuccessfully'));
-        this.bsModalRef.hide();
-        this.onSave.emit();
-      });
+        }
+      );
   }
 }

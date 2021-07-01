@@ -1,6 +1,5 @@
 import { Component, OnInit, Injector } from '@angular/core';
 import { AppComponentBase } from '@shared/app-component-base';
-import { finalize } from 'rxjs/operators';
 import {
   UserServiceProxy,
   ResetPasswordDto
@@ -37,16 +36,14 @@ export class ResetPasswordDialogComponent extends AppComponentBase
 
   public resetPassword(): void {
     this.isLoading = true;
-    this._userService
-      .resetPassword(this.resetPasswordDto)
-      .pipe(
-        finalize(() => {
-          this.isLoading = false;
-        })
-      )
-      .subscribe(() => {
+    this._userService.resetPassword(this.resetPasswordDto).subscribe(
+      () => {
         this.notify.info('Password Reset');
         this.bsModalRef.hide();
-      });
+      },
+      () => {
+        this.isLoading = false;
+      }
+    );
   }
 }
