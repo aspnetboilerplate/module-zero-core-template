@@ -18,7 +18,7 @@
   </ItemGroup>
 
   <ItemGroup>
-    <PackageReference Include="Abp.Castle.Log4Net" Version="6.4.0-rc1" />
+    <PackageReference Include="Abp.Castle.Log4Net" Version="6.4.0" />
   </ItemGroup>
 
   <ItemGroup>
