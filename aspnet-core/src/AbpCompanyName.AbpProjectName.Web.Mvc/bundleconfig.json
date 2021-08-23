@@ -77,7 +77,9 @@
       "wwwroot/libs/datatables/js/dataTables.buttons.js",
       "wwwroot/libs/datatables/js/buttons.bootstrap4.js",
       "wwwroot/js/main.js",
-      "wwwroot/view-resources/Views/Shared/_Layout.js"
+      "wwwroot/view-resources/Views/Shared/_Layout.js",
+      "wwwroot/libs/signalr/dist/browser/signalr.js",
+      "wwwroot/libs/abp-web-resources/Abp/Framework/scripts/libs/abp.signalr-client.js"
     ]
   },
   {
