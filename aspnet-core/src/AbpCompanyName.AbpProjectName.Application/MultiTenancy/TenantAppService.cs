@@ -51,7 +51,7 @@ namespace AbpCompanyName.AbpProjectName.MultiTenancy
             var tenant = ObjectMapper.Map<Tenant>(input);
             tenant.ConnectionString = input.ConnectionString.IsNullOrEmpty()
                 ? null
-                : SimpleStringCipher.Instance.Encrypt(input.ConnectionString);
+                : SimpleStringCipher.Instance.Encrypt(input.ConnectionString, AbpProjectNameConsts.DefaultPassPhrase);
 
             var defaultEdition = await _editionManager.FindByNameAsync(EditionManager.DefaultEditionName);
             if (defaultEdition != null)
