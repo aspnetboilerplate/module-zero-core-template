@@ -22,7 +22,7 @@ sudo echo ""
 cd ..
 cd angular/
 sudo echo " Building docker image $ABP_NG..."
-sudo docker build -t $ABP_NG .
+sudo docker build -t $ABP_NG -f Dockerfile-updated .
 sudo echo " Done. -- Building docker image $ABP_NG..."
 sudo echo ""
 sudo echo ""
