@@ -230,7 +230,7 @@ namespace AbpCompanyName.AbpProjectName.Controllers
 
         private string GetEncryptedAccessToken(string accessToken)
         {
-            return SimpleStringCipher.Instance.Encrypt(accessToken, AbpProjectNameConsts.DefaultPassPhrase);
+            return SimpleStringCipher.Instance.Encrypt(accessToken);
         }
     }
 }
