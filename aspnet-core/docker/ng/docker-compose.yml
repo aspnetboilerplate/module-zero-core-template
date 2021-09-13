@@ -10,7 +10,7 @@ services:
       App__CorsOrigins: "http://localhost:4200"
       TZ: "America/Toronto"
     ports:
-      - "9902:44311"
+      - "9902:80"
     volumes:
       - "./Host-Logs:/app/App_Data/Logs"
     restart: always
