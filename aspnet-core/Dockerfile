@@ -19,7 +19,7 @@ WORKDIR "/src/src/AbpCompanyName.AbpProjectName.Web.Host"
 RUN dotnet publish -c Release -o /publish --no-restore
 
 FROM mcr.microsoft.com/dotnet/aspnet:5.0
-EXPOSE 44311
+EXPOSE 80
 WORKDIR /app
 COPY --from=build /publish .
 ENTRYPOINT ["dotnet", "AbpCompanyName.AbpProjectName.Web.Host.dll"]
