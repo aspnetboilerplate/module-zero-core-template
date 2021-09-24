@@ -35,16 +35,16 @@
   </ItemGroup>
 
   <ItemGroup>
-    <PackageReference Include="BuildBundlerMinifier" Version="3.2.447" />
-    <PackageReference Include="Microsoft.AspNetCore.Mvc.Razor.RuntimeCompilation" Version="5.0.8" />
-    <PackageReference Include="Microsoft.EntityFrameworkCore.Design" Version="5.0.0">
+    <PackageReference Include="BuildBundlerMinifier" Version="3.2.449" />
+    <PackageReference Include="Microsoft.AspNetCore.Mvc.Razor.RuntimeCompilation" Version="5.0.10" />
+    <PackageReference Include="Microsoft.EntityFrameworkCore.Design" Version="5.0.10">
       <PrivateAssets>all</PrivateAssets>
       <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
     </PackageReference>
     <PackageReference Include="PaulMiami.AspNetCore.Mvc.Recaptcha" Version="1.2.2" />
-    <PackageReference Include="Abp.HangFire" Version="6.4.0" />
-    <PackageReference Include="Abp.RedisCache" Version="6.4.0" />
-    <PackageReference Include="Abp.Castle.Log4Net" Version="6.4.0" />
+    <PackageReference Include="Abp.HangFire" Version="6.5.0" />
+    <PackageReference Include="Abp.RedisCache" Version="6.5.0" />
+    <PackageReference Include="Abp.Castle.Log4Net" Version="6.5.0" />
   </ItemGroup>
 
   <ItemGroup>
