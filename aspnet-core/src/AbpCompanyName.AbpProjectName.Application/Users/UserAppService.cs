@@ -21,7 +21,6 @@ using AbpCompanyName.AbpProjectName.Authorization.Users;
 using AbpCompanyName.AbpProjectName.Roles.Dto;
 using AbpCompanyName.AbpProjectName.Users.Dto;
 using Microsoft.AspNetCore.Identity;
-using Microsoft.EntityFrameworkCore;
 
 namespace AbpCompanyName.AbpProjectName.Users
 {
@@ -167,7 +166,7 @@ namespace AbpCompanyName.AbpProjectName.Users
 
         protected override async Task<User> GetEntityByIdAsync(long id)
         {
-            var user = await Repository.GetAllIncluding(x => x.Roles).FirstOrDefaultAsync(x => x.Id == id);
+            var user = await AsyncQueryableExecuter.FirstOrDefaultAsync(Repository.GetAllIncluding(x => x.Roles).Where(x => x.Id == id));
 
             if (user == null)
             {

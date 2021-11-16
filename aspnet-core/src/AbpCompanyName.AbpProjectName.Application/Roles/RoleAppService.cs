@@ -13,7 +13,6 @@ using AbpCompanyName.AbpProjectName.Authorization.Roles;
 using AbpCompanyName.AbpProjectName.Authorization.Users;
 using AbpCompanyName.AbpProjectName.Roles.Dto;
 using Microsoft.AspNetCore.Identity;
-using Microsoft.EntityFrameworkCore;
 
 namespace AbpCompanyName.AbpProjectName.Roles
 {
@@ -51,13 +50,12 @@ namespace AbpCompanyName.AbpProjectName.Roles
 
         public async Task<ListResultDto<RoleListDto>> GetRolesAsync(GetRolesInput input)
         {
-            var roles = await _roleManager
-                .Roles
+            var roles = await AsyncQueryableExecuter.ToListAsync(
+                _roleManager.Roles
                 .WhereIf(
                     !input.Permission.IsNullOrWhiteSpace(),
                     r => r.Permissions.Any(rp => rp.Name == input.Permission && rp.IsGranted)
-                )
-                .ToListAsync();
+                ));
 
             return new ListResultDto<RoleListDto>(ObjectMapper.Map<List<RoleListDto>>(roles));
         }
@@ -116,7 +114,7 @@ namespace AbpCompanyName.AbpProjectName.Roles
 
         protected override async Task<Role> GetEntityByIdAsync(int id)
         {
-            return await Repository.GetAllIncluding(x => x.Permissions).FirstOrDefaultAsync(x => x.Id == id);
+            return await AsyncQueryableExecuter.FirstOrDefaultAsync(Repository.GetAllIncluding(x => x.Permissions).Where(x => x.Id == id));
         }
 
         protected override IQueryable<Role> ApplySorting(IQueryable<Role> query, PagedRoleResultRequestDto input)

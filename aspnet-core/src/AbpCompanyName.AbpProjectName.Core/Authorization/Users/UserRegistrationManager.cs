@@ -3,10 +3,10 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Identity;
-using Microsoft.EntityFrameworkCore;
 using Abp.Authorization.Users;
 using Abp.Domain.Services;
 using Abp.IdentityFramework;
+using Abp.Linq;
 using Abp.Runtime.Session;
 using Abp.UI;
 using AbpCompanyName.AbpProjectName.Authorization.Roles;
@@ -17,6 +17,7 @@ namespace AbpCompanyName.AbpProjectName.Authorization.Users
     public class UserRegistrationManager : DomainService
     {
         public IAbpSession AbpSession { get; set; }
+        public IAsyncQueryableExecuter AsyncQueryableExecuter { get; set; }
 
         private readonly TenantManager _tenantManager;
         private readonly UserManager _userManager;
@@ -35,6 +36,7 @@ namespace AbpCompanyName.AbpProjectName.Authorization.Users
             _passwordHasher = passwordHasher;
 
             AbpSession = NullAbpSession.Instance;
+            AsyncQueryableExecuter = NullAsyncQueryableExecuter.Instance;
         }
 
         public async Task<User> RegisterAsync(string name, string surname, string emailAddress, string userName, string plainPassword, bool isEmailConfirmed)
@@ -56,8 +58,9 @@ namespace AbpCompanyName.AbpProjectName.Authorization.Users
             };
 
             user.SetNormalizedNames();
-           
-            foreach (var defaultRole in await _roleManager.Roles.Where(r => r.IsDefault).ToListAsync())
+
+            var defaultRoles = await AsyncQueryableExecuter.ToListAsync(_roleManager.Roles.Where(r => r.IsDefault));
+            foreach (var defaultRole in defaultRoles)
             {
                 user.Roles.Add(new UserRole(tenant.Id, user.Id, defaultRole.Id));
             }
