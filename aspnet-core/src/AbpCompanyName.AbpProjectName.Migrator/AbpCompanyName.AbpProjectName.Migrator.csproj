@@ -1,7 +1,7 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk">
 
   <PropertyGroup>
-    <TargetFramework>net5.0</TargetFramework>
+    <TargetFramework>net6.0</TargetFramework>
     <AssetTargetFallback>$(AssetTargetFallback);portable-net45+win8+wp8+wpa81;</AssetTargetFallback>
     <AssemblyName>AbpCompanyName.AbpProjectName.Migrator</AssemblyName>
     <OutputType>Exe</OutputType>
@@ -18,7 +18,7 @@
   </ItemGroup>
 
   <ItemGroup>
-    <PackageReference Include="Abp.Castle.Log4Net" Version="6.5.0" />
+    <PackageReference Include="Abp.Castle.Log4Net" Version="7.0.0" />
   </ItemGroup>
 
   <ItemGroup>

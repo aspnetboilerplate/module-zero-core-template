@@ -2,7 +2,7 @@
 
   <PropertyGroup>
     <VersionPrefix>1.0.0.0</VersionPrefix>
-    <TargetFrameworks>net5.0</TargetFrameworks>
+    <TargetFrameworks>net6.0</TargetFrameworks>
     <AssetTargetFallback>$(AssetTargetFallback);portable-net45+win8+wp8+wpa81;</AssetTargetFallback>
     <AssemblyName>AbpCompanyName.AbpProjectName.Web.Core</AssemblyName>
     <PackageId>AbpCompanyName.AbpProjectName.Web.Core</PackageId>
@@ -26,11 +26,11 @@
   </ItemGroup>
 
   <ItemGroup>
-    <PackageReference Include="Microsoft.AspNetCore.Authentication.JwtBearer" Version="5.0.10" />
-    <PackageReference Include="Swashbuckle.AspNetCore" Version="6.2.2" />
-    <PackageReference Include="Abp.AspNetCore" Version="6.5.0" />
-    <PackageReference Include="Abp.ZeroCore" Version="6.5.0" />
-    <PackageReference Include="Abp.AspNetCore.SignalR" Version="6.5.0" />
+    <PackageReference Include="Microsoft.AspNetCore.Authentication.JwtBearer" Version="6.0.0" />
+    <PackageReference Include="Swashbuckle.AspNetCore" Version="6.2.3" />
+    <PackageReference Include="Abp.AspNetCore" Version="7.0.0" />
+    <PackageReference Include="Abp.ZeroCore" Version="7.0.0" />
+    <PackageReference Include="Abp.AspNetCore.SignalR" Version="7.0.0" />
   </ItemGroup>
 
 </Project>
