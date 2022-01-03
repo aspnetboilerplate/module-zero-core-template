@@ -33,7 +33,7 @@ namespace AbpCompanyName.AbpProjectName.Web.Startup
             _appConfiguration = env.GetAppConfiguration();
         }
 
-        public IServiceProvider ConfigureServices(IServiceCollection services)
+        public void ConfigureServices(IServiceCollection services)
         {
             // MVC
             services.AddControllersWithViews(
@@ -60,7 +60,7 @@ namespace AbpCompanyName.AbpProjectName.Web.Startup
             services.AddSignalR();
 
             // Configure Abp and Dependency Injection
-            return services.AddAbp<AbpProjectNameWebMvcModule>(
+            services.AddAbpWithoutCreatingServiceProvider<AbpProjectNameWebMvcModule>(
                 // Configure Log4Net logging
                 options => options.IocManager.IocContainer.AddFacility<LoggingFacility>(
                     f => f.UseAbpLog4Net().WithConfig(

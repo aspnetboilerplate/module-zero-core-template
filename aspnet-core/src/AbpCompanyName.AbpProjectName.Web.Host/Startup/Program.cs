@@ -1,7 +1,7 @@
-﻿using Microsoft.AspNetCore;
+﻿using Abp.AspNetCore.Dependency;
+using Abp.Dependency;
 using Microsoft.AspNetCore.Hosting;
-using Microsoft.Extensions.Configuration;
-using System.IO;
+using Microsoft.Extensions.Hosting;
 
 namespace AbpCompanyName.AbpProjectName.Web.Host.Startup
 {
@@ -9,14 +9,15 @@ namespace AbpCompanyName.AbpProjectName.Web.Host.Startup
     {
         public static void Main(string[] args)
         {
-            BuildWebHost(args).Run();
+            CreateHostBuilder(args).Build().Run();
         }
 
-        public static IWebHost BuildWebHost(string[] args)
-        {
-            return WebHost.CreateDefaultBuilder(args)
-                .UseStartup<Startup>()
-                .Build();
-        }
+        internal static IHostBuilder CreateHostBuilder(string[] args) =>
+            Microsoft.Extensions.Hosting.Host.CreateDefaultBuilder(args)
+                .ConfigureWebHostDefaults(webBuilder =>
+                {
+                    webBuilder.UseStartup<Startup>();
+                })
+                .UseCastleWindsor(IocManager.Instance.IocContainer);
     }
 }
