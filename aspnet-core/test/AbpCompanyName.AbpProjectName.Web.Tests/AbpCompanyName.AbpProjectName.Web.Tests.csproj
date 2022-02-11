@@ -28,7 +28,7 @@
         <IncludeAssets>runtime; build; native; contentfiles; analyzers</IncludeAssets>
       </PackageReference>
       <PackageReference Include="AngleSharp" Version="0.16.1" />
-      <PackageReference Include="Abp.AspNetCore.TestBase" Version="7.0.0" />
+      <PackageReference Include="Abp.AspNetCore.TestBase" Version="7.1.0" />
     </ItemGroup>
 
 </Project>
