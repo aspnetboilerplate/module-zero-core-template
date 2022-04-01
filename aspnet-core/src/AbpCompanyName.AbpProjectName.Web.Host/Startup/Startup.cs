@@ -38,7 +38,7 @@ namespace AbpCompanyName.AbpProjectName.Web.Host.Startup
             _appConfiguration = env.GetAppConfiguration();
         }
 
-        public IServiceProvider ConfigureServices(IServiceCollection services)
+        public void ConfigureServices(IServiceCollection services)
         {
             //MVC
             services.AddControllersWithViews(
@@ -78,7 +78,7 @@ namespace AbpCompanyName.AbpProjectName.Web.Host.Startup
             ConfigureSwagger(services);
 
             // Configure Abp and Dependency Injection
-            return services.AddAbp<AbpProjectNameWebHostModule>(
+            services.AddAbpWithoutCreatingServiceProvider<AbpProjectNameWebHostModule>(
                 // Configure Log4Net logging
                 options => options.IocManager.IocContainer.AddFacility<LoggingFacility>(
                     f => f.UseAbpLog4Net().WithConfig(_hostingEnvironment.IsDevelopment()
@@ -89,7 +89,7 @@ namespace AbpCompanyName.AbpProjectName.Web.Host.Startup
             );
         }
 
-        public void Configure(IApplicationBuilder app, ILoggerFactory loggerFactory)
+        public void Configure(IApplicationBuilder app, IWebHostEnvironment env, ILoggerFactory loggerFactory)
         {
             app.UseAbp(options => { options.UseAbpRequestLocalization = false; }); // Initializes ABP framework.
 

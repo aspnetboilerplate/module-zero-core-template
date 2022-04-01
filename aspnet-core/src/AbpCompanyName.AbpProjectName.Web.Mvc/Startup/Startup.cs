@@ -1,4 +1,6 @@
 ﻿using System;
+using System.Text.Encodings.Web;
+using System.Text.Unicode;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Mvc;
@@ -17,6 +19,7 @@ using Abp.AspNetCore.SignalR.Hubs;
 using Abp.Dependency;
 using Abp.Json;
 using Microsoft.Extensions.Hosting;
+using Microsoft.Extensions.WebEncoders;
 using Newtonsoft.Json.Serialization;
 
 
@@ -33,7 +36,7 @@ namespace AbpCompanyName.AbpProjectName.Web.Startup
             _appConfiguration = env.GetAppConfiguration();
         }
 
-        public IServiceProvider ConfigureServices(IServiceCollection services)
+        public void ConfigureServices(IServiceCollection services)
         {
             // MVC
             services.AddControllersWithViews(
@@ -55,12 +58,17 @@ namespace AbpCompanyName.AbpProjectName.Web.Startup
             IdentityRegistrar.Register(services);
             AuthConfigurer.Configure(services, _appConfiguration);
 
+            services.Configure<WebEncoderOptions>(options =>
+            {
+                options.TextEncoderSettings = new TextEncoderSettings(UnicodeRanges.All);
+            });
+            
             services.AddScoped<IWebResourceManager, WebResourceManager>();
 
             services.AddSignalR();
 
             // Configure Abp and Dependency Injection
-            return services.AddAbp<AbpProjectNameWebMvcModule>(
+            services.AddAbpWithoutCreatingServiceProvider<AbpProjectNameWebMvcModule>(
                 // Configure Log4Net logging
                 options => options.IocManager.IocContainer.AddFacility<LoggingFacility>(
                     f => f.UseAbpLog4Net().WithConfig(

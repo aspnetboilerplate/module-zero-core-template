@@ -250,3 +250,7 @@ paket-files/
 # JetBrains Rider
 .idea/
 *.sln.iml
+
+src/AbpCompanyName.AbpProjectName.Web.Mvc/secrets.json
+src/AbpCompanyName.AbpProjectName.Web.Host/secrets.json
+src/AbpCompanyName.AbpProjectName.Migrator/secrets.json
