@@ -28,7 +28,7 @@
   </ItemGroup>
 
   <ItemGroup>
-    <PackageReference Include="Abp.ZeroCore.EntityFrameworkCore" Version="6.5.0" />
+    <PackageReference Include="Abp.ZeroCore.EntityFrameworkCore" Version="7.1.0" />
   </ItemGroup>
    
   <ItemGroup>
