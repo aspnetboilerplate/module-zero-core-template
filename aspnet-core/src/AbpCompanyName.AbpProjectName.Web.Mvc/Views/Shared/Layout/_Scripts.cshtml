@@ -1,5 +1,9 @@
 ﻿@using System.Globalization
+@using Abp.AspNetCore.Mvc.Caching
+@using Abp.CachedUniqueKeys
 @inject AbpCompanyName.AbpProjectName.Timing.AppTimes AppTimes
+@inject ICachedUniqueKeyPerUser CachedUniqueKeyPerUser
+@inject IGetScriptsResponsePerUserConfiguration GetScriptsResponsePerUserConfiguration
 
 <environment names="Development">
     @*core scripts start*@
@@ -92,4 +96,12 @@
 
 <!-- Dynamic scripts of ABP system (They are created on runtime and can not be bundled) -->
 <script src="~/AbpServiceProxies/GetAll?v=@(AppTimes.StartupTime.Ticks)" type="text/javascript"></script>
-<script src="~/AbpScripts/GetScripts?v=@(AppTimes.StartupTime.Ticks)" type="text/javascript"></script>
+
+@if (GetScriptsResponsePerUserConfiguration.IsEnabled)
+{
+    <script src="@(ApplicationPath)AbpScripts/GetScripts?v=@(await CachedUniqueKeyPerUser.GetKeyAsync(GetScriptsResponsePerUserCache.CacheName))" type="text/javascript"></script>
+}
+else
+{
+    <script src="@(ApplicationPath)AbpScripts/GetScripts?v=@(AppTimes.StartupTime.Ticks)" type="text/javascript"></script>
+}
