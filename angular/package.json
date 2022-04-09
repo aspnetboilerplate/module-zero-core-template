@@ -29,7 +29,7 @@
     "core-js": "^3.2.1",
     "famfamfam-flags": "^1.0.0",
     "lodash-es": "^4.17.15",
-    "moment": "2.24.0",
+    "moment": "2.29.2",
     "moment-timezone": "0.5.33",
     "ngx-bootstrap": "^5.6.1",
     "ngx-pagination": "^5.0.0",
