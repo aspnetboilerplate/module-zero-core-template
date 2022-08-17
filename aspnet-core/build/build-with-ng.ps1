@@ -5,6 +5,7 @@ $slnFolder = Join-Path $buildFolder "../"
 $outputFolder = Join-Path $buildFolder "outputs"
 $webHostFolder = Join-Path $slnFolder "src/AbpCompanyName.AbpProjectName.Web.Host"
 $ngFolder = Join-Path $buildFolder "../../angular"
+$distFolder = Join-Path $slnFolder "src/desertfireCloud.Web.Host/wwwroot"
 
 ## CLEAR ######################################################################
 
@@ -26,7 +27,7 @@ dotnet publish --output (Join-Path $outputFolder "Host")
 Set-Location $ngFolder
 & yarn
 & ng build --prod
-Copy-Item (Join-Path $ngFolder "dist") (Join-Path $outputFolder "ng") -Recurse
+Copy-Item (Join-Path $distFolder "dist") (Join-Path $outputFolder "ng") -Recurse
 Copy-Item (Join-Path $ngFolder "Dockerfile") (Join-Path $outputFolder "ng")
 
 # Change UI configuration
