@@ -85,7 +85,7 @@
     <text name="TenantIdIsNotActive{0}">Savininkas su Id {0} yra neaktyvus</text>
     <text name="UnknownTenantId{0}">Nežinomas savininko Id {0}</text>
 	
-	<text name="ThisFieldIsRequired">Šis laukas yra privalomas</text>
+    <text name="ThisFieldIsRequired">Šis laukas yra privalomas</text>
     <text name="PleaseWait">Prašome palaukti...</text>
     <text name="Administration">Administration</text>
     <text name="ClearAll">Išvalyti visus</text>
@@ -104,6 +104,28 @@
     <text name="AreYouSureWantToDelete">Ar tikrai norite pašalinti {0}?</text>
     <text name="StartTyping">Pradėkite rašyti</text>
     <text name="Skins">Apvalkalai</text>
-	<text name="Settings">Nustatymai</text>
+    <text name="Settings">Nustatymai</text>
+    <text name="Filter">Filtruoti</text>
+    <text name="CurrentPassword">Dabartinis slaptažodis</text>
+    <text name="NewPassword">Naujas slaptažodis</text>
+    <text name="ConfirmNewPassword">Pakartoti naują slaptažodį</text>
+    <text name="PasswordsDoNotMatch">Slaptažodžiai nesutampa</text>
+    <text name="PasswordsMustBeAtLeast8CharactersContainLowercaseUppercaseNumber">Slaptažodžiai turi būti bent 8 simbolių, turėti mažųjų, didžiųjų raidžių ir skaičių</text>
+    <text name="UserDeleteWarningMessage">Vartotojas {0} bus pašalintas.</text>
+    <text name="RoleDeleteWarningMessage">Rolė {0} bus pašalinta ir atskirta nuo visų priskirtų vartotojų.</text>
+    <text name="TenantDeleteWarningMessage">Savininkas {0} bus pašalintas.</text>
+    <text name="SearchWithThreeDot">Ieškoti...</text>
+    <text name="PleaseEnterAtLeastNCharacter">Įveskite bent {0} simbolius</text>
+    <text name="PleaseEnterNoMoreThanNCharacter">Įveskite ne daugiau nei {0} simbolius</text>
+    <text name="InvalidEmailAddress">Nevalidus el. pašto adresas</text>
+    <text name="InvalidPattern">Nevalidus</text>
+    <text name="PairsDoNotMatch">Nesutampa</text>
+    <text name="All">Visi</text>
+    <text name="TotalRecordsCount">Iš viso: {0}</text>
+    <text name="Search">Ieškoti</text>
+    <text name="Clear">Išvalyti</text>
+    <text name="ResetPasswordStepOneInfo">1. Įveskite savo administratoriaus slaptažodį</text>
+    <text name="ResetPasswordStepTwoInfo">2. Nusikopijuokite šį atsitiktinį slaptažodį, kad persiųstumėte vartotojui</text>
+    <text name="UsersActivation">Vartotojų aktyvacija</text>
   </texts>
 </localizationDictionary>
