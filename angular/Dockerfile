@@ -2,8 +2,8 @@
 FROM node:14 as node
 WORKDIR /app
 COPY . .
-# This is a workaround to avoid updating the file appconfig.production.json. 
-# If you prefer updating appconfig.production.json yourself delete this line.
+# This is a workaround to avoid updating appconfig.production.json file. 
+# If you prefer to updating appconfig.production.json file instead of appconfig.container.json please delete this line.
 RUN mv ./src/assets/appconfig.container.json ./src/assets/appconfig.production.json
 RUN yarn install
 RUN yarn run ng build --configuration production
