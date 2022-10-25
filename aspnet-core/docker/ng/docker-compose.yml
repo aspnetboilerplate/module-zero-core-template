@@ -7,10 +7,13 @@ services:
     environment:
       ASPNETCORE_ENVIRONMENT: "Staging"
       ConnectionStrings__Default: "Server=10.0.75.1; Database=AbpProjectNameDb; User=AbpProjectNameUser; Password=YourStrongPassword;"
+      App__ServerRootAddress: "http://localhost:44311/"
+      App__ClientRootAddress: "http://localhost:4200/"
       App__CorsOrigins: "http://localhost:4200"
       TZ: "America/Toronto"
+      Kestrel__Endpoints__Http__Url: "http://+:80"
     ports:
-      - "9902:80"
+      - "44311:80"
     volumes:
       - "./Host-Logs:/app/App_Data/Logs"
     restart: always
@@ -19,4 +22,3 @@ services:
     image: abp/ng
     ports:
       - "4200:80"
-
