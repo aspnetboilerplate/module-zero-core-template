@@ -1,34 +1,34 @@
 #!/bin/bash
-sudo echo " Welcome to docker build"
-sudo echo ""
-sudo echo ""
+echo " Welcome to docker build"
+echo ""
+echo ""
 
 ABP_HOST="abp/host"
 ABP_NG="abp/ng"
 
 cd ..
-sudo echo " Building docker image $ABP_HOST..."
-sudo docker build -t $ABP_HOST .
-sudo echo " Done. -- Building docker image $ABP_HOST..."
-sudo echo ""
-sudo echo ""
+echo " Building docker image $ABP_HOST..."
+docker build -t $ABP_HOST .
+echo " Done. -- Building docker image $ABP_HOST..."
+echo ""
+echo ""
 
-# sudo echo " Pushing docker image $ABP_HOST..."
-# sudo docker push $ABP_HOST
-# sudo echo " Done. -- Pushing docker image $ABP_HOST..."
-# sudo echo ""
-# sudo echo ""
+# echo " Pushing docker image $ABP_HOST..."
+# docker push $ABP_HOST
+# echo " Done. -- Pushing docker image $ABP_HOST..."
+# echo ""
+# echo ""
 
 cd ..
 cd angular/
-sudo echo " Building docker image $ABP_NG..."
-sudo docker build -t $ABP_NG -f Dockerfile .
-sudo echo " Done. -- Building docker image $ABP_NG..."
-sudo echo ""
-sudo echo ""
+echo " Building docker image $ABP_NG..."
+docker build -t $ABP_NG -f Dockerfile .
+echo " Done. -- Building docker image $ABP_NG..."
+echo ""
+echo ""
 
-# sudo echo " Pushing docker image $ABP_NG..."
-# sudo docker push $ABP_NG
-# sudo echo " Done. -- Pushing docker image $ABP_NG..."
-# sudo echo ""
-# sudo echo ""
+# echo " Pushing docker image $ABP_NG..."
+# docker push $ABP_NG
+# echo " Done. -- Pushing docker image $ABP_NG..."
+# echo ""
+# echo ""
