@@ -2,11 +2,12 @@
 FROM node:14 as node
 WORKDIR /app
 COPY . .
+# This is a workaround to avoid updating the file appconfig.production.json. 
+# If you prefer updating appconfig.production.json yourself delete this line.
+RUN mv ./src/assets/appconfig.container.json ./src/assets/appconfig.production.json
 RUN yarn install
 RUN yarn run ng build --configuration production
 # stage 2
 FROM nginx
 COPY --from=node /app/dist /usr/share/nginx/html
-# This is a workaround to avoid updating the file outside the container. 
-RUN sed -i "s/https/http/g" /usr/share/nginx/html/assets/appconfig.production.json
 COPY fast-nginx-default.conf /etc/nginx/conf.d/default.conf
