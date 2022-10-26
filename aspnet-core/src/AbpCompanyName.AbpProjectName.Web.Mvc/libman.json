@@ -182,7 +182,7 @@
       "destination": "wwwroot/libs/jquery-validate"
     },
     {
-      "library": "push.js@1.0.9",
+      "library": "push.js@1.0.12",
       "destination": "wwwroot/libs/push.js"
     }
     //other libs end

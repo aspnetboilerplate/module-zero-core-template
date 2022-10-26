@@ -1,6 +1,7 @@
 ﻿using Abp.Localization;
 using Abp.Modules;
 using Abp.Reflection.Extensions;
+using Abp.Runtime.Security;
 using Abp.Timing;
 using Abp.Zero;
 using Abp.Zero.Configuration;
@@ -38,6 +39,7 @@ namespace AbpCompanyName.AbpProjectName
             Configuration.Localization.Languages.Add(new LanguageInfo("fa", "فارسی", "famfamfam-flags ir"));
             
             Configuration.Settings.SettingEncryptionConfiguration.DefaultPassPhrase = AbpProjectNameConsts.DefaultPassPhrase;
+            SimpleStringCipher.DefaultPassPhrase = AbpProjectNameConsts.DefaultPassPhrase;
         }
 
         public override void Initialize()
