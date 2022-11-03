@@ -1,57 +1,33 @@
-# COMMON PATHS
+echo " Welcome to docker build"
+echo ""
+echo ""
 
-$buildFolder = (Get-Item -Path "./" -Verbose).FullName
-$slnFolder = Join-Path $buildFolder "../"
-$outputFolder = Join-Path $buildFolder "outputs"
-$webHostFolder = Join-Path $slnFolder "src/AbpCompanyName.AbpProjectName.Web.Host"
-$ngFolder = Join-Path $buildFolder "../../angular"
+$ABP_HOST="abp/host"
+$ABP_NG="abp/ng"
 
-## CLEAR ######################################################################
+cd ..
+echo " Building docker image $ABP_HOST..."
+docker build -t $ABP_HOST .
+echo " Done. -- Building docker image $ABP_HOST..."
+echo ""
+echo ""
 
-Remove-Item $outputFolder -Force -Recurse -ErrorAction Ignore
-New-Item -Path $outputFolder -ItemType Directory
+# echo " Pushing docker image $ABP_HOST..."
+# docker push $ABP_HOST
+# echo " Done. -- Pushing docker image $ABP_HOST..."
+# echo ""
+# echo ""
 
-## RESTORE NUGET PACKAGES #####################################################
+cd ..
+cd angular/
+echo " Building docker image $ABP_NG..."
+docker build -t $ABP_NG -f Dockerfile .
+echo " Done. -- Building docker image $ABP_NG..."
+echo ""
+echo ""
 
-Set-Location $slnFolder
-dotnet restore
-
-## PUBLISH WEB HOST PROJECT ###################################################
-
-Set-Location $webHostFolder
-dotnet publish --output (Join-Path $outputFolder "Host")
-
-## PUBLISH ANGULAR UI PROJECT #################################################
-
-Set-Location $ngFolder
-& yarn
-& ng build --prod
-Copy-Item (Join-Path $ngFolder "dist") (Join-Path $outputFolder "ng") -Recurse
-Copy-Item (Join-Path $ngFolder "Dockerfile") (Join-Path $outputFolder "ng")
-
-# Change UI configuration
-$ngConfigPath = Join-Path $outputFolder "ng/assets/appconfig.json"
-(Get-Content $ngConfigPath) -replace "44311", "9901" | Set-Content $ngConfigPath
-(Get-Content $ngConfigPath) -replace "4200", "9902" | Set-Content $ngConfigPath
-
-## CREATE DOCKER IMAGES #######################################################
-
-# Host
-Set-Location (Join-Path $outputFolder "Host")
-
-docker rmi abp/host -f
-docker build -t abp/host .
-
-# Angular UI
-Set-Location (Join-Path $outputFolder "ng")
-
-docker rmi abp/ng -f
-docker build -t abp/ng .
-
-## DOCKER COMPOSE FILES #######################################################
-
-Copy-Item (Join-Path $slnFolder "docker/ng/*.*") $outputFolder
-
-## FINALIZE ###################################################################
-
-Set-Location $outputFolder
+# echo " Pushing docker image $ABP_NG..."
+# docker push $ABP_NG
+# echo " Done. -- Pushing docker image $ABP_NG..."
+# echo ""
+# echo ""
