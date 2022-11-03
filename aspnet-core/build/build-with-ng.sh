@@ -1,9 +1,10 @@
+#!/bin/bash
 echo " Welcome to docker build"
 echo ""
 echo ""
 
-$ABP_HOST="abp/host"
-$ABP_NG="abp/ng"
+ABP_HOST="abp/host"
+ABP_NG="abp/ng"
 
 cd ..
 echo " Building docker image $ABP_HOST..."
