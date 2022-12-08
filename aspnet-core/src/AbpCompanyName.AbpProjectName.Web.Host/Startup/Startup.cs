@@ -100,10 +100,10 @@ namespace AbpCompanyName.AbpProjectName.Web.Host.Startup
             app.UseRouting();
 
             app.UseAuthentication();
+            app.UseAuthorization();
 
             app.UseAbpRequestLocalization();
-
-
+            
             app.UseEndpoints(endpoints =>
             {
                 endpoints.MapHub<AbpCommonHub>("/signalr");
