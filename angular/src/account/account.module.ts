@@ -39,10 +39,6 @@ import { TenantChangeDialogComponent } from './tenant/tenant-change-dialog.compo
         // tenant
         TenantChangeComponent,
         TenantChangeDialogComponent,
-    ],
-    entryComponents: [
-        // tenant
-        TenantChangeDialogComponent
     ]
 })
 export class AccountModule {

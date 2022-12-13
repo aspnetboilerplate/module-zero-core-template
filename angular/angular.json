@@ -156,15 +156,6 @@
               "node_modules/abp-web-resources/Abp/Framework/scripts/libs/abp.moment.js"
             ]
           }
-        },
-        "lint": {
-          "builder": "@angular-devkit/build-angular:tslint",
-          "options": {
-            "tsConfig": [
-              "src/tsconfig.json"
-            ],
-            "exclude": []
-          }
         }
       }
     },
@@ -178,15 +169,6 @@
           "options": {
             "protractorConfig": "./protractor.conf.js",
             "devServerTarget": "AbpProjectName:serve"
-          }
-        },
-        "lint": {
-          "builder": "@angular-devkit/build-angular:tslint",
-          "options": {
-            "tsConfig": [
-              "e2e/tsconfig.json"
-            ],
-            "exclude": []
           }
         }
       }
