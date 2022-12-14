@@ -26,7 +26,8 @@ bin/
 !.vscode/extensions.json
 
 # misc
-/.sass-cache
+//.angular/cache
+.sass-cache
 /connect.lock
 /coverage/*
 /libpeerconnection.log
@@ -41,3 +42,5 @@ testem.log
 #System Files
 .DS_Store
 Thumbs.db
+
+.angular

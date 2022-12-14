@@ -35,7 +35,7 @@ export class AppInitializer {
                   const angularLocale = this.convertAbpLocaleToAngularLocale(
                     abp.localization.currentLanguage.name
                   );
-                  import(`@angular/common/locales/${angularLocale}.js`).then(
+                  import(`/node_modules/@angular/common/locales/${angularLocale}.mjs`).then(
                     (module) => {
                       registerLocaleData(module.default);
                       resolve(result);
