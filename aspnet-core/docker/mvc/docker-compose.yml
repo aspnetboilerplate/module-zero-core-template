@@ -2,11 +2,15 @@ version: '3'
 
 services:
 
-    abp_mvc:
-        image: abp/mvc
-        environment:
-            - ASPNETCORE_ENVIRONMENT=Staging
-        ports:
-            - "9903:80"
-        volumes:
-            - "./Mvc-Logs:/app/App_Data/Logs"
+  abp_host:
+    image: abp/mvc
+    environment:
+      ASPNETCORE_ENVIRONMENT: "Staging"
+      ConnectionStrings__Default: "Server=10.0.75.1; Database=AbpProjectNameDb; User=sa; Password=123qwe;TrustServerCertificate=True;"
+      TZ: "America/Toronto"
+      Kestrel__Endpoints__Http__Url: "http://+:80"
+    ports:
+      - "44312:80"
+    volumes:
+      - "./Mvc-Logs:/app/App_Data/Logs"
+    restart: always
