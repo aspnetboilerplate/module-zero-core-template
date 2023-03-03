@@ -27,10 +27,10 @@
 
   <ItemGroup>
     <PackageReference Include="Microsoft.AspNetCore.Authentication.JwtBearer" Version="7.0.0" />
-    <PackageReference Include="Swashbuckle.AspNetCore" Version="6.4.0" />
-    <PackageReference Include="Abp.AspNetCore" Version="8.0.0" />
-    <PackageReference Include="Abp.ZeroCore" Version="8.0.0" />
-    <PackageReference Include="Abp.AspNetCore.SignalR" Version="8.0.0" />
+    <PackageReference Include="Swashbuckle.AspNetCore" Version="6.5.0" />
+    <PackageReference Include="Abp.AspNetCore" Version="8.1.0" />
+    <PackageReference Include="Abp.ZeroCore" Version="8.1.0" />
+    <PackageReference Include="Abp.AspNetCore.SignalR" Version="8.1.0" />
   </ItemGroup>
 
 </Project>
