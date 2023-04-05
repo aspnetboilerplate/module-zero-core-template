@@ -14,11 +14,8 @@ using Abp.Extensions;
 using AbpCompanyName.AbpProjectName.Configuration;
 using AbpCompanyName.AbpProjectName.Identity;
 using Abp.AspNetCore.SignalR.Hubs;
-using Abp.Dependency;
-using Abp.Json;
 using Microsoft.Extensions.Hosting;
 using Microsoft.OpenApi.Models;
-using Newtonsoft.Json.Serialization;
 using System.IO;
 
 namespace AbpCompanyName.AbpProjectName.Web.Host.Startup
@@ -41,14 +38,9 @@ namespace AbpCompanyName.AbpProjectName.Web.Host.Startup
         public void ConfigureServices(IServiceCollection services)
         {
             //MVC
-            services.AddControllersWithViews(
-                options => { options.Filters.Add(new AbpAutoValidateAntiforgeryTokenAttribute()); }
-            ).AddNewtonsoftJson(options =>
+            services.AddControllersWithViews(options =>
             {
-                options.SerializerSettings.ContractResolver = new AbpMvcContractResolver(IocManager.Instance)
-                {
-                    NamingStrategy = new CamelCaseNamingStrategy()
-                };
+                options.Filters.Add(new AbpAutoValidateAntiforgeryTokenAttribute());
             });
 
             IdentityRegistrar.Register(services);
@@ -103,7 +95,7 @@ namespace AbpCompanyName.AbpProjectName.Web.Host.Startup
             app.UseAuthorization();
 
             app.UseAbpRequestLocalization();
-            
+
             app.UseEndpoints(endpoints =>
             {
                 endpoints.MapHub<AbpCommonHub>("/signalr");
@@ -121,10 +113,10 @@ namespace AbpCompanyName.AbpProjectName.Web.Host.Startup
                 options.SwaggerEndpoint($"/swagger/{_apiVersion}/swagger.json", $"AbpProjectName API {_apiVersion}");
                 options.IndexStream = () => Assembly.GetExecutingAssembly()
                     .GetManifestResourceStream("AbpCompanyName.AbpProjectName.Web.Host.wwwroot.swagger.ui.index.html");
-                options.DisplayRequestDuration(); // Controls the display of the request duration (in milliseconds) for "Try it out" requests.  
+                options.DisplayRequestDuration(); // Controls the display of the request duration (in milliseconds) for "Try it out" requests.
             }); // URL: /swagger
         }
-        
+
         private void ConfigureSwagger(IServiceCollection services)
         {
             services.AddSwaggerGen(options =>

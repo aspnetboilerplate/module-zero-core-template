@@ -4,6 +4,7 @@ using System.Net;
 using System.Net.Http;
 using System.Net.Http.Headers;
 using System.Text;
+using System.Text.Json;
 using System.Threading.Tasks;
 using Abp.AspNetCore.TestBase;
 using Abp.Authorization.Users;
@@ -17,8 +18,6 @@ using AbpCompanyName.AbpProjectName.Web.Startup;
 using AngleSharp.Html.Dom;
 using AngleSharp.Html.Parser;
 using Microsoft.AspNetCore.Hosting;
-using Newtonsoft.Json;
-using Newtonsoft.Json.Serialization;
 using Shouldly;
 
 namespace AbpCompanyName.AbpProjectName.Web.Tests
@@ -31,7 +30,7 @@ namespace AbpCompanyName.AbpProjectName.Web.Tests
         {
             ContentRootFolder = new Lazy<string>(WebContentDirectoryFinder.CalculateContentRootFolder, true);
         }
-        
+
         protected override IWebHostBuilder CreateWebHostBuilder()
         {
             return base
@@ -46,9 +45,9 @@ namespace AbpCompanyName.AbpProjectName.Web.Tests
             HttpStatusCode expectedStatusCode = HttpStatusCode.OK)
         {
             var strResponse = await GetResponseAsStringAsync(url, expectedStatusCode);
-            return JsonConvert.DeserializeObject<T>(strResponse, new JsonSerializerSettings
+            return JsonSerializer.Deserialize<T>(strResponse, new JsonSerializerOptions()
             {
-                ContractResolver = new CamelCasePropertyNamesContractResolver()
+                PropertyNamingPolicy = JsonNamingPolicy.CamelCase
             });
         }
 
@@ -68,9 +67,9 @@ namespace AbpCompanyName.AbpProjectName.Web.Tests
         }
 
         #endregion
-        
+
         #region Authenticate
-        
+
         /// <summary>
         /// /api/TokenAuth/Authenticate
         /// TokenAuthController
@@ -81,7 +80,7 @@ namespace AbpCompanyName.AbpProjectName.Web.Tests
         protected async Task AuthenticateAsync(string tenancyName, AuthenticateModel input)
         {
             if (tenancyName.IsNullOrWhiteSpace())
-            { 
+            {
                 var tenant = UsingDbContext(context => context.Tenants.FirstOrDefault(t => t.TenancyName == tenancyName));
                 if (tenant != null)
                 {
@@ -93,16 +92,17 @@ namespace AbpCompanyName.AbpProjectName.Web.Tests
             var response = await Client.PostAsync("/api/TokenAuth/Authenticate",
                 new StringContent(input.ToJsonString(), Encoding.UTF8, "application/json"));
             response.StatusCode.ShouldBe(HttpStatusCode.OK);
-            var result =
-                JsonConvert.DeserializeObject<AjaxResponse<AuthenticateResultModel>>(
-                    await response.Content.ReadAsStringAsync());
+            var result = JsonSerializer.Deserialize<AjaxResponse<AuthenticateResultModel>>(await response.Content.ReadAsStringAsync(), new JsonSerializerOptions()
+            {
+                PropertyNamingPolicy = JsonNamingPolicy.CamelCase
+            });
             Client.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue("Bearer", result.Result.AccessToken);
-            
+
             AbpSession.UserId = result.Result.UserId;
         }
-        
+
         #endregion
-        
+
         #region Login
 
         protected void LoginAsHostAdmin()
@@ -154,7 +154,6 @@ namespace AbpCompanyName.AbpProjectName.Web.Tests
         }
 
         #endregion
-
 
         #region UsingDbContext
 
