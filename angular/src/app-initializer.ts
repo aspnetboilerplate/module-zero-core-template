@@ -6,6 +6,8 @@ import { filter as _filter, merge as _merge } from 'lodash-es';
 import { AppConsts } from '@shared/AppConsts';
 import { AppSessionService } from '@shared/session/app-session.service';
 import { environment } from './environments/environment';
+import { AccountServiceProxy, IsTenantAvailableInput, IsTenantAvailableOutput, TenantAvailabilityState } from '@shared/service-proxies/service-proxies';
+import { SubdomainTenantResolver } from '@shared/multi-tenancy/tenant-resolvers/subdomain-tenant-resolver';
 
 @Injectable({
   providedIn: 'root',
@@ -164,7 +166,40 @@ export class AppInitializer {
         AppConsts.remoteServiceBaseUrl = response.remoteServiceBaseUrl;
         AppConsts.localeMappings = response.localeMappings;
 
-        callback();
+        // Find tenant from subdomain
+        var tenancyName = this.resolveTenancyName(response.appBaseUrl);
+
+        if (tenancyName == null) {
+          callback();
+        } else {
+          this.ConfigureTenantIdCookie(tenancyName, callback);
+        }
       });
+  }
+
+  private ConfigureTenantIdCookie(tenancyName: string, callback: () => void) {
+    let accountServiceProxy: AccountServiceProxy = this._injector.get(AccountServiceProxy);
+    let input = new IsTenantAvailableInput();
+    input.tenancyName = tenancyName;
+
+    accountServiceProxy.isTenantAvailable(input).subscribe((result: IsTenantAvailableOutput) => {
+      if (result.state === TenantAvailabilityState._1) { // Available
+        abp.multiTenancy.setTenantIdCookie(result.tenantId);
+      }
+
+      callback();
+    });
+  }
+
+  private resolveTenancyName(appBaseUrl): string | null {
+    var subdomainTenantResolver = new SubdomainTenantResolver();
+    var tenancyName = subdomainTenantResolver.resolve(appBaseUrl);
+    if (tenancyName) {
+      return tenancyName;
+    }
+
+    // add other tenancy resolvers here, ex: CookieTenantResolver, QueryStringTenantResolver etc...
+
+    return null;
   }
 }
