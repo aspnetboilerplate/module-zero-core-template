@@ -98,21 +98,21 @@
         "serve": {
           "builder": "@angular-devkit/build-angular:dev-server",
           "options": {
-            "browserTarget": "AbpProjectName:build"
+            "buildTarget": "AbpProjectName:build"
           },
           "configurations": {
             "production": {
-              "browserTarget": "AbpProjectName:build:production"
+              "buildTarget": "AbpProjectName:build:production"
             },
             "hmr": {
-              "browserTarget": "AbpProjectName:build:hmr"
+              "buildTarget": "AbpProjectName:build:hmr"
             }
           }
         },
         "extract-i18n": {
           "builder": "@angular-devkit/build-angular:extract-i18n",
           "options": {
-            "browserTarget": "AbpProjectName:build"
+            "buildTarget": "AbpProjectName:build"
           }
         },
         "test": {
