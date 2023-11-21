@@ -23,7 +23,7 @@
     "@angular/router": "^16.2.12",
     "@aspnet/signalr": "^1.1.4",
     "@fortawesome/fontawesome-free": "^6.2.1",
-    "abp-ng2-module": "8.0.0",
+    "abp-ng2-module": "10.0.0",
     "abp-web-resources": "^5.7.0",
     "admin-lte-css-only": "^3.2.0",
     "core-js": "^3.26.1",
