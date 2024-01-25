@@ -1,5 +1,4 @@
-﻿using System;
-using System.Text.Encodings.Web;
+﻿using System.Text.Encodings.Web;
 using System.Text.Unicode;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
@@ -16,12 +15,8 @@ using AbpCompanyName.AbpProjectName.Configuration;
 using AbpCompanyName.AbpProjectName.Identity;
 using AbpCompanyName.AbpProjectName.Web.Resources;
 using Abp.AspNetCore.SignalR.Hubs;
-using Abp.Dependency;
-using Abp.Json;
 using Microsoft.Extensions.Hosting;
 using Microsoft.Extensions.WebEncoders;
-using Newtonsoft.Json.Serialization;
-
 
 namespace AbpCompanyName.AbpProjectName.Web.Startup
 {
@@ -46,14 +41,7 @@ namespace AbpCompanyName.AbpProjectName.Web.Startup
                         options.Filters.Add(new AbpAutoValidateAntiforgeryTokenAttribute());
                     }
                 )
-                .AddRazorRuntimeCompilation()
-                .AddNewtonsoftJson(options =>
-                {
-                    options.SerializerSettings.ContractResolver = new AbpMvcContractResolver(IocManager.Instance)
-                    {
-                        NamingStrategy = new CamelCaseNamingStrategy()
-                    };
-                });
+                .AddRazorRuntimeCompilation();
 
             IdentityRegistrar.Register(services);
             AuthConfigurer.Configure(services, _appConfiguration);
@@ -62,7 +50,7 @@ namespace AbpCompanyName.AbpProjectName.Web.Startup
             {
                 options.TextEncoderSettings = new TextEncoderSettings(UnicodeRanges.All);
             });
-            
+
             services.AddScoped<IWebResourceManager, WebResourceManager>();
 
             services.AddSignalR();
