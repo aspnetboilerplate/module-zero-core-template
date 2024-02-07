@@ -8,6 +8,7 @@ import { AppSessionService } from '@shared/session/app-session.service';
 import { environment } from './environments/environment';
 import { AccountServiceProxy, IsTenantAvailableInput, IsTenantAvailableOutput, TenantAvailabilityState } from '@shared/service-proxies/service-proxies';
 import { SubdomainTenantResolver } from '@shared/multi-tenancy/tenant-resolvers/subdomain-tenant-resolver';
+import { QueryStringTenantResolver } from '@shared/multi-tenancy/tenant-resolvers/query-string-tenant-resolver';
 
 @Injectable({
   providedIn: 'root',
@@ -194,6 +195,12 @@ export class AppInitializer {
   private resolveTenancyName(appBaseUrl): string | null {
     var subdomainTenantResolver = new SubdomainTenantResolver();
     var tenancyName = subdomainTenantResolver.resolve(appBaseUrl);
+    if (tenancyName) {
+      return tenancyName;
+    }
+
+    var queryStirngTenantResolver = new QueryStringTenantResolver();
+    var tenancyName = queryStirngTenantResolver.resolve(appBaseUrl);
     if (tenancyName) {
       return tenancyName;
     }
