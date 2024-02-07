@@ -27,7 +27,7 @@
       <PrivateAssets>all</PrivateAssets>
       <IncludeAssets>runtime; build; native; contentfiles; analyzers</IncludeAssets>
     </PackageReference>
-    <PackageReference Include="Abp.TestBase" Version="9.1.0-preview20240125" />
+    <PackageReference Include="Abp.TestBase" Version="9.1.0" />
     <PackageReference Include="Microsoft.EntityFrameworkCore.InMemory" Version="8.0.0" />
     <PackageReference Include="Castle.Core" Version="5.1.1" />
   </ItemGroup>
