@@ -40,8 +40,7 @@ namespace AbpCompanyName.AbpProjectName.Web.Startup
                         options.Filters.Add(new AutoValidateAntiforgeryTokenAttribute());
                         options.Filters.Add(new AbpAutoValidateAntiforgeryTokenAttribute());
                     }
-                )
-                .AddRazorRuntimeCompilation();
+                );
 
             IdentityRegistrar.Register(services);
             AuthConfigurer.Configure(services, _appConfiguration);
