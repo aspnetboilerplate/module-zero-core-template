@@ -3,7 +3,8 @@ import {
   Injector,
   OnInit,
   EventEmitter,
-  Output
+  Output,
+  ChangeDetectorRef
 } from '@angular/core';
 import { BsModalRef } from 'ngx-bootstrap/modal';
 import { forEach as _forEach, includes as _includes, map as _map } from 'lodash-es';
@@ -30,7 +31,8 @@ export class EditUserDialogComponent extends AppComponentBase
   constructor(
     injector: Injector,
     public _userService: UserServiceProxy,
-    public bsModalRef: BsModalRef
+    public bsModalRef: BsModalRef,
+    private cd: ChangeDetectorRef
   ) {
     super(injector);
   }
@@ -42,6 +44,7 @@ export class EditUserDialogComponent extends AppComponentBase
       this._userService.getRoles().subscribe((result2) => {
         this.roles = result2.items;
         this.setInitialRolesStatus();
+        this.cd.detectChanges();
       });
     });
   }

@@ -1,4 +1,4 @@
-import { Component, Injector } from '@angular/core';
+import { Component, Injector, ChangeDetectorRef } from '@angular/core';
 import { finalize } from 'rxjs/operators';
 import { BsModalRef, BsModalService } from 'ngx-bootstrap/modal';
 import { appModuleAnimation } from '@shared/animations/routerTransition';
@@ -29,9 +29,10 @@ export class RolesComponent extends PagedListingComponentBase<RoleDto> {
   constructor(
     injector: Injector,
     private _rolesService: RoleServiceProxy,
-    private _modalService: BsModalService
+    private _modalService: BsModalService,
+    cd: ChangeDetectorRef
   ) {
-    super(injector);
+    super(injector, cd);
   }
 
   list(
@@ -51,6 +52,7 @@ export class RolesComponent extends PagedListingComponentBase<RoleDto> {
       .subscribe((result: RoleDtoPagedResultDto) => {
         this.roles = result.items;
         this.showPaging(result, pageNumber);
+        this.cd.detectChanges();
       });
   }
 

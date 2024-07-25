@@ -3,7 +3,8 @@ import {
   Injector,
   OnInit,
   EventEmitter,
-  Output,
+  output,
+  ChangeDetectorRef,
 } from '@angular/core';
 import { BsModalRef } from 'ngx-bootstrap/modal';
 import { AppComponentBase } from '@shared/app-component-base';
@@ -27,12 +28,13 @@ export class CreateRoleDialogComponent extends AppComponentBase
   checkedPermissionsMap: { [key: string]: boolean } = {};
   defaultPermissionCheckedStatus = true;
 
-  @Output() onSave = new EventEmitter<any>();
+  onSave = output<EventEmitter<any>>()
 
   constructor(
     injector: Injector,
     private _roleService: RoleServiceProxy,
-    public bsModalRef: BsModalRef
+    public bsModalRef: BsModalRef,
+    private cd: ChangeDetectorRef
   ) {
     super(injector);
   }
@@ -43,6 +45,7 @@ export class CreateRoleDialogComponent extends AppComponentBase
       .subscribe((result: PermissionDtoListResultDto) => {
         this.permissions = result.items;
         this.setInitialPermissionsStatus();
+        this.cd.detectChanges();
       });
   }
 
@@ -87,10 +90,11 @@ export class CreateRoleDialogComponent extends AppComponentBase
         () => {
           this.notify.info(this.l('SavedSuccessfully'));
           this.bsModalRef.hide();
-          this.onSave.emit();
+          this.onSave.emit(null);
         },
         () => {
           this.saving = false;
+          this.cd.detectChanges();
         }
       );
   }

@@ -5,7 +5,6 @@ import { Component, Input, Output, EventEmitter } from '@angular/core';
   templateUrl: './abp-pagination-controls.component.html'
 })
 export class AbpPaginationControlsComponent {
-
   @Input() id: string;
   @Input() maxSize = 7;
   @Input() previousLabel = 'Previous';
@@ -13,7 +12,7 @@ export class AbpPaginationControlsComponent {
   @Input() screenReaderPaginationLabel = 'Pagination';
   @Input() screenReaderPageLabel = 'page';
   @Input() screenReaderCurrentLabel = `You're on page`;
-  @Output() pageChange: EventEmitter<number> = new EventEmitter<number>();
+  @Output() pageChange = new EventEmitter<number>();
 
   private _directionLinks = true;
   private _autoHide = false;
@@ -25,6 +24,7 @@ export class AbpPaginationControlsComponent {
   set directionLinks(value: boolean) {
     this._directionLinks = !!value && <any>value !== 'false';
   }
+
   @Input()
   get autoHide(): boolean {
     return this._autoHide;

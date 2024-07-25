@@ -1,7 +1,7 @@
 import {
   Component,
-  Input,
-  Output,
+  input,
+  output,
   EventEmitter,
   ChangeDetectionStrategy,
   Injector
@@ -14,12 +14,12 @@ import { AppComponentBase } from '@shared/app-component-base';
   changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class AbpModalFooterComponent extends AppComponentBase {
-  @Input() cancelLabel = this.l('Cancel');
-  @Input() cancelDisabled: boolean;
-  @Input() saveLabel = this.l('Save');
-  @Input() saveDisabled: boolean;
+  cancelLabel = input(this.l('Cancel'));
+  cancelDisabled= input<boolean>();
+  saveLabel = input(this.l('Save'));
+  saveDisabled = input<boolean>();
 
-  @Output() onCancelClick = new EventEmitter<number>();
+  onCancelClick = output<EventEmitter<number>>();
 
   constructor(injector: Injector) {
     super(injector);

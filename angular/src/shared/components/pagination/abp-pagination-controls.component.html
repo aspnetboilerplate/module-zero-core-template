@@ -28,7 +28,7 @@
             }
           </li>
         }
-        @for (page of p.pages; track page) {
+        @for (page of p.pages; track page.label) {
           <li
             class="page-item"
             [class.active]="p.getCurrent() === page.value"
