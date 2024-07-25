@@ -177,7 +177,8 @@
   "schematics": {
     "@schematics/angular:component": {
       "prefix": "app",
-      "style": "css"
+      "style": "css",
+      "project": "AbpProjectName"
     },
     "@schematics/angular:directive": {
       "prefix": "app"
