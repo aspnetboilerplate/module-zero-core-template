@@ -4,68 +4,73 @@
     data-widget="treeview"
     role="menu"
     data-accordion="false"
-  >
-    <ng-container *ngFor="let item of menuItems">
+    >
+    @for (item of menuItems; track item) {
       <ng-container
         *ngTemplateOutlet="sidebarInner; context: { item: item }"
       ></ng-container>
-    </ng-container>
+    }
   </ul>
 </nav>
 
 <ng-template #sidebarInner let-item="item">
-  <li
-    *ngIf="isMenuItemVisible(item)"
-    class="nav-item"
-    [class.menu-open]="!item.isCollapsed"
-    [class.has-treeview]="item.children"
-  >
-    <a
-      *ngIf="item.route && item.route.indexOf('http') != 0"
-      class="nav-link"
-      [routerLink]="item.route"
-      [class.active]="item.isActive"
-    >
-      <i class="nav-icon {{ item.icon }}"></i>
-      <p>
-        {{ item.label }}
-      </p>
-    </a>
-    <a
-      *ngIf="item.route && item.route.indexOf('http') == 0 && !item.children"
-      class="nav-link"
-      target="_blank"
-      [href]="item.route"
-    >
-      <i class="nav-icon {{ item.icon }}"></i>
-      <p>
-        {{ item.label }}
-      </p>
-    </a>
-    <a
-      *ngIf="!item.route && item.children"
-      class="nav-link"
-      href="javascript:;"
-      [class.active]="item.isActive"
-      (click)="item.isCollapsed = !item.isCollapsed"
-    >
-      <i class="nav-icon {{ item.icon }}"></i>
-      <p>
-        {{ item.label }}
-        <i class="right fas fa-angle-left"></i>
-      </p>
-    </a>
-    <ul
-      *ngIf="item.children"
-      class="nav nav-treeview"
-      [collapse]="item.isCollapsed"
-      [isAnimated]="true"
-    >
-      <ng-container *ngFor="let item of item.children">
-        <ng-container
-          *ngTemplateOutlet="sidebarInner; context: { item: item }"
-        ></ng-container>
-      </ng-container>
-    </ul>
-  </li>
+  @if (isMenuItemVisible(item)) {
+    <li
+      class="nav-item"
+      [class.menu-open]="!item.isCollapsed"
+      [class.has-treeview]="item.children"
+      >
+      @if (item.route && item.route.indexOf('http') != 0) {
+        <a
+          class="nav-link"
+          [routerLink]="item.route"
+          [class.active]="item.isActive"
+          >
+          <i class="nav-icon {{ item.icon }}"></i>
+          <p>
+            {{ item.label }}
+          </p>
+        </a>
+      }
+      @if (item.route && item.route.indexOf('http') == 0 && !item.children) {
+        <a
+          class="nav-link"
+          target="_blank"
+          [href]="item.route"
+          >
+          <i class="nav-icon {{ item.icon }}"></i>
+          <p>
+            {{ item.label }}
+          </p>
+        </a>
+      }
+      @if (!item.route && item.children) {
+        <a
+          class="nav-link"
+          href="javascript:;"
+          [class.active]="item.isActive"
+          (click)="item.isCollapsed = !item.isCollapsed"
+          >
+          <i class="nav-icon {{ item.icon }}"></i>
+          <p>
+            {{ item.label }}
+            <i class="right fas fa-angle-left"></i>
+          </p>
+        </a>
+      }
+      @if (item.children) {
+        <ul
+          class="nav nav-treeview"
+          [collapse]="item.isCollapsed"
+          [isAnimated]="true"
+          >
+          @for (item of item.children; track item) {
+            <ng-container
+              *ngTemplateOutlet="sidebarInner; context: { item: item }"
+            ></ng-container>
+          }
+        </ul>
+      }
+    </li>
+  }
 </ng-template>

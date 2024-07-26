@@ -1,7 +1,7 @@
 import {
   Component,
-  Input,
-  Output,
+  input,
+  output,
   EventEmitter,
   ChangeDetectionStrategy,
   Injector
@@ -14,9 +14,9 @@ import { AppComponentBase } from '@shared/app-component-base';
   changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class AbpModalHeaderComponent extends AppComponentBase {
-  @Input() title: string;
+  title = input<string>();
 
-  @Output() onCloseClick = new EventEmitter<number>();
+  onCloseClick = output<EventEmitter<number>>();
 
   constructor(injector: Injector) {
     super(injector);

@@ -1,5 +1,5 @@
 import { AppComponentBase } from 'shared/app-component-base';
-import { Component, Injector, OnInit } from '@angular/core';
+import { Component, Injector, OnInit, ChangeDetectorRef } from '@angular/core';
 
 export class PagedResultDto {
     items: any[];
@@ -25,9 +25,14 @@ export abstract class PagedListingComponentBase<TEntityDto> extends AppComponent
     public totalPages = 1;
     public totalItems: number;
     public isTableLoading = false;
+    protected cd: ChangeDetectorRef;
 
-    constructor(injector: Injector) {
+    constructor(
+        injector: Injector,
+        cd: ChangeDetectorRef
+    ) {
         super(injector);
+        this.cd = cd;
     }
 
     ngOnInit(): void {
@@ -53,6 +58,7 @@ export abstract class PagedListingComponentBase<TEntityDto> extends AppComponent
         this.isTableLoading = true;
         this.list(req, page, () => {
             this.isTableLoading = false;
+            this.cd.detectChanges();
         });
     }
 

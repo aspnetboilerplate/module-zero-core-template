@@ -1,4 +1,4 @@
-import { Component, Injector } from '@angular/core';
+import { ChangeDetectorRef, Component, Injector } from '@angular/core';
 import { finalize } from 'rxjs/operators';
 import { BsModalService, BsModalRef } from 'ngx-bootstrap/modal';
 import { appModuleAnimation } from '@shared/animations/routerTransition';
@@ -33,9 +33,10 @@ export class UsersComponent extends PagedListingComponentBase<UserDto> {
   constructor(
     injector: Injector,
     private _userService: UserServiceProxy,
-    private _modalService: BsModalService
+    private _modalService: BsModalService,
+    cd: ChangeDetectorRef
   ) {
-    super(injector);
+    super(injector, cd);
   }
 
   createUser(): void {

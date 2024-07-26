@@ -4,6 +4,7 @@ import {
   OnInit,
   EventEmitter,
   Output,
+  ChangeDetectorRef,
 } from '@angular/core';
 import { BsModalRef } from 'ngx-bootstrap/modal';
 import { forEach as _forEach, includes as _includes, map as _map } from 'lodash-es';
@@ -34,7 +35,8 @@ export class EditRoleDialogComponent extends AppComponentBase
   constructor(
     injector: Injector,
     private _roleService: RoleServiceProxy,
-    public bsModalRef: BsModalRef
+    public bsModalRef: BsModalRef,
+    private cd: ChangeDetectorRef
   ) {
     super(injector);
   }
@@ -47,6 +49,7 @@ export class EditRoleDialogComponent extends AppComponentBase
         this.permissions = result.permissions;
         this.grantedPermissionNames = result.grantedPermissionNames;
         this.setInitialPermissionsStatus();
+        this.cd.detectChanges();
       });
   }
 
@@ -62,7 +65,7 @@ export class EditRoleDialogComponent extends AppComponentBase
     return _includes(this.grantedPermissionNames, permissionName);
   }
 
-  onPermissionChange(permission: PermissionDto, $event) {
+  onPermissionChange(permission: FlatPermissionDto, $event) {
     this.checkedPermissionsMap[permission.name] = $event.target.checked;
   }
 

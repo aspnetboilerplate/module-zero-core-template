@@ -2,12 +2,12 @@
   <button
     type="button"
     class="btn btn-default"
-    [disabled]="cancelDisabled"
-    (click)="onCancelClick.emit()"
+    [disabled]="cancelDisabled()"
+    (click)="onCancelClick.emit($event)"
   >
-    {{ cancelLabel }}
+    {{ cancelLabel() }}
   </button>
-  <button type="submit" class="btn btn-primary" [disabled]="saveDisabled">
-    {{ saveLabel }}
+  <button type="submit" class="btn btn-primary" [disabled]="saveDisabled()">
+    {{ saveLabel() }}
   </button>
 </div>

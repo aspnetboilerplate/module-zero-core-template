@@ -1,10 +1,10 @@
 <div class="modal-header">
-  <h4 class="modal-title">{{ title }}</h4>
+  <h4 class="modal-title">{{ title() }}</h4>
   <button
     type="button"
     class="close"
     aria-label="Close"
-    (click)="onCloseClick.emit()"
+    (click)="onCloseClick.emit($event)"
   >
     <span aria-hidden="true">&times;</span>
   </button>

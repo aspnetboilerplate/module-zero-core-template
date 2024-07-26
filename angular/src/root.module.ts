@@ -1,5 +1,5 @@
-import { NgModule, APP_INITIALIZER, LOCALE_ID } from '@angular/core';
-import { BrowserModule } from '@angular/platform-browser';
+import { NgModule, APP_INITIALIZER, LOCALE_ID,provideExperimentalZonelessChangeDetection} from '@angular/core';
+import { BrowserModule, provideClientHydration } from '@angular/platform-browser';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
 
@@ -43,6 +43,8 @@ export function getCurrentLanguage(): string {
   ],
   declarations: [RootComponent],
   providers: [
+    provideExperimentalZonelessChangeDetection(),
+    provideClientHydration(),
     { provide: HTTP_INTERCEPTORS, useClass: AbpHttpInterceptor, multi: true },
     {
       provide: APP_INITIALIZER,

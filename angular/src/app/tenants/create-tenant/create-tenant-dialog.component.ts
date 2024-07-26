@@ -3,7 +3,8 @@ import {
   Injector,
   OnInit,
   Output,
-  EventEmitter
+  EventEmitter,
+  ChangeDetectorRef
 } from '@angular/core';
 import { BsModalRef } from 'ngx-bootstrap/modal';
 import { AppComponentBase } from '@shared/app-component-base';
@@ -25,13 +26,15 @@ export class CreateTenantDialogComponent extends AppComponentBase
   constructor(
     injector: Injector,
     public _tenantService: TenantServiceProxy,
-    public bsModalRef: BsModalRef
+    public bsModalRef: BsModalRef,
+    private cd: ChangeDetectorRef
   ) {
     super(injector);
   }
 
   ngOnInit(): void {
     this.tenant.isActive = true;
+    this.cd.detectChanges();
   }
 
   save(): void {
