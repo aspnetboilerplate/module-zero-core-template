@@ -181,7 +181,8 @@
       "project": "AbpProjectName"
     },
     "@schematics/angular:directive": {
-      "prefix": "app"
+      "prefix": "app",
+      "project": "AbpProjectName"
     }
   },
   "cli": {
