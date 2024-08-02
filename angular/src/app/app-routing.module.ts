@@ -8,14 +8,17 @@ import { AppComponent } from './app.component';
         RouterModule.forChild([
             {
                 path: '',
+                component: AppComponent,
                 children: [
                     {
                         path: 'home',
                         loadChildren: () => import('./home/home.module').then((m) => m.HomeModule),
+                        canActivate: [AppRouteGuard]
                     },
                     {
                         path: 'about',
                         loadChildren: () => import('./about/about.module').then((m) => m.AboutModule),
+                        canActivate: [AppRouteGuard]
                     },
                     {
                         path: 'users',
@@ -38,6 +41,7 @@ import { AppComponent } from './app.component';
                     {
                         path: 'update-password',
                         loadChildren: () => import('./users/users.module').then((m) => m.UsersModule),
+                        canActivate: [AppRouteGuard]
                     },
                 ]
             }
