@@ -5,9 +5,10 @@ import { EditUserDialogComponent } from './edit-user/edit-user-dialog.component'
 import { ResetPasswordDialogComponent } from './reset-password/reset-password.component';
 import { ChangePasswordComponent } from './change-password/change-password.component';
 import { UsersRoutingModule } from './users-routing.module';
+import { UsersComponent } from './users.component';
 
 @NgModule({
-    declarations: [ResetPasswordDialogComponent, EditUserDialogComponent, CreateUserDialogComponent, ChangePasswordComponent],
+    declarations: [UsersComponent, ResetPasswordDialogComponent, EditUserDialogComponent, CreateUserDialogComponent, ChangePasswordComponent],
     imports: [SharedModule, UsersRoutingModule],
 })
 export class UsersModule {}
