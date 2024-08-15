@@ -2,7 +2,7 @@ import { CommonModule } from '@angular/common';
 import { NgModule, ModuleWithProviders } from '@angular/core';
 import { RouterModule } from '@angular/router';
 import { NgxPaginationModule } from 'ngx-pagination';
-
+import { FormsModule } from '@angular/forms';
 import { AppSessionService } from './session/app-session.service';
 import { AppUrlService } from './nav/app-url.service';
 import { AppAuthService } from './auth/app-auth.service';
@@ -18,11 +18,21 @@ import { LayoutStoreService } from './layout/layout-store.service';
 import { BusyDirective } from './directives/busy.directive';
 import { EqualValidator } from './directives/equal-validator.directive';
 
+import { ModalModule } from 'ngx-bootstrap/modal';
+import { BsDropdownModule } from 'ngx-bootstrap/dropdown';
+import { CollapseModule } from 'ngx-bootstrap/collapse';
+import { TabsModule } from 'ngx-bootstrap/tabs';
+
 @NgModule({
     imports: [
         CommonModule,
         RouterModule,
-        NgxPaginationModule
+        NgxPaginationModule,
+        FormsModule,
+        ModalModule,
+        BsDropdownModule,
+        CollapseModule,
+        TabsModule
     ],
     declarations: [
         AbpPaginationControlsComponent,
@@ -40,7 +50,13 @@ import { EqualValidator } from './directives/equal-validator.directive';
         AbpModalFooterComponent,
         LocalizePipe,
         BusyDirective,
-        EqualValidator
+        EqualValidator,
+        FormsModule,
+        NgxPaginationModule,
+        ModalModule,
+        BsDropdownModule,
+        CollapseModule,
+        TabsModule
     ]
 })
 export class SharedModule {
