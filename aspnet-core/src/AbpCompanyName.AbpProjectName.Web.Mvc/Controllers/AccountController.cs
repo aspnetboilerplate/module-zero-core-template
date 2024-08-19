@@ -367,6 +367,16 @@ namespace AbpCompanyName.AbpProjectName.Web.Controllers
 
         #endregion
 
+        #region 403 Forbidden
+        
+        [Route("/Account/Forbidden")]
+        public ActionResult Error403()
+        {
+            return View();
+        }
+        
+        #endregion
+        
         #region Helpers
 
         public ActionResult RedirectToAppHome()

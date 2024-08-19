@@ -1,5 +1,7 @@
 ﻿using System;
 using System.Text;
+using Abp.AspNetCore.Mvc.Authorization;
+using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.IdentityModel.Tokens;
@@ -10,6 +12,11 @@ namespace AbpCompanyName.AbpProjectName.Web.Startup
     {
         public static void Configure(IServiceCollection services, IConfiguration configuration)
         {
+            services.ConfigureApplicationCookie(options =>
+            {
+                options.AccessDeniedPath = "/Account/Forbidden";
+            });
+            
             if (bool.Parse(configuration["Authentication:JwtBearer:IsEnabled"]))
             {
                 services.AddAuthentication()

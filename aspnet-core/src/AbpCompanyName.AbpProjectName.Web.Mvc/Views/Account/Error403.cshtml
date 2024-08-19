@@ -1,0 +1,26 @@
+﻿@{
+    ViewBag.Title = L("403PageHeader");
+    ViewBag.HideTenantChange = true;
+}
+
+@section styles
+{
+    <link href="~/view-resources/Views/Account/Error403.css" rel="stylesheet" asp-append-version="true" />
+}
+
+<div class="forbidden-box d-flex flex-column align-items-center justify-content-center text-center">
+    <div class="d-flex align-items-center">
+        <div class="display-1 text-warning me-3">
+            403
+        </div>
+    </div>
+    <h2 class="text-warning">
+        <i class="fas fa-exclamation-triangle"></i> @L("403PageHeader")
+    </h2>
+    <div class="mt-4">
+        <p class="lead text-muted">
+            @L("403PageDescription")
+        </p>
+        <a href="@Url.Action("Index", "Home")" class="btn btn-primary">@L("403PageButton")</a>
+    </div>
+</div>
