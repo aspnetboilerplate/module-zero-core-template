@@ -12,6 +12,9 @@
 
     var pageTitle = !string.IsNullOrWhiteSpace(ViewBag.Title) ? ViewBag.Title + " / " : "";
     pageTitle += "AbpProjectName";
+    
+    var hideTenantChange = ViewBag.HideTenantChange != null && ViewBag.HideTenantChange == true;
+    var showTenantChange = MultiTenancyConfig.IsEnabled && !hideTenantChange;
 }
 <!DOCTYPE html>
 <html lang="@LanguageManager.CurrentLanguage.Name">
@@ -31,7 +34,7 @@
             <a href="/"><b>AbpProjectName</b></a>
         </div>
         <div class="card">
-            @if (MultiTenancyConfig.IsEnabled)
+            @if (showTenantChange)
             {
                 <div class="card-header">
                     <vc:tenant-change></vc:tenant-change>
