@@ -18,7 +18,7 @@
     </ItemGroup>
 
     <ItemGroup>
-      <PackageReference Include="Microsoft.NET.Test.Sdk" Version="17.10.0" />
+      <PackageReference Include="Microsoft.NET.Test.Sdk" Version="17.11.1" />
       <PackageReference Include="NSubstitute" Version="5.1.0" />
       <PackageReference Include="Shouldly" Version="4.2.1" />
       <PackageReference Include="xunit" Version="2.9.0" />
@@ -28,7 +28,7 @@
         <IncludeAssets>runtime; build; native; contentfiles; analyzers</IncludeAssets>
       </PackageReference>
       <PackageReference Include="AngleSharp" Version="1.1.2" />
-      <PackageReference Include="Abp.AspNetCore.TestBase" Version="9.3.0" />
+      <PackageReference Include="Abp.AspNetCore.TestBase" Version="9.4.0" />
     </ItemGroup>
 
 </Project>
