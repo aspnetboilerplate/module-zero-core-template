@@ -28,9 +28,9 @@
   <ItemGroup>
     <PackageReference Include="Microsoft.AspNetCore.Authentication.JwtBearer" Version="8.0.8" />
     <PackageReference Include="Swashbuckle.AspNetCore" Version="6.7.3" />
-    <PackageReference Include="Abp.AspNetCore" Version="9.4.0" />
-    <PackageReference Include="Abp.ZeroCore" Version="9.4.0" />
-    <PackageReference Include="Abp.AspNetCore.SignalR" Version="9.4.0" />
+    <PackageReference Include="Abp.AspNetCore" Version="9.4.1" />
+    <PackageReference Include="Abp.ZeroCore" Version="9.4.1" />
+    <PackageReference Include="Abp.AspNetCore.SignalR" Version="9.4.1" />
   </ItemGroup>
 
 </Project>
