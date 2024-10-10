@@ -8,6 +8,7 @@
     var _$rolesTable = _$table.DataTable({
         paging: true,
         serverSide: true,
+        processing: true,
         listAction: {
             ajaxFunction: _roleService.getAll,
             inputFilter: function () {
@@ -31,21 +32,20 @@
                 targets: 0,
                 className: 'control',
                 defaultContent: '',
+                orderable: false,
             },
             {
                 targets: 1,
                 data: 'name',
-                sortable: false
             },
             {
                 targets: 2,
                 data: 'displayName',
-                sortable: false
             },
             {
                 targets: 3,
                 data: null,
-                sortable: false,
+                orderable: false,
                 autoWidth: false,
                 defaultContent: '',
                 render: (data, type, row, meta) => {

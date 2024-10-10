@@ -6,9 +6,7 @@
           <h1>{{ "Roles" | localize }}</h1>
         </div>
         <div class="col-6 text-right">
-          <a href="javascript:;"
-            class="btn bg-blue"
-            (click)="createRole()">
+          <a href="javascript:;" class="btn bg-blue" (click)="createRole()">
             <i class="fa fa-plus-square"></i>
             {{ "Create" | localize }}
           </a>
@@ -16,95 +14,137 @@
       </div>
     </div>
   </section>
-  <section class="content px-2">
+  <section class="content px-2 pb-5">
     <div class="container-fluid">
-      <div class="card">
+      <div class="card mb-0 table-wrapper">
         <div class="card-header">
           <div class="row">
             <div class="col-md-6">&emsp;</div>
             <div class="col-md-6">
               <div class="input-group">
                 <div class="input-group-prepend">
-                  <button type="button"
-                    class="btn bg-blue"
-                    (click)="getDataPage(1)">
+                  <button type="button" class="btn bg-blue" (click)="list()">
                     <i class="fas fa-search"></i>
                   </button>
                 </div>
-                <input type="text"
+                <input
+                  type="text"
                   class="form-control"
                   name="keyword"
                   [placeholder]="'SearchWithThreeDot' | localize"
                   [(ngModel)]="keyword"
-                  (keyup.enter)="getDataPage(1)" />
-                </div>
+                  (keyup.enter)="list()"
+                />
               </div>
             </div>
           </div>
-          <div class="card-body">
-            <div class="table-responsive">
-              <table class="table table-striped table-bordered"
-                [busy]="isTableLoading">
-                <thead class="bg-light">
+        </div>
+        <div class="card-body">
+          <div class="table-responsive">
+            <!--<Primeng-TurboTable-Start>-->
+            <div
+              class="primeng-datatable-container table-striped table-bordered"
+            >
+              <p-table
+                #dataTable
+                sortMode="multiple"
+                (onLazyLoad)="list($event)"
+                [value]="primengTableHelper.records"
+                rows="{{ primengTableHelper.defaultRecordsCountPerPage }}"
+                [paginator]="false"
+                [lazy]="true"
+                [tableStyle]="{ 'min-width': '50rem' }"
+              >
+                <ng-template pTemplate="header">
                   <tr>
-                    <th>{{ "RoleName" | localize }}</th>
-                    <th>{{ "DisplayName" | localize }}</th>
-                    <th style="width: 200px;">{{ "Actions" | localize }}</th>
+                    <th style="min-width: 150px" pSortableColumn="name">
+                      {{ "RoleName" | localize }}
+                      <p-sortIcon field="name"></p-sortIcon>
+                    </th>
+                    <th style="min-width: 150px" pSortableColumn="displayName">
+                      {{ "DisplayName" | localize }}
+                      <p-sortIcon field="displayName"></p-sortIcon>
+                    </th>
+                    <th style="min-width: 130px">
+                      {{ "Actions" | localize }}
+                    </th>
                   </tr>
-                </thead>
-                <tbody>
-                  @for (
-                    role of roles
-                    | paginate
-                    : {
-                    id: 'server',
-                    itemsPerPage: pageSize,
-                    currentPage: pageNumber,
-                    totalItems: totalItems
-                  }
-                  ; track
-                  role.id) {
+                </ng-template>
+
+                <ng-template pTemplate="body" let-record="$implicit">
                   <tr>
-                    <td>{{ role.name }}</td>
-                    <td>{{ role.displayName }}</td>
                     <td>
-                      <button type="button"
+                      <span class="p-column-title">{{
+                        "RoleName" | localize
+                      }}</span>
+                      <span>
+                        {{ record.name }}
+                      </span>
+                    </td>
+                    <td>
+                      <span class="p-column-title">{{
+                        "DisplayName" | localize
+                      }}</span>
+                      <span>
+                        {{ record.displayName }}
+                      </span>
+                    </td>
+                    <td>
+                      <button
+                        type="button"
                         class="btn btn-sm bg-secondary"
-                        (click)="editRole(role)">
+                        (click)="editRole(record)"
+                      >
                         <i class="fas fa-pencil-alt"></i>
                         {{ "Edit" | localize }}
                       </button>
-                      <button type="button"
+                      <button
+                        type="button"
                         class="btn btn-sm bg-danger mx-2"
-                        (click)="delete(role)">
+                        (click)="delete(record)"
+                      >
                         <i class="fas fa-trash"></i>
                         {{ "Delete" | localize }}
                       </button>
                     </td>
                   </tr>
-                }
-              </tbody>
-            </table>
+                </ng-template>
+              </p-table>
+              <div
+                class="primeng-no-data"
+                *ngIf="primengTableHelper.totalRecordsCount == 0"
+              >
+                {{ "NoData" | localize }}
+              </div>
+            </div>
+            <!--<Primeng-TurboTable-End>-->
           </div>
         </div>
-        <div class="card-footer table-card-footer bg-light border-top">
-          <div class="row">
+        <div class="card-footer table-card-footer bg-white border-top">
+          <div class="row d-flex justify-content-center align-items-center">
             <div class="col-sm-4 col-12 text-sm-left text-center">
-              <button class="btn btn-secondary"
-                (click)="refresh()">
+              <button class="btn btn-secondary" (click)="refresh()">
                 <i class="fas fa-redo-alt"></i>
               </button>
             </div>
-            <div class="col-sm-4 col-12 text-center">
-              <p class="mb-0 my-2">
-                {{ "TotalRecordsCount" | localize: totalItems }}
-              </p>
-            </div>
-            <div class="col-sm-4 col-12">
+            <div class="col-sm-8 col-12">
               <div class="float-sm-right m-auto">
-                <abp-pagination-controls id="server"
-                  (pageChange)="getDataPage($event)">
-                </abp-pagination-controls>
+                <div class="primeng-paging-container">
+                  <p-paginator
+                    [rows]="primengTableHelper.defaultRecordsCountPerPage"
+                    #paginator
+                    (onPageChange)="list($event)"
+                    [totalRecords]="primengTableHelper.totalRecordsCount"
+                    [rowsPerPageOptions]="
+                      primengTableHelper.predefinedRecordsCountPerPage
+                    "
+                    [showCurrentPageReport]="true"
+                    [currentPageReportTemplate]="
+                      'TotalRecordsCount'
+                        | localize : primengTableHelper.totalRecordsCount
+                    "
+                  ></p-paginator>
+                </div>
               </div>
             </div>
           </div>

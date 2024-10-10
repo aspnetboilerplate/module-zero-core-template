@@ -1,4 +1,5 @@
 ﻿using System.Linq;
+using System.Linq.Dynamic.Core;
 using System.Threading.Tasks;
 using Abp.Application.Services;
 using Abp.Application.Services.Dto;
@@ -96,6 +97,11 @@ namespace AbpCompanyName.AbpProjectName.MultiTenancy
             return Repository.GetAll()
                 .WhereIf(!input.Keyword.IsNullOrWhiteSpace(), x => x.TenancyName.Contains(input.Keyword) || x.Name.Contains(input.Keyword))
                 .WhereIf(input.IsActive.HasValue, x => x.IsActive == input.IsActive);
+        }
+
+        protected override IQueryable<Tenant> ApplySorting(IQueryable<Tenant> query, PagedTenantResultRequestDto input)
+        {
+            return query.OrderBy(input.Sorting);
         }
 
         protected override void MapToEntity(TenantDto updateInput, Tenant entity)

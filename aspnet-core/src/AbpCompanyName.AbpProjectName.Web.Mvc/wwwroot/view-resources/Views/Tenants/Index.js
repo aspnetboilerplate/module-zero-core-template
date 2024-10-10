@@ -8,10 +8,11 @@
     var _$tenantsTable = _$table.DataTable({
         paging: true,
         serverSide: true,
+        processing: true,
         listAction: {
-            ajaxFunction: _tenantService.getAll,
-            inputFilter: function () {
-                return $('#TenantsSearchForm').serializeFormToObject(true);
+          ajaxFunction: _tenantService.getAll,
+          inputFilter: function () {
+              return $('#TenantsSearchForm').serializeFormToObject(true);
             }
         },
         buttons: [
@@ -35,23 +36,21 @@
             {
                 targets: 1,
                 data: 'tenancyName',
-                sortable: false
             },
             {
                 targets: 2,
                 data: 'name',
-                sortable: false
             },
             {
                 targets: 3,
                 data: 'isActive',
-                sortable: false,
+                orderable: false,
                 render: data => `<input type="checkbox" disabled ${data ? 'checked' : ''}>`
             },
             {
                 targets: 4,
                 data: null,
-                sortable: false,
+                orderable: false,
                 autoWidth: false,
                 defaultContent: '',
                 render: (data, type, row, meta) => {
@@ -67,7 +66,6 @@
             }
         ]
     });
-
     _$form.find('.save-button').click(function (e) {
         e.preventDefault();
 
