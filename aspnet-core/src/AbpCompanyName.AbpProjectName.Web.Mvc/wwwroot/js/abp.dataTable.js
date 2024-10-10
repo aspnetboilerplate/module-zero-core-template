@@ -33,7 +33,7 @@
 
     $.extend(true, $.fn.dataTable.defaults, {
         searching: false,
-        ordering: false,
+        ordering: true,
         language: language,
         processing: true,
         autoWidth: false,

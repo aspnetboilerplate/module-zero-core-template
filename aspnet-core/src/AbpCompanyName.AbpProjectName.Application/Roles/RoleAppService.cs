@@ -1,5 +1,6 @@
 ﻿using System.Collections.Generic;
 using System.Linq;
+using System.Linq.Dynamic.Core;
 using System.Threading.Tasks;
 using Abp.Application.Services;
 using Abp.Application.Services.Dto;
@@ -121,7 +122,7 @@ namespace AbpCompanyName.AbpProjectName.Roles
 
         protected override IQueryable<Role> ApplySorting(IQueryable<Role> query, PagedRoleResultRequestDto input)
         {
-            return query.OrderBy(r => r.DisplayName);
+            return query.OrderBy(input.Sorting);
         }
 
         protected virtual void CheckErrors(IdentityResult identityResult)
