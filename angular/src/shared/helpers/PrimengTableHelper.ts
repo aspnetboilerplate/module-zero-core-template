@@ -61,9 +61,6 @@ export class PrimengTableHelper {
     }
 
     getMaxResultCount(paginator: Paginator, event: LazyLoadEvent): number {
-        console.log(event)
-
-        console.log(paginator)
         if (paginator.rows) {
             return paginator.rows;
         }

@@ -4,6 +4,7 @@ import { TenantsRoutingModule } from './tenants-routing.module';
 import { CreateTenantDialogComponent } from './create-tenant/create-tenant-dialog.component';
 import { EditTenantDialogComponent } from './edit-tenant/edit-tenant-dialog.component';
 import { TenantsComponent } from './tenants.component';
+import { CommonModule } from '@angular/common';
 
 @NgModule({
     declarations: [
@@ -11,6 +12,6 @@ import { TenantsComponent } from './tenants.component';
         EditTenantDialogComponent,
         TenantsComponent,
     ],
-    imports: [SharedModule, TenantsRoutingModule],
+    imports: [SharedModule, TenantsRoutingModule, CommonModule],
 })
 export class TenantsModule {}
