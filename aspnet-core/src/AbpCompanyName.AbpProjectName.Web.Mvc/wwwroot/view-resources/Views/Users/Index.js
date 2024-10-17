@@ -8,6 +8,7 @@
     var _$usersTable = _$table.DataTable({
         paging: true,
         serverSide: true,
+        processing: true,
         listAction: {
             ajaxFunction: _userService.getAll,
             inputFilter: function () {
@@ -31,32 +32,31 @@
                 targets: 0,
                 className: 'control',
                 defaultContent: '',
+                orderable: false,
             },
             {
                 targets: 1,
                 data: 'userName',
-                sortable: false
             },
             {
                 targets: 2,
                 data: 'fullName',
-                sortable: false
+                orderable: false,
             },
             {
                 targets: 3,
                 data: 'emailAddress',
-                sortable: false
             },
             {
                 targets: 4,
                 data: 'isActive',
-                sortable: false,
+                orderable: false,
                 render: data => `<input type="checkbox" disabled ${data ? 'checked' : ''}>`
             },
             {
                 targets: 5,
                 data: null,
-                sortable: false,
+                orderable: false,
                 autoWidth: false,
                 defaultContent: '',
                 render: (data, type, row, meta) => {

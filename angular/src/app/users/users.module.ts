@@ -6,9 +6,10 @@ import { ResetPasswordDialogComponent } from './reset-password/reset-password.co
 import { ChangePasswordComponent } from './change-password/change-password.component';
 import { UsersRoutingModule } from './users-routing.module';
 import { UsersComponent } from './users.component';
+import { CommonModule } from '@angular/common';
 
 @NgModule({
     declarations: [UsersComponent, ResetPasswordDialogComponent, EditUserDialogComponent, CreateUserDialogComponent, ChangePasswordComponent],
-    imports: [SharedModule, UsersRoutingModule],
+    imports: [SharedModule, UsersRoutingModule, CommonModule],
 })
 export class UsersModule {}

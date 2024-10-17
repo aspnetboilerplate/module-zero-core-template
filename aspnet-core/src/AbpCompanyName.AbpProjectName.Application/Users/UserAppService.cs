@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Linq.Dynamic.Core;
 using System.Text.RegularExpressions;
 using System.Threading.Tasks;
 using Abp.Application.Services;
@@ -179,7 +180,7 @@ namespace AbpCompanyName.AbpProjectName.Users
 
         protected override IQueryable<User> ApplySorting(IQueryable<User> query, PagedUserResultRequestDto input)
         {
-            return query.OrderBy(r => r.UserName);
+            return query.OrderBy(input.Sorting);
         }
 
         protected virtual void CheckErrors(IdentityResult identityResult)

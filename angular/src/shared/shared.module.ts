@@ -22,6 +22,10 @@ import { ModalModule } from 'ngx-bootstrap/modal';
 import { BsDropdownModule } from 'ngx-bootstrap/dropdown';
 import { CollapseModule } from 'ngx-bootstrap/collapse';
 import { TabsModule } from 'ngx-bootstrap/tabs';
+import { TableModule } from 'primeng/table';
+import { AutoCompleteModule } from 'primeng/autocomplete';
+import { PaginatorModule } from 'primeng/paginator';
+import { ProgressBarModule } from 'primeng/progressbar';
 
 @NgModule({
     imports: [
@@ -32,7 +36,11 @@ import { TabsModule } from 'ngx-bootstrap/tabs';
         ModalModule,
         BsDropdownModule,
         CollapseModule,
-        TabsModule
+        TabsModule,
+        TableModule,
+        PaginatorModule,
+        ProgressBarModule,
+        AutoCompleteModule
     ],
     declarations: [
         AbpPaginationControlsComponent,
@@ -56,7 +64,9 @@ import { TabsModule } from 'ngx-bootstrap/tabs';
         ModalModule,
         BsDropdownModule,
         CollapseModule,
-        TabsModule
+        TabsModule,
+        TableModule,
+        PaginatorModule
     ]
 })
 export class SharedModule {
