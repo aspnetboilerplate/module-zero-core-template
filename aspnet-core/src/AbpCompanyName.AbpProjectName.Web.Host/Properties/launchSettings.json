@@ -18,11 +18,10 @@
     "AbpCompanyName.AbpProjectName.Web.Host": {
       "commandName": "Project",
       "launchBrowser": true,
-      "launchUrl": "https://localhost:44311/",
+      "applicationUrl": "https://localhost:44311/",
       "environmentVariables": {
         "ASPNETCORE_ENVIRONMENT": "Development"
-      },
-      "applicationUrl": "https://localhost:44311/"
+      }
     }
   }
 }
