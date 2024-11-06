@@ -22,7 +22,7 @@
               name="name"
               id="name"
               required
-              maxlength="32"
+              maxlength="64"
               [(ngModel)]="user.name"
               #nameModel="ngModel"
               #nameEl
@@ -44,7 +44,7 @@
                 name="surname"
                 id="surname"
                 required
-                maxlength="32"
+                maxlength="64"
                 [(ngModel)]="user.surname"
                 #surnameModel="ngModel"
                 #surnameEl
@@ -67,7 +67,7 @@
                   id="userName"
                   required
                   minlength="2"
-                  maxlength="32"
+                  maxlength="256"
                   [(ngModel)]="user.userName"
                   #userNameModel="ngModel"
                   #userNameEl
