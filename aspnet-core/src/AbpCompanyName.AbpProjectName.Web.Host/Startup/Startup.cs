@@ -136,7 +136,7 @@ namespace AbpCompanyName.AbpProjectName.Web.Host.Startup
                     License = new OpenApiLicense
                     {
                         Name = "MIT License",
-                        Url = new Uri("https://github.com/aspnetboilerplate/aspnetboilerplate/blob/dev/LICENSE"),
+                        Url = new Uri("https://github.com/aspnetboilerplate/aspnetboilerplate/blob/dev/LICENSE.md"),
                     }
                 });
                 options.DocInclusionPredicate((docName, description) => true);
