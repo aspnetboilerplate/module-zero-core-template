@@ -1,12 +1,11 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk.Web">
-
   <PropertyGroup>
     <AssemblyName>AbpCompanyName.AbpProjectName.Web.Mvc</AssemblyName>
     <OutputType>Exe</OutputType>
     <PackageId>AbpCompanyName.AbpProjectName.Web.Mvc</PackageId>
     <UserSecretsId>AbpCompanyName-AbpProjectName-56C2EF2F-ABD6-4EFC-AAF2-2E81C34E8FB1</UserSecretsId>
     <RootNamespace>AbpCompanyName.AbpProjectName.Web</RootNamespace>
-    <TargetFramework>net8.0</TargetFramework>
+    <TargetFramework>net9.0</TargetFramework>
     <AssetTargetFallback>$(AssetTargetFallback);portable-net45+win8+wp8+wpa81;</AssetTargetFallback>
     <AutoGenerateBindingRedirects>true</AutoGenerateBindingRedirects>
     <GenerateBindingRedirectsOutputType>true</GenerateBindingRedirectsOutputType>
@@ -15,7 +14,6 @@
     <MvcRazorExcludeRefAssembliesFromPublish>false</MvcRazorExcludeRefAssembliesFromPublish>
     <PreserveCompilationReferences>true</PreserveCompilationReferences>
   </PropertyGroup>
-
   <ItemGroup>
     <None Update="Dockerfile">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
@@ -28,15 +26,13 @@
       <CopyToPublishDirectory>PreserveNewest</CopyToPublishDirectory>
     </None>
   </ItemGroup>
-
   <ItemGroup>
     <ProjectReference Include="..\AbpCompanyName.AbpProjectName.Web.Core\AbpCompanyName.AbpProjectName.Web.Core.csproj" />
   </ItemGroup>
-
   <ItemGroup>
     <PackageReference Include="BuildBundlerMinifier" Version="3.2.449" />
-    <PackageReference Include="Microsoft.AspNetCore.Mvc.Razor.RuntimeCompilation" Version="8.0.8" />
-    <PackageReference Include="Microsoft.EntityFrameworkCore.Design" Version="8.0.8">
+    <PackageReference Include="Microsoft.AspNetCore.Mvc.Razor.RuntimeCompilation" Version="9.0.0" />
+    <PackageReference Include="Microsoft.EntityFrameworkCore.Design" Version="9.0.0">
       <PrivateAssets>all</PrivateAssets>
       <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
     </PackageReference>
@@ -45,10 +41,8 @@
     <PackageReference Include="Abp.RedisCache" Version="9.4.1" />
     <PackageReference Include="Abp.Castle.Log4Net" Version="9.4.1" />
   </ItemGroup>
-
   <ItemGroup>
     <Folder Include="wwwroot\libs\" />
     <Folder Include="wwwroot\view-resources\Views\_Bundles\" />
   </ItemGroup>
-
 </Project>
