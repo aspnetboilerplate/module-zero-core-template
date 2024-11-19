@@ -1,33 +1,32 @@
-﻿using System.Threading.Tasks;
-using Abp.Configuration.Startup;
+﻿using Abp.Configuration.Startup;
 using AbpCompanyName.AbpProjectName.Sessions;
 using Microsoft.AspNetCore.Mvc;
+using System.Threading.Tasks;
 
-namespace AbpCompanyName.AbpProjectName.Web.Views.Shared.Components.RightNavbarUserArea
+namespace AbpCompanyName.AbpProjectName.Web.Views.Shared.Components.RightNavbarUserArea;
+
+public class RightNavbarUserAreaViewComponent : AbpProjectNameViewComponent
 {
-    public class RightNavbarUserAreaViewComponent : AbpProjectNameViewComponent
+    private readonly ISessionAppService _sessionAppService;
+    private readonly IMultiTenancyConfig _multiTenancyConfig;
+
+    public RightNavbarUserAreaViewComponent(
+        ISessionAppService sessionAppService,
+        IMultiTenancyConfig multiTenancyConfig)
     {
-        private readonly ISessionAppService _sessionAppService;
-        private readonly IMultiTenancyConfig _multiTenancyConfig;
+        _sessionAppService = sessionAppService;
+        _multiTenancyConfig = multiTenancyConfig;
+    }
 
-        public RightNavbarUserAreaViewComponent(
-            ISessionAppService sessionAppService,
-            IMultiTenancyConfig multiTenancyConfig)
+    public async Task<IViewComponentResult> InvokeAsync()
+    {
+        var model = new RightNavbarUserAreaViewModel
         {
-            _sessionAppService = sessionAppService;
-            _multiTenancyConfig = multiTenancyConfig;
-        }
+            LoginInformations = await _sessionAppService.GetCurrentLoginInformations(),
+            IsMultiTenancyEnabled = _multiTenancyConfig.IsEnabled,
+        };
 
-        public async Task<IViewComponentResult> InvokeAsync()
-        {
-            var model = new RightNavbarUserAreaViewModel
-            {
-                LoginInformations = await _sessionAppService.GetCurrentLoginInformations(),
-                IsMultiTenancyEnabled = _multiTenancyConfig.IsEnabled,
-            };
-
-            return View(model);
-        }
+        return View(model);
     }
 }
 

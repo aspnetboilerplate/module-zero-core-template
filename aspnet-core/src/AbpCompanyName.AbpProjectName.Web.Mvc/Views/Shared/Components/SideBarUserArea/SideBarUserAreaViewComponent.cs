@@ -1,32 +1,31 @@
-﻿using System.Threading.Tasks;
-using Abp.Configuration.Startup;
+﻿using Abp.Configuration.Startup;
 using AbpCompanyName.AbpProjectName.Sessions;
 using Microsoft.AspNetCore.Mvc;
+using System.Threading.Tasks;
 
-namespace AbpCompanyName.AbpProjectName.Web.Views.Shared.Components.SideBarUserArea
+namespace AbpCompanyName.AbpProjectName.Web.Views.Shared.Components.SideBarUserArea;
+
+public class SideBarUserAreaViewComponent : AbpProjectNameViewComponent
 {
-    public class SideBarUserAreaViewComponent : AbpProjectNameViewComponent
+    private readonly ISessionAppService _sessionAppService;
+    private readonly IMultiTenancyConfig _multiTenancyConfig;
+
+    public SideBarUserAreaViewComponent(
+        ISessionAppService sessionAppService,
+        IMultiTenancyConfig multiTenancyConfig)
     {
-        private readonly ISessionAppService _sessionAppService;
-        private readonly IMultiTenancyConfig _multiTenancyConfig;
+        _sessionAppService = sessionAppService;
+        _multiTenancyConfig = multiTenancyConfig;
+    }
 
-        public SideBarUserAreaViewComponent(
-            ISessionAppService sessionAppService,
-            IMultiTenancyConfig multiTenancyConfig)
+    public async Task<IViewComponentResult> InvokeAsync()
+    {
+        var model = new SideBarUserAreaViewModel
         {
-            _sessionAppService = sessionAppService;
-            _multiTenancyConfig = multiTenancyConfig;
-        }
+            LoginInformations = await _sessionAppService.GetCurrentLoginInformations(),
+            IsMultiTenancyEnabled = _multiTenancyConfig.IsEnabled,
+        };
 
-        public async Task<IViewComponentResult> InvokeAsync()
-        {
-            var model = new SideBarUserAreaViewModel
-            {
-                LoginInformations = await _sessionAppService.GetCurrentLoginInformations(),
-                IsMultiTenancyEnabled = _multiTenancyConfig.IsEnabled,
-            };
-
-            return View(model);
-        }
+        return View(model);
     }
 }

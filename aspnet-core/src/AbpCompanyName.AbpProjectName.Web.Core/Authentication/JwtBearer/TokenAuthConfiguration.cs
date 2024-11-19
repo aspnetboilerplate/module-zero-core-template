@@ -1,5 +1,5 @@
-﻿using System;
-using Microsoft.IdentityModel.Tokens;
+﻿using Microsoft.IdentityModel.Tokens;
+using System;
 
 namespace AbpCompanyName.AbpProjectName.Authentication.JwtBearer
 {

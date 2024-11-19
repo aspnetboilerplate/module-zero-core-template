@@ -1,11 +1,10 @@
 ﻿using Abp.AutoMapper;
 using AbpCompanyName.AbpProjectName.Sessions.Dto;
 
-namespace AbpCompanyName.AbpProjectName.Web.Views.Shared.Components.TenantChange
+namespace AbpCompanyName.AbpProjectName.Web.Views.Shared.Components.TenantChange;
+
+[AutoMapFrom(typeof(GetCurrentLoginInformationsOutput))]
+public class TenantChangeViewModel
 {
-    [AutoMapFrom(typeof(GetCurrentLoginInformationsOutput))]
-    public class TenantChangeViewModel
-    {
-        public TenantLoginInfoDto Tenant { get; set; }
-    }
+    public TenantLoginInfoDto Tenant { get; set; }
 }

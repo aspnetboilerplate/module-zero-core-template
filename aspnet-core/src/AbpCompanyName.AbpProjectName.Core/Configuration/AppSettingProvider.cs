@@ -1,16 +1,15 @@
-﻿using System.Collections.Generic;
-using Abp.Configuration;
+﻿using Abp.Configuration;
+using System.Collections.Generic;
 
-namespace AbpCompanyName.AbpProjectName.Configuration
+namespace AbpCompanyName.AbpProjectName.Configuration;
+
+public class AppSettingProvider : SettingProvider
 {
-    public class AppSettingProvider : SettingProvider
+    public override IEnumerable<SettingDefinition> GetSettingDefinitions(SettingDefinitionProviderContext context)
     {
-        public override IEnumerable<SettingDefinition> GetSettingDefinitions(SettingDefinitionProviderContext context)
+        return new[]
         {
-            return new[]
-            {
-                new SettingDefinition(AppSettingNames.UiTheme, "red", scopes: SettingScopes.Application | SettingScopes.Tenant | SettingScopes.User, clientVisibilityProvider: new VisibleSettingClientVisibilityProvider())
-            };
-        }
+            new SettingDefinition(AppSettingNames.UiTheme, "red", scopes: SettingScopes.Application | SettingScopes.Tenant | SettingScopes.User, clientVisibilityProvider: new VisibleSettingClientVisibilityProvider())
+        };
     }
 }

@@ -1,12 +1,11 @@
-﻿namespace AbpCompanyName.AbpProjectName.Web.Models.Common.Modals
-{
-    public class ModalHeaderViewModel
-    {
-        public string Title { get; set; }
+﻿namespace AbpCompanyName.AbpProjectName.Web.Models.Common.Modals;
 
-        public ModalHeaderViewModel(string title)
-        {
-            Title = title;
-        }
+public class ModalHeaderViewModel
+{
+    public string Title { get; set; }
+
+    public ModalHeaderViewModel(string title)
+    {
+        Title = title;
     }
 }

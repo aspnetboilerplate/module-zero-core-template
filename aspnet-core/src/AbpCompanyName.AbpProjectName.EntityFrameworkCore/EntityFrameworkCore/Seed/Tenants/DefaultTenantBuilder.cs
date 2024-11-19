@@ -1,43 +1,42 @@
-﻿using System.Linq;
-using Microsoft.EntityFrameworkCore;
-using Abp.MultiTenancy;
+﻿using Abp.MultiTenancy;
 using AbpCompanyName.AbpProjectName.Editions;
 using AbpCompanyName.AbpProjectName.MultiTenancy;
+using Microsoft.EntityFrameworkCore;
+using System.Linq;
 
-namespace AbpCompanyName.AbpProjectName.EntityFrameworkCore.Seed.Tenants
+namespace AbpCompanyName.AbpProjectName.EntityFrameworkCore.Seed.Tenants;
+
+public class DefaultTenantBuilder
 {
-    public class DefaultTenantBuilder
+    private readonly AbpProjectNameDbContext _context;
+
+    public DefaultTenantBuilder(AbpProjectNameDbContext context)
     {
-        private readonly AbpProjectNameDbContext _context;
+        _context = context;
+    }
 
-        public DefaultTenantBuilder(AbpProjectNameDbContext context)
+    public void Create()
+    {
+        CreateDefaultTenant();
+    }
+
+    private void CreateDefaultTenant()
+    {
+        // Default tenant
+
+        var defaultTenant = _context.Tenants.IgnoreQueryFilters().FirstOrDefault(t => t.TenancyName == AbpTenantBase.DefaultTenantName);
+        if (defaultTenant == null)
         {
-            _context = context;
-        }
+            defaultTenant = new Tenant(AbpTenantBase.DefaultTenantName, AbpTenantBase.DefaultTenantName);
 
-        public void Create()
-        {
-            CreateDefaultTenant();
-        }
-
-        private void CreateDefaultTenant()
-        {
-            // Default tenant
-
-            var defaultTenant = _context.Tenants.IgnoreQueryFilters().FirstOrDefault(t => t.TenancyName == AbpTenantBase.DefaultTenantName);
-            if (defaultTenant == null)
+            var defaultEdition = _context.Editions.IgnoreQueryFilters().FirstOrDefault(e => e.Name == EditionManager.DefaultEditionName);
+            if (defaultEdition != null)
             {
-                defaultTenant = new Tenant(AbpTenantBase.DefaultTenantName, AbpTenantBase.DefaultTenantName);
-
-                var defaultEdition = _context.Editions.IgnoreQueryFilters().FirstOrDefault(e => e.Name == EditionManager.DefaultEditionName);
-                if (defaultEdition != null)
-                {
-                    defaultTenant.EditionId = defaultEdition.Id;
-                }
-
-                _context.Tenants.Add(defaultTenant);
-                _context.SaveChanges();
+                defaultTenant.EditionId = defaultEdition.Id;
             }
+
+            _context.Tenants.Add(defaultTenant);
+            _context.SaveChanges();
         }
     }
 }

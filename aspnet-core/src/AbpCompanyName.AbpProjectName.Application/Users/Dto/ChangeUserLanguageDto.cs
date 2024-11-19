@@ -1,10 +1,9 @@
 using System.ComponentModel.DataAnnotations;
 
-namespace AbpCompanyName.AbpProjectName.Users.Dto
+namespace AbpCompanyName.AbpProjectName.Users.Dto;
+
+public class ChangeUserLanguageDto
 {
-    public class ChangeUserLanguageDto
-    {
-        [Required]
-        public string LanguageName { get; set; }
-    }
+    [Required]
+    public string LanguageName { get; set; }
 }

@@ -1,25 +1,24 @@
 ﻿using AbpCompanyName.AbpProjectName.Sessions.Dto;
 
-namespace AbpCompanyName.AbpProjectName.Web.Views.Shared.Components.SideBarUserArea
+namespace AbpCompanyName.AbpProjectName.Web.Views.Shared.Components.SideBarUserArea;
+
+public class SideBarUserAreaViewModel
 {
-    public class SideBarUserAreaViewModel
+    public GetCurrentLoginInformationsOutput LoginInformations { get; set; }
+
+    public bool IsMultiTenancyEnabled { get; set; }
+
+    public string GetShownLoginName()
     {
-        public GetCurrentLoginInformationsOutput LoginInformations { get; set; }
+        var userName = LoginInformations.User.UserName;
 
-        public bool IsMultiTenancyEnabled { get; set; }
-
-        public string GetShownLoginName()
+        if (!IsMultiTenancyEnabled)
         {
-            var userName = LoginInformations.User.UserName;
-
-            if (!IsMultiTenancyEnabled)
-            {
-                return userName;
-            }
-
-            return LoginInformations.Tenant == null
-                ? ".\\" + userName
-                : LoginInformations.Tenant.TenancyName + "\\" + userName;
+            return userName;
         }
+
+        return LoginInformations.Tenant == null
+            ? ".\\" + userName
+            : LoginInformations.Tenant.TenancyName + "\\" + userName;
     }
 }

@@ -1,27 +1,26 @@
-﻿using System.Linq;
-using Abp.Localization;
+﻿using Abp.Localization;
 using Microsoft.AspNetCore.Mvc;
+using System.Linq;
 
-namespace AbpCompanyName.AbpProjectName.Web.Views.Shared.Components.RightNavbarLanguageSwitch
+namespace AbpCompanyName.AbpProjectName.Web.Views.Shared.Components.RightNavbarLanguageSwitch;
+
+public class RightNavbarLanguageSwitchViewComponent : AbpProjectNameViewComponent
 {
-    public class RightNavbarLanguageSwitchViewComponent : AbpProjectNameViewComponent
+    private readonly ILanguageManager _languageManager;
+
+    public RightNavbarLanguageSwitchViewComponent(ILanguageManager languageManager)
     {
-        private readonly ILanguageManager _languageManager;
+        _languageManager = languageManager;
+    }
 
-        public RightNavbarLanguageSwitchViewComponent(ILanguageManager languageManager)
+    public IViewComponentResult Invoke()
+    {
+        var model = new RightNavbarLanguageSwitchViewModel
         {
-            _languageManager = languageManager;
-        }
+            CurrentLanguage = _languageManager.CurrentLanguage,
+            Languages = _languageManager.GetLanguages().Where(l => !l.IsDisabled).ToList()
+        };
 
-        public IViewComponentResult Invoke()
-        {
-            var model = new RightNavbarLanguageSwitchViewModel
-            {
-                CurrentLanguage = _languageManager.CurrentLanguage,
-                Languages = _languageManager.GetLanguages().Where(l => !l.IsDisabled).ToList()
-            };
-
-            return View(model);
-        }
+        return View(model);
     }
 }

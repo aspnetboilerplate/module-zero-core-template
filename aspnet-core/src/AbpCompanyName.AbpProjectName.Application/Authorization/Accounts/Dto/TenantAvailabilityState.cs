@@ -1,9 +1,8 @@
-﻿namespace AbpCompanyName.AbpProjectName.Authorization.Accounts.Dto
+﻿namespace AbpCompanyName.AbpProjectName.Authorization.Accounts.Dto;
+
+public enum TenantAvailabilityState
 {
-    public enum TenantAvailabilityState
-    {
-        Available = 1,
-        InActive,
-        NotFound
-    }
+    Available = 1,
+    InActive,
+    NotFound
 }

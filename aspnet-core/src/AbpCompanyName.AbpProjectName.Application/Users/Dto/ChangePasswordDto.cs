@@ -1,13 +1,12 @@
 ﻿using System.ComponentModel.DataAnnotations;
 
-namespace AbpCompanyName.AbpProjectName.Users.Dto
-{
-    public class ChangePasswordDto
-    {
-        [Required]
-        public string CurrentPassword { get; set; }
+namespace AbpCompanyName.AbpProjectName.Users.Dto;
 
-        [Required]
-        public string NewPassword { get; set; }
-    }
+public class ChangePasswordDto
+{
+    [Required]
+    public string CurrentPassword { get; set; }
+
+    [Required]
+    public string NewPassword { get; set; }
 }
