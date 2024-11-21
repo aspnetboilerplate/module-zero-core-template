@@ -1,7 +1,6 @@
-﻿namespace AbpCompanyName.AbpProjectName.Authorization.Accounts.Dto
+﻿namespace AbpCompanyName.AbpProjectName.Authorization.Accounts.Dto;
+
+public class RegisterOutput
 {
-    public class RegisterOutput
-    {
-        public bool CanLogin { get; set; }
-    }
+    public bool CanLogin { get; set; }
 }

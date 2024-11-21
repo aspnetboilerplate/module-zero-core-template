@@ -1,12 +1,11 @@
 ﻿using Abp.AspNetCore.Mvc.ViewComponents;
 
-namespace AbpCompanyName.AbpProjectName.Web.Views
+namespace AbpCompanyName.AbpProjectName.Web.Views;
+
+public abstract class AbpProjectNameViewComponent : AbpViewComponent
 {
-    public abstract class AbpProjectNameViewComponent : AbpViewComponent
+    protected AbpProjectNameViewComponent()
     {
-        protected AbpProjectNameViewComponent()
-        {
-            LocalizationSourceName = AbpProjectNameConsts.LocalizationSourceName;
-        }
+        LocalizationSourceName = AbpProjectNameConsts.LocalizationSourceName;
     }
 }

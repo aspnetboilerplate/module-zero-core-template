@@ -63,7 +63,7 @@ var abp = abp || {};
         };
 
         xhr.open('POST', '/api/TokenAuth/Authenticate', true);
-        xhr.setRequestHeader('Abp.TenantId', tenantId);
+        xhr.setRequestHeader('Abp-TenantId', tenantId);
         xhr.setRequestHeader('Content-type', 'application/json');
         addAntiForgeryTokenToXhr(xhr);
         xhr.send(

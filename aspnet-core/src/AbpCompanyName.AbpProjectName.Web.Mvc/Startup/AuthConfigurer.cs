@@ -1,52 +1,49 @@
-﻿using System;
-using System.Text;
-using Abp.AspNetCore.Mvc.Authorization;
-using Microsoft.AspNetCore.Mvc;
-using Microsoft.Extensions.Configuration;
+﻿using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.IdentityModel.Tokens;
+using System;
+using System.Text;
 
-namespace AbpCompanyName.AbpProjectName.Web.Startup
+namespace AbpCompanyName.AbpProjectName.Web.Startup;
+
+public static class AuthConfigurer
 {
-    public static class AuthConfigurer
+    public static void Configure(IServiceCollection services, IConfiguration configuration)
     {
-        public static void Configure(IServiceCollection services, IConfiguration configuration)
+        services.ConfigureApplicationCookie(options =>
         {
-            services.ConfigureApplicationCookie(options =>
-            {
-                options.AccessDeniedPath = "/Account/Forbidden";
-            });
-            
-            if (bool.Parse(configuration["Authentication:JwtBearer:IsEnabled"]))
-            {
-                services.AddAuthentication()
-                    .AddJwtBearer(options =>
+            options.AccessDeniedPath = "/Account/Forbidden";
+        });
+
+        if (bool.Parse(configuration["Authentication:JwtBearer:IsEnabled"]))
+        {
+            services.AddAuthentication()
+                .AddJwtBearer(options =>
+                {
+                    options.Audience = configuration["Authentication:JwtBearer:Audience"];
+
+                    options.TokenValidationParameters = new TokenValidationParameters
                     {
-                        options.Audience = configuration["Authentication:JwtBearer:Audience"];
-                        
-                        options.TokenValidationParameters = new TokenValidationParameters
-                        {
-                            // The signing key must match!
-                            ValidateIssuerSigningKey = true,
-                            IssuerSigningKey = new SymmetricSecurityKey(Encoding.ASCII.GetBytes(configuration["Authentication:JwtBearer:SecurityKey"])),
+                        // The signing key must match!
+                        ValidateIssuerSigningKey = true,
+                        IssuerSigningKey = new SymmetricSecurityKey(Encoding.ASCII.GetBytes(configuration["Authentication:JwtBearer:SecurityKey"])),
 
-                            // Validate the JWT Issuer (iss) claim
-                            ValidateIssuer = true,
-                            ValidIssuer = configuration["Authentication:JwtBearer:Issuer"],
+                        // Validate the JWT Issuer (iss) claim
+                        ValidateIssuer = true,
+                        ValidIssuer = configuration["Authentication:JwtBearer:Issuer"],
 
-                            // Validate the JWT Audience (aud) claim
-                            ValidateAudience = true,
-                            ValidAudience = configuration["Authentication:JwtBearer:Audience"],
+                        // Validate the JWT Audience (aud) claim
+                        ValidateAudience = true,
+                        ValidAudience = configuration["Authentication:JwtBearer:Audience"],
 
-                            // Validate the token expiry
-                            ValidateLifetime = true,
+                        // Validate the token expiry
+                        ValidateLifetime = true,
 
-                            // If you want to allow a certain amount of clock drift, set that here
-                            ClockSkew = TimeSpan.Zero
-                        };
-                    });
-                
-            }
+                        // If you want to allow a certain amount of clock drift, set that here
+                        ClockSkew = TimeSpan.Zero
+                    };
+                });
+
         }
     }
 }

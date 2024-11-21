@@ -1,14 +1,14 @@
-﻿using Microsoft.AspNetCore.Hosting;
-using Microsoft.Extensions.Configuration;
-using Abp.Modules;
+﻿using Abp.Modules;
 using Abp.Reflection.Extensions;
 using AbpCompanyName.AbpProjectName.Configuration;
+using Microsoft.AspNetCore.Hosting;
+using Microsoft.Extensions.Configuration;
 
 namespace AbpCompanyName.AbpProjectName.Web.Host.Startup
 {
     [DependsOn(
        typeof(AbpProjectNameWebCoreModule))]
-    public class AbpProjectNameWebHostModule: AbpModule
+    public class AbpProjectNameWebHostModule : AbpModule
     {
         private readonly IWebHostEnvironment _env;
         private readonly IConfigurationRoot _appConfiguration;

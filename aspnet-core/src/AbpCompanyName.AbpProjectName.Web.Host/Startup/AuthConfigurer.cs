@@ -1,12 +1,12 @@
-﻿using System;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using Abp.Runtime.Security;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.IdentityModel.Tokens;
-using Abp.Runtime.Security;
+using System;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
 
 namespace AbpCompanyName.AbpProjectName.Web.Host.Startup
 {
@@ -16,7 +16,8 @@ namespace AbpCompanyName.AbpProjectName.Web.Host.Startup
         {
             if (bool.Parse(configuration["Authentication:JwtBearer:IsEnabled"]))
             {
-                services.AddAuthentication(options => {
+                services.AddAuthentication(options =>
+                {
                     options.DefaultAuthenticateScheme = "JwtBearer";
                     options.DefaultChallengeScheme = "JwtBearer";
                 }).AddJwtBearer("JwtBearer", options =>

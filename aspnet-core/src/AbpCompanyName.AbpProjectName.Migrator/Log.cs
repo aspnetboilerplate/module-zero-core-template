@@ -1,23 +1,22 @@
-using System;
-using Castle.Core.Logging;
 using Abp.Dependency;
 using Abp.Timing;
+using Castle.Core.Logging;
+using System;
 
-namespace AbpCompanyName.AbpProjectName.Migrator
+namespace AbpCompanyName.AbpProjectName.Migrator;
+
+public class Log : ITransientDependency
 {
-    public class Log : ITransientDependency
+    public ILogger Logger { get; set; }
+
+    public Log()
     {
-        public ILogger Logger { get; set; }
+        Logger = NullLogger.Instance;
+    }
 
-        public Log()
-        {
-            Logger = NullLogger.Instance;
-        }
-
-        public void Write(string text)
-        {
-            Console.WriteLine(Clock.Now.ToString("yyyy-MM-dd HH:mm:ss") + " | " + text);
-            Logger.Info(text);
-        }
+    public void Write(string text)
+    {
+        Console.WriteLine(Clock.Now.ToString("yyyy-MM-dd HH:mm:ss") + " | " + text);
+        Logger.Info(text);
     }
 }

@@ -2,28 +2,27 @@
 
 #nullable disable
 
-namespace AbpCompanyName.AbpProjectName.Migrations
+namespace AbpCompanyName.AbpProjectName.Migrations;
+
+/// <inheritdoc />
+public partial class Upgraded_To_Abp_9_2 : Migration
 {
     /// <inheritdoc />
-    public partial class Upgraded_To_Abp_9_2 : Migration
+    protected override void Up(MigrationBuilder migrationBuilder)
     {
-        /// <inheritdoc />
-        protected override void Up(MigrationBuilder migrationBuilder)
-        {
-            migrationBuilder.AddColumn<string>(
-                name: "FailReason",
-                table: "AbpUserLoginAttempts",
-                type: "nvarchar(1024)",
-                maxLength: 1024,
-                nullable: true);
-        }
+        migrationBuilder.AddColumn<string>(
+            name: "FailReason",
+            table: "AbpUserLoginAttempts",
+            type: "nvarchar(1024)",
+            maxLength: 1024,
+            nullable: true);
+    }
 
-        /// <inheritdoc />
-        protected override void Down(MigrationBuilder migrationBuilder)
-        {
-            migrationBuilder.DropColumn(
-                name: "FailReason",
-                table: "AbpUserLoginAttempts");
-        }
+    /// <inheritdoc />
+    protected override void Down(MigrationBuilder migrationBuilder)
+    {
+        migrationBuilder.DropColumn(
+            name: "FailReason",
+            table: "AbpUserLoginAttempts");
     }
 }

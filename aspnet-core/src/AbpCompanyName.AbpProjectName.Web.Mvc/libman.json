@@ -16,7 +16,7 @@
 
     //abp libs start
     {
-      "library": "abp-web-resources@4.1.0",
+      "library": "abp-web-resources@6.0.0",
       "provider": "jsdelivr",
       "destination": "wwwroot/libs/abp-web-resources"
     },

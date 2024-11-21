@@ -1,7 +1,7 @@
-﻿using System;
+﻿using Abp.Dependency;
+using System;
 using System.Linq;
 using System.Threading.Tasks;
-using Abp.Dependency;
 
 namespace AbpCompanyName.AbpProjectName.Authentication.External
 {

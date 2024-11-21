@@ -1,12 +1,11 @@
-﻿using System.Collections.Generic;
-using Abp.Localization;
+﻿using Abp.Localization;
+using System.Collections.Generic;
 
-namespace AbpCompanyName.AbpProjectName.Web.Views.Shared.Components.RightNavbarLanguageSwitch
+namespace AbpCompanyName.AbpProjectName.Web.Views.Shared.Components.RightNavbarLanguageSwitch;
+
+public class RightNavbarLanguageSwitchViewModel
 {
-    public class RightNavbarLanguageSwitchViewModel
-    {
-        public LanguageInfo CurrentLanguage { get; set; }
+    public LanguageInfo CurrentLanguage { get; set; }
 
-        public IReadOnlyList<LanguageInfo> Languages { get; set; }
-    }
+    public IReadOnlyList<LanguageInfo> Languages { get; set; }
 }

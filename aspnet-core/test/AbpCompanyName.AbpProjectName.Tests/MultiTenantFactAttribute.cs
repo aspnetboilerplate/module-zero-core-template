@@ -1,15 +1,14 @@
 ﻿using Xunit;
 
-namespace AbpCompanyName.AbpProjectName.Tests
+namespace AbpCompanyName.AbpProjectName.Tests;
+
+public sealed class MultiTenantFactAttribute : FactAttribute
 {
-    public sealed class MultiTenantFactAttribute : FactAttribute
+    public MultiTenantFactAttribute()
     {
-        public MultiTenantFactAttribute()
+        if (!AbpProjectNameConsts.MultiTenancyEnabled)
         {
-            if (!AbpProjectNameConsts.MultiTenancyEnabled)
-            {
-                Skip = "MultiTenancy is disabled.";
-            }
+            Skip = "MultiTenancy is disabled.";
         }
     }
 }

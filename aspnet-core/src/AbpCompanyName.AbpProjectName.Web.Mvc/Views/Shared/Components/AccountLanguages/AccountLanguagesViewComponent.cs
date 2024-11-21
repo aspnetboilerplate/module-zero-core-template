@@ -1,31 +1,30 @@
-﻿using System.Linq;
-using System.Threading.Tasks;
-using Abp.Localization;
+﻿using Abp.Localization;
 using Microsoft.AspNetCore.Mvc;
+using System.Linq;
+using System.Threading.Tasks;
 
-namespace AbpCompanyName.AbpProjectName.Web.Views.Shared.Components.AccountLanguages
+namespace AbpCompanyName.AbpProjectName.Web.Views.Shared.Components.AccountLanguages;
+
+public class AccountLanguagesViewComponent : AbpProjectNameViewComponent
 {
-    public class AccountLanguagesViewComponent : AbpProjectNameViewComponent
+    private readonly ILanguageManager _languageManager;
+
+    public AccountLanguagesViewComponent(ILanguageManager languageManager)
     {
-        private readonly ILanguageManager _languageManager;
+        _languageManager = languageManager;
+    }
 
-        public AccountLanguagesViewComponent(ILanguageManager languageManager)
+    public Task<IViewComponentResult> InvokeAsync()
+    {
+        var model = new LanguageSelectionViewModel
         {
-            _languageManager = languageManager;
-        }
+            CurrentLanguage = _languageManager.CurrentLanguage,
+            Languages = _languageManager.GetLanguages().Where(l => !l.IsDisabled).ToList()
+            .Where(l => !l.IsDisabled)
+            .ToList(),
+            CurrentUrl = Request.Path
+        };
 
-        public Task<IViewComponentResult> InvokeAsync()
-        {
-            var model = new LanguageSelectionViewModel
-            {
-                CurrentLanguage = _languageManager.CurrentLanguage,
-                Languages = _languageManager.GetLanguages().Where(l => !l.IsDisabled).ToList()
-                .Where(l => !l.IsDisabled)
-                .ToList(),
-                CurrentUrl = Request.Path
-            };
-
-            return Task.FromResult(View(model) as IViewComponentResult);
-        }
+        return Task.FromResult(View(model) as IViewComponentResult);
     }
 }

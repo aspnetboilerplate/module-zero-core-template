@@ -1,10 +1,9 @@
-﻿using System.Threading.Tasks;
-using AbpCompanyName.AbpProjectName.Configuration.Dto;
+﻿using AbpCompanyName.AbpProjectName.Configuration.Dto;
+using System.Threading.Tasks;
 
-namespace AbpCompanyName.AbpProjectName.Configuration
+namespace AbpCompanyName.AbpProjectName.Configuration;
+
+public interface IConfigurationAppService
 {
-    public interface IConfigurationAppService
-    {
-        Task ChangeUiTheme(ChangeUiThemeInput input);
-    }
+    Task ChangeUiTheme(ChangeUiThemeInput input);
 }

@@ -1,8 +1,6 @@
-using System.Threading.Tasks;
 using Abp.Web.Security.AntiForgery;
-using Microsoft.AspNetCore.Antiforgery;
 using AbpCompanyName.AbpProjectName.Controllers;
-using Microsoft.AspNetCore.Mvc;
+using Microsoft.AspNetCore.Antiforgery;
 
 namespace AbpCompanyName.AbpProjectName.Web.Host.Controllers
 {

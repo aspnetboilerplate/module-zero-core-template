@@ -1,7 +1,6 @@
-﻿namespace AbpCompanyName.AbpProjectName.Roles.Dto
+﻿namespace AbpCompanyName.AbpProjectName.Roles.Dto;
+
+public class GetRolesInput
 {
-    public class GetRolesInput
-    {
-        public string Permission { get; set; }
-    }
+    public string Permission { get; set; }
 }

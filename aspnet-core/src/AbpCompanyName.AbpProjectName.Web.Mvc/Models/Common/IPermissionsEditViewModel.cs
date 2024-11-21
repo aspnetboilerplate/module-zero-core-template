@@ -1,10 +1,9 @@
-﻿using System.Collections.Generic;
-using AbpCompanyName.AbpProjectName.Roles.Dto;
+﻿using AbpCompanyName.AbpProjectName.Roles.Dto;
+using System.Collections.Generic;
 
-namespace AbpCompanyName.AbpProjectName.Web.Models.Common
+namespace AbpCompanyName.AbpProjectName.Web.Models.Common;
+
+public interface IPermissionsEditViewModel
 {
-    public interface IPermissionsEditViewModel
-    {
-        List<FlatPermissionDto> Permissions { get; set; }
-    }
+    List<FlatPermissionDto> Permissions { get; set; }
 }

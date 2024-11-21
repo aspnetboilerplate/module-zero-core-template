@@ -1,7 +1,6 @@
-﻿namespace AbpCompanyName.AbpProjectName.Web.Views.Shared.Components.TenantChange
+﻿namespace AbpCompanyName.AbpProjectName.Web.Views.Shared.Components.TenantChange;
+
+public class ChangeModalViewModel
 {
-    public class ChangeModalViewModel
-    {
-        public string TenancyName { get; set; }
-    }
+    public string TenancyName { get; set; }
 }
