@@ -52,9 +52,6 @@
   {
     "outputFileName": "wwwroot/view-resources/Views/_Bundles/shared-layout.min.js",
     "inputFiles": [
-      "wwwroot/libs/jquery/jquery.js",
-
-      "wwwroot/libs/bootstrap/dist/js/bootstrap.bundle.js",
       "wwwroot/libs/datatables/js/jquery.dataTables.min.js",
       "wwwroot/Common/helpers.js",
       "wwwroot/Common/datatables.ajax.js",
