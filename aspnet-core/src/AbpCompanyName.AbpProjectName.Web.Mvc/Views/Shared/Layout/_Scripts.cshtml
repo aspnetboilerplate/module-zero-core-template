@@ -5,69 +5,13 @@
 @inject ICachedUniqueKeyPerUser CachedUniqueKeyPerUser
 @inject IGetScriptsResponsePerUserConfiguration GetScriptsResponsePerUserConfiguration
 
-<environment names="Development">
-    @*core scripts start*@
-    <script src="~/libs/jquery/jquery.js" asp-append-version="true"></script>
-    @*core scripts end*@
-
-    @*admin-lte scripts start*@
-    <script src="~/libs/bootstrap/dist/js/bootstrap.bundle.js" asp-append-version="true"></script>
-    <script src="~/libs/datatables/js/jquery.dataTables.min.js" asp-append-version="true"></script>
-    <script src="~/view-resources/Views/_Bundles/helpers.min.js" asp-append-version="true"></script>
-    <script src="~/view-resources/Views/_Bundles/datatables.ajax.min.js" asp-append-version="true"></script>
-    <script src="~/libs/datatables/js/dataTables.bootstrap4.min.js" asp-append-version="true"></script>
-    <script src="~/libs/datatables/js/dataTables.responsive.min.js" asp-append-version="true"></script>
-    <script src="~/libs/datatables/js/responsive.bootstrap4.min.js" asp-append-version="true"></script>
-    <script src="~/libs/datatables/js/dataTables.buttons.js" asp-append-version="true"></script>
-    <script src="~/libs/datatables/js/buttons.bootstrap4.js" asp-append-version="true"></script>
-    <script src="~/libs/admin-lte/dist/js/adminlte.js" asp-append-version="true"></script>
-    @*admin-lte scripts end*@
-
-    @*abp scripts start*@
-    <script src="~/libs/block-ui/jquery.blockUI.js" asp-append-version="true"></script>
-    <script src="~/libs/spin/spin.js" asp-append-version="true"></script>
-    <script src="~/libs-ext/spin/jquery.spin.js" asp-append-version="true"></script>
-    <script src="~/libs/sweetalert/sweetalert.min.js" asp-append-version="true"></script>
-    <script src="~/libs/toastr/toastr.min.js" asp-append-version="true"></script>
-    <script src="~/libs/moment/moment-with-locales.js" asp-append-version="true"></script>
-    <script src="~/libs/signalr/dist/browser/signalr.js" asp-append-version="true"></script>
-    <script src="~/libs/abp-web-resources/Abp/Framework/scripts/abp.js" asp-append-version="true"></script>
-    <script src="~/libs/abp-web-resources/Abp/Framework/scripts/libs/abp.jquery.js" asp-append-version="true"></script>
-    <script src="~/libs/abp-web-resources/Abp/Framework/scripts/libs/abp.toastr.js" asp-append-version="true"></script>
-    <script src="~/libs/abp-web-resources/Abp/Framework/scripts/libs/abp.blockUI.js" asp-append-version="true"></script>
-    <script src="~/libs/abp-web-resources/Abp/Framework/scripts/libs/abp.spin.js" asp-append-version="true"></script>
-    <script src="~/libs/abp-web-resources/Abp/Framework/scripts/libs/abp.sweet-alert.js" asp-append-version="true"></script>
-    <script src="~/libs/abp-web-resources/Abp/Framework/scripts/libs/abp.signalr-client.js" asp-append-version="true"></script>
-    @*abp scripts end*@
-
-    @*other scripts start*@
-    <script src="~/libs/jquery-validate/jquery.validate.js" asp-append-version="true"></script>
-    <script src="~/libs/jquery-validate/jquery.validate.unobtrusive.js" asp-append-version="true"></script>
-    <script src="~/libs/push.js/push.js" asp-append-version="true"></script>
-    @*other scripts end*@
-
-    @*custom scripts start*@
-    <script src="~/js/abp.dataTable.js" asp-append-version="true"></script>
-    <script src="~/js/main.js" asp-append-version="true"></script>
-    @*custom scripts end*@
-    
-    <script type="text/javascript">
-        // This is used to get the application's root path from javascript.
-        // It's useful if you're running application in a virtual directory under IIS.
-        var abp = abp || {};
-        abp.appPath = '@ApplicationPath';
-    </script>
-</environment>
-
-<environment names="Staging,Production">
-    <script src="~/view-resources/Views/_Bundles/shared-layout.min.js" asp-append-version="true"></script>
-    <script type="text/javascript">
-        // This is used to get the application's root path from javascript.
-        // It's useful if you're running application in a virtual directory under IIS.
-        var abp = abp || {};
-        abp.appPath = '@ApplicationPath';
-    </script>
-</environment>
+<script src="~/view-resources/Views/_Bundles/shared-layout.min.js" asp-append-version="true"></script>
+<script type="text/javascript">
+    // This is used to get the application's root path from javascript.
+    // It's useful if you're running application in a virtual directory under IIS.
+    var abp = abp || {};
+    abp.appPath = '@ApplicationPath';
+</script>
 
 @if (CultureInfo.CurrentUICulture.Name != "en")
 {

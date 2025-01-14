@@ -1,0 +1,123 @@
+{
+  "scripts": [
+    {
+      "output": "view-resources/Views/_Bundles/account-layout.min.js",
+      "input": [
+        "node_modules/jquery/dist/jquery.js",
+        "node_modules/bootstrap/dist/js/bootstrap.bundle.js",
+        "node_modules/admin-lte/dist/js/adminlte.js",
+        "node_modules/jquery-validation/dist/jquery.validate.js",
+        "node_modules/jquery-validation-unobtrusive/dist/jquery.validate.unobtrusive.js",
+        "node_modules/toastr/build/toastr.min.js",
+        "node_modules/jquery-blockui/jquery.blockUI.js",
+        "node_modules/spin.js/spin.js",
+        "wwwroot/libs-ext/spin/jquery.spin.js",
+        "node_modules/sweetalert/dist/sweetalert.min.js",
+        "node_modules/moment/min/moment-with-locales.js",
+        "node_modules/abp-web-resources/Abp/Framework/scripts/abp.js",
+        "node_modules/abp-web-resources/Abp/Framework/scripts/libs/abp.jquery.js",
+        "node_modules/abp-web-resources/Abp/Framework/scripts/libs/abp.toastr.js",
+        "node_modules/abp-web-resources/Abp/Framework/scripts/libs/abp.blockUI.js",
+        "node_modules/abp-web-resources/Abp/Framework/scripts/libs/abp.spin.js",
+        "node_modules/abp-web-resources/Abp/Framework/scripts/libs/abp.sweet-alert.js",
+        "wwwroot/js/main.js"
+      ]
+    },
+    {
+      "output": "view-resources/Views/_Bundles/shared-layout.min.js",
+      "input": [
+        "node_modules/jquery/dist/jquery.js",
+
+        "node_modules/bootstrap/dist/js/bootstrap.bundle.js",
+        "node_modules/datatables.net/js/jquery.dataTables.min.js",
+        "wwwroot/Common/helpers.js",
+        "wwwroot/Common/datatables.ajax.js",
+        "node_modules/datatables.net-bs4/js/dataTables.bootstrap4.min.js",
+        "node_modules/datatables.net-responsive/js/dataTables.responsive.min.js",
+        "node_modules/datatables.net-responsive-bs4/js/responsive.bootstrap4.min.js",
+        "node_modules/datatables.net-buttons/js/dataTables.buttons.js",
+        "node_modules/datatables.net-buttons-bs4/js/buttons.bootstrap4.js",
+        "node_modules/admin-lte/dist/js/adminlte.js",
+
+        "node_modules/jquery-blockui/jquery.blockUI.js",
+        "node_modules/spin.js/spin.js",
+        "wwwroot/libs-ext/spin/jquery.spin.js",
+        "node_modules/sweetalert/dist/sweetalert.min.js",
+        "node_modules/toastr/build/toastr.min.js",
+        "node_modules/moment/min/moment-with-locales.js",
+        "node_modules/@microsoft/signalr/dist/browser/signalr.js",
+
+        "node_modules/abp-web-resources/Abp/Framework/scripts/abp.js",
+        "node_modules/abp-web-resources/Abp/Framework/scripts/libs/abp.jquery.js",
+        "node_modules/abp-web-resources/Abp/Framework/scripts/libs/abp.toastr.js",
+        "node_modules/abp-web-resources/Abp/Framework/scripts/libs/abp.blockUI.js",
+        "node_modules/abp-web-resources/Abp/Framework/scripts/libs/abp.spin.js",
+        "node_modules/abp-web-resources/Abp/Framework/scripts/libs/abp.sweet-alert.js",
+        "node_modules/abp-web-resources/Abp/Framework/scripts/libs/abp.signalr-client.js",
+
+        "node_modules/jquery-validation/dist/jquery.validate.js",
+        "node_modules/jquery-validation-unobtrusive/dist/jquery.validate.unobtrusive.js",
+        "node_modules/push.js/bin/push.js",
+
+        "wwwroot/js/abp.dataTable.js",
+        "wwwroot/js/main.js"
+      ]
+    },
+    {
+      "output": "view-resources/Views/_Bundles/home-index.min.js",
+      "input": [
+        "node_modules/chart.js/dist/Chart.js",
+        "wwwroot/view-resources/Views/Home/Index.js"
+      ]
+    },
+    {
+      "output": "view-resources/Views/_Bundles/datatables.ajax.min.js",
+      "input": [
+        "wwwroot/Common/datatables.ajax.js"
+      ]
+    },
+    {
+      "output": "view-resources/Views/_Bundles/helpers.min.js",
+      "input": [
+        "wwwroot/Common/helpers.js"
+      ]
+    }
+  ],
+  "styles": [
+    {
+      "output": "view-resources/Views/_Bundles/account-layout.min.css",
+      "input": [
+        "node_modules/@fortawesome/fontawesome-free/css/all.css",
+        "wwwroot/libs-ext/famfamfam-flags/dist/sprite/famfamfam-flags.css",
+        "node_modules/icheck-bootstrap/icheck-bootstrap.css",
+        "node_modules/toastr/build/toastr.css",
+        "node_modules/admin-lte/dist/css/adminlte.css",
+        "wwwroot/css/style.css",
+        "wwwroot/view-resources/Views/Account/_Layout.css"
+      ]
+    },
+    {
+      "output": "view-resources/Views/_Bundles/shared-layout.min.css",
+      "input": [
+        "node_modules/@fortawesome/fontawesome-free/css/all.min.css",
+        "wwwroot/libs-ext/famfamfam-flags/dist/sprite/famfamfam-flags.min.css",
+        "node_modules/icheck-bootstrap/icheck-bootstrap.css",
+        "node_modules/toastr/build/toastr.css",
+        "node_modules/admin-lte/dist/css/adminlte.min.css",
+        "node_modules/datatables.net-bs4/css/dataTables.bootstrap4.min.css",
+        "node_modules/datatables.net-responsive-bs4/css/responsive.bootstrap4.min.css",
+        "node_modules/datatables.net-buttons-bs4/css/buttons.bootstrap4.min.css",
+        "wwwroot/css/style.css",
+        "wwwroot/view-resources/Views/Shared/_Layout.css"
+      ]
+    }
+  ],
+  "scriptMappings": [
+    {
+      "outputFolder": "libs/moment-timezone",
+      "input": [
+        "node_modules/moment-timezone/*.js"
+      ]
+    }
+  ]
+}
