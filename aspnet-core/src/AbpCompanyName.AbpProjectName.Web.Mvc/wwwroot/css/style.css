@@ -29,3 +29,17 @@ html {
 .famfamfam-flags {
     display: inline-block;
 }
+
+.sidebar ul li p {
+    white-space: nowrap !important;
+    text-overflow: ellipsis;
+    transition: opacity 0.5s ease-in-out !important;
+    opacity: 1;
+}
+
+.sidebar-mini .main-sidebar .sidebar,
+.sidebar-mini .main-sidebar .sidebar:hover {
+    overflow-x: auto !important;
+    width: 250px;
+    transition: width 0.3s ease-in-out;
+}
