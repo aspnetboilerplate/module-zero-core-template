@@ -23,10 +23,10 @@
     <ProjectReference Include="..\AbpCompanyName.AbpProjectName.EntityFrameworkCore\AbpCompanyName.AbpProjectName.EntityFrameworkCore.csproj" />
   </ItemGroup>
   <ItemGroup>
-    <PackageReference Include="Microsoft.AspNetCore.Authentication.JwtBearer" Version="9.0.0" />
-    <PackageReference Include="Swashbuckle.AspNetCore" Version="7.0.0" />
-    <PackageReference Include="Abp.AspNetCore" Version="10.0.0" />
-    <PackageReference Include="Abp.ZeroCore" Version="10.0.0" />
-    <PackageReference Include="Abp.AspNetCore.SignalR" Version="10.0.0" />
+    <PackageReference Include="Microsoft.AspNetCore.Authentication.JwtBearer" Version="9.0.2" />
+    <PackageReference Include="Swashbuckle.AspNetCore" Version="7.2.0" />
+    <PackageReference Include="Abp.AspNetCore" Version="10.1.0" />
+    <PackageReference Include="Abp.ZeroCore" Version="10.1.0" />
+    <PackageReference Include="Abp.AspNetCore.SignalR" Version="10.1.0" />
   </ItemGroup>
 </Project>
