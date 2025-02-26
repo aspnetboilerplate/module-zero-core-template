@@ -31,14 +31,14 @@
   </ItemGroup>
   <ItemGroup>
     <PackageReference Include="BuildBundlerMinifier" Version="3.2.449" />
-    <PackageReference Include="Microsoft.AspNetCore.Mvc.Razor.RuntimeCompilation" Version="9.0.0" />
-    <PackageReference Include="Microsoft.EntityFrameworkCore.Design" Version="9.0.0">
+    <PackageReference Include="Microsoft.AspNetCore.Mvc.Razor.RuntimeCompilation" Version="9.0.2" />
+    <PackageReference Include="Microsoft.EntityFrameworkCore.Design" Version="9.0.2">
       <PrivateAssets>all</PrivateAssets>
       <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
     </PackageReference>
     <PackageReference Include="PaulMiami.AspNetCore.Mvc.Recaptcha" Version="1.2.2" />
-    <PackageReference Include="Abp.HangFire" Version="10.0.0" />
-    <PackageReference Include="Abp.RedisCache" Version="10.0.0" />
-    <PackageReference Include="Abp.Castle.Log4Net" Version="10.0.0" />
+    <PackageReference Include="Abp.HangFire" Version="10.1.0" />
+    <PackageReference Include="Abp.RedisCache" Version="10.1.0" />
+    <PackageReference Include="Abp.Castle.Log4Net" Version="10.1.0" />
   </ItemGroup>
 </Project>
