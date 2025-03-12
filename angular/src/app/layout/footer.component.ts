@@ -1,10 +1,13 @@
 import { Component, Injector, ChangeDetectionStrategy } from '@angular/core';
 import { AppComponentBase } from '@shared/app-component-base';
+import { LocalizePipe } from '@shared/pipes/localize.pipe';
 
 @Component({
-  selector: 'app-footer',
-  templateUrl: './footer.component.html',
-  changeDetection: ChangeDetectionStrategy.OnPush
+    selector: 'app-footer',
+    templateUrl: './footer.component.html',
+    changeDetection: ChangeDetectionStrategy.OnPush,
+    standalone: true,
+    imports: [LocalizePipe]
 })
 export class FooterComponent extends AppComponentBase {
   currentYear: number;

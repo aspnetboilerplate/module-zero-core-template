@@ -1,18 +1,17 @@
 import {Component, Injector, OnInit} from '@angular/core';
 import {AppComponentBase} from '@shared/app-component-base';
-import {
-    Router,
-    RouterEvent,
-    NavigationEnd,
-    PRIMARY_OUTLET
-} from '@angular/router';
+import { Router, RouterEvent, NavigationEnd, PRIMARY_OUTLET, RouterLink } from '@angular/router';
 import {BehaviorSubject} from 'rxjs';
 import {filter} from 'rxjs/operators';
 import {MenuItem} from '@shared/layout/menu-item';
+import { NgTemplateOutlet } from '@angular/common';
+import { CollapseDirective } from 'ngx-bootstrap/collapse';
 
 @Component({
     selector: 'sidebar-menu',
-    templateUrl: './sidebar-menu.component.html'
+    templateUrl: './sidebar-menu.component.html',
+    standalone: true,
+    imports: [NgTemplateOutlet, RouterLink, CollapseDirective]
 })
 export class SidebarMenuComponent extends AppComponentBase implements OnInit {
     menuItems: MenuItem[];

@@ -2,9 +2,15 @@ import { Component, Injector, OnInit, Renderer2 } from '@angular/core';
 import { AppComponentBase } from '@shared/app-component-base';
 import { SignalRAspNetCoreHelper } from '@shared/helpers/SignalRAspNetCoreHelper';
 import { LayoutStoreService } from '@shared/layout/layout-store.service';
+import { HeaderComponent } from './layout/header.component';
+import { SidebarComponent } from './layout/sidebar.component';
+import { RouterOutlet } from '@angular/router';
+import { FooterComponent } from './layout/footer.component';
 
 @Component({
-  templateUrl: './app.component.html'
+    templateUrl: './app.component.html',
+    standalone: true,
+    imports: [HeaderComponent, SidebarComponent, RouterOutlet, FooterComponent]
 })
 export class AppComponent extends AppComponentBase implements OnInit {
   sidebarExpanded: boolean;

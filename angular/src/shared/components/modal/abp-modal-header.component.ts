@@ -9,9 +9,10 @@ import {
 import { AppComponentBase } from '@shared/app-component-base';
 
 @Component({
-  selector: 'abp-modal-header',
-  templateUrl: './abp-modal-header.component.html',
-  changeDetection: ChangeDetectionStrategy.OnPush
+    selector: 'abp-modal-header',
+    templateUrl: './abp-modal-header.component.html',
+    changeDetection: ChangeDetectionStrategy.OnPush,
+    standalone: true
 })
 export class AbpModalHeaderComponent extends AppComponentBase {
   title = input<string>();

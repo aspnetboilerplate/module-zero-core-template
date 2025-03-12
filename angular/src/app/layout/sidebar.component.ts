@@ -5,12 +5,17 @@ import {
   OnInit
 } from '@angular/core';
 import { LayoutStoreService } from '@shared/layout/layout-store.service';
+import { SidebarLogoComponent } from './sidebar-logo.component';
+import { SidebarUserPanelComponent } from './sidebar-user-panel.component';
+import { SidebarMenuComponent } from './sidebar-menu.component';
 
 @Component({
-  // tslint:disable-next-line:component-selector
-  selector: 'sidebar',
-  templateUrl: './sidebar.component.html',
-  changeDetection: ChangeDetectionStrategy.OnPush
+    // tslint:disable-next-line:component-selector
+    selector: 'sidebar',
+    templateUrl: './sidebar.component.html',
+    changeDetection: ChangeDetectionStrategy.OnPush,
+    standalone: true,
+    imports: [SidebarLogoComponent, SidebarUserPanelComponent, SidebarMenuComponent]
 })
 export class SidebarComponent implements OnInit {
   sidebarExpanded: boolean;

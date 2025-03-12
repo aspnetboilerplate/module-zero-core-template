@@ -11,8 +11,9 @@ import { AppComponentBase } from '@shared/app-component-base';
 import { AbpValidationError } from './abp-validation.api';
 
 @Component({
-  selector: 'abp-validation-summary',
-  templateUrl: './abp-validation.summary.component.html'
+    selector: 'abp-validation-summary',
+    templateUrl: './abp-validation.summary.component.html',
+    standalone: true
 })
 export class AbpValidationSummaryComponent extends AppComponentBase implements OnInit {
 

@@ -40,9 +40,7 @@ import { ProgressBarModule } from 'primeng/progressbar';
         TableModule,
         PaginatorModule,
         ProgressBarModule,
-        AutoCompleteModule
-    ],
-    declarations: [
+        AutoCompleteModule,
         AbpPaginationControlsComponent,
         AbpValidationSummaryComponent,
         AbpModalHeaderComponent,

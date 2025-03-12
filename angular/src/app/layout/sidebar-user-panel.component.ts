@@ -7,9 +7,10 @@ import {
 import { AppComponentBase } from '@shared/app-component-base';
 
 @Component({
-  selector: 'sidebar-user-panel',
-  templateUrl: './sidebar-user-panel.component.html',
-  changeDetection: ChangeDetectionStrategy.OnPush
+    selector: 'sidebar-user-panel',
+    templateUrl: './sidebar-user-panel.component.html',
+    changeDetection: ChangeDetectionStrategy.OnPush,
+    standalone: true
 })
 export class SidebarUserPanelComponent extends AppComponentBase
   implements OnInit {

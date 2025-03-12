@@ -1,7 +1,8 @@
 import { Directive, ElementRef, Input } from '@angular/core';
 
 @Directive({
-  selector: '[busy]',
+    selector: '[busy]',
+    standalone: true,
 })
 export class BusyDirective {
 

@@ -7,9 +7,15 @@ import {
   IsTenantAvailableInput,
   IsTenantAvailableOutput
 } from '@shared/service-proxies/service-proxies';
+import { FormsModule } from '@angular/forms';
+import { AbpModalHeaderComponent } from '../../shared/components/modal/abp-modal-header.component';
+import { AbpModalFooterComponent } from '../../shared/components/modal/abp-modal-footer.component';
+import { LocalizePipe } from '@shared/pipes/localize.pipe';
 
 @Component({
-  templateUrl: './tenant-change-dialog.component.html'
+    templateUrl: './tenant-change-dialog.component.html',
+    standalone: true,
+    imports: [FormsModule, AbpModalHeaderComponent, AbpModalFooterComponent, LocalizePipe]
 })
 export class TenantChangeDialogComponent extends AppComponentBase {
   saving = false;

@@ -2,10 +2,13 @@
 import { AppComponentBase } from '@shared/app-component-base';
 import { TenantChangeDialogComponent } from './tenant-change-dialog.component';
 import { BsModalService } from 'ngx-bootstrap/modal';
+import { LocalizePipe } from '@shared/pipes/localize.pipe';
 
 @Component({
-  selector: 'tenant-change',
-  templateUrl: './tenant-change.component.html'
+    selector: 'tenant-change',
+    templateUrl: './tenant-change.component.html',
+    standalone: true,
+    imports: [LocalizePipe]
 })
 export class TenantChangeComponent extends AppComponentBase implements OnInit {
   tenancyName = '';

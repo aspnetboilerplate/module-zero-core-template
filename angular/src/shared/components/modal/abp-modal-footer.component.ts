@@ -9,9 +9,10 @@ import {
 import { AppComponentBase } from '@shared/app-component-base';
 
 @Component({
-  selector: 'abp-modal-footer',
-  templateUrl: './abp-modal-footer.component.html',
-  changeDetection: ChangeDetectionStrategy.OnPush
+    selector: 'abp-modal-footer',
+    templateUrl: './abp-modal-footer.component.html',
+    changeDetection: ChangeDetectionStrategy.OnPush,
+    standalone: true
 })
 export class AbpModalFooterComponent extends AppComponentBase {
   cancelLabel = input(this.l('Cancel'));
