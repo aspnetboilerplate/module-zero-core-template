@@ -20,6 +20,8 @@ import { TabsModule } from 'ngx-bootstrap/tabs';
 import { ServiceProxyModule } from '@shared/service-proxies/service-proxy.module';
 import { RootRoutingModule } from './root-routing.module';
 import { RootComponent } from './root.component';
+import { providePrimeNG } from 'primeng/config';
+import Lara from '@primeng/themes/lara';
 
 if (environment.production) {
     enableProdMode();
@@ -45,6 +47,11 @@ const bootstrap = () => {
         },
         provideAnimations(),
         provideHttpClient(withInterceptorsFromDi()),
+        providePrimeNG({
+            theme: {
+                preset: Lara
+            }
+        }),
     ]
 });
 };
