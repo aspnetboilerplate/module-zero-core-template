@@ -1,5 +1,6 @@
 {
   "compilerOptions": {
+    "esModuleInterop": true,
     "allowSyntheticDefaultImports": true,
     "declaration": false,
     "downlevelIteration": true,
@@ -11,7 +12,8 @@
     "moduleResolution": "node",
     "outDir": "../dist/out-tsc",
     "sourceMap": true,
-    "target": "es2015",
+    "target": "ES2022",
+    "useDefineForClassFields": false,
     "typeRoots": [
       "../node_modules/@types"
     ],
@@ -21,7 +23,6 @@
       "@app/*": [ "./app/*" ],
       "@shared/*": [ "./shared/*" ],
       "@node_modules/*": [ "../node_modules/*" ],
-      "@angular/*": ["../node_modules/@angular/*"],
     }
   },
   "files": [
