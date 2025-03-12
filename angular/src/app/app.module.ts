@@ -24,19 +24,6 @@ import { SidebarUserPanelComponent } from './layout/sidebar-user-panel.component
 import { SidebarMenuComponent } from './layout/sidebar-menu.component';
 
 @NgModule({
-    declarations: [
-        AppComponent,
-        // layout
-        HeaderComponent,
-        HeaderLeftNavbarComponent,
-        HeaderLanguageMenuComponent,
-        HeaderUserMenuComponent,
-        FooterComponent,
-        SidebarComponent,
-        SidebarLogoComponent,
-        SidebarUserPanelComponent,
-        SidebarMenuComponent
-    ],
     imports: [
         AppRoutingModule,
         CommonModule,
@@ -50,7 +37,18 @@ import { SidebarMenuComponent } from './layout/sidebar-menu.component';
         TabsModule,
         ServiceProxyModule,
         NgxPaginationModule,
-        SharedModule
+        SharedModule,
+        AppComponent,
+        // layout
+        HeaderComponent,
+        HeaderLeftNavbarComponent,
+        HeaderLanguageMenuComponent,
+        HeaderUserMenuComponent,
+        FooterComponent,
+        SidebarComponent,
+        SidebarLogoComponent,
+        SidebarUserPanelComponent,
+        SidebarMenuComponent
     ],
     providers: []
 })

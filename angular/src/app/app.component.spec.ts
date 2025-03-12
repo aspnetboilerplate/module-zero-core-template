@@ -33,23 +33,7 @@ import { SidebarMenuComponent } from "./layout/sidebar-menu.component";
 describe("AppComponent", () => {
   beforeEach(() => {
     TestBed.configureTestingModule({
-      declarations: [
-        AppComponent,
-        HomeComponent,
-        AboutComponent,
-
-        // layout
-        HeaderComponent,
-        HeaderLeftNavbarComponent,
-        HeaderLanguageMenuComponent,
-        HeaderUserMenuComponent,
-        FooterComponent,
-        SidebarComponent,
-        SidebarLogoComponent,
-        SidebarUserPanelComponent,
-        SidebarMenuComponent,
-      ],
-      imports: [
+    imports: [
         BrowserAnimationsModule,
         CommonModule,
         FormsModule,
@@ -64,27 +48,40 @@ describe("AppComponent", () => {
         ServiceProxyModule,
         SharedModule.forRoot(),
         NgxPaginationModule,
-      ],
-      providers: [
+        AppComponent,
+        HomeComponent,
+        AboutComponent,
+        // layout
+        HeaderComponent,
+        HeaderLeftNavbarComponent,
+        HeaderLanguageMenuComponent,
+        HeaderUserMenuComponent,
+        FooterComponent,
+        SidebarComponent,
+        SidebarLogoComponent,
+        SidebarUserPanelComponent,
+        SidebarMenuComponent,
+    ],
+    providers: [
         LayoutStoreService,
         {
-          provide: AppSessionService,
-          useValue: {
-            application: {
-              version: "",
-              releaseDate: {
-                format: function () {
-                  return "";
+            provide: AppSessionService,
+            useValue: {
+                application: {
+                    version: "",
+                    releaseDate: {
+                        format: function () {
+                            return "";
+                        },
+                    },
                 },
-              },
+                getShownLoginName: function () {
+                    return 'admin';
+                }
             },
-            getShownLoginName: function(){
-              return 'admin';
-            }
-          },
         },
-      ],
-    });
+    ],
+});
     TestBed.compileComponents();
   });
 
