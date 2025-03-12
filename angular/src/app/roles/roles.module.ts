@@ -7,6 +7,7 @@ import { EditRoleDialogComponent } from './edit-role/edit-role-dialog.component'
 import { CommonModule } from '@angular/common';
 
 @NgModule({
-    imports: [SharedModule, RolesRoutingModule, CommonModule, RolesComponent, CreateRoleDialogComponent, EditRoleDialogComponent],
+    declarations: [RolesComponent, CreateRoleDialogComponent, EditRoleDialogComponent],
+    imports: [SharedModule, RolesRoutingModule, CommonModule],
 })
 export class RolesModule {}
