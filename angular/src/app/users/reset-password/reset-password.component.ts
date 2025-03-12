@@ -5,10 +5,17 @@ import {
   ResetPasswordDto
 } from '@shared/service-proxies/service-proxies';
 import { BsModalRef } from 'ngx-bootstrap/modal';
+import { FormsModule } from '@angular/forms';
+import { AbpModalHeaderComponent } from '../../../shared/components/modal/abp-modal-header.component';
+import { AbpValidationSummaryComponent } from '../../../shared/components/validation/abp-validation.summary.component';
+import { AbpModalFooterComponent } from '../../../shared/components/modal/abp-modal-footer.component';
+import { LocalizePipe } from '@shared/pipes/localize.pipe';
 
 @Component({
-  selector: 'app-reset-password',
-  templateUrl: './reset-password.component.html'
+    selector: 'app-reset-password',
+    templateUrl: './reset-password.component.html',
+    standalone: true,
+    imports: [FormsModule, AbpModalHeaderComponent, AbpValidationSummaryComponent, AbpModalFooterComponent, LocalizePipe]
 })
 export class ResetPasswordDialogComponent extends AppComponentBase
   implements OnInit {

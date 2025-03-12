@@ -10,11 +10,14 @@ import {
   ChangeUserLanguageDto
 } from '@shared/service-proxies/service-proxies';
 import { filter as _filter } from 'lodash-es';
+import { BsDropdownDirective, BsDropdownToggleDirective, BsDropdownMenuDirective } from 'ngx-bootstrap/dropdown';
 
 @Component({
-  selector: 'header-language-menu',
-  templateUrl: './header-language-menu.component.html',
-  changeDetection: ChangeDetectionStrategy.OnPush
+    selector: 'header-language-menu',
+    templateUrl: './header-language-menu.component.html',
+    changeDetection: ChangeDetectionStrategy.OnPush,
+    standalone: true,
+    imports: [BsDropdownDirective, BsDropdownToggleDirective, BsDropdownMenuDirective]
 })
 export class HeaderLanguageMenuComponent extends AppComponentBase
   implements OnInit {

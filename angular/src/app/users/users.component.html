@@ -129,9 +129,7 @@
           </div>
           }
         </div>
-        <div
-          class="card-body table-responsive table-striped table-bordered"
-        >
+        <div class="card-body table-responsive table-striped table-bordered">
           <!--<Primeng-TurboTable-Start>-->
           <div class="primeng-datatable-container">
             <p-table
@@ -170,33 +168,21 @@
               <ng-template pTemplate="body" let-record="$implicit">
                 <tr>
                   <td>
-                    <span class="p-column-title">{{
-                      "UserName" | localize
-                    }}</span>
                     <span>
                       {{ record.userName }}
                     </span>
                   </td>
                   <td>
-                    <span class="p-column-title">{{
-                      "FullName" | localize
-                    }}</span>
                     <span>
                       {{ record.fullName }}
                     </span>
                   </td>
                   <td>
-                    <span class="p-column-title">{{
-                      "EmailAddress" | localize
-                    }}</span>
                     <span>
                       {{ record.emailAddress }}
                     </span>
                   </td>
                   <td>
-                    <span class="p-column-title">{{
-                      "IsActive" | localize
-                    }}</span>
                     <span>
                       {{ record.isActive }}
                     </span>

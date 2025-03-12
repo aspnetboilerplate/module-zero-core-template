@@ -8,10 +8,16 @@ import {
   UserServiceProxy
 } from '@shared/service-proxies/service-proxies';
 import { AbpValidationError } from '@shared/components/validation/abp-validation.api';
+import { FormsModule } from '@angular/forms';
+import { AbpValidationSummaryComponent } from '../../../shared/components/validation/abp-validation.summary.component';
+import { EqualValidator } from '../../../shared/directives/equal-validator.directive';
+import { LocalizePipe } from '@shared/pipes/localize.pipe';
 
 @Component({
-  templateUrl: './change-password.component.html',
-  animations: [appModuleAnimation()]
+    templateUrl: './change-password.component.html',
+    animations: [appModuleAnimation()],
+    standalone: true,
+    imports: [FormsModule, AbpValidationSummaryComponent, EqualValidator, LocalizePipe]
 })
 export class ChangePasswordComponent extends AppComponentBase {
   saving = false;

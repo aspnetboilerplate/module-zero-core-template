@@ -6,10 +6,17 @@ import {
   Renderer2
 } from '@angular/core';
 import { AppComponentBase } from '@shared/app-component-base';
+import { AccountHeaderComponent } from './layout/account-header.component';
+import { TenantChangeComponent } from './tenant/tenant-change.component';
+import { RouterOutlet } from '@angular/router';
+import { AccountLanguagesComponent } from './layout/account-languages.component';
+import { AccountFooterComponent } from './layout/account-footer.component';
 
 @Component({
-  templateUrl: './account.component.html',
-  encapsulation: ViewEncapsulation.None
+    templateUrl: './account.component.html',
+    encapsulation: ViewEncapsulation.None,
+    standalone: true,
+    imports: [AccountHeaderComponent, TenantChangeComponent, RouterOutlet, AccountLanguagesComponent, AccountFooterComponent]
 })
 export class AccountComponent extends AppComponentBase implements OnInit {
   constructor(injector: Injector, private renderer: Renderer2) {

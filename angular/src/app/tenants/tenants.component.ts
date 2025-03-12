@@ -15,14 +15,26 @@ import {
 } from "@shared/service-proxies/service-proxies";
 import { CreateTenantDialogComponent } from "./create-tenant/create-tenant-dialog.component";
 import { EditTenantDialogComponent } from "./edit-tenant/edit-tenant-dialog.component";
-import { Table } from "primeng/table";
-import { LazyLoadEvent } from "primeng/api";
+import { Table, TableModule } from "primeng/table";
+import { LazyLoadEvent, PrimeTemplate } from "primeng/api";
 import { ActivatedRoute } from "@angular/router";
-import { Paginator } from "primeng/paginator";
+import { Paginator, PaginatorModule } from "primeng/paginator";
+import { FormsModule } from "@angular/forms";
+import { NgIf } from "@angular/common";
+import { LocalizePipe } from "@shared/pipes/localize.pipe";
 
 @Component({
-  templateUrl: "./tenants.component.html",
-  animations: [appModuleAnimation()],
+    templateUrl: "./tenants.component.html",
+    animations: [appModuleAnimation()],
+    standalone: true,
+    imports: [
+        FormsModule,
+        TableModule,
+        PrimeTemplate,
+        NgIf,
+        PaginatorModule,
+        LocalizePipe,
+    ],
 })
 export class TenantsComponent extends PagedListingComponentBase<TenantDto> {
   tenants: TenantDto[] = [];

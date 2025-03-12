@@ -8,9 +8,10 @@ import { AppComponentBase } from '@shared/app-component-base';
 import { filter as _filter } from 'lodash-es';
 
 @Component({
-  selector: 'account-languages',
-  templateUrl: './account-languages.component.html',
-  changeDetection: ChangeDetectionStrategy.OnPush
+    selector: 'account-languages',
+    templateUrl: './account-languages.component.html',
+    changeDetection: ChangeDetectionStrategy.OnPush,
+    standalone: true
 })
 export class AccountLanguagesComponent extends AppComponentBase
   implements OnInit {

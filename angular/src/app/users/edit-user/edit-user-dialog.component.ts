@@ -14,9 +14,17 @@ import {
   UserDto,
   RoleDto
 } from '@shared/service-proxies/service-proxies';
+import { FormsModule } from '@angular/forms';
+import { AbpModalHeaderComponent } from '../../../shared/components/modal/abp-modal-header.component';
+import { TabsetComponent, TabDirective } from 'ngx-bootstrap/tabs';
+import { AbpValidationSummaryComponent } from '../../../shared/components/validation/abp-validation.summary.component';
+import { AbpModalFooterComponent } from '../../../shared/components/modal/abp-modal-footer.component';
+import { LocalizePipe } from '@shared/pipes/localize.pipe';
 
 @Component({
-  templateUrl: './edit-user-dialog.component.html'
+    templateUrl: './edit-user-dialog.component.html',
+    standalone: true,
+    imports: [FormsModule, AbpModalHeaderComponent, TabsetComponent, TabDirective, AbpValidationSummaryComponent, AbpModalFooterComponent, LocalizePipe]
 })
 export class EditUserDialogComponent extends AppComponentBase
   implements OnInit {
