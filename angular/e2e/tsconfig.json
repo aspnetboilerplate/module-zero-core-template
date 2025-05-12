@@ -1,29 +1,22 @@
 {
-  "compileOnSave": false,
-  "compilerOptions": {
-    "declaration": false,
-    "experimentalDecorators": true,
-    "lib": [
-      "es2016"
-    ],
-    "module": "commonjs",
-    "moduleResolution": "node",
-    "outDir": "../dist/out-tsc-e2e",
-    "sourceMap": true,
-    "target": "es6",
-    "typeRoots": [
-      "../node_modules/@types"
-    ],
-    "baseUrl": ".",
-    "paths": {
-      "@abp/*": [ "../node_modules/abp-ng2-module/dist/src/*" ],
-      "@app/*": [ "./app/*" ],
-      "@shared/*": [ "./shared/*" ],
-      "@node_modules/*": [ "../node_modules/*" ]
-    }
-  },
-  "files": [
-    "../src/polyfills.ts",
-    "../src/test.ts"
-  ],
+    "compileOnSave": false,
+    "compilerOptions": {
+        "declaration": false,
+        "experimentalDecorators": true,
+        "lib": ["es2016"],
+        "module": "commonjs",
+        "moduleResolution": "node",
+        "outDir": "../dist/out-tsc-e2e",
+        "sourceMap": true,
+        "target": "es6",
+        "typeRoots": ["../node_modules/@types"],
+        "baseUrl": ".",
+        "paths": {
+            "@abp/*": ["../node_modules/abp-ng2-module/dist/src/*"],
+            "@app/*": ["./app/*"],
+            "@shared/*": ["./shared/*"],
+            "@node_modules/*": ["../node_modules/*"]
+        }
+    },
+    "files": ["../src/polyfills.ts", "../src/test.ts"]
 }

@@ -10,8 +10,8 @@ declare var System: any;
 declare var Push: any;
 
 declare namespace abp {
-  namespace ui {
-    function setBusy(elm?: any, text?: any, delay?: any): void;
-    function clearBusy(elm?: any, delay?: any): void;
-  }
+    namespace ui {
+        function setBusy(elm?: any, text?: any, delay?: any): void;
+        function clearBusy(elm?: any, delay?: any): void;
+    }
 }

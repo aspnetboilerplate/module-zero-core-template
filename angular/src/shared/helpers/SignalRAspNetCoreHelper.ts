@@ -13,7 +13,7 @@ export class SignalRAspNetCoreHelper {
             remoteServiceBaseUrl: AppConsts.remoteServiceBaseUrl,
             startConnection: undefined,
             url: '/signalr',
-            withUrlOptions: {}
+            withUrlOptions: {},
         };
 
         const script = document.createElement('script');

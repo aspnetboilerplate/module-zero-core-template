@@ -47,7 +47,7 @@ import { ProgressBarModule } from 'primeng/progressbar';
         AbpModalFooterComponent,
         LocalizePipe,
         BusyDirective,
-        EqualValidator
+        EqualValidator,
     ],
     exports: [
         AbpPaginationControlsComponent,
@@ -64,20 +64,14 @@ import { ProgressBarModule } from 'primeng/progressbar';
         CollapseModule,
         TabsModule,
         TableModule,
-        PaginatorModule
-    ]
+        PaginatorModule,
+    ],
 })
 export class SharedModule {
     static forRoot(): ModuleWithProviders<SharedModule> {
         return {
             ngModule: SharedModule,
-            providers: [
-                AppSessionService,
-                AppUrlService,
-                AppAuthService,
-                AppRouteGuard,
-                LayoutStoreService
-            ]
+            providers: [AppSessionService, AppUrlService, AppAuthService, AppRouteGuard, LayoutStoreService],
         };
     }
 }

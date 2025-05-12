@@ -1,5 +1,11 @@
 import { platformBrowserDynamic } from '@angular/platform-browser-dynamic';
-import { enableProdMode, provideExperimentalZonelessChangeDetection, APP_INITIALIZER, LOCALE_ID, importProvidersFrom } from '@angular/core';
+import {
+    enableProdMode,
+    provideExperimentalZonelessChangeDetection,
+    APP_INITIALIZER,
+    LOCALE_ID,
+    importProvidersFrom,
+} from '@angular/core';
 import { environment } from './environments/environment';
 import { getCurrentLanguage } from './root.module';
 
@@ -29,31 +35,43 @@ if (environment.production) {
 
 const bootstrap = () => {
     return bootstrapApplication(RootComponent, {
-    providers: [
-        importProvidersFrom(BrowserModule, SharedModule.forRoot(), ModalModule.forRoot(), BsDropdownModule.forRoot(), CollapseModule.forRoot(), TabsModule.forRoot(), ServiceProxyModule, RootRoutingModule),
-        provideExperimentalZonelessChangeDetection(),
-        provideClientHydration(),
-        { provide: HTTP_INTERCEPTORS, useClass: AbpHttpInterceptor, multi: true },
-        {
-            provide: APP_INITIALIZER,
-            useFactory: (appInitializer: AppInitializer) => appInitializer.init(),
-            deps: [AppInitializer],
-            multi: true,
-        },
-        { provide: API_BASE_URL, useFactory: () => AppConsts.remoteServiceBaseUrl },
-        {
-            provide: LOCALE_ID,
-            useFactory: getCurrentLanguage,
-        },
-        provideAnimations(),
-        provideHttpClient(withInterceptorsFromDi()),
-        providePrimeNG({
-            theme: {
-                preset: Lara
-            }
-        }),
-    ]
-});
+        providers: [
+            importProvidersFrom(
+                BrowserModule,
+                SharedModule.forRoot(),
+                ModalModule.forRoot(),
+                BsDropdownModule.forRoot(),
+                CollapseModule.forRoot(),
+                TabsModule.forRoot(),
+                ServiceProxyModule,
+                RootRoutingModule
+            ),
+            provideExperimentalZonelessChangeDetection(),
+            provideClientHydration(),
+            { provide: HTTP_INTERCEPTORS, useClass: AbpHttpInterceptor, multi: true },
+            {
+                provide: APP_INITIALIZER,
+                useFactory: (appInitializer: AppInitializer) => appInitializer.init(),
+                deps: [AppInitializer],
+                multi: true,
+            },
+            {
+                provide: API_BASE_URL,
+                useFactory: () => AppConsts.remoteServiceBaseUrl,
+            },
+            {
+                provide: LOCALE_ID,
+                useFactory: getCurrentLanguage,
+            },
+            provideAnimations(),
+            provideHttpClient(withInterceptorsFromDi()),
+            providePrimeNG({
+                theme: {
+                    preset: Lara,
+                },
+            }),
+        ],
+    });
 };
 
 /* "Hot Module Replacement" is enabled as described on

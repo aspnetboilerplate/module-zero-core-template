@@ -29,14 +29,14 @@ export class AppAuthService {
     logout(reload?: boolean): void {
         abp.auth.clearToken();
         abp.utils.deleteCookie(AppConsts.authorization.encryptedAuthTokenName);
-        
+
         if (reload !== false) {
             location.href = AppConsts.appBaseUrl;
         }
     }
 
     authenticate(finallyCallback?: () => void): void {
-        finallyCallback = finallyCallback || (() => { });
+        finallyCallback = finallyCallback || (() => {});
 
         this._tokenAuthService
             .authenticate(this.authenticateModel)
@@ -50,9 +50,7 @@ export class AppAuthService {
             });
     }
 
-    private processAuthenticateResult(
-        authenticateResult: AuthenticateResultModel
-    ) {
+    private processAuthenticateResult(authenticateResult: AuthenticateResultModel) {
         this.authenticateResult = authenticateResult;
 
         if (authenticateResult.accessToken) {
@@ -77,9 +75,7 @@ export class AppAuthService {
         expireInSeconds: number,
         rememberMe?: boolean
     ): void {
-        const tokenExpireDate = rememberMe
-            ? new Date(new Date().getTime() + 1000 * expireInSeconds)
-            : undefined;
+        const tokenExpireDate = rememberMe ? new Date(new Date().getTime() + 1000 * expireInSeconds) : undefined;
 
         this._tokenService.setToken(accessToken, tokenExpireDate);
 

@@ -1,76 +1,54 @@
 <nav class="mt-2">
-  <ul
-    class="nav nav-pills nav-sidebar flex-column nav-flat"
-    data-widget="treeview"
-    role="menu"
-    data-accordion="false"
-    >
-    @for (item of menuItems; track item) {
-      <ng-container
-        *ngTemplateOutlet="sidebarInner; context: { item: item }"
-      ></ng-container>
-    }
-  </ul>
+    <ul
+        class="nav nav-pills nav-sidebar flex-column nav-flat"
+        data-widget="treeview"
+        role="menu"
+        data-accordion="false">
+        @for (item of menuItems; track item) {
+            <ng-container *ngTemplateOutlet="sidebarInner; context: { item: item }"></ng-container>
+        }
+    </ul>
 </nav>
 
 <ng-template #sidebarInner let-item="item">
-  @if (isMenuItemVisible(item)) {
-    <li
-      class="nav-item"
-      [class.menu-open]="!item.isCollapsed"
-      [class.has-treeview]="item.children"
-      >
-      @if (item.route && item.route.indexOf('http') != 0) {
-        <a
-          class="nav-link"
-          [routerLink]="item.route"
-          [class.active]="item.isActive"
-          >
-          <i class="nav-icon {{ item.icon }}"></i>
-          <p>
-            {{ item.label }}
-          </p>
-        </a>
-      }
-      @if (item.route && item.route.indexOf('http') == 0 && !item.children) {
-        <a
-          class="nav-link"
-          target="_blank"
-          [href]="item.route"
-          >
-          <i class="nav-icon {{ item.icon }}"></i>
-          <p>
-            {{ item.label }}
-          </p>
-        </a>
-      }
-      @if (!item.route && item.children) {
-        <a
-          class="nav-link"
-          href="javascript:;"
-          [class.active]="item.isActive"
-          (click)="item.isCollapsed = !item.isCollapsed"
-          >
-          <i class="nav-icon {{ item.icon }}"></i>
-          <p>
-            {{ item.label }}
-            <i class="right fas fa-angle-left"></i>
-          </p>
-        </a>
-      }
-      @if (item.children) {
-        <ul
-          class="nav nav-treeview"
-          [collapse]="item.isCollapsed"
-          [isAnimated]="true"
-          >
-          @for (item of item.children; track item) {
-            <ng-container
-              *ngTemplateOutlet="sidebarInner; context: { item: item }"
-            ></ng-container>
-          }
-        </ul>
-      }
-    </li>
-  }
+    @if (isMenuItemVisible(item)) {
+        <li class="nav-item" [class.menu-open]="!item.isCollapsed" [class.has-treeview]="item.children">
+            @if (item.route && item.route.indexOf('http') != 0) {
+                <a class="nav-link" [routerLink]="item.route" [class.active]="item.isActive">
+                    <i class="nav-icon {{ item.icon }}"></i>
+                    <p>
+                        {{ item.label }}
+                    </p>
+                </a>
+            }
+            @if (item.route && item.route.indexOf('http') == 0 && !item.children) {
+                <a class="nav-link" target="_blank" [href]="item.route">
+                    <i class="nav-icon {{ item.icon }}"></i>
+                    <p>
+                        {{ item.label }}
+                    </p>
+                </a>
+            }
+            @if (!item.route && item.children) {
+                <a
+                    class="nav-link"
+                    href="javascript:;"
+                    [class.active]="item.isActive"
+                    (click)="item.isCollapsed = !item.isCollapsed">
+                    <i class="nav-icon {{ item.icon }}"></i>
+                    <p>
+                        {{ item.label }}
+                        <i class="right fas fa-angle-left"></i>
+                    </p>
+                </a>
+            }
+            @if (item.children) {
+                <ul class="nav nav-treeview" [collapse]="item.isCollapsed" [isAnimated]="true">
+                    @for (item of item.children; track item) {
+                        <ng-container *ngTemplateOutlet="sidebarInner; context: { item: item }"></ng-container>
+                    }
+                </ul>
+            }
+        </li>
+    }
 </ng-template>

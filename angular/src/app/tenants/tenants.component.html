@@ -1,252 +1,223 @@
 <div [@routerTransition]>
-  <section class="content-header">
-    <div class="container-fluid">
-      <div class="row">
-        <div class="col-6">
-          <h1>{{ "Tenants" | localize }}</h1>
-        </div>
-        <div class="col-6 text-right">
-          <a href="javascript:;" class="btn bg-blue" (click)="createTenant()">
-            <i class="fa fa-plus-square"></i>
-            {{ "Create" | localize }}
-          </a>
-        </div>
-      </div>
-    </div>
-  </section>
-  <section class="content px-2 pb-5">
-    <div class="container-fluid">
-      <div class="card table-wrapper">
-        <div class="card-header">
-          <div class="row">
-            <div class="col-md-6">&emsp;</div>
-            <div class="col-md-6">
-              <div class="input-group">
-                <div class="input-group-prepend">
-                  <button type="button" class="btn bg-blue" (click)="list()">
-                    <i class="fas fa-search"></i>
-                  </button>
+    <section class="content-header">
+        <div class="container-fluid">
+            <div class="row">
+                <div class="col-6">
+                    <h1>{{ 'Tenants' | localize }}</h1>
                 </div>
-                <input
-                  type="text"
-                  class="form-control"
-                  name="keyword"
-                  [placeholder]="'SearchWithThreeDot' | localize"
-                  [(ngModel)]="keyword"
-                  (keyup.enter)="list()"
-                />
-                <div class="input-group-append">
-                  <button
-                    type="button"
-                    class="btn btn-default"
-                    (click)="advancedFiltersVisible = !advancedFiltersVisible"
-                  >
-                    <i
-                      class="fas"
-                      [class.fa-angle-up]="advancedFiltersVisible"
-                      [class.fa-angle-down]="!advancedFiltersVisible"
-                    ></i>
-                  </button>
+                <div class="col-6 text-right">
+                    <a href="javascript:;" class="btn bg-blue" (click)="createTenant()">
+                        <i class="fa fa-plus-square"></i>
+                        {{ 'Create' | localize }}
+                    </a>
                 </div>
-              </div>
             </div>
-          </div>
-          @if (advancedFiltersVisible) {
-          <div class="card mb-0 mt-1">
-            <div class="card-body">
-              <form class="form-horizontal">
-                <div class="row">
-                  <div class="col-md-6">
-                    <div class="form-group row mb-0">
-                      <label class="col-md-3 col-form-label">
-                        {{ "IsActive" | localize }}
-                      </label>
-                      <div class="col-md-9 pt-2">
-                        <div class="custom-control custom-radio d-inline">
-                          <input
-                            type="radio"
-                            class="custom-control-input"
-                            id="isActiveAll"
-                            name="isActive"
-                            [(ngModel)]="isActive"
-                            [value]="undefined"
-                            checked
-                          />
-                          <label class="custom-control-label" for="isActiveAll">
-                            {{ "All" | localize }}
-                          </label>
+        </div>
+    </section>
+    <section class="content px-2 pb-5">
+        <div class="container-fluid">
+            <div class="card table-wrapper">
+                <div class="card-header">
+                    <div class="row">
+                        <div class="col-md-6">&emsp;</div>
+                        <div class="col-md-6">
+                            <div class="input-group">
+                                <div class="input-group-prepend">
+                                    <button type="button" class="btn bg-blue" (click)="list()">
+                                        <i class="fas fa-search"></i>
+                                    </button>
+                                </div>
+                                <input
+                                    type="text"
+                                    class="form-control"
+                                    name="keyword"
+                                    [placeholder]="'SearchWithThreeDot' | localize"
+                                    [(ngModel)]="keyword"
+                                    (keyup.enter)="list()" />
+                                <div class="input-group-append">
+                                    <button
+                                        type="button"
+                                        class="btn btn-default"
+                                        (click)="advancedFiltersVisible = !advancedFiltersVisible">
+                                        <i
+                                            class="fas"
+                                            [class.fa-angle-up]="advancedFiltersVisible"
+                                            [class.fa-angle-down]="!advancedFiltersVisible"></i>
+                                    </button>
+                                </div>
+                            </div>
                         </div>
-                        <div class="custom-control custom-radio d-inline mx-3">
-                          <input
-                            type="radio"
-                            class="custom-control-input"
-                            id="isActiveActive"
-                            name="isActive"
-                            [(ngModel)]="isActive"
-                            [value]="true"
-                          />
-                          <label
-                            class="custom-control-label"
-                            for="isActiveActive"
-                          >
-                            {{ "Yes" | localize }}
-                          </label>
-                        </div>
-                        <div class="custom-control custom-radio d-inline">
-                          <input
-                            type="radio"
-                            class="custom-control-input"
-                            id="isActivePassive"
-                            name="isActive"
-                            [(ngModel)]="isActive"
-                            [value]="false"
-                          />
-                          <label
-                            class="custom-control-label"
-                            for="isActivePassive"
-                          >
-                            {{ "No" | localize }}
-                          </label>
-                        </div>
-                      </div>
                     </div>
-                  </div>
+                    @if (advancedFiltersVisible) {
+                        <div class="card mb-0 mt-1">
+                            <div class="card-body">
+                                <form class="form-horizontal">
+                                    <div class="row">
+                                        <div class="col-md-6">
+                                            <div class="form-group row mb-0">
+                                                <label class="col-md-3 col-form-label">
+                                                    {{ 'IsActive' | localize }}
+                                                </label>
+                                                <div class="col-md-9 pt-2">
+                                                    <div class="custom-control custom-radio d-inline">
+                                                        <input
+                                                            type="radio"
+                                                            class="custom-control-input"
+                                                            id="isActiveAll"
+                                                            name="isActive"
+                                                            [(ngModel)]="isActive"
+                                                            [value]="undefined"
+                                                            checked />
+                                                        <label class="custom-control-label" for="isActiveAll">
+                                                            {{ 'All' | localize }}
+                                                        </label>
+                                                    </div>
+                                                    <div class="custom-control custom-radio d-inline mx-3">
+                                                        <input
+                                                            type="radio"
+                                                            class="custom-control-input"
+                                                            id="isActiveActive"
+                                                            name="isActive"
+                                                            [(ngModel)]="isActive"
+                                                            [value]="true" />
+                                                        <label class="custom-control-label" for="isActiveActive">
+                                                            {{ 'Yes' | localize }}
+                                                        </label>
+                                                    </div>
+                                                    <div class="custom-control custom-radio d-inline">
+                                                        <input
+                                                            type="radio"
+                                                            class="custom-control-input"
+                                                            id="isActivePassive"
+                                                            name="isActive"
+                                                            [(ngModel)]="isActive"
+                                                            [value]="false" />
+                                                        <label class="custom-control-label" for="isActivePassive">
+                                                            {{ 'No' | localize }}
+                                                        </label>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </form>
+                            </div>
+                            <div class="card-footer">
+                                <button type="button" class="btn bg-blue">
+                                    {{ 'Search' | localize }}
+                                </button>
+                                <button type="button" class="btn btn-default float-right" (click)="clearFilters()">
+                                    {{ 'Clear' | localize }}
+                                </button>
+                            </div>
+                        </div>
+                    }
                 </div>
-              </form>
-            </div>
-            <div class="card-footer">
-              <button type="button" class="btn bg-blue">
-                {{ "Search" | localize }}
-              </button>
-              <button
-                type="button"
-                class="btn btn-default float-right"
-                (click)="clearFilters()"
-              >
-                {{ "Clear" | localize }}
-              </button>
-            </div>
-          </div>
-          }
-        </div>
-        <div
-          class="card-body table-responsive table-striped table-bordered"
-        >
-          <!--<Primeng-TurboTable-Start>-->
-          <div class="primeng-datatable-container">
-            <p-table
-              #dataTable
-              sortMode="multiple"
-              (onLazyLoad)="list($event)"
-              [value]="primengTableHelper.records"
-              rows="{{ primengTableHelper.defaultRecordsCountPerPage }}"
-              [paginator]="false"
-              [lazy]="true"
-              [tableStyle]="{ 'min-width': '50rem' }"
-            >
-              <ng-template pTemplate="header">
-                <tr>
-                  <th style="min-width: 150px" pSortableColumn="tenancyName">
-                    {{ "TenancyName" | localize }}
-                    <p-sortIcon field="tenancyName"></p-sortIcon>
-                  </th>
-                  <th style="min-width: 150px" pSortableColumn="name">
-                    {{ "Name" | localize }}
-                    <p-sortIcon field="name"></p-sortIcon>
-                  </th>
-                  <th style="min-width: 150px">
-                    {{ "IsActive" | localize }}
-                  </th>
-                  <th style="min-width: 130px">
-                    {{ "Actions" | localize }}
-                  </th>
-                </tr>
-              </ng-template>
+                <div class="card-body table-responsive table-striped table-bordered">
+                    <!--<Primeng-TurboTable-Start>-->
+                    <div class="primeng-datatable-container">
+                        <p-table
+                            #dataTable
+                            sortMode="multiple"
+                            (onLazyLoad)="list($event)"
+                            [value]="primengTableHelper.records"
+                            rows="{{ primengTableHelper.defaultRecordsCountPerPage }}"
+                            [paginator]="false"
+                            [lazy]="true"
+                            [tableStyle]="{ 'min-width': '50rem' }">
+                            <ng-template pTemplate="header">
+                                <tr>
+                                    <th style="min-width: 150px" pSortableColumn="tenancyName">
+                                        {{ 'TenancyName' | localize }}
+                                        <p-sortIcon field="tenancyName"></p-sortIcon>
+                                    </th>
+                                    <th style="min-width: 150px" pSortableColumn="name">
+                                        {{ 'Name' | localize }}
+                                        <p-sortIcon field="name"></p-sortIcon>
+                                    </th>
+                                    <th style="min-width: 150px">
+                                        {{ 'IsActive' | localize }}
+                                    </th>
+                                    <th style="min-width: 130px">
+                                        {{ 'Actions' | localize }}
+                                    </th>
+                                </tr>
+                            </ng-template>
 
-              <ng-template pTemplate="body" let-record="$implicit">
-                <tr>
-                  <td>
-                    <span>
-                      {{ record.tenancyName }}
-                    </span>
-                  </td>
-                  <td>
-                    <span>
-                      {{ record.name }}
-                    </span>
-                  </td>
-                  <td>
-                    <div class="custom-control custom-checkbox">
-                      <input
-                        type="checkbox"
-                        class="custom-control-input"
-                        disabled
-                        [checked]="record.isActive"
-                      />
-                      <label class="custom-control-label"></label>
+                            <ng-template pTemplate="body" let-record="$implicit">
+                                <tr>
+                                    <td>
+                                        <span>
+                                            {{ record.tenancyName }}
+                                        </span>
+                                    </td>
+                                    <td>
+                                        <span>
+                                            {{ record.name }}
+                                        </span>
+                                    </td>
+                                    <td>
+                                        <div class="custom-control custom-checkbox">
+                                            <input
+                                                type="checkbox"
+                                                class="custom-control-input"
+                                                disabled
+                                                [checked]="record.isActive" />
+                                            <label class="custom-control-label"></label>
+                                        </div>
+                                    </td>
+                                    <td>
+                                        <button
+                                            type="button"
+                                            class="btn btn-sm bg-secondary"
+                                            (click)="editTenant(record)">
+                                            <i class="fas fa-pencil-alt"></i>
+                                            {{ 'Edit' | localize }}
+                                        </button>
+                                        <button
+                                            type="button"
+                                            class="btn btn-sm bg-danger mx-2"
+                                            (click)="delete(record)">
+                                            <i class="fas fa-trash"></i>
+                                            {{ 'Delete' | localize }}
+                                        </button>
+                                    </td>
+                                </tr>
+                            </ng-template>
+                        </p-table>
+                        <div class="primeng-no-data" *ngIf="primengTableHelper.totalRecordsCount == 0">
+                            {{ 'NoData' | localize }}
+                        </div>
+                        <div class="ui-table-footer"></div>
                     </div>
-                  </td>
-                  <td>
-                    <button
-                      type="button"
-                      class="btn btn-sm bg-secondary"
-                      (click)="editTenant(record)"
-                    >
-                      <i class="fas fa-pencil-alt"></i>
-                      {{ "Edit" | localize }}
-                    </button>
-                    <button
-                      type="button"
-                      class="btn btn-sm bg-danger mx-2"
-                      (click)="delete(record)"
-                    >
-                      <i class="fas fa-trash"></i>
-                      {{ "Delete" | localize }}
-                    </button>
-                  </td>
-                </tr>
-              </ng-template>
-            </p-table>
-            <div
-              class="primeng-no-data"
-              *ngIf="primengTableHelper.totalRecordsCount == 0"
-            >
-              {{ "NoData" | localize }}
-            </div>
-            <div class="ui-table-footer"></div>
-          </div>
-          <!--<Primeng-TurboTable-End>-->
-        </div>
-        <div class="card-footer table-card-footer bg-white border-top">
-          <div class="row">
-            <div class="col-sm-4 col-12 text-sm-left text-center">
-              <button class="btn btn-secondary" (click)="refresh()">
-                <i class="fas fa-redo-alt"></i>
-              </button>
-            </div>
-            <div class="col-sm-8 col-12">
-              <div class="float-sm-right m-auto">
-                <div class="primeng-paging-container">
-                  <p-paginator
-                    [rows]="primengTableHelper.defaultRecordsCountPerPage"
-                    #paginator
-                    (onPageChange)="list($event)"
-                    [totalRecords]="primengTableHelper.totalRecordsCount"
-                    [rowsPerPageOptions]="
-                      primengTableHelper.predefinedRecordsCountPerPage
-                    "
-                    [showCurrentPageReport]="true"
-                    [currentPageReportTemplate]="
-                      'TotalRecordsCount'
-                        | localize : primengTableHelper.totalRecordsCount
-                    "
-                  ></p-paginator>
+                    <!--<Primeng-TurboTable-End>-->
                 </div>
-              </div>
+                <div class="card-footer table-card-footer bg-white border-top">
+                    <div class="row">
+                        <div class="col-sm-4 col-12 text-sm-left text-center">
+                            <button class="btn btn-secondary" (click)="refresh()">
+                                <i class="fas fa-redo-alt"></i>
+                            </button>
+                        </div>
+                        <div class="col-sm-8 col-12">
+                            <div class="float-sm-right m-auto">
+                                <div class="primeng-paging-container">
+                                    <p-paginator
+                                        [rows]="primengTableHelper.defaultRecordsCountPerPage"
+                                        #paginator
+                                        (onPageChange)="list($event)"
+                                        [totalRecords]="primengTableHelper.totalRecordsCount"
+                                        [rowsPerPageOptions]="primengTableHelper.predefinedRecordsCountPerPage"
+                                        [showCurrentPageReport]="true"
+                                        [currentPageReportTemplate]="
+                                            'TotalRecordsCount' | localize: primengTableHelper.totalRecordsCount
+                                        "></p-paginator>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
             </div>
-          </div>
         </div>
-      </div>
-    </div>
-  </section>
+    </section>
 </div>

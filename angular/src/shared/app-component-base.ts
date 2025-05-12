@@ -7,14 +7,13 @@ import {
     NotifyService,
     SettingService,
     MessageService,
-    AbpMultiTenancyService
+    AbpMultiTenancyService,
 } from 'abp-ng2-module';
 
 import { AppSessionService } from '@shared/session/app-session.service';
 import { PrimengTableHelper } from 'shared/helpers/PrimengTableHelper';
 
 export abstract class AppComponentBase {
-
     localizationSourceName = AppConsts.localization.defaultLocalizationSourceName;
 
     localization: LocalizationService;

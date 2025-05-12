@@ -1,17 +1,17 @@
 ﻿<div class="login-box">
-  <account-header></account-header>
-  <div class="card">
-    @if (showTenantChange()) {
-      <div class="card-header">
-        <tenant-change></tenant-change>
-      </div>
-    }
-    <div class="card-body login-card-body">
-      <router-outlet></router-outlet>
+    <account-header></account-header>
+    <div class="card">
+        @if (showTenantChange()) {
+            <div class="card-header">
+                <tenant-change></tenant-change>
+            </div>
+        }
+        <div class="card-body login-card-body">
+            <router-outlet></router-outlet>
+        </div>
+        <div class="card-footer">
+            <account-languages></account-languages>
+        </div>
     </div>
-    <div class="card-footer">
-      <account-languages></account-languages>
-    </div>
-  </div>
-  <account-footer></account-footer>
+    <account-footer></account-footer>
 </div>

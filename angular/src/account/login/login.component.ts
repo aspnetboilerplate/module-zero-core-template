@@ -12,33 +12,33 @@ import { LocalizePipe } from '@shared/pipes/localize.pipe';
     templateUrl: './login.component.html',
     animations: [accountModuleAnimation()],
     standalone: true,
-    imports: [FormsModule, AbpValidationSummaryComponent, RouterLink, LocalizePipe]
+    imports: [FormsModule, AbpValidationSummaryComponent, RouterLink, LocalizePipe],
 })
 export class LoginComponent extends AppComponentBase {
-  submitting = false;
+    submitting = false;
 
-  constructor(
-    injector: Injector,
-    public authService: AppAuthService,
-    private _sessionService: AbpSessionService
-  ) {
-    super(injector);
-  }
-
-  get multiTenancySideIsTeanant(): boolean {
-    return this._sessionService.tenantId > 0;
-  }
-
-  get isSelfRegistrationAllowed(): boolean {
-    if (!this._sessionService.tenantId) {
-      return false;
+    constructor(
+        injector: Injector,
+        public authService: AppAuthService,
+        private _sessionService: AbpSessionService
+    ) {
+        super(injector);
     }
 
-    return true;
-  }
+    get multiTenancySideIsTeanant(): boolean {
+        return this._sessionService.tenantId > 0;
+    }
 
-  login(): void {
-    this.submitting = true;
-    this.authService.authenticate(() => (this.submitting = false));
-  }
+    get isSelfRegistrationAllowed(): boolean {
+        if (!this._sessionService.tenantId) {
+            return false;
+        }
+
+        return true;
+    }
+
+    login(): void {
+        this.submitting = true;
+        this.authService.authenticate(() => (this.submitting = false));
+    }
 }

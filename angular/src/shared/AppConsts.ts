@@ -1,5 +1,4 @@
 export class AppConsts {
-
     static readonly tenancyNamePlaceHolderInUrl = '{TENANCY_NAME}';
 
     static remoteServiceBaseUrl: string;
@@ -9,14 +8,14 @@ export class AppConsts {
     static localeMappings: any = [];
 
     static readonly userManagement = {
-        defaultAdminUserName: 'admin'
+        defaultAdminUserName: 'admin',
     };
 
     static readonly localization = {
-        defaultLocalizationSourceName: 'AbpProjectName'
+        defaultLocalizationSourceName: 'AbpProjectName',
     };
 
     static readonly authorization = {
-        encryptedAuthTokenName: 'enc_auth_token'
+        encryptedAuthTokenName: 'enc_auth_token',
     };
 }

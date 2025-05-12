@@ -7,20 +7,20 @@ import { LocalizePipe } from '@shared/pipes/localize.pipe';
     templateUrl: './footer.component.html',
     changeDetection: ChangeDetectionStrategy.OnPush,
     standalone: true,
-    imports: [LocalizePipe]
+    imports: [LocalizePipe],
 })
 export class FooterComponent extends AppComponentBase {
-  currentYear: number;
-  versionText: string;
+    currentYear: number;
+    versionText: string;
 
-  constructor(injector: Injector) {
-    super(injector);
+    constructor(injector: Injector) {
+        super(injector);
 
-    this.currentYear = new Date().getFullYear();
-    this.versionText =
-      this.appSession.application.version +
-      ' [' +
-      this.appSession.application.releaseDate.format('YYYYDDMM') +
-      ']';
-  }
+        this.currentYear = new Date().getFullYear();
+        this.versionText =
+            this.appSession.application.version +
+            ' [' +
+            this.appSession.application.releaseDate.format('YYYYDDMM') +
+            ']';
+    }
 }

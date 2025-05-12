@@ -7,8 +7,13 @@ import { TenantsComponent } from './tenants.component';
 import { CommonModule } from '@angular/common';
 
 @NgModule({
-    imports: [SharedModule, TenantsRoutingModule, CommonModule, CreateTenantDialogComponent,
+    imports: [
+        SharedModule,
+        TenantsRoutingModule,
+        CommonModule,
+        CreateTenantDialogComponent,
         EditTenantDialogComponent,
-        TenantsComponent],
+        TenantsComponent,
+    ],
 })
 export class TenantsModule {}

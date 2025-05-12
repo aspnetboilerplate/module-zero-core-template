@@ -6,6 +6,6 @@ import { RouterLink } from '@angular/router';
     templateUrl: './sidebar-logo.component.html',
     changeDetection: ChangeDetectionStrategy.OnPush,
     standalone: true,
-    imports: [RouterLink]
+    imports: [RouterLink],
 })
 export class SidebarLogoComponent {}

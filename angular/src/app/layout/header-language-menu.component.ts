@@ -1,14 +1,6 @@
-import {
-  Component,
-  ChangeDetectionStrategy,
-  OnInit,
-  Injector
-} from '@angular/core';
+import { Component, ChangeDetectionStrategy, OnInit, Injector } from '@angular/core';
 import { AppComponentBase } from '@shared/app-component-base';
-import {
-  UserServiceProxy,
-  ChangeUserLanguageDto
-} from '@shared/service-proxies/service-proxies';
+import { UserServiceProxy, ChangeUserLanguageDto } from '@shared/service-proxies/service-proxies';
 import { filter as _filter } from 'lodash-es';
 import { BsDropdownDirective, BsDropdownToggleDirective, BsDropdownMenuDirective } from 'ngx-bootstrap/dropdown';
 
@@ -17,38 +9,37 @@ import { BsDropdownDirective, BsDropdownToggleDirective, BsDropdownMenuDirective
     templateUrl: './header-language-menu.component.html',
     changeDetection: ChangeDetectionStrategy.OnPush,
     standalone: true,
-    imports: [BsDropdownDirective, BsDropdownToggleDirective, BsDropdownMenuDirective]
+    imports: [BsDropdownDirective, BsDropdownToggleDirective, BsDropdownMenuDirective],
 })
-export class HeaderLanguageMenuComponent extends AppComponentBase
-  implements OnInit {
-  languages: abp.localization.ILanguageInfo[];
-  currentLanguage: abp.localization.ILanguageInfo;
+export class HeaderLanguageMenuComponent extends AppComponentBase implements OnInit {
+    languages: abp.localization.ILanguageInfo[];
+    currentLanguage: abp.localization.ILanguageInfo;
 
-  constructor(injector: Injector, private _userService: UserServiceProxy) {
-    super(injector);
-  }
+    constructor(
+        injector: Injector,
+        private _userService: UserServiceProxy
+    ) {
+        super(injector);
+    }
 
-  ngOnInit() {
-    this.languages = _filter(
-      this.localization.languages,
-      (l) => !l.isDisabled
-    );
-    this.currentLanguage = this.localization.currentLanguage;
-  }
+    ngOnInit() {
+        this.languages = _filter(this.localization.languages, (l) => !l.isDisabled);
+        this.currentLanguage = this.localization.currentLanguage;
+    }
 
-  changeLanguage(languageName: string): void {
-    const input = new ChangeUserLanguageDto();
-    input.languageName = languageName;
+    changeLanguage(languageName: string): void {
+        const input = new ChangeUserLanguageDto();
+        input.languageName = languageName;
 
-    this._userService.changeLanguage(input).subscribe(() => {
-      abp.utils.setCookieValue(
-        'Abp.Localization.CultureName',
-        languageName,
-        new Date(new Date().getTime() + 5 * 365 * 86400000), // 5 year
-        abp.appPath
-      );
+        this._userService.changeLanguage(input).subscribe(() => {
+            abp.utils.setCookieValue(
+                'Abp.Localization.CultureName',
+                languageName,
+                new Date(new Date().getTime() + 5 * 365 * 86400000), // 5 year
+                abp.appPath
+            );
 
-      window.location.reload();
-    });
-  }
+            window.location.reload();
+        });
+    }
 }
