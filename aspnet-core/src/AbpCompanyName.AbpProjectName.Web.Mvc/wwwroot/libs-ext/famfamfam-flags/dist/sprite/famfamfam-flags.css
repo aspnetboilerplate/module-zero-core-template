@@ -1,5 +1,5 @@
 .famfamfam-flags {
-  background: url( 'famfamfam-flags.png' ) no-repeat;
+  background: url("famfamfam-flags.png") no-repeat;
   background-size: 224px 199px;
 }
 
@@ -459,7 +459,11 @@
   background-position: -112px -55px;
 }
 
-.famfamfam-flags.gp, .famfamfam-flags.mf, .famfamfam-flags.re, .famfamfam-flags.yt, .famfamfam-flags.fr {
+.famfamfam-flags.gp,
+.famfamfam-flags.mf,
+.famfamfam-flags.re,
+.famfamfam-flags.yt,
+.famfamfam-flags.fr {
   width: 16px;
   height: 11px;
   background-position: -112px -66px;
@@ -993,7 +997,8 @@
   background-position: -160px -155px;
 }
 
-.famfamfam-flags.bq, .famfamfam-flags.nl {
+.famfamfam-flags.bq,
+.famfamfam-flags.nl {
   width: 16px;
   height: 11px;
   background-position: -176px 0px;
@@ -1496,4 +1501,3 @@
   height: 11px;
   background-position: -208px -154px;
 }
-

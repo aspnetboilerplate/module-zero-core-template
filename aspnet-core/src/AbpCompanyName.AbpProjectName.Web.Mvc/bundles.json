@@ -72,15 +72,11 @@
     },
     {
       "output": "view-resources/Views/_Bundles/datatables.ajax.min.js",
-      "input": [
-        "wwwroot/Common/datatables.ajax.js"
-      ]
+      "input": ["wwwroot/Common/datatables.ajax.js"]
     },
     {
       "output": "view-resources/Views/_Bundles/helpers.min.js",
-      "input": [
-        "wwwroot/Common/helpers.js"
-      ]
+      "input": ["wwwroot/Common/helpers.js"]
     }
   ],
   "styles": [
@@ -115,9 +111,7 @@
   "scriptMappings": [
     {
       "outputFolder": "libs/moment-timezone",
-      "input": [
-        "node_modules/moment-timezone/*.js"
-      ]
+      "input": ["node_modules/moment-timezone/*.js"]
     }
   ]
 }

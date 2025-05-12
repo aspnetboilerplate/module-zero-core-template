@@ -2,7 +2,9 @@
   "name": "abptemplate",
   "scripts": {
     "create-bundles": "yarn && gulp buildDev",
-    "build": "yarn && gulp build"
+    "build": "yarn && gulp build",
+    "prettier": "npx prettier --write .",
+    "lint": "eslint"
   },
   "version": "10.1.0",
   "license": "MIT",
@@ -32,7 +34,11 @@
     "toastr": "2.1.4"
   },
   "devDependencies": {
+    "@eslint/compat": "^1.2.9",
     "@types/node": "^22.13.5",
+    "eslint": "^9.26.0",
+    "eslint-plugin-jquery": "^1.5.1",
+    "globals": "^16.1.0",
     "globby": "^14.1.0",
     "gulp": "^4.0.2",
     "gulp-clean-css": "^4.3.0",

@@ -1,6 +1,7 @@
 ## Change Log
 
 ### 0.5.1 (2016/02/15 09:42 +00:00)
+
 - [37efc40](https://github.com/legacy-icons/famfamfam-flags/commit/37efc40be0563d2bb1be65e6ee6ef3a5a10e499d) chore: v0.5.1 (@t1st3)
 - [#20](https://github.com/legacy-icons/famfamfam-flags/pull/20) chore(package): update gulp-cssnano to version 2.1.1 (@t1st3)
 - [ba06931](https://github.com/legacy-icons/famfamfam-flags/commit/ba06931a869f1823368c0bd8795cc5c943776d89) chore(package): update gulp-cssnano to version 2.1.1 (@greenkeeperio-bot)
@@ -15,6 +16,7 @@
 - [7e0defd](https://github.com/legacy-icons/famfamfam-flags/commit/7e0defd471467e74478af84ceef62cbbb98fbccf) chore: travis.yml indentation (@t1st3)
 
 ### 0.5.0 (2016/01/19 13:39 +00:00)
+
 - [6e46357](https://github.com/legacy-icons/famfamfam-flags/commit/6e46357c5047251c629712619536a0db86e0704a) chore: update changelog (@t1st3)
 - [1b856d2](https://github.com/legacy-icons/famfamfam-flags/commit/1b856d20da3c2b891130560ffc3427eecdd1384f) chore: v0.5.0 (@t1st3)
 - [323a768](https://github.com/legacy-icons/famfamfam-flags/commit/323a7686b4346ee5258b2bbad71bc7ce3f4fae0c) chore: update deps versions with caret ranges (@t1st3)
@@ -42,6 +44,7 @@
 - [529b03b](https://github.com/legacy-icons/famfamfam-flags/commit/529b03bec32a7916ae819c812dd7b40cd2ba83e7) chore(package): update gulp-minify-css to version 1.2.3 (@greenkeeperio-bot)
 
 ### 0.4.1 (2015/12/22 13:03 +00:00)
+
 - [acd82de](https://github.com/legacy-icons/famfamfam-flags/commit/acd82de268068bbf932d62459125e201d1f8c873) chore: v0.4.1 (@t1st3)
 - [854cb96](https://github.com/legacy-icons/famfamfam-flags/commit/854cb96fab33a50fa59c146c29e34289a59670b9) feat: add MyGet deployment files and support for NuGet (@t1st3)
 - [#6](https://github.com/legacy-icons/famfamfam-flags/pull/6) Update all dependencies 🌴 (@T1st3)
@@ -49,6 +52,7 @@
 - [ad56ea1](https://github.com/legacy-icons/famfamfam-flags/commit/ad56ea1aecbd6499b1be71d20690021869c674b0) chore: fix build task (@t1st3)
 
 ### 0.4.0 (2015/10/20 11:04 +00:00)
+
 - [f686b9c](https://github.com/legacy-icons/famfamfam-flags/commit/f686b9c7a3f6d8be6b29385257a073a4613f4bf1) chore: v0.4.0 (@t1st3)
 - [37783a2](https://github.com/legacy-icons/famfamfam-flags/commit/37783a264c74974cf76d3d140387c286976bffbe) feat: add jersey.png (@t1st3)
 - [10037bc](https://github.com/legacy-icons/famfamfam-flags/commit/10037bc550d3ba9ed3ce69cc39a39d88df3163f0) chore: update NPM deps (del) (@t1st3)
@@ -57,12 +61,14 @@
 - [5f818f5](https://github.com/legacy-icons/famfamfam-flags/commit/5f818f5938756ce6f35769475a8a9b34af09c459) docs: update README (@t1st3)
 
 ### 0.3.5 (2015/08/17 13:30 +00:00)
+
 - [223e6d8](https://github.com/legacy-icons/famfamfam-flags/commit/223e6d81cd29bf9cc2ea63a65b8e6a6ac5e11762) chore: v0.3.5 (@t1st3)
 - [d282c71](https://github.com/legacy-icons/famfamfam-flags/commit/d282c71f81535c67e2034fa58b30fd107a1c60ae) fix: update mm flag (Myanmar) (@t1st3)
 - [#3](https://github.com/legacy-icons/famfamfam-flags/pull/3) Fix Myanmar flag (@lucas34)
 - [2fc45e2](https://github.com/legacy-icons/famfamfam-flags/commit/2fc45e2a7791571a9537a25e0174490ce1f4f592) Fix Myanmar flag (@lucas34)
 
 ### 0.3.4 (2015/07/28 00:53 +00:00)
+
 - [668fbbf](https://github.com/legacy-icons/famfamfam-flags/commit/668fbbf90ffa7d3775652b3e1042211045695525) chore: v0.3.4 (@t1st3)
 - [a293305](https://github.com/legacy-icons/famfamfam-flags/commit/a293305f30e19a86f884ac428f0a5c9f85010089) chore: update npm deps (@t1st3)
 - [d5d5e80](https://github.com/legacy-icons/famfamfam-flags/commit/d5d5e8074184362e73e21aad6530510f6ac6b7e0) chore: update npm dev-deps (@t1st3)
@@ -75,6 +81,7 @@
 - [fc7c9c7](https://github.com/legacy-icons/famfamfam-flags/commit/fc7c9c7fc197cdd880de6929b247fd0db6c563ae) chore: update bower ignores (@t1st3)
 
 ### 0.3.3 (2015/03/22 15:04 +00:00)
+
 - [d0a195c](https://github.com/legacy-icons/famfamfam-flags/commit/d0a195c11ef11ea9db336db1c0a8771273965f93) chore: v0.3.3 (@t1st3)
 - [6a674a6](https://github.com/legacy-icons/famfamfam-flags/commit/6a674a61d801ed0f9858cc0ae6fb19e7d933f47b) docs: include spritesheet to README (@t1st3)
 - [a7cd08c](https://github.com/legacy-icons/famfamfam-flags/commit/a7cd08c2bc8c839eb8631a599b9c5eb2e1a92e41) feat: add gg flag, from Silk Companion (@t1st3)
@@ -82,6 +89,7 @@
 - [5e488d3](https://github.com/legacy-icons/famfamfam-flags/commit/5e488d3a4a17292926b40e478655c326fa64553b) docs: add dependency badge in README (@t1st3)
 
 ### 0.3.2 (2015/03/19 16:23 +00:00)
+
 - [a07266a](https://github.com/legacy-icons/famfamfam-flags/commit/a07266afe668343b1aec5f01708d88e897a64555) chore: v0.3.2 (@t1st3)
 - [bed4c6e](https://github.com/legacy-icons/famfamfam-flags/commit/bed4c6e8d42fead2e21b3c385d5203638ad2e331) docs: update mention to spritesheets in README (@t1st3)
 - [1f01166](https://github.com/legacy-icons/famfamfam-flags/commit/1f011662428a0fa9ed09863fdab3f582f71a2a59) docs: update mention to spritesheets in README (@t1st3)
@@ -89,10 +97,12 @@
 - [3343f3a](https://github.com/legacy-icons/famfamfam-flags/commit/3343f3af7a6f6da3970e63200a46afd2c9111637) docs: add mention to spritesheet in README (@t1st3)
 
 ### 0.3.1 (2015/03/18 17:51 +00:00)
+
 - [a5ac872](https://github.com/legacy-icons/famfamfam-flags/commit/a5ac872b959189dbe1feb2ce928fd021f46692c9) chore: v0.3.1 (@t1st3)
 - [c815ede](https://github.com/legacy-icons/famfamfam-flags/commit/c815ede2c181923f847bb042e8417717ab111c5e) fix: update travis.yml to fix CI error (@t1st3)
 
 ### 0.3.0 (2015/03/18 16:39 +00:00)
+
 - [48dd346](https://github.com/legacy-icons/famfamfam-flags/commit/48dd3461211d49a1634c1367e4c15fb46731daeb) chore: v0.3.0 (@t1st3)
 - [e5187ac](https://github.com/legacy-icons/famfamfam-flags/commit/e5187ac8a3a2d62b5638f8c34e9e9e37ce83f02d) feat: build with imagemin, add spritesheet (@t1st3)
 - [3f185e1](https://github.com/legacy-icons/famfamfam-flags/commit/3f185e14f4c8241eb1d53f4167f7d39f300742b8) chore: add imagemin and spritesheet as dev deps (@t1st3)
@@ -105,10 +115,12 @@
 - [1af7abc](https://github.com/legacy-icons/famfamfam-flags/commit/1af7abc00030e7c92e49fb2c9f1ea136f815ebb0) chore: update .npmignore to exclude composer files (@t1st3)
 
 ### 0.2.4 (2015/03/10 21:40 +00:00)
+
 - [ca959d7](https://github.com/legacy-icons/famfamfam-flags/commit/ca959d7fd51da851c6bf266e94bee164ae2ce400) chore: v0.2.4 (@t1st3)
 - [e69d3f7](https://github.com/legacy-icons/famfamfam-flags/commit/e69d3f7470d5143e67fe7287b8acd6007b157917) chore: update package.json files (@t1st3)
 
 ### 0.2.3 (2015/03/10 21:18 +00:00)
+
 - [1d80637](https://github.com/legacy-icons/famfamfam-flags/commit/1d80637f6191ecbedb5142cfac6727504f8c9832) chore: v0.2.3 (@t1st3)
 - [c11ed44](https://github.com/legacy-icons/famfamfam-flags/commit/c11ed4446bed139620a51f9efdcf03bb58908734) chore: update package.json files (@t1st3)
 - [02a769e](https://github.com/legacy-icons/famfamfam-flags/commit/02a769eacb7d1c4f4fa7361a8d6f5ffff816eb72) chore: update package.json files (@t1st3)
@@ -116,21 +128,25 @@
 - [435a3fe](https://github.com/legacy-icons/famfamfam-flags/commit/435a3fe2077bee4887a2eaae3338b349c2d16caa) chore: update bower.json ignores (@t1st3)
 
 ### 0.2.2 (2015/03/10 06:45 +00:00)
+
 - [5e38b80](https://github.com/legacy-icons/famfamfam-flags/commit/5e38b80390e44c194cb103a92c0e275e8d96f959) chore: v0.2.2 (@t1st3)
 - [1b16fd9](https://github.com/legacy-icons/famfamfam-flags/commit/1b16fd9f79802c6940202a26ac97473698a7f9e6) feat: add auto-deploy on Travis (@t1st3)
 
 ### 0.2.1 (2015/03/10 01:58 +00:00)
+
 - [cf1cfa7](https://github.com/legacy-icons/famfamfam-flags/commit/cf1cfa71cd533b62dc90e0168fba09d893b3a884) chore: v0.2.1 (@t1st3)
 - [8973495](https://github.com/legacy-icons/famfamfam-flags/commit/8973495d7dd03dd7481ab305d31f09f8d627f9be) fix: remove version from composer.json (@t1st3)
 - [0aa8f21](https://github.com/legacy-icons/famfamfam-flags/commit/0aa8f217d83f390e76893bad30abc38573d4bad6) fix: edit package name in README (@t1st3)
 
 ### 0.2.0 (2015/03/10 01:50 +00:00)
+
 - [3b4dd34](https://github.com/legacy-icons/famfamfam-flags/commit/3b4dd34598bc620f266d7f409479b342100bae83) chore: change owner from kwipi to t1st3; bump to v0.2.0 (@t1st3)
 - [#1](https://github.com/legacy-icons/famfamfam-flags/pull/1) Added composer "component" syntax (@tagme)
 - [6ab6a93](https://github.com/legacy-icons/famfamfam-flags/commit/6ab6a9309417824da9b2139a5d6668d1f5a5e0f8) Version information is not needed for composer/packagist to work. Using tags instead (@vworldat)
 - [19ba451](https://github.com/legacy-icons/famfamfam-flags/commit/19ba451d11f945336ae609e5ac33e42bedad9bfd) Added composer "component" syntax (@vworldat)
 
 ### 0.1.1 (2014/02/27 21:42 +00:00)
+
 - [bea3a8c](https://github.com/legacy-icons/famfamfam-flags/commit/bea3a8cefad5062b59d59f0603f37366ecbd032d) Bump to 0.1.1 (@t1st3)
 - [e556b09](https://github.com/legacy-icons/famfamfam-flags/commit/e556b0959d7b2a5db37bded2299dfa0459e174b1) bump to 0.1.1 (@jonrandoem)
 - [c11959d](https://github.com/legacy-icons/famfamfam-flags/commit/c11959def0f7399898bdcb8b959b51db2e99cdca) Update readme (@jonrandoem)

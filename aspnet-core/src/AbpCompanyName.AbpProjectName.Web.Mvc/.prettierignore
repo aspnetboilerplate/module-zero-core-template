@@ -1,0 +1,21 @@
+# Ignore artifacts:
+build
+.idea/
+.vs/
+.vscode/
+bin/
+e2e/
+node_modules/
+nswag/
+obj/
+src/assets/
+dist/
+
+*.css
+*.less
+*.min.*
+package.json
+package-lock.json
+yarn.lock
+*.json
+src/shared/service-proxies/service-proxies.ts

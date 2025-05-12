@@ -2,10 +2,11 @@
   color: #d00;
   content: "*";
   position: absolute;
-  margin-left: 3px; }
+  margin-left: 3px;
+}
 
 .nav-user-menu .user-image {
   width: 20px;
   margin-right: 4px;
-  margin-top: -4px; 
+  margin-top: -4px;
 }
