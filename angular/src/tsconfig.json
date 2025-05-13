@@ -1,46 +1,28 @@
 {
-  "compilerOptions": {
-    "esModuleInterop": true,
-    "allowSyntheticDefaultImports": true,
-    "declaration": false,
-    "downlevelIteration": true,
-    "experimentalDecorators": true,
-    "lib": [ "es6", "dom" ],
-    "mapRoot": "./",
-    "module": "esnext",
-    "skipLibCheck": true,
-    "moduleResolution": "node",
-    "outDir": "../dist/out-tsc",
-    "sourceMap": true,
-    "target": "ES2022",
-    "useDefineForClassFields": false,
-    "typeRoots": [
-      "../node_modules/@types"
-    ],
-    "baseUrl": ".",
-    "paths": {
-      "@abp/*": [ "../node_modules/abp-ng2-module/dist/src/*" ],
-      "@app/*": [ "./app/*" ],
-      "@shared/*": [ "./shared/*" ],
-      "@node_modules/*": [ "../node_modules/*" ],
-    }
-  },
-  "files": [
-    "main.ts",
-    "polyfills.ts"
-  ],
-  "include": [
-    "src/**/*.d.ts",
-    "typings.d.ts"
-  ],
-  "angularCompilerOptions": {
-    "fullTemplateTypeCheck": true,
-    "strictTemplates": true,
-    "strictInputTypes": false,
-    "strictAttributeTypes": false,
-    "strictOutputEventTypes": false,
-    "strictDomEventTypes": false,
-    "strictLiteralTypes": false,
-    "strictInjectionParameters": false
-  }
+    "compilerOptions": {
+        "esModuleInterop": true,
+        "allowSyntheticDefaultImports": true,
+        "declaration": false,
+        "downlevelIteration": true,
+        "experimentalDecorators": true,
+        "lib": ["es6", "dom"],
+        "mapRoot": "./",
+        "module": "esnext",
+        "skipLibCheck": true,
+        "moduleResolution": "node",
+        "outDir": "../dist/out-tsc",
+        "sourceMap": true,
+        "target": "ES2022",
+        "useDefineForClassFields": false,
+        "typeRoots": ["../node_modules/@types"],
+        "baseUrl": ".",
+        "paths": {
+            "@abp/*": ["../node_modules/abp-ng2-module/dist/src/*"],
+            "@app/*": ["./app/*"],
+            "@shared/*": ["./shared/*"],
+            "@node_modules/*": ["../node_modules/*"]
+        }
+    },
+    "files": ["main.ts", "polyfills.ts"],
+    "include": ["src/**/*.d.ts", "typings.d.ts"]
 }

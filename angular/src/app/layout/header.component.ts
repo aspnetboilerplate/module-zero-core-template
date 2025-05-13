@@ -8,6 +8,6 @@ import { HeaderUserMenuComponent } from './header-user-menu.component';
     templateUrl: './header.component.html',
     changeDetection: ChangeDetectionStrategy.OnPush,
     standalone: true,
-    imports: [HeaderLeftNavbarComponent, HeaderLanguageMenuComponent, HeaderUserMenuComponent]
+    imports: [HeaderLeftNavbarComponent, HeaderLanguageMenuComponent, HeaderUserMenuComponent],
 })
 export class HeaderComponent {}

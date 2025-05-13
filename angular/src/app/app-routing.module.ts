@@ -13,40 +13,40 @@ import { AppComponent } from './app.component';
                     {
                         path: 'home',
                         loadChildren: () => import('./home/home.module').then((m) => m.HomeModule),
-                        canActivate: [AppRouteGuard]
+                        canActivate: [AppRouteGuard],
                     },
                     {
                         path: 'about',
                         loadChildren: () => import('./about/about.module').then((m) => m.AboutModule),
-                        canActivate: [AppRouteGuard]
+                        canActivate: [AppRouteGuard],
                     },
                     {
                         path: 'users',
                         loadChildren: () => import('./users/users.module').then((m) => m.UsersModule),
                         data: { permission: 'Pages.Users' },
-                        canActivate: [AppRouteGuard]
+                        canActivate: [AppRouteGuard],
                     },
                     {
                         path: 'roles',
                         loadChildren: () => import('./roles/roles.module').then((m) => m.RolesModule),
                         data: { permission: 'Pages.Roles' },
-                        canActivate: [AppRouteGuard]
+                        canActivate: [AppRouteGuard],
                     },
                     {
                         path: 'tenants',
                         loadChildren: () => import('./tenants/tenants.module').then((m) => m.TenantsModule),
                         data: { permission: 'Pages.Tenants' },
-                        canActivate: [AppRouteGuard]
+                        canActivate: [AppRouteGuard],
                     },
                     {
                         path: 'update-password',
                         loadChildren: () => import('./users/users.module').then((m) => m.UsersModule),
-                        canActivate: [AppRouteGuard]
+                        canActivate: [AppRouteGuard],
                     },
-                ]
-            }
-        ])
+                ],
+            },
+        ]),
     ],
-    exports: [RouterModule]
+    exports: [RouterModule],
 })
-export class AppRoutingModule { }
+export class AppRoutingModule {}

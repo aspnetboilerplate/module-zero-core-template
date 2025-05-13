@@ -48,8 +48,8 @@ import { SidebarMenuComponent } from './layout/sidebar-menu.component';
         SidebarComponent,
         SidebarLogoComponent,
         SidebarUserPanelComponent,
-        SidebarMenuComponent
+        SidebarMenuComponent,
     ],
-    providers: []
+    providers: [],
 })
 export class AppModule {}

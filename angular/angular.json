@@ -1,191 +1,189 @@
 {
-  "$schema": "./node_modules/@angular/cli/lib/config/schema.json",
-  "version": 1,
-  "newProjectRoot": "projects",
-  "projects": {
-    "AbpProjectName": {
-      "root": "",
-      "sourceRoot": "src",
-      "projectType": "application",
-      "architect": {
-        "build": {
-          "builder": "@angular-devkit/build-angular:application",
-          "options": {
-            "outputPath": {
-              "base": "dist"
-            },
-            "index": "src/index.html",
-            "tsConfig": "src/tsconfig.json",
-            "polyfills": [
-              "src/polyfills.ts"
-            ],
-            "assets": [
-              "src/assets",
-              "src/favicon.ico",
-              {
-                "glob": "abp.signalr.js",
-                "input": "node_modules/abp-web-resources/Abp/Framework/scripts/libs",
-                "output": "/assets/abp"
-              },
-              {
-                "glob": "abp.signalr-client.js",
-                "input": "node_modules/abp-web-resources/Abp/Framework/scripts/libs",
-                "output": "/assets/abp"
-              }
-            ],
-            "styles": [
-              "node_modules/famfamfam-flags/dist/sprite/famfamfam-flags.css",
-              "node_modules/sweetalert2/dist/sweetalert2.css",
-              "src/assets/freeze-ui/freeze-ui.css",
-              "node_modules/@fortawesome/fontawesome-free/css/all.min.css",
-              "node_modules/admin-lte-css-only/css/adminlte.min.css",
-              "src/shared/core.less"
-            ],
-            "scripts": [
-              "node_modules/moment/min/moment.min.js",
-              "node_modules/@microsoft/signalr/dist/browser/signalr.min.js",
-              "node_modules/sweetalert2/dist/sweetalert2.js",
-              "src/assets/freeze-ui/freeze-ui.js",
-              "node_modules/push.js/bin/push.min.js",
-              "node_modules/abp-web-resources/Abp/Framework/scripts/abp.js",
-              "src/assets/abp-web-resources/abp.sweet-alert.js",
-              "src/assets/abp-web-resources/abp.freeze-ui.js",
-              "node_modules/abp-web-resources/Abp/Framework/scripts/libs/abp.moment.js"
-            ],
-            "extractLicenses": false,
-            "sourceMap": true,
-            "optimization": false,
-            "namedChunks": true,
-            "browser": "src/main.ts"
-          },
-          "configurations": {
-            "production": {
-              "budgets": [
-                {
-                  "type": "anyComponentStyle",
-                  "maximumWarning": "6kb"
+    "$schema": "./node_modules/@angular/cli/lib/config/schema.json",
+    "version": 1,
+    "newProjectRoot": "projects",
+    "projects": {
+        "AbpProjectName": {
+            "root": "",
+            "sourceRoot": "src",
+            "projectType": "application",
+            "architect": {
+                "build": {
+                    "builder": "@angular-devkit/build-angular:application",
+                    "options": {
+                        "outputPath": {
+                            "base": "dist"
+                        },
+                        "index": "src/index.html",
+                        "tsConfig": "src/tsconfig.json",
+                        "polyfills": ["src/polyfills.ts"],
+                        "assets": [
+                            "src/assets",
+                            "src/favicon.ico",
+                            {
+                                "glob": "abp.signalr.js",
+                                "input": "node_modules/abp-web-resources/Abp/Framework/scripts/libs",
+                                "output": "/assets/abp"
+                            },
+                            {
+                                "glob": "abp.signalr-client.js",
+                                "input": "node_modules/abp-web-resources/Abp/Framework/scripts/libs",
+                                "output": "/assets/abp"
+                            }
+                        ],
+                        "styles": [
+                            "node_modules/famfamfam-flags/dist/sprite/famfamfam-flags.css",
+                            "node_modules/sweetalert2/dist/sweetalert2.css",
+                            "src/assets/freeze-ui/freeze-ui.css",
+                            "node_modules/@fortawesome/fontawesome-free/css/all.min.css",
+                            "node_modules/admin-lte-css-only/css/adminlte.min.css",
+                            "src/shared/core.less"
+                        ],
+                        "scripts": [
+                            "node_modules/moment/min/moment.min.js",
+                            "node_modules/@microsoft/signalr/dist/browser/signalr.min.js",
+                            "node_modules/sweetalert2/dist/sweetalert2.js",
+                            "src/assets/freeze-ui/freeze-ui.js",
+                            "node_modules/push.js/bin/push.min.js",
+                            "node_modules/abp-web-resources/Abp/Framework/scripts/abp.js",
+                            "src/assets/abp-web-resources/abp.sweet-alert.js",
+                            "src/assets/abp-web-resources/abp.freeze-ui.js",
+                            "node_modules/abp-web-resources/Abp/Framework/scripts/libs/abp.moment.js"
+                        ],
+                        "extractLicenses": false,
+                        "sourceMap": true,
+                        "optimization": false,
+                        "namedChunks": true,
+                        "browser": "src/main.ts"
+                    },
+                    "configurations": {
+                        "production": {
+                            "budgets": [
+                                {
+                                    "type": "anyComponentStyle",
+                                    "maximumWarning": "6kb"
+                                }
+                            ],
+                            "optimization": true,
+                            "outputHashing": "all",
+                            "sourceMap": false,
+                            "namedChunks": false,
+                            "extractLicenses": true,
+                            "fileReplacements": [
+                                {
+                                    "replace": "src/environments/environment.ts",
+                                    "with": "src/environments/environment.prod.ts"
+                                }
+                            ]
+                        },
+                        "hmr": {
+                            "budgets": [
+                                {
+                                    "type": "anyComponentStyle",
+                                    "maximumWarning": "6kb"
+                                }
+                            ],
+                            "fileReplacements": [
+                                {
+                                    "replace": "src/environments/environment.ts",
+                                    "with": "src/environments/environment.hmr.ts"
+                                }
+                            ]
+                        }
+                    },
+                    "defaultConfiguration": ""
+                },
+                "serve": {
+                    "builder": "@angular-devkit/build-angular:dev-server",
+                    "options": {
+                        "buildTarget": "AbpProjectName:build"
+                    },
+                    "configurations": {
+                        "production": {
+                            "buildTarget": "AbpProjectName:build:production"
+                        },
+                        "hmr": {
+                            "buildTarget": "AbpProjectName:build:hmr"
+                        }
+                    }
+                },
+                "extract-i18n": {
+                    "builder": "@angular-devkit/build-angular:extract-i18n",
+                    "options": {
+                        "buildTarget": "AbpProjectName:build"
+                    }
+                },
+                "test": {
+                    "builder": "@angular-devkit/build-angular:karma",
+                    "options": {
+                        "main": "src/test.ts",
+                        "karmaConfig": "./karma.conf.js",
+                        "polyfills": "src/polyfills.ts",
+                        "tsConfig": "src/tsconfig.spec.json",
+                        "assets": [
+                            "src/assets",
+                            "src/favicon.ico",
+                            {
+                                "glob": "abp.signalr.js",
+                                "input": "node_modules/abp-web-resources/Abp/Framework/scripts/libs",
+                                "output": "/assets/abp"
+                            },
+                            {
+                                "glob": "abp.signalr-client.js",
+                                "input": "node_modules/abp-web-resources/Abp/Framework/scripts/libs",
+                                "output": "/assets/abp"
+                            }
+                        ],
+                        "styles": [
+                            "node_modules/famfamfam-flags/dist/sprite/famfamfam-flags.css",
+                            "node_modules/sweetalert2/dist/sweetalert2.css",
+                            "src/assets/freeze-ui/freeze-ui.css",
+                            "node_modules/@fortawesome/fontawesome-free/css/all.min.css",
+                            "node_modules/admin-lte-css-only/css/adminlte.min.css",
+                            "src/shared/core.less"
+                        ],
+                        "scripts": [
+                            "node_modules/moment/min/moment.min.js",
+                            "node_modules/@microsoft/signalr/dist/browser/signalr.min.js",
+                            "node_modules/sweetalert2/dist/sweetalert2.js",
+                            "src/assets/freeze-ui/freeze-ui.js",
+                            "node_modules/push.js/bin/push.min.js",
+                            "node_modules/abp-web-resources/Abp/Framework/scripts/abp.js",
+                            "src/assets/abp-web-resources/abp.sweet-alert.js",
+                            "src/assets/abp-web-resources/abp.freeze-ui.js",
+                            "node_modules/abp-web-resources/Abp/Framework/scripts/libs/abp.moment.js"
+                        ]
+                    }
                 }
-              ],
-              "optimization": true,
-              "outputHashing": "all",
-              "sourceMap": false,
-              "namedChunks": false,
-              "extractLicenses": true,
-              "fileReplacements": [
-                {
-                  "replace": "src/environments/environment.ts",
-                  "with": "src/environments/environment.prod.ts"
-                }
-              ]
-            },
-            "hmr": {
-              "budgets": [
-                {
-                  "type": "anyComponentStyle",
-                  "maximumWarning": "6kb"
-                }
-              ],
-              "fileReplacements": [
-                {
-                  "replace": "src/environments/environment.ts",
-                  "with": "src/environments/environment.hmr.ts"
-                }
-              ]
             }
-          },
-          "defaultConfiguration": ""
         },
-        "serve": {
-          "builder": "@angular-devkit/build-angular:dev-server",
-          "options": {
-            "buildTarget": "AbpProjectName:build"
-          },
-          "configurations": {
-            "production": {
-              "buildTarget": "AbpProjectName:build:production"
-            },
-            "hmr": {
-              "buildTarget": "AbpProjectName:build:hmr"
+        "AbpProjectName-e2e": {
+            "root": "",
+            "sourceRoot": "",
+            "projectType": "application",
+            "architect": {
+                "e2e": {
+                    "builder": "@angular-devkit/build-angular:protractor",
+                    "options": {
+                        "protractorConfig": "./protractor.conf.js",
+                        "devServerTarget": "AbpProjectName:serve"
+                    }
+                }
             }
-          }
-        },
-        "extract-i18n": {
-          "builder": "@angular-devkit/build-angular:extract-i18n",
-          "options": {
-            "buildTarget": "AbpProjectName:build"
-          }
-        },
-        "test": {
-          "builder": "@angular-devkit/build-angular:karma",
-          "options": {
-            "main": "src/test.ts",
-            "karmaConfig": "./karma.conf.js",
-            "polyfills": "src/polyfills.ts",
-            "tsConfig": "src/tsconfig.spec.json",
-            "assets": [
-              "src/assets",
-              "src/favicon.ico",
-              {
-                "glob": "abp.signalr.js",
-                "input": "node_modules/abp-web-resources/Abp/Framework/scripts/libs",
-                "output": "/assets/abp"
-              },
-              {
-                "glob": "abp.signalr-client.js",
-                "input": "node_modules/abp-web-resources/Abp/Framework/scripts/libs",
-                "output": "/assets/abp"
-              }
-            ],
-            "styles": [
-              "node_modules/famfamfam-flags/dist/sprite/famfamfam-flags.css",
-              "node_modules/sweetalert2/dist/sweetalert2.css",
-              "src/assets/freeze-ui/freeze-ui.css",
-              "node_modules/@fortawesome/fontawesome-free/css/all.min.css",
-              "node_modules/admin-lte-css-only/css/adminlte.min.css",
-              "src/shared/core.less"
-            ],
-            "scripts": [
-              "node_modules/moment/min/moment.min.js",
-              "node_modules/@microsoft/signalr/dist/browser/signalr.min.js",
-              "node_modules/sweetalert2/dist/sweetalert2.js",
-              "src/assets/freeze-ui/freeze-ui.js",
-              "node_modules/push.js/bin/push.min.js",
-              "node_modules/abp-web-resources/Abp/Framework/scripts/abp.js",
-              "src/assets/abp-web-resources/abp.sweet-alert.js",
-              "src/assets/abp-web-resources/abp.freeze-ui.js",
-              "node_modules/abp-web-resources/Abp/Framework/scripts/libs/abp.moment.js"
-            ]
-          }
         }
-      }
     },
-    "AbpProjectName-e2e": {
-      "root": "",
-      "sourceRoot": "",
-      "projectType": "application",
-      "architect": {
-        "e2e": {
-          "builder": "@angular-devkit/build-angular:protractor",
-          "options": {
-            "protractorConfig": "./protractor.conf.js",
-            "devServerTarget": "AbpProjectName:serve"
-          }
+    "schematics": {
+        "@schematics/angular:component": {
+            "prefix": "app",
+            "style": "css",
+            "project": "AbpProjectName"
+        },
+        "@schematics/angular:directive": {
+            "prefix": "app",
+            "project": "AbpProjectName"
         }
-      }
-    }
-  },
-  "schematics": {
-    "@schematics/angular:component": {
-      "prefix": "app",
-      "style": "css",
-      "project": "AbpProjectName"
     },
-    "@schematics/angular:directive": {
-      "prefix": "app",
-      "project": "AbpProjectName"
+    "cli": {
+        "analytics": false
     }
-  },
-  "cli": {
-    "analytics": false
-  }
 }

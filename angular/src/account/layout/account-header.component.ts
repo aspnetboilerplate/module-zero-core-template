@@ -4,6 +4,6 @@ import { Component, ChangeDetectionStrategy } from '@angular/core';
     selector: 'account-header',
     templateUrl: './account-header.component.html',
     changeDetection: ChangeDetectionStrategy.OnPush,
-    standalone: true
+    standalone: true,
 })
 export class AccountHeaderComponent {}

@@ -8,20 +8,20 @@ import { LocalizePipe } from '@shared/pipes/localize.pipe';
     templateUrl: './header-left-navbar.component.html',
     changeDetection: ChangeDetectionStrategy.OnPush,
     standalone: true,
-    imports: [RouterLink, LocalizePipe]
+    imports: [RouterLink, LocalizePipe],
 })
 export class HeaderLeftNavbarComponent implements OnInit {
-  sidebarExpanded: boolean;
+    sidebarExpanded: boolean;
 
-  constructor(private _layoutStore: LayoutStoreService) {}
+    constructor(private _layoutStore: LayoutStoreService) {}
 
-  ngOnInit(): void {
-    this._layoutStore.sidebarExpanded.subscribe((value) => {
-      this.sidebarExpanded = value;
-    });
-  }
+    ngOnInit(): void {
+        this._layoutStore.sidebarExpanded.subscribe((value) => {
+            this.sidebarExpanded = value;
+        });
+    }
 
-  toggleSidebar(): void {
-    this._layoutStore.setSidebarExpanded(!this.sidebarExpanded);
-  }
+    toggleSidebar(): void {
+        this._layoutStore.setSidebarExpanded(!this.sidebarExpanded);
+    }
 }

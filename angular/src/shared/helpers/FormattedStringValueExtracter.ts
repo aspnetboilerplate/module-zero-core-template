@@ -33,13 +33,14 @@ class FormatStringTokenizer {
 
         for (let i = 0; i < format.length; i++) {
             const c = format[i];
+            let dynamicValue;
             switch (c) {
                 case '{':
                     if (inDynamicValue) {
                         throw new Error(
                             'Incorrect syntax at char ' +
-                            i +
-                            '! format string can not contain nested dynamic value expression!'
+                                i +
+                                '! format string can not contain nested dynamic value expression!'
                         );
                     }
 
@@ -55,8 +56,8 @@ class FormatStringTokenizer {
                     if (!inDynamicValue) {
                         throw new Error(
                             'Incorrect syntax at char ' +
-                            i +
-                            '! These is no opening brackets for the closing bracket }.'
+                                i +
+                                '! These is no opening brackets for the closing bracket }.'
                         );
                     }
 
@@ -66,7 +67,7 @@ class FormatStringTokenizer {
                         throw new Error('Incorrect syntax at char ' + i + '! Brackets does not containt any chars.');
                     }
 
-                    let dynamicValue = currentText;
+                    dynamicValue = currentText;
                     if (includeBracketsForDynamicValues) {
                         dynamicValue = '{' + dynamicValue + '}';
                     }
@@ -125,7 +126,10 @@ export class FormattedStringValueExtracter {
                         return result;
                     }
 
-                    result.Matches.push({ name: previousToken?.Text, value: str.substr(0, matchIndex) });
+                    result.Matches.push({
+                        name: previousToken?.Text,
+                        value: str.substr(0, matchIndex),
+                    });
                     str = str.substring(0, matchIndex + currentToken.Text.length);
                 }
             }

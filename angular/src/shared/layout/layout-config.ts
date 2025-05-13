@@ -1,3 +1,3 @@
 export class LayoutConfig {
-  sidebarExpanded?: boolean;
+    sidebarExpanded?: boolean;
 }

@@ -9,12 +9,12 @@ import { LocalizePipe } from '@shared/pipes/localize.pipe';
     templateUrl: './header-user-menu.component.html',
     changeDetection: ChangeDetectionStrategy.OnPush,
     standalone: true,
-    imports: [BsDropdownDirective, BsDropdownToggleDirective, BsDropdownMenuDirective, RouterLink, LocalizePipe]
+    imports: [BsDropdownDirective, BsDropdownToggleDirective, BsDropdownMenuDirective, RouterLink, LocalizePipe],
 })
 export class HeaderUserMenuComponent {
-  constructor(private _authService: AppAuthService) {}
+    constructor(private _authService: AppAuthService) {}
 
-  logout(): void {
-    this._authService.logout();
-  }
+    logout(): void {
+        this._authService.logout();
+    }
 }

@@ -1,70 +1,46 @@
-<pagination-template
-  #p="paginationApi"
-  [id]="id"
-  [maxSize]="maxSize"
-  (pageChange)="pageChange.emit($event)"
-  >
-  <nav>
-    @if (!(autoHide && p.pages.length <= 1)) {
-      <ul class="pagination m-0">
-        @if (directionLinks) {
-          <li
-            class="page-item"
-            [class.disabled]="p.isFirstPage()"
-            >
-            @if (!p.isFirstPage()) {
-              <a
-                class="page-link"
-                href="javascript:;"
-                (click)="p.previous()"
-                >
-                <i class="fas fa-chevron-left"></i>
-              </a>
-            }
-            @if (p.isFirstPage()) {
-              <a class="page-link" href="javascript:;">
-                <i class="fas fa-chevron-left"></i>
-              </a>
-            }
-          </li>
+<pagination-template #p="paginationApi" [id]="id" [maxSize]="maxSize" (pageChange)="pageChange.emit($event)">
+    <nav>
+        @if (!(autoHide && p.pages.length <= 1)) {
+            <ul class="pagination m-0">
+                @if (directionLinks) {
+                    <li class="page-item" [class.disabled]="p.isFirstPage()">
+                        @if (!p.isFirstPage()) {
+                            <a class="page-link" href="javascript:;" (click)="p.previous()">
+                                <i class="fas fa-chevron-left"></i>
+                            </a>
+                        }
+                        @if (p.isFirstPage()) {
+                            <a class="page-link" href="javascript:;">
+                                <i class="fas fa-chevron-left"></i>
+                            </a>
+                        }
+                    </li>
+                }
+                @for (page of p.pages; track page.label) {
+                    <li
+                        class="page-item"
+                        [class.active]="p.getCurrent() === page.value"
+                        [style.z-index]="p.getCurrent() === page.value ? '0' : ''">
+                        <a class="page-link" href="javascript:;" (click)="p.setCurrent(page.value)">
+                            {{ page.label }}
+                        </a>
+                    </li>
+                }
+                @if (directionLinks) {
+                    <li class="page-item" [class.disabled]="p.isLastPage()">
+                        @if (!p.isLastPage()) {
+                            <a class="page-link" href="javascript:;" (click)="p.next()">
+                                <i class="fas fa-chevron-right"></i>
+                            </a>
+                        }
+                        @if (p.isLastPage()) {
+                            <a class="page-link" href="javascript:;">
+                                <i class="fas fa-chevron-right"></i>
+                            </a>
+                        }
+                    </li>
+                }
+            </ul>
         }
-        @for (page of p.pages; track page.label) {
-          <li
-            class="page-item"
-            [class.active]="p.getCurrent() === page.value"
-            [style.z-index]="p.getCurrent() === page.value ? '0' : ''"
-            >
-            <a
-              class="page-link"
-              href="javascript:;"
-              (click)="p.setCurrent(page.value)"
-              >
-              {{ page.label }}
-            </a>
-          </li>
-        }
-        @if (directionLinks) {
-          <li
-            class="page-item"
-            [class.disabled]="p.isLastPage()"
-            >
-            @if (!p.isLastPage()) {
-              <a
-                class="page-link"
-                href="javascript:;"
-                (click)="p.next()"
-                >
-                <i class="fas fa-chevron-right"></i>
-              </a>
-            }
-            @if (p.isLastPage()) {
-              <a class="page-link" href="javascript:;">
-                <i class="fas fa-chevron-right"></i>
-              </a>
-            }
-          </li>
-        }
-      </ul>
-    }
-  </nav>
+    </nav>
 </pagination-template>

@@ -3,10 +3,9 @@ import { AppComponentBase } from '@shared/app-component-base';
 
 @Pipe({
     name: 'localize',
-    standalone: true
+    standalone: true,
 })
 export class LocalizePipe extends AppComponentBase implements PipeTransform {
-
     constructor(injector: Injector) {
         super(injector);
     }

@@ -10,45 +10,45 @@ import { FooterComponent } from './layout/footer.component';
 @Component({
     templateUrl: './app.component.html',
     standalone: true,
-    imports: [HeaderComponent, SidebarComponent, RouterOutlet, FooterComponent]
+    imports: [HeaderComponent, SidebarComponent, RouterOutlet, FooterComponent],
 })
 export class AppComponent extends AppComponentBase implements OnInit {
-  sidebarExpanded: boolean;
+    sidebarExpanded: boolean;
 
-  constructor(
-    injector: Injector,
-    private renderer: Renderer2,
-    private _layoutStore: LayoutStoreService
-  ) {
-    super(injector);
-  }
+    constructor(
+        injector: Injector,
+        private renderer: Renderer2,
+        private _layoutStore: LayoutStoreService
+    ) {
+        super(injector);
+    }
 
-  ngOnInit(): void {
-    this.renderer.addClass(document.body, 'sidebar-mini');
+    ngOnInit(): void {
+        this.renderer.addClass(document.body, 'sidebar-mini');
 
-    SignalRAspNetCoreHelper.initSignalR();
+        SignalRAspNetCoreHelper.initSignalR();
 
-    abp.event.on('abp.notifications.received', (userNotification) => {
-      abp.notifications.showUiNotifyForUserNotification(userNotification);
+        abp.event.on('abp.notifications.received', (userNotification) => {
+            abp.notifications.showUiNotifyForUserNotification(userNotification);
 
-      // Desktop notification
-      Push.create('AbpZeroTemplate', {
-        body: userNotification.notification.data.message,
-        icon: abp.appPath + 'assets/app-logo-small.png',
-        timeout: 6000,
-        onClick: function () {
-          window.focus();
-          this.close();
-        }
-      });
-    });
+            // Desktop notification
+            Push.create('AbpZeroTemplate', {
+                body: userNotification.notification.data.message,
+                icon: abp.appPath + 'assets/app-logo-small.png',
+                timeout: 6000,
+                onClick: function () {
+                    window.focus();
+                    this.close();
+                },
+            });
+        });
 
-    this._layoutStore.sidebarExpanded.subscribe((value) => {
-      this.sidebarExpanded = value;
-    });
-  }
+        this._layoutStore.sidebarExpanded.subscribe((value) => {
+            this.sidebarExpanded = value;
+        });
+    }
 
-  toggleSidebar(): void {
-    this._layoutStore.setSidebarExpanded(!this.sidebarExpanded);
-  }
+    toggleSidebar(): void {
+        this._layoutStore.setSidebarExpanded(!this.sidebarExpanded);
+    }
 }

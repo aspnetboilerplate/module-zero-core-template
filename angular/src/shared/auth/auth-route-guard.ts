@@ -5,13 +5,12 @@ import { AppSessionService } from '../session/app-session.service';
 import { Router, ActivatedRouteSnapshot, RouterStateSnapshot } from '@angular/router';
 
 @Injectable()
-export class AppRouteGuard  {
-
+export class AppRouteGuard {
     constructor(
         private _permissionChecker: PermissionCheckerService,
         private _router: Router,
-        private _sessionService: AppSessionService,
-    ) { }
+        private _sessionService: AppSessionService
+    ) {}
 
     canActivate(route: ActivatedRouteSnapshot, state: RouterStateSnapshot): boolean {
         if (!this._sessionService.user) {

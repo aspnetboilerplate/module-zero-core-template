@@ -1,45 +1,45 @@
 ﻿/* prevent the drop down icon going onto a new line for the top bar language link */
 .top-bar-language-nav-link {
-    min-width: 65px;
+  min-width: 65px;
 }
 
 /* bootstrap model showing two scroll bars */
 html {
-    overflow: visible;
+  overflow: visible;
 }
 
 /* main sidebar not under model */
 .modal {
-    z-index: 1110;
+  z-index: 1110;
 }
 
 .form-group.required .col-form-label:after {
-    color: #d00;
-    content: "*";
-    position: absolute;
-    margin-left: 3px;
+  color: #d00;
+  content: "*";
+  position: absolute;
+  margin-left: 3px;
 }
 
 .nav-user-menu .user-image {
-    width: 20px;
-    margin-right: 4px;
-    margin-top: -4px;
+  width: 20px;
+  margin-right: 4px;
+  margin-top: -4px;
 }
 
 .famfamfam-flags {
-    display: inline-block;
+  display: inline-block;
 }
 
 .sidebar ul li p {
-    white-space: nowrap !important;
-    text-overflow: ellipsis;
-    transition: opacity 0.5s ease-in-out !important;
-    opacity: 1;
+  white-space: nowrap !important;
+  text-overflow: ellipsis;
+  transition: opacity 0.5s ease-in-out !important;
+  opacity: 1;
 }
 
 .sidebar-mini .main-sidebar .sidebar,
 .sidebar-mini .main-sidebar .sidebar:hover {
-    overflow-x: auto !important;
-    width: 250px;
-    transition: width 0.3s ease-in-out;
+  overflow-x: auto !important;
+  width: 250px;
+  transition: width 0.3s ease-in-out;
 }

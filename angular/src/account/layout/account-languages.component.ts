@@ -1,9 +1,4 @@
-import {
-  Component,
-  OnInit,
-  Injector,
-  ChangeDetectionStrategy
-} from '@angular/core';
+import { Component, OnInit, Injector, ChangeDetectionStrategy } from '@angular/core';
 import { AppComponentBase } from '@shared/app-component-base';
 import { filter as _filter } from 'lodash-es';
 
@@ -11,33 +6,29 @@ import { filter as _filter } from 'lodash-es';
     selector: 'account-languages',
     templateUrl: './account-languages.component.html',
     changeDetection: ChangeDetectionStrategy.OnPush,
-    standalone: true
+    standalone: true,
 })
-export class AccountLanguagesComponent extends AppComponentBase
-  implements OnInit {
-  languages: abp.localization.ILanguageInfo[];
-  currentLanguage: abp.localization.ILanguageInfo;
+export class AccountLanguagesComponent extends AppComponentBase implements OnInit {
+    languages: abp.localization.ILanguageInfo[];
+    currentLanguage: abp.localization.ILanguageInfo;
 
-  constructor(injector: Injector) {
-    super(injector);
-  }
+    constructor(injector: Injector) {
+        super(injector);
+    }
 
-  ngOnInit() {
-    this.languages = _filter(
-      this.localization.languages,
-      (l) => !l.isDisabled
-    );
-    this.currentLanguage = this.localization.currentLanguage;
-  }
+    ngOnInit() {
+        this.languages = _filter(this.localization.languages, (l) => !l.isDisabled);
+        this.currentLanguage = this.localization.currentLanguage;
+    }
 
-  changeLanguage(languageName: string): void {
-    abp.utils.setCookieValue(
-      'Abp.Localization.CultureName',
-      languageName,
-      new Date(new Date().getTime() + 5 * 365 * 86400000), // 5 year
-      abp.appPath
-    );
+    changeLanguage(languageName: string): void {
+        abp.utils.setCookieValue(
+            'Abp.Localization.CultureName',
+            languageName,
+            new Date(new Date().getTime() + 5 * 365 * 86400000), // 5 year
+            abp.appPath
+        );
 
-    location.reload();
-  }
+        location.reload();
+    }
 }
