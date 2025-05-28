@@ -15,8 +15,8 @@
     <EmbeddedResource Include="Localization\SourceFiles\*.xml" Exclude="bin\**;obj\**;**\*.xproj;packages\**;@(EmbeddedResource)" />
   </ItemGroup>
   <ItemGroup>
-    <PackageReference Include="Abp.AutoMapper" Version="10.1.0" />
-    <PackageReference Include="Abp.ZeroCore.EntityFrameworkCore" Version="10.1.0" />
+    <PackageReference Include="Abp.AutoMapper" Version="10.2.0" />
+    <PackageReference Include="Abp.ZeroCore.EntityFrameworkCore" Version="10.2.0" />
     <PackageReference Include="Castle.Windsor.MsDependencyInjection" Version="4.1.0" />
   </ItemGroup>
 </Project>

@@ -62,7 +62,7 @@
         defaultContent: "",
         render: (data, type, row, meta) => {
           return [
-            `   <button type="button" class="btn btn-sm bg-secondary edit-user" data-user-id="${row.id}" data-toggle="modal" data-target="#UserEditModal">`,
+            `   <button type="button" class="btn btn-sm bg-secondary edit-user" data-user-id="${row.id}" data-bs-toggle="modal" data-bs-target="#UserEditModal">`,
             `       <i class="fas fa-pencil-alt"></i> ${l("Edit")}`,
             "   </button>",
             `   <button type="button" class="btn btn-sm bg-danger delete-user" data-user-id="${row.id}" data-user-name="${row.name}">`,
@@ -161,7 +161,7 @@
     });
   });
 
-  $(document).on("click", 'a[data-target="#UserCreateModal"]', (e) => {
+  $(document).on("click", 'a[data-bs-target="#UserCreateModal"]', (e) => {
     $('.nav-tabs a[href="#user-details"]').tab("show");
   });
 

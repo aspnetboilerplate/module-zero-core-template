@@ -50,7 +50,7 @@
         defaultContent: "",
         render: (data, type, row, meta) => {
           return [
-            `   <button type="button" class="btn btn-sm bg-secondary edit-role" data-role-id="${row.id}" data-toggle="modal" data-target="#RoleEditModal">`,
+            `   <button type="button" class="btn btn-sm bg-secondary edit-role" data-role-id="${row.id}" data-bs-toggle="modal" data-bs-target="#RoleEditModal">`,
             `       <i class="fas fa-pencil-alt"></i> ${l("Edit")}`,
             "   </button>",
             `   <button type="button" class="btn btn-sm bg-danger delete-role" data-role-id="${row.id}" data-role-name="${row.name}">`,
