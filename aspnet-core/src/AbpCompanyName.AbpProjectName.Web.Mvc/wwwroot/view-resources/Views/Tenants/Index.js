@@ -56,7 +56,7 @@
         defaultContent: "",
         render: (data, type, row, meta) => {
           return [
-            `   <button type="button" class="btn btn-sm bg-secondary edit-tenant" data-tenant-id="${row.id}" data-toggle="modal" data-target="#TenantEditModal">`,
+            `   <button type="button" class="btn btn-sm bg-secondary edit-tenant" data-tenant-id="${row.id}" data-bs-toggle="modal" data-bs-target="#TenantEditModal">`,
             `       <i class="fas fa-pencil-alt"></i> ${l("Edit")}`,
             "   </button>",
             `   <button type="button" class="btn btn-sm bg-danger delete-tenant" data-tenant-id="${row.id}" data-tenancy-name="${row.name}">`,
