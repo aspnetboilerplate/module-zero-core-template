@@ -38,6 +38,13 @@ export class SidebarMenuComponent extends AppComponentBase implements OnInit {
                 this.activateMenuItems('/' + primaryUrlSegmentGroup.toString());
             }
         });
+        
+        // Activate menu for current route on load
+        const initialUrl = this.router.url !== '/' ? this.router.url : this.homeRoute;
+        const initialSegmentGroup = this.router.parseUrl(initialUrl).root.children[PRIMARY_OUTLET];
+        if (initialSegmentGroup) {
+            this.activateMenuItems('/' + initialSegmentGroup.toString());
+        }
     }
 
     getMenuItems(): MenuItem[] {
