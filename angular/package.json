@@ -29,7 +29,6 @@
         "abp-ng2-module": "12.1.0",
         "abp-web-resources": "^6.1.0",
         "admin-lte-css-only": "^3.2.0",
-        "core-js": "^3.41.0",
         "famfamfam-flags": "^1.0.0",
         "lodash-es": "^4.17.21",
         "moment": "2.30.1",
