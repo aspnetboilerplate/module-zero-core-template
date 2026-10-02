@@ -1,4 +1,5 @@
-﻿using Abp.AspNetCore;
+﻿using Abp;
+using Abp.AspNetCore;
 using Abp.AspNetCore.Configuration;
 using Abp.AspNetCore.SignalR;
 using Abp.Modules;
@@ -10,6 +11,7 @@ using AbpCompanyName.AbpProjectName.EntityFrameworkCore;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Mvc.ApplicationParts;
 using Microsoft.Extensions.Configuration;
+using Microsoft.Extensions.Hosting;
 using Microsoft.IdentityModel.Tokens;
 using System;
 using System.Text;
@@ -24,6 +26,11 @@ namespace AbpCompanyName.AbpProjectName
      )]
     public class AbpProjectNameWebCoreModule : AbpModule
     {
+        // Part of the signing key the startup template ships with. Projects downloaded from
+        // aspnetboilerplate.com get a random key instead, but a project created from the
+        // repository may still contain it.
+        private const string TemplateSecurityKeyMarker = "C421AAEE0D114E9C";
+
         private readonly IWebHostEnvironment _env;
         private readonly IConfigurationRoot _appConfiguration;
 
@@ -52,14 +59,40 @@ namespace AbpCompanyName.AbpProjectName
 
         private void ConfigureTokenAuth()
         {
+            var securityKey = _appConfiguration["Authentication:JwtBearer:SecurityKey"];
+            EnsureSecurityKeyIsNotTemplateDefault(securityKey);
+
             IocManager.Register<TokenAuthConfiguration>();
             var tokenAuthConfig = IocManager.Resolve<TokenAuthConfiguration>();
 
-            tokenAuthConfig.SecurityKey = new SymmetricSecurityKey(Encoding.ASCII.GetBytes(_appConfiguration["Authentication:JwtBearer:SecurityKey"]));
+            tokenAuthConfig.SecurityKey = new SymmetricSecurityKey(Encoding.ASCII.GetBytes(securityKey));
             tokenAuthConfig.Issuer = _appConfiguration["Authentication:JwtBearer:Issuer"];
             tokenAuthConfig.Audience = _appConfiguration["Authentication:JwtBearer:Audience"];
             tokenAuthConfig.SigningCredentials = new SigningCredentials(tokenAuthConfig.SecurityKey, SecurityAlgorithms.HmacSha256);
             tokenAuthConfig.Expiration = TimeSpan.FromDays(1);
+        }
+
+        // Anyone who knows the project name can forge tokens signed with the template key,
+        // so a production deployment refuses to start with it.
+        private void EnsureSecurityKeyIsNotTemplateDefault(string securityKey)
+        {
+            if (!bool.Parse(_appConfiguration["Authentication:JwtBearer:IsEnabled"]) ||
+                securityKey == null ||
+                !securityKey.Contains(TemplateSecurityKeyMarker))
+            {
+                return;
+            }
+
+            const string message =
+                "Authentication:JwtBearer:SecurityKey still contains the default key of the startup template. " +
+                "Replace it with a long, random value that is unique to this deployment.";
+
+            if (_env.IsProduction())
+            {
+                throw new AbpInitializationException(message);
+            }
+
+            Logger.Warn(message);
         }
 
         public override void Initialize()

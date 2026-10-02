@@ -79,3 +79,23 @@ function Rename {
 Rename -TargetFolder $slnFolder -PlaceHolderCompanyName $oldCompanyName -PlaceHolderProjectName $oldProjectName -NewCompanyName $newCompanyName -NewProjectName $newProjectName
 Rename -TargetFolder $vueFolder -PlaceHolderCompanyName $oldCompanyName -PlaceHolderProjectName $oldProjectName -NewCompanyName $newCompanyName -NewProjectName $newProjectName
 
+# replace the template's JWT signing key with a random one, so every project signs its tokens with its own key
+$templateSecurityKey="C421AAEE0D114E9CX"
+
+function New-RandomSecurityKey {
+	$bytes = New-Object byte[] 32
+	$rng = [System.Security.Cryptography.RandomNumberGenerator]::Create()
+	try { $rng.GetBytes($bytes) } finally { $rng.Dispose() }
+	return -join ($bytes | ForEach-Object { $_.ToString("X2") })
+}
+
+Write-Host "[$slnFolder]Start replace JWT signing key..."
+Ls $slnFolder -Include "appsettings*.json" -Recurse | Where { $_.GetType().Name -eq $fileType } | ForEach-Object{
+	$fileText = Get-Content $_ -Raw -Encoding UTF8
+	if($fileText.Length -gt 0 -and $fileText.contains($templateSecurityKey)){
+		$fileText.Replace($templateSecurityKey, (New-RandomSecurityKey)) | Set-Content $_ -Encoding UTF8 -NoNewline
+		Write-Host 'file(new JWT signing key) ' $_.FullName
+	}
+}
+Write-Host "[$slnFolder]End replace JWT signing key."
+
