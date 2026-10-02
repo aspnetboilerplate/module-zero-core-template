@@ -99,3 +99,16 @@ Ls $slnFolder -Include "appsettings*.json" -Recurse | Where { $_.GetType().Name 
 }
 Write-Host "[$slnFolder]End replace JWT signing key."
 
+# replace the pass phrase placeholder (used by SimpleStringCipher in release builds) with a random one
+$templatePassPhrase="{{DEFAULT_PASS_PHRASE_HERE}}"
+
+Write-Host "[$slnFolder]Start replace default pass phrase..."
+Ls $slnFolder -Include "*Consts.cs" -Recurse | Where { $_.GetType().Name -eq $fileType } | ForEach-Object{
+	$fileText = Get-Content $_ -Raw -Encoding UTF8
+	if($fileText.Length -gt 0 -and $fileText.contains($templatePassPhrase)){
+		$fileText.Replace($templatePassPhrase, (New-RandomSecurityKey)) | Set-Content $_ -Encoding UTF8 -NoNewline
+		Write-Host 'file(new pass phrase) ' $_.FullName
+	}
+}
+Write-Host "[$slnFolder]End replace default pass phrase."
+

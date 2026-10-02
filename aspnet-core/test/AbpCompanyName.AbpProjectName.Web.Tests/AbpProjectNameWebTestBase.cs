@@ -35,7 +35,7 @@ public abstract class AbpProjectNameWebTestBase : AbpAspNetCoreIntegratedTestBas
     {
         return base
             .CreateWebHostBuilder()
-            // Not Production, so the template's JWT signing key does not stop the test host.
+            // Not Production, so the template's default JWT signing key and pass phrase do not stop the test host.
             .UseEnvironment("Test")
             .UseContentRoot(ContentRootFolder.Value)
             .UseSetting(WebHostDefaults.ApplicationKey, typeof(AbpProjectNameWebMvcModule).Assembly.FullName);
